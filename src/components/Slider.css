@@ -1,89 +1,101 @@
 .slider {
-	width: 95%;
-    margin: auto;
-    overflow: hidden;
-    height: 80vh;
-    background: #F0F0F0;
+  width: 95%;
+  margin: auto;
+  overflow: hidden;
+  height: 80vh;
+  background: #f0f0f0;
 }
 
 .slider ul {
-    padding: 0; 
-    display: flex;
-    width: 300%;
-    height: 100%;
-    margin: 0;
+  padding: 0;
+  display: flex;
+  width: 300%;
+  height: 100%;
+  margin: 0;
 }
 
 .slider li {
-    list-style: none;
-    width: 100%;
-    display: flex;
-    margin: 1em 3em;
-    align-items: center;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  margin: 1em 3em;
+  align-items: center;
 }
 
 .slider li .containerSlider {
-    display: flex;
-    width: 100%;
-    height: 90%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 90%;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider li .containerSlider .data {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 5%;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 5%;
 }
 
 .slider li .containerSlider .data .title {
-    font-size: 4em;
+  font-size: 4em;
 }
 
 .slider li .containerSlider .data .description {
-    font-size: 2.3em;
+  font-size: 2.3em;
 }
 
 .slider li .containerSlider .data .buttons {
-    width: 100%;
-    height: 10%;
-    justify-content: space-around;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  height: 10%;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
 }
 
 .slider li .containerSlider .data .buttons button {
-    width: 20%;
-    height: 100%;
-    border: none;
-    border-radius: .5em;
-    background: #EF8F00;
-    font-size: 1.2em;
+  width: 20%;
+  height: 100%;
+  border: none;
+  border-radius: 0.5em;
+  background: #9d9da7;
+  font-size: 1.2em;
 }
 
 .slider img {
-    height: 90%; 
+  height: 90%;
 }
 
 /*ANIMATION SLIDER*/
 
 .slider ul {
-    animation: cambio 50s infinite ;
-    animation-direction: unset;
-    animation-timing-function: linear;
+  animation: cambio 50s infinite;
+  animation-direction: unset;
+  animation-timing-function: linear;
 }
 
 @keyframes cambio {
-    0% {margin-left:0;}
-    30% {margin-left:0;}
+  0% {
+    margin-left: 0;
+  }
+  30% {
+    margin-left: 0;
+  }
 
-    35% {margin-left:-100%;}
-    65% {margin-left:-100%;}
+  35% {
+    margin-left: -100%;
+  }
+  65% {
+    margin-left: -100%;
+  }
 
-    70% {margin-left:-200%;}
-    100% {margin-left:-200%;}
+  70% {
+    margin-left: -200%;
+  }
+  100% {
+    margin-left: -200%;
+  }
 }
