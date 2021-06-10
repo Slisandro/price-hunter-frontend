@@ -8,9 +8,9 @@ function SliderHP() {
         <div className="slider">
             <ul>
                 <li>
-                    <div className="container">
+                    <div className="containerSlider">
                         <div className="data">
-                            <h2 className="title">PRICE HUNTER</h2>
+                            <h2 className="titleNavBar">PRICE HUNTER</h2>
                             <p className="description">Consiga grandes recompensas por cumplir con tareas gracias a nuestras empresas asociadas</p>
                             <div className="buttons">
                                 <button>Saber más</button>
@@ -24,7 +24,7 @@ function SliderHP() {
                     </div>
                 </li>
                 <li>
-                    <div className="container">
+                    <div className="containerSlider">
                         <div className="data">
                             <h2 className="title">PRICE REWARD</h2>
                             <p className="description">Consiga las mejores ofertas en su zona en miles de productos gracias a nuestros price hunters</p>
@@ -40,7 +40,7 @@ function SliderHP() {
                     </div>
                 </li>
                 <li>
-                    <div className="container">
+                    <div className="containerSlider">
                         <div className="data">
                             <h2 className="title">EMPRESAS</h2>
                             <p className="description">Consiga una recopilación de datos adaptable a sus intereses para su empresa</p>
