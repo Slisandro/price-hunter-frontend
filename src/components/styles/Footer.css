@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #353553;
+  text-align: center;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: rgb(80, 72, 153);
+  text-decoration: underline;
+}
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+.title {
+  align-self: flex-start;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+.suscripcion {
+  margin-right: 8.5rem;
+}
+
+.input {
+  border: none;
+  border-bottom: 2px solid lightgrey;
+  width: 11rem;
+  background-color: #353553;
+  color: white;
+  margin-right: 2rem;
+}
+
+.send {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+  cursor: pointer;
+  border-color: rgba(13, 110, 253, 0.55);
+  width: 8rem;
+  margin-right: 5.2rem;
+  margin-top: 0.2rem;
+}
+
+.rights {
+  align-self: flex-end;
+  margin-left: -23.8rem;
+}
+
+h6 {
+  color: var(--clr-white);
+  text-transform: none;
+}
