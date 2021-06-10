@@ -1,0 +1,120 @@
+.main{
+    background: #353553;
+    grid-area: main;
+    overflow-y: auto;
+    border-bottom-left-radius: 15px;
+    
+
+}
+
+.main__container{
+    padding: 20px 35px;
+    /* display: flex;
+    justify-content: space-between; */
+    
+}
+
+
+.main__title {
+    display: flex;
+    align-items: center;
+    
+
+
+}
+
+.main__title > img{
+    min-height: 100px;
+    object-fit: contain;
+    margin-right: 20px;
+    width: 90px;
+   
+}
+
+.main_welcome > h1 {
+    font-size: 24px;
+    color: #dfe6ee;
+    margin-bottom: 4px;
+    font-weight: bold;
+
+    
+}
+.main_welcome .hunter {
+    font-size: 24px;
+    color: #c3d2e0;
+    font-weight: lighter;
+    padding-left: 2px;
+    
+    
+}
+
+.main_welcome > p {
+    font-size: 17px;
+    color: #c3d2e0;
+    font-weight: lighter;
+    
+    
+}
+
+
+
+.list li  a {
+    text-decoration: none;
+    color: #e8eaeb;
+    background: #353553;
+    border: 2px solid #dfe6ee;
+    padding: 10px 15px;
+    display: block;
+    list-style: none;
+}
+
+
+
+
+.list > li {
+    float: left;
+}
+
+.list li ul {
+    display: none;
+    position: absolute;
+    min-height: 140px;
+   
+
+
+}
+.list li:hover > ul {
+    display: block;
+    
+
+
+}
+.list li ul li{
+    position: relative;
+}
+.list li ul li ul{
+    right: -140px;
+    top: 0px;
+}
+
+
+
+
+
+
+.main__input .form input{
+    padding: 10px;
+    width: 380px;
+
+}
+
+.form .btn{
+    padding: 10px;
+    border: 1px solid #e8eaeb;
+    color: #e8eaeb;
+   
+    
+}
+
+
+
