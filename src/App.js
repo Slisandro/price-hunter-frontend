@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import fakedata from "./components/assets/fakedata";
 import Footer from "./components/Footer";
@@ -8,9 +7,11 @@ import MarcasAsociadas from "./components/MarcasAsociadas";
 function App() {
   return (
     <div className="App">
-      <MarcasAsociadas />
-      <Testimonios people={fakedata} />
-      <Footer />
+//       <MarcasAsociadas />
+//       <Testimonios people={fakedata} />
+//       <Footer />
+//     router
+
     </div>
   );
 }
