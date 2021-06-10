@@ -3,10 +3,10 @@ import "./Navbar.css";
 import user from "../../assets/user (1).png";
 // import notificacion from "../../assets/";
 
-const Navbar = ({sidebar, openSidebar}) => {
+const Navbar = (props) => {
     return ( 
         <nav className="navbar">
-            <div className="nav_icon" onClick={() => openSidebar()}>
+            <div className="nav_icon" onClick={() => props.openSidebar()}>
                 <i class="fas fa-bars"></i>
             </div>
 
@@ -18,7 +18,7 @@ const Navbar = ({sidebar, openSidebar}) => {
 
             <div className="navbar__right">
                 <a href='!#'>
-                {/* <img width={22} src={notificacion} alt="user"/> */}
+                {/* camapana */}
                 </a>
 
                 <a href='!#'>
