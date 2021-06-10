@@ -1,14 +1,36 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #d1d1d8;
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&display=swap');
+/*Barras de sroll*/
+
+::-webkit-scrollbar{
+  width: 5px;
+  height: 8px;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 5px #a5aaad;
+  border-radius: 10px;
 }
+
+::-webkit-scrollbar-thumb {
+  background: #b4d306;
+  border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1B1B3E;
+
+  
+  
+}
+
+
+body{
+  box-sizing: border-box;
+  font-family: 'Catamaran', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
