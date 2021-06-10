@@ -9,6 +9,10 @@
   margin: auto;
 }
 
+#title {
+  margin-top: 3.5rem;
+}
+
 .mySlides {
   display: inline-flex;
 }
