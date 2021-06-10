@@ -11,28 +11,6 @@ import image8 from "../assets/img/logomarcas/mars.png";
 import image9 from "../assets/img/logomarcas/mondelez.png";
 import image10 from "../assets/img/logomarcas/unilever.png";
 
-// function MarcasAsociadas() {
-//   return (
-//     <>
-//       <div>
-//         <h2 id="title">Marcas Asociadas</h2>
-//         <div className="logosmarcas">
-//           <img className="logoimagen" src={image1} alt="Not Found" />
-//           <img className="logoimagen" src={image2} alt="Not Found" />
-//           <img className="logoimagen" src={image3} alt="Not Found" />
-//           <img className="logoimagen" src={image4} alt="Not Found" />
-//           <img className="logoimagen" src={image5} alt="Not Found" />
-//           <img className="logoimagen" src={image6} alt="Not Found" />
-//           <img className="logoimagen" src={image7} alt="Not Found" />
-//           <img className="logoimagen" src={image8} alt="Not Found" />
-//           <img className="logoimagen" src={image9} alt="Not Found" />
-//           <img className="logoimagen" src={image10} alt="Not Found" />
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
 function MarcasAsociadas() {
   var slideIndex = 1;
   showSlides(slideIndex);
