@@ -1,17 +1,26 @@
 
 .form{
      position: absolute;
+     margin-top: 5rem;
      width: 500px;
      height: 800px;
      background: #FFFFFF;
      border-radius: 30px 0px 0px 30px;
 }
 
-.form title{
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.title{
 position: absolute;
 width: 500px;
 height: 50px;
-margin-left: 10.rem;
+margin-bottom: 15rem;
+margin-left: 8rem;
 font-family: Ubuntu;
 font-style: normal;
 font-weight: normal;
@@ -35,6 +44,13 @@ opacity: 0.6;
     background-color: #1976D2;
     border-radius: 5px ;
 
+}
+.img-facebook{
+    width: 50px;
+    margin-right: 8rem;
+    position: absolute;
+    left: 5%;
+    top: 5%;
 }
 
 .twitter{
@@ -62,6 +78,8 @@ opacity: 0.6;
  position: absolute;
 width: 500px;
 height: 48px;
+margin-top: 9rem;
+margin-left: 12rem;
 
 font-family: Roboto;
 font-style: italic;
@@ -77,11 +95,25 @@ color: #000000;
 opacity: 0.6;
 }
 
-/* .form-group{
+
+.form-control-contraseña {
     position: absolute;
+    width: 350px;
+    height: 60px;
+    margin-top: 15.5rem; 
+    margin-left: 1rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+ .form-control-usuario{
+position: absolute;
 width: 350px;
 height: 60px;
-margin-top: 8rem;
+margin-top: 11rem;
 margin-left: 1rem;
 
 background: #FFFFFF;
@@ -89,36 +121,56 @@ border: 1px solid rgba(0, 0, 0, 0.6);
 box-sizing: border-box;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 5px;
-} */
+} 
 
-/* .form-control {
+.btn-submit {
     position: absolute;
-width: 250px;
-height: 50px;
+    width: 350px;
+    height: 60px;
+    margin-top: 20rem;
+    margin-left: 1rem;
+    background: #DEC800;
+    border: 1px solid #A5A58D;
+    box-sizing: border-box;
+    border-radius: 5px;
 
-font-family: Ubuntu;
-font-style: italic;
+}
+
+.forgot-password{
+    position: absolute;
+width: 170px;
+height: 20px;
+margin-top: 25rem;
+margin-left: 14rem;
+font-family: Montserrat;
+font-style: normal;
 font-weight: normal;
-font-size: 20px;
-line-height: 23px;
+font-size: 15px;
+line-height: 18px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+
+opacity: 0.6;
+}
+
+.registrarse{
+position: absolute;
+width: 85px;
+height: 20px;
+margin-top: 25rem;
+margin-left: 1rem;
+font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 18px;
 display: flex;
 align-items: center;
 
 color: #000000;
 
 opacity: 0.6;
-} */
-
-/* .form-group-password{
-position: absolute;
-width: 350px;
-height: 60px;
-margin-top: 6rem;
-margin-left: 1rem;
-
-background: #FFFFFF;
-border: 1px solid rgba(0, 0, 0, 0.6);
-box-sizing: border-box;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 5px;
-} */
+}
