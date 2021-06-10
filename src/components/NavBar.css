@@ -1,0 +1,42 @@
+.containerNavBar {
+    height: 10vh;
+    padding: 0 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerNavBar .title {
+    font-size: 1.8em;
+    font-style: italic;
+}
+
+.containerNavBar .links {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.containerNavBar .links p {
+    font-size: 1em;
+}
+
+.containerNavBar .button {
+    width: 12%;
+    height: 60%;
+    border: none;
+    border-radius: .5em;
+    background: #EA8120;
+    font-size: 1em;
+}
+
+.containerNavBar .modal {
+    position: absolute;
+    z-index: 100;
+    top: 25%;
+    left: 25%;
+    background: red;
+    width: 50%;
+    height: 50%;
+}
