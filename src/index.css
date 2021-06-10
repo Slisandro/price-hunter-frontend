@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&display=swap");
 /*Barras de sroll*/
 
-::-webkit-scrollbar {
+::-webkit-scrollbar{
   width: 5px;
   height: 8px;
 }

@@ -8,7 +8,7 @@ import  "./Tablero.css";
 
 function Tablero() {
 
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebarOpen, setSidebar] = useState(false);
 
   const openSidebar = () => {
     setSidebar(true);
@@ -21,9 +21,9 @@ function Tablero() {
   return (
     <div className="contenedor">
   
-      <Navbar sidebar={sidebar} openSidebar={openSidebar} />
+      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <Main/>
-      <Sidebar sidebar={sidebar} closeSidebar={closeSidebar}/>
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
     
     </div>
 

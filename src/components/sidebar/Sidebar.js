@@ -3,9 +3,9 @@ import "./Sidebar.css";
 import aguila from "../../assets/aguila.png";
 
 
-const Sidebar = ({sidebar , closeSidebar}) => {
+const Sidebar = (props) => {
     return ( 
-        <div className={  sidebar ? "sidebar-responsive" : ""  } id="sidebar">
+        <div className={ props.sidebarOpen ? "sidebar-responsive" : ""  } id="sidebar">
 
             <div className="sidebar__title">
                 <div className="sidebar__img">
@@ -13,9 +13,9 @@ const Sidebar = ({sidebar , closeSidebar}) => {
                     <h1>PH</h1>
                 </div>
                 <i  
-                    className="far fa-times-circle"
+                    class="far fa-window-close"
                     id="sidebarIcon"
-                    onClick={() => closeSidebar()}>
+                    onClick={() => props.closeSidebar()}>
                     
                 </i>
                 
@@ -43,7 +43,7 @@ const Sidebar = ({sidebar , closeSidebar}) => {
 
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Sidebar;

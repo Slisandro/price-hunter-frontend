@@ -1,12 +1,13 @@
 #sidebar {
-    background: #1B1B3E;
+    background: #0c0c1f;
     grid-area: sidebar;
     overflow-y: auto;
-    padding: 25px;
+    padding: 15px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    border-right: 4px solid #ffffff;
 
 }
 
@@ -14,11 +15,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: beige;
+    color: rgb(255, 255, 255);
     margin-bottom: 30px;
 
 }
-
 
 .sidebar__img{
     display: flex;
@@ -49,10 +49,15 @@
 
 
 
+
+
+
 .sidebar__link {
     color: #fbfdff;
     padding: 10px;
     border-radius: 3px;
+    margin-bottom: 5px;
+
     
   
 
