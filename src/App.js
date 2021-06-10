@@ -1,27 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
+import fakedata from "./components/assets/fakedata";
+import Footer from "./components/Footer";
+import Testimonios from "./components/Testimonios.js";
+import MarcasAsociadas from "./components/MarcasAsociadas";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <p>
-          Edit <code>src/App.js</code> and save to reload again .
-        </p>
-
-        
-   
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
+      <MarcasAsociadas />
+      <Testimonios people={fakedata} />
+      <Footer />
     </div>
   );
 }
