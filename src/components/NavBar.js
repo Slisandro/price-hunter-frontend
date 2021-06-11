@@ -19,6 +19,7 @@ function NavBar() {
         <Link to="/Recompensas">Recompensas</Link>
         <Link to="Servicios">Servicios</Link>
         <Link to="/SobreNosotros">Sobre nosotros</Link>
+        <Link to="/Ayuda">Ayuda</Link>
       </div>
       <button onClick={handleModal} className="button">
         Ingresar/Registrarse
