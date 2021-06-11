@@ -18,8 +18,10 @@
   justify-content: space-evenly;
 }
 
-.containerNavBar .links p {
+.containerNavBar .links a {
   font-size: 1em;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .containerNavBar .button {
@@ -32,6 +34,10 @@
   cursor: pointer;
 }
 
+.button:hover {
+  background-color: #8b8a96;
+}
+
 .containerNavBar .modal {
   position: absolute;
   z-index: 100;
@@ -40,4 +46,8 @@
   background: red;
   width: 50%;
   height: 50%;
+}
+
+.titleNavBar {
+  cursor: pointer;
 }

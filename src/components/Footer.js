@@ -26,7 +26,7 @@ function Footer() {
         <div>
           <h4>Price Hunter</h4>
           <h6>
-            <a href="#">Sobre Nosotros</a>
+            <a href="/SobreNosotros">Sobre Nosotros</a>
           </h6>
           <h6>
             <a href="#">Nuestra Historia</a>
