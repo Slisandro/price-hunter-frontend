@@ -44,107 +44,98 @@ function MarcasAsociadas() {
     // slides[slideIndex - 1].style.display = "block";
     // dots[slideIndex - 1].className += " active";
   }
+
   return (
-    <>
-      <div>
-        <h2 id="title">Marcas Asociadas</h2>
-        <div class="slideshow-container">
-          <a class="prev" onclick={plusSlides(-1)}>
-            &#10094;
-          </a>
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image1}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image2}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image3}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img className="logoimagen" src={image4} alt="Not Found" />
-          </div>
-
-          <div class="mySlides fade">
-            <img className="logoimagen" src={image5} alt="Not Found" />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image6}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image7}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image8}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image9}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <div class="mySlides fade">
-            <img
-              className="logoimagen"
-              src={image10}
-              alt="Not Found"
-              // style={{ width: "100%" }}
-            />
-          </div>
-
-          <a class="next" onclick={plusSlides(1)}>
-            &#10095;
-          </a>
+    <div className="marcasAsociadas">
+      <h2 id="title">Marcas Asociadas</h2>
+      <div className="slideshow-container">
+        <a className="prev" onclick={plusSlides(-1)}>
+          &#10094;
+        </a>
+        <div class="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image1}
+            alt="Not Found"
+          />
         </div>
-        <br></br>
 
-        <div style={{ textAlign: "center" }}>
-          <span class="dot" onclick={currentSlide(1)}></span>
-          <span class="dot" onclick={currentSlide(2)}></span>
-          <span class="dot" onclick={currentSlide(3)}></span>
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image2}
+            alt="Not Found"
+          />
         </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image3}
+            alt="Not Found"
+          />
+        </div>
+
+        <div className="mySlides fade">
+          <img className="logoimagen" src={image4} alt="Not Found" />
+        </div>
+
+        <div className="mySlides fade">
+          <img className="logoimagen" src={image5} alt="Not Found" />
+        </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image6}
+            alt="Not Found"
+          />
+        </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image7}
+            alt="Not Found"
+          />
+        </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image8}
+            alt="Not Found"
+          />
+        </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image9}
+            alt="Not Found"
+          />
+        </div>
+
+        <div className="mySlides fade">
+          <img
+            className="logoimagen"
+            src={image10}
+            alt="Not Found"
+          />
+        </div>
+
+        <a className="next" onclick={plusSlides(1)}>
+          &#10095;
+        </a>
       </div>
-    </>
+      <br></br>
+
+      <div style={{ textAlign: "center" }}>
+        <span className="dot" onclick={currentSlide(1)}></span>
+        <span className="dot" onclick={currentSlide(2)}></span>
+        <span className="dot" onclick={currentSlide(3)}></span>
+      </div>
+    </div>
   );
 }
 
