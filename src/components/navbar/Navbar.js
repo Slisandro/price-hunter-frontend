@@ -22,7 +22,7 @@ const Navbar = (props) => {
                 </a>
 
                 <a href='!#'>
-                    <img width={22} src={user} alt="user"/>
+                    <img className="icon-user" width={22} src={user} alt="user"/>
                 </a>
 
             </div>

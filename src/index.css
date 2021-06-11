@@ -1,4 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
+
+
+
+body {
+  box-sizing:border-box !important;
+  font-family: 'Catamaran', sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #c4c4cc;
+}
+
 /*Barras de sroll*/
 
 ::-webkit-scrollbar{
@@ -20,10 +31,6 @@
   background: #1b1b3e;
 }
 
-body {
-  box-sizing: border-box;
-  font-family: "Catamaran", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #c4c4cc;
-}
+
+
+
