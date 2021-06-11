@@ -2,7 +2,6 @@
 .form{
      position: absolute;
      margin-top: 5rem;
-    
      width: 100%;
      height: 80%;
      border-radius: 30px 0px 0px 30px;
@@ -129,6 +128,7 @@ height: 48px;
 margin-top: 14%;
 margin-left: 18rem;
 
+
 font-family: Roboto;
 font-style: italic;
 font-weight: normal;
@@ -151,12 +151,14 @@ opacity: 0.6;
     height: 50px;
     margin-top: 17rem; 
     margin-left: 8rem;
+
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
+
 
 .form-control-usuario{
 position: absolute;
@@ -170,7 +172,6 @@ border: 1px solid rgba(0, 0, 0, 0.6);
 box-sizing: border-box;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 5px;
-
 } 
 
 .btn-submit {
@@ -220,6 +221,7 @@ font-size: 15px;
 line-height: 18px;
 display: flex;
 align-items: center;
+
 
 color: #000000;
 
@@ -290,4 +292,3 @@ color: #000000;
 text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.55);
 
 }
-

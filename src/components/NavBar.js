@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import './NavBar.css'
+import './NavBar.css';
 
 function NavBar() {
     const [modal, setModal] = useState(false);
@@ -11,7 +11,7 @@ function NavBar() {
 
     return (
         <div className="containerNavBar">
-            <h2 className="title">Price Hunter</h2>
+            <h2 className="titleNavBar">Price Hunter</h2>
             <div className="links">
                 <p>Inicio</p>
                 <p>Marcas</p>

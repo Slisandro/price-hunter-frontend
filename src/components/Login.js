@@ -9,9 +9,11 @@ import Usuario from '../assets/img/slider/usuario.png'
 import Password from '../assets/img/slider/password.png'
 
 
+
 function Login(){
     return(
         <div className="container">
+
         <div className="container-form">
             <h2 className="title">Creá tu cuenta</h2>
     
@@ -61,6 +63,13 @@ function Login(){
             <h1 className="price-hunter2">HUNTER</h1>
               
             <img className="img-hunter" src={Hunter}/>
+            </div>
+
+            </div>
+
+
+            <div>
+                
             </div>
 
             </div>
