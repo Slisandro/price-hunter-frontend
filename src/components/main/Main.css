@@ -1,8 +1,10 @@
 .main{
-    background: radial-gradient(circle, #2b3264 0%, #13162f 100%);
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
     grid-area: main;
     overflow-y: auto;
     border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    
     
 
 }
@@ -19,7 +21,7 @@
     display: flex;
     padding-left: 10px;
     padding-bottom: 18px;
-    border-bottom: 2px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
 }
 
 .main__title > img{
@@ -49,9 +51,6 @@
     font-weight: lighter;
     padding-left: 10px;
 
-
-    
-    
 }
 
 .main_welcome > p {
@@ -65,69 +64,7 @@
 }
 
 
-
-.list li  a {
-    text-decoration: none;
-    color: #e8eaeb;
-    background: #353553;
-    border: 2px solid #dfe6ee;
-    padding: 10px 15px;
-    display: block;
-    list-style: none;
-}
-
-
-
-
-.list > li {
-    float: left;
-}
-
-.list li ul {
-    display: none;
-    position: absolute;
-    min-height: 140px;
-   
-
-
-}
-.list li:hover > ul {
-    display: block;
-    
-
-
-}
-.list li ul li{
-    position: relative;
-}
-.list li ul li ul{
-    right: -140px;
-    top: 0px;
-}
-
-
-
-
-
-
-.main__input .form input{
-    padding: 10px;
-    width: 380px;
-
-}
-
-.form .btn{
-    padding: 10px;
-    border: 1px solid #e8eaeb;
-    color: #e8eaeb;
-   
-    
-}
-
-
-
-  
-  .circle {
+.circle {
     width: 100px;
     height: 100px;
     border: 3px solid #5b5f78;
@@ -171,54 +108,134 @@
     transform: translate(-50%, -50%);
     color: #17e8f7;
     font-weight: 500;
+    font-size: 25px;
 }
 
 
-
-.form {
-    display: flex;
-    align-items: center;
-
+.box{
+    margin-left: 340px;
+}
+input{
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    transition: .5s;
 }
 
 
-.nav_list{
-    margin-top: 26px;
-}
-
-.nav_list .form .btn{
-    background: #110b33;
-    height: 50px;
-    font-size: 15px;
-    border: 2px solid  #282981;
-    color: #e6e6e6;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-family: "Catamaran", sans-serif;
-
-
-}
-
-.nav_list .form .input{
-    margin-left: 260px;
-    height: 44px;
+input[type="text"]{
+    background: cornsilk;
+    width:300px ;
+    height: 35px;
+    border: none;
     outline: none;
-    border:1px solid #282981;
-    background: #fffffee1;
-    padding-left: 40px;
-    font-size: 18px;
-    color: rgb(11, 20, 61);
-    transition: .7s;
-    width: 300px;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
+    padding: 0 25px;
+    border-radius: 25px 0 0 25px;
+
 
 }
-.nav_list .input:hover{
-    border:2px solid #0d1150;
+
+input[type="submit"]{
+    left: -5px;
+    position: relative;
+    border-radius: 0 25px 25px 0;
+    width: 220px;
+    height: 35px;
+    border: 2px solid #17e8f7;
+    outline: none;
+    cursor: pointer;
+    background: #0d1029 ;
+
+    color: rgb(255, 253, 253);
+
+    
+    
+
+}
+
+
+
+
+/*categorias*/
+.categorias{
+    max-width: 1000px;
+}
+.categorias ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+
+}
+
+.categorias li{
+    display: inline-block;
+    /* transition: .5s; */
+    border-radius: 10px;
+    font-size: 15px;
+
+}
+
+ .categorias .menu-main li:hover{
+    background: #5b5f78;
+
+} 
+
+
+.categorias ul li a {
+    color: #e0e0e0;
+    font-weight: bolder;
+    text-decoration: none;
+    display: block;
+    padding: 0.35em 1.96em;
+    
+
+}
+
+
+
+.menu-sub{
+    position: absolute;
+    background: #0d1029;
+    width: 100%;
+    display: none;
+    color: #02b3c0;
+    padding: 2em;
+   
+}
+
+.categorias li:hover .menu-sub{
+    display: block;
+    border-radius: 2px;
+    
+}
+
+.menu-main .sub {
+    display: block;
+}
+
+
+.menu-sub ul li  a {
+    padding: 0;
 }
 
 
 
 
 
+
+
+
+
+
+
+
+@media only screen and (max-width: 978px){
+    .main{
+        overflow-x: hidden;
+        border-radius: 0%;
+
+    }
+    
+
+}

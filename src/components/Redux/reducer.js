@@ -19,12 +19,7 @@ const initialState = {
 
 export function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS_NAME: {
-      return {
-        ...state,
-        arrayPrueba: state.arrayPrueba
-      }
-    }
+    case GET_PRODUCTS_NAME: 
     
       
       break;

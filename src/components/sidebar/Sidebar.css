@@ -1,13 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
+
+
 #sidebar {
-    background: #0c0c1f;
+    background: #24244b;
     grid-area: sidebar;
-    overflow-y: auto;
+    overflow-y:hidden;
     padding: 15px;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    border-right: 4px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    font-family: 'Catamaran', sans-serif !important;
+    
+    
 
 }
 
@@ -22,14 +28,13 @@
 
 .sidebar__img{
     display: flex;
-    align-items: center;
+    padding-left:45px;
 
 }
 
 .sidebar__title > div > img {
     width: 50px;
     object-fit: contain;
-    /* margin-left: 116px; */
     
 }
 
@@ -64,8 +69,9 @@
 }
 
 .active_menu_link  {
-    background: #353553;
+    background: #0d1029;
     color: azure;
+    
     
 
 }
@@ -127,6 +133,15 @@
 @media only screen and (max-width: 978px){
     #sidebar {
         display: none;
+        height: 95vh;
+        border: none;
+        
+       
+    }
+    .sidebar__img{
+       
+        padding-left:25px;
+    
     }
 
     .sidebar__title{

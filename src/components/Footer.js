@@ -4,7 +4,7 @@ import "./styles/Footer.css";
 function Footer() {
   return (
     <>
-      <div className="container">
+      <div className="container-footer">
         <div className="title">
           <h3>Price Hunter</h3>
         </div>

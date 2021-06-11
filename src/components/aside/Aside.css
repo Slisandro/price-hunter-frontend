@@ -1,0 +1,93 @@
+
+#aside{
+    background: #24244b;
+    grid-area: aside;
+    overflow-y:hidden;
+    padding: 15px;
+    -webkit-transition: all 0.5s;
+    border-bottom-left-radius: 15px;
+    transition: all 0.5s;
+    border-right: 1px solid #ffffff;
+    font-family: 'Catamaran', sans-serif !important;
+    
+}
+
+.account-profile {
+    margin-top: 5%;
+    position: relative;
+    text-align: center;
+    position: relative;
+  }
+  .account-profile img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: left;
+       object-position: left;
+    border: 5px solid #03ebeb;
+    padding: 5px;
+  }
+
+  .account-name {
+    margin: 20px 0 10px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .account-title {
+    font-size: 15px;
+    color: #fff;
+  }
+
+
+  .card {
+    margin-top: 30px;
+    background: #10163a;
+    background: radial-gradient(circle, #37428d 0%, #13162f 100%);
+    padding: 80px 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-height: 430px;
+    width: 80%;
+  }
+
+  .user-card {
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    padding-top: 16px;
+    position: relative;
+    color: white;
+  }
+  .user-card:before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #9b9ca7;
+    right: 10px;
+    border-radius: 50%;
+    box-shadow: -10px 0 0 0 #9b9ca7, 10px 0 0 0 #9b9ca7;
+    top: 24px;
+  }
+  .user-income {
+    font-size: 14px;
+    color: white;
+  }
+  .user-info {
+    margin-top: auto;
+    font-weight: 500;
+    color: white;
+  }
+
+
+@media only screen and (max-width: 978px){
+    #aside {
+        display: none;
+    }
+
+
+}

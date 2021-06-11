@@ -52,8 +52,7 @@
 }
 
 .navbar__right > a {
-    margin-left: 20px;
-    text-decoration: none;
+    display: none;
 
 }
 
@@ -69,15 +68,27 @@
 
 
 @media only screen and (max-width:978px) {
+    .navbar{
+        border-radius: 0px;
+    }
     .nav_icon {
         display: inline;
+    }
+ 
+    .navbar__right > a {
+        display: inline;
+        margin-left: 20px;
+        text-decoration: none;
+    
     }
     
 }
 
 @media only screen and (max-width:480px) {
+
     .navbar__left {
         display: none;
     }
+    
     
 }

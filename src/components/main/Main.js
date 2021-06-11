@@ -4,7 +4,7 @@ import { getAllProductsByName } from "../Redux/actions";
 import "./Main.css";
 // import logo from "../../assets/mira.png";
 
-import Cards from '../Cards';
+// import Cards from '../Cards';
 
 
 const Main = () => {
@@ -51,23 +51,64 @@ const Main = () => {
                         </div>
     
     
-                        <div className="nav_list">    
-                            
-                                <form className="form" onSubmit={e => handleSubmit(e)}>
+                        <div className="box">    
+                                <form onSubmit={e => handleSubmit(e)}>
                                     <input
-                                        className="input" 
                                         type="text" 
-                                        placeholder="Buscar..."
+                                        placeholder="Buscar productos por nombre"
                                         onChange={e => handleChange(e)}
                                         value={producto}
                                         name={producto}
                                     /> 
-                                    <button type="submit" className="btn">Buscar</button> 
+                                    <input type="submit" className="btn" value="Buscar"/> 
                                 </form>
+
+                                <div className="categorias">
+                                    <ul className="menu-main">
+
+                                        <li><a href="!#">Tabla 1</a>
+                                            <div className="menu-sub">
+                                                <h3>Frescos</h3>
+                                                <ul>
+                                                    <li className="sub"><a href="!#">Tabla 2</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 3</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 4</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 5</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 6</a></li>
+                                                </ul>
+
+                                                <h3>Carnes</h3>
+                                                <ul>
+                                                    <li className="sub"><a href="!#">Tabla 2</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 3</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 4</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 5</a></li>
+                                                    <li className="sub"><a href="!#">Tabla 6</a></li>
+                                                </ul>
+                                            </div>
+                                        
+                                        
+                                        
+                                        </li>
+
+
+
+
+                                        <li><a href="!#">Tabla 2</a></li>
+                                        <li><a href="!#">Tabla 3</a></li>
+                                        <li><a href="!#">Tabla 4</a></li>
+                                        <li><a href="!#">Tabla 5</a></li>
+        
+                                    </ul>
+                                </div>
                             
                         </div>
 
-                        <Cards productos={productos}/>
+                    
+
+                    
+
+                        {/* <Cards productos={productos}/> */}
 
                 </div>
             </div>
