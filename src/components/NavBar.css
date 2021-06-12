@@ -41,11 +41,11 @@
 .containerNavBar .modal {
   position: absolute;
   z-index: 100;
-  top: 25%;
-  left: 25%;
   background: red;
-  width: 50%;
-  height: 50%;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
 }
 
 .titleNavBar {
