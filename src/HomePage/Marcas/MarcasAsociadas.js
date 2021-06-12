@@ -52,7 +52,7 @@ function MarcasAsociadas() {
         <a className="prev" onclick={plusSlides(-1)}>
           &#10094;
         </a>
-        <div class="mySlides fade">
+        <div className="mySlides fade">
           <img
             className="logoimagen"
             src={image1}

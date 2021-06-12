@@ -9,8 +9,12 @@
   --clr-grey-8: hsl(210, 31%, 80%);
   --clr-grey-9: hsl(212, 33%, 89%);
   --clr-grey-10: hsl(210, 36%, 96%);
+  --clr-red-dark: hsl(360, 67%, 44%);
+  --clr-red-light: hsl(360, 71%, 66%);
+  --clr-green-dark: hsl(125, 67%, 44%);
+  --clr-green-light: hsl(125, 71%, 66%);
   --clr-white: #fff;
-  --clr-purple: #c2b1d8;
+  --clr-purple: #e0d7eb;
   --clr-grey-special: #eae6eb;
   --clr-black: #222;
   --spacing: 0.1rem;
@@ -99,4 +103,17 @@ Questions
   margin-left: 1rem;
   align-self: center;
   min-width: 2rem;
+}
+
+.btnAB {
+  background: transparent;
+  border-color: transparent;
+  width: 6rem;
+  height: 6rem;
+  background: var(--clr-grey-special);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20%;
+  text-decoration: none;
 }

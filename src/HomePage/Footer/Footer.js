@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -14,26 +15,26 @@ function Footer() {
         <div>
           <h4>Soporte</h4>
           <h6>
-            <a href="#">Contáctanos</a>
+            <Link to="/Contacto">Contáctanos</Link>
           </h6>
           <h6>
-            <a href="#">Preguntas Frecuentes</a>
+            <Link to="/Ayuda">Preguntas Frecuentes</Link>
           </h6>
           <h6>
-            <a href="#">Política de Privacidad</a>
+            <Link to="">Política de Privacidad</Link>
           </h6>
         </div>
         <div>
           <h4>Price Hunter</h4>
           <h6>
-            <a href="/SobreNosotros">Sobre Nosotros</a>
+            <Link to="/SobreNosotros">Sobre Nosotros</Link>
           </h6>
           <h6>
-            <a href="#">Nuestra Historia</a>
+            <Link to="/SobreNosotros">Nuestra Historia</Link>
           </h6>
         </div>
         <div>
-          <h4 className="suscripcion">Suscríbase</h4>
+          <h4 className="suscripcion">¡Recibí Novedades!</h4>
           <input
             className="inputfooter"
             type="text"
@@ -41,7 +42,7 @@ function Footer() {
             placeholder="Ingrese su email"
           />
           <br></br>
-          <button className="send">Enviar</button>
+          <button className="send">Suscribirme</button>
         </div>
       </div>
     </>

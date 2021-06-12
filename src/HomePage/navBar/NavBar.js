@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 import "./NavBar.css";
 
@@ -16,8 +17,8 @@ function NavBar() {
       <div className="links">
         <Link to="/">Inicio</Link>
         <Link to="/Marcas">Marcas</Link>
-        <Link to="/Recompensas">Recompensas</Link>
         <Link to="Servicios">Servicios</Link>
+        <Link to="/Contacto">Contacto</Link>
         <Link to="/SobreNosotros">Sobre nosotros</Link>
         <Link to="/Ayuda">Ayuda</Link>
       </div>
@@ -26,8 +27,8 @@ function NavBar() {
       </button>
       {modal ? (
         <div className="modal">
-          Modal Abierto
           <button onClick={handleModal}>x</button>
+          <Login />
         </div>
       ) : null}
     </div>

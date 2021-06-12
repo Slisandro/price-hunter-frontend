@@ -1,5 +1,5 @@
 /* Slideshow container */
-.marcasAsociadas{
+.marcasAsociadas {
   margin: 2% 0;
 }
 
@@ -15,11 +15,11 @@
 
 .marcasAsociadas #title {
   display: flex;
-    font-weight: 600;
-    font-size: 30px;
-    text-shadow: 1px 1px 4px black;
-    letter-spacing: 0.2rem;
-    justify-content: center;
+  font-weight: 600;
+  font-size: 30px;
+  text-shadow: 1px 1px 4px black;
+  letter-spacing: 0.2rem;
+  justify-content: center;
 }
 
 .logoimagen {
@@ -91,6 +91,22 @@
   to {
     opacity: 1;
   }
+}
+
+.regresar {
+  width: 50%;
+  height: 100%;
+  border: 0.1rem solid;
+  border-radius: 0.2em;
+  background: #9d9da7;
+  font-size: 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 5rem;
+}
+
+.regresar:hover {
+  background-color: #9d9da790;
 }
 
 @keyframes fade {
