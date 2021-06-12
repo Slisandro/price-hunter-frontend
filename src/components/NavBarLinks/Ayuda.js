@@ -17,7 +17,9 @@ function Ayuda() {
             );
           })}
         </section>
-        <Link to="/">Regresar</Link>
+        <Link className="btnAB" to="/">
+          Regresar
+        </Link>
       </div>
     </main>
   );

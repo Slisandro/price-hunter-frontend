@@ -29,12 +29,12 @@ const Sidebar = (props) => {
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <Link to="">Configuración</Link>
+          <Link to="/configuración">Configuración</Link>
         </div>
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <Link to="">Configuración</Link>
+          <Link to="/configuración">Configuración</Link>
         </div>
       </div>
     </div>

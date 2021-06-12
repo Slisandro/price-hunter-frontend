@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-.regresar {
+/* .regresar {
   width: 20%;
   height: 100%;
   border: 0.1rem solid;
@@ -33,11 +33,11 @@
   font-size: 1em;
   cursor: pointer;
   margin-left: 5rem;
-}
-
+} */
+/* 
 .regresar:hover {
   background-color: #9d9da790;
-}
+} */
 
 .sobrenosotrosDescripcion {
   text-align: center;

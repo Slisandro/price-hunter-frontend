@@ -7,6 +7,7 @@ import Contacto from "./components/NavBarLinks/Contacto";
 import Servicios from "./components/NavBarLinks/Servicios";
 import Ayuda from "./components/NavBarLinks/Ayuda";
 import MisDesafios from "./components/desafios/MisDesafios";
+import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         {/* <Route path="/login" component={Login}/> */}
         <Route path="/tablero" component={Tablero} />
         <Route exact path="/misdesafios" component={MisDesafios} />
+        <Route exact path="/configuración" component={Configuración} />
       </Switch>
     </Router>
   );
