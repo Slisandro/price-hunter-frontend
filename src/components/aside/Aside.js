@@ -2,6 +2,7 @@ import React from 'react';
 import "./Aside.css";
 
 
+
 const Aside= () => {
 
     return ( 
@@ -14,15 +15,21 @@ const Aside= () => {
                     <div className="blob"></div>
                 </div>
                 <div className="account-name">Nombre usuario</div>
-                <div className="account-title">Cerrar sesion</div>
+                <div className="account-title">Cerrar Sesion</div>
             </div>
 
+            <div class="account card card1">
+                <div class="user-card">Tienes 8678 hunterCoins</div>
+                <div class="user-income">Precios cazados: 25</div>
+                <p class="user-info">*********************</p>
+            </div>
+        
+
+
             <div class="account card">
-              <div class="user-card">Tienes 8678 hunterCoins</div>
-              <div class="user-income">Precios cazados: 25</div>
-              <p class="user-info">*********************</p>
-           </div>
-          
+               
+            </div>
+
         </div>
      );
 }

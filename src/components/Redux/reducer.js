@@ -1,5 +1,5 @@
 
-import {GET_PRODUCTS_NAME} from "./actions"
+import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID} from "./actions"
 
 const initialState = {
   arrayPrueba: [
@@ -10,7 +10,10 @@ const initialState = {
   {id_producto: 4 , nombre_producto: "huevos" , contenido_neto: 30 ,cod_u_medida: "un" , id_sub: 84, price: "70"}
 
   ],
+  categorias: [],
   loading: false,
+  productos: [],
+  subcategorias:[]
 
 };
 
@@ -19,10 +22,23 @@ const initialState = {
 
 export function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS_NAME: 
-    
+    case GET_CATEGORIAS: 
+      return {
+        ...state,
+        categorias: action.payload
+    }
+    case GET_PRODUCTOS_NAME:     
+      return {
+        ...state,        
+        productos: action.payload
+    }
+    case GET_SUBCATEGORIAS_ID:     
+      return {
+        ...state,        
+        subcategorias: action.payload
+    }
       
-      break;
+    
   
     default:
       return state;
