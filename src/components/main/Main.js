@@ -1,17 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import { getAllProductsByName } from "../Redux/actions";
+import { getCategorias,getProductsByName } from "../Redux/actions";
+// import {Link} from "react-router-dom";
+import Categorias from '../categorias/Categorias';
 import "./Main.css";
 // import logo from "../../assets/mira.png";
 
-// import Cards from '../Cards';
+
 
 
 const Main = () => {
-    const productos = useSelector(store => store.arrayPrueba)
-    // console.log("STORE",productos)
+    const categorias = useSelector(store => store.categorias)
+    const productos = useSelector(store => store.productos)
+    // const loading = useSelector(store => store.loading)
     // useSelector()
-    // useDispatch()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCategorias())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const [producto, setProducto] = useState("");
     
@@ -19,14 +27,12 @@ const Main = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("producto", producto)
+        dispatch(getProductsByName(producto))
     }
     
     const handleChange = (e) => {
         setProducto(e.target.value) 
     }
-
-
     
     return ( 
         <main className="main">
@@ -34,6 +40,7 @@ const Main = () => {
                 
                 
                 <div className="main__title">
+                        <div id="container-welcome">
                         <div class="discount-chart">
                             <div class="circle">
                                 <div class="pie">
@@ -49,67 +56,31 @@ const Main = () => {
                             <h1>Bienvenido, <span className="hunter"> cazador</span></h1>
                             <p>Administra aquí tus precios</p>
                         </div>
+                        </div>
     
     
-                        <div className="box">    
-                                <form onSubmit={e => handleSubmit(e)}>
+                            <Categorias categorias={categorias}/>
+                                
+                                <form onSubmit={ handleSubmit}>
                                     <input
                                         type="text" 
                                         placeholder="Buscar productos por nombre"
-                                        onChange={e => handleChange(e)}
+                                        onChange={handleChange}
                                         value={producto}
                                         name={producto}
                                     /> 
                                     <input type="submit" className="btn" value="Buscar"/> 
                                 </form>
-
-                                <div className="categorias">
-                                    <ul className="menu-main">
-
-                                        <li><a href="!#">Tabla 1</a>
-                                            <div className="menu-sub">
-                                                <h3>Frescos</h3>
-                                                <ul>
-                                                    <li className="sub"><a href="!#">Tabla 2</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 3</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 4</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 5</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 6</a></li>
-                                                </ul>
-
-                                                <h3>Carnes</h3>
-                                                <ul>
-                                                    <li className="sub"><a href="!#">Tabla 2</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 3</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 4</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 5</a></li>
-                                                    <li className="sub"><a href="!#">Tabla 6</a></li>
-                                                </ul>
-                                            </div>
-                                        
-                                        
-                                        
-                                        </li>
-
-
-
-
-                                        <li><a href="!#">Tabla 2</a></li>
-                                        <li><a href="!#">Tabla 3</a></li>
-                                        <li><a href="!#">Tabla 4</a></li>
-                                        <li><a href="!#">Tabla 5</a></li>
-        
-                                    </ul>
-                                </div>
-                            
-                        </div>
-
-                    
-
-                    
-
-                        {/* <Cards productos={productos}/> */}
-
+                                {/* {
+                                    productos.map(producto => (
+                                        <div>
+                                            <p>{producto.precio}</p>
+                                            <p>{producto.preoducto}</p>
+                                        </div>
+                                    ))
+                                } */}
+                                
+                        
                 </div>
             </div>
         </main>
