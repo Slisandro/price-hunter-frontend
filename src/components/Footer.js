@@ -15,7 +15,7 @@ function Footer() {
         <div>
           <h4>Soporte</h4>
           <h6>
-            <Link to="">Contáctanos</Link>
+            <Link to="/Contacto">Contáctanos</Link>
           </h6>
           <h6>
             <Link to="/Ayuda">Preguntas Frecuentes</Link>
@@ -34,7 +34,7 @@ function Footer() {
           </h6>
         </div>
         <div>
-          <h4 className="suscripcion">Suscríbase</h4>
+          <h4 className="suscripcion">¡Recibí Novedades!</h4>
           <input
             className="inputfooter"
             type="text"
@@ -42,7 +42,7 @@ function Footer() {
             placeholder="Ingrese su email"
           />
           <br></br>
-          <button className="send">Enviar</button>
+          <button className="send">Suscribirme</button>
         </div>
       </div>
     </>

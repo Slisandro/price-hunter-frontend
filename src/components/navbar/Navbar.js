@@ -15,7 +15,7 @@ const Navbar = (props) => {
         <Link Link to="/misdesafios">
           Mis desafios
         </Link>
-        <Link to="/misdesafios">Mis desafios</Link>
+        <Link to="/configuración">Configuración</Link>
         <a className="active_link" href="!#">
           admin
         </a>
@@ -24,7 +24,7 @@ const Navbar = (props) => {
       <div className="navbar__right">
         <Link>{/* camapana */}</Link>
 
-        <Link to="">
+        <Link to="/configuración">
           <img className="icon-user" width={22} src={user} alt="user" />
         </Link>
       </div>
