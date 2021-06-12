@@ -1,16 +1,25 @@
 /* Slideshow container */
-.slideshow-container {
+.marcasAsociadas{
+  margin: 2% 0;
+}
+
+.marcasAsociadas .slideshow-container {
   max-width: 1000px;
   position: relative;
   margin: auto;
 }
 
-#title1 {
-  margin-top: 3.5rem;
+.marcasAsociadas .slideshow-container .mySlides {
+  display: inline-flex;
 }
 
-.mySlides {
-  display: inline-flex;
+.marcasAsociadas #title {
+  display: flex;
+    font-weight: 600;
+    font-size: 30px;
+    text-shadow: 1px 1px 4px black;
+    letter-spacing: 0.2rem;
+    justify-content: center;
 }
 
 .logoimagen {
@@ -23,8 +32,8 @@
   margin: 0 5%;
 }
 
-.prev,
-.next {
+.marcasAsociadas .slideshow-container .prev,
+.marcasAsociadas .slideshow-container .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -41,18 +50,18 @@
   margin-right: -0.2rem;
 }
 
-.next {
+.marcasAsociadas .slideshow-container .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-.prev:hover,
-.next:hover {
+.marcasAsociadas .slideshow-container .prev:hover,
+.marcasAsociadas .slideshow-container .next:hover {
   color: rgba(111, 120, 199, 0.8);
   text-decoration: none;
 }
 
-.dot {
+.marcasAsociadas div .dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -63,12 +72,12 @@
   transition: background-color 0.6s ease;
 }
 
-.active,
-.dot:hover {
+/* .active, */
+.marcasAsociadas div .dot:hover {
   background-color: #717171;
 }
 
-.fade {
+.marcasAsociadas .slideshow-container .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;

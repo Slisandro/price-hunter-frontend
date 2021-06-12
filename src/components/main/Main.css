@@ -1,10 +1,10 @@
 .main{
     background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
     grid-area: main;
-    overflow-y: auto;
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    
     
 
 }
@@ -19,9 +19,17 @@
 
 .main__title {
     display: flex;
+    align-items:center;
+    justify-content:space-between;
     padding-left: 10px;
     padding-bottom: 18px;
     border-bottom: 1px solid #f3f3f3;
+}
+
+#container-welcome{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .main__title > img{
@@ -125,7 +133,7 @@ input{
 
 input[type="text"]{
     background: cornsilk;
-    width:300px ;
+    width: 240px ;
     height: 35px;
     border: none;
     outline: none;
@@ -152,79 +160,6 @@ input[type="submit"]{
     
 
 }
-
-
-
-
-/*categorias*/
-.categorias{
-    max-width: 1000px;
-}
-.categorias ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: relative;
-
-}
-
-.categorias li{
-    display: inline-block;
-    /* transition: .5s; */
-    border-radius: 10px;
-    font-size: 15px;
-
-}
-
- .categorias .menu-main li:hover{
-    background: #5b5f78;
-
-} 
-
-
-.categorias ul li a {
-    color: #e0e0e0;
-    font-weight: bolder;
-    text-decoration: none;
-    display: block;
-    padding: 0.35em 1.96em;
-    
-
-}
-
-
-
-.menu-sub{
-    position: absolute;
-    background: #0d1029;
-    width: 100%;
-    display: none;
-    color: #02b3c0;
-    padding: 2em;
-   
-}
-
-.categorias li:hover .menu-sub{
-    display: block;
-    border-radius: 2px;
-    
-}
-
-.menu-main .sub {
-    display: block;
-}
-
-
-.menu-sub ul li  a {
-    padding: 0;
-}
-
-
-
-
-
-
-
 
 
 

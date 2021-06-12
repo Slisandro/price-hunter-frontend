@@ -9,6 +9,7 @@
     transition: all 0.5s;
     border-right: 1px solid #ffffff;
     font-family: 'Catamaran', sans-serif !important;
+    z-index: 1000;
     
 }
 
@@ -45,7 +46,7 @@
     margin-top: 30px;
     background: #10163a;
     background: radial-gradient(circle, #37428d 0%, #13162f 100%);
-    padding: 80px 30px;
+    padding: 40px 30px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -53,6 +54,13 @@
     max-height: 430px;
     width: 80%;
   }
+
+  .calendar{
+    color: #0afce8;
+    padding-left: 45px;
+    font-size: 15px;
+  }
+ 
 
   .user-card {
     font-size: 19px;
@@ -80,7 +88,7 @@
   .user-info {
     margin-top: auto;
     font-weight: 500;
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
 

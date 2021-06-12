@@ -3,7 +3,7 @@ import "./styles/Testimonios.css";
 
 function Testimonios({ people }) {
   return (
-    <>
+    <div className="containerTestimonios">
       <h2 id="title">Testimonios</h2>
       <section className="testimonios">
         {people.map((person) => {
@@ -19,7 +19,7 @@ function Testimonios({ people }) {
           );
         })}
       </section>
-    </>
+    </div>
   );
 }
 

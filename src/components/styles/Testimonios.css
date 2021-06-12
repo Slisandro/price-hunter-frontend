@@ -1,9 +1,9 @@
-.testimonios {
+.containerTestimonios .testimonios {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.testimonio {
+.containerTestimonios .testimonio {
   margin-bottom: 2rem;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -14,18 +14,18 @@
   border-radius: 3rem;
 }
 
-#inside {
+.containerTestimonios .testimonios .testimonio #inside {
   margin-top: -4rem;
   text-align: center;
 }
 
-#name {
+.containerTestimonios .testimonios .testimonio #inside #name {
   display: flex;
   justify-content: center;
   font-size: 1.2rem;
 }
 
-#title {
+.containerTestimonios #title {
   display: flex;
   font-weight: 600;
   font-size: 30px;
@@ -34,7 +34,7 @@
   justify-content: center;
 }
 
-.userImage {
+.containerTestimonios .testimonios .testimonio .userImage {
   display: flex;
   width: 75px;
   height: 75px;
@@ -45,6 +45,6 @@
   margin-top: 1rem;
 }
 
-.testimonio:hover {
+.containerTestimonios .testimonios .testimonio:hover {
   background-color: #9d9da790;
 }

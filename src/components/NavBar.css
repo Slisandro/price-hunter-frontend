@@ -51,3 +51,12 @@
 .titleNavBar {
   cursor: pointer;
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .containerNavBar .button {
+    height: 50%;
+    font-size: .8em;
+  }
+}
