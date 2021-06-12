@@ -6,20 +6,21 @@
   text-align: center;
 }
 
-a {
+.container-footer h6 a {
   color: black;
 }
 
-a:hover {
+.container-footer h6 a:hover {
   color: rgb(80, 72, 153);
   text-decoration: underline;
 }
-a:link {
+
+.container-footer h6 a:link {
   color: white;
   text-decoration: none;
 }
 
-.title {
+.container-footer .title {
   align-self: flex-start;
   padding-left: 3rem;
   padding-top: 1rem;
@@ -30,16 +31,16 @@ a:link {
   margin-right: 8.5rem;
 }
 
-.input {
+.container-footer div .input {
   border: none;
   border-bottom: 2px solid lightgrey;
-  width: 11rem;
+  width: 5rem;
   background-color: #353553;
   color: white;
   margin-right: 2rem;
 }
 
-.send {
+.container-footer div .send {
   border-radius: 0.5rem;
   box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
   cursor: pointer;
@@ -49,12 +50,12 @@ a:link {
   margin-top: 0.2rem;
 }
 
-.rights {
+.container-footer .rights {
   align-self: flex-end;
   margin-left: -23.8rem;
 }
 
-h6 {
+.container-footer div h6 {
   color: var(--clr-white);
   text-transform: none;
 }

@@ -35,7 +35,7 @@ function Footer() {
         <div>
           <h4 className="suscripcion">Suscríbase</h4>
           <input
-            className="input"
+            className="inputfooter"
             type="text"
             name="name"
             placeholder="Ingrese su email"
