@@ -19,9 +19,9 @@ console.log(subcategorias)
                                 
         <ul className="menu-main">
                 { categorias && categorias.map(familia => (
-                    <li><a href="!#">{familia.nombre_familia}</a>
+                    <li className="family"><a href="!#">{familia.nombre_familia}</a>
                         
-                        <div className="menu-sub">
+                        <div className="menu-sub">  
                             
                             <div className="menu-col-1 ">
                                 
@@ -33,7 +33,7 @@ console.log(subcategorias)
                                         
                                         <ul className="grid-ul">
                                         {categoria.subcategoria.map( subcategoria => (
-                                            <li className="sub"><a href='!#' onClick={() => dispatch(getSubcategoriasId(subcategoria.id))}>{subcategoria.nombre_subcategoria}</a></li>
+                                            <li className="sub" onClick={() => dispatch(getSubcategoriasId(subcategoria.id))}>{subcategoria.nombre_subcategoria}</li>
                                         ))
                                         }
                                         </ul>

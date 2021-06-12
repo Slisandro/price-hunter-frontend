@@ -1,15 +1,15 @@
 import React from "react";
-import "./styles/MarcasAsociadas.css";
-import image1 from "../assets/img/logomarcas/cocacola.png";
-import image2 from "../assets/img/logomarcas/chupachups.png";
-import image3 from "../assets/img/logomarcas/colgate.png";
-import image4 from "../assets/img/logomarcas/kelloggs.png";
-import image5 from "../assets/img/logomarcas/oreo.png";
-import image6 from "../assets/img/logomarcas/pepsi.png";
-import image7 from "../assets/img/logomarcas/nestle.png";
-import image8 from "../assets/img/logomarcas/mars.png";
-import image9 from "../assets/img/logomarcas/mondelez.png";
-import image10 from "../assets/img/logomarcas/unilever.png";
+import "./MarcasAsociadas.css";
+import image1 from "../../assets/img/marcas/cocacola.png";
+import image2 from "../../assets/img/logomarcas/chupachups.png";
+import image3 from "../../assets/img/logomarcas/colgate.png";
+import image4 from "../../assets/img/logomarcas/kelloggs.png";
+import image5 from "../../assets/img/logomarcas/oreo.png";
+import image6 from "../../assets/img/logomarcas/pepsi.png";
+import image7 from "../../assets/img/logomarcas/nestle.png";
+import image8 from "../../assets/img/logomarcas/mars.png";
+import image9 from "../../assets/img/logomarcas/mondelez.png";
+import image10 from "../../assets/img/logomarcas/unilever.png";
 
 function MarcasAsociadas() {
   var slideIndex = 1;

@@ -119,6 +119,7 @@ input {
     display: inline-block;
     font-size: 14px;
     transition: .5s;
+    
 }
 
 input[type="text"] {
@@ -135,7 +136,7 @@ input[type="submit"] {
     left: -5px;
     position: relative;
     border-radius: 0 25px 25px 0;
-    width: 220px;
+    width: 15em;
     height: 35px;
     border: 2px solid #17e8f7;
     outline: none;
