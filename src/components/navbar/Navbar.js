@@ -8,7 +8,7 @@ const Navbar = (props) => {
   return (
     <nav className="navbar">
       <div className="nav_icon" onClick={() => props.openSidebar()}>
-        <i class="fas fa-bars"></i>
+        <i className="fas fa-bars"></i>
       </div>
 
       <div className="navbar__left">
