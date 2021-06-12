@@ -1,53 +1,39 @@
 import React from "react";
 import ReactTable from "react-table-6";
-import "react-table-6/react-table.css";
+import './Table.css'
 
-function Table() {
-
-    const data = [{
-        firstName: "hola",
-        lastName: "chau",
-        age: 10
-    }];
+function Table({ name, productos }) {
 
     return (
-        <div>
-            <ReactTable
-                data={data}
-                columns={[
-                    {
-                        Header: "Name",
-                        columns: [
-                            {
-                                Header: "First Name",
-                                accessor: "firstName"
-                            },
-                            {
-                                Header: "Last Name",
-                                accessor: "lastName"
-                            }
-                        ]
+        <ReactTable className="containerProductSearch"
+            data={productos}
+            columns={
+                [{
+                    Header: `Resultado de la búsqueda "${name}"`,
+                    columns: [{
+                        Header: "Nombre",
+                        accessor: "preoducto"
                     },
                     {
-                        Header: "Info",
-                        columns: [
-                            {
-                                Header: "Age",
-                                accessor: "age"
-                            }
-                        ]
-                    }
-                ]}
-                defaultSorted={[
+                        Header: "Desafio",
+                        accessor: "desafio"
+                    },
                     {
-                        id: "age",
-                        desc: true
+                        Header: "Precio",
+                        accessor: "precio"
                     }
-                ]}
-                defaultPageSize={10}
-                className="-striped -highlight"
-            />
-        </div>
+                    ]
+                }]
+            }
+            defaultSorted={
+                [{
+                    id: "preoducto",
+                    desc: true
+                }]
+            }
+            defaultPageSize={5}
+            className="-striped -highlight"
+        />
     );
 }
 

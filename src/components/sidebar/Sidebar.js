@@ -12,7 +12,7 @@ const Sidebar = (props) => {
           <h1>PH</h1>
         </div>
         <i
-          class="far fa-window-close"
+          className="far fa-window-close"
           id="sidebarIcon"
           onClick={() => props.closeSidebar()}
         ></i>

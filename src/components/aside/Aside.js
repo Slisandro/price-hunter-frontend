@@ -18,15 +18,15 @@ const Aside= () => {
                 <div className="account-title">Cerrar Sesion</div>
             </div>
 
-            <div class="account card card1">
-                <div class="user-card">Tienes 8678 hunterCoins</div>
-                <div class="user-income">Precios cazados: 25</div>
-                <p class="user-info">*********************</p>
+            <div className="account card card1">
+                <div className="user-card">Tienes 8678 hunterCoins</div>
+                <div className="user-income">Precios cazados: 25</div>
+                <p className="user-info">*********************</p>
             </div>
         
 
 
-            <div class="account card">
+            <div className="account card">
                
             </div>
 
