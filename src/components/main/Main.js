@@ -71,17 +71,31 @@ const Main = () => {
                                     /> 
                                     <input type="submit" className="btn" value="Buscar"/> 
                                 </form>
+                
+                
+                </div>
+                {/* AQUI COMIENZA EL DIV DONDE VAMOS A IR RENDERIZANDO DIFERENTES COMPONENTES */}
+
+                
+            
+                <div>
                                 {/* {
                                     productos.map(producto => (
                                         <div>
-                                            <p>{producto.precio}</p>
+                                            
                                             <p>{producto.preoducto}</p>
+                                            <p>{producto.precio}</p>
+                                            <p>{producto.fecha}</p>
+                                            <p>{producto.desafio}</p>
+
                                         </div>
                                     ))
-                                } */}
-                                
-                        
+                                } 
+                                 */}
                 </div>
+
+
+
             </div>
         </main>
     );

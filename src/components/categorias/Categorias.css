@@ -3,7 +3,8 @@
 /*categorias*/
 .categorias{
     width: auto;
-    z-index: 1000;
+   
+    
 }
 .categorias ul{
     margin: 0;
@@ -13,18 +14,19 @@
 
 }
 
-.categorias li{
+.categorias .family{
     display: inline-block;
-    /* transition: .5s; */
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     font-size: 14px;
     z-index: 1000;
+    padding-right: 0;
+    border-radius: 8px;
+   
 
 }
 
 .categorias .menu-main li:hover{
-    background: radial-gradient(circle, #04071d 0%, #090b1f 100%);
+    background: #0d1029;
+    
 } 
 
 
@@ -33,37 +35,45 @@
     font-weight: bolder;
     text-decoration: none;
     display: block;
-    padding: 0.35em 1.96em;
+    padding: .6em .6em .6em .6em ;
+    padding-left: 0;
     
-
 }
-
 
 
 .menu-sub{
     position: absolute;
-    background: red;
-    margin-right: 10px;
-    width: auto !important;
+    background: transparent;
+    /* margin-right: 10px; */
+    /* width: auto !important; */
     display: none;
     color: #17e8f7;
-    padding: 2em;
+    padding-top: 2em ;
+
+   
+    
   
    
 }
 
 .categorias li:hover .menu-sub{
-    display: block;
+    display: flex;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    width: 508px;
-    
+    width: 700px;
+}
+
+
+.menu-main{
+    padding-left: 0 !important;
     
 }
 
+
 .menu-main .sub {
     display: block;
+    cursor: pointer;
 }
 
 .sub:hover {
@@ -72,11 +82,14 @@ background: lightblue;
 
 .menu-sub ul li  a {
     padding: 0;
-    
 }
 
 .menu-categoria{
-    margin: 1em 0 .5em ;
+    margin: .4em 0 .3em ;
+    font-size: 14px;
+    color: #17e8f7;
+    font-weight: bold;
+    
 }
 
 /* .menu-col-1{
@@ -88,33 +101,33 @@ background: lightblue;
 
 .menu-col-1{
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    background: hotpink;
-    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+    padding: -5rem;
+    width: 800px;
+    border-radius: 10px;
 }
 
 .grid-category{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items:center;
-    justify-content: flex-start;
-    background: yellow;
+    align-items:center; */
+    color: white;
+    background: transparent;
     margin: 0.25rem;
+    margin-right: 0.5rem;
+    font-weight: bolder;
+    
     flex-wrap: wrap;
     height: auto;
     max-height: 24rem;
-    
-   
-    
+    column-width: 18rem;
 }
 
 .sub-categoria-container{
-    background: green;
-    
+    background: transparent;
 }
 
-.grid-ul{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-column-gap: 2em;
-}
+/* .grid-ul{
+    margin-left: 10rem;
+} */
