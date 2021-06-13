@@ -44,12 +44,13 @@ function NavBarMain({producto, setProducto, setState}) {
                         <p>Administra aquí tus precios</p>
                     </div>
                 </div>
+
             
             
                 
             
                     {/* Categories */}
-                    <Categorias categorias={categorias} setProducto={setProducto} />
+                     <Categorias categorias={categorias} setState={setState} />
                     {/* SearchBar */}
                     
                     
@@ -68,6 +69,7 @@ function NavBarMain({producto, setProducto, setState}) {
                 
             
         
+
         </>
     )
 }

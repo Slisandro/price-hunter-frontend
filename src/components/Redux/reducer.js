@@ -28,15 +28,17 @@ export function rootReducer(state = initialState, action) {
         ...state,
         categorias: action.payload
     }
-    case GET_PRODUCTOS_NAME:     
+    case GET_PRODUCTOS_NAME:
+      console.log(action.payload)      
       return {
         ...state,        
         productos: action.payload
     }
-    case GET_SUBCATEGORIAS_ID:     
+    case GET_SUBCATEGORIAS_ID:   
+      console.log(action.payload.productos) 
       return {
         ...state,        
-        subcategorias: action.payload
+        productos: action.payload.productos
     }
     case MOSTRAR_ERROR:
       return {

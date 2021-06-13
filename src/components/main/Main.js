@@ -6,9 +6,9 @@ import Table from '../Table.js'
 import "./Main.css";
 
 const Main = ({ state, setState }) => {
-    const productos = useSelector(store => store.productos)
-    const subcategorias = useSelector(store => store.subcategorias)
-    const [producto, setProducto] = useState("");
+  const productos = useSelector(store => store.productos)
+  const subcategorias = useSelector(store => store.subcategorias)
+  const [producto, setProducto] = useState("");
 
     return (
         <main className="main">
@@ -30,7 +30,7 @@ const Main = ({ state, setState }) => {
                 <div className="containerTableSearch">
                     {
                         state === "Search" ? <Table productos={productos} name={producto} /> :
-                            state === "SubCategorias" ? <Table productos={subcategorias} name={producto}/> :
+                        
                                 state === "Desafios" ? <MisDesafios /> :
                                     state === "Configuracion" ? <div>Configuración</div> : null
                     }
@@ -39,6 +39,7 @@ const Main = ({ state, setState }) => {
     
       
     </main>
+
   );
 };
 
