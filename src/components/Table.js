@@ -16,7 +16,7 @@ function Table({ name, productos }) {
                             accessor: "preoducto"
                         },
                         {
-                            Header: "Desafio",
+                            Header: "Contenido neto",
                             accessor: "contenido_neto"
                         },
                         {
@@ -26,6 +26,10 @@ function Table({ name, productos }) {
                         {
                             Header: "Precio",
                             accessor: "precio"
+                        },
+                        {
+                            Header: "Desafio",
+                            accessor: "desafio"
                         }
                     ]
                 }]
