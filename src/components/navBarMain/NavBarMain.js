@@ -44,7 +44,7 @@ function NavBarMain({producto, setProducto, setState}) {
                 </div>
             </div>
             {/* Categories */}
-            <Categorias categorias={categorias} setProducto={setProducto} />
+            <Categorias categorias={categorias} setState={setState} />
             {/* SearchBar */}
             <form onSubmit={handleSubmit}>
                 <input
