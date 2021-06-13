@@ -4,7 +4,7 @@ import "./Categorias.css";
 import { NavLink } from 'react-router-dom'
 import { getSubcategoriasId } from "../Redux/actions";
 
-const Categorias = ({ categorias, setProducto }) => {
+const Categorias = ({ categorias, setState }) => {
 
     const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ const Categorias = ({ categorias, setProducto }) => {
 
     const handleClick = (e, id) => {
         e.preventDefault();
-        setProducto(e.target.value);
+        setState("Search");
         dispatch(getSubcategoriasId(id))
     }
 

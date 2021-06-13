@@ -41,6 +41,7 @@ export function getProductsByName(nombre) {
 };
 
 export function getSubcategoriasId(id) {     
+    console.log(id, "ID")
     return function(dispatch) { 
         axios.get(`http://localhost:3001/subcategoria/${id}?id=1&idUsuario=1`)
         .then(r => {   

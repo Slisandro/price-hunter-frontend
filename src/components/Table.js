@@ -17,7 +17,11 @@ function Table({ name, productos }) {
                         },
                         {
                             Header: "Desafio",
-                            accessor: "desafio"
+                            accessor: "contenido_neto"
+                        },
+                        {
+                            Header: "Unidad de Medida",
+                            accessor: "unidad_medida"
                         },
                         {
                             Header: "Precio",
@@ -28,7 +32,7 @@ function Table({ name, productos }) {
             }
             defaultSorted={
                 [{
-                    id: "preoducto",
+                    id: "nombre",
                     desc: true
                 }]
             }
