@@ -10,18 +10,19 @@ function Table({ name, productos }) {
             columns={
                 [{
                     Header: `Resultado de la búsqueda "${name}"`,
-                    columns: [{
-                        Header: "Nombre",
-                        accessor: "preoducto"
-                    },
-                    {
-                        Header: "Desafio",
-                        accessor: "desafio"
-                    },
-                    {
-                        Header: "Precio",
-                        accessor: "precio"
-                    }
+                    columns: [
+                        {
+                            Header: "Nombre",
+                            accessor: "preoducto"
+                        },
+                        {
+                            Header: "Desafio",
+                            accessor: "desafio"
+                        },
+                        {
+                            Header: "Precio",
+                            accessor: "precio"
+                        }
                     ]
                 }]
             }

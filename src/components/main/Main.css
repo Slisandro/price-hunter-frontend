@@ -144,8 +144,8 @@ input[type="submit"] {
     color: rgb(255, 253, 253);
 }
 
-.containerTableSearch {
-    background: white;
+.containerMain {
+    /* background: white; */
     width: 90%;
     margin: auto;
     margin-top: 3%;

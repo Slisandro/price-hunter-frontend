@@ -8,6 +8,8 @@
     -ms-flex-direction: column;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    background: radial-gradient(circle, #272f75 0%, rgba(13, 16, 41,.95) 100%);
+    color: white;
 }
 
 .ReactTable * {
@@ -91,11 +93,11 @@
 }
 
 .ReactTable .rt-thead .rt-th.-sort-asc, .ReactTable .rt-thead .rt-td.-sort-asc {
-    box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.6)
+    box-shadow: inset 0 3px 0 0 rgba(255, 255, 255, 1)
 }
 
 .ReactTable .rt-thead .rt-th.-sort-desc, .ReactTable .rt-thead .rt-td.-sort-desc {
-    box-shadow: inset 0 -3px 0 0 rgba(0, 0, 0, 0.6)
+    box-shadow: inset 0 -3px 0 0 rgba(255, 255, 255, 1)
 }
 
 .ReactTable .rt-thead .rt-th.-cursor-pointer, .ReactTable .rt-thead .rt-td.-cursor-pointer {
@@ -333,6 +335,7 @@
 }
 
 .ReactTable .-pagination .-btn {
+    color: white;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -343,7 +346,6 @@
     border-radius: 3px;
     padding: 6px;
     font-size: 1em;
-    color: rgba(0, 0, 0, 0.6);
     background: rgba(0, 0, 0, 0.1);
     transition: all .1s ease;
     cursor: pointer;

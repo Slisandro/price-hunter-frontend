@@ -8,7 +8,7 @@ import Aside from "../aside/Aside";
 
 
 function Tablero() {
-
+  const [state, setState] = useState("")
   const [sidebarOpen, setSidebar] = useState(false);
 
   const openSidebar = () => {
@@ -21,10 +21,10 @@ function Tablero() {
   
   return (
     <div className="contenedor">
-  
+
       <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      <Main/>
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar}/>
+      <Main state={state} setState={setState}/>
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState}/>
       <Aside/>
     
     </div>

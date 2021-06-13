@@ -1,7 +1,7 @@
 .contextC {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: #10163a;
   background: radial-gradient(circle, #37428d 0%, #13162f 100%);
   padding: 1rem -2rem;
