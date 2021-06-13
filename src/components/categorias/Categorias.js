@@ -21,12 +21,12 @@ const Categorias = ({ categorias, setProducto }) => {
 
     return (
         <div className="categorias">
-
             <ul className="menu-main">
                 {categorias && categorias.map(familia => (
                     <li><a href="!#">{familia.nombre_familia}</a>
 
                         <div className="menu-sub">
+
 
                             <div className="menu-col-1 ">
 
@@ -39,7 +39,7 @@ const Categorias = ({ categorias, setProducto }) => {
                                                 <ul className="grid-ul">
                                                     {categoria.subcategoria.map(subcategoria => (
                                                         <li className="sub">
-                                                            <NavLink value={subcategoria.nombre_subcategoria}
+                                                            <NavLink to="" value={subcategoria.nombre_subcategoria}
                                                                 onClick={(e) => handleClick(e, subcategoria.id)}
                                                             >{subcategoria.nombre_subcategoria}</NavLink>
                                                         </li>

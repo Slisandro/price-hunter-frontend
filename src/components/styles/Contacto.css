@@ -1,5 +1,9 @@
+.backscreen {
+  display: grid;
+  background: radial-gradient(circle, #37428d 0%, #13162f 100%);
+}
+
 .form-style-9 {
-  max-width: 450px;
   background: #fafafa;
   padding: 30px;
   margin: 50px auto;
@@ -44,7 +48,7 @@
 }
 .form-style-9 ul li textarea {
   width: 100%;
-  height: 100px;
+  height: 7rem;
 }
 .form-style-9 ul li input[type="button"],
 .form-style-9 ul li input[type="submit"] {
@@ -60,9 +64,4 @@
   padding: 8px 18px;
   text-decoration: none;
   font: 0.8rem Arial, Helvetica, sans-serif;
-}
-.form-style-9 ul li input[type="button"]:hover,
-.form-style-9 ul li input[type="submit"]:hover {
-  background: linear-gradient(to bottom, #2d77a2 5%, #337da8 100%);
-  background-color: #28739e;
 }

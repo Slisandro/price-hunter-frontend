@@ -1,7 +1,7 @@
 import "./Slider.css";
-import Pic1 from '../assets/img/slider/slider1.png';
-import Pic2 from '../assets/img/slider/slider2.png';
-import Pic3 from '../assets/img/slider/slider3.png';
+import Pic1 from '../../assets/img/slider/slider1.png';
+import Pic2 from '../../assets/img/slider/slider2.png';
+import Pic3 from '../../assets/img/slider/slider3.png';
 
 function SliderHP() {
     return (
@@ -27,7 +27,7 @@ function SliderHP() {
                     <div className="containerSlider">
                         <div className="data">
                             <h2 className="title">PRICE REWARD</h2>
-                            <p className="description">Consiga las mejores ofertas en su zona en miles de productos gracias a nuestros price hunters</p>
+                            <p className="description">Consiga los mejores precios gracias a nuestros price hunters</p>
                             <div className="buttons">
                                 <button>Saber más</button>
                                 <button>Unirte</button>
@@ -43,7 +43,7 @@ function SliderHP() {
                     <div className="containerSlider">
                         <div className="data">
                             <h2 className="title">EMPRESAS</h2>
-                            <p className="description">Consiga una recopilación de datos adaptable a sus intereses para su empresa</p>
+                            <p className="description">Consiga una recopilación de datos adaptable a los intereses para su empresa</p>
                             <div className="buttons">
                                 <button>Saber más</button>
                                 <button>Unirte</button>

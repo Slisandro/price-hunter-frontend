@@ -28,11 +28,56 @@ const Main = ({ state, setState }) => {
                                     state === "Configuracion" ? <div>Configuración</div> : null
                     }
                 </div>
+              </div>
+    
+              <Categorias categorias={categorias} />
+    
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  className="input__text"
+                  placeholder="Buscar productos por nombre"
+                  onChange={handleChange}
+                  value={producto}
+                  name={producto}
+                />
+                <input type="submit" className="btn__main" value="Buscar" />
+              </form>
+            
+            
+            
+            
+            
             </div>
-        </main>
-    );
-}
-
-
+            {/* AQUI COMIENZA EL DIV DONDE VAMOS A IR RENDERIZANDO DIFERENTES COMPONENTES */}
+    
+            <div>
+              {/* {
+                                        productos.map(producto => (
+                                            <div>
+                                                
+                                                <p>{producto.preoducto}</p>
+                                                <p>{producto.precio}</p>
+                                                <p>{producto.fecha}</p>
+                                                <p>{producto.desafio}</p>
+    
+                                            </div>
+                                        ))
+                                    } */}
+            </div>
+            {/* {console.log(prodsuctos)} */}
+            
+            
+            <div className="containerTableSearch">
+              {productos.length === 0 ? (
+                <div>Cargando...</div>
+              ) : (
+                <Table productos={productos} name={producto} />
+              )}
+            </div>
+        </div>
+    </main>
+  );
+};
 
 export default Main;

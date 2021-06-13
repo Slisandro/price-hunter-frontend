@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MarcasAsociadas from "../MarcasAsociadas";
+import MarcasAsociadas from "../../HomePage/Marcas/MarcasAsociadas";
 
 function Marcas() {
   return (

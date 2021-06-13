@@ -1,5 +1,5 @@
 
-import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID} from "./actions"
+import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID, MOSTRAR_ERROR, OCULTAR_ERROR} from "./actions"
 
 const initialState = {
   arrayPrueba: [
@@ -13,7 +13,8 @@ const initialState = {
   categorias: [],
   loading: false,
   productos: [],
-  subcategorias:[]
+  subcategorias:[],
+  alerta: null
 
 };
 
@@ -36,6 +37,14 @@ export function rootReducer(state = initialState, action) {
       return {
         ...state,        
         subcategorias: action.payload
+    }
+    case MOSTRAR_ERROR:
+      return {
+        alerta: action.payload
+      }
+    case OCULTAR_ERROR:
+      return {
+        alerta: null
     }
       
     
