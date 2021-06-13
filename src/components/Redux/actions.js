@@ -4,6 +4,8 @@ export const GET_CATEGORIAS  = "GET_CATEGORIAS";
 export const LOADING = "LOADING";
 export const GET_PRODUCTOS_NAME = "GET_PRODUCTOS_NAME";
 export const GET_SUBCATEGORIAS_ID = "GET_SUBCATEGORIAS_ID"
+export const MOSTRAR_ERROR = "MOSTRAR_ERROR"
+export const OCULTAR_ERROR = "OCULTAR_ERROR"
 
 
 
@@ -52,3 +54,25 @@ export function getSubcategoriasId(id) {
     }
     
 };
+
+export function mostrarError(msg){
+    return function (dispatch){
+        dispatch({
+            type:  MOSTRAR_ERROR,
+            payload: msg
+            
+        }
+    )
+    setTimeout(() => {
+        dispatch({
+            type: OCULTAR_ERROR
+        })
+    }, 5000);
+  }
+    
+}
+
+
+
+    
+
