@@ -24,17 +24,17 @@ const Sidebar = (props) => {
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <Link to="/misdesafios">Mis desafios</Link>
+          <button value={"Desafios"} onClick={() => props.setState("Desafios")}>Mis desafios</button>
         </div>
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <Link to="/configuración">Configuración</Link>
+          <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Configuración</button>
         </div>
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <Link to="/configuración">Configuración</Link>
+          <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Configuración</button>
         </div>
       </div>
     </div>

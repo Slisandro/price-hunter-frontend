@@ -1,62 +1,71 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import "./Categorias.css";
-import {getSubcategoriasId} from "../Redux/actions"; 
+import { NavLink } from 'react-router-dom'
+import { getSubcategoriasId } from "../Redux/actions";
 
-const Categorias = ({categorias}) => {
+const Categorias = ({ categorias, setProducto }) => {
 
     const dispatch = useDispatch();
-    
-const subcategorias= useSelector(x => x.subcategorias)
-console.log(subcategorias)
 
-    
-    
-    
-    
-    return ( 
+    const subcategorias = useSelector(x => x.subcategorias)
+    // console.log(subcategorias)
+
+    const handleClick = (e, id) => {
+        e.preventDefault();
+        setProducto(e.target.value);
+        dispatch(getSubcategoriasId(id))
+    }
+
+
+
+    return (
         <div className="categorias">
-                                
-        <ul className="menu-main">
-                { categorias && categorias.map(familia => (
-                    <li className="family"><a href="!#">{familia.nombre_familia}</a>
-                        
-                        <div className="menu-sub">  
-                            
+            <ul className="menu-main">
+                {categorias && categorias.map(familia => (
+                    <li><a href="!#">{familia.nombre_familia}</a>
+
+                        <div className="menu-sub">
+
+
                             <div className="menu-col-1 ">
-                                
-                                {familia.categoria.map( categoria => (
+
+                                {familia.categoria.map(categoria => (
                                     <>
-                                    <div className="grid-category">
-                                    <h3 className="menu-categoria">{categoria.nombre_categoria}</h3>
-                                        <div className="sub-categoria-container">
-                                        
-                                        <ul className="grid-ul">
-                                        {categoria.subcategoria.map( subcategoria => (
-                                            <li className="sub" onClick={() => dispatch(getSubcategoriasId(subcategoria.id))}>{subcategoria.nombre_subcategoria}</li>
-                                        ))
-                                        }
-                                        </ul>
-                                        
+                                        <div className="grid-category">
+                                            <h3 className="menu-categoria">{categoria.nombre_categoria}</h3>
+                                            <div className="sub-categoria-container">
+
+                                                <ul className="grid-ul">
+                                                    {categoria.subcategoria.map(subcategoria => (
+                                                        <li className="sub">
+                                                            <NavLink to="" value={subcategoria.nombre_subcategoria}
+                                                                onClick={(e) => handleClick(e, subcategoria.id)}
+                                                            >{subcategoria.nombre_subcategoria}</NavLink>
+                                                        </li>
+                                                    ))
+                                                    }
+                                                </ul>
+
+                                            </div>
                                         </div>
-                                    </div>
-                                        
+
                                     </>
-                                    )
+                                )
                                 )}
-                
+
                             </div>
                         </div>
                     </li>
-                )) 
+                ))
                 }
-                    
-        </ul>
-        
+
+            </ul>
 
 
-       </div>
-     );
+
+        </div >
+    );
 }
- 
+
 export default Categorias;
