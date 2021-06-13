@@ -1,0 +1,44 @@
+.services-center {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4rem;
+  gap: 2.5rem;
+}
+
+.sobrenosotros {
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
+  background-color: #9d9da7;
+  box-shadow: 0 0 0 0.15rem rgba(146, 106, 165, 0.541);
+  border: 0.1rem solid;
+  border-radius: 3rem;
+}
+
+.sobrenosotros:hover {
+  background-color: #9d9da790;
+}
+
+.sobrenosotrosTitle {
+  text-align: center;
+}
+
+/* .regresar {
+  width: 20%;
+  height: 100%;
+  border: 0.1rem solid;
+  border-radius: 0.5em;
+  background: #9d9da7;
+  font-size: 1em;
+  cursor: pointer;
+  margin-left: 5rem;
+} */
+/* 
+.regresar:hover {
+  background-color: #9d9da790;
+} */
+
+.sobrenosotrosDescripcion {
+  text-align: center;
+}

@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
+
+
+
+.login {
+    background-image: linear-gradient(#050824,#1a2058, #18e7dd);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 30px;
+    height: 100vh;
+    font-family: 'Catamaran', sans-serif !important;
+  }
+  
+  .login__container {
+    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+    border: 2px solid rgb(1, 247, 234);
+    border-radius: 40px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 80px 70px 100px 80px;
+  
+  }
+  
+  .login__container--form {
+    display: flex;
+    flex-direction: column;
+  }
+  .login__container--form  > input{
+     
+      background: cornsilk;
+      width: 240px ;
+      height: 35px;
+      border: none;
+      outline: none;
+      padding: 0 25px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+  }
+  .logo__login{
+      width: 4em;
+      margin-left: 6.2rem;
+  }
+  .login__container h2{
+      color: rgb(227, 243, 4);
+      margin-left: 4.5rem;
+      
+  }
+  
+  .login__container--form label {
+    font-size: 14px;
+  }
+
+  .button__login{
+    
+    border-radius: 2em;
+    width: 21.8em;
+    height: 35px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background:#17e8f7;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    transition: .4s;
+  }
+  .button__login:hover{
+    background:#4ccbd4;
+ 
+  }
+
+
+  .login__container--remember-me {
+    color: rgb(250, 250, 250);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  .login__container--remember-me a {
+    color: rgb(250, 250, 250);
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 4px;
+    font-weight: bold;
+  }
+  
+  .login__container--remember-me a:hover {
+    text-decoration: underline;
+  }
+
+
+  .login__container--social-media{
+      padding-top: 2rem;
+  }
+  
+  .login__container--social-media > div {
+    align-items: center;
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .login__container--social-media > div > img {
+    margin-right: 1.3rem;
+    width: 30px;
+  }
+
+
+  .register__login{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  
+  .login__container--register {
+    font-size: 14px;
+  }
+  
+  .login__container--register{
+    color: rgb(0, 236, 253);
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+ .link {
+     text-decoration: none;
+     color: rgb(5, 236, 236);
+ }
+
+
+ 
+@media only screen and (max-width:480px) {
+
+    .login__container {
+        border: none;
+    }
+    
+    
+}
