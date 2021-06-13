@@ -52,10 +52,7 @@
     color: #17e8f7;
     padding-top: 2em ;
 
-   
-    
-  
-   
+
 }
 
 .categorias li:hover .menu-sub{
@@ -69,6 +66,9 @@
 
 .menu-main{
     padding-left: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
 }
 
@@ -76,6 +76,7 @@
 .menu-main .sub {
     display: block;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .sub:hover {

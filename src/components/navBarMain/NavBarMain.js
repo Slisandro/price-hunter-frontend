@@ -25,39 +25,54 @@ function NavBarMain({producto, setProducto, setState}) {
 
     return (
         <>
+        
             {/* Animation */}
-            <div id="container-welcome">
-                <div className="discount-chart">
-                    <div className="circle">
-                        <div className="pie">
-                            <svg>
-                                <circle cx="60" cy="60" r="50"></circle>
-                            </svg>
+                <div id="container-welcome">
+                    <div className="discount-chart">
+                        <div className="circle">
+                            <div className="pie">
+                                <svg>
+                                    <circle cx="60" cy="60" r="50"></circle>
+                                </svg>
+                            </div>
+                            <div className="counter"> $ </div>
                         </div>
-                        <div className="counter"> $ </div>
+                    </div>
+    
+                    <div className="main_welcome">
+                        <h1>Bienvenido, <span className="hunter"> cazador</span></h1>
+                        <p>Administra aquí tus precios</p>
                     </div>
                 </div>
 
-                <div className="main_welcome">
-                    <h1>Bienvenido, <span className="hunter"> cazador</span></h1>
-                    <p>Administra aquí tus precios</p>
-                </div>
-            </div>
-            {/* Categories */}
-            <Categorias categorias={categorias} setState={setState} />
-            {/* SearchBar */}
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Buscar productos por nombre"
-                    onChange={handleChange}
-                    value={producto}
-                    name={producto}
-                />
-                <input type="submit" className="btn" value="Buscar" />
-            </form>
+            
+            
+                
+            
+                    {/* Categories */}
+                     <Categorias categorias={categorias} setState={setState} />
+                    {/* SearchBar */}
+                    
+                    
+                    
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            className="input__text"
+                            placeholder="Buscar productos por nombre"
+                            onChange={handleChange}
+                            value={producto}
+                            name={producto}
+                        />
+                        <input type="submit" className="btn__main" value="Buscar" />
+                    </form>
+                
+            
+        
+
         </>
     )
 }
+
 
 export default NavBarMain;

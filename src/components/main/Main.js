@@ -10,26 +10,36 @@ const Main = ({ state, setState }) => {
   const subcategorias = useSelector(store => store.subcategorias)
   const [producto, setProducto] = useState("");
 
-  return (
-    <main className="main">
-      <div className="main__container">
-        {
-          state === "Desafios" ?
-            null :
-            <div className="main__title">
-              <NavBarMain producto={producto} setProducto={setProducto} setState={setState} />
-            </div>
-        }
-        <div className="containerTableSearch">
-          {
-            state === "Search" ? <Table productos={productos} name={producto} /> :
-              state === "SubCategorias" ? <Table productos={subcategorias} name={producto} /> :
-                state === "Desafios" ? <MisDesafios /> :
-                  state === "Configuracion" ? <div>Configuración</div> : null
-          }
-        </div>
-      </div>
-    </main >
+    return (
+        <main className="main">
+              
+              
+              
+              <div className="main__container">
+                {
+                    state === "Desafios" ?
+                        null :
+                        <div className="main__title">
+                            <NavBarMain producto={producto} setProducto={setProducto} setState={setState} />
+                        </div>
+                }
+              
+
+
+
+                <div className="containerTableSearch">
+                    {
+                        state === "Search" ? <Table productos={productos} name={producto} /> :
+                        
+                                state === "Desafios" ? <MisDesafios /> :
+                                    state === "Configuracion" ? <div>Configuración</div> : null
+                    }
+                </div>
+              </div>
+    
+      
+    </main>
+
   );
 };
 
