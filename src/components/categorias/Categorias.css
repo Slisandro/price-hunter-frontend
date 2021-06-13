@@ -3,6 +3,7 @@
 /*categorias*/
 .categorias{
     width: auto;
+    z-index: 1000;
    
     
 }
@@ -43,7 +44,8 @@
 
 .menu-sub{
     position: absolute;
-    background: transparent;
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+
     /* margin-right: 10px; */
     /* width: auto !important; */
     display: none;

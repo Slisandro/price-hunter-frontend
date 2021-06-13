@@ -7,6 +7,11 @@ import Categorias from "../categorias/Categorias";
 import "./Main.css";
 // import logo from "../../assets/mira.png";
 
+
+
+
+
+
 const Main = () => {
   const categorias = useSelector((store) => store.categorias);
   const productos = useSelector((store) => store.productos);
@@ -33,66 +38,75 @@ const Main = () => {
 
   return (
     <main className="main">
-      <div className="main__container">
-        <div className="main__title">
-          <div id="container-welcome">
-            <div className="discount-chart">
-              <div className="circle">
-                <div className="pie">
-                  <svg>
-                    <circle cx="60" cy="60" r="50"></circle>
-                  </svg>
+          <div className="main__container">
+            <div className="main__title">
+              <div id="container-welcome">
+                
+                <div className="discount-chart">
+                  <div className="circle">
+                    <div className="pie">
+                      <svg>
+                        <circle cx="60" cy="60" r="50"></circle>
+                      </svg>
+                    </div>
+                    <div className="counter"> $ </div>
+                  </div>
                 </div>
-                <div className="counter"> $ </div>
+    
+                <div className="main_welcome">
+                  <h1>
+                    Bienvenido, <span className="hunter"> cazador</span>
+                  </h1>
+                  <p>Administra aquí tus precios</p>
+                </div>
               </div>
+    
+              <Categorias categorias={categorias} />
+    
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  className="input__text"
+                  placeholder="Buscar productos por nombre"
+                  onChange={handleChange}
+                  value={producto}
+                  name={producto}
+                />
+                <input type="submit" className="btn__main" value="Buscar" />
+              </form>
+            
+            
+            
+            
+            
             </div>
-
-            <div className="main_welcome">
-              <h1>
-                Bienvenido, <span className="hunter"> cazador</span>
-              </h1>
-              <p>Administra aquí tus precios</p>
+            {/* AQUI COMIENZA EL DIV DONDE VAMOS A IR RENDERIZANDO DIFERENTES COMPONENTES */}
+    
+            <div>
+              {/* {
+                                        productos.map(producto => (
+                                            <div>
+                                                
+                                                <p>{producto.preoducto}</p>
+                                                <p>{producto.precio}</p>
+                                                <p>{producto.fecha}</p>
+                                                <p>{producto.desafio}</p>
+    
+                                            </div>
+                                        ))
+                                    } */}
             </div>
-          </div>
-
-          <Categorias categorias={categorias} />
-
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Buscar productos por nombre"
-              onChange={handleChange}
-              value={producto}
-              name={producto}
-            />
-            <input type="submit" className="btn" value="Buscar" />
-          </form>
+            {/* {console.log(prodsuctos)} */}
+            
+            
+            <div className="containerTableSearch">
+              {productos.length === 0 ? (
+                <div>Cargando...</div>
+              ) : (
+                <Table productos={productos} name={producto} />
+              )}
+            </div>
         </div>
-        {/* AQUI COMIENZA EL DIV DONDE VAMOS A IR RENDERIZANDO DIFERENTES COMPONENTES */}
-
-        <div>
-          {/* {
-                                    productos.map(producto => (
-                                        <div>
-                                            
-                                            <p>{producto.preoducto}</p>
-                                            <p>{producto.precio}</p>
-                                            <p>{producto.fecha}</p>
-                                            <p>{producto.desafio}</p>
-
-                                        </div>
-                                    ))
-                                } */}
-        </div>
-        {/* {console.log(prodsuctos)} */}
-        <div className="containerTableSearch">
-          {productos.length === 0 ? (
-            <div>Cargando...</div>
-          ) : (
-            <Table productos={productos} name={producto} />
-          )}
-        </div>
-      </div>
     </main>
   );
 };
