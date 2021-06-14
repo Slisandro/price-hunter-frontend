@@ -154,6 +154,14 @@ input {
     margin-top: 3%;
 }
 
+.containerMessageBack {
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+}
+
 @media only screen and (max-width: 978px) {
     .main {
         overflow-x: hidden;

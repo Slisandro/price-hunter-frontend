@@ -17,6 +17,7 @@ function NavBarMain({producto, setProducto, setState}) {
         e.preventDefault();
         dispatch(getProductsByName(producto));
         setState("Search");
+        setProducto("")
     }
 
     const handleChange = (e) => {
