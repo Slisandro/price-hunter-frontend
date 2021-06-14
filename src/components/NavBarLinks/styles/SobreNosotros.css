@@ -1,0 +1,68 @@
+.backscreenS {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: radial-gradient(circle, #37428d 0%, #13162f 100%);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
+  min-height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.services-center {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4rem;
+  gap: 2.5rem;
+}
+
+.sobrenosotros {
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
+  background-color: #9d9da7;
+  box-shadow: 0 0 0 0.15rem rgba(146, 106, 165, 0.541);
+  border: 0.1rem solid;
+  border-radius: 3rem;
+}
+
+.sobrenosotros:hover {
+  background-color: #9d9da790;
+}
+
+.sobrenosotrosTitle {
+  text-align: center;
+}
+
+.regresarConteiner {
+  padding-right: 25rem;
+  padding-bottom: 10rem;
+}
+
+.regresar {
+  background-color: #216288;
+  color: var(--clr-white);
+  letter-spacing: var(--spacing);
+  display: block;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  text-align: center;
+  width: 50%;
+  border: 2px solid var(--clr-primary-5);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius);
+}
+
+.regresar:hover {
+  color: var(--clr-primary-5);
+  background: var(--clr-primary-1);
+  border-color: var(--clr-primary-1);
+}
+
+.sobrenosotrosDescripcion {
+  text-align: center;
+}
