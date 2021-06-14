@@ -10,7 +10,7 @@ const getLocalStorage = () => {
     return (list = JSON.parse(localStorage.getItem("list")));
   } else {
     return [];
-  }
+  } 
 };
 
 function MisDesafios({setState}) {

@@ -61,7 +61,7 @@ const Login = (props) => {
           <Link to="/tablero">
             <button className="button__login">Iniciar sesión</button>
           </Link>
-
+ 
           <div className="login__container--remember-me">
             <label>
               <input type="checkbox" id="cbox1" value="first_checkbox" />Recuérdame

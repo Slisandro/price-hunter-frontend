@@ -13,7 +13,7 @@ const Main = ({ state, setState }) => {
   return (
     <main className="main">
 
-
+ 
 
       <div className="main__container">
         {
