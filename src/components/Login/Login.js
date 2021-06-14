@@ -7,6 +7,8 @@ import './Login.css'
 import aguila from "../../assets/aguila.png";
 import Twitter from '../../assets/twitter.png';
 import Google from '../../assets/google.png';
+import {mostrarError} from "../Redux/actions";
+import {useSelector, useDispatch} from 'react-redux';
 
 
 
@@ -15,7 +17,8 @@ import Google from '../../assets/google.png';
 
 const Login = (props) => {
   // const login = useSelector(store => store.login)
-
+  const alerta = useSelector((store) => store.alerta);
+  const dispatch = useDispatch();
 
     const [user , guardarUser] = useState({
       email: "",
@@ -33,6 +36,12 @@ const Login = (props) => {
   
     const handleSubmit = e => {
       e.preventDefault();
+
+       // Validar que no haya campos vacios
+       if(email.trim() === '' || password.trim() === '') {
+        dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+    }
+
       // dispatch(loginRequest(user));
     }
   
@@ -42,7 +51,8 @@ const Login = (props) => {
           <section className="login__container">
               <img src={aguila} alt="" className="logo__login" />
               <h2>Iniciar sesión</h2>
-                
+              { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> )  : null }
+
                 <form className="login__container--form" onSubmit={handleSubmit}>
                       <input 
                         name={email}
@@ -78,7 +88,7 @@ const Login = (props) => {
                 
                 <div className="register__login">
                     <p className="login__container--register"> No tienes cuenta ?</p>
-                    <p className="login__container--register .link"><Link className="link" to="/register">Regístrate</Link></p>
+                    <p className="login__container--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
                 </div>
           
           </section>

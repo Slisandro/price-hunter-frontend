@@ -4,11 +4,17 @@ import { mostrarError} from '../Redux/actions';
 import {Link} from "react-router-dom";
 import "./Registro.css";
 import aguila from "../../assets/aguila.png";
+import { registrarUsuario} from '../Redux/actions';
 
 const Registro = () => {
 
   const alerta = useSelector((store) => store.alerta);
+  
+  
+  
   const dispatch = useDispatch();
+  
+  
   
   const [registro, guardarRegistro] = useState({
     email: "",
@@ -34,28 +40,34 @@ const Registro = () => {
 
 
   const handleSubmit = e => {
-    e.preventDefault();
+      e.preventDefault();
+      
+      if( nombre.trim() === ''    || 
+          email.trim()  === ''    || 
+          password.trim()  === '' || 
+          confirmar.trim() === '' ) {
+                  dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+                  return;
+          }
+  // Password minimo de 6 caracteres
+      if(password.length < 6) {
+                  dispatch(mostrarError('El password debe ser de al menos 6 caracteres', 'alerta-error'));
+                  return;
+      }
+  
+  //Los 2 passwords son iguales
+      if(password !== confirmar) {
+                  dispatch(mostrarError('Los passwords no son iguales', 'alerta-error'));
+                  return;
+      }
     
-    if( nombre.trim() === ''   || 
-        email.trim() === ''    || 
-        password.trim() === '' || 
-        confirmar.trim() === '' ) {
-                dispatch(mostrarError('Todos los campos son obligatorios'));
-                return;
-        }
-    // Password minimo de 6 caracteres
-    if(password.length < 6) {
-      dispatch(mostrarError('El password debe ser de al menos 6 caracteres'));
-      return;
-    }
-
-  // Los 2 passwords son iguales
-    if(password !== confirmar) {
-      dispatch(mostrarError('Los passwords no son iguales'));
-      return;
-    }
-    
-    // dispatch(  (registro))
+  //Si pasamos todas las validacions: 
+      dispatch(registrarUsuario({
+          nombre,
+          email,
+          password
+        })
+      )
     
 
   }
@@ -68,13 +80,16 @@ const Registro = () => {
  
     <section className="register">
       <section className="register__container">
+        
         <div className="registro__start">
             <img src={aguila} alt="" className="logo__register"/>
             <h2>Regístrate</h2>
             <p className="p">Y comenzá a cazar precios</p>
         </div>
 
-        {/* {alerta ? : null } */}
+        {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>): null }
+          
+          
           <form className="register__container--form" onSubmit={handleSubmit}>
             
             <input 
@@ -103,6 +118,7 @@ const Registro = () => {
             value={password}
             onChange={handleInputRegister}
             />
+
             <input 
             className="input__registro" 
             type="password" 

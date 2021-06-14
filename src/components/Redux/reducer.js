@@ -1,5 +1,5 @@
 
-import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID, MOSTRAR_ERROR, OCULTAR_ERROR} from "./actions"
+import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID, MOSTRAR_ERROR, OCULTAR_ERROR, REGISTRO_EXITOSO, LOGIN_EXITOSO} from "./actions"
 
 const initialState = {
   arrayPrueba: [
@@ -14,7 +14,11 @@ const initialState = {
   loading: false,
   productos: [],
   subcategorias:[],
-  alerta: null
+  alerta: null,
+  token: localStorage.getItem("token"),
+  autenticado: null,
+  usuario: null,
+  mensaje:null
 
 };
 
@@ -47,6 +51,17 @@ export function rootReducer(state = initialState, action) {
     case OCULTAR_ERROR:
       return {
         alerta: null
+    }
+
+    
+    case REGISTRO_EXITOSO:
+    case LOGIN_EXITOSO:
+      localStorage.setItem('token', action.payload.token);
+      return {
+          ...state,
+          autenticado: true,
+          mensaje: null,
+          cargando: false
     }
       
     

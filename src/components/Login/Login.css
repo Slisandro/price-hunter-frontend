@@ -38,7 +38,7 @@
       border: none;
       outline: none;
       padding: 0 25px;
-      border-radius: 10px;
+      border-radius: .2em;
       margin-bottom: 1rem;
   }
   .logo__login{
@@ -57,7 +57,7 @@
 
   .button__login{
     
-    border-radius: 2em;
+    border-radius: .2em;
     width: 21.8em;
     height: 35px;
     border: none;
