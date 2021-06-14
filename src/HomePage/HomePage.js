@@ -4,6 +4,7 @@ import Testimonios from "./Testimonios/Testimonios";
 import Footer from "./Footer/Footer";
 import Data from "../assets/fakedata";
 import MarcasAsociadas from "./Marcas/MarcasAsociadas";
+import Bot from "./Chatbot/Bot";
 
 function HomePage() {
   return (
@@ -12,6 +13,7 @@ function HomePage() {
       <Slider />
       <MarcasAsociadas />
       <Testimonios people={Data} />
+      <Bot />
       <Footer />
     </>
   );

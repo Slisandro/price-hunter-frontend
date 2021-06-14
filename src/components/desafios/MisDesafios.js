@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import List from "./List";
 import Alert from "./Alert";
 import { Link } from "react-router-dom";
-import "../styles/MisDesafios.css";
+import "./styles/MisDesafios.css";
 
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
@@ -10,10 +10,10 @@ const getLocalStorage = () => {
     return (list = JSON.parse(localStorage.getItem("list")));
   } else {
     return [];
-  } 
+  }
 };
 
-function MisDesafios({setState}) {
+function MisDesafios({ setState }) {
   const [name, setName] = useState("");
   const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
@@ -99,9 +99,9 @@ function MisDesafios({setState}) {
             </button>
           </div>
         )}
-        <p onClick={() => setState("Home")} style={{ color: "#e7e7e7" }}>
+        {/* <p onClick={() => setState("Home")} style={{ color: "#e7e7e7" }}>
           Regresar a Mi Tablero
-        </p>
+        </p> */}
       </section>
     </div>
   );
