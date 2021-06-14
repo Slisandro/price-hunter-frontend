@@ -11,6 +11,7 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
+import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
+        {/* <TableroEmpresa/> */}
       </Switch>
     </Router>
   );
