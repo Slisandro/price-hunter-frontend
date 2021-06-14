@@ -11,10 +11,11 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
+// import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 
 function App() {
   return (
-    <Router>
+    <Router> 
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
@@ -24,9 +25,10 @@ function App() {
         <Route exact path="/Ayuda" component={Ayuda} />
         <Route path="/login" component={Login} />
         <Route path="/tablero" component={Tablero} />
-        <Route exact path="/misdesafios" component={MisDesafios} />
+        {/* <Route exact path="/misdesafios" component={MisDesafios} /> */}
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
+        {/* <TableroEmpresa/> */}
       </Switch>
     </Router>
   );

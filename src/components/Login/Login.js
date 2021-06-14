@@ -1,8 +1,8 @@
 
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 // import { Button } from 'react-bootstrap';
 // import {useSelector, useDispatch} from 'react-redux';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './Login.css'
 import aguila from "../../assets/aguila.png";
 import Twitter from '../../assets/twitter.png';
@@ -20,19 +20,21 @@ const Login = (props) => {
   const alerta = useSelector((store) => store.alerta);
   const dispatch = useDispatch();
 
-    const [user , guardarUser] = useState({
-      email: "",
-      password:""
-  
+  const [user, guardarUser] = useState({
+    email: "",
+    password: ""
+
+  })
+  const { email, password } = user;
+
+  const handleInputLogin = e => {
+    guardarUser({
+      ...user,
+      [e.target.name]: e.target.value
     })
-    const {email, password} = user;
-  
-    const handleInputLogin = e => {
-      guardarUser({
-        ...user,
-        [e.target.name] : e.target.value
-      })
-    }
+  }
+    
+
   
     const handleSubmit = e => {
       e.preventDefault();
@@ -45,6 +47,9 @@ const Login = (props) => {
       // dispatch(loginRequest(user));
     }
   
+
+
+    
     return (
     
     <section className="login">
@@ -55,18 +60,20 @@ const Login = (props) => {
 
                 <form className="login__container--form" onSubmit={handleSubmit}>
                       <input 
-                        name={email}
+                        name="email"
                         className="input_login" 
                         type="text" 
                         placeholder="Correo"
                         onChange={handleInputLogin}
+                        value={email}
                         />
                       <input 
-                        name={password}
+                        name="password"
                         className="input_login" 
                         type="password" 
                         placeholder="Contraseña"
                         onChange={handleInputLogin}
+                        value={password}
                         />
               
                         <button className="button__login">Iniciar sesión</button>
@@ -93,12 +100,12 @@ const Login = (props) => {
           
           </section>
     </section>
-    
-    )
-  }
-  
-  
-  
-  
-  export default Login;
-  
+
+  )
+}
+
+
+
+
+
+export default Login;

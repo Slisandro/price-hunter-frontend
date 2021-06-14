@@ -39,10 +39,10 @@ export function rootReducer(state = initialState, action) {
         productos: action.payload
     }
     case GET_SUBCATEGORIAS_ID:   
-      console.log(action.payload.productos) 
+      console.log(action.payload) 
       return {
         ...state,        
-        productos: action.payload.productos
+        productos: action.payload
     }
     case MOSTRAR_ERROR:
       return {
