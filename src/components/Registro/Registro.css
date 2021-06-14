@@ -69,13 +69,13 @@
     border: none;
     outline: none;
     padding: 0 25px;
-    border-radius: 1em;
+    border-radius: .2em;
     margin-bottom: 1rem;
 
   }
 
   .button__registro{
-    border-radius: 1em;
+    border-radius: .2em;
     width: 21.8em;
     height: 35px;
     border: none;
@@ -114,3 +114,17 @@
     background:#769603;
    
   }
+
+
+  .alerta-ok {
+    background-color: rgb(109, 211, 109);
+    color: rgb(2, 103, 2);
+  }
+  .alerta-error {
+    background-color: rgb(255, 19, 19);
+    color: #f0f8f8;
+    font-weight: bold;
+    border-radius: .2em;
+    
+  }
+  

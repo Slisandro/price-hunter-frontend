@@ -33,5 +33,12 @@ body {
 }
 
 
-
+.alerta-ok {
+  background-color: rgb(109, 211, 109);
+  color: rgb(2, 103, 2);
+}
+.alerta-error {
+  background-color: rgb(255, 19, 19);
+  color: #f0f8f8;
+}
 

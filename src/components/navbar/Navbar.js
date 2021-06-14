@@ -12,13 +12,13 @@ const Navbar = (props) => {
       </div>
 
       <div className="navbar__left">
-        <Link Link to="/misdesafios">
-          Mis desafios
-        </Link>
+        {/* <Link Link to="/misdesafios">
+          Mis desafios 
+        </Link> */}
         <Link to="/configuración">Configuración</Link>
-        <a className="active_link" href="!#">
+        {/* <a className="active_link" href="!#">
           admin
-        </a>
+        </a> */}
       </div>
 
       <div className="navbar__right">
