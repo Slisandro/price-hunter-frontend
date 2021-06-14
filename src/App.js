@@ -25,7 +25,7 @@ function App() {
         <Route exact path="/Ayuda" component={Ayuda} />
         <Route path="/login" component={Login} />
         <Route path="/tablero" component={Tablero} />
-        <Route exact path="/misdesafios" component={MisDesafios} />
+        {/* <Route exact path="/misdesafios" component={MisDesafios} /> */}
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
         {/* <TableroEmpresa/> */}

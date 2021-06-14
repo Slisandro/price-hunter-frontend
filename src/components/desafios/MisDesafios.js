@@ -13,7 +13,7 @@ const getLocalStorage = () => {
   }
 };
 
-function MisDesafios() {
+function MisDesafios({setState}) {
   const [name, setName] = useState("");
   const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
@@ -99,9 +99,9 @@ function MisDesafios() {
             </button>
           </div>
         )}
-        <Link style={{ color: "#e7e7e7" }} to="/tablero">
+        <p onClick={() => setState("Home")} style={{ color: "#e7e7e7" }}>
           Regresar a Mi Tablero
-        </Link>
+        </p>
       </section>
     </div>
   );

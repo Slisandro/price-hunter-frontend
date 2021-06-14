@@ -38,8 +38,8 @@ const Main = ({ state, setState }) => {
                 </div>
             ) :
 
-              state === "Desafios" ? <MisDesafios /> :
-                state === "Configuracion" ? <div>Configuración</div> : null
+              state === "Desafios" ? <MisDesafios setState={setState} /> :
+                state === "Configuracion" ? <div className="containerMessageBack">Configuración</div> : null
           }
         </div>
       </div>
