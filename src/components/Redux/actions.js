@@ -135,6 +135,7 @@ export const usuarioAutenticado = async () => {
 };
 
 ////---------------  ADMIN ACTIONS ---------------////
+//_____________________ POST _____________________//
 export const UNIDAD_MEDIDA = "UNIDAD_MEDIDA";
 export const TIPO_USUARIO = "TIPO_USUARIO";
 export const GENERO = "GENERO";
@@ -149,6 +150,7 @@ export const TIPO_TRANSACCION = "TIPO_TRANSACCION";
 export const TRANSACCION = "TRANSACCION";
 export const CLIENTES = "CLIENTES";
 export const DESAFIO = "DESAFIO";
+export const PRODUCTO = "PRODUCTO";
 
 export function unidadDeMedida(objeto) {
   return function(dispatch) {
@@ -401,4 +403,49 @@ export function desafio(objeto) {
   };
 }
 
-//-----------------------------------------------------------
+export function productos(objeto) {
+  return function(dispatch) {
+    axios
+      .post(`http://localhost:3001/admin/productos`, objeto)
+      .then((response) => {
+        let productos = {
+          nombre: response.data.nombre,
+          contenido_neto: response.data.contenido_neto,
+          unidadMedidaCodigoUnidadMedida:
+            response.data.unidadMedidaCodigoUnidadMedida,
+          subcategoriumId: response.data.subcategoriumId,
+        };
+        dispatch({
+          type: PRODUCTO,
+          payload: productos,
+        });
+      });
+  };
+}
+
+//_____________________ GET _____________________//
+
+export const GET_FAMILIA = "GET_FAMILIA";
+export const GET_CATEGORIA = "GET_CATEGORIA";
+
+export function getFamilia() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/familia`).then((response) => {
+      dispatch({
+        type: GET_FAMILIA,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getCategoria() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/categoria`).then((response) => {
+      dispatch({
+        type: GET_CATEGORIA,
+        payload: response.data,
+      });
+    });
+  };
+}
