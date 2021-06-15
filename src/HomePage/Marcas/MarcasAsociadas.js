@@ -11,10 +11,27 @@ import image8 from "../../assets/img/logomarcas/mars.png";
 import image9 from "../../assets/img/logomarcas/mondelez.png";
 import image10 from "../../assets/img/logomarcas/unilever.png";
 
+//----------------------------------------
+//         PRUEBA PARA POST ADMIN
+
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import {unidadDeMedida, pais, tipoUsuario, genero, monedas, ciudad, region, familia, categoria, subcategoria, tipoTransaccion, transaccion, clientes, desafio } from '../../components/Redux/actions'
+//----------------------------------------
+
 function MarcasAsociadas() {
   var slideIndex = 1;
   showSlides(slideIndex);
+  //----------------------------------------
+  //         PRUEBA PARA POST ADMIN
 
+  // const m= useSelector(x => x.obj)
+  // const dispatch = useDispatch()
+  // useEffect(() => {
+  //   dispatch(desafio(m));
+  // }, [dispatch, m]);
+
+  //-----------------------------------------
   // Next/previous controls
   function plusSlides(n) {
     showSlides((slideIndex += n));
@@ -53,27 +70,15 @@ function MarcasAsociadas() {
           &#10094;
         </a>
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image1}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image1} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image2}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image2} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image3}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image3} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
@@ -85,43 +90,23 @@ function MarcasAsociadas() {
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image6}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image6} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image7}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image7} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image8}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image8} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image9}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image9} alt="Not Found" />
         </div>
 
         <div className="mySlides fade">
-          <img
-            className="logoimagen"
-            src={image10}
-            alt="Not Found"
-          />
+          <img className="logoimagen" src={image10} alt="Not Found" />
         </div>
 
         <a className="next" onclick={plusSlides(1)}>
