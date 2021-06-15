@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {unidadDeMedida, pais, tipoUsuario, genero, monedas, ciudad, region, familia, categoria, subcategoria, tipoTransaccion, transaccion, clientes, desafio, productos } from '../../../components/Redux/actions'
+import {unidadDeMedida, pais, tipoUsuario, genero, monedas, ciudad, region, familia, categoria, subcategoria, tipoTransaccion, transaccion, clientes, desafio, productos, getFamilia, getCategoria  } from '../../../components/Redux/actions'
 //----------------------------------------
  
 
@@ -21,8 +21,8 @@ const NavbarAdm = (props) => {
   const m= useSelector(x => x.obj)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(productos(m));
-  }, [dispatch, m]);
+    dispatch(getCategoria());
+  }, [dispatch]);
 
   //-----------------------------------------
   return (
