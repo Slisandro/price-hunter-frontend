@@ -272,7 +272,7 @@ export function familia(objeto) {
       .then((response) => {
         let familia = {
           nombre_familia: response.data.nombre_familia,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
         };
         dispatch({
           type: FAMILIA,
@@ -289,7 +289,7 @@ export function categoria(objeto) {
       .then((response) => {
         let categoria = {
           nombre_categoria: response.data.nombre_categoria,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
         };
         dispatch({
           type: CATEGORIA,
@@ -306,7 +306,7 @@ export function subcategoria(objeto) {
       .then((response) => {
         let subcategoria = {
           nombre_subcategoria: response.data.nombre_subcategoria,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
           categoriumId: response.data.categoriumId,
         };
         dispatch({
@@ -400,6 +400,5 @@ export function desafio(objeto) {
       });
   };
 }
-
 
 //-----------------------------------------------------------

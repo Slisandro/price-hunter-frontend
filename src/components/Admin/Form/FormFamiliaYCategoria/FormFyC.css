@@ -62,11 +62,30 @@ header {
 }
 
 .text-label {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border: 0.2rem solid rgba(0, 0, 0, 0.2);
   background-color: rgba(4, 0, 43, 0.692);
   border-radius: 0.3rem;
   color: var(--clr-primary-5);
+}
+
+.text-label-desc {
+  font-size: 0.8rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(4, 0, 43, 0.692);
+  border-radius: 0.3rem;
+  color: var(--clr-primary-5);
+}
+
+.btm-desc {
+  outline: none;
+  height: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10rem;
+  padding: 0 0 0 10px;
+  width: 50%;
+  margin: 5px 0;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .containerForm form div {
