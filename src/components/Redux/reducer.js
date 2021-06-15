@@ -6,21 +6,21 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  UNIDAD_MEDIDA,
-  TIPO_USUARIO,
-  GENERO,
-  MONEDA,
-  CIUDAD,
-  PAIS,
-  REGION,
-  FAMILIA,
-  CATEGORIA,
-  SUBCATEGORIA,
-  TIPO_TRANSACCION,
-  TRANSACCION,
-  CLIENTES,
-  DESAFIO,
-  PRODUCTO,
+  UNIDAD_MEDIDA_POST,
+  TIPO_USUARIO_POST,
+  GENERO_POST,
+  MONEDA_POST,
+  CIUDAD_POST,
+  PAIS_POST,
+  REGION_POST,
+  FAMILIA_POST,
+  CATEGORIA_POST,
+  SUBCATEGORIA_POST,
+  TIPO_TRANSACCION_POST,
+  TRANSACCION_POST,
+  CLIENTES_POST,
+  DESAFIO_POST,
+  PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
 } from "./actions";
@@ -165,77 +165,77 @@ function rootReducer(state = initialState, action) {
         mensaje: null,
         cargando: false,
       };
-    case UNIDAD_MEDIDA:
+    case UNIDAD_MEDIDA_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case TIPO_USUARIO:
+    case TIPO_USUARIO_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case GENERO:
+    case GENERO_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case MONEDA:
+    case MONEDA_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case CIUDAD:
+    case CIUDAD_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case PAIS:
+    case PAIS_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case REGION:
+    case REGION_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case FAMILIA:
+    case FAMILIA_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case CATEGORIA:
+    case CATEGORIA_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case SUBCATEGORIA:
+    case SUBCATEGORIA_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case TIPO_TRANSACCION:
+    case TIPO_TRANSACCION_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case TRANSACCION:
+    case TRANSACCION_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case CLIENTES:
+    case CLIENTES_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case DESAFIO:
+    case DESAFIO_POST:
       return {
         ...state,
         admin: action.payload,
       };
-    case PRODUCTO:
+    case PRODUCTO_POST:
       return {
         ...state,
         admin: action.payload,

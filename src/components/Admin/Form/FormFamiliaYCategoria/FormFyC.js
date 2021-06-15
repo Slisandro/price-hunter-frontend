@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCategorias,
-  familia,
-  categoria,
-  subcategoria,
+  getCategoria,
+  getFamilia,
+  familiaPost,
+  categoriaPost,
+  subcategoriaPost,
 } from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
@@ -12,18 +13,18 @@ import "./FormFyC.css";
 
 function FormFyC() {
   const dispatch = useDispatch();
-  const nombre_familia = useSelector((store) => store.obj.nombre_familia);
-  const nombre_categoria = useSelector((store) => store.obj.nombre_categoria);
-  const Subcategoria = useSelector((store) => store.obj.Subcategoria);
-  const categorias = useSelector((store) => store.categorias);
+  const categoria = useSelector((store) => store.categoria);
+  const familia = useSelector((store) => store.familia);
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
 
   useEffect(() => {
-    dispatch(getCategorias());
+    dispatch(getCategoria());
+    dispatch(getFamilia());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const mapeado = categorias.map((familia) => familia.categoria);
-  console.log(mapeado);
 
   const [fam, setFam] = useState({
     nombre_familia: "",
@@ -38,14 +39,14 @@ function FormFyC() {
   const [subcate, setSubcate] = useState({
     nombre_subcategoria: "",
     descripción: "",
-    categoriumId: 100,
+    categoriumId: getRandomInt(60, 1000),
   });
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(e.target.value);
-    // console.log(name);
+    console.log(e.target.value);
+    console.log(name);
     if (name === "nombre_familia") {
       setFam({
         ...fam,
@@ -62,60 +63,39 @@ function FormFyC() {
         [name]: target.value,
       });
     }
-    // } else if{
-    //   setFam({
-    //     ...fam,
-    //     [name]: target.value,
-    //   });
-    // }
   };
-  // console.log(fam);
-  // console.log(cate);
-  // console.log(subcate);
-
-  useEffect(() => {
-    dispatch(getCategorias());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nuevaFamilia = {
-      nombre_familia: fam.nombre_familia,
-      descripcion: fam.descripcion,
-    };
+    // const nuevaFamilia = {
+    //   nombre_familia: fam.nombre_familia,
+    //   descripcion: fam.descripcion,
+    // };
 
-    const nuevaCategoria = {
-      nombre_categoria: cate.nombre_categoria,
-      descripcion: cate.descripcion,
-    };
+    // const nuevaCategoria = {
+    //   nombre_categoria: cate.nombre_categoria,
+    //   descripcion: cate.descripcion,
+    // };
 
     const nuevaSubcate = {
       nombre_subcategoria: subcate.nombre_subcategoria,
       descripcion: subcate.descripcion,
       categoriumId: subcate.categoriumId,
     };
-    console.log(nuevaFamilia);
-    console.log(nuevaCategoria);
+
+    // console.log(nuevaFamilia);
+    // console.log(nuevaCategoria);
     console.log(nuevaSubcate);
 
-    if (!nuevaFamilia.nombre_familia) {
-      alert("Por favor, ingrese una familia de producto");
-      return;
-    }
-    if (!nuevaCategoria.nombre_categoria) {
-      alert("Por favor, ingrese una categoria de producto");
-      return;
-    }
     if (!nuevaSubcate.nombre_subcategoria) {
       alert("Por favor, ingrese una sub-categoria de producto");
       return;
     }
 
-    dispatch(familia(nuevaFamilia));
-    dispatch(categoria(nuevaCategoria));
-    dispatch(subcategoria(nuevaSubcate));
+    // dispatch(familiaPost(nuevaFamilia));
+    // dispatch(categoriaPost(nuevaCategoria));
+    dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
     alert("Familia y Categorías agregadas con éxito!");
@@ -139,7 +119,7 @@ function FormFyC() {
     <>
       <div className="containerForm">
         <header>
-          <h1 id="title">Agregar Familia y Categorías</h1>
+          <h1 id="title">Agregar Sub-Categorías</h1>
         </header>
         <form
           id="survey-form"
@@ -151,12 +131,21 @@ function FormFyC() {
           <div className="divForm">
             <div>
               <label className="text-label">Familia</label>
-              <input
+              <select
+                name="nombre_familia"
+                value={fam.familia}
+                onChange={(e) => ChangeInput(e)}
+              >
+                {familia.map((f) => (
+                  <option value={f.nombre_familia}>{f.nombre_familia}</option>
+                ))}
+              </select>
+              {/* <input
                 className="btm"
                 type="text"
                 name="nombre_familia"
                 value={fam.familia}
-              ></input>
+              ></input> */}
             </div>
             <div className="divForm">
               <div>
@@ -172,12 +161,23 @@ function FormFyC() {
             <div className="divForm">
               <div>
                 <label className="text-label">Categoría</label>
-                <input
+                <select
+                  name="nombre_categoria"
+                  value={fam.familia}
+                  onChange={(e) => ChangeInput(e)}
+                >
+                  {categoria.map((f) => (
+                    <option value={f.nombre_categoria}>
+                      {f.nombre_categoria}
+                    </option>
+                  ))}
+                </select>
+                {/* <input
                   className="btm"
                   type="text"
                   name="nombre_categoria"
                   value={cate.nombre_categoria}
-                ></input>
+                ></input> */}
               </div>
             </div>
             <div className="divForm">
