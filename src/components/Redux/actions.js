@@ -135,6 +135,7 @@ export const usuarioAutenticado = async () => {
 };
 
 ////---------------  ADMIN ACTIONS ---------------////
+//_____________________ POST _____________________//
 export const UNIDAD_MEDIDA = "UNIDAD_MEDIDA";
 export const TIPO_USUARIO = "TIPO_USUARIO";
 export const GENERO = "GENERO";
@@ -150,6 +151,7 @@ export const TRANSACCION = "TRANSACCION";
 export const CLIENTES = "CLIENTES";
 export const DESAFIO = "DESAFIO";
 export const PRODUCTO = "PRODUCTO";
+
 
 export function unidadDeMedida(objeto) {
   return function(dispatch) {
@@ -173,6 +175,7 @@ export function tipoUsuario(objeto) {
       .then((response) => {
         let tipo_usuario = {
           tipo_usuario: response.data.tipo_usuario,
+
         };
         dispatch({
           type: TIPO_USUARIO,
@@ -422,4 +425,33 @@ export function productos(objeto) {
   };
 }
 
-//-----------------------------------------------------------
+//_____________________ GET _____________________//
+
+export const GET_FAMILIA = "GET_FAMILIA";
+export const GET_CATEGORIA = "GET_CATEGORIA";
+
+export function getFamilia() {
+  return function(dispatch) {
+    axios
+      .get(`http://localhost:3001/getadmin/familia`)
+      .then((response) => {
+        dispatch({
+          type: GET_FAMILIA,
+          payload: response.data,
+        });
+      });
+  };
+}
+
+export function getCategoria() {
+  return function(dispatch) {
+    axios
+      .get(`http://localhost:3001/getadmin/categoria`)
+      .then((response) => {
+        dispatch({
+          type: GET_CATEGORIA,
+          payload: response.data,
+        });
+      });
+  };
+}

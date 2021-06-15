@@ -20,7 +20,9 @@ import {
   TRANSACCION,
   CLIENTES,
   DESAFIO,
-  PRODUCTO
+  PRODUCTO,
+  GET_FAMILIA,
+  GET_CATEGORIA,
 } from "./actions";
 
 const initialState = {
@@ -68,6 +70,8 @@ const initialState = {
   usuario: null,
   mensaje: null,
   admin: {},
+  familia: [],
+  categoria: [],
   //----------------------------------------
   //         PRUEBA PARA POST ADMIN
   obj: {
@@ -116,10 +120,10 @@ const initialState = {
     // url_image: "www.prueba.com",
     // clienteId: 1,
     // productoId: 2,
-    nombre:"prueba1",
-    contenido_neto: 100 ,
-    unidadMedidaCodigoUnidadMedida:"kg",
-    subcategoriumId: 100
+    nombre: "prueba1",
+    contenido_neto: 100,
+    unidadMedidaCodigoUnidadMedida: "kg",
+    subcategoriumId: 100,
     //--------------------------------
   },
 };
@@ -231,10 +235,20 @@ function rootReducer(state = initialState, action) {
         ...state,
         admin: action.payload,
       };
-      case PRODUCTO:
+    case PRODUCTO:
       return {
         ...state,
         admin: action.payload,
+      };
+    case GET_FAMILIA:
+      return {
+        ...state,
+        familia: action.payload,
+      };
+    case GET_CATEGORIA:
+      return {
+        ...state,
+        categoria: action.payload,
       };
 
     default:
