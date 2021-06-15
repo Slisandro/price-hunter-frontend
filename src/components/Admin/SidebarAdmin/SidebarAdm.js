@@ -23,7 +23,7 @@ const SidebarAdm = (props) => {
           <Link to="">Panel de control</Link>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user-secret"></i>
+          <i className="fa fa-user"></i>
           <button
             value={"Agregar Productos"}
             onClick={() => props.setState("Agregar Productos")}
@@ -32,21 +32,39 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user-secret"></i>
+          <i className="fa fa-user"></i>
           <button
-            value={"Mis Desafios"}
-            onClick={() => props.setState("Mis Desafios")}
+            value={"Agregar Moneda y UM"}
+            onClick={() => props.setState("Agregar Moneda y UM")}
           >
-            Mis desafios
+            Agregar Moneda y UM
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user-secret"></i>
+          <i className="fa fa-user"></i>
           <button
-            value={"Ir a mi Dashboard"}
-            onClick={() => props.setState("Ir a mi Dashboard")}
+            value={"Agregar Ubicación"}
+            onClick={() => props.setState("Agregar Ubicación")}
           >
-            Ir a mi Dashboard
+            Agregar Ubicación
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-user"></i>
+          <button
+            value={"Agregar Familia y Categorias"}
+            onClick={() => props.setState("Agregar Familia y Categorias")}
+          >
+            Agregar Familia y Categorias
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-user"></i>
+          <button
+            value={"Agregar Tipo de Transacción"}
+            onClick={() => props.setState("Agregar Tipo de Transacción")}
+          >
+            Agregar Tipo de Transacción
           </button>
         </div>
         <div className="sidebar__link">
