@@ -72,14 +72,21 @@ function FormTransaccion() {
           <div className="divForm">
             <div>
               <label className="text-label">Tipo de Transacción</label>
-              <input
+              {/* <input
                 className="btm"
                 type="text"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
-              ></input>
+              ></input> */}
+              <select
+                name="tipo_transaccion"
+                value={state.tipo_transaccion}
+                onChange={(e) => ChangeInput(e)}
+              >
+                <option value={state.tipo_transaccion}>Puntos Ganados</option>
+                <option value={state.tipo_transaccion}>Puntos Retirados</option>
+              </select>
             </div>
-
             {/* <div>
                 <ul className="ulubi">
                   {ubicaciones.map((t) => (

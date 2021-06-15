@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import {} from "../../Redux/actions";
+import { productoPost } from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
 import "./AgregarProducto.css";
 
 function FormAgregarProducto() {
   const dispatch = useDispatch();
-  const ubicaciones = useSelector((store) => store.ubicaciones);
+  // const contenido_neto = useSelector((store) => store.contenido_neto);
 
   const [state, setState] = useState({
     nombre: "",
     contenido_neto: "",
-    unidad_medida: "",
-    id_subcategoria: "",
+    unidad_de_medida: "",
+    subcategoriumId: "",
   });
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    if (name === "ubicacion") {
-      const arr = state[name];
+    // console.log(name);
+    // console.log(target.value);
+    if (name === "nombre") {
       setState({
         ...state,
-        [name]: arr.concat(target.value),
+        [name]: target.value,
       });
-    } else {
+    } else if (name === "contenido_neto") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    } else if (name === "unidad_de_medida") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    } else if (name === "subcategoriumId") {
       setState({
         ...state,
         [name]: target.value,
@@ -34,7 +45,7 @@ function FormAgregarProducto() {
   };
 
   useEffect(() => {
-    // dispatch(getUbicaciones());
+    // dispatch(());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,23 +55,18 @@ function FormAgregarProducto() {
     const nuevoProducto = {
       nombre: state.nombre,
       contenido_neto: state.contenido_neto,
-      unidad_medida: state.unidad_medida,
-      id_subcategoria: state.id_subcategoria,
+      unidad_de_medida: state.unidad_de_medida,
+      subcategoriumId: state.subcategoriumId,
     };
+
+    console.log(nuevoProducto);
 
     if (!nuevoProducto.nombre) {
       alert("Por favor, ingrese un nombre");
       return;
     }
-    if (!nuevoProducto.familia) {
-      alert("Por favor, ingrese una familia de producto");
-      return;
-    }
-    if (!nuevoProducto.categoria) {
-      alert("Por favor, ingrese una categoria");
-      return;
-    }
-    if (!nuevoProducto.sub_categoria) {
+
+    if (!nuevoProducto.subcategoriumId) {
       alert("Por favor, ingrese una sub-categoria");
       return;
     }
@@ -75,23 +81,15 @@ function FormAgregarProducto() {
       return;
     }
 
-    // dispatch(crearProducto(nuevoProducto));
+    dispatch(productoPost(nuevoProducto));
     e.target.reset();
     alert("Producto agregado con éxito!");
 
     setState({
       nombre: "",
-      familia: null,
-      categoria: null,
-      sub_categoria: null,
-      pais: "",
-      ciudad: "",
-      region: "",
-      transaccion: "",
-      tipo_transaccion: "",
-      unidad_de_medida: null,
-      moneda: null,
-      contenido_neto: null,
+      subcategoriumId: "",
+      unidad_de_medida: "",
+      contenido_neto: "",
     });
   };
 
@@ -119,15 +117,6 @@ function FormAgregarProducto() {
               ></input>
             </div>
             <div>
-              <label className="text-label">Contenido Neto</label>
-              <input
-                className="btm"
-                type="text"
-                name="contenido_neto"
-                value={state.contenido_neto}
-              ></input>
-            </div>
-            <div>
               <label className="text-label">Unidad de Medida</label>
               <input
                 className="btm"
@@ -137,30 +126,23 @@ function FormAgregarProducto() {
               ></input>
             </div>
             <div>
-              <label className="text-label">Sub Categoria</label>
+              <label className="text-label">Contenido Neto</label>
+              <input
+                className="btm"
+                type="number"
+                name="contenido_neto"
+                value={state.contenido_neto}
+              ></input>
+            </div>
+            <div>
+              <label className="text-label">Sub-Categoría</label>
               <input
                 className="btm"
                 type="text"
-                name="sub_categoria"
-                value={state.sub_categoria}
+                name="subcategoriumId"
+                value={state.subcategoriumId}
               ></input>
             </div>
-
-            {/* <div>
-                <ul className="ulubi">
-                  {ubicaciones.map((t) => (
-                    <li key={t.id}>
-                      <input
-                        className="input"
-                        type="checkbox"
-                        name="ubicacion"
-                        value={t.nombre}
-                      ></input>
-                      <label nombre={t}>{t.nombre}</label>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
             <button type="submit">Agregar Producto</button>
           </div>
         </form>
