@@ -149,6 +149,7 @@ export const TIPO_TRANSACCION = "TIPO_TRANSACCION";
 export const TRANSACCION = "TRANSACCION";
 export const CLIENTES = "CLIENTES";
 export const DESAFIO = "DESAFIO";
+export const PRODUCTO = "PRODUCTO";
 
 export function unidadDeMedida(objeto) {
   return function(dispatch) {
@@ -401,5 +402,24 @@ export function desafio(objeto) {
   };
 }
 
+export function productos(objeto) {
+  return function(dispatch) {
+    axios
+      .post(`http://localhost:3001/admin/productos`, objeto)
+      .then((response) => {
+        let productos = {
+          nombre: response.data.nombre,
+          contenido_neto: response.data.contenido_neto,
+          unidadMedidaCodigoUnidadMedida:
+            response.data.unidadMedidaCodigoUnidadMedida,
+          subcategoriumId: response.data.subcategoriumId,
+        };
+        dispatch({
+          type: PRODUCTO,
+          payload: productos,
+        });
+      });
+  };
+}
 
 //-----------------------------------------------------------

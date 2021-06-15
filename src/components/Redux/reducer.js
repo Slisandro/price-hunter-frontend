@@ -20,6 +20,7 @@ import {
   TRANSACCION,
   CLIENTES,
   DESAFIO,
+  PRODUCTO
 } from "./actions";
 
 const initialState = {
@@ -115,6 +116,10 @@ const initialState = {
     // url_image: "www.prueba.com",
     // clienteId: 1,
     // productoId: 2,
+    nombre:"prueba1",
+    contenido_neto: 100 ,
+    unidadMedidaCodigoUnidadMedida:"kg",
+    subcategoriumId: 100
     //--------------------------------
   },
 };
@@ -222,6 +227,11 @@ function rootReducer(state = initialState, action) {
         admin: action.payload,
       };
     case DESAFIO:
+      return {
+        ...state,
+        admin: action.payload,
+      };
+      case PRODUCTO:
       return {
         ...state,
         admin: action.payload,

@@ -11,27 +11,12 @@ import image8 from "../../assets/img/logomarcas/mars.png";
 import image9 from "../../assets/img/logomarcas/mondelez.png";
 import image10 from "../../assets/img/logomarcas/unilever.png";
 
-//----------------------------------------
-//         PRUEBA PARA POST ADMIN
 
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import {unidadDeMedida, pais, tipoUsuario, genero, monedas, ciudad, region, familia, categoria, subcategoria, tipoTransaccion, transaccion, clientes, desafio } from '../../components/Redux/actions'
-//----------------------------------------
 
 function MarcasAsociadas() {
   var slideIndex = 1;
   showSlides(slideIndex);
-  //----------------------------------------
-  //         PRUEBA PARA POST ADMIN
-
-  // const m= useSelector(x => x.obj)
-  // const dispatch = useDispatch()
-  // useEffect(() => {
-  //   dispatch(desafio(m));
-  // }, [dispatch, m]);
-
-  //-----------------------------------------
+ 
   // Next/previous controls
   function plusSlides(n) {
     showSlides((slideIndex += n));
