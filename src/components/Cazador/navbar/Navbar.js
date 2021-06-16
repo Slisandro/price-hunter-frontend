@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-import user from "../../assets/user (1).png";
+import user from "../../../assets/user (1).png";
 import { Link } from "react-router-dom";
 // import notificacion from "../../assets/";
 

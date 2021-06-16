@@ -1,0 +1,111 @@
+.containerForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding-top: 0;
+  padding: 0;
+  position: relative;
+}
+
+.containerForm .form {
+  background-color: transparent;
+  border-radius: 10rem;
+  height: 135vh;
+  width: 50%;
+  padding: 20px 50px;
+  color: white;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#title {
+  font-size: 30px;
+  margin: 30px 0px 0px 0px;
+  color: var(--clr-primary-5);
+}
+
+.containerForm .btm,
+.containerForm button {
+  width: 60%;
+  border-radius: 30px;
+}
+
+#file {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.containerForm .btm:focus {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #f0f0f0;
+}
+
+.containerForm button {
+  outline: none;
+}
+
+.btm {
+  outline: none;
+  height: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 0 0 0 10px;
+  width: 0%;
+  margin: 5px 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.text-label {
+  font-size: 1.2rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(4, 0, 43, 0.692);
+  border-radius: 0.3rem;
+  color: var(--clr-primary-5);
+}
+
+.text-label-desc {
+  font-size: 0.8rem;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(4, 0, 43, 0.692);
+  border-radius: 0.3rem;
+  color: var(--clr-primary-5);
+}
+
+.btm-desc {
+  outline: none;
+  height: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10rem;
+  padding: 0 0 0 10px;
+  width: 50%;
+  margin: 5px 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.containerForm form div {
+  margin: 10px 0;
+}
+
+.ulubi {
+  display: grid;
+  grid-gap: 2% 0;
+  grid-template-columns: repeat(3, 5fr);
+  align-items: center;
+  height: 80%;
+}
+
+.submitForm {
+  height: 2rem;
+  margin-top: 2rem;
+  background-color: rgba(4, 0, 43, 0.692);
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+}
