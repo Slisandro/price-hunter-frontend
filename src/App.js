@@ -1,5 +1,5 @@
 import React from "react";
-import Tablero from "./components/Tablero Usuario/Tablero";
+import Tablero from "./components/Cazador/Tablero Usuario/Tablero";
 import HomePage from "./HomePage/HomePage";
 import Marcas from "./components/NavBarLinks/Marcas";
 import SobreNosotros from "./components/NavBarLinks/SobreNosotros";
@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/Ayuda" component={Ayuda} />
         <Route path="/login" component={Login} />
         <Route path="/tablero" component={Tablero} />
-        {/* <Route exact path="/misdesafios" component={MisDesafios} /> */}
+        <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
       </Switch>

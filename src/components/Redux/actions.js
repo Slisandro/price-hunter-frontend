@@ -14,6 +14,14 @@ export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
 
+export const GET_GENEROS = "GET_GENEROS";
+export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
+export const GET_PAISES = "GET_PAISES";
+export const GET_CIUDADES = "GET_CIUDADES";
+
+
+
+
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
   return function(dispatch) {
@@ -23,11 +31,48 @@ export function getCategorias() {
       .then((json) => {
         dispatch({
           type: GET_CATEGORIAS,
-          payload: json,
-        });
-      });
-  };
+          payload: json
+        })
+      })
+    }
 }
+
+
+//ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
+export function getPaises() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/paises";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_PAISES ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+
+
+
+export function getCiudades(id) {     
+    return function(dispatch) { 
+        let api =`http://localhost:3001/ciudades/${id}`;                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_CIUDADES ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
 export function getProductsByName(nombre) {
@@ -42,19 +87,60 @@ export function getProductsByName(nombre) {
   };
 }
 
+
+
+
+
+
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
-export function getSubcategoriasId(id) {
-  // console.log(id, "ID")
-  return function(dispatch) {
-    axios.get(`http://localhost:3001/subcategoria/${id}`).then((r) => {
-      console.log(r.data);
-      dispatch({
-        type: GET_SUBCATEGORIAS_ID,
-        payload: r.data,
-      });
-    });
-  };
-}
+export function getSubcategoriasId(id) {     
+    // console.log(id, "ID")
+    return function(dispatch) { 
+        axios.get(`http://localhost:3001/subcategoria/${id}`)
+        .then(r => {   
+            console.log(r.data.data.token)                                             
+            dispatch({ 
+                type: GET_SUBCATEGORIAS_ID,
+                payload: r.data
+                
+            });
+        });
+    }
+    
+};
+
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
+export function getGeneros() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/generos";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_GENEROS ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
+export function getTipoUsuario() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/tipousuario";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_TIPO_USUARIO ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
 
 //ACCION QUE DESPACHA DOS TYPES DIFERENTES: MOSTRAR ERROR Y OCULTAR ERROR LUEGO DE 5 SEGUNDOS.EJEMPLO: SI EL USUARIO NO COMPLETA LOS CAMPOS EN EL FORMULARIO DE
 //LOGIN, O COLOCA CONTRASEÑAS DIFERENTES, SE DESPACHA MOSTRAR ERROR Y LUEGO DE 5 SEG DESAPARECE EL MENSAJE.
@@ -75,36 +161,48 @@ export function mostrarError(msg, categoria) {
   };
 }
 
+
+
+
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
-export const registrarUsuario = async (datosUser) => {
-  try {
-    const respuesta = await axios.post(
-      "http://localhost:3001/usuarios/registro",
-      datosUser
-    );
-    console.log(respuesta.data);
-    return function(dispatch) {
-      dispatch({
-        type: REGISTRO_EXITOSO,
-        payload: respuesta.data,
-      });
-    };
-    // Obtener el usuario
-    // usuarioAutenticado();
-  } catch (error) {
-    console.log(error.response);
-    const alerta = {
-      msg: error.response.data.msg,
-      categoria: "alerta-error",
-    };
-    return function(dispatch) {
-      dispatch({
-        type: REGISTRO_ERROR,
-        payload: alerta,
-      });
-    };
-  }
-};
+export function registrarUsuario(datosUser) {     
+    
+    
+    return function(dispatch) { 
+        axios.post("http://localhost:3001/usuarios/registro", datosUser)
+        .then(respuesta => { 
+            console.log(respuesta)                                           
+            respuesta.data.msg ? (
+                
+
+                dispatch({
+                    type: MOSTRAR_ERROR,
+                    payload: {
+                        msg: respuesta.data.msg,
+                        categoria: "alerta-error"
+                    }
+                })
+
+                ):(
+                dispatch({ 
+                    type: REGISTRO_EXITOSO,
+                    payload: respuesta.data
+                    
+                })
+                )
+
+
+
+
+
+        }).catch(err => (console.log(err)))
+    }
+    
+}
+
+
+
+
 
 // Retorna el usuario autenticado
 export const usuarioAutenticado = async () => {
@@ -134,22 +232,33 @@ export const usuarioAutenticado = async () => {
   }
 };
 
+
+
+
+
+
+
+
+
+
+
 ////---------------  ADMIN ACTIONS ---------------////
-export const UNIDAD_MEDIDA = "UNIDAD_MEDIDA";
-export const TIPO_USUARIO = "TIPO_USUARIO";
-export const GENERO = "GENERO";
-export const MONEDA = "MONEDA";
-export const CIUDAD = "CIUDAD";
-export const PAIS = "PAIS";
-export const REGION = "REGION";
-export const FAMILIA = "FAMILIA";
-export const CATEGORIA = "CATEGORIA";
-export const SUBCATEGORIA = "SUBCATEGORIA";
-export const TIPO_TRANSACCION = "TIPO_TRANSACCION";
-export const TRANSACCION = "TRANSACCION";
-export const CLIENTES = "CLIENTES";
-export const DESAFIO = "DESAFIO";
-export const PRODUCTO = "PRODUCTO";
+//_____________________ POST _____________________//
+export const UNIDAD_MEDIDA_POST = "UNIDAD_MEDIDA_POST";
+export const TIPO_USUARIO_POST = "TIPO_USUARIO_POST";
+export const GENERO_POST = "GENERO_POST";
+export const MONEDA_POST = "MONEDA_POST";
+export const CIUDAD_POST = "CIUDAD_POST";
+export const PAIS_POST = "PAIS_POST";
+export const REGION_POST = "REGION_POST";
+export const FAMILIA_POST = "FAMILIA_POST";
+export const CATEGORIA_POST = "CATEGORIA_POST";
+export const SUBCATEGORIA_POST = "SUBCATEGORIA_POST";
+export const TIPO_TRANSACCION_POST = "TIPO_TRANSACCION_POST";
+export const TRANSACCION_POST = "TRANSACCION_POST";
+export const CLIENTES_POST = "CLIENTES_POST";
+export const DESAFIO_POST = "DESAFIO_POST";
+export const PRODUCTO_POST = "PRODUCTO_POST";
 
 export function unidadDeMedida(objeto) {
   return function(dispatch) {
@@ -159,12 +268,19 @@ export function unidadDeMedida(objeto) {
         nombre_unidad: response.data.nombre_unidad,
       };
       dispatch({
-        type: UNIDAD_MEDIDA,
+        type: UNIDAD_MEDIDA_POST,
         payload: um,
       });
     });
   };
 }
+
+
+
+
+
+
+
 
 export function tipoUsuario(objeto) {
   return function(dispatch) {
@@ -175,14 +291,14 @@ export function tipoUsuario(objeto) {
           tipo_usuario: response.data.tipo_usuario,
         };
         dispatch({
-          type: TIPO_USUARIO,
+          type: TIPO_USUARIO_POST,
           payload: tipo_usuario,
         });
       });
   };
 }
 
-export function genero(objeto) {
+export function generoPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/genero`, objeto)
@@ -191,14 +307,16 @@ export function genero(objeto) {
           genero: response.data.genero,
         };
         dispatch({
-          type: GENERO,
+          type: GENERO_POST,
           payload: genero,
         });
       });
   };
 }
 
-export function monedas(objeto) {
+
+
+export function monedaPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/moneda`, objeto)
@@ -209,14 +327,17 @@ export function monedas(objeto) {
           simbolo: response.data.simbolo,
         };
         dispatch({
-          type: MONEDA,
+          type: MONEDA_POST,
           payload: moneda,
         });
       });
   };
 }
 
-export function ciudad(objeto) {
+
+
+
+export function ciudadPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/ciudad`, objeto)
@@ -226,14 +347,14 @@ export function ciudad(objeto) {
           paiseCodigoAlfa: response.data.paiseCodigoAlfa,
         };
         dispatch({
-          type: CIUDAD,
+          type: CIUDAD_POST,
           payload: ciudad,
         });
       });
   };
 }
 
-export function pais(objeto) {
+export function paisPost(objeto) {
   return function(dispatch) {
     axios.post(`http://localhost:3001/admin/pais`, objeto).then((response) => {
       let pais = {
@@ -243,14 +364,14 @@ export function pais(objeto) {
         monedaCodigoMoneda: response.data.monedaCodigoMoneda,
       };
       dispatch({
-        type: PAIS,
+        type: PAIS_POST,
         payload: pais,
       });
     });
   };
 }
 
-export function region(objeto) {
+export function regionPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/region`, objeto)
@@ -259,66 +380,76 @@ export function region(objeto) {
           nombre_region: response.data.nombre_region,
         };
         dispatch({
-          type: REGION,
+          type: REGION_POST,
           payload: region,
         });
       });
   };
 }
 
-export function familia(objeto) {
+
+
+export function familiaPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/familia`, objeto)
       .then((response) => {
         let familia = {
           nombre_familia: response.data.nombre_familia,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
         };
         dispatch({
-          type: FAMILIA,
+          type: FAMILIA_POST,
           payload: familia,
         });
       });
   };
 }
 
-export function categoria(objeto) {
+
+
+export function categoriaPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/categoria`, objeto)
       .then((response) => {
         let categoria = {
           nombre_categoria: response.data.nombre_categoria,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
+          familiumId: response.data.familiumId,
         };
         dispatch({
-          type: CATEGORIA,
+          type: CATEGORIA_POST,
           payload: categoria,
         });
       });
   };
 }
 
-export function subcategoria(objeto) {
+
+
+
+export function subcategoriaPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/subcategoria`, objeto)
       .then((response) => {
         let subcategoria = {
           nombre_subcategoria: response.data.nombre_subcategoria,
-          descripcion: response.data.descripcion,
+          descripcion: response.data.descripcion, //opcional
           categoriumId: response.data.categoriumId,
         };
         dispatch({
-          type: SUBCATEGORIA,
+          type: SUBCATEGORIA_POST,
           payload: subcategoria,
         });
       });
   };
 }
 
-export function tipoTransaccion(objeto) {
+
+
+export function tipoTransaccionPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/tipo_transaccion`, objeto)
@@ -327,14 +458,17 @@ export function tipoTransaccion(objeto) {
           tipo_transaccion: response.data.tipo_transaccion,
         };
         dispatch({
-          type: TIPO_TRANSACCION,
+          type: TIPO_TRANSACCION_POST,
           payload: tipoTransaccion,
         });
       });
   };
 }
 
-export function transaccion(objeto) {
+
+
+
+export function transaccionPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/transaccion`, objeto)
@@ -346,14 +480,18 @@ export function transaccion(objeto) {
           tipoTransaccionId: response.data.tipoTransaccionId,
         };
         dispatch({
-          type: TRANSACCION,
+          type: TRANSACCION_POST,
           payload: transaccion,
         });
       });
   };
 }
 
-export function clientes(objeto) {
+
+
+
+
+export function clientesPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/clientes`, objeto)
@@ -373,14 +511,18 @@ export function clientes(objeto) {
           tipoUsuarioId: response.data.tipoUsuarioId,
         };
         dispatch({
-          type: CLIENTES,
+          type: CLIENTES_POST,
           payload: clientes,
         });
       });
   };
 }
 
-export function desafio(objeto) {
+
+
+
+
+export function desafioPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/desafio`, objeto)
@@ -395,14 +537,16 @@ export function desafio(objeto) {
           productoId: response.data.productoId,
         };
         dispatch({
-          type: DESAFIO,
+          type: DESAFIO_POST,
           payload: desafio,
         });
       });
   };
 }
 
-export function productos(objeto) {
+
+
+export function productoPost(objeto) {
   return function(dispatch) {
     axios
       .post(`http://localhost:3001/admin/productos`, objeto)
@@ -415,11 +559,36 @@ export function productos(objeto) {
           subcategoriumId: response.data.subcategoriumId,
         };
         dispatch({
-          type: PRODUCTO,
+          type: PRODUCTO_POST,
           payload: productos,
         });
       });
   };
 }
 
-//-----------------------------------------------------------
+//_____________________ GET _____________________//
+
+export const GET_FAMILIA = "GET_FAMILIA";
+export const GET_CATEGORIA = "GET_CATEGORIA";
+
+export function getFamilia() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/familia`).then((response) => {
+      dispatch({
+        type: GET_FAMILIA,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getCategoria() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/categoria`).then((response) => {
+      dispatch({
+        type: GET_CATEGORIA,
+        payload: response.data,
+      });
+    });
+  };
+}

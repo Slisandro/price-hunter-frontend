@@ -42,7 +42,7 @@ function NavBarMainAdm({ producto, setProducto, setState }) {
           <p>Administra aquí tus productos</p>
         </div>
       </div>
-      <Categorias categorias={categorias} setState={setState} />
+      {/* <Categorias categorias={categorias} setState={setState} /> */}
     </>
   );
 }

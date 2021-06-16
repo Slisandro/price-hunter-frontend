@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import {} from "../../Redux/actions";
+import { paisPost, regionPost, ciudadPost } from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
 import "./FormUbicacion.css";
@@ -9,24 +9,40 @@ function FormUbicacion() {
   const dispatch = useDispatch();
   const ubicaciones = useSelector((store) => store.ubicaciones);
 
-  const [state, setState] = useState({
-    pais: "",
+  const [pais, setPais] = useState({
+    codigo_alfa: "",
+    nombre_pais: "",
+    regioneId: null,
+    monedaCodigoMoneda: "",
+  });
+
+  const [ciudad, setCiudad] = useState({
     ciudad: "",
-    region: "",
+    paiseCodigoAlfa: "",
+  });
+
+  const [region, setRegion] = useState({
+    nombre_region: "",
   });
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    if (name === "ubicacion") {
-      const arr = state[name];
-      setState({
-        ...state,
-        [name]: arr.concat(target.value),
+    console.log(name);
+    console.log(target.value);
+    if (name === "nombre_pais") {
+      setPais({
+        ...pais,
+        [name]: target.value,
       });
-    } else {
-      setState({
-        ...state,
+    } else if (name === "ciudad") {
+      setCiudad({
+        ...ciudad,
+        [name]: target.value,
+      });
+    } else if (name === "nombre_region") {
+      setRegion({
+        ...region,
         [name]: target.value,
       });
     }
@@ -40,32 +56,53 @@ function FormUbicacion() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nuevaUbicacion = {
-      pais: state.pais,
-      ciudad: state.ciudades,
-      region: state.region,
+    const nuevoPais = {
+      codigo_alfa: pais.codigo_alfa,
+      nombre_pais: pais.nombre_pais,
+      regioneId: pais.regioneId,
+      monedaCodigoMoneda: pais.monedaCodigoMoneda,
     };
 
-    if (!nuevaUbicacion.pais) {
+    const nuevaCiudad = {
+      ciudad: ciudad.ciudad,
+      paiseCodigoAlfa: ciudad.paiseCodigoAlfa,
+    };
+
+    const nuevaRegion = {
+      nombre_region: region.nombre_region,
+    };
+
+    if (!nuevoPais.nombre_pais) {
       alert("Por favor, ingrese un país");
       return;
     }
-    if (!nuevaUbicacion.ciudad) {
+    if (!nuevaCiudad.ciudad) {
       alert("Por favor, ingrese una ciudad");
       return;
     }
-    if (!nuevaUbicacion.region) {
+    if (!nuevaRegion.nombre_region) {
       alert("Por favor, ingrese una región");
       return;
     }
 
-    // dispatch(crearProducto(nuevoProducto));
+    dispatch(paisPost(nuevoPais));
+    dispatch(ciudadPost(nuevaCiudad));
+    dispatch(regionPost(nuevaRegion));
     e.target.reset();
-    alert("Producto creado con éxito!");
+    alert("Ubicación agregada exitosamente!");
 
-    setState({
-      unidad_de_medida: null,
-      moneda: null,
+    setPais({
+      codigo_alfa: "",
+      nombre_pais: "",
+      regioneId: null,
+      monedaCodigoMoneda: "",
+    });
+    setCiudad({
+      ciudad: "",
+      paiseCodigoAlfa: "",
+    });
+    setRegion({
+      nombre_region: "",
     });
   };
 
@@ -88,8 +125,8 @@ function FormUbicacion() {
               <input
                 className="btm"
                 type="text"
-                name="pais"
-                value={state.nombre}
+                name="nombre_pais"
+                value={pais.nombre_pais}
               ></input>
             </div>
             <div>
@@ -98,7 +135,7 @@ function FormUbicacion() {
                 className="btm"
                 type="text"
                 name="ciudad"
-                value={state.familia}
+                value={ciudad.ciudad}
               ></input>
             </div>
             <div>
@@ -106,8 +143,8 @@ function FormUbicacion() {
               <input
                 className="btm"
                 type="text"
-                name="region"
-                value={state.familia}
+                name="nombre_region"
+                value={region.nombre_region}
               ></input>
             </div>
             {/* <div>

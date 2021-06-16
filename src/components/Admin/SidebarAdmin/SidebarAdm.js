@@ -52,10 +52,10 @@ const SidebarAdm = (props) => {
         <div className="sidebar__link">
           <i className="fa fa-user"></i>
           <button
-            value={"Agregar Familia y Categorias"}
-            onClick={() => props.setState("Agregar Familia y Categorias")}
+            value={"Agregar Sub-Categorías"}
+            onClick={() => props.setState("Agregar Sub-Categorías")}
           >
-            Agregar Familia y Categorias
+            Agregar Sub-Categorías
           </button>
         </div>
         <div className="sidebar__link">
