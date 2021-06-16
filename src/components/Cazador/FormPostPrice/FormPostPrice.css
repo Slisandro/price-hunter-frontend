@@ -1,0 +1,62 @@
+.FormPostPrice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    z-index: 10;
+    background: rgba(255,255,255,1);
+    width: 40%;
+    height: 70%;
+    border-radius: 1em;
+}
+
+.FormPostPrice .closeModal {
+    margin-left: 90%; 
+    margin-top: 2%; 
+    background: transparent; 
+    border: 1px solid black; 
+    font-size: .8em;
+    height: 5%;
+    width: 5%;
+}
+
+.FormPostPrice .form-group {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 15%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.FormPostPrice .form-group .control {
+    width: 80%;
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: .5em;
+    padding: 2%;
+    margin-top: 2%;
+}
+
+.FormPostPrice .form-group .label {
+    width: 85%;
+    font-size: 1.2em
+}
+
+.FormPostPrice .btn {
+    margin: auto;
+    width: 30%;
+    height: 8%;
+}
+
+.p {
+    display: none;
+}
+
+.errors {
+    display: block;
+    color: red;
+}
