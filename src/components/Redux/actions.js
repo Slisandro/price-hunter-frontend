@@ -292,6 +292,7 @@ export function categoriaPost(objeto) {
         let categoria = {
           nombre_categoria: response.data.nombre_categoria,
           descripcion: response.data.descripcion, //opcional
+          familiumId: response.data.familiumId,
         };
         dispatch({
           type: CATEGORIA_POST,
