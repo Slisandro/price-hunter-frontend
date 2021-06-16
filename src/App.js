@@ -18,18 +18,18 @@ function App() {
   return (
     <Router>
       <Switch>
-        {/* <Route exact path="/admin" component={AdminPage} />
+        <Route exact path="/admin" component={AdminPage} />
         <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
         <Route exact path="/Contacto" component={Contacto} />
         <Route exact path="/Servicios" component={Servicios} />
         <Route exact path="/Ayuda" component={Ayuda} />
-        <Route path="/login" component={Login} /> */}
+        <Route path="/login" component={Login} />
         <Route path="/tablero" component={Tablero} />
-        {/* <Route exact path="/misdesafios" component={MisDesafios} /> */}
-        {/* <Route exact path="/configuración" component={Configuración} />
-        <Route exact path="/registro" component={Registro} /> */}
+        <Route exact path="/misdesafios" component={MisDesafios} />
+        <Route exact path="/configuración" component={Configuración} />
+        <Route exact path="/registro" component={Registro} />
       </Switch>
     </Router>
   );
