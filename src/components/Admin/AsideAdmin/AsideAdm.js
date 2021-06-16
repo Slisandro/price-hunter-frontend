@@ -18,7 +18,7 @@ const AsideAdm = () => {
         <button className="account-title">Cerrar Sesión</button>
       </div>
 
-      <div className="account card card1">
+      <div className="account cardAdm card1">
         <div className="user-income">Desafíos Totales: 40</div>
         <div className="user-income">Desafíos Activos: 25</div>
         <div className="user-income">Total de Productos: 15</div>

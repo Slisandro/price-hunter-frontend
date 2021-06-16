@@ -1,7 +1,7 @@
 import React from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
-import aguila from "../../assets/aguila.png";
+import aguila from "../../../assets/aguila.png";
 
 const Sidebar = (props) => {
   return (
@@ -20,7 +20,7 @@ const Sidebar = (props) => {
 
       <div className="sidebar__menu">
         <div className="sidebar__link  active_menu_link">
-          <Link to="">Panel de control</Link>
+          <Link to="/tablero">Panel de control</Link>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
@@ -29,7 +29,7 @@ const Sidebar = (props) => {
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Configuración</button>
+          <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Mis Movimientos</button>
         </div>
 
         <div className="sidebar__link">
