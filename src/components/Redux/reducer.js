@@ -23,6 +23,8 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
+  GET_SUBCATEGORIA,
+  GET_UNIDAD_MEDIDA,
 } from "./actions";
 
 const initialState = {
@@ -72,6 +74,8 @@ const initialState = {
   admin: {},
   familia: [],
   categoria: [],
+  subcategoria: [],
+  unidad_medida: [],
   //----------------------------------------
   //         PRUEBA PARA POST ADMIN
   obj: {
@@ -249,6 +253,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         categoria: action.payload,
+      };
+    case GET_SUBCATEGORIA:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_UNIDAD_MEDIDA:
+      return {
+        ...state,
+        unidad_medida: action.payload,
       };
 
     default:

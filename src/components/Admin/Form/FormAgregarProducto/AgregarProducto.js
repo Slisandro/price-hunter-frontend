@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { productoPost } from "../../../Redux/actions";
+import { productoPost, getSubcategoria, getUnidadMedida } from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
 import "./AgregarProducto.css";
@@ -8,6 +8,15 @@ import "./AgregarProducto.css";
 function FormAgregarProducto() {
   const dispatch = useDispatch();
   // const contenido_neto = useSelector((store) => store.contenido_neto);
+
+  useEffect(() => {
+    dispatch(getSubcategoria());
+    dispatch(getUnidadMedida());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const subcategoria = useSelector((store) => store.subcategoria); 
+  const unidad_medida = useSelector((store) => store.unidad_medida);
 
   const [state, setState] = useState({
     nombre: "",
@@ -19,8 +28,8 @@ function FormAgregarProducto() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(name);
-    // console.log(target.value);
+    console.log(name);
+    console.log(e.target.value);
     if (name === "nombre") {
       setState({
         ...state,
@@ -55,7 +64,7 @@ function FormAgregarProducto() {
     const nuevoProducto = {
       nombre: state.nombre,
       contenido_neto: state.contenido_neto,
-      unidad_de_medida: state.unidad_de_medida,
+      unidadMedidaCodigoUnidadMedida: state.unidad_de_medida,
       subcategoriumId: state.subcategoriumId,
     };
 
@@ -71,7 +80,7 @@ function FormAgregarProducto() {
       return;
     }
 
-    if (!nuevoProducto.unidad_de_medida) {
+    if (!nuevoProducto.unidadMedidaCodigoUnidadMedida) {
       alert("Por favor, ingrese una unidad de medida");
       return;
     }
@@ -118,12 +127,24 @@ function FormAgregarProducto() {
             </div>
             <div>
               <label className="text-label">Unidad de Medida</label>
-              <input
+              <select
+                name="unidad_de_medida"
+                // value={state.nombre}
+                onChange={(e) => ChangeInput(e)}
+              >
+                <option></option>
+                {unidad_medida.map((f, index) => (
+                  <option key={index} value={f.codigo_unidad_medida}>
+                    {f.codigo_unidad_medida}
+                    </option>
+                ))}
+              </select>
+              {/* <input
                 className="btm"
                 type="text"
                 name="unidad_de_medida"
                 value={state.unidad_de_medida}
-              ></input>
+              ></input> */}
             </div>
             <div>
               <label className="text-label">Contenido Neto</label>
@@ -136,12 +157,22 @@ function FormAgregarProducto() {
             </div>
             <div>
               <label className="text-label">Sub-Categoría</label>
-              <input
+              <select
+                name="subcategoriumId"
+                // value={state.nombre}
+                onChange={(e) => ChangeInput(e)}
+                >
+                <option></option>
+                {subcategoria.map((f, index) => (
+                  <option key={index} value={f.id}>{f.nombre_subcategoria}</option>
+                ))}
+              </select>
+              {/* <input
                 className="btm"
                 type="text"
                 name="subcategoriumId"
                 value={state.subcategoriumId}
-              ></input>
+              ></input> */}
             </div>
             <button type="submit">Agregar Producto</button>
           </div>
