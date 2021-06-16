@@ -16,9 +16,11 @@ function FormFyC() {
   const categoria = useSelector((store) => store.categoria);
   const familia = useSelector((store) => store.familia);
 
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+  // console.log(familia) === {id: 1, nombre_familia: "Almacen", descripcion: "productos secos", ... }
+  // console.log(categoria); // id(pin):1
+  // descripcion(pin):null
+  // nombre_categoria(pin):"Aceites_y_Aderezos"
+  // familiumId(pin):1
 
   useEffect(() => {
     dispatch(getCategoria());
@@ -29,41 +31,54 @@ function FormFyC() {
   const [fam, setFam] = useState({
     nombre_familia: "",
     descripción: "",
+    id: null,
   });
 
   const [cate, setCate] = useState({
     nombre_categoria: "",
     descripción: "",
+    familiumId: null,
   });
 
   const [subcate, setSubcate] = useState({
     nombre_subcategoria: "",
     descripción: "",
-    categoriumId: getRandomInt(60, 1000),
+    categoriumId: null,
   });
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(e.target.value);
-    console.log(name);
+    // console.log(e.target.value);
+    // console.log(e.target);
     if (name === "nombre_familia") {
+      var fa = familia.find((f) => f.nombre_familia === e.target.value);
+      var final = fa.id;
+      var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
+      var finalCat = cat.id;
       setFam({
         ...fam,
         [name]: target.value,
+        id: final,
       });
     } else if (name === "nombre_categoria") {
       setCate({
         ...cate,
+        familiumId: fam.id,
         [name]: target.value,
+        id: finalCat,
       });
+      // console.log(cate);
     } else if (name === "nombre_subcategoria") {
       setSubcate({
         ...subcate,
+        categoriumId: cate.id,
         [name]: target.value,
       });
     }
   };
+  console.log(cate);
+  // console.log(fam);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -133,7 +148,7 @@ function FormFyC() {
               <label className="text-label">Familia</label>
               <select
                 name="nombre_familia"
-                value={fam.familia}
+                value={fam.nombre_familia}
                 onChange={(e) => ChangeInput(e)}
               >
                 {familia.map((f) => (
@@ -163,7 +178,7 @@ function FormFyC() {
                 <label className="text-label">Categoría</label>
                 <select
                   name="nombre_categoria"
-                  value={fam.familia}
+                  value={cate.nombre_categoria}
                   onChange={(e) => ChangeInput(e)}
                 >
                   {categoria.map((f) => (
