@@ -1,5 +1,7 @@
 
-import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID, MOSTRAR_ERROR, OCULTAR_ERROR, REGISTRO_EXITOSO, LOGIN_EXITOSO} from "./actions"
+import {GET_CATEGORIAS, GET_PRODUCTOS_NAME, GET_SUBCATEGORIAS_ID, MOSTRAR_ERROR, OCULTAR_ERROR, 
+  REGISTRO_EXITOSO, LOGIN_EXITOSO, GET_GENEROS, GET_TIPO_USUARIO, GET_PAISES, GET_CIUDADES, OBTENER_USUARIO, CERRAR_SESION,LOGIN_ERROR,REGISTRO_ERROR
+} from "./actions"
 
 const initialState = {
   arrayPrueba: [
@@ -15,10 +17,20 @@ const initialState = {
   productos: [],
   subcategorias:[],
   alerta: null,
+  
+
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
-  mensaje:null
+  mensaje:null,
+
+
+
+  generos: [],
+  tipo_usuarios:[],
+  paises: [],
+  ciudades: []
+
 
 };
 
@@ -32,6 +44,28 @@ export function rootReducer(state = initialState, action) {
         ...state,
         categorias: action.payload
     }
+    case GET_GENEROS: 
+    return {
+      ...state,
+      generos: action.payload
+  }
+    case GET_TIPO_USUARIO: 
+    return {
+      ...state,
+      tipo_usuarios: action.payload
+    }
+    case GET_PAISES: 
+    return {
+      ...state,
+      paises: action.payload
+    }
+    case GET_CIUDADES: 
+    return {
+      ...state,
+      ciudades: action.payload
+    }
+
+
     case GET_PRODUCTOS_NAME:
       console.log(action.payload)      
       return {
@@ -63,6 +97,27 @@ export function rootReducer(state = initialState, action) {
           mensaje: null,
           cargando: false
     }
+
+    case OBTENER_USUARIO: 
+      return {
+          ...state,
+          autenticado: true,
+          usuario: action.payload, 
+          cargando: false
+      }
+
+    case CERRAR_SESION:
+    case LOGIN_ERROR:
+    case REGISTRO_ERROR:
+      localStorage.removeItem('token');
+      return {
+          ...state,
+          token: null,
+          usuario: null,
+          autenticado: null,
+          mensaje: action.payload, 
+          cargando: false
+      }
       
     
   

@@ -14,6 +14,11 @@ export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
 
+export const GET_GENEROS = "GET_GENEROS";
+export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
+export const GET_PAISES = "GET_PAISES";
+export const GET_CIUDADES = "GET_CIUDADES";
+
 
 
 
@@ -26,6 +31,37 @@ export function getCategorias() {
         .then(json => {                                                
             dispatch({ 
                 type: GET_CATEGORIAS ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+//ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
+export function getPaises() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/paises";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_PAISES ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+export function getCiudades(id) {     
+    return function(dispatch) { 
+        let api =`http://localhost:3001/ciudades/${id}`;                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_CIUDADES ,
                 payload: json 
             });
         });
@@ -59,7 +95,7 @@ export function getSubcategoriasId(id) {
     return function(dispatch) { 
         axios.get(`http://localhost:3001/subcategoria/${id}`)
         .then(r => {   
-            console.log(r.data)                                             
+            console.log(r.data.data.token)                                             
             dispatch({ 
                 type: GET_SUBCATEGORIAS_ID,
                 payload: r.data
@@ -70,6 +106,37 @@ export function getSubcategoriasId(id) {
     
 };
 
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
+export function getGeneros() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/generos";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_GENEROS ,
+                payload: json 
+            });
+        });
+    
+    }
+};
+
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
+export function getTipoUsuario() {     
+    return function(dispatch) { 
+        let api = "http://localhost:3001/tipousuario";                         
+        return fetch(api)  
+        .then(response => response.json())                               
+        .then(json => {                                                
+            dispatch({ 
+                type: GET_TIPO_USUARIO ,
+                payload: json 
+            });
+        });
+    
+    }
+};
 
 
 //ACCION QUE DESPACHA DOS TYPES DIFERENTES: MOSTRAR ERROR Y OCULTAR ERROR LUEGO DE 5 SEGUNDOS.EJEMPLO: SI EL USUARIO NO COMPLETA LOS CAMPOS EN EL FORMULARIO DE 
@@ -98,45 +165,49 @@ export function mostrarError(msg,categoria){
 
 
 
-//ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
-export const registrarUsuario = async datosUser => {
-    try {
 
-        const respuesta = await axios.post('http://localhost:3001/usuarios/registro', datosUser);
-        console.log(respuesta.data)
-        return function (dispatch){
-        dispatch({
-            type: REGISTRO_EXITOSO,
-            payload: respuesta.data
-        });
-        }
 
-        // Obtener el usuario
-        // usuarioAutenticado();
+export function registrarUsuario(datosUser) {     
     
-    } catch (error) {
+    
+        return function(dispatch) { 
+            axios.post("http://localhost:3001/usuarios/registro", datosUser)
+            .then(respuesta => { 
+                console.log(respuesta)                                           
+                respuesta.data.msg ? (
+                    
+
+                    dispatch({
+                        type: MOSTRAR_ERROR,
+                        payload: {
+                            msg: respuesta.data.msg,
+                            categoria: "alerta-error"
+                        }
+                    })
+
+                    ):(
+                    dispatch({ 
+                        type: REGISTRO_EXITOSO,
+                        payload: respuesta.data
+                        
+                    })
+                    )
+
+
+
+
+
+            }).catch(err => (console.log(err)))
+        }
         
-        console.log(error.response);
-        const alerta = {
-            msg: error.response.data.msg,
-            categoria: 'alerta-error'
-        }
-        return function (dispatch){
-            dispatch({
-                type: REGISTRO_ERROR,
-                payload: alerta
-            });
-        }
     }
-}
 
 
 
 
 
 
-
-  // Retorna el usuario autenticado
+  // Retorna el usuario autenticado 
   const usuarioAutenticado = async () => {
     const token = localStorage.getItem('token');
     if(token) {
@@ -165,7 +236,5 @@ export const registrarUsuario = async datosUser => {
     
     }
 }
-
-
 
 

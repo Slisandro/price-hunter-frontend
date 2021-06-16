@@ -29,6 +29,7 @@ function App() {
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
         {/* <TableroEmpresa/> */}
+        
       </Switch>
     </Router>
   );
