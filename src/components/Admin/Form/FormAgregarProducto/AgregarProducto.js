@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { productoPost, getSubcategoria, getUnidadMedida } from "../../../Redux/actions";
+import {
+  productoPost,
+  getSubcategoria,
+  getUnidadMedida,
+} from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
 import "./AgregarProducto.css";
@@ -15,7 +19,7 @@ function FormAgregarProducto() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const subcategoria = useSelector((store) => store.subcategoria); 
+  const subcategoria = useSelector((store) => store.subcategoria);
   const unidad_medida = useSelector((store) => store.unidad_medida);
 
   const [state, setState] = useState({
@@ -28,8 +32,8 @@ function FormAgregarProducto() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(name);
-    console.log(e.target.value);
+    // console.log(name);
+    // console.log(e.target.value);
     if (name === "nombre") {
       setState({
         ...state,
@@ -136,7 +140,7 @@ function FormAgregarProducto() {
                 {unidad_medida.map((f, index) => (
                   <option key={index} value={f.codigo_unidad_medida}>
                     {f.codigo_unidad_medida}
-                    </option>
+                  </option>
                 ))}
               </select>
               {/* <input
@@ -161,10 +165,12 @@ function FormAgregarProducto() {
                 name="subcategoriumId"
                 // value={state.nombre}
                 onChange={(e) => ChangeInput(e)}
-                >
+              >
                 <option></option>
                 {subcategoria.map((f, index) => (
-                  <option key={index} value={f.id}>{f.nombre_subcategoria}</option>
+                  <option key={index} value={f.id}>
+                    {f.nombre_subcategoria}
+                  </option>
                 ))}
               </select>
               {/* <input
