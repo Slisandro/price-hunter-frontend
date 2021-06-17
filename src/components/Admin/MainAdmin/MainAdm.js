@@ -39,7 +39,7 @@ const MainAdm = ({ state, setState }) => {
             <FormAgregarProducto />
           ) : state === "Agregar Moneda y UM" ? (
             <FormMonedaYum />
-          ) : state === "Agregar Sub-Categorías" ? (
+          ) : state === "Agregar Familia y Categoría" ? (
             <FormFyC />
           ) : state === "Agregar Tipo de Transacción" ? (
             <FormTransaccion />

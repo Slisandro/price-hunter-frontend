@@ -10,8 +10,9 @@ function FormMonedaYum() {
   const ubicaciones = useSelector((store) => store.ubicaciones);
 
   const [state, setState] = useState({
-    moneda: "",
-    unidad_medida: "",
+    codigo_moneda: "",
+    nombre_moneda: "",
+    simbolo: "",
   });
 
   const ChangeInput = (e) => {

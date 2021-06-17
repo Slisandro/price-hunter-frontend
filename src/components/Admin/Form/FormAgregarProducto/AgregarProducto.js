@@ -12,7 +12,7 @@ function FormAgregarProducto() {
   const [state, setState] = useState({
     nombre: "",
     contenido_neto: "",
-    unidad_de_medida: "",
+    unidadMedidaCodigoUnidadMedida: "",
     subcategoriumId: "",
   });
 
@@ -31,7 +31,7 @@ function FormAgregarProducto() {
         ...state,
         [name]: target.value,
       });
-    } else if (name === "unidad_de_medida") {
+    } else if (name === "unidadMedidaCodigoUnidadMedida") {
       setState({
         ...state,
         [name]: target.value,
@@ -55,7 +55,7 @@ function FormAgregarProducto() {
     const nuevoProducto = {
       nombre: state.nombre,
       contenido_neto: state.contenido_neto,
-      unidad_de_medida: state.unidad_de_medida,
+      unidadMedidaCodigoUnidadMedida: state.unidadMedidaCodigoUnidadMedida,
       subcategoriumId: state.subcategoriumId,
     };
 
@@ -71,7 +71,7 @@ function FormAgregarProducto() {
       return;
     }
 
-    if (!nuevoProducto.unidad_de_medida) {
+    if (!nuevoProducto.unidadMedidaCodigoUnidadMedida) {
       alert("Por favor, ingrese una unidad de medida");
       return;
     }
@@ -88,7 +88,7 @@ function FormAgregarProducto() {
     setState({
       nombre: "",
       subcategoriumId: "",
-      unidad_de_medida: "",
+      unidadMedidaCodigoUnidadMedida: "",
       contenido_neto: "",
     });
   };
@@ -121,8 +121,8 @@ function FormAgregarProducto() {
               <input
                 className="btm"
                 type="text"
-                name="unidad_de_medida"
-                value={state.unidad_de_medida}
+                name="unidadMedidaCodigoUnidadMedida"
+                value={state.unidadMedidaCodigoUnidadMedida}
               ></input>
             </div>
             <div>
