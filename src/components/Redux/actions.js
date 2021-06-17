@@ -275,13 +275,6 @@ export function unidadDeMedida(objeto) {
   };
 }
 
-
-
-
-
-
-
-
 export function tipoUsuario(objeto) {
   return function(dispatch) {
     axios
@@ -314,8 +307,6 @@ export function generoPost(objeto) {
   };
 }
 
-
-
 export function monedaPost(objeto) {
   return function(dispatch) {
     axios
@@ -333,9 +324,6 @@ export function monedaPost(objeto) {
       });
   };
 }
-
-
-
 
 export function ciudadPost(objeto) {
   return function(dispatch) {
@@ -406,8 +394,6 @@ export function familiaPost(objeto) {
   };
 }
 
-
-
 export function categoriaPost(objeto) {
   return function(dispatch) {
     axios
@@ -425,9 +411,6 @@ export function categoriaPost(objeto) {
       });
   };
 }
-
-
-
 
 export function subcategoriaPost(objeto) {
   return function(dispatch) {
@@ -447,8 +430,6 @@ export function subcategoriaPost(objeto) {
   };
 }
 
-
-
 export function tipoTransaccionPost(objeto) {
   return function(dispatch) {
     axios
@@ -464,9 +445,6 @@ export function tipoTransaccionPost(objeto) {
       });
   };
 }
-
-
-
 
 export function transaccionPost(objeto) {
   return function(dispatch) {
@@ -486,10 +464,6 @@ export function transaccionPost(objeto) {
       });
   };
 }
-
-
-
-
 
 export function clientesPost(objeto) {
   return function(dispatch) {
@@ -518,10 +492,6 @@ export function clientesPost(objeto) {
   };
 }
 
-
-
-
-
 export function desafioPost(objeto) {
   return function(dispatch) {
     axios
@@ -543,8 +513,6 @@ export function desafioPost(objeto) {
       });
   };
 }
-
-
 
 export function productoPost(objeto) {
   return function(dispatch) {
