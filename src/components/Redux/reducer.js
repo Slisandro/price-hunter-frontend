@@ -24,7 +24,8 @@ import {
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_DESAFIOS,
-  PRICE,
+  PRICE
+  GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
   GET_GENEROS,
   GET_TIPO_USUARIO,
@@ -148,8 +149,10 @@ const initialState = {
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
+  
 };
 
+//-------------ADMIN-------------//
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CATEGORIAS:
@@ -319,7 +322,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         desafios: action.payload,
       };
-    case PRICE:
+    case PRICE: 
       console.log("red")
       return;
     case GET_SUBCATEGORIAS:
@@ -333,6 +336,10 @@ function rootReducer(state = initialState, action) {
         unidad_medida: action.payload,
       };
     //-------------ADMIN-------------//
+<<<<<<< HEAD
+=======
+
+>>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
     default:
       return state;
   }

@@ -529,6 +529,10 @@ export function getCategoria() {
   };
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
 export function getDesafios() {
   return function(dispatch) {
     let api = "http://localhost:3001/detalledesafio";
