@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategorias, subcategoriaPost } from "../../../Redux/actions";
+import {
+  getCategorias,
+  subcategoriaPost,
+  getSubcategoria,
+} from "../../../Redux/actions";
 
 function Subcate({ setSwitcher }) {
   const dispatch = useDispatch();
   const [buttonSUB, setButtonSUB] = useState(false);
   const categorias = useSelector((store) => store.categorias);
+  const subcategoria = useSelector((store) => store.subcategoria);
 
   // var mapeado = categorias.map((c) => c.categoria);
   // var mapeado2 = mapeado.map((ca) => ca.categoria);
@@ -14,6 +19,7 @@ function Subcate({ setSwitcher }) {
 
   useEffect(() => {
     dispatch(getCategorias());
+    dispatch(getSubcategoria());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -68,7 +74,7 @@ function Subcate({ setSwitcher }) {
     dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
-    alert("Familia y Categorías agregadas con éxito!");
+    alert("Sub-Categoría agregada con éxito!");
 
     setSubcate({
       nombre_subcategoria: "",
@@ -100,13 +106,13 @@ function Subcate({ setSwitcher }) {
                 <label className="text-label">Sub-Categoría</label>
                 <select
                   name="nombre_categoria"
-                  className="selectTrans"
+                  className="selectTransAgregar"
                   value={subcate.nombre_categoria}
                   onChange={(e) => ChangeInput(e)}
                 >
-                  {categorias.map((f) => (
-                    <option value={f.nombre_categoria}>
-                      {f.nombre_categoria}
+                  {subcategoria.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.nombre_subcategoria}
                     </option>
                   ))}
                 </select>

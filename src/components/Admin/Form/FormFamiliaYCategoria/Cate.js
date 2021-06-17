@@ -102,7 +102,7 @@ function Cate({ setSwitcher }) {
                 <label className="text-label">Categoría</label>
                 <select
                   name="nombre_categoria"
-                  className="selectTrans"
+                  className="selectTransAgregar"
                   value={cate.nombre_categoria}
                   onChange={(e) => ChangeInput(e)}
                 >
