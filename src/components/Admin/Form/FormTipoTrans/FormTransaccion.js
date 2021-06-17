@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import {} from "../../Redux/actions";
+import { tipoTransaccionPost } from "../../../Redux/actions";
 // import { Link } from "react-router-dom";
 // import logo from "../../assets/aguila.png";
 import "./FormTransaccion.css";
@@ -16,24 +16,19 @@ function FormTransaccion() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    if (name === "ubicacion") {
-      const arr = state[name];
-      setState({
-        ...state,
-        [name]: arr.concat(target.value),
-      });
-    } else {
+
+    if (name === "tipo_transaccion") {
       setState({
         ...state,
         [name]: target.value,
       });
-    }
+    } 
   };
 
-  useEffect(() => {
-    // dispatch(getUbicaciones());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   // dispatch(getUbicaciones());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +42,7 @@ function FormTransaccion() {
       return;
     }
 
-    // dispatch(crearProducto(nuevoProducto));
+    dispatch(tipoTransaccionPost(nuevoTipoTransaccion));
     e.target.reset();
     alert("Tipo de Transacción agregado con éxito!");
 
@@ -72,12 +67,12 @@ function FormTransaccion() {
           <div className="divForm">
             <div>
               <label className="text-label">Tipo de Transacción</label>
-              {/* <input
+              <input
                 className="btm"
                 type="text"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
-              ></input> */}
+              ></input> 
               <select
                 className="selectTransAgregar"
                 name="tipo_transaccion"

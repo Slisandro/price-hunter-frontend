@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import MisDesafios from "../../desafios/MisDesafios";
 import NavBarMainAdm from "../NavbarMainAdmin/NavbarMainAdm";
 import Configuración from "../../configuración/Configuración";
-import FormMoneda from "../Form/FormMonedaYum/FormMoneda";
+import FormMoneda from "../Form/FormMoneda/FormMoneda";
 import FormUnidadMedida from "../Form/FormUm/FormUnidadMedida";
 import FormUbicacion from "../Form/FormUbicacion/FormUbicacion";
 import FormTransaccion from "../Form/FormTipoTrans/FormTransaccion";
@@ -50,7 +50,7 @@ const MainAdm = ({ state, setState }) => {
           ) : state === "Agregar UM" ? (
             <FormUnidadMedida />
           ) : state === "Agregar Sub-Categorías" ? (
-             <div></div>
+            <FormMoneda />
           ) : state === "Agregar Familia y Categoría" ? (
             <FormFyC />
           ) : state === "Agregar Tipo de Transacción" ? (
