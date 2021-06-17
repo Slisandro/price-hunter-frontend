@@ -488,8 +488,8 @@ export function productoPost(objeto) {
 // 
 export function pricePost(objeto) {
   return function(dispatch) {
-    axios.post(`localhost:3001/precios`, objeto)
-    .then(resp => resp.json())
+    axios.post(`http://localhost:3001/precios`, objeto)
+    // .then(resp => resp.json())
     .then(json => {
       console.log(json)
       dispatch({
@@ -529,10 +529,6 @@ export function getCategoria() {
   };
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
 export function getDesafios() {
   return function(dispatch) {
     let api = "http://localhost:3001/detalledesafio";

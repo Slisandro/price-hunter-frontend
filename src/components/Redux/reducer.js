@@ -24,7 +24,7 @@ import {
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_DESAFIOS,
-  PRICE
+  PRICE,
   GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
   GET_GENEROS,
@@ -336,10 +336,6 @@ function rootReducer(state = initialState, action) {
         unidad_medida: action.payload,
       };
     //-------------ADMIN-------------//
-<<<<<<< HEAD
-=======
-
->>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
     default:
       return state;
   }
