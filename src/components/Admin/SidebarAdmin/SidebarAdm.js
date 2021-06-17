@@ -34,10 +34,10 @@ const SidebarAdm = (props) => {
         <div className="sidebar__link">
           <i className="fa fa-user"></i>
           <button
-            value={"Agregar Moneda y UM"}
-            onClick={() => props.setState("Agregar Moneda y UM")}
+            value={"Agregar Moneda"}
+            onClick={() => props.setState("Agregar Moneda")}
           >
-            Agregar Moneda y UM
+            Agregar Moneda
           </button>
         </div>
         <div className="sidebar__link">
