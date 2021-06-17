@@ -4,7 +4,7 @@ import { monedaPost } from "../../../Redux/actions";
 
 import "./FormMonedaYum.css";
 
-function FormMonedaYum() {
+function FormMoneda() {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
@@ -126,8 +126,53 @@ function FormMonedaYum() {
           </div>
         </form>
       </div>
+
+      <div>
+      <header>
+          <h1 id="title">Agregar Uidad Medida</h1>
+        </header>
+        <form
+          id="survey-form"
+          className="form"
+          noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="divForm">
+            <div>
+              <label className="text-label">Codigo de Moneda</label>
+              <input
+                className="btm"
+                type="text"
+                name="codigo_moneda"
+                value={state.codigo_moneda}
+              ></input>
+            </div>
+            <div>
+              <label className="text-label">Nombre de la Moneda</label>
+              <input
+                className="btm"
+                type="text"
+                name="nombre_moneda"
+                value={state.nombre_moneda}
+              ></input>
+            </div>
+            <div>
+              <label className="text-label">Simbolo</label>
+              <input
+                className="btm"
+                type="text"
+                name="simbolo"
+                value={state.simbolo}
+              ></input>
+            </div>
+            <button type="submit">Agregar</button>
+          </div>
+        </form>
+      </div>
+
     </>
   );
 }
 
-export default FormMonedaYum;
+export default FormMoneda;
