@@ -23,6 +23,8 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
+//   GET_SUBCATEGORIA,
+//   GET_UNIDAD_MEDIDA,
   GET_GENEROS, GET_TIPO_USUARIO, GET_PAISES, GET_CIUDADES, OBTENER_USUARIO, CERRAR_SESION,LOGIN_ERROR,REGISTRO_ERROR
 } from "./actions";
 
@@ -81,6 +83,8 @@ const initialState = {
   admin: {},
   familia: [],
   categoria: [],
+  subcategoria: [],
+  unidad_medida: [],
   //----------------------------------------
   //         PRUEBA PARA POST ADMIN
   obj: {
@@ -316,6 +320,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         categoria: action.payload,
+      };
+    case GET_SUBCATEGORIA:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_UNIDAD_MEDIDA:
+      return {
+        ...state,
+        unidad_medida: action.payload,
       };
 
     default:

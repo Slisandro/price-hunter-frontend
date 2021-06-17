@@ -570,6 +570,9 @@ export function productoPost(objeto) {
 
 export const GET_FAMILIA = "GET_FAMILIA";
 export const GET_CATEGORIA = "GET_CATEGORIA";
+export const GET_SUBCATEGORIA = 'GET_SUBCATEGORIA'
+export const GET_UNIDAD_MEDIDA = 'GET_UNIDAD_MEDIDA'
+
 
 export function getFamilia() {
   return function(dispatch) {
@@ -587,6 +590,28 @@ export function getCategoria() {
     axios.get(`http://localhost:3001/getadmin/categoria`).then((response) => {
       dispatch({
         type: GET_CATEGORIA,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getSubcategoria() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/subcategoria`).then((response) => {
+      dispatch({
+        type: GET_SUBCATEGORIA,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getUnidadMedida() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/um`).then((response) => {
+      dispatch({
+        type: GET_UNIDAD_MEDIDA,
         payload: response.data,
       });
     });
