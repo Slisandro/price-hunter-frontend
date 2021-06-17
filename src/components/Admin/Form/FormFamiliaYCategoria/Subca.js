@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCategorias,
+  getCategoria,
   subcategoriaPost,
   getSubcategoria,
 } from "../../../Redux/actions";
@@ -9,24 +9,30 @@ import {
 function Subcate({ setSwitcher }) {
   const dispatch = useDispatch();
   const [buttonSUB, setButtonSUB] = useState(false);
-  const categorias = useSelector((store) => store.categorias);
+  const categoria = useSelector((store) => store.categoria);
   const subcategoria = useSelector((store) => store.subcategoria);
 
-  // var mapeado = categorias.map((c) => c.categoria);
-  // var mapeado2 = mapeado.map((ca) => ca.categoria);
-  // var mapeado3 = mapeado2.map((cat) => cat.nombre_subcategoria);
-  // console.log(mapeado2);
+  var mapeado = categoria.map((c) => c.id);
+  var mapeado2 = mapeado.map((ca) => ca);
+
+  console.log(mapeado);
 
   useEffect(() => {
-    dispatch(getCategorias());
+    dispatch(getCategoria());
     dispatch(getSubcategoria());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleButtonSUB = (e) => {
-    e.preventDefault();
-    setButtonSUB(!buttonSUB);
-  };
+  // const handleButtonSUB = (e) => {
+  //   e.preventDefault();
+  //   setButtonSUB(!buttonSUB);
+  // };
+
+  const [cate, setCate] = useState({
+    nombre_categoria: "",
+    descripcion: "",
+    id: null,
+  });
 
   const [subcate, setSubcate] = useState({
     nombre_subcategoria: "",
@@ -37,18 +43,28 @@ function Subcate({ setSwitcher }) {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
+    if (name === "nombre_categoria") {
+      var ca = categoria.find((f) => f.nombre_categoria === e.target.value);
+      var final = ca.id;
+      setCate({
+        ...cate,
+        [name]: target.value,
+        id: final,
+      });
+    }
 
     if (name === "nombre_subcategoria") {
+      var ca = categoria.find((f) => f.nombre_categoria === e.target.value);
+      var final = cate.id;
       setSubcate({
         ...subcate,
-        // categoriumId: target.value,
+        categoriumId: final,
         [name]: target.value,
       });
     }
     if (name === "descripcion") {
       setSubcate({
         ...subcate,
-        // categoriumId: target.value,
         [name]: target.value,
       });
     }
@@ -71,6 +87,11 @@ function Subcate({ setSwitcher }) {
       return;
     }
 
+    if (!categoria.includes(subcate.nombre_subcategoria)) {
+      alert("Sub-Categoría de producto existente");
+      return;
+    }
+
     dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
@@ -87,83 +108,55 @@ function Subcate({ setSwitcher }) {
     <>
       <div className="divSUB">
         <h6 id="title3">Sub-Categoría</h6>
-        <button className="btn6" onClick={handleButtonSUB}>
-          Seleccionar Sub-Categoría
-        </button>
-        <button className="btn6" onClick={handleButtonSUB}>
-          Agregar Sub-Categoría
-        </button>
-        {buttonSUB ? (
-          <form
-            // id="survey-form"
-            className="formSUB"
-            noValidate
-            onChange={(e) => ChangeInput(e)}
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="divFormCAT">
-              <div>
-                <label className="text-label">Sub-Categoría</label>
-                <select
-                  name="nombre_categoria"
-                  className="selectTransAgregar"
-                  value={subcate.nombre_categoria}
-                  onChange={(e) => ChangeInput(e)}
-                >
-                  {subcategoria.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.nombre_subcategoria}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        <form
+          className="formSUB"
+          noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="divFormCAT">
+            <div>
+              <label className="text-label">Categoría</label>
+              <select
+                name="nombre_categoria"
+                className="selectTransAgregar"
+                value={cate.nombre_categoria}
+                onChange={(e) => ChangeInput(e)}
+              >
+                {categoria.map((f) => (
+                  <option value={f.nombre_categoria}>
+                    {f.nombre_categoria}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div className="divForm">
-              <div>
-                <label className="text-label-desc">* Descripción</label>
-                <input
-                  className="btm-desc"
-                  type="text"
-                  name="descripcion"
-                  value={subcate.descripcion}
-                ></input>
-              </div>
+          </div>
+          <div className="divFormCAT">
+            <div>
+              <label className="text-label">Sub-Categoría</label>
+              <input
+                value={subcate.nombre_subcategoria}
+                name={"nombre_subcategoria"}
+                className="inp"
+                placeholder="Agregar Sub-Categoría"
+              ></input>
             </div>
-            <button type="submit">Agregar</button>
-          </form>
-        ) : (
-          <form
-            // id="survey-form"
-            className="formSUB"
-            noValidate
-            onChange={(e) => ChangeInput(e)}
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="divFormCAT">
-              <div>
-                <label className="text-label">Sub-Categoría</label>
-                <input
-                  value={subcate.nombre_subcategoria}
-                  name={"nombre_subcategoria"}
-                  className="inp"
-                  placeholder="Agregar Sub-Categoría"
-                ></input>
-              </div>
+          </div>
+          <div className="divForm">
+            <div>
+              <label className="text-label-desc">* Descripción</label>
+              <input
+                className="btm-desc"
+                type="text"
+                name="descripcion"
+                value={subcate.descripcion}
+              ></input>
             </div>
-            <div className="divForm">
-              <div>
-                <label className="text-label-desc">* Descripción</label>
-                <input
-                  className="btm-desc"
-                  type="text"
-                  name="descripcion"
-                  value={subcate.descripcion}
-                ></input>
-              </div>
-            </div>
-            <button type="submit">Agregar</button>
-          </form>
-        )}
+          </div>
+          <button className="btn6" type="submit">
+            Agregar Sub-Categoría
+          </button>
+        </form>
       </div>
     </>
   );

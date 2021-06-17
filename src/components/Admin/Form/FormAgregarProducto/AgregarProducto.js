@@ -11,7 +11,6 @@ import "./AgregarProducto.css";
 
 function FormAgregarProducto() {
   const dispatch = useDispatch();
-  // const contenido_neto = useSelector((store) => store.contenido_neto);
 
   useEffect(() => {
     dispatch(getSubcategoria());
@@ -172,7 +171,9 @@ function FormAgregarProducto() {
                 value={state.subcategoriumId}
               ></input> */}
             </div>
-            <button type="submit">Agregar Producto</button>
+            <button className="btn" type="submit">
+              Agregar
+            </button>
           </div>
         </form>
       </div>

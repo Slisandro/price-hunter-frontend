@@ -20,23 +20,19 @@
 }
 
 .divFAM {
-  margin-top: 11rem;
   margin-right: 35rem;
   background-color: transparent;
   border-radius: 10rem;
-  height: 135vh;
   width: 45%;
-  padding: 20px 50px;
 }
 
 .formFAM {
-  margin-top: 1rem;
   margin-left: -3rem;
   background-color: transparent;
   border-radius: 10rem;
   height: 135vh;
   width: 100%;
-  padding: 20px 50px;
+  padding: 0 10rem 1rem 3rem;
 }
 
 .divCAT {
@@ -91,7 +87,7 @@ header {
 
 #title2 {
   font-size: 1.3rem;
-  margin: 2rem 50rem 1rem 0;
+
   color: var(--clr-primary-5);
 }
 
