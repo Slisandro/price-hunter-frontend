@@ -72,8 +72,7 @@ function FormTransaccion() {
                 type="text"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
-              ></input>{" "}
-              */}
+              ></input>
               <select
                 className="selectTransAgregar"
                 name="tipo_transaccion"
@@ -83,7 +82,6 @@ function FormTransaccion() {
                 <option value={state.tipo_transaccion}>Puntos Ganados</option>
                 <option value={state.tipo_transaccion}>Puntos Retirados</option>
               </select>{" "}
-              */}
             </div>
             {/* <div>
                 <ul className="ulubi">
