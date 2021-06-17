@@ -11,6 +11,7 @@
     width: 40%;
     height: 70%;
     border-radius: 1em;
+    z-index: 1000;
 }
 
 .FormPostPrice .closeModal {

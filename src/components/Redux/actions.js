@@ -14,6 +14,10 @@ export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
 
+export const GET_DESAFIOS = "GET_DESAFIOS";
+
+export const PRICE = "PRICE";
+
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
   return function(dispatch) {
@@ -424,6 +428,24 @@ export function productoPost(objeto) {
   };
 }
 
+
+
+
+// 
+export function pricePost(objeto) {
+  return function(dispatch) {
+    axios.post(`localhost:3001/precios`, objeto)
+    .then(resp => resp.json())
+    .then(json => {
+      console.log(json)
+      dispatch({
+        type: PRICE,
+        payload: json
+      })
+    })
+  }
+}
+
 //_____________________ GET _____________________//
 
 export const GET_FAMILIA = "GET_FAMILIA";
@@ -448,5 +470,19 @@ export function getCategoria() {
         payload: response.data,
       });
     });
+  };
+}
+
+export function getDesafios() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/detalledesafio";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_DESAFIOS,
+          payload: json,
+        });
+      });
   };
 }

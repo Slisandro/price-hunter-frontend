@@ -23,6 +23,8 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
+  GET_DESAFIOS,
+  PRICE
 } from "./actions";
 
 const initialState = {
@@ -126,6 +128,7 @@ const initialState = {
     subcategoriumId: 100,
     //--------------------------------
   },
+  desafios: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -136,13 +139,11 @@ function rootReducer(state = initialState, action) {
         categorias: action.payload,
       };
     case GET_PRODUCTOS_NAME:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
       };
     case GET_SUBCATEGORIAS_ID:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
@@ -250,7 +251,14 @@ function rootReducer(state = initialState, action) {
         ...state,
         categoria: action.payload,
       };
-
+    case GET_DESAFIOS:
+      return {
+        ...state,
+        desafios: action.payload,
+      };
+    case PRICE: 
+      console.log("red")
+      return;
     default:
       return state;
   }
