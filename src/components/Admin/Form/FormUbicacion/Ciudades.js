@@ -60,7 +60,9 @@ function Ciudades() {
               value={ciudad.ciudad}
             ></input>
           </div>
-          <button type="submit">Agregar</button>
+          <button className="btn4" type="submit">
+            Agregar
+          </button>
         </div>
       </form>
     </div>

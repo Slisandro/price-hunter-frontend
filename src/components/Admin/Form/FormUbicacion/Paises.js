@@ -64,23 +64,25 @@ function Paises() {
     <div>
       <form
         id="survey-form"
-        className="form"
+        // className="form"
         noValidate
         onChange={(e) => ChangeInput(e)}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className="divForm">
-          <div>
-            <label className="text-label">País</label>
-            <input
-              className="btm"
-              type="text"
-              name="nombre_pais"
-              value={pais.nombre_pais}
-            ></input>
-          </div>
-          <button type="submit">Agregar</button>
+        {/* <div className="divFormPAI"> */}
+        <div>
+          <label className="text-label">País</label>
+          <input
+            className="btm"
+            type="text"
+            name="nombre_pais"
+            value={pais.nombre_pais}
+          ></input>
         </div>
+        <button className="btn4" type="submit">
+          Agregar
+        </button>
+        {/* </div> */}
       </form>
     </div>
   );

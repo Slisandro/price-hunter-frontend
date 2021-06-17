@@ -22,7 +22,7 @@ function FormTransaccion() {
         ...state,
         [name]: target.value,
       });
-    } 
+    }
   };
 
   // useEffect(() => {
@@ -72,16 +72,18 @@ function FormTransaccion() {
                 type="text"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
-              ></input>
-              {/* <select
-                className="selectTrans"
+              ></input>{" "}
+              */}
+              <select
+                className="selectTransAgregar"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
                 onChange={(e) => ChangeInput(e)}
               >
                 <option value={state.tipo_transaccion}>Puntos Ganados</option>
                 <option value={state.tipo_transaccion}>Puntos Retirados</option>
-              </select> */}
+              </select>{" "}
+              */}
             </div>
             {/* <div>
                 <ul className="ulubi">
@@ -98,7 +100,9 @@ function FormTransaccion() {
                   ))}
                 </ul>
               </div> */}
-            <button type="submit">Agregar</button>
+            <button className="btn4" type="submit">
+              Agregar
+            </button>
           </div>
         </form>
       </div>
