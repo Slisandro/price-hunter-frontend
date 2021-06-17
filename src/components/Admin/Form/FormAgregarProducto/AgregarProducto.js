@@ -25,7 +25,7 @@ function FormAgregarProducto() {
   const [state, setState] = useState({
     nombre: "",
     contenido_neto: "",
-    unidad_de_medida: "",
+    unidadMedidaCodigoUnidadMedida: "",
     subcategoriumId: "",
   });
 
@@ -44,7 +44,7 @@ function FormAgregarProducto() {
         ...state,
         [name]: target.value,
       });
-    } else if (name === "unidad_de_medida") {
+    } else if (name === "unidadMedidaCodigoUnidadMedida") {
       setState({
         ...state,
         [name]: target.value,
@@ -68,7 +68,8 @@ function FormAgregarProducto() {
     const nuevoProducto = {
       nombre: state.nombre,
       contenido_neto: state.contenido_neto,
-      unidadMedidaCodigoUnidadMedida: state.unidad_de_medida,
+
+      unidadMedidaCodigoUnidadMedida: state.unidadMedidaCodigoUnidadMedida,
       subcategoriumId: state.subcategoriumId,
     };
 
@@ -101,7 +102,7 @@ function FormAgregarProducto() {
     setState({
       nombre: "",
       subcategoriumId: "",
-      unidad_de_medida: "",
+      unidadMedidaCodigoUnidadMedida: "",
       contenido_neto: "",
     });
   };
@@ -146,9 +147,7 @@ function FormAgregarProducto() {
               {/* <input
                 className="btm"
                 type="text"
-                name="unidad_de_medida"
-                value={state.unidad_de_medida}
-              ></input> */}
+ */}
             </div>
             <div>
               <label className="text-label">Contenido Neto</label>
