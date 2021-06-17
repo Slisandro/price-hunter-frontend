@@ -18,7 +18,7 @@ const Aside= () => {
                 <div className="account-title">Cerrar Sesion</div>
             </div>
 
-            <div className="account card card1">
+            <div className="account cardAside card1">
                 <div className="user-card">Tienes 8678 hunterCoins</div>
                 <div className="user-income">Precios cazados: 25</div>
                 <p className="user-info">*********************</p>

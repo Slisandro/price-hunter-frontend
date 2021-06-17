@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import {} from "../../Redux/actions";
-// import { Link } from "react-router-dom";
-// import logo from "../../assets/aguila.png";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { monedaPost } from "../../../Redux/actions";
+
 import "./FormMonedaYum.css";
 
 function FormMonedaYum() {
   const dispatch = useDispatch();
-  const ubicaciones = useSelector((store) => store.ubicaciones);
 
   const [state, setState] = useState({
     codigo_moneda: "",
@@ -18,13 +16,19 @@ function FormMonedaYum() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    if (name === "ubicacion") {
-      const arr = state[name];
+    console.log(name);
+
+    if (name === "codigo_moneda") {
       setState({
         ...state,
-        [name]: arr.concat(target.value),
+        [name]: target.value,
       });
-    } else {
+    } else if (name === "nombre_moneda") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    } else if (name === "simbolo") {
       setState({
         ...state,
         [name]: target.value,
@@ -32,35 +36,48 @@ function FormMonedaYum() {
     }
   };
 
-  useEffect(() => {
-    // dispatch(getUbicaciones());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const nuevaMonedaYum = {
-      moneda: state.moneda,
-      unidad_medida: state.unidad_medida,
+    const nuevaMoneda = {
+      codigo_moneda: state.codigo_moneda.toLocaleUpperCase(),
+      nombre_moneda: state.nombre_moneda,
+      simbolo: state.simbolo,
     };
 
-    if (!nuevaMonedaYum.unidad_de_medida) {
-      alert("Por favor, ingrese una unidad de medida");
+    if (!nuevaMoneda.codigo_moneda) {
+      alert("Por favor, ingrese el codigo de la moneda");
       return;
     }
-    if (!nuevaMonedaYum.moneda) {
-      alert("Por favor, ingrese una moneda");
+    if (nuevaMoneda.codigo_moneda.length !== 3) {
+      alert("Debe ingresar 3 letras...");
+      return;
+    }
+    if (!isNaN(parseInt(nuevaMoneda.codigo_moneda))) {
+      alert("El codigo solo puede contener letras");
+      return;
+    }
+    if (!nuevaMoneda.nombre_moneda) {
+      alert("Por favor, ingrese el nombre de la moneda");
+      return;
+    }
+    if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
+      alert("El nombre solo puede contener letras");
+      return;
+    }
+    if (!nuevaMoneda.simbolo) {
+      alert("Por favor, ingrese el simbolo de la moneda");
       return;
     }
 
-    // dispatch(crearProducto(nuevoProducto));
+    dispatch(monedaPost(nuevaMoneda));
     e.target.reset();
-    alert("Moneda y Unidad de Medida agregadas con éxito!");
+    alert("La Moneda fue agregada con éxito!");
 
     setState({
-      unidad_de_medida: null,
-      moneda: null,
+      codigo_moneda: "",
+      nombre_moneda: "",
+      simbolo: "",
     });
   };
 
@@ -68,7 +85,7 @@ function FormMonedaYum() {
     <>
       <div className="containerForm">
         <header>
-          <h1 id="title">Agregar Moneda y Unidad de Medida</h1>
+          <h1 id="title">Agregar Moneda</h1>
         </header>
         <form
           id="survey-form"
@@ -79,38 +96,32 @@ function FormMonedaYum() {
         >
           <div className="divForm">
             <div>
-              <label className="text-label">Moneda</label>
+              <label className="text-label">Codigo de Moneda</label>
               <input
                 className="btm"
                 type="text"
-                name="moneda"
-                value={state.moneda}
+                name="codigo_moneda"
+                value={state.codigo_moneda}
               ></input>
             </div>
             <div>
-              <label className="text-label">Unidad de Medida</label>
+              <label className="text-label">Nombre de la Moneda</label>
               <input
                 className="btm"
                 type="text"
-                name="unidad_de_medida"
-                value={state.unidad_de_medida}
+                name="nombre_moneda"
+                value={state.nombre_moneda}
               ></input>
             </div>
-            {/* <div>
-                <ul className="ulubi">
-                  {ubicaciones.map((t) => (
-                    <li key={t.id}>
-                      <input
-                        className="input"
-                        type="checkbox"
-                        name="ubicacion"
-                        value={t.nombre}
-                      ></input>
-                      <label nombre={t}>{t.nombre}</label>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
+            <div>
+              <label className="text-label">Simbolo</label>
+              <input
+                className="btm"
+                type="text"
+                name="simbolo"
+                value={state.simbolo}
+              ></input>
+            </div>
             <button type="submit">Agregar</button>
           </div>
         </form>

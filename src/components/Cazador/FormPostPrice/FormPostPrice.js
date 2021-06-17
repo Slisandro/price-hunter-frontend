@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import axios from 'axios'
 
 var geolocation = require('geolocation');
 
-function FormPostPrice() {
-    const [errors, setErrors] = useState({});
+function FormPostPrice({ setModal, modal, desafio }) {
+    const [errors, setErrors] = useState({
+        nombre_negocio: true,
+        direccion_negocio: true,
+        precio: true,
+    });
 
     const [state, setState] = useState({
         latitud: "",
@@ -40,24 +45,33 @@ function FormPostPrice() {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        geolocation.getCurrentPosition((err, position) => {
+        await geolocation.getCurrentPosition((err, position) => {
             if (err) throw err
             setState({
                 ...state,
                 latitud: position.coords.latitude,
-                longitud: position.coords.longitude
+                longitud: position.coords.longitude,
+                desafioId: desafio
             })
-            // PREGUNTAR
-            console.log(state) //POST
+            // console.log(state) //POST
+            if (Object.values(errors).filter(x => x === true).length === 0) {
+                console.log("sin error")
+                // axios.post(`ruta`, state)
+                // .then(resp => resp.json())
+                // .then(json => console.log(json.msj))  // Acá me trae el mensaje si se posteo correctamente o no 
+            // Y deberia mostrarlo en un modal con el msj y setear el state
+            } else {
+                console.log("con error")
+            }
         })
-
     }
 
     return (
         <form className="FormPostPrice" onSubmit={handleSubmit}>
+            <button className="closeModal" onClick={e => setModal(!modal)}>X</button>
             <Form.Group>
                 <Form.Label className="label">Nombre del negocio</Form.Label>
                 <Form.Control
@@ -97,20 +111,6 @@ function FormPostPrice() {
                     className="control"
                 />
                 <Form.Text className={errors.precio ? "errors" : "p"}>
-                    Este campo no puede estar vacío y debe ser un número
-                </Form.Text>
-            </Form.Group>
-            <Form.Group>
-                <Form.Label className="label">Nombre del negocio</Form.Label>
-                <Form.Control
-                    name="desafioId"
-                    onChange={(e) => handleChange(e)}
-                    value={state.desafioId}
-                    type="text"
-                    placeholder="Ingresé desafioId"
-                    className="control"
-                />
-                <Form.Text className={errors.desafioId ? "errors" : "p"}>
                     Este campo no puede estar vacío y debe ser un número
                 </Form.Text>
             </Form.Group>
