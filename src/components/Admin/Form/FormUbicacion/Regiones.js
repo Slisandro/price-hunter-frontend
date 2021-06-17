@@ -53,7 +53,9 @@ function Regiones() {
               value={region.nombre_region}
             ></input>
           </div>
-          <button type="submit">Agregar</button>
+          <button className="btn4" type="submit">
+            Agregar
+          </button>
         </div>
       </form>
     </div>

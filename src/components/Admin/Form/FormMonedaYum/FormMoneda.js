@@ -16,7 +16,7 @@ function FormMoneda() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(name);
+    // console.log(name);
 
     if (name === "codigo_moneda") {
       setState({
@@ -122,14 +122,16 @@ function FormMoneda() {
                 value={state.simbolo}
               ></input>
             </div>
-            <button type="submit">Agregar</button>
+            <button className="btn" type="submit">
+              Agregar
+            </button>
           </div>
         </form>
       </div>
 
-      <div>
-      <header>
-          <h1 id="title">Agregar Uidad Medida</h1>
+      {/* <div>
+        <header>
+          <h1 id="title">Agregar Unidad Medida</h1>
         </header>
         <form
           id="survey-form"
@@ -166,11 +168,12 @@ function FormMoneda() {
                 value={state.simbolo}
               ></input>
             </div>
-            <button type="submit">Agregar</button>
+            <button className="btn" type="submit">
+              Agregar
+            </button>
           </div>
         </form>
-      </div>
-
+      </div> */}
     </>
   );
 }
