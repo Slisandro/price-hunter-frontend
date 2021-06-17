@@ -13,15 +13,12 @@ export const OBTENER_USUARIO = "OBTENER_USUARIO";
 export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
-
-
 export const GET_DESAFIOS = "GET_DESAFIOS";
 export const PRICE = "PRICE";
 export const GET_GENEROS = "GET_GENEROS";
 export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
 export const GET_PAISES = "GET_PAISES";
 export const GET_CIUDADES = "GET_CIUDADES";
-
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
@@ -532,7 +529,10 @@ export function getCategoria() {
   };
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
 export function getDesafios() {
   return function(dispatch) {
     let api = "http://localhost:3001/detalledesafio";

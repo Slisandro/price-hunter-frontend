@@ -149,10 +149,10 @@ const initialState = {
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
-  //-------------ADMIN-------------//
-
+  
 };
 
+//-------------ADMIN-------------//
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CATEGORIAS:
@@ -336,7 +336,10 @@ function rootReducer(state = initialState, action) {
         unidad_medida: action.payload,
       };
     //-------------ADMIN-------------//
+<<<<<<< HEAD
+=======
 
+>>>>>>> dfa67d7ededf8ae0022be405ad5fa30fbfb9888f
     default:
       return state;
   }
