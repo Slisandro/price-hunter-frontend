@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import MisDesafios from "../MisDesafios/MisDesafios";
 import NavBarMain from "../../navBarMain/NavBarMain";
 import Configuración from "../../configuración/Configuración";
+import Monedero from "../Monedero/Monedero"
 import Table from "../../Table.js";
 import "./Main.css";
 
@@ -35,6 +36,8 @@ const Main = ({ state, setState }) => {
             <MisDesafios setState={setState} />
           ) : state === "Configuracion" ? (
             <Configuración />
+          ) : state === "Movimientos" ? (
+            <Monedero />
           ) : null}
         </div>
       </div>
