@@ -25,6 +25,16 @@ import {
   GET_CATEGORIA,
   GET_DESAFIOS,
   PRICE
+  GET_SUBCATEGORIAS,
+  GET_UNIDAD_MEDIDAS,
+  GET_GENEROS,
+  GET_TIPO_USUARIO,
+  GET_PAISES,
+  GET_CIUDADES,
+  OBTENER_USUARIO,
+  CERRAR_SESION,
+  LOGIN_ERROR,
+  REGISTRO_ERROR,
 } from "./actions";
 
 const initialState = {
@@ -67,10 +77,18 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
+
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
+
+  generos: [],
+  tipo_usuarios: [],
+  paises: [],
+  ciudades: [],
   mensaje: null,
+
+  //-------------ADMIN-------------//
   admin: {},
   familia: [],
   categoria: [],
@@ -129,6 +147,10 @@ const initialState = {
     //--------------------------------
   },
   desafios: [],
+  subcategoria: [],
+  unidad_medida: [],
+  //-------------ADMIN-------------//
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -138,6 +160,27 @@ function rootReducer(state = initialState, action) {
         ...state,
         categorias: action.payload,
       };
+    case GET_GENEROS:
+      return {
+        ...state,
+        generos: action.payload,
+      };
+    case GET_TIPO_USUARIO:
+      return {
+        ...state,
+        tipo_usuarios: action.payload,
+      };
+    case GET_PAISES:
+      return {
+        ...state,
+        paises: action.payload,
+      };
+    case GET_CIUDADES:
+      return {
+        ...state,
+        ciudades: action.payload,
+      };
+
     case GET_PRODUCTOS_NAME:
       return {
         ...state,
@@ -166,6 +209,29 @@ function rootReducer(state = initialState, action) {
         mensaje: null,
         cargando: false,
       };
+
+    case OBTENER_USUARIO:
+      return {
+        ...state,
+        autenticado: true,
+        usuario: action.payload,
+        cargando: false,
+      };
+
+    case CERRAR_SESION:
+    case LOGIN_ERROR:
+    case REGISTRO_ERROR:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        usuario: null,
+        autenticado: null,
+        mensaje: action.payload,
+        cargando: false,
+      };
+
+    //-------------ADMIN-------------//
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -259,6 +325,18 @@ function rootReducer(state = initialState, action) {
     case PRICE: 
       console.log("red")
       return;
+    case GET_SUBCATEGORIAS:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_UNIDAD_MEDIDAS:
+      return {
+        ...state,
+        unidad_medida: action.payload,
+      };
+    //-------------ADMIN-------------//
+
     default:
       return state;
   }
