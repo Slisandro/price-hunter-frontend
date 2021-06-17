@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import MisDesafios from "../desafios/MisDesafios";
-import NavBarMain from "../navBarMain/NavBarMain";
-import Configuración from "../configuración/Configuración";
-import Table from "../Table.js";
+import MisDesafios from "../MisDesafios/MisDesafios";
+import NavBarMain from "../../navBarMain/NavBarMain";
+import Configuración from "../../configuración/Configuración";
+import Table from "../../Table.js";
 import "./Main.css";
 
 const Main = ({ state, setState }) => {
@@ -14,15 +14,13 @@ const Main = ({ state, setState }) => {
   return (
     <main className="main">
       <div className="main__container">
-        {state === "Desafios" ? null : (
-          <div className="main__title">
-            <NavBarMain
-              producto={producto}
-              setProducto={setProducto}
-              setState={setState}
-            />
-          </div>
-        )}
+        <div className="main__title">
+          <NavBarMain
+            producto={producto}
+            setProducto={setProducto}
+            setState={setState}
+          />
+        </div>
 
         <div className="containerTableSearch">
           {state === "Search" ? (

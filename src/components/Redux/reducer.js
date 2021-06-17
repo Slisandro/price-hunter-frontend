@@ -25,6 +25,8 @@ import {
   GET_CATEGORIA,
   GET_SUBCATEGORIA,
   GET_UNIDAD_MEDIDA,
+
+  GET_GENEROS, GET_TIPO_USUARIO, GET_PAISES, GET_CIUDADES, OBTENER_USUARIO, CERRAR_SESION,LOGIN_ERROR,REGISTRO_ERROR
 } from "./actions";
 
 const initialState = {
@@ -67,78 +69,59 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
+  
+
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
+
+
+  generos: [],
+  tipo_usuarios:[],
+  paises: [],
+  ciudades: [],
   mensaje: null,
+  
+  //-------------ADMIN-------------//
   admin: {},
   familia: [],
   categoria: [],
   subcategoria: [],
   unidad_medida: [],
-  //----------------------------------------
-  //         PRUEBA PARA POST ADMIN
-  obj: {
-    // codigo_alfa:"PRU",
-    // nombre_pais:"Prueba",
-    // regioneId: 3,
-    // monedaCodigoMoneda:"EUR"
-    // codigo_unidad_medida:"c3f",
-    // nombre_unidad: "centimetro cubicoo"
-    // tipo_usuario:"prueba"
-    // genero:"prueba"
-    // codigo_moneda:"EUR",
-    // nombre_moneda:"Euro",
-    // simbolo:"E"
-    // ciudad:"Chicago",
-    // paiseCodigoAlfa:"ARG"
-    // nombre_region:"Centro America"
-    // nombre_familia: "PRU",
-    // descripcion: "Prueba"
-    // nombre_categoria: "prueba",
-    // descripcion: "esta es una prueba"
-    // nombre_subcategoria: "prueba",
-    // descripcion: "prueba",
-    // categoriumId: 1,
-    //   tipo_transaccion:"prueba"
-    // observacion: "prueba",
-    // puntos: 100,
-    // usuarioId: 5,
-    // tipoTransaccionId: 3,
-    // razon_social: "Prueba S.R.L",
-    // nombre_cial_fantasia:"Prueba",
-    // cuit_nit_rut:"00000000",
-    // email:"prueba@mail.com",
-    // telefono:"000000000",
-    // direccion_fiscal:"prueba 55",
-    // metodo_pago:"Ctt Cte",
-    // banco:"Macro",
-    // numero_cuenta:"0000000",
-    // password:"prueba1234",
-    // ciudadId: 2,
-    // tipoUsuarioId: 1
-    // nombre_desafio: "desafio 1",
-    // descripcion_desafio: "buscar precios",
-    // fecha_inicial: "2021/01/20",
-    // fecha_final: "2021/01/20",
-    // url_image: "www.prueba.com",
-    // clienteId: 1,
-    // productoId: 2,
-    nombre: "prueba1",
-    contenido_neto: 100,
-    unidadMedidaCodigoUnidadMedida: "kg",
-    subcategoriumId: 100,
-    //--------------------------------
-  },
+  //-------------ADMIN-------------//
 };
+
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    
+    
     case GET_CATEGORIAS:
       return {
         ...state,
-        categorias: action.payload,
-      };
+        categorias: action.payload
+    }
+    case GET_GENEROS: 
+    return {
+      ...state,
+      generos: action.payload
+  }
+    case GET_TIPO_USUARIO: 
+    return {
+      ...state,
+      tipo_usuarios: action.payload
+    }
+    case GET_PAISES: 
+    return {
+      ...state,
+      paises: action.payload
+    }
+    case GET_CIUDADES: 
+    return {
+      ...state,
+      ciudades: action.payload
+    }
+
     case GET_PRODUCTOS_NAME:
       console.log(action.payload);
       return {
@@ -160,6 +143,8 @@ function rootReducer(state = initialState, action) {
         alerta: null,
       };
 
+
+      
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
@@ -169,6 +154,32 @@ function rootReducer(state = initialState, action) {
         mensaje: null,
         cargando: false,
       };
+
+      case OBTENER_USUARIO: 
+      return {
+          ...state,
+          autenticado: true,
+          usuario: action.payload, 
+          cargando: false
+      }
+
+    case CERRAR_SESION:
+    case LOGIN_ERROR:
+    case REGISTRO_ERROR:
+      localStorage.removeItem('token');
+      return {
+          ...state,
+          token: null,
+          usuario: null,
+          autenticado: null,
+          mensaje: action.payload, 
+          cargando: false
+    }
+
+
+
+
+//-------------ADMIN-------------//
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -264,7 +275,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         unidad_medida: action.payload,
       };
-
+//-------------ADMIN-------------//
     default:
       return state;
   }

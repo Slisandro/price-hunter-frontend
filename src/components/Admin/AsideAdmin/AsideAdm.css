@@ -41,7 +41,7 @@
   border-radius: var(--radius);
 }
 
-.card {
+.cardAdm {
   margin-top: 30px;
   background: #10163a;
   background: radial-gradient(circle, #37428d 0%, #13162f 100%);
