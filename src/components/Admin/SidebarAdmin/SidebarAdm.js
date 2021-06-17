@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SidebarAdm.css";
 import { Link } from "react-router-dom";
 import aguila from "../../../assets/aguila.png";
 
 const SidebarAdm = (props) => {
+  const [modal, setModal] = useState(false);
+
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <div className={props.sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -26,7 +32,10 @@ const SidebarAdm = (props) => {
           <i className="fa fa-user"></i>
           <button
             value={"Agregar Productos"}
-            onClick={() => props.setState("Agregar Productos")}
+            onClick={() => {
+              handleModal();
+              props.setState("Agregar Productos");
+            }}
           >
             Agregar Productos
           </button>
@@ -34,10 +43,19 @@ const SidebarAdm = (props) => {
         <div className="sidebar__link">
           <i className="fa fa-user"></i>
           <button
-            value={"Agregar Moneda y UM"}
-            onClick={() => props.setState("Agregar Moneda y UM")}
+            value={"Agregar Moneda"}
+            onClick={() => props.setState("Agregar Moneda")}
           >
-            Agregar Moneda y UM
+            Agregar Moneda
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-user"></i>
+          <button
+            value={"Agregar UM"}
+            onClick={() => props.setState("Agregar UM")}
+          >
+            Agregar UM
           </button>
         </div>
         <div className="sidebar__link">
@@ -53,9 +71,9 @@ const SidebarAdm = (props) => {
           <i className="fa fa-user"></i>
           <button
             value={"Agregar Sub-Categorías"}
-            onClick={() => props.setState("Agregar Sub-Categorías")}
+            onClick={() => props.setState("Agregar Familia y Categoría")}
           >
-            Agregar Sub-Categorías
+            Agregar Familia y Categoría
           </button>
         </div>
         <div className="sidebar__link">

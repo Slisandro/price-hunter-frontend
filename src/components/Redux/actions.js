@@ -13,10 +13,12 @@ export const OBTENER_USUARIO = "OBTENER_USUARIO";
 export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
-
 export const GET_DESAFIOS = "GET_DESAFIOS";
-
 export const PRICE = "PRICE";
+export const GET_GENEROS = "GET_GENEROS";
+export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
+export const GET_PAISES = "GET_PAISES";
+export const GET_CIUDADES = "GET_CIUDADES";
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
@@ -27,6 +29,35 @@ export function getCategorias() {
       .then((json) => {
         dispatch({
           type: GET_CATEGORIAS,
+          payload: json,
+        });
+      });
+  };
+}
+
+//ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
+export function getPaises() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/paises";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_PAISES,
+          payload: json,
+        });
+      });
+  };
+}
+
+export function getCiudades(id) {
+  return function(dispatch) {
+    let api = `http://localhost:3001/ciudades/${id}`;
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_CIUDADES,
           payload: json,
         });
       });
@@ -51,12 +82,42 @@ export function getSubcategoriasId(id) {
   // console.log(id, "ID")
   return function(dispatch) {
     axios.get(`http://localhost:3001/subcategoria/${id}`).then((r) => {
-      console.log(r.data);
+      console.log(r.data.data.token);
       dispatch({
         type: GET_SUBCATEGORIAS_ID,
         payload: r.data,
       });
     });
+  };
+}
+
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
+export function getGeneros() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/generos";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_GENEROS,
+          payload: json,
+        });
+      });
+  };
+}
+
+//ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
+export function getTipoUsuario() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/tipousuario";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_TIPO_USUARIO,
+          payload: json,
+        });
+      });
   };
 }
 
@@ -80,35 +141,28 @@ export function mostrarError(msg, categoria) {
 }
 
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
-export const registrarUsuario = async (datosUser) => {
-  try {
-    const respuesta = await axios.post(
-      "http://localhost:3001/usuarios/registro",
-      datosUser
-    );
-    console.log(respuesta.data);
-    return function(dispatch) {
-      dispatch({
-        type: REGISTRO_EXITOSO,
-        payload: respuesta.data,
-      });
-    };
-    // Obtener el usuario
-    // usuarioAutenticado();
-  } catch (error) {
-    console.log(error.response);
-    const alerta = {
-      msg: error.response.data.msg,
-      categoria: "alerta-error",
-    };
-    return function(dispatch) {
-      dispatch({
-        type: REGISTRO_ERROR,
-        payload: alerta,
-      });
-    };
-  }
-};
+export function registrarUsuario(datosUser) {
+  return function(dispatch) {
+    axios
+      .post("http://localhost:3001/usuarios/registro", datosUser)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+              type: MOSTRAR_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
+          : dispatch({
+              type: REGISTRO_EXITOSO,
+              payload: respuesta.data,
+            });
+      })
+      .catch((err) => console.log(err));
+  };
+}
 
 // Retorna el usuario autenticado
 export const usuarioAutenticado = async () => {
@@ -450,6 +504,8 @@ export function pricePost(objeto) {
 
 export const GET_FAMILIA = "GET_FAMILIA";
 export const GET_CATEGORIA = "GET_CATEGORIA";
+export const GET_SUBCATEGORIAS = "GET_SUBCATEGORIAS";
+export const GET_UNIDAD_MEDIDAS = "GET_UNIDAD_MEDIDAS";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -484,5 +540,29 @@ export function getDesafios() {
           payload: json,
         });
       });
+  };
+}
+
+export function getSubcategoria() {
+  return function(dispatch) {
+    axios
+      .get(`http://localhost:3001/getadmin/subcategoria`)
+      .then((response) => {
+        dispatch({
+          type: GET_SUBCATEGORIAS,
+          payload: response.data,
+        });
+      });
+  };
+}
+
+export function getUnidadMedida() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/um`).then((response) => {
+      dispatch({
+        type: GET_UNIDAD_MEDIDAS,
+        payload: response.data,
+      });
+    });
   };
 }
