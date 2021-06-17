@@ -99,7 +99,7 @@ function Fami({ setSwitcher }) {
                 <label className="text-label">Familia</label>
                 <select
                   name="nombre_familia"
-                  className="selectTrans"
+                  className="selectTransAgregar"
                   value={fam.nombre_familia}
                   onChange={(e) => ChangeInput(e)}
                 >

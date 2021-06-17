@@ -32,8 +32,6 @@ function FormAgregarProducto() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(name);
-    // console.log(e.target.value);
     if (name === "nombre") {
       setState({
         ...state,
@@ -56,11 +54,6 @@ function FormAgregarProducto() {
       });
     }
   };
-
-  useEffect(() => {
-    // dispatch(());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -130,24 +123,23 @@ function FormAgregarProducto() {
                 value={state.nombre}
               ></input>
             </div>
-            <div>
-              <label className="text-label">Unidad de Medida</label>
-              <select
-                name="unidad_de_medida"
-                // value={state.nombre}
-                onChange={(e) => ChangeInput(e)}
-              >
-                <option></option>
-                {unidad_medida.map((f, index) => (
-                  <option key={index} value={f.codigo_unidad_medida}>
-                    {f.codigo_unidad_medida}
-                  </option>
-                ))}
-              </select>
-              {/* <input
-                className="btm"
-                type="text"
- */}
+            <div className="divForm">
+              <div>
+                <label className="text-label">Unidad de Medida</label>
+                <select
+                  name="unidadMedidaCodigoUnidadMedida"
+                  className="selectTransAgregar"
+                  // value={state.nombre}
+                  onChange={(e) => ChangeInput(e)}
+                >
+                  <option></option>
+                  {unidad_medida.map((f, index) => (
+                    <option key={index} value={f.codigo_unidad_medida}>
+                      {f.codigo_unidad_medida}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div>
               <label className="text-label">Contenido Neto</label>
@@ -162,6 +154,7 @@ function FormAgregarProducto() {
               <label className="text-label">Sub-Categoría</label>
               <select
                 name="subcategoriumId"
+                className="selectTransAgregar"
                 // value={state.nombre}
                 onChange={(e) => ChangeInput(e)}
               >

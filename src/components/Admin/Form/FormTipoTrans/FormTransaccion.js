@@ -79,7 +79,7 @@ function FormTransaccion() {
                 value={state.tipo_transaccion}
               ></input> */}
               <select
-                className="selectTrans"
+                className="selectTransAgregar"
                 name="tipo_transaccion"
                 value={state.tipo_transaccion}
                 onChange={(e) => ChangeInput(e)}
