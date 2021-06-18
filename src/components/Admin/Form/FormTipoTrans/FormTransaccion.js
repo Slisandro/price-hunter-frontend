@@ -1,3 +1,4 @@
+
 import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { tipoTransaccionPost } from "../../../Redux/actions";
@@ -31,7 +32,6 @@ function FormTransaccion() {
 
   const submit = (data, e) => {
     dispatch(tipoTransaccionPost(state));
-
     e.target.reset();
     alert("Tipo de Transacción agregado con éxito!");
 

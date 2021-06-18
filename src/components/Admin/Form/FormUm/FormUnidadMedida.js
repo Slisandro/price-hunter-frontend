@@ -69,7 +69,7 @@ function FormUnidadMedida() {
 
   return (
     <>
-      <div className="containerForm">
+      <div className="contenedorFAM">
         <header>
           <h1 id="title">Agregar Unidad Medida</h1>
         </header>
@@ -83,7 +83,7 @@ function FormUnidadMedida() {
           <div>
             <label className="text-label">Nombre</label>
             <input
-              className="btm"
+              className="inp"
               type="text"
               name="nombre_unidad"
               value={state.nombre_unidad}
@@ -93,7 +93,7 @@ function FormUnidadMedida() {
             <div>
               <label className="text-label">Unidad de Medida</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="codigo_unidad_medida"
                 value={state.codigo_moneda}

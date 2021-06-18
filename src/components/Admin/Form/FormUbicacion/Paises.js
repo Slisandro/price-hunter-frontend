@@ -73,7 +73,7 @@ function Paises() {
         <div>
           <label className="text-label">País</label>
           <input
-            className="btm"
+            className="inp"
             type="text"
             name="nombre_pais"
             value={pais.nombre_pais}
