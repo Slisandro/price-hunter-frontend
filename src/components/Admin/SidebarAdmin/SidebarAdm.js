@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SidebarAdm.css";
 import { Link } from "react-router-dom";
 import aguila from "../../../assets/aguila.png";
 
 const SidebarAdm = (props) => {
+  const [modal, setModal] = useState(false);
+
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <div className={props.sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
       <div className="sidebar__title">
@@ -26,7 +32,10 @@ const SidebarAdm = (props) => {
           <i className="fa fa-user"></i>
           <button
             value={"Agregar Productos"}
-            onClick={() => props.setState("Agregar Productos")}
+            onClick={() => {
+              handleModal();
+              props.setState("Agregar Productos");
+            }}
           >
             Agregar Productos
           </button>

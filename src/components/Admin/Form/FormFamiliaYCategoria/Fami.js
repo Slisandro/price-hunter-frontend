@@ -7,17 +7,12 @@ function Fami({ setSwitcher }) {
   const [buttonFAM, setButtonFAM] = useState(false);
   const familia = useSelector((store) => store.familia);
 
-  console.log(familia);
+  var mapeado = familia.map((fa) => fa.nombre_familia);
 
   useEffect(() => {
     dispatch(getFamilia());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleButtonFAM = (e) => {
-    e.preventDefault();
-    setButtonFAM(!buttonFAM);
-  };
 
   const [fam, setFam] = useState({
     nombre_familia: "",
@@ -66,6 +61,11 @@ function Fami({ setSwitcher }) {
       return;
     }
 
+    if (!familia.includes(fam.nombre_familia)) {
+      alert("Familia de producto existente");
+      return;
+    }
+
     dispatch(familiaPost(nuevaFamilia));
 
     e.target.reset();
@@ -80,79 +80,38 @@ function Fami({ setSwitcher }) {
   return (
     <>
       <div className="divFAM">
-        <h6 id="title3">Familia</h6>
-        <button className="btn4" onClick={handleButtonFAM}>
-          Agregar Familia
-        </button>
-        <button className="btn4" onClick={handleButtonFAM}>
-          Familia Existente
-        </button>
-        {buttonFAM ? (
-          <form
-            className="formFAM"
-            noValidate
-            onChange={(e) => ChangeInput(e)}
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="divFormFAM">
-              <div>
-                <label className="text-label">Familia</label>
-                <select
-                  name="nombre_familia"
-                  className="selectTrans"
-                  value={fam.nombre_familia}
-                  onChange={(e) => ChangeInput(e)}
-                >
-                  {familia.map((f) => (
-                    <option value={f.nombre_familia}>{f.nombre_familia}</option>
-                  ))}
-                </select>
-              </div>
+        <h6 id="title2">Familia</h6>
+        <form
+          className="formFAM"
+          noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="divFormFAM">
+            <div>
+              <label className="text-label">Familia</label>
+              <input
+                name="agregar_familia"
+                className="inp"
+                placeholder="Agregar Familia"
+              ></input>
             </div>
-            <div className="divFormFAM">
-              <div>
-                <label className="text-label-desc">* Descripción</label>
-                <input
-                  className="btm-desc"
-                  type="text"
-                  name="descripcion"
-                  value={fam.descripcion}
-                ></input>
-              </div>
+          </div>
+          <div className="divFormFAM">
+            <div>
+              <label className="text-label-desc">* Descripción</label>
+              <input
+                className="btm-desc"
+                type="text"
+                name="descripcion"
+                value={fam.descripcion}
+              ></input>
             </div>
-            <button type="submit">Agregar</button>
-          </form>
-        ) : (
-          <form
-            className="formFAM"
-            noValidate
-            onChange={(e) => ChangeInput(e)}
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <div className="divFormFAM">
-              <div>
-                <label className="text-label">Familia</label>
-                <input
-                  name="agregar_familia"
-                  className="inp"
-                  placeholder="Agregar Familia"
-                ></input>
-              </div>
-            </div>
-            <div className="divFormFAM">
-              <div>
-                <label className="text-label-desc">* Descripción</label>
-                <input
-                  className="btm-desc"
-                  type="text"
-                  name="descripcion"
-                  value={fam.descripcion}
-                ></input>
-              </div>
-            </div>
-            <button type="submit">Agregar</button>
-          </form>
-        )}
+          </div>
+          <button className="btn4" type="submit">
+            Agregar Familia
+          </button>
+        </form>
       </div>
     </>
   );

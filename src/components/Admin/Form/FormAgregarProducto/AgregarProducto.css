@@ -109,3 +109,19 @@ header {
   border: none;
   cursor: pointer;
 }
+
+.selectTransAgregar {
+  color: black;
+  width: 10rem;
+  height: 2.2rem;
+  border-radius: var(--radius);
+  background-color: white;
+}
+
+/* .divFormAgregar {
+  background-color: green;
+} */
+
+/* .divAgregar {
+  width: 100%;
+} */

@@ -9,6 +9,7 @@ import FormUbicacion from "../Form/FormUbicacion/FormUbicacion";
 import FormTransaccion from "../Form/FormTipoTrans/FormTransaccion";
 import FormFyC from "../Form/FormFamiliaYCategoria/FormFyC";
 import FormAgregarProducto from "../Form/FormAgregarProducto/AgregarProducto";
+// import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
 import Form from "../Form/Form";
 import "./MainAdm.css";
 
@@ -16,6 +17,12 @@ const MainAdm = ({ state, setState }) => {
   const productos = useSelector((store) => store.productos);
   const subcategorias = useSelector((store) => store.subcategorias);
   const [producto, setProducto] = useState("");
+
+  const [mod, setMod] = useState(false);
+
+  const handleMod = () => {
+    setMod(!mod);
+  };
 
   return (
     <main className="main">

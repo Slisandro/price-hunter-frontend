@@ -17,7 +17,7 @@ function FormMoneda() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(name);
+    // console.log(name);
 
     if (name === "codigo_moneda") {
       setState({
@@ -188,7 +188,9 @@ function FormMoneda() {
               />
               <span className="err">{errors?.simbolo?.message}</span>
             </div>
-            <button type="submit">Agregar</button>
+            <button className="btn" type="submit">
+              Agregar
+            </button>
           </div>
         </form>
       </div>
