@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { monedaPost } from "../../../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { monedaPost, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
-
+  
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
@@ -45,37 +45,39 @@ function FormMoneda() {
     codigo_moneda: NaN,
   });
 
-  const submit = (data, e) => {
-    // e.preventDefault();
+  const alerta = useSelector((store) => store.alerta);
 
-    // const nuevaMoneda = {
-    //   codigo_moneda: state.codigo_moneda.toLocaleUpperCase(),
-    //   nombre_moneda: state.nombre_moneda,
-    //   simbolo: state.simbolo,
-    // };
+  const submit = (data, e) => {
+    e.preventDefault();
+
+    const nuevaMoneda = {
+      codigo_moneda: state.codigo_moneda.toLocaleUpperCase(),
+      nombre_moneda: state.nombre_moneda,
+      simbolo: state.simbolo,
+    };
 
     // if (!nuevaMoneda.codigo_moneda) {
-    //   alert("Por favor, ingrese el codigo de la moneda");
+    //   dispatch(mostrarError("Debe ingresar el codigo de la moneda", 'alerta-error'));
     //   return;
     // }
     // if (data.codigo_moneda.length !== 3) {
-    //   alert("Debe ingresar 3 letras...");
+    //   dispatch(mostrarError("Debe ingresar 3 letras",'alerta-error'));
     //   return;
     // }
     if (!isNaN(parseInt(data.codigo_moneda))) {
-      alert("El codigo solo puede contener letras");
+      dispatch(mostrarError('El codigo solo puede contener letras', 'alerta-error'));
       return;
     }
     // if (!nuevaMoneda.nombre_moneda) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
+    //   dispatch(mostrarError("Por favor, ingrese el nombre de la moneda", 'alerta-error'));
     //   return;
     // }
-    // if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
+    if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
+      dispatch(mostrarError("El nombre solo puede contener letras", 'alerta-error'));
+      return;
+    }
     // if (!nuevaMoneda.simbolo) {
-    //   alert("Por favor, ingrese el simbolo de la moneda");
+    //   dispatch(mostrarError("Por favor, ingrese el simbolo de la moneda", 'alerta-error'));
     //   return;
     // }
 
@@ -152,6 +154,7 @@ function FormMoneda() {
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
+           {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
           <div className="divForm">
             <div>
               <label className="text-label">Codigo de Moneda</label>
@@ -173,19 +176,17 @@ function FormMoneda() {
                     value: 3,
                     message: "El codigo debe tener tres letras!",
                   },
-                  // required: {
-                  //   value: NaN,
-                  //   message: 'El codigo no puede ser un numero'
-                  // }
                 })}
               />
+             
               <span className="err">{errors?.codigo_moneda?.message}</span>
             </div>
+           
             <div>
               <label className="text-label">Nombre de la Moneda</label>
               <input
                 className="btm"
-                type="text"
+                // type="text"
                 name="nombre_moneda"
                 autoComplete="off"
                 {...register("nombre_moneda", {
@@ -202,11 +203,7 @@ function FormMoneda() {
                     message:
                       "El nombre no puede tener maenos de dos caracteres!",
                   },
-                  // type: {
-                  //   value: NaN,
-                  //   message: 'El codigo no puede ser un numero'
-                  // }
-                })}
+                 })}
               />
               <span className="err">{errors?.nombre_moneda?.message}</span>
             </div>
@@ -230,10 +227,6 @@ function FormMoneda() {
                     value: 1,
                     message: "El codigo debe tener como minimo 1 letra!",
                   },
-                  // typeof: {
-                  //   value: 'Integer',
-                  //   message: 'El codigo no puede ser un numero'
-                  // }
                 })}
               />
               <span className="err">{errors?.simbolo?.message}</span>
