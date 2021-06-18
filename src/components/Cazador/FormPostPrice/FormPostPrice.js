@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { pricePost } from '../../Redux/actions'
+// import 
 
 var geolocation = require('geolocation');
 
-function FormPostPrice({ setModal, modal, desafio }) {
+function FormPostPrice({ setModal, modal, referencia }) {
+    const dispatch = useDispatch()
     const [errors, setErrors] = useState({
         nombre_negocio: true,
         direccion_negocio: true,
@@ -50,24 +54,50 @@ function FormPostPrice({ setModal, modal, desafio }) {
 
         await geolocation.getCurrentPosition((err, position) => {
             if (err) throw err
-            setState({
-                ...state,
-                latitud: position.coords.latitude,
-                longitud: position.coords.longitude,
-                desafioId: desafio
-            })
-            // console.log(state) //POST
-            if (Object.values(errors).filter(x => x === true).length === 0) {
-                console.log("sin error")
-                // axios.post(`ruta`, state)
-                // .then(resp => resp.json())
-                // .then(json => console.log(json.msj))  // Acá me trae el mensaje si se posteo correctamente o no 
-            // Y deberia mostrarlo en un modal con el msj y setear el state
-            } else {
-                console.log("con error")
-            }
-        })
+            dispatch(pricePost(
+                {
+                    "latitud": "-34.78014081",
+                    "longitud": "-58.276012",
+                    "nombre_negocio": "prueba",
+                    "direccion_negocio": "av 1 mayo 53 - 25",
+                    "precio": 33,
+                    "desafioId": 1,
+                    "usuarioId": 1,
+                    "mtsTolera": 100
+                }
+            ))
+        })   
     }
+        // setState({
+        //     ...state,
+        //     latitud: position.coords.latitude,
+        //     longitud: position.coords.longitude,
+        //     desafioId: referencia.idDesafio,
+
+        // })
+        // console.log(state) //POST
+        // if (Object.values(errors).filter(x => x === true).length === 0) {
+        // axios.post(`localhost:3001/precios`, 
+        // {
+            //     "latitud": "-34.78014081",
+            //     "longitud": "-58.276012",
+            //     "nombre_negocio": "prueba",
+            //     "direccion_negocio": "av 1 mayo 53 - 25",
+            //     "precio": 33,
+            //     "desafioId": 1,
+            //     "usuarioId": 1,
+            //     "mtsTolera": 100
+            // }
+            // )
+            // .then(resp => resp.json())
+            // .then(json => console.log(json))
+            // axios.post(`ruta`, state)
+            // .then(resp => resp.json())
+            // .then(json => console.log(json.msj))  // Acá me trae el mensaje si se posteo correctamente o no 
+            // Y deberia mostrarlo en un modal con el msj y setear el state
+            // } else {
+            //     console.log("con error")
+            // 
 
     return (
         <form className="FormPostPrice" onSubmit={handleSubmit}>
