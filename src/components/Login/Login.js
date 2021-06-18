@@ -7,8 +7,8 @@ import "./Login.css";
 import aguila from "../../assets/aguila.png";
 import Twitter from '../../assets/twitter.png';
 import Google from '../../assets/google.png';
-import {iniciarSesion, mostrarError} from "../Redux/actions";
-import {useSelector, useDispatch} from 'react-redux';
+import { iniciarSesion, mostrarError } from "../Redux/actions";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -16,14 +16,14 @@ import {useSelector, useDispatch} from 'react-redux';
 
 
 const Login = (props) => {
-  
+
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
 
   const dispatch = useDispatch();
 
-/*****************************************************************************************************************************/
+  /*****************************************************************************************************************************/
 
 
 
@@ -32,24 +32,24 @@ const Login = (props) => {
   mostrar error, la cual va  mostrar el mensaje de error que viene del back y ademas, una categoria, que no es mas que una clase 
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
-    if(autenticado) {
-        props.history.push('/tablero');
+    if (autenticado) {
+      props.history.push('/tablero');
     }
-    if(mensaje) {
-        mostrarError(mensaje.msg, mensaje.categoria);
+    if (mensaje) {
+      mostrarError(mensaje.msg, mensaje.categoria);
     }
     // eslint-disable-next-line
-}, [mensaje, autenticado, props.history]);
+  }, [mensaje, autenticado, props.history]);
 
 
 
 
 
 
-/******************************************************************************************************************************/
+  /******************************************************************************************************************************/
 
-  
-const [user, guardarUser] = useState({
+
+  const [user, guardarUser] = useState({
     email: "",
     password: "",
   });

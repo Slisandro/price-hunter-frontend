@@ -241,6 +241,13 @@ export const cerrarSesion = () => {
 
 
 
+// Retorna el usuario autenticado
+export const usuarioAutenticado = async () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    // tokenAuth(token);
+  }
+*/}
 
 
 
