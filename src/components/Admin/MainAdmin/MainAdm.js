@@ -9,7 +9,7 @@ import FormUbicacion from "../Form/FormUbicacion/FormUbicacion";
 import FormTransaccion from "../Form/FormTipoTrans/FormTransaccion";
 import FormFyC from "../Form/FormFamiliaYCategoria/FormFyC";
 import FormAgregarProducto from "../Form/FormAgregarProducto/AgregarProducto";
-import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
+// import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
 import Form from "../Form/Form";
 import "./MainAdm.css";
 

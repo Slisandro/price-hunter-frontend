@@ -21,11 +21,7 @@ export default function CardsDesafios({ desafio, handleClickOpen }) {
                                 onClick={e => handleClickOpen(e)}
                                 class="btn"
                             >
-                                {/* <span
-                                    class="buy"
-                                > */}
-                                    Publicar precio
-                                {/* </span> */}
+                                Publicar precio
                             </button>
                         </div>
                     </div>
