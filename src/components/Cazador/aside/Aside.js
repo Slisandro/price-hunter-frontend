@@ -6,7 +6,7 @@ import "./Aside.css";
 const Aside= () => {
 
     return ( 
-        <div id="asideUser">
+        <div id="aside">
             <div className="account-profile">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Lionel_Messi_20180626_%28cropped%29.jpg" alt=""/>
                 <div className="blob-wrap">

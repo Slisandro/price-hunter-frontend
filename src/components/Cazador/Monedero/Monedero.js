@@ -3,8 +3,8 @@ import './Monedero.css';
 import axios from 'axios';
 
 function actualPoints(arr) {
-    const suma = arr.slice().filter(x => x.tipoTransaccionId === 1).reduce(((acc, cur) => acc + cur.puntos), 0);
-    const resta = arr.slice().filter(x => x.tipoTransaccionId === 2).reduce(((acc, cur) => acc + cur.puntos), 0);
+    const suma = arr.slice().filter(x => x.tipo_transaccion.id === 1).reduce(((acc, cur) => acc + cur.puntos), 0);
+    const resta = arr.slice().filter(x => x.tipo_transaccion.id === 2).reduce(((acc, cur) => acc + cur.puntos), 0);
     return suma - resta
 }
 
@@ -15,14 +15,14 @@ function Monedero() {
     useEffect(() => {
         axios.get(`http://localhost:3001/transacciones/${1}`)
         .then(json => {
-            console.log(json)
-            // setMovimientos(json)
+            console.log(json.data)
+            setMovimientos(json.data)
             setLoading(false);
         })
     }, [])
 
     return (
-        !loading ?
+        loading ?
             <div>Cargando movimientos...</div>
             :
             <div className="miMonedero">
@@ -36,10 +36,10 @@ function Monedero() {
                     <ul className="listTransaccion">
                         {movimiento.map(transaccion => {
                             return (
-                                <li className="transaccion">
+                                <li key={transaccion.id} className="transaccion">
                                     <p className="title">{transaccion.observacion}</p>
                                     {
-                                        transaccion.tipoTransaccionId === 2 ?
+                                        transaccion.tipo_transaccion.id === 2 ?
                                             <h2 className="puntos menos">- {transaccion.puntos}</h2> :
                                             <h2 className="puntos mas">+ {transaccion.puntos}</h2>
                                     }
