@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 export const GET_CATEGORIAS = "GET_CATEGORIAS";
 export const LOADING = "LOADING";
 export const GET_PRODUCTOS_NAME = "GET_PRODUCTOS_NAME";
@@ -70,34 +68,36 @@ export function getProductsByName(nombre) {
   return function(dispatch) {
     const token = localStorage.getItem("token");
     // axios.get("http://localhost:3001/productos?name=sal", { headers: { "Authorization": `Bearer ${token}` } })
-    axios.get(`http://localhost:3001/productos?name=${nombre}`, { headers: { "Authorization": `Bearer ${token}` } }).then((r) => {
-      console.log(r.data);
-      dispatch({
-        type: GET_PRODUCTOS_NAME,
-        payload: r.data,
+    axios
+      .get(`http://localhost:3001/productos?name=${nombre}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((r) => {
+        console.log(r.data);
+        dispatch({
+          type: GET_PRODUCTOS_NAME,
+          payload: r.data,
+        });
       });
-    });
   };
 }
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
-export function getSubcategoriasId(id) {     
-    const token = localStorage.getItem("token");
-    return function(dispatch) {
-        axios.get(`http://localhost:3001/subcategoria/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) 
-        .then(r => {                                               
-            dispatch({ 
-                type: GET_SUBCATEGORIAS_ID,
-                payload: r.data
-                
-            });
+export function getSubcategoriasId(id) {
+  const token = localStorage.getItem("token");
+  return function(dispatch) {
+    axios
+      .get(`http://localhost:3001/subcategoria/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((r) => {
+        dispatch({
+          type: GET_SUBCATEGORIAS_ID,
+          payload: r.data,
         });
-    }
-    
-};
-
-
-
+      });
+  };
+}
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
 export function getGeneros() {
@@ -114,9 +114,6 @@ export function getGeneros() {
   };
 }
 
-
-
-
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
 export function getTipoUsuario() {
   return function(dispatch) {
@@ -131,8 +128,6 @@ export function getTipoUsuario() {
       });
   };
 }
-
-
 
 //ACCION QUE DESPACHA DOS TYPES DIFERENTES: MOSTRAR ERROR Y OCULTAR ERROR LUEGO DE 5 SEGUNDOS.EJEMPLO: SI EL USUARIO NO COMPLETA LOS CAMPOS EN EL FORMULARIO DE
 //LOGIN, O COLOCA CONTRASEÑAS DIFERENTES, SE DESPACHA MOSTRAR ERROR Y LUEGO DE 5 SEG DESAPARECE EL MENSAJE.
@@ -153,93 +148,68 @@ export function mostrarError(msg, categoria) {
   };
 }
 
-
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
-export function registrarUsuario(datosUser) {     
-    return function(dispatch) { 
-        axios.post("http://localhost:3001/usuarios/registro", datosUser)
-        .then(respuesta => { 
-            console.log(respuesta)                                               
-            respuesta.data.msg ? (
-                dispatch({
-                    type: REGISTRO_ERROR,
-                    payload: {
-                        msg: respuesta.data.msg,
-                        categoria: "alerta-error"
-                    }
-                })
-                )
-                
-                :
-                
-                (
-                dispatch({ 
-                    type: REGISTRO_EXITOSO,
-                    payload:{
-                      token: respuesta.data.token,
-                      usuario: respuesta.data.user
-                    } 
-                    
-                    
-                })
-                )
-        }).catch(err => (console.log(err)))
-    }
-    
+export function registrarUsuario(datosUser) {
+  return function(dispatch) {
+    axios
+      .post("http://localhost:3001/usuarios/registro", datosUser)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+              type: REGISTRO_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
+          : dispatch({
+              type: REGISTRO_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.user,
+              },
+            });
+      })
+      .catch((err) => console.log(err));
+  };
 }
 
-
-
 // Cuando el usuario inicia sesión
-export function iniciarSesion(datos){
-  return function(dispatch) { 
-  axios.post("http://localhost:3001/usuarios/ingreso", datos)
-        .then(respuesta => { 
-            console.log(respuesta)                  
-            respuesta.data.msg ? (
-                dispatch({
-                    type: LOGIN_ERROR,
-                    payload: {
-                        msg: respuesta.data.msg,
-                        categoria: "alerta-error"
-                    }
-                })
-                )
-                
-                :
-                
-                (
-
-                dispatch({ 
-                    type: LOGIN_EXITOSO,
-                    payload:{
-                      token: respuesta.data.token,
-                      usuario: respuesta.data.user
-                    }
-                })
-                )
-                
-        }).catch(err => (console.log(err)))
-    }
-} 
-
-
+export function iniciarSesion(datos) {
+  return function(dispatch) {
+    axios
+      .post("http://localhost:3001/usuarios/ingreso", datos)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+              type: LOGIN_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
+          : dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.user,
+              },
+            });
+      })
+      .catch((err) => console.log(err));
+  };
+}
 
 // Cierra la sesión del usuario
 export const cerrarSesion = () => {
-  return function(dispatch) { 
-  dispatch({
-      type: CERRAR_SESION
-  })
-  
-
-  }
-}
-
-
-
-
-
+  return function(dispatch) {
+    dispatch({
+      type: CERRAR_SESION,
+    });
+  };
+};
 
 // Retorna el usuario autenticado
 export const usuarioAutenticado = async () => {
@@ -247,13 +217,7 @@ export const usuarioAutenticado = async () => {
   if (token) {
     // tokenAuth(token);
   }
-*/}
-
-
-
-
-
-
+};
 
 ////---------------  ADMIN ACTIONS ---------------////
 //_____________________ POST _____________________//
@@ -304,9 +268,6 @@ export function tipoUsuario(objeto) {
   };
 }
 
-
-
-
 export function generoPost(objeto) {
   return function(dispatch) {
     axios
@@ -322,10 +283,6 @@ export function generoPost(objeto) {
       });
   };
 }
-
-
-
-
 
 export function monedaPost(objeto) {
   return function(dispatch) {
@@ -345,10 +302,6 @@ export function monedaPost(objeto) {
   };
 }
 
-
-
-
-
 export function ciudadPost(objeto) {
   return function(dispatch) {
     axios
@@ -365,10 +318,6 @@ export function ciudadPost(objeto) {
       });
   };
 }
-
-
-
-
 
 export function paisPost(objeto) {
   return function(dispatch) {
@@ -387,11 +336,6 @@ export function paisPost(objeto) {
   };
 }
 
-
-
-
-
-
 export function regionPost(objeto) {
   return function(dispatch) {
     axios
@@ -407,10 +351,6 @@ export function regionPost(objeto) {
       });
   };
 }
-
-
-
-
 
 export function familiaPost(objeto) {
   return function(dispatch) {
@@ -428,11 +368,6 @@ export function familiaPost(objeto) {
       });
   };
 }
-
-
-
-
-
 
 export function categoriaPost(objeto) {
   return function(dispatch) {
@@ -452,11 +387,6 @@ export function categoriaPost(objeto) {
   };
 }
 
-
-
-
-
-
 export function subcategoriaPost(objeto) {
   return function(dispatch) {
     axios
@@ -475,14 +405,6 @@ export function subcategoriaPost(objeto) {
   };
 }
 
-
-
-
-
-
-
-
-
 export function tipoTransaccionPost(objeto) {
   return function(dispatch) {
     axios
@@ -498,15 +420,6 @@ export function tipoTransaccionPost(objeto) {
       });
   };
 }
-
-
-
-
-
-
-
-
-
 
 export function transaccionPost(objeto) {
   return function(dispatch) {
@@ -526,17 +439,6 @@ export function transaccionPost(objeto) {
       });
   };
 }
-
-
-
-
-
-
-
-
-
-
-
 
 export function clientesPost(objeto) {
   return function(dispatch) {
@@ -606,23 +508,20 @@ export function productoPost(objeto) {
       });
   };
 }
-
-
-
-
-// 
+//
 export function pricePost(objeto) {
   return function(dispatch) {
-    axios.post(`http://localhost:3001/precios`, objeto)
-    // .then(resp => resp.json())
-    .then(json => {
-      console.log(json)
-      dispatch({
-        type: PRICE,
-        payload: json
-      })
-    })
-  }
+    axios
+      .post(`http://localhost:3001/precios`, objeto)
+      // .then(resp => resp.json())
+      .then((json) => {
+        console.log(json);
+        dispatch({
+          type: PRICE,
+          payload: json,
+        });
+      });
+  };
 }
 
 //_____________________ GET _____________________//
@@ -631,6 +530,9 @@ export const GET_FAMILIA = "GET_FAMILIA";
 export const GET_CATEGORIA = "GET_CATEGORIA";
 export const GET_SUBCATEGORIAS = "GET_SUBCATEGORIAS";
 export const GET_UNIDAD_MEDIDAS = "GET_UNIDAD_MEDIDAS";
+export const GET_REGION = "GET_REGION";
+export const GET_PAIS = "GET_PAIS";
+export const GET_MONEDA = "GET_MONEDA";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -686,6 +588,39 @@ export function getUnidadMedida() {
     axios.get(`http://localhost:3001/getadmin/um`).then((response) => {
       dispatch({
         type: GET_UNIDAD_MEDIDAS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getRegion() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/region`).then((response) => {
+      dispatch({
+        type: GET_REGION,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getPais() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/pais`).then((response) => {
+      dispatch({
+        type: GET_PAIS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getMoneda() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/moneda`).then((response) => {
+      dispatch({
+        type: GET_MONEDA,
         payload: response.data,
       });
     });
