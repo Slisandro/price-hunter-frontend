@@ -1,19 +1,19 @@
 import axios from "axios";
 
+
+
 export const GET_CATEGORIAS = "GET_CATEGORIAS";
 export const LOADING = "LOADING";
 export const GET_PRODUCTOS_NAME = "GET_PRODUCTOS_NAME";
 export const GET_SUBCATEGORIAS_ID = "GET_SUBCATEGORIAS_ID";
 export const MOSTRAR_ERROR = "MOSTRAR_ERROR";
 export const OCULTAR_ERROR = "OCULTAR_ERROR";
-
 export const REGISTRO_EXITOSO = "REGISTRO_EXITOSO";
 export const REGISTRO_ERROR = "REGISTRO_ERROR";
 export const OBTENER_USUARIO = "OBTENER_USUARIO";
 export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
-
 export const GET_GENEROS = "GET_GENEROS";
 export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
 export const GET_PAISES = "GET_PAISES";
@@ -77,7 +77,9 @@ export function getCiudades(id) {
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
 export function getProductsByName(nombre) {
   return function(dispatch) {
-    axios.get(`http://localhost:3001/productos?name=${nombre}`).then((r) => {
+    const token = localStorage.getItem("token");
+    // axios.get("http://localhost:3001/productos?name=sal", { headers: { "Authorization": `Bearer ${token}` } })
+    axios.get(`http://localhost:3001/productos?name=${nombre}`, { headers: { "Authorization": `Bearer ${token}` } }).then((r) => {
       console.log(r.data);
       dispatch({
         type: GET_PRODUCTOS_NAME,
@@ -94,11 +96,10 @@ export function getProductsByName(nombre) {
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
 export function getSubcategoriasId(id) {     
-    // console.log(id, "ID")
-    return function(dispatch) { 
-        axios.get(`http://localhost:3001/subcategoria/${id}`)
-        .then(r => {   
-            console.log(r.data.data.token)                                             
+    const token = localStorage.getItem("token");
+    return function(dispatch) {
+        axios.get(`http://localhost:3001/subcategoria/${id}`, { headers: { "Authorization": `Bearer ${token}` } }) 
+        .then(r => {                                               
             dispatch({ 
                 type: GET_SUBCATEGORIAS_ID,
                 payload: r.data
@@ -108,6 +109,9 @@ export function getSubcategoriasId(id) {
     }
     
 };
+
+
+
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
 export function getGeneros() {     
@@ -125,6 +129,9 @@ export function getGeneros() {
     }
 };
 
+
+
+
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
 export function getTipoUsuario() {     
     return function(dispatch) { 
@@ -140,6 +147,8 @@ export function getTipoUsuario() {
     
     }
 };
+
+
 
 
 //ACCION QUE DESPACHA DOS TYPES DIFERENTES: MOSTRAR ERROR Y OCULTAR ERROR LUEGO DE 5 SEGUNDOS.EJEMPLO: SI EL USUARIO NO COMPLETA LOS CAMPOS EN EL FORMULARIO DE
@@ -162,39 +171,35 @@ export function mostrarError(msg, categoria) {
 }
 
 
-
-
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
 export function registrarUsuario(datosUser) {     
-    
-    
     return function(dispatch) { 
         axios.post("http://localhost:3001/usuarios/registro", datosUser)
         .then(respuesta => { 
-            console.log(respuesta)                                           
+            console.log(respuesta)                                               
             respuesta.data.msg ? (
-                
-
                 dispatch({
-                    type: MOSTRAR_ERROR,
+                    type: REGISTRO_ERROR,
                     payload: {
                         msg: respuesta.data.msg,
                         categoria: "alerta-error"
                     }
                 })
-
-                ):(
+                )
+                
+                :
+                
+                (
                 dispatch({ 
                     type: REGISTRO_EXITOSO,
-                    payload: respuesta.data
+                    payload:{
+                      token: respuesta.data.token,
+                      usuario: respuesta.data.user
+                    } 
+                    
                     
                 })
                 )
-
-
-
-
-
         }).catch(err => (console.log(err)))
     }
     
@@ -202,35 +207,63 @@ export function registrarUsuario(datosUser) {
 
 
 
+// Cuando el usuario inicia sesión
+export function iniciarSesion(datos){
+  return function(dispatch) { 
+  axios.post("http://localhost:3001/usuarios/ingreso", datos)
+        .then(respuesta => { 
+            console.log(respuesta)                  
+            respuesta.data.msg ? (
+                dispatch({
+                    type: LOGIN_ERROR,
+                    payload: {
+                        msg: respuesta.data.msg,
+                        categoria: "alerta-error"
+                    }
+                })
+                )
+                
+                :
+                
+                (
+
+                dispatch({ 
+                    type: LOGIN_EXITOSO,
+                    payload:{
+                      token: respuesta.data.token,
+                      usuario: respuesta.data.user
+                    }
+                })
+                )
+                
+        }).catch(err => (console.log(err)))
+    }
+} 
 
 
-// Retorna el usuario autenticado
-export const usuarioAutenticado = async () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    // tokenAuth(token);
+
+// Cierra la sesión del usuario
+export const cerrarSesion = () => {
+  return function(dispatch) { 
+  dispatch({
+      type: CERRAR_SESION
+  })
+  
+
   }
+}
 
-  try {
-    const respuesta = await axios.get(
-      "http://localhost:3001/usuarios/registro"
-    );
-    // console.log(respuesta);
-    return function(dispatch) {
-      dispatch({
-        type: OBTENER_USUARIO,
-        payload: respuesta.data.usuario,
-      });
-    };
-  } catch (error) {
-    console.log(error.response);
-    return function(dispatch) {
-      dispatch({
-        type: LOGIN_ERROR,
-      });
-    };
-  }
-};
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -298,6 +331,9 @@ export function tipoUsuario(objeto) {
   };
 }
 
+
+
+
 export function generoPost(objeto) {
   return function(dispatch) {
     axios
@@ -313,6 +349,8 @@ export function generoPost(objeto) {
       });
   };
 }
+
+
 
 
 
@@ -337,6 +375,7 @@ export function monedaPost(objeto) {
 
 
 
+
 export function ciudadPost(objeto) {
   return function(dispatch) {
     axios
@@ -354,6 +393,10 @@ export function ciudadPost(objeto) {
   };
 }
 
+
+
+
+
 export function paisPost(objeto) {
   return function(dispatch) {
     axios.post(`http://localhost:3001/admin/pais`, objeto).then((response) => {
@@ -370,6 +413,11 @@ export function paisPost(objeto) {
     });
   };
 }
+
+
+
+
+
 
 export function regionPost(objeto) {
   return function(dispatch) {
@@ -389,6 +437,8 @@ export function regionPost(objeto) {
 
 
 
+
+
 export function familiaPost(objeto) {
   return function(dispatch) {
     axios
@@ -405,6 +455,9 @@ export function familiaPost(objeto) {
       });
   };
 }
+
+
+
 
 
 
@@ -429,6 +482,8 @@ export function categoriaPost(objeto) {
 
 
 
+
+
 export function subcategoriaPost(objeto) {
   return function(dispatch) {
     axios
@@ -446,6 +501,12 @@ export function subcategoriaPost(objeto) {
       });
   };
 }
+
+
+
+
+
+
 
 
 
@@ -468,6 +529,12 @@ export function tipoTransaccionPost(objeto) {
 
 
 
+
+
+
+
+
+
 export function transaccionPost(objeto) {
   return function(dispatch) {
     axios
@@ -486,6 +553,13 @@ export function transaccionPost(objeto) {
       });
   };
 }
+
+
+
+
+
+
+
 
 
 

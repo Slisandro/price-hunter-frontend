@@ -39,6 +39,10 @@
   .account-title {
     font-size: 15px;
     color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+   
   }
 
 

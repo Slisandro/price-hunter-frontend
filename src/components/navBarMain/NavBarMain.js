@@ -8,6 +8,8 @@ function NavBarMain({producto, setProducto, setState}) {
 
     const dispatch = useDispatch();
 
+    const nombre = localStorage.getItem("nombre");
+
     useEffect(() => {
         dispatch(getCategorias())
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -41,7 +43,7 @@ function NavBarMain({producto, setProducto, setState}) {
                     </div>
     
                     <div className="main_welcome">
-                        <h1>Bienvenido, <span className="hunter"> cazador</span></h1>
+                        <h1>Bienvenido, <span className="hunter">{nombre}</span></h1>
                         <p>Administra aquí tus precios</p>
                     </div>
                 </div>

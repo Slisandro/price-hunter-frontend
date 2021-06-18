@@ -13,6 +13,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 import TableroEmpresa from "./components/TableroEmpresas/TableroEmpresa";
 import AdminPage from "./components/Admin/AdminPage";
+import RutaPrivada from "./RutaPrivada";
+
+
+
 
 function App() {
   return (
@@ -26,7 +30,7 @@ function App() {
         <Route exact path="/Servicios" component={Servicios} />
         <Route exact path="/Ayuda" component={Ayuda} />
         <Route path="/login" component={Login} />
-        <Route path="/tablero" component={Tablero} />
+        <RutaPrivada path="/tablero" component={Tablero} />
         <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />

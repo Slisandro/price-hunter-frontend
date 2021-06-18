@@ -23,7 +23,13 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
-  GET_GENEROS, GET_TIPO_USUARIO, GET_PAISES, GET_CIUDADES, OBTENER_USUARIO, CERRAR_SESION,LOGIN_ERROR,REGISTRO_ERROR
+  GET_GENEROS, 
+  GET_TIPO_USUARIO,
+  GET_PAISES, 
+  GET_CIUDADES, 
+  CERRAR_SESION,
+  LOGIN_ERROR,
+  REGISTRO_ERROR
 } from "./actions";
 
 const initialState = {
@@ -67,17 +73,18 @@ const initialState = {
   subcategorias: [],
   alerta: null,
   
-
+  /*Estados para la autenticacion*/
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
+  mensaje: null,
+  /******************************* */
 
 
   generos: [],
   tipo_usuarios:[],
   paises: [],
   ciudades: [],
-  mensaje: null,
   admin: {},
   familia: [],
   categoria: [],
@@ -173,7 +180,6 @@ function rootReducer(state = initialState, action) {
       ...state,
       ciudades: action.payload
     }
-
     case GET_PRODUCTOS_NAME:
       console.log(action.payload);
       return {
@@ -200,38 +206,28 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("nombre", action.payload.usuario.nombre);
+      
       return {
         ...state,
         autenticado: true,
+        usuario: null,
         mensaje: null,
-        cargando: false,
+      
       };
-
-      case OBTENER_USUARIO: 
-      return {
-          ...state,
-          autenticado: true,
-          usuario: action.payload, 
-          cargando: false
-      }
-
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
       localStorage.removeItem('token');
+      localStorage.removeItem('nombre')
       return {
           ...state,
           token: null,
           usuario: null,
-          autenticado: null,
+          autenticado: null ,
           mensaje: action.payload, 
-          cargando: false
-    }
-
-
-
-
-
+          
+    };
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -317,7 +313,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         categoria: action.payload,
       };
-
     default:
       return state;
   }
