@@ -28,18 +28,14 @@
 
 
    
-.contenedor{
+.contenedorTableroUser{
     margin: 0% !important;
     font-family: 'Catamaran', sans-serif !important;
-    display: grid;
     height: 100vh;
-    grid-template-columns: 0.3fr 1fr 1fr 0.5fr;
-    grid-template-rows: 0.2fr 3fr;
-    grid-template-areas:
-    "sidebar nav nav nav"
-    "sidebar main main aside";
-   
-  
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   

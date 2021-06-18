@@ -25,7 +25,7 @@ function NavBarMain({producto, setProducto, setState}) {
     const handleChange = (e) => {
         setProducto(e.target.value)
     }
-
+    console.log(categorias)
     return (
         <>
         

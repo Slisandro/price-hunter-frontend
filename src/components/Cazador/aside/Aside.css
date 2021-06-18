@@ -1,16 +1,14 @@
-
-#aside{
-    background: #24244b;
-    grid-area: aside;
-    overflow-y:hidden;
-    padding: 15px;
-    -webkit-transition: all 0.5s;
-    border-bottom-left-radius: 15px;
-    transition: all 0.5s;
-    border-right: 1px solid #ffffff;
-    font-family: 'Catamaran', sans-serif !important;
-    z-index: 1000;
-    
+#asideUser{
+  background: #24244b;
+  grid-area: aside;
+  overflow-y: hidden;
+  transition: all 0.5s;
+  border-right: 1px solid #ffffff;
+  font-family: 'Catamaran', sans-serif !important;
+  width: 20%;
+  height: 100%;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
 }
 
 .account-profile {

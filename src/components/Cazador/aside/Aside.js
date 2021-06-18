@@ -16,7 +16,7 @@ const Aside= (props) => {
 
 
     return ( 
-        <div id="aside">
+        <div id="asideUser">
             <div className="account-profile">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Lionel_Messi_20180626_%28cropped%29.jpg" alt=""/>
                 <div className="blob-wrap">
