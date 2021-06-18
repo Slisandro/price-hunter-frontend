@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 // import { Button } from 'react-bootstrap';
 // import {useSelector, useDispatch} from 'react-redux';
 import { Link } from "react-router-dom";
-import './Login.css'
+import "./Login.css";
 import aguila from "../../assets/aguila.png";
 import Twitter from '../../assets/twitter.png';
 import Google from '../../assets/google.png';
@@ -51,9 +51,8 @@ const Login = (props) => {
   
 const [user, guardarUser] = useState({
     email: "",
-    password: ""
-
-  })
+    password: "",
+  });
   const { email, password } = user;
 
     const handleInputLogin = e => {
@@ -82,9 +81,7 @@ const [user, guardarUser] = useState({
   
 
 
-    
-    return (
-    
+  return (
     <section className="login">
           <section className="login__container">
               <img src={aguila} alt="" className="logo__login" />
@@ -136,12 +133,7 @@ const [user, guardarUser] = useState({
           
           </section>
     </section>
-
-  )
-}
-
-
-
-
+  );
+};
 
 export default Login;

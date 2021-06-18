@@ -23,13 +23,18 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
-  GET_GENEROS, 
+  GET_DESAFIOS,
+  PRICE,
+  GET_SUBCATEGORIAS,
+  GET_UNIDAD_MEDIDAS,
+  GET_GENEROS,
   GET_TIPO_USUARIO,
-  GET_PAISES, 
-  GET_CIUDADES, 
+  GET_PAISES,
+  GET_CIUDADES,
+  OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
-  REGISTRO_ERROR
+  REGISTRO_ERROR,
 } from "./actions";
 
 const initialState = {
@@ -80,9 +85,8 @@ const initialState = {
   mensaje: null,
   /******************************* */
 
-
   generos: [],
-  tipo_usuarios:[],
+  tipo_usuarios: [],
   paises: [],
   ciudades: [],
   admin: {},
@@ -142,52 +146,47 @@ const initialState = {
     subcategoriumId: 100,
     //--------------------------------
   },
+  desafios: [],
+  subcategoria: [],
+  unidad_medida: [],
+  
 };
 
-
-
-
-
-
-
-
+//-------------ADMIN-------------//
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    
-    
     case GET_CATEGORIAS:
       return {
         ...state,
-        categorias: action.payload
-    }
-    case GET_GENEROS: 
-    return {
-      ...state,
-      generos: action.payload
-  }
-    case GET_TIPO_USUARIO: 
-    return {
-      ...state,
-      tipo_usuarios: action.payload
-    }
-    case GET_PAISES: 
-    return {
-      ...state,
-      paises: action.payload
-    }
-    case GET_CIUDADES: 
-    return {
-      ...state,
-      ciudades: action.payload
-    }
+        categorias: action.payload,
+      };
+    case GET_GENEROS:
+      return {
+        ...state,
+        generos: action.payload,
+      };
+    case GET_TIPO_USUARIO:
+      return {
+        ...state,
+        tipo_usuarios: action.payload,
+      };
+    case GET_PAISES:
+      return {
+        ...state,
+        paises: action.payload,
+      };
+    case GET_CIUDADES:
+      return {
+        ...state,
+        ciudades: action.payload,
+      };
+
     case GET_PRODUCTOS_NAME:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
       };
     case GET_SUBCATEGORIAS_ID:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
@@ -201,8 +200,6 @@ function rootReducer(state = initialState, action) {
         alerta: null,
       };
 
-
-      
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
@@ -313,6 +310,25 @@ function rootReducer(state = initialState, action) {
         ...state,
         categoria: action.payload,
       };
+    case GET_DESAFIOS:
+      return {
+        ...state,
+        desafios: action.payload,
+      };
+    case PRICE: 
+      console.log("red")
+      return;
+    case GET_SUBCATEGORIAS:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_UNIDAD_MEDIDAS:
+      return {
+        ...state,
+        unidad_medida: action.payload,
+      };
+    //-------------ADMIN-------------//
     default:
       return state;
   }

@@ -5,7 +5,10 @@ import aguila from "../../../assets/aguila.png";
 
 const SidebarAdm = (props) => {
   return (
-    <div className={props.sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
+    <div
+      className={props.sidebarOpen ? "sidebar-responsivee" : ""}
+      id="sidebarr"
+    >
       <div className="sidebar__title">
         <div className="sidebar__img">
           <img src={aguila} alt="logo" />
@@ -23,7 +26,7 @@ const SidebarAdm = (props) => {
           <Link to="">Panel de control</Link>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-plus"></i>
           <button
             value={"Agregar Productos"}
             onClick={() => props.setState("Agregar Productos")}
@@ -32,16 +35,25 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-university"></i>
           <button
             value={"Agregar Moneda y UM"}
-            onClick={() => props.setState("Agregar Moneda y UM")}
+            onClick={() => props.setState("Agregar Moneda")}
           >
-            Agregar Moneda y UM
+            Agregar Moneda
           </button>
         </div>
         <div className="sidebar__link">
           <i className="fa fa-user"></i>
+          <button
+            value={"Agregar UM"}
+            onClick={() => props.setState("Agregar UM")}
+          >
+            Agregar UM
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-map-marker" aria-hidden="true"></i>
           <button
             value={"Agregar Ubicación"}
             onClick={() => props.setState("Agregar Ubicación")}
@@ -50,16 +62,16 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-sitemap"></i>
           <button
             value={"Agregar Sub-Categorías"}
-            onClick={() => props.setState("Agregar Sub-Categorías")}
+            onClick={() => props.setState("Agregar Familia y Categoría")}
           >
-            Agregar Sub-Categorías
+            Agregar Familia y Categoría
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-credit-card"></i>
           <button
             value={"Agregar Tipo de Transacción"}
             onClick={() => props.setState("Agregar Tipo de Transacción")}

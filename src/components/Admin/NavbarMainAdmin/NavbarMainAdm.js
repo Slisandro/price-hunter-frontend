@@ -24,7 +24,7 @@ function NavBarMainAdm({ producto, setProducto, setState }) {
     <>
       {/* Animation */}
       <div id="container-welcome">
-        <div className="discount-chart">
+        {/* <div className="discount-chart">
           <div className="circle">
             <div className="pie">
               <svg>
@@ -33,7 +33,7 @@ function NavBarMainAdm({ producto, setProducto, setState }) {
             </div>
             <div className="counter"> $ </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="main_welcome">
           <h1>

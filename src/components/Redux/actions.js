@@ -14,13 +14,12 @@ export const OBTENER_USUARIO = "OBTENER_USUARIO";
 export const LOGIN_EXITOSO = "LOGIN_EXITOSO";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const CERRAR_SESION = "CERRAR_SESION";
+export const GET_DESAFIOS = "GET_DESAFIOS";
+export const PRICE = "PRICE";
 export const GET_GENEROS = "GET_GENEROS";
 export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
 export const GET_PAISES = "GET_PAISES";
 export const GET_CIUDADES = "GET_CIUDADES";
-
-
-
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
@@ -31,48 +30,40 @@ export function getCategorias() {
       .then((json) => {
         dispatch({
           type: GET_CATEGORIAS,
-          payload: json
-        })
-      })
-    }
+          payload: json,
+        });
+      });
+  };
 }
 
-
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
-export function getPaises() {     
-    return function(dispatch) { 
-        let api = "http://localhost:3001/paises";                         
-        return fetch(api)  
-        .then(response => response.json())                               
-        .then(json => {                                                
-            dispatch({ 
-                type: GET_PAISES ,
-                payload: json 
-            });
+export function getPaises() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/paises";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_PAISES,
+          payload: json,
         });
-    
-    }
-};
+      });
+  };
+}
 
-
-
-
-export function getCiudades(id) {     
-    return function(dispatch) { 
-        let api =`http://localhost:3001/ciudades/${id}`;                         
-        return fetch(api)  
-        .then(response => response.json())                               
-        .then(json => {                                                
-            dispatch({ 
-                type: GET_CIUDADES ,
-                payload: json 
-            });
+export function getCiudades(id) {
+  return function(dispatch) {
+    let api = `http://localhost:3001/ciudades/${id}`;
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_CIUDADES,
+          payload: json,
         });
-    
-    }
-};
-
-
+      });
+  };
+}
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
 export function getProductsByName(nombre) {
@@ -88,11 +79,6 @@ export function getProductsByName(nombre) {
     });
   };
 }
-
-
-
-
-
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
 export function getSubcategoriasId(id) {     
@@ -114,40 +100,37 @@ export function getSubcategoriasId(id) {
 
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
-export function getGeneros() {     
-    return function(dispatch) { 
-        let api = "http://localhost:3001/generos";                         
-        return fetch(api)  
-        .then(response => response.json())                               
-        .then(json => {                                                
-            dispatch({ 
-                type: GET_GENEROS ,
-                payload: json 
-            });
+export function getGeneros() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/generos";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_GENEROS,
+          payload: json,
         });
-    
-    }
-};
+      });
+  };
+}
 
 
 
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
-export function getTipoUsuario() {     
-    return function(dispatch) { 
-        let api = "http://localhost:3001/tipousuario";                         
-        return fetch(api)  
-        .then(response => response.json())                               
-        .then(json => {                                                
-            dispatch({ 
-                type: GET_TIPO_USUARIO ,
-                payload: json 
-            });
+export function getTipoUsuario() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/tipousuario";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_TIPO_USUARIO,
+          payload: json,
         });
-    
-    }
-};
-
+      });
+  };
+}
 
 
 
@@ -265,16 +248,6 @@ export const cerrarSesion = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 ////---------------  ADMIN ACTIONS ---------------////
 //_____________________ POST _____________________//
 export const UNIDAD_MEDIDA_POST = "UNIDAD_MEDIDA_POST";
@@ -307,13 +280,6 @@ export function unidadDeMedida(objeto) {
     });
   };
 }
-
-
-
-
-
-
-
 
 export function tipoUsuario(objeto) {
   return function(dispatch) {
@@ -592,10 +558,6 @@ export function clientesPost(objeto) {
   };
 }
 
-
-
-
-
 export function desafioPost(objeto) {
   return function(dispatch) {
     axios
@@ -618,8 +580,6 @@ export function desafioPost(objeto) {
   };
 }
 
-
-
 export function productoPost(objeto) {
   return function(dispatch) {
     axios
@@ -640,10 +600,30 @@ export function productoPost(objeto) {
   };
 }
 
+
+
+
+// 
+export function pricePost(objeto) {
+  return function(dispatch) {
+    axios.post(`http://localhost:3001/precios`, objeto)
+    // .then(resp => resp.json())
+    .then(json => {
+      console.log(json)
+      dispatch({
+        type: PRICE,
+        payload: json
+      })
+    })
+  }
+}
+
 //_____________________ GET _____________________//
 
 export const GET_FAMILIA = "GET_FAMILIA";
 export const GET_CATEGORIA = "GET_CATEGORIA";
+export const GET_SUBCATEGORIAS = "GET_SUBCATEGORIAS";
+export const GET_UNIDAD_MEDIDAS = "GET_UNIDAD_MEDIDAS";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -661,6 +641,44 @@ export function getCategoria() {
     axios.get(`http://localhost:3001/getadmin/categoria`).then((response) => {
       dispatch({
         type: GET_CATEGORIA,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getDesafios() {
+  return function(dispatch) {
+    let api = "http://localhost:3001/detalledesafio";
+    return fetch(api)
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_DESAFIOS,
+          payload: json,
+        });
+      });
+  };
+}
+
+export function getSubcategoria() {
+  return function(dispatch) {
+    axios
+      .get(`http://localhost:3001/getadmin/subcategoria`)
+      .then((response) => {
+        dispatch({
+          type: GET_SUBCATEGORIAS,
+          payload: response.data,
+        });
+      });
+  };
+}
+
+export function getUnidadMedida() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/um`).then((response) => {
+      dispatch({
+        type: GET_UNIDAD_MEDIDAS,
         payload: response.data,
       });
     });

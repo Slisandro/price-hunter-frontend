@@ -68,6 +68,23 @@
   }
 }
 
+.divADM {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 1rem 0 1rem;
+}
+
+.btnNav {
+  height: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  width: 100%;
+  margin: 5px 0;
+  color: white;
+  margin: 0.5rem;
+  background: rgb(32, 50, 85);
+}
+
 .panelADM {
   color: white;
   font-size: 1.5rem;
