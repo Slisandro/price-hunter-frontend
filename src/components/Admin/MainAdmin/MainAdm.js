@@ -18,12 +18,6 @@ const MainAdm = ({ state, setState }) => {
   const subcategorias = useSelector((store) => store.subcategorias);
   const [producto, setProducto] = useState("");
 
-  const [mod, setMod] = useState(false);
-
-  const handleMod = () => {
-    setMod(!mod);
-  };
-
   return (
     <main className="main">
       <div className="main__container">

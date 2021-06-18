@@ -75,6 +75,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
                 .then(resp => {
                     console.log(resp.data)
                     alert(resp.data.msj)
+<<<<<<< HEAD
                     if (resp.data.aceptado === true) {
                         setState({
                             latitud: "",
@@ -87,6 +88,19 @@ function FormPostPrice({ setModal, modal, referencia }) {
                             mtsTolera: 20,
                         })
                     }
+=======
+                    setModal(!modal)
+                    setState({
+                        latitud: "",
+                        longitud: "",
+                        nombre_negocio: "", // Usuario
+                        direccion_negocio: "", // Usuario
+                        precio: 0, // Usuario
+                        desafioId: "", // Usuario
+                        usuarioId: 1,
+                        mtsTolera: 20,
+                    })
+>>>>>>> 73624e9ec2f3f3c9c9a6bb0892e716759ef0a586
                 })
         }
     }

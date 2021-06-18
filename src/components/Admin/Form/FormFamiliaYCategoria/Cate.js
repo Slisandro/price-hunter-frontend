@@ -8,9 +8,10 @@ import {
 
 function Cate({ setSwitcher }) {
   const dispatch = useDispatch();
-  const [buttonCAT, setButtonCAT] = useState(false);
   const familia = useSelector((store) => store.familia);
   const categoria = useSelector((store) => store.categoria);
+
+  var mapeado = categoria.map((ca) => ca.nombre_categoria);
 
   const [fam, setFam] = useState({
     nombre_familia: "",
@@ -35,7 +36,6 @@ function Cate({ setSwitcher }) {
     const name = target.name;
     if (name === "nombre_familia") {
       var fa = familia.find((f) => f.nombre_familia === e.target.value);
-      // console.log(fa.id);
       var final = fa.id;
       setFam({
         ...fam,
@@ -58,7 +58,6 @@ function Cate({ setSwitcher }) {
         [name]: target.value,
       });
     }
-    console.log(cate);
   };
 
   const handleSubmit = (e) => {
@@ -77,7 +76,7 @@ function Cate({ setSwitcher }) {
       return;
     }
 
-    if (!categoria.includes(cate.nombre_categoria)) {
+    if (mapeado.includes(cate.nombre_categoria)) {
       alert("Categoría de producto existente");
       return;
     }
@@ -98,9 +97,6 @@ function Cate({ setSwitcher }) {
     <>
       <div className="divCAT">
         <h6 id="title3">Categoría</h6>
-        {/* <button className="btn4" onClick={handleButtonCAT}>
-          Categoría Existente
-        </button> */}
         <>
           <form
             className="formFAM"

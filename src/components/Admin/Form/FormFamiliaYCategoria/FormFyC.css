@@ -81,7 +81,6 @@ header {
 
 #title {
   font-size: 30px;
-  margin: 30px 0px 0px 0px;
   color: var(--clr-primary-5);
 }
 
@@ -301,7 +300,10 @@ header {
 
 .inp {
   height: 1.8rem;
+  margin-top: 0.5rem;
   border-radius: var(--radius);
+  background-color: white;
+  color: black;
 }
 
 .btn6 {

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+
+import React, { useState, Fragment } from "react";
+import { useDispatch } from "react-redux";
 import { tipoTransaccionPost } from "../../../Redux/actions";
-// import { Link } from "react-router-dom";
-// import logo from "../../assets/aguila.png";
+import { useForm } from "react-hook-form";
+
 import "./FormTransaccion.css";
 
 function FormTransaccion() {
   const dispatch = useDispatch();
-  const ubicaciones = useSelector((store) => store.ubicaciones);
 
   const [state, setState] = useState({
     tipo_transaccion: "",
@@ -22,37 +22,27 @@ function FormTransaccion() {
         ...state,
         [name]: target.value,
       });
-    } 
-  };
-
-  // useEffect(() => {
-  //   // dispatch(getUbicaciones());
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const nuevoTipoTransaccion = {
-      tipo_transaccion: state.tipo_transaccion,
-    };
-
-    if (!nuevoTipoTransaccion.tipo_transaccion) {
-      alert("Por favor, ingrese un tipo de transacción");
-      return;
     }
+  };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-    dispatch(tipoTransaccionPost(nuevoTipoTransaccion));
+  const submit = (data, e) => {
+    dispatch(tipoTransaccionPost(state));
     e.target.reset();
     alert("Tipo de Transacción agregado con éxito!");
 
     setState({
+      ...state,
       tipo_transaccion: "",
     });
   };
 
   return (
-    <>
+    <Fragment>
       <div className="containerForm">
         <header>
           <h1 id="title">Agregar Tipo de Transacción</h1>
@@ -60,9 +50,8 @@ function FormTransaccion() {
         <form
           id="survey-form"
           className="form"
-          noValidate
           onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(submit)}
         >
           <div className="divForm">
             <div>
@@ -71,40 +60,27 @@ function FormTransaccion() {
                 className="btm"
                 type="text"
                 name="tipo_transaccion"
-                value={state.tipo_transaccion}
-              ></input> 
-              <select
-                className="selectTransAgregar"
-                name="tipo_transaccion"
-                value={state.tipo_transaccion}
-                onChange={(e) => ChangeInput(e)}
-              >
-                <option value={state.tipo_transaccion}>Puntos Ganados</option>
-                <option value={state.tipo_transaccion}>Puntos Retirados</option>
-              </select>
+                autoComplete="off"
+                {...register("tipo_transaccion", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar un tipo de transaccion",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "Mínimo 3 carácteres",
+                  },
+                })}
+              />
+              <span className="err">
+                {errors.tipo_transaccion && errors.tipo_transaccion.message}
+              </span>
             </div>
-            {/* <div>
-                <ul className="ulubi">
-                  {ubicaciones.map((t) => (
-                    <li key={t.id}>
-                      <input
-                        className="input"
-                        type="checkbox"
-                        name="ubicacion"
-                        value={t.nombre}
-                      ></input>
-                      <label nombre={t}>{t.nombre}</label>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
-            <button className="btn4" type="submit">
-              Agregar
-            </button>
+            <button type="submit">Agregar</button>
           </div>
         </form>
       </div>
-    </>
+    </Fragment>
   );
 }
 

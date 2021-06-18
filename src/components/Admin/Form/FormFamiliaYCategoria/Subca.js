@@ -2,23 +2,36 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCategoria,
+  getCategorias,
   subcategoriaPost,
   getSubcategoria,
 } from "../../../Redux/actions";
 
 function Subcate({ setSwitcher }) {
   const dispatch = useDispatch();
-  const [buttonSUB, setButtonSUB] = useState(false);
   const categoria = useSelector((store) => store.categoria);
+  const categorias = useSelector((store) => store.categorias);
   const subcategoria = useSelector((store) => store.subcategoria);
 
-  var mapeado = categoria.map((c) => c.id);
-  var mapeado2 = mapeado.map((ca) => ca);
+  // var mapeado = categorias.map((c) => c);
+  // var mapeado1 = mapeado.map((array) => array);
+  // var mapeado2 = mapeado1.map((a) => a);
+  // var mapeado3 = mapeado2.map((b) => b);
+  // var mapeado4 = mapeado3.map((b) => b.categoria);
+  // var mapeado5 = mapeado4.map((c) => c);
+  // var mapeado6 = mapeado5.map((d) => d);
+  // var mapeado7 = mapeado6.map((e) => e);
 
-  console.log(mapeado);
+  // var fin = mapeado7.forEach((element) => {
+  //   element.map((g) => g);
+  //   console.log(element);
+  // });
+
+  // console.log(fin);
 
   useEffect(() => {
     dispatch(getCategoria());
+    dispatch(getCategorias());
     dispatch(getSubcategoria());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -87,7 +100,7 @@ function Subcate({ setSwitcher }) {
       return;
     }
 
-    if (!categoria.includes(subcate.nombre_subcategoria)) {
+    if (categoria.includes(subcate.nombre_subcategoria)) {
       alert("Sub-Categoría de producto existente");
       return;
     }

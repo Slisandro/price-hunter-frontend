@@ -27,7 +27,10 @@ function MisDesafios() {
     }
 
     const handleClickClose = (e) => {
-        setModal(!modal)
+        setModal(!modal);
+        setReferencia({
+            idDesafio: ""
+        })
     }
 
     return (

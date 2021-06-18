@@ -22,7 +22,7 @@ function FormUbicacion() {
 
   return (
     <>
-      <div className="containerForm">
+      <div className="contenedorFAM">
         <header>
           <h1 id="title">Agregar Ubicación</h1>
         </header>
