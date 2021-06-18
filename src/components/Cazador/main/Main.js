@@ -13,7 +13,7 @@ const Main = ({ state, setState }) => {
   const [producto, setProducto] = useState("");
 
   return (
-    <main className="main">
+    <main className="mainUser">
       <div className="main__container">
         <div className="main__title">
           <NavBarMain

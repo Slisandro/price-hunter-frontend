@@ -20,11 +20,11 @@ function Tablero() {
 
 
   return (
-    <div className="contenedor">
+    <div className="contenedorTableroUser">
 
-      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      <Main state={state} setState={setState} />
+      {/* <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} /> */}
       <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
+      <Main state={state} setState={setState} />
       <Aside />
 
     </div>
