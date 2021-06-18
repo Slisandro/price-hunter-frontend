@@ -10,7 +10,7 @@ import FormTransaccion from "../Form/FormTipoTrans/FormTransaccion";
 import FormFyC from "../Form/FormFamiliaYCategoria/FormFyC";
 import FormAgregarProducto from "../Form/FormAgregarProducto/AgregarProducto";
 // import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
-import Form from "../Form/Form";
+// import Form from "../Form/Form";
 import "./MainAdm.css";
 
 const MainAdm = ({ state, setState }) => {

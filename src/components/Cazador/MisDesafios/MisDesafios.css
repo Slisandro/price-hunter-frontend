@@ -8,9 +8,9 @@
     text-align: center;
     border-radius: 5px;
     overflow: hidden;
-    margin: 2em;
-    height: 80%;
-    width: 80%;
+    margin: 4.1em auto;
+    height: 75%;
+    width: 95%;
 }
 
 .product-details {
@@ -24,7 +24,7 @@
 #container .product-details h1 {
     display: inline-block;
     position: relative;
-    font-size: 1.8em;
+    font-size: 2em;
     color: #344055;
     margin: 0;
     text-transform: uppercase;
