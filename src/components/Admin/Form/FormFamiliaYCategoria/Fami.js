@@ -4,7 +4,6 @@ import { getFamilia, familiaPost } from "../../../Redux/actions";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();
-  const [buttonFAM, setButtonFAM] = useState(false);
   const familia = useSelector((store) => store.familia);
 
   var mapeado = familia.map((fa) => fa.nombre_familia);
@@ -17,7 +16,6 @@ function Fami({ setSwitcher }) {
   const [fam, setFam] = useState({
     nombre_familia: "",
     descripcion: "",
-    id: null,
   });
 
   const ChangeInput = (e) => {
@@ -43,7 +41,6 @@ function Fami({ setSwitcher }) {
         descripcion: target.value,
       });
     }
-    console.log(fam);
   };
 
   const handleSubmit = (e) => {
@@ -54,14 +51,12 @@ function Fami({ setSwitcher }) {
       descripcion: fam.descripcion,
     };
 
-    // console.log(nuevaFamilia);
-
     if (!nuevaFamilia.nombre_familia) {
       alert("Por favor, ingrese una familia de producto");
       return;
     }
 
-    if (!familia.includes(fam.nombre_familia)) {
+    if (mapeado.includes(fam.nombre_familia)) {
       alert("Familia de producto existente");
       return;
     }

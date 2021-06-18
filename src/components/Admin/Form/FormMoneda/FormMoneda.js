@@ -83,7 +83,7 @@ function FormMoneda() {
 
   return (
     <>
-      <div className="containerForm">
+      <div className="contenedorFAM">
         <header>
           <h1 id="title">Agregar Moneda</h1>
         </header>
@@ -98,7 +98,7 @@ function FormMoneda() {
             <div>
               <label className="text-label">Codigo de Moneda</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="codigo_moneda"
                 value={state.codigo_moneda}
@@ -107,7 +107,7 @@ function FormMoneda() {
             <div>
               <label className="text-label">Nombre de la Moneda</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="nombre_moneda"
                 value={state.nombre_moneda}
@@ -116,7 +116,7 @@ function FormMoneda() {
             <div>
               <label className="text-label">Simbolo</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="simbolo"
                 value={state.simbolo}
