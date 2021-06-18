@@ -18,6 +18,7 @@
   position: relative;
 }
 
+
 .account-profile img {
   width: 84px;
   height: 84px;
@@ -29,6 +30,20 @@
   border: 5px solid #03ebeb;
   padding: 5px;
 }
+
+  .account-name {
+    margin: 20px 0 10px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .account-title {
+    font-size: 15px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+   
+  }
 
 .account-name {
   margin: 20px 0 10px;

@@ -47,7 +47,7 @@ function Regiones() {
           <div>
             <label className="text-label">Región</label>
             <input
-              className="btm"
+              className="inp"
               type="text"
               name="nombre_region"
               value={region.nombre_region}

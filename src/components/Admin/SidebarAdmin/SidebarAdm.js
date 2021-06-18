@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SidebarAdm.css";
 import { Link } from "react-router-dom";
 import aguila from "../../../assets/aguila.png";
 
 const SidebarAdm = (props) => {
-  const [modal, setModal] = useState(false);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
-
   return (
-    <div className={props.sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
+    <div
+      className={props.sidebarOpen ? "sidebar-responsivee" : ""}
+      id="sidebarr"
+    >
       <div className="sidebar__title">
         <div className="sidebar__img">
           <img src={aguila} alt="logo" />
@@ -29,21 +26,18 @@ const SidebarAdm = (props) => {
           <Link to="">Panel de control</Link>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-plus"></i>
           <button
             value={"Agregar Productos"}
-            onClick={() => {
-              handleModal();
-              props.setState("Agregar Productos");
-            }}
+            onClick={() => props.setState("Agregar Productos")}
           >
             Agregar Productos
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-university"></i>
           <button
-            value={"Agregar Moneda"}
+            value={"Agregar Moneda y UM"}
             onClick={() => props.setState("Agregar Moneda")}
           >
             Agregar Moneda
@@ -59,7 +53,7 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-map-marker" aria-hidden="true"></i>
           <button
             value={"Agregar Ubicación"}
             onClick={() => props.setState("Agregar Ubicación")}
@@ -68,7 +62,7 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-sitemap"></i>
           <button
             value={"Agregar Sub-Categorías"}
             onClick={() => props.setState("Agregar Familia y Categoría")}
@@ -77,7 +71,7 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-user"></i>
+          <i className="fa fa-credit-card"></i>
           <button
             value={"Agregar Tipo de Transacción"}
             onClick={() => props.setState("Agregar Tipo de Transacción")}

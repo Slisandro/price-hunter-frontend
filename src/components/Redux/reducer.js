@@ -23,18 +23,25 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
+  GET_GENEROS, 
+  GET_TIPO_USUARIO,
+  GET_PAISES, 
+  GET_CIUDADES, 
+  CERRAR_SESION,
+  LOGIN_ERROR,
+  REGISTRO_ERROR,
   GET_DESAFIOS,
   PRICE,
   GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
-  GET_GENEROS,
-  GET_TIPO_USUARIO,
-  GET_PAISES,
-  GET_CIUDADES,
+  // GET_GENEROS,
+  // GET_TIPO_USUARIO,
+  // GET_PAISES,
+  // GET_CIUDADES,
   OBTENER_USUARIO,
-  CERRAR_SESION,
-  LOGIN_ERROR,
-  REGISTRO_ERROR,
+  // CERRAR_SESION,
+  // LOGIN_ERROR,
+  // REGISTRO_ERROR,
 } from "./actions";
 
 const initialState = {
@@ -77,10 +84,14 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
+  
+  /*Estados para la autenticacion*/
 
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
+  mensaje: null,
+  /******************************* */
 
   generos: [],
   tipo_usuarios: [],
@@ -89,6 +100,7 @@ const initialState = {
   mensaje: null,
 
   //-------------ADMIN-------------//
+  
   admin: {},
   familia: [],
   categoria: [],
@@ -158,28 +170,28 @@ function rootReducer(state = initialState, action) {
     case GET_CATEGORIAS:
       return {
         ...state,
-        categorias: action.payload,
-      };
-    case GET_GENEROS:
-      return {
-        ...state,
-        generos: action.payload,
-      };
-    case GET_TIPO_USUARIO:
-      return {
-        ...state,
-        tipo_usuarios: action.payload,
-      };
-    case GET_PAISES:
-      return {
-        ...state,
-        paises: action.payload,
-      };
-    case GET_CIUDADES:
-      return {
-        ...state,
-        ciudades: action.payload,
-      };
+        categorias: action.payload
+    }
+    case GET_GENEROS: 
+    return {
+      ...state,
+      generos: action.payload
+  }
+    case GET_TIPO_USUARIO: 
+    return {
+      ...state,
+      tipo_usuarios: action.payload
+    }
+    case GET_PAISES: 
+    return {
+      ...state,
+      paises: action.payload
+    }
+    case GET_CIUDADES: 
+    return {
+      ...state,
+      ciudades: action.payload
+    }
 
     case GET_PRODUCTOS_NAME:
       return {
@@ -203,14 +215,32 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("nombre", action.payload.usuario.nombre);
+      
       return {
         ...state,
         autenticado: true,
+        usuario: null,
         mensaje: null,
-        cargando: false,
+      
       };
 
-    case OBTENER_USUARIO:
+    case CERRAR_SESION:
+    case LOGIN_ERROR:
+    case REGISTRO_ERROR:
+      localStorage.removeItem('token');
+      localStorage.removeItem('nombre')
+      return {
+          ...state,
+          token: null,
+          usuario: null,
+          autenticado: null ,
+          mensaje: action.payload, 
+          
+    };
+
+      {/*
+        case OBTENER_USUARIO:
       return {
         ...state,
         autenticado: true,
@@ -230,8 +260,10 @@ function rootReducer(state = initialState, action) {
         mensaje: action.payload,
         cargando: false,
       };
+      */}
 
     //-------------ADMIN-------------//
+
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -336,6 +368,7 @@ function rootReducer(state = initialState, action) {
         unidad_medida: action.payload,
       };
     //-------------ADMIN-------------//
+
     default:
       return state;
   }

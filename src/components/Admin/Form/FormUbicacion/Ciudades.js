@@ -54,7 +54,7 @@ function Ciudades() {
           <div>
             <label className="text-label">Ciudad</label>
             <input
-              className="btm"
+              className="inp"
               type="text"
               name="ciudad"
               value={ciudad.ciudad}
