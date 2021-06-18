@@ -1,26 +1,27 @@
-.mainUser {
+.main {
     background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
-    width: 70%;
-    margin-right: .5%;
-    height: 100%;
-    border-radius: 2em;
-    margin: 0 0.1em;
+    grid-area: main;
     overflow-y: hidden;
+    /* Hide vertical scrollbar */
     overflow-x: hidden;
-    height: 100%;
+    /* Hide horizontal scrollbar */
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .main__container {
-    height: 15%;
     padding: 20px 20px;
+    /* display: flex;
+    justify-content: space-between; */
 }
 
 .main__title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 10px;
+    padding-bottom: 18px;
     border-bottom: 1px solid #f3f3f3;
-    padding-bottom: 1%;
 }
 
 #container-welcome {
@@ -109,13 +110,13 @@
     font-size: 25px;
 }
 
-.main__title form {
+/* .main__title form {
     width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-}
+} */
 
 .box {
     margin-left: 340px;
@@ -130,18 +131,20 @@ input {
 
 .input__text[type="text"] {
     background: cornsilk;
-    width: 50%;
+    width: 240px;
+    height: 35px;
     border: none;
     outline: none;
-    padding: 0 1.5em;
-    border-radius: 1em 0 0 1em;
-    height: 30%;
+    padding: 0 25px;
+    border-radius: 25px 0 0 25px;
 }
 
 .btn__main[type="submit"] {
+    left: -5px;
+    position: relative;
     border-radius: 0 25px 25px 0;
-    width: 40%;
-    height: 30%;
+    width: 15em;
+    height: 35px;
     border: 2px solid #17e8f7;
     outline: none;
     cursor: pointer;
