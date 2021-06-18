@@ -81,7 +81,6 @@ export function getProductsByName(nombre) {
 }
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
-
 export function getSubcategoriasId(id) {     
     const token = localStorage.getItem("token");
     return function(dispatch) {
@@ -96,7 +95,6 @@ export function getSubcategoriasId(id) {
     }
     
 };
-
 
 
 
@@ -154,7 +152,6 @@ export function mostrarError(msg, categoria) {
     }, 5000);
   };
 }
-
 
 
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
@@ -243,30 +240,6 @@ export const cerrarSesion = () => {
 
 
 
-{/*
-//ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
-export function registrarUsuario(datosUser) {
-  return function(dispatch) {
-    axios
-      .post("http://localhost:3001/usuarios/registro", datosUser)
-      .then((respuesta) => {
-        console.log(respuesta);
-        respuesta.data.msg
-          ? dispatch({
-              type: MOSTRAR_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
-          : dispatch({
-              type: REGISTRO_EXITOSO,
-              payload: respuesta.data,
-            });
-      })
-      .catch((err) => console.log(err));
-  };
-}
 
 // Retorna el usuario autenticado
 export const usuarioAutenticado = async () => {
@@ -350,6 +323,10 @@ export function generoPost(objeto) {
   };
 }
 
+
+
+
+
 export function monedaPost(objeto) {
   return function(dispatch) {
     axios
@@ -367,6 +344,10 @@ export function monedaPost(objeto) {
       });
   };
 }
+
+
+
+
 
 export function ciudadPost(objeto) {
   return function(dispatch) {
@@ -428,6 +409,9 @@ export function regionPost(objeto) {
 }
 
 
+
+
+
 export function familiaPost(objeto) {
   return function(dispatch) {
     axios
@@ -444,6 +428,10 @@ export function familiaPost(objeto) {
       });
   };
 }
+
+
+
+
 
 
 export function categoriaPost(objeto) {
@@ -465,6 +453,10 @@ export function categoriaPost(objeto) {
 }
 
 
+
+
+
+
 export function subcategoriaPost(objeto) {
   return function(dispatch) {
     axios
@@ -484,6 +476,13 @@ export function subcategoriaPost(objeto) {
 }
 
 
+
+
+
+
+
+
+
 export function tipoTransaccionPost(objeto) {
   return function(dispatch) {
     axios
@@ -499,6 +498,15 @@ export function tipoTransaccionPost(objeto) {
       });
   };
 }
+
+
+
+
+
+
+
+
+
 
 export function transaccionPost(objeto) {
   return function(dispatch) {
@@ -518,6 +526,16 @@ export function transaccionPost(objeto) {
       });
   };
 }
+
+
+
+
+
+
+
+
+
+
 
 
 export function clientesPost(objeto) {

@@ -86,7 +86,6 @@ const initialState = {
   alerta: null,
   
   /*Estados para la autenticacion*/
-
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
@@ -97,10 +96,6 @@ const initialState = {
   tipo_usuarios: [],
   paises: [],
   ciudades: [],
-  mensaje: null,
-
-  //-------------ADMIN-------------//
-  
   admin: {},
   familia: [],
   categoria: [],
@@ -170,28 +165,28 @@ function rootReducer(state = initialState, action) {
     case GET_CATEGORIAS:
       return {
         ...state,
-        categorias: action.payload
-    }
-    case GET_GENEROS: 
-    return {
-      ...state,
-      generos: action.payload
-  }
-    case GET_TIPO_USUARIO: 
-    return {
-      ...state,
-      tipo_usuarios: action.payload
-    }
-    case GET_PAISES: 
-    return {
-      ...state,
-      paises: action.payload
-    }
-    case GET_CIUDADES: 
-    return {
-      ...state,
-      ciudades: action.payload
-    }
+        categorias: action.payload,
+      };
+    case GET_GENEROS:
+      return {
+        ...state,
+        generos: action.payload,
+      };
+    case GET_TIPO_USUARIO:
+      return {
+        ...state,
+        tipo_usuarios: action.payload,
+      };
+    case GET_PAISES:
+      return {
+        ...state,
+        paises: action.payload,
+      };
+    case GET_CIUDADES:
+      return {
+        ...state,
+        ciudades: action.payload,
+      };
 
     case GET_PRODUCTOS_NAME:
       return {
@@ -224,7 +219,6 @@ function rootReducer(state = initialState, action) {
         mensaje: null,
       
       };
-
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
@@ -238,32 +232,6 @@ function rootReducer(state = initialState, action) {
           mensaje: action.payload, 
           
     };
-
-      {/*
-        case OBTENER_USUARIO:
-      return {
-        ...state,
-        autenticado: true,
-        usuario: action.payload,
-        cargando: false,
-      };
-
-    case CERRAR_SESION:
-    case LOGIN_ERROR:
-    case REGISTRO_ERROR:
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        usuario: null,
-        autenticado: null,
-        mensaje: action.payload,
-        cargando: false,
-      };
-      */}
-
-    //-------------ADMIN-------------//
-
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -368,7 +336,6 @@ function rootReducer(state = initialState, action) {
         unidad_medida: action.payload,
       };
     //-------------ADMIN-------------//
-
     default:
       return state;
   }
