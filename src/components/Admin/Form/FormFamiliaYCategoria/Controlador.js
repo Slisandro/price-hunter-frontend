@@ -1,7 +1,4 @@
 import React from "react";
-import Fami from "./Fami";
-import Cate from "./Cate";
-import Subca from "./Subca";
 
 function Controlador({ switcher, setSwitcher }) {
   return (
@@ -15,15 +12,6 @@ function Controlador({ switcher, setSwitcher }) {
       <button className="btnC" onClick={() => setSwitcher("subca")}>
         SUBCATEGORÍA
       </button>
-      {/* {switcher === "fami" ? (
-        <Fami setSwitcher={setSwitcher} />
-      ) : switcher === "cate" ? (
-        <Cate setSwitcher={setSwitcher} />
-      ) : switcher === "subca" ? (
-        <Subca setSwitcher={setSwitcher} />
-      ) : (
-        <h1>Nada renderiza</h1>
-      )} */}
     </div>
   );
 }

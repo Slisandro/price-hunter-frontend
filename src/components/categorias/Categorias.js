@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Categorias.css";
@@ -24,12 +25,8 @@ const Categorias = ({ categorias, setState }) => {
             <ul className="menu-main">
                 {categorias && categorias.map(familia => (
                     <li><a href="!#">{familia.nombre_familia}</a>
-
                         <div className="menu-sub">
-
-
                             <div className="menu-col-1 ">
-
                                 {familia.categoria.map(categoria => (
                                     <>
                                         <div className="grid-category">
@@ -49,21 +46,15 @@ const Categorias = ({ categorias, setState }) => {
 
                                             </div>
                                         </div>
-
                                     </>
                                 )
                                 )}
-
                             </div>
                         </div>
                     </li>
                 ))
                 }
-
             </ul>
-
-
-
         </div >
     );
 }

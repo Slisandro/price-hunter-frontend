@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MisDesafios from "../MisDesafios/MisDesafios";
 import NavBarMain from "../../navBarMain/NavBarMain";
 import Configuración from "../../configuración/Configuración";
+import Monedero from "../Monedero/Monedero";
+import { getDesafios } from '../../Redux/actions'
 import Table from "../../Table.js";
 import "./Main.css";
 
 const Main = ({ state, setState }) => {
   const productos = useSelector((store) => store.productos);
-  const subcategorias = useSelector((store) => store.subcategorias);
   const [producto, setProducto] = useState("");
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getDesafios())
+  }, [])
 
   return (
     <main className="main">
@@ -35,6 +41,8 @@ const Main = ({ state, setState }) => {
             <MisDesafios setState={setState} />
           ) : state === "Configuracion" ? (
             <Configuración />
+          ) : state === "Movimientos" ? (
+            <Monedero />
           ) : null}
         </div>
       </div>

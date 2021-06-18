@@ -61,7 +61,7 @@ function Regiones() {
        
             <label className="text-label">Región</label>
             <input
-              className="btm"
+              className="inp"
               type="text"
               name="nombre_region"
               autoComplete="off"

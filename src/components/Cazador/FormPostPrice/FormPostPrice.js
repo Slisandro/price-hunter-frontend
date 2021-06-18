@@ -1,27 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios'
+import axios from 'axios';
 
 var geolocation = require('geolocation');
 
-function FormPostPrice({ setModal, modal, desafio }) {
+geolocation.getCurrentPosition((err, position) => {
+    return position.coords.longitude
+})
+
+
+function FormPostPrice({ setModal, modal, referencia }) {
     const [errors, setErrors] = useState({
         nombre_negocio: true,
         direccion_negocio: true,
         precio: true,
     });
 
+    useEffect(() => {
+        geolocation.getCurrentPosition((err, position) => {
+            setState({
+                ...state,
+                longitud: position.coords.longitude + "",
+                latitud: position.coords.latitude + "",
+                desafioId: referencia.idDesafio,
+            })
+        })
+    }, [])
+
     const [state, setState] = useState({
         latitud: "",
         longitud: "",
         nombre_negocio: "", // Usuario
         direccion_negocio: "", // Usuario
-        precio: "", // Usuario
+        precio: null, // Usuario
         desafioId: "", // Usuario
-        usuarioId: "",
-        mtsTolera: "",
+        usuarioId: 1,
+        mtsTolera: 20,
     })
 
     const handleChange = (e) => {
@@ -41,32 +57,37 @@ function FormPostPrice({ setModal, modal, desafio }) {
                 [e.target.name]: false
             })
         }
-        console.log(errors)
+
+        if (e.target.name === "precio") {
+            setState({
+                ...state,
+                precio: parseInt(e.target.value)
+            })
+        }
     }
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        await geolocation.getCurrentPosition((err, position) => {
-            if (err) throw err
-            setState({
-                ...state,
-                latitud: position.coords.latitude,
-                longitud: position.coords.longitude,
-                desafioId: desafio
-            })
-            // console.log(state) //POST
-            if (Object.values(errors).filter(x => x === true).length === 0) {
-                console.log("sin error")
-                // axios.post(`ruta`, state)
-                // .then(resp => resp.json())
-                // .then(json => console.log(json.msj))  // Acá me trae el mensaje si se posteo correctamente o no 
-            // Y deberia mostrarlo en un modal con el msj y setear el state
-            } else {
-                console.log("con error")
-            }
-        })
+        e.preventDefault();
+        console.log(state)
+        if (Object.values(errors).filter(x => x === true).length === 0) {
+            axios.post("http://localhost:3001/precios", state)
+                .then(resp => {
+                    console.log(resp.data)
+                    alert(resp.data.msj)
+                    setModal(!modal)
+                    setState({
+                        latitud: "",
+                        longitud: "",
+                        nombre_negocio: "", // Usuario
+                        direccion_negocio: "", // Usuario
+                        precio: 0, // Usuario
+                        desafioId: "", // Usuario
+                        usuarioId: 1,
+                        mtsTolera: 20,
+                    })
+                })
+        }
     }
 
     return (

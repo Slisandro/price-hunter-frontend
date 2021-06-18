@@ -24,8 +24,6 @@
     border-bottom: 1px solid #f3f3f3;
 }
 
-
-
 #container-welcome {
     display: flex;
     align-items: center;
@@ -112,6 +110,14 @@
     font-size: 25px;
 }
 
+/* .main__title form {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+} */
+
 .box {
     margin-left: 340px;
 }
@@ -121,7 +127,6 @@ input {
     display: inline-block;
     font-size: 14px;
     transition: .5s;
-    
 }
 
 .input__text[type="text"] {

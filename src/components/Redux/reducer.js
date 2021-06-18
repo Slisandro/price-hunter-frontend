@@ -23,9 +23,7 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
-  GET_SUBCATEGORIAS,
-  GET_UNIDAD_MEDIDAS,
-  GET_GENEROS,
+  GET_GENEROS, 
   GET_TIPO_USUARIO,
   GET_PAISES,
   GET_CIUDADES,
@@ -36,6 +34,18 @@ import {
   CERRAR_SESION,
   LOGIN_ERROR,
   REGISTRO_ERROR,
+  GET_DESAFIOS,
+  PRICE,
+  GET_SUBCATEGORIAS,
+  GET_UNIDAD_MEDIDAS,
+  // GET_GENEROS,
+  // GET_TIPO_USUARIO,
+  // GET_PAISES,
+  // GET_CIUDADES,
+  OBTENER_USUARIO,
+  // CERRAR_SESION,
+  // LOGIN_ERROR,
+  // REGISTRO_ERROR,
 } from "./actions";
 
 const initialState = {
@@ -78,21 +88,76 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
-
+  
+  /*Estados para la autenticacion*/
   token: localStorage.getItem("token"),
   autenticado: null,
   usuario: null,
+  mensaje: null,
+  /******************************* */
 
   generos: [],
   tipo_usuarios: [],
   paises: [],
   ciudades: [],
-  mensaje: null,
-
-  //-------------ADMIN-------------//
   admin: {},
   familia: [],
   categoria: [],
+  //----------------------------------------
+  //         PRUEBA PARA POST ADMIN
+  obj: {
+    // codigo_alfa:"PRU",
+    // nombre_pais:"Prueba",
+    // regioneId: 3,
+    // monedaCodigoMoneda:"EUR"
+    // codigo_unidad_medida:"c3f",
+    // nombre_unidad: "centimetro cubicoo"
+    // tipo_usuario:"prueba"
+    // genero:"prueba"
+    // codigo_moneda:"EUR",
+    // nombre_moneda:"Euro",
+    // simbolo:"E"
+    // ciudad:"Chicago",
+    // paiseCodigoAlfa:"ARG"
+    // nombre_region:"Centro America"
+    // nombre_familia: "PRU",
+    // descripcion: "Prueba"
+    // nombre_categoria: "prueba",
+    // descripcion: "esta es una prueba"
+    // nombre_subcategoria: "prueba",
+    // descripcion: "prueba",
+    // categoriumId: 1,
+    //   tipo_transaccion:"prueba"
+    // observacion: "prueba",
+    // puntos: 100,
+    // usuarioId: 5,
+    // tipoTransaccionId: 3,
+    // razon_social: "Prueba S.R.L",
+    // nombre_cial_fantasia:"Prueba",
+    // cuit_nit_rut:"00000000",
+    // email:"prueba@mail.com",
+    // telefono:"000000000",
+    // direccion_fiscal:"prueba 55",
+    // metodo_pago:"Ctt Cte",
+    // banco:"Macro",
+    // numero_cuenta:"0000000",
+    // password:"prueba1234",
+    // ciudadId: 2,
+    // tipoUsuarioId: 1
+    // nombre_desafio: "desafio 1",
+    // descripcion_desafio: "buscar precios",
+    // fecha_inicial: "2021/01/20",
+    // fecha_final: "2021/01/20",
+    // url_image: "www.prueba.com",
+    // clienteId: 1,
+    // productoId: 2,
+    nombre: "prueba1",
+    contenido_neto: 100,
+    unidadMedidaCodigoUnidadMedida: "kg",
+    subcategoriumId: 100,
+    //--------------------------------
+  },
+  desafios: [],
   subcategoria: [],
   unidad_medida: [],
   pais: [],
@@ -101,6 +166,7 @@ const initialState = {
   //-------------ADMIN-------------//
 };
 
+//-------------ADMIN-------------//
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CATEGORIAS:
@@ -130,13 +196,11 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_PRODUCTOS_NAME:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
       };
     case GET_SUBCATEGORIAS_ID:
-      console.log(action.payload);
       return {
         ...state,
         productos: action.payload,
@@ -153,35 +217,28 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("nombre", action.payload.usuario.nombre);
+      
       return {
         ...state,
         autenticado: true,
+        usuario: null,
         mensaje: null,
-        cargando: false,
+      
       };
-
-    case OBTENER_USUARIO:
-      return {
-        ...state,
-        autenticado: true,
-        usuario: action.payload,
-        cargando: false,
-      };
-
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
+      localStorage.removeItem('nombre')
       return {
-        ...state,
-        token: null,
-        usuario: null,
-        autenticado: null,
-        mensaje: action.payload,
-        cargando: false,
-      };
-
-    //-------------ADMIN-------------//
+          ...state,
+          token: null,
+          usuario: null,
+          autenticado: null ,
+          mensaje: action.payload, 
+          
+    };
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -267,6 +324,14 @@ function rootReducer(state = initialState, action) {
         ...state,
         categoria: action.payload,
       };
+    case GET_DESAFIOS:
+      return {
+        ...state,
+        desafios: action.payload,
+      };
+    case PRICE: 
+      console.log("red")
+      return;
     case GET_SUBCATEGORIAS:
       return {
         ...state,
