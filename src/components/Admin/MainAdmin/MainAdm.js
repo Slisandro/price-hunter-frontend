@@ -9,6 +9,8 @@ import FormUbicacion from "../Form/FormUbicacion/FormUbicacion";
 import FormTransaccion from "../Form/FormTipoTrans/FormTransaccion";
 import FormFyC from "../Form/FormFamiliaYCategoria/FormFyC";
 import FormAgregarProducto from "../Form/FormAgregarProducto/AgregarProducto";
+import FormUsuario from "../Form/FormUsuario/FormUsuario";
+import FormGenero from "../Form/FormGenero/FormGenero";
 // import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
 // import Form from "../Form/Form";
 import "./MainAdm.css";
@@ -51,6 +53,10 @@ const MainAdm = ({ state, setState }) => {
             <FormTransaccion />
           ) : state === "Agregar Ubicación" ? (
             <FormUbicacion />
+          ) : state === "Agregar Tipo de Usuario" ? (
+            <FormUsuario />
+          ) : state === "Agregar Género" ? (
+            <FormGenero />
           ) : null}
         </div>
       </div>

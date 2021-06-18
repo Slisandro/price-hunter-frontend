@@ -79,7 +79,7 @@ function Paises() {
             value={pais.nombre_pais}
           ></input>
         </div>
-        <button className="btn4" type="submit">
+        <button className="agregarModal" type="submit">
           Agregar
         </button>
         {/* </div> */}

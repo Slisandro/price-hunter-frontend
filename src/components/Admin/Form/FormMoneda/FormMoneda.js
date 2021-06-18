@@ -7,7 +7,7 @@ import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
-  
+
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
@@ -65,7 +65,9 @@ function FormMoneda() {
     //   return;
     // }
     if (!isNaN(parseInt(data.codigo_moneda))) {
-      dispatch(mostrarError('El codigo solo puede contener letras', 'alerta-error'));
+      dispatch(
+        mostrarError("El codigo solo puede contener letras", "alerta-error")
+      );
       return;
     }
     // if (!nuevaMoneda.nombre_moneda) {
@@ -73,7 +75,9 @@ function FormMoneda() {
     //   return;
     // }
     if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
-      dispatch(mostrarError("El nombre solo puede contener letras", 'alerta-error'));
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
       return;
     }
     // if (!nuevaMoneda.simbolo) {
@@ -94,55 +98,9 @@ function FormMoneda() {
 
   return (
     <>
-      <div className="contenedorFAM">
+      <div className="contenedorMoneda">
         <header>
           <h1 id="title">Agregar Moneda</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <div className="divForm">
-            <div>
-              <label className="text-label">Codigo de Moneda</label>
-              <input
-                className="inp"
-                type="text"
-                name="codigo_moneda"
-                value={state.codigo_moneda}
-              ></input>
-            </div>
-            <div>
-              <label className="text-label">Nombre de la Moneda</label>
-              <input
-                className="inp"
-                type="text"
-                name="nombre_moneda"
-                value={state.nombre_moneda}
-              ></input>
-            </div>
-            <div>
-              <label className="text-label">Simbolo</label>
-              <input
-                className="inp"
-                type="text"
-                name="simbolo"
-                value={state.simbolo}
-              ></input>
-            </div>
-            <button className="btn" type="submit">
-              Agregar
-            </button>
-          </div>
-        </form>
-      </div>
-
-       <div>
-        <header>
-          <h1 id="title">Agregar Unidad Medida</h1>
         </header>
         <form
           id="survey-form"
@@ -154,13 +112,16 @@ function FormMoneda() {
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
-           {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
+          {alerta ? (
+            <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
+          ) : null}
           <div className="divForm">
             <div>
               <label className="text-label">Codigo de Moneda</label>
               <input
                 className="btm"
                 type="NaN"
+                className="inp"
                 name="codigo_moneda"
                 autoComplete="off"
                 {...register("codigo_moneda", {
@@ -178,14 +139,14 @@ function FormMoneda() {
                   },
                 })}
               />
-             
+
               <span className="err">{errors?.codigo_moneda?.message}</span>
             </div>
-           
+
             <div>
               <label className="text-label">Nombre de la Moneda</label>
               <input
-                className="btm"
+                className="inp"
                 // type="text"
                 name="nombre_moneda"
                 autoComplete="off"
@@ -200,17 +161,16 @@ function FormMoneda() {
                   },
                   minLength: {
                     value: 2,
-                    message:
-                      "El nombre no puede tener maenos de dos caracteres!",
+                    message: "El nombre debe tener más de dos caracteres!",
                   },
-                 })}
+                })}
               />
               <span className="err">{errors?.nombre_moneda?.message}</span>
             </div>
             <div>
               <label className="text-label">Simbolo</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="simbolo"
                 autoComplete="off"
@@ -231,7 +191,7 @@ function FormMoneda() {
               />
               <span className="err">{errors?.simbolo?.message}</span>
             </div>
-            <button className="btn" type="submit">
+            <button className="agregarModal" type="submit">
               Agregar
             </button>
           </div>

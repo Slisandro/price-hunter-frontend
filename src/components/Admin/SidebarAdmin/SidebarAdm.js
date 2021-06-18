@@ -53,7 +53,7 @@ const SidebarAdm = (props) => {
           </button>
         </div>
         <div className="sidebar__link">
-          <i className="fa fa-map-marker" aria-hidden="true"></i>
+          <i className="fas fa-globe-americas"></i>
           <button
             value={"Agregar Ubicación"}
             onClick={() => props.setState("Agregar Ubicación")}
@@ -77,6 +77,24 @@ const SidebarAdm = (props) => {
             onClick={() => props.setState("Agregar Tipo de Transacción")}
           >
             Agregar Tipo de Transacción
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fa fa-user"></i>
+          <button
+            value={"Agregar Tipo de Usuario"}
+            onClick={() => props.setState("Agregar Tipo de Usuario")}
+          >
+            Agregar Tipo de Usuario
+          </button>
+        </div>
+        <div className="sidebar__link">
+          <i className="fas fa-venus-mars"></i>
+          <button
+            value={"Agregar Género"}
+            onClick={() => props.setState("Agregar Género")}
+          >
+            Agregar Género
           </button>
         </div>
         <div className="sidebar__link">

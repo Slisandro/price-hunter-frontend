@@ -1,4 +1,3 @@
-
 import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { tipoTransaccionPost } from "../../../Redux/actions";
@@ -43,21 +42,18 @@ function FormTransaccion() {
 
   return (
     <Fragment>
-      <div className="containerForm">
-        <header>
-          <h1 id="title">Agregar Tipo de Transacción</h1>
-        </header>
+      <div className="contenedorTransacciones">
+        <h6 id="titleTran">Agregar Tipo de Transacción</h6>
         <form
-          id="survey-form"
-          className="form"
+          className="formFamilia"
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
-          <div className="divForm">
+          <div className="divTransacciones">
             <div>
               <label className="text-label">Tipo de Transacción</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="tipo_transaccion"
                 autoComplete="off"
@@ -76,8 +72,10 @@ function FormTransaccion() {
                 {errors.tipo_transaccion && errors.tipo_transaccion.message}
               </span>
             </div>
-            <button type="submit">Agregar</button>
           </div>
+          <button className="agregarModal" type="submit">
+            Agregar
+          </button>
         </form>
       </div>
     </Fragment>

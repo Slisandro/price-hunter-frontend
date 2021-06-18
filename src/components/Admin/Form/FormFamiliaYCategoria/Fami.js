@@ -74,25 +74,25 @@ function Fami({ setSwitcher }) {
 
   return (
     <>
-      <div className="divFAM">
-        <h6 id="title2">Familia</h6>
+      <div className="contenedorFamilia">
+        <h6 id="titleFam">Familia</h6>
         <form
-          className="formFAM"
+          className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="divFormFAM">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Familia</label>
               <input
                 name="agregar_familia"
-                className="inp"
+                className="inp3"
                 placeholder="Agregar Familia"
               ></input>
             </div>
           </div>
-          <div className="divFormFAM">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label-desc">* Descripción</label>
               <input
@@ -103,7 +103,7 @@ function Fami({ setSwitcher }) {
               ></input>
             </div>
           </div>
-          <button className="btn4" type="submit">
+          <button className="agregarModal" type="submit">
             Agregar Familia
           </button>
         </form>
