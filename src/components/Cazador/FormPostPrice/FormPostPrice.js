@@ -1,31 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { pricePost } from '../../Redux/actions'
-// import 
 
 var geolocation = require('geolocation');
 
+geolocation.getCurrentPosition((err, position) => {
+    return position.coords.longitude
+})
+
+
 function FormPostPrice({ setModal, modal, referencia }) {
-    const dispatch = useDispatch()
     const [errors, setErrors] = useState({
         nombre_negocio: true,
         direccion_negocio: true,
         precio: true,
     });
 
+    useEffect(() => {
+        geolocation.getCurrentPosition((err, position) => {
+            setState({
+                ...state,
+                longitud: position.coords.longitude + "",
+                latitud: position.coords.latitude + "",
+                desafioId: referencia.idDesafio,
+            })
+        })
+    }, [])
+
     const [state, setState] = useState({
         latitud: "",
         longitud: "",
         nombre_negocio: "", // Usuario
         direccion_negocio: "", // Usuario
-        precio: "", // Usuario
+        precio: null, // Usuario
         desafioId: "", // Usuario
-        usuarioId: "",
-        mtsTolera: "",
+        usuarioId: 1,
+        mtsTolera: 20,
     })
 
     const handleChange = (e) => {
@@ -45,59 +57,39 @@ function FormPostPrice({ setModal, modal, referencia }) {
                 [e.target.name]: false
             })
         }
-        console.log(errors)
+
+        if (e.target.name === "precio") {
+            setState({
+                ...state,
+                precio: parseInt(e.target.value)
+            })
+        }
     }
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        await geolocation.getCurrentPosition((err, position) => {
-            if (err) throw err
-            dispatch(pricePost(
-                {
-                    "latitud": "-34.78014081",
-                    "longitud": "-58.276012",
-                    "nombre_negocio": "prueba",
-                    "direccion_negocio": "av 1 mayo 53 - 25",
-                    "precio": 33,
-                    "desafioId": 1,
-                    "usuarioId": 1,
-                    "mtsTolera": 100
-                }
-            ))
-        })   
+        e.preventDefault();
+        console.log(state)
+        if (Object.values(errors).filter(x => x === true).length === 0) {
+            axios.post("http://localhost:3001/precios", state)
+                .then(resp => {
+                    console.log(resp.data)
+                    alert(resp.data.msj)
+                    if (resp.data.aceptado === true) {
+                        setState({
+                            latitud: "",
+                            longitud: "",
+                            nombre_negocio: "", // Usuario
+                            direccion_negocio: "", // Usuario
+                            precio: null, // Usuario
+                            desafioId: "", // Usuario
+                            usuarioId: 1,
+                            mtsTolera: 20,
+                        })
+                    }
+                })
+        }
     }
-        // setState({
-        //     ...state,
-        //     latitud: position.coords.latitude,
-        //     longitud: position.coords.longitude,
-        //     desafioId: referencia.idDesafio,
-
-        // })
-        // console.log(state) //POST
-        // if (Object.values(errors).filter(x => x === true).length === 0) {
-        // axios.post(`localhost:3001/precios`, 
-        // {
-            //     "latitud": "-34.78014081",
-            //     "longitud": "-58.276012",
-            //     "nombre_negocio": "prueba",
-            //     "direccion_negocio": "av 1 mayo 53 - 25",
-            //     "precio": 33,
-            //     "desafioId": 1,
-            //     "usuarioId": 1,
-            //     "mtsTolera": 100
-            // }
-            // )
-            // .then(resp => resp.json())
-            // .then(json => console.log(json))
-            // axios.post(`ruta`, state)
-            // .then(resp => resp.json())
-            // .then(json => console.log(json.msj))  // Acá me trae el mensaje si se posteo correctamente o no 
-            // Y deberia mostrarlo en un modal con el msj y setear el state
-            // } else {
-            //     console.log("con error")
-            // 
 
     return (
         <form className="FormPostPrice" onSubmit={handleSubmit}>

@@ -9,7 +9,6 @@ function MisDesafios() {
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
     const [referencia, setReferencia] = useState({
-        idCiudad: "",
         idDesafio: ""
     })
     const dispatch = useDispatch();
@@ -22,8 +21,7 @@ function MisDesafios() {
 
     const handleClickOpen = (e) => {
         setReferencia({
-            idCiudad: e.target.name,
-            idDesafio: e.target.value
+            idDesafio: parseInt(e.target.value)
         })
         setModal(!modal)
     }
