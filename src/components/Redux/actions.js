@@ -487,6 +487,9 @@ export const GET_FAMILIA = "GET_FAMILIA";
 export const GET_CATEGORIA = "GET_CATEGORIA";
 export const GET_SUBCATEGORIAS = "GET_SUBCATEGORIAS";
 export const GET_UNIDAD_MEDIDAS = "GET_UNIDAD_MEDIDAS";
+export const GET_REGION = 'GET_REGION'
+export const GET_PAIS = 'GET_PAIS'
+export const GET_MONEDA = 'GET_MONEDA'
 
 export function getFamilia() {
   return function(dispatch) {
@@ -528,6 +531,39 @@ export function getUnidadMedida() {
     axios.get(`http://localhost:3001/getadmin/um`).then((response) => {
       dispatch({
         type: GET_UNIDAD_MEDIDAS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getRegion() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/region`).then((response) => {
+      dispatch({
+        type: GET_REGION,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getPais() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/pais`).then((response) => {
+      dispatch({
+        type: GET_PAIS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getMoneda() {
+  return function(dispatch) {
+    axios.get(`http://localhost:3001/getadmin/moneda`).then((response) => {
+      dispatch({
+        type: GET_MONEDA,
         payload: response.data,
       });
     });
