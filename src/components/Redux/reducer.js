@@ -25,8 +25,12 @@ import {
   GET_CATEGORIA,
   GET_GENEROS, 
   GET_TIPO_USUARIO,
-  GET_PAISES, 
-  GET_CIUDADES, 
+  GET_PAISES,
+  GET_CIUDADES,
+  GET_REGION,
+  GET_PAIS,
+  GET_MONEDA,
+  OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
   REGISTRO_ERROR,
@@ -156,7 +160,10 @@ const initialState = {
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
-  
+  pais: [],
+  region: [],
+  moneda: [],
+  //-------------ADMIN-------------//
 };
 
 //-------------ADMIN-------------//
@@ -335,6 +342,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         unidad_medida: action.payload,
       };
+    case GET_REGION:
+      return {
+        ...state,
+        region: action.payload,
+      };
+    case GET_PAIS:
+      return {
+        ...state,
+        pais: action.payload,
+      };
+    case GET_MONEDA:
+      return {
+        ...state,
+        moneda: action.payload,
+      };
+
     //-------------ADMIN-------------//
     default:
       return state;

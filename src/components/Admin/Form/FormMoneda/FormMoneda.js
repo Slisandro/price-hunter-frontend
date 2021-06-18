@@ -36,7 +36,6 @@ function FormMoneda() {
       });
     }
   };
-
   const {
     register,
     formState: { errors },
@@ -99,15 +98,13 @@ function FormMoneda() {
   return (
     <>
       <div className="contenedorMoneda">
+      <div className="containerForm">
         <header>
           <h1 id="title">Agregar Moneda</h1>
         </header>
         <form
           id="survey-form"
           className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
           // noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
