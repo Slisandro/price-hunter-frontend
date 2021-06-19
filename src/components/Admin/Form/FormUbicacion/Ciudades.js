@@ -44,16 +44,16 @@ function Ciudades() {
   const alerta = useSelector((store) => store.alerta);
   
   const submit = (data, e) => {
-    // e.preventDefault();
+    // // e.preventDefault();
 
-    const nuevaCiudad = {
-      ciudad: ciudad.ciudad,
-      paiseCodigoAlfa: ciudad.paiseCodigoAlfa,
-    };
-    if (!nuevaCiudad.ciudad) {
-      alert("Por favor, ingrese una ciudad");
-      return;
-    }
+    // const nuevaCiudad = {
+    //   ciudad: ciudad.ciudad,
+    //   paiseCodigoAlfa: ciudad.paiseCodigoAlfa,
+    // };
+    // if (!nuevaCiudad.ciudad) {
+    //   alert("Por favor, ingrese una ciudad");
+    //   return;
+    // }
     
     dispatch(ciudadPost(ciudad));
     e.target.reset();

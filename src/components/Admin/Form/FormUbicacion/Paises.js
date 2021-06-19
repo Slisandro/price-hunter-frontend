@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMoneda, getRegion, paisPost } from "../../../Redux/actions";
+import { getMoneda, getRegion, paisPost, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 function Paises() {
   const dispatch = useDispatch();
   const region = useSelector((store) => store.region)
   const moneda = useSelector(store => store.moneda)
-console.log(region)
 
   const [pais, setPais] = useState({
     codigo_alfa: "",
@@ -16,25 +15,16 @@ console.log(region)
     monedaCodigoMoneda: "",
   });
 
-  
-
   useEffect(() => {
     dispatch(getRegion());
     dispatch(getMoneda())
   }, [dispatch]);
 
-  const [paises, setPaises] = useState(false);
-
-  // const handleButtonPaises = (e) => {
-  //   e.preventDefault();
-  //   setPaises(!paises);
-  // };
-
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(target);
-    // console.log(target.value);
+    
+    
     if (name === "nombre_pais") {
       setPais({
         ...pais,
@@ -64,7 +54,7 @@ console.log(region)
       });
     }
   };
- console.log(pais)
+ 
   const {
     register,
     formState: { errors },
@@ -74,8 +64,7 @@ console.log(region)
   const alerta = useSelector((store) => store.alerta); 
 
   const submit = (data, e) => {
-    // e.preventDefault();
-    console.log(data) 
+    
  if(pais.codigo_alfa && pais.nombre_pais){
     const nuevoPais = {
       codigo_alfa: pais.codigo_alfa.toLocaleUpperCase(),
@@ -84,14 +73,8 @@ console.log(region)
       monedaCodigoMoneda: pais.monedaCodigoMoneda,
     };
 
-    // if (!nuevoPais.nombre_pais) {
-    //   alert("Por favor, ingrese un país");
-    //   return;
-    // }
-
-
-    dispatch(paisPost(nuevoPais));
-    // e.target.reset();
+  dispatch(paisPost(nuevoPais));
+    
     e.target.reset();
     alert("Pais agregado exitosamente!");
     setPais({
@@ -106,14 +89,11 @@ console.log(region)
     <div>
       <form
         id="survey-form"
-        // className="form"
-        noValidate
         onChange={(e) => ChangeInput(e)}
         onSubmit={handleSubmit(submit)}
       >
          {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
-        {/* <div className="divFormPAI"> */}
-        <div>
+         <div>
           <label className="text-label">País</label>
           <input
             className="inp"
@@ -140,7 +120,7 @@ console.log(region)
              <div>  
              <label className="text-label">Codigo</label>
              <input
-            className="btm"
+            className="inp"
             type="text"
             name="codigo_alfa"
             autoComplete="off"
@@ -166,35 +146,45 @@ console.log(region)
              <select
                   name="nombre_region"
                   className="selectTransAgregar"
-                  value={paises.nombre_region}
                   onChange={(e) => ChangeInput(e)}
+                  {...register("nombre_region", {
+                    required: {
+                      value: true,
+                      message: "Debe seleccionar una region",
+                     },
+                   })}
                   >
                   <option></option>
                   {region.map((f) => (
                     <option value={f.nombre_region}>{f.nombre_region}</option>
                   ))}
                 </select>
+                <span className="err">{errors?.nombre_region?.message}</span>
              </div>
              <div>
              <label className="text-label">Moneda</label>
              <select
                   name="codigo_moneda"
                   className="selectTransAgregar"
-                  value={paises.nombre_region}
                   onChange={(e) => ChangeInput(e)}
+                  {...register("codigo_moneda", {
+                    required: {
+                      value: true,
+                      message: "Debe seleccionar una moneda",
+                     },
+                   })}
                   >
                   <option></option>
                   {moneda.map((f) => (
                     <option value={f.codigo_moneda}>{f.codigo_moneda}</option>
                   ))}
                 </select>        
-           
+                <span className="err">{errors?.codigo_moneda?.message}</span>
         </div>
         <button className="btn4" type="submit">
           Agregar
         </button>
-        {/* </div> */}
-      </form>
+       </form>
     </div>
   );
 }
