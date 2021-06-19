@@ -95,16 +95,16 @@ function Cate({ setSwitcher }) {
 
   return (
     <>
-      <div className="divCAT">
-        <h6 id="title3">Categoría</h6>
+      <div className="contenedorFamilia">
+        <h6 id="titleFam">Categoría</h6>
         <>
           <form
-            className="formFAM"
+            className="formFamilia"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={(e) => handleSubmit(e)}
           >
-            <div className="divFormFAM">
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label">Familia</label>
                 <select
@@ -113,13 +113,14 @@ function Cate({ setSwitcher }) {
                   value={fam.nombre_familia}
                   onChange={(e) => ChangeInput(e)}
                 >
+                  <option></option>
                   {familia.map((f) => (
                     <option value={f.nombre_familia}>{f.nombre_familia}</option>
                   ))}
                 </select>
               </div>
             </div>
-            <div className="divFormCAT">
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label">Categoría</label>
                 <input
@@ -130,7 +131,7 @@ function Cate({ setSwitcher }) {
                 ></input>
               </div>
             </div>
-            <div className="divFormCAT">
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label-desc">* Descripción</label>
                 <input
@@ -141,7 +142,7 @@ function Cate({ setSwitcher }) {
                 ></input>
               </div>
             </div>
-            <button className="btn4" type="submit">
+            <button className="agregarModal" type="submit">
               Agregar Categoría
             </button>
           </form>

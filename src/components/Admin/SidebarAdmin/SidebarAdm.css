@@ -20,6 +20,14 @@
   margin-bottom: 30px;
 }
 
+.sidebar__menu {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
 .sidebar__img {
   display: flex;
   padding-left: 45px;
@@ -112,5 +120,12 @@
   }
   .sidebar__title {
     display: inline;
+  }
+  .sidebar__menu {
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
   }
 }
