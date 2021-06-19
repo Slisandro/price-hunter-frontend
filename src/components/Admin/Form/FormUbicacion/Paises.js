@@ -181,7 +181,7 @@ function Paises() {
                 </select>        
                 <span className="err">{errors?.codigo_moneda?.message}</span>
         </div>
-        <button className="btn4" type="submit">
+        <button className="agregarModal" type="submit">
           Agregar
         </button>
        </form>

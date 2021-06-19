@@ -119,15 +119,15 @@ function Subcate({ setSwitcher }) {
 
   return (
     <>
-      <div className="divSUB">
-        <h6 id="title3">Sub-Categoría</h6>
+      <div className="contenedorFamilia">
+        <h6 id="titleFam">Sub-Categoría</h6>
         <form
-          className="formSUB"
+          className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="divFormCAT">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Categoría</label>
               <select
@@ -136,6 +136,7 @@ function Subcate({ setSwitcher }) {
                 value={cate.nombre_categoria}
                 onChange={(e) => ChangeInput(e)}
               >
+                <option></option>
                 {categoria.map((f) => (
                   <option value={f.nombre_categoria}>
                     {f.nombre_categoria}
@@ -144,7 +145,7 @@ function Subcate({ setSwitcher }) {
               </select>
             </div>
           </div>
-          <div className="divFormCAT">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Sub-Categoría</label>
               <input
@@ -155,7 +156,7 @@ function Subcate({ setSwitcher }) {
               ></input>
             </div>
           </div>
-          <div className="divForm">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label-desc">* Descripción</label>
               <input
@@ -166,7 +167,7 @@ function Subcate({ setSwitcher }) {
               ></input>
             </div>
           </div>
-          <button className="btn6" type="submit">
+          <button className="agregarModal" type="submit">
             Agregar Sub-Categoría
           </button>
         </form>
