@@ -1,16 +1,25 @@
-import React, { useState, Fragment } from "react";
-import { useDispatch } from "react-redux";
-import { tipoTransaccionPost } from "../../../Redux/actions";
+import React, { useState, Fragment, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  tipoTransaccionPost,
+  getTipoTransaccion,
+} from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 import "./FormTransaccion.css";
 
 function FormTransaccion() {
   const dispatch = useDispatch();
+  const transaccion = useSelector((store) => store.transaccion);
 
   const [state, setState] = useState({
     tipo_transaccion: "",
   });
+
+  useEffect(() => {
+    dispatch(getTipoTransaccion());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -77,6 +86,14 @@ function FormTransaccion() {
             Agregar
           </button>
         </form>
+      </div>
+      <div className="contenedorActualesUM">
+        Tipos de Transacción Actuales
+        <div className="tiposUM">
+          {transaccion.map((t) => (
+            <span className="spansUM">{t.tipo_transaccion}</span>
+          ))}
+        </div>
       </div>
     </Fragment>
   );

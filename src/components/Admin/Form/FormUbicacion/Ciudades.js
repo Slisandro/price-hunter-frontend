@@ -15,7 +15,7 @@ function Ciudades() {
     dispatch(getPais());
   }, [dispatch]);
 
-  const paises = useSelector(store => store.pais)
+  const paises = useSelector((store) => store.pais);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -42,7 +42,7 @@ function Ciudades() {
   } = useForm();
 
   const alerta = useSelector((store) => store.alerta);
-  
+
   const submit = (data, e) => {
     // // e.preventDefault();
 
@@ -54,7 +54,7 @@ function Ciudades() {
     //   alert("Por favor, ingrese una ciudad");
     //   return;
     // }
-    
+
     dispatch(ciudadPost(ciudad));
     e.target.reset();
     alert("Ubicación agregada exitosamente!");
@@ -64,18 +64,40 @@ function Ciudades() {
     });
   };
 
-
   return (
     <div>
       <form
-      id="survey-form"
-      // className="form"
-      noValidate
-      onChange={(e) => ChangeInput(e)}
-      onSubmit={handleSubmit(submit)}
-    >
-       {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
+        id="survey-form"
+        // className="form"
+        noValidate
+        onChange={(e) => ChangeInput(e)}
+        onSubmit={handleSubmit(submit)}
+      >
+        {alerta ? (
+          <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
+        ) : null}
         <div>
+          <div className="separador">
+            <label className="text-label">Pais</label>
+            <select
+              name="paiseCodigoAlfa"
+              className="selectTransAgregar"
+              value={paises.nombre_region}
+              onChange={(e) => ChangeInput(e)}
+              {...register("paiseCodigoAlfa", {
+                required: {
+                  value: true,
+                  message: "Debe seleccionar un pais",
+                },
+              })}
+            >
+              <option></option>
+              {paises.map((f) => (
+                <option value={f.codigo_alfa}>{f.nombre_pais}</option>
+              ))}
+            </select>
+            <span className="err">{errors?.paiseCodigoAlfa?.message}</span>
+          </div>
           <div>
             <label className="text-label">Ciudad</label>
             <input
@@ -83,45 +105,24 @@ function Ciudades() {
               type="text"
               name="ciudad"
               autoComplete="off"
-                {...register("ciudad", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un nombre para el ciudad",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "El Nombre no debe tener mas de diez caracteres",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "El nombre no debe tener menos de tres caracteres",
-                  },
-                })}
-           />
+              {...register("ciudad", {
+                required: {
+                  value: true,
+                  message: "Debe ingresar un nombre para el ciudad",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "El Nombre no debe tener mas de diez caracteres",
+                },
+                minLength: {
+                  value: 3,
+                  message: "El nombre no debe tener menos de tres caracteres",
+                },
+              })}
+            />
             <span className="err">{errors?.ciudad?.message}</span>
           </div>
-          <div>
-             <label className="text-label">Pais</label>
-             <select
-                  name="paiseCodigoAlfa"
-                  className="selectTransAgregar"
-                  value={paises.nombre_region}
-                  onChange={(e) => ChangeInput(e)}
-                     {...register("paiseCodigoAlfa", {
-                       required: {
-                         value: true,
-                         message: "Debe seleccionar un pais",
-                        },
-                      })}
-                      >
-                  <option></option>
-                  {paises.map((f) => (
-                    <option value={f.codigo_alfa}>{f.nombre_pais}</option>
-                  ))}
-                </select>
-                <span className="err">{errors?.paiseCodigoAlfa?.message}</span>
-             </div>
-          <button className="btn4" type="submit">
+          <button className="agregarModal" type="submit">
             Agregar
           </button>
         </div>
