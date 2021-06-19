@@ -1,32 +1,58 @@
 .miMonedero {
     width: 90%;
     margin: auto;
+    color: white;
 }
 
 .miMonedero .misPuntos {
-    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    flex-direction: column;
     margin: auto;
 }
 
 .miMonedero .misPuntos h2 {
-    
+    font-size: 3em;
+    text-transform: uppercase;
+}
+
+.miMonedero .misPuntos .actual {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.miMonedero .misPuntos .actual .pointsActual {
+    font-size: 4em;
+    margin: 0;
+    color: green;
+    font-weight: 900;
+    font-family: sans-serif;
+    margin: 0 5%;
+}
+
+.miMonedero .misPuntos .actual .puntos {
+    font-weight: 600;
+    font-family: sans-serif;
 }
 
 .miMonedero .movimientos {
-    width: 60%;
-    border: 1px solid rgba(0,0,0,.5);
-    margin: auto
+    width: 90%;
+    margin: auto;
 }
 
 .miMonedero .movimientos .titleMovimientos {
-    text-align: center;
+    text-align: left;
     font-size: 2em;
     text-transform: uppercase;
 }
 
 .miMonedero .movimientos .listTransaccion {
-    width: 100%;
-    /* margin: auto; */
+    width: 80%;
+    margin: auto;
     padding: 0;
 }
 
@@ -34,6 +60,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 1em;
+    margin: 1% 0;
 }
 
 .miMonedero .movimientos .listTransaccion .transaccion .title {
@@ -47,4 +76,22 @@
 
 .miMonedero .movimientos .listTransaccion .transaccion .mas {
     color: green;
+}
+
+.miMonedero .movimientos button {
+    background: green;
+    border: 1px solid green;
+    width: 20%;
+    height: 7vh;
+    margin: 2% 0;
+    margin-left: 70%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    border-radius: .5em;
+}
+
+.miMonedero .movimientos button:hover {
+    opacity: .5;
 }

@@ -110,6 +110,19 @@
     font-size: 25px;
 }
 
+#mainUser {
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+    grid-area: main;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#nameUser {
+    position: relative;
+}
+
 /* .main__title form {
     width: 40%;
     display: flex;
