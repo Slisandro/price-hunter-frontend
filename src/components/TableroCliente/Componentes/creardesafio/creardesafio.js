@@ -123,9 +123,6 @@ function CrearDesafio() {
 
           </div>
 
-          {/* <div className="form-cliente-crear-desafio-div" id="form-cliente-div2" >
-          </div> */}
-
         </form>
         <FormCiudades handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
     </div>
