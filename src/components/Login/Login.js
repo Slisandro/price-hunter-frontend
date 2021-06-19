@@ -2,6 +2,7 @@
 import React, { useState,useEffect } from 'react';
 // import { Button } from 'react-bootstrap';
 // import {useSelector, useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom'
 import { Link } from "react-router-dom";
 import "./Login.css";
 import aguila from "../../assets/aguila.png";
@@ -16,7 +17,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 const Login = (props) => {
-
+  console.log(props)
+  const history = useHistory()
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
@@ -33,7 +35,7 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      props.history.push('/tablero');
+      history.push('/tablero');
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);

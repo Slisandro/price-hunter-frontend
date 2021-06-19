@@ -18,7 +18,7 @@ const Main = ({ state, setState }) => {
   }, [])
 
   return (
-    <main className="main">
+    <main className="main" id="mainUser">
       <div className="main__container">
         <div className="main__title">
           <NavBarMain

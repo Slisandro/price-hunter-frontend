@@ -14,11 +14,11 @@ function Monedero() {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/transacciones/${1}`)
-        .then(json => {
-            console.log(json.data)
-            setMovimientos(json.data)
-            setLoading(false);
-        })
+            .then(json => {
+                console.log(json.data)
+                setMovimientos(json.data)
+                setLoading(false);
+            })
     }, [])
 
     return (
@@ -28,8 +28,10 @@ function Monedero() {
             <div className="miMonedero">
                 <div className="misPuntos">
                     <h2>Mis puntos</h2>
-                    <p className="pointsActual">{actualPoints(movimiento)}</p>
-                    <p>puntos</p>
+                    <div className="actual">
+                        <p className="pointsActual">{actualPoints(movimiento)}</p>
+                        <p className="puntos">puntos</p>
+                    </div>
                 </div>
                 <div className="movimientos">
                     <h2 className="titleMovimientos">Mis movimientos</h2>
@@ -48,6 +50,7 @@ function Monedero() {
                         }
                         )}
                     </ul>
+                    <button>Canjear puntos</button>
                 </div>
             </div>
     )
