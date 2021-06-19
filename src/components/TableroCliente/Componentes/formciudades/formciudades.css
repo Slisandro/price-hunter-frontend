@@ -1,0 +1,48 @@
+#hola{
+    width: 50vw;
+}
+
+#form-cliente-crear-desafio-ciudades{
+    display: grid;
+    grid-template-columns: 1fr;
+
+    background-color: #ebebeb;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow:  0 0 1px 0 rgb(0 0 0 / 5%), 0 1px 2px 0 rgb(0 0 0 / 15%);
+
+    width: 100%;
+    min-height: 8vh;
+}
+
+#div-form-cliente-ciudades{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: #ebebeb;
+    padding: 0.5rem;
+    border-radius: 10px;
+    box-shadow:  0 0 1px 0 rgb(0 0 0 / 5%), 0 1px 2px 0 rgb(0 0 0 / 15%);
+
+    width: 100%;
+    min-height: 52vh;
+}
+
+#inputs-bttn-ciudades{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.lista-ciudades-agregadas{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+
+    border: 1px solid black;
+    border-radius: 10px;
+}

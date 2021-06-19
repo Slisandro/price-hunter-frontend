@@ -12,6 +12,7 @@ import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
+import TableroCLiente from "./components/TableroCliente/index";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
         {/* <TableroEmpresa/> */}
+        <Route path="/tablerocliente" component={TableroCLiente} />
       </Switch>
     </Router>
   );

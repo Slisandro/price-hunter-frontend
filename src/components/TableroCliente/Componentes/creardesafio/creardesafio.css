@@ -1,0 +1,70 @@
+#conteiner-cliente-crear-desafio{
+    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+    width: 100vw;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#form-cliente-crear-desafio{
+    display: grid;
+    grid-template-columns: 1fr;
+
+    background-color: #ebebeb;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow:  0 0 1px 0 rgb(0 0 0 / 5%), 0 1px 2px 0 rgb(0 0 0 / 15%);
+
+    width: 40%;
+    min-height: 60vh;
+}
+
+@media only screen and (max-width: 980px) {
+    #form-cliente-crear-desafio{
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-cliente-crear-desafio-div{
+    background-color: white;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    
+    display: flex;
+    align-items: cent;
+    justify-content:space-around;
+    flex-direction: column;
+}
+
+#fechas-desafio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#productos-bttn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#select-productos{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 980px) {
+    #fechas-desafio{
+        flex-direction: column;
+    }
+}
+
+#form-cliente-div2{
+    justify-content:start
+
+}
