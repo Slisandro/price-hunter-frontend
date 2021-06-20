@@ -194,6 +194,7 @@ function FormMoneda() {
           </div>
         </form>
       </div>
+    </div>
     </>
   );
 }
