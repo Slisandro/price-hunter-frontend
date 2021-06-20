@@ -20,8 +20,7 @@ function Ciudades() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(name);
-    console.log(target.value);
+  
     if (name === "ciudad") {
       setCiudad({
         ...ciudad,
@@ -44,16 +43,6 @@ function Ciudades() {
   const alerta = useSelector((store) => store.alerta);
   
   const submit = (data, e) => {
-    // // e.preventDefault();
-
-    // const nuevaCiudad = {
-    //   ciudad: ciudad.ciudad,
-    //   paiseCodigoAlfa: ciudad.paiseCodigoAlfa,
-    // };
-    // if (!nuevaCiudad.ciudad) {
-    //   alert("Por favor, ingrese una ciudad");
-    //   return;
-    // }
     
     dispatch(ciudadPost(ciudad));
     e.target.reset();
@@ -69,7 +58,6 @@ function Ciudades() {
     <div>
       <form
       id="survey-form"
-      // className="form"
       noValidate
       onChange={(e) => ChangeInput(e)}
       onSubmit={handleSubmit(submit)}
