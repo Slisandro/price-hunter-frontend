@@ -45,12 +45,12 @@ const Registro = (props) => {
     numero_de_cuenta: "",
     tipoUsuarioId: "",
     password: "",
-    
+
     confirmar: "",
 
   })
 
-  const { email, nombre, apellido, fecha_de_nacimiento,  metodo_de_cobro, password, confirmar,generoId, ciudadId,banco,numero_de_cuenta,tipoUsuarioId} = registro;
+  const { email, nombre, apellido, fecha_de_nacimiento, metodo_de_cobro, password, confirmar, generoId, ciudadId, banco, numero_de_cuenta, tipoUsuarioId } = registro;
 
 
 
@@ -238,7 +238,7 @@ const Registro = (props) => {
             <option value="">-</option>
             {generos ? generos.map(genero => (
               <option key={genero.id} value={genero.id}>{genero.genero}</option>
-            )):("")}
+            )) : ("")}
           </select>
 
 
@@ -256,24 +256,24 @@ const Registro = (props) => {
             metodo_de_cobro !== "" ?
               (metodo_de_cobro === "CBU" ? (
                 <>
-                <label>Ingrese su banco</label>
-                <input
-                  className="input__registro"
-                  type="text"
-                  placeholder="Ingrese su banco"
-                  name="banco"
-                  onChange={handleInputRegister}
-                />
-                <label>Ingrese su numero de cuenta</label>
-                <input
-                  className="input__registro"
-                  type="text"
-                  placeholder="Ingrese su numero de cuenta"
-                  name="numero_de_cuenta"
-                  onChange={handleInputRegister}
-                />
+                  <label>Ingrese su banco</label>
+                  <input
+                    className="input__registro"
+                    type="text"
+                    placeholder="Ingrese su banco"
+                    name="banco"
+                    onChange={handleInputRegister}
+                  />
+                  <label>Ingrese su numero de cuenta</label>
+                  <input
+                    className="input__registro"
+                    type="text"
+                    placeholder="Ingrese su numero de cuenta"
+                    name="numero_de_cuenta"
+                    onChange={handleInputRegister}
+                  />
                 </>
-                
+
               ) : (
                 metodo_de_cobro === "Mercado Pago" ?
                   <input
@@ -301,7 +301,7 @@ const Registro = (props) => {
             <option value="">-</option>
             {tipo_usuarios ? tipo_usuarios.map(item => (
               <option key={item.id} value={item.id}>{item.tipo_usuario}</option>
-            )):("")}
+            )) : ("")}
           </select>
 
 
@@ -321,7 +321,7 @@ const Registro = (props) => {
             <option value="">-</option>
             {ciudades ? ciudades.map(item => (
               <option key={item.id} value={item.id}>{item.ciudad}</option>
-            )):("")}
+            )) : ("")}
           </select>
 
 
