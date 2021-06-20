@@ -29,7 +29,7 @@ const Sidebar = (props) => {
 
         <div className="sidebar__link">
           <i className="fa fa-user-secret"></i>
-          <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Mis Movimientos</button>
+          <button value={"Movimientos"} onClick={() => props.setState("Movimientos")}>Mis Movimientos</button>
         </div>
 
         <div className="sidebar__link">

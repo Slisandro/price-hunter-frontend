@@ -81,6 +81,13 @@ header {
   height: 80%;
 }
 
+.selectTrans {
+  color: black;
+  width: 10rem;
+  height: 2.2rem;
+  border-radius: var(--radius);
+}
+
 .submitForm {
   height: 2rem;
   margin-top: 2rem;
@@ -89,4 +96,8 @@ header {
   font-size: 1.1rem;
   border: none;
   cursor: pointer;
+}
+
+.err {
+  color: aliceblue;
 }

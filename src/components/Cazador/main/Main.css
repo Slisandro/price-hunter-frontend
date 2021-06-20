@@ -24,8 +24,6 @@
     border-bottom: 1px solid #f3f3f3;
 }
 
-
-
 #container-welcome {
     display: flex;
     align-items: center;
@@ -112,6 +110,19 @@
     font-size: 25px;
 }
 
+#mainUser {
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+    grid-area: main;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#nameUser {
+    position: relative;
+}
+
 .box {
     margin-left: 340px;
 }
@@ -121,7 +132,6 @@ input {
     display: inline-block;
     font-size: 14px;
     transition: .5s;
-    
 }
 
 .input__text[type="text"] {

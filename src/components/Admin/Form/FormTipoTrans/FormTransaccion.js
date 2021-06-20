@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import {} from "../../Redux/actions";
-// import { Link } from "react-router-dom";
-// import logo from "../../assets/aguila.png";
+import React, { useState, Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { tipoTransaccionPost } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
+
 import "./FormTransaccion.css";
 
 function FormTransaccion() {
   const dispatch = useDispatch();
-  const ubicaciones = useSelector((store) => store.ubicaciones);
 
   const [state, setState] = useState({
     tipo_transaccion: "",
@@ -16,97 +15,70 @@ function FormTransaccion() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    if (name === "ubicacion") {
-      const arr = state[name];
-      setState({
-        ...state,
-        [name]: arr.concat(target.value),
-      });
-    } else {
+
+    if (name === "tipo_transaccion") {
       setState({
         ...state,
         [name]: target.value,
       });
     }
   };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  useEffect(() => {
-    // dispatch(getUbicaciones());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const nuevoTipoTransaccion = {
-      tipo_transaccion: state.tipo_transaccion,
-    };
-
-    if (!nuevoTipoTransaccion.tipo_transaccion) {
-      alert("Por favor, ingrese un tipo de transacción");
-      return;
-    }
-
-    // dispatch(crearProducto(nuevoProducto));
+  const submit = (data, e) => {
+    dispatch(tipoTransaccionPost(state));
     e.target.reset();
     alert("Tipo de Transacción agregado con éxito!");
 
     setState({
+      ...state,
       tipo_transaccion: "",
     });
   };
 
   return (
-    <>
-      <div className="containerForm">
-        <header>
-          <h1 id="title">Agregar Tipo de Transacción</h1>
-        </header>
+    <Fragment>
+      <div className="contenedorTransacciones">
+        <h6 id="titleTran">Agregar Tipo de Transacción</h6>
         <form
-          id="survey-form"
-          className="form"
-          noValidate
+          className="formFamilia"
           onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(submit)}
         >
-          <div className="divForm">
+          <div className="divTransacciones">
             <div>
               <label className="text-label">Tipo de Transacción</label>
-              {/* <input
-                className="btm"
+              <input
+                className="inp"
                 type="text"
                 name="tipo_transaccion"
-                value={state.tipo_transaccion}
-              ></input> */}
-              <select
-                name="tipo_transaccion"
-                value={state.tipo_transaccion}
-                onChange={(e) => ChangeInput(e)}
-              >
-                <option value={state.tipo_transaccion}>Puntos Ganados</option>
-                <option value={state.tipo_transaccion}>Puntos Retirados</option>
-              </select>
+                autoComplete="off"
+                {...register("tipo_transaccion", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar un tipo de transaccion",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "Mínimo 3 carácteres",
+                  },
+                })}
+              />
+              <span className="err">
+                {errors.tipo_transaccion && errors.tipo_transaccion.message}
+              </span>
             </div>
-            {/* <div>
-                <ul className="ulubi">
-                  {ubicaciones.map((t) => (
-                    <li key={t.id}>
-                      <input
-                        className="input"
-                        type="checkbox"
-                        name="ubicacion"
-                        value={t.nombre}
-                      ></input>
-                      <label nombre={t}>{t.nombre}</label>
-                    </li>
-                  ))}
-                </ul>
-              </div> */}
-            <button type="submit">Agregar</button>
           </div>
+          <button className="agregarModal" type="submit">
+            Agregar
+          </button>
         </form>
       </div>
-    </>
+    </Fragment>
   );
 }
 

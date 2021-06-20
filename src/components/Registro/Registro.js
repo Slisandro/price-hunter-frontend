@@ -4,7 +4,7 @@ import { mostrarError } from '../Redux/actions';
 import { Link } from "react-router-dom";
 import "./Registro.css";
 import aguila from "../../assets/aguila.png";
-import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades } from '../Redux/actions';
+import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades} from '../Redux/actions';
 
 // import axios from 'axios';
 
@@ -24,6 +24,7 @@ const Registro = (props) => {
 
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
+ 
 
 
   const dispatch = useDispatch();
@@ -59,10 +60,11 @@ const Registro = (props) => {
 
   useEffect(() => {
     if (autenticado) {
-      props.history.push("/tablero")
+      props.history.push("/login")
+      
     }
     if (mensaje) {
-      dispatch(mostrarError('Error en el apellido enviado', 'alerta-error'))
+      dispatch(mostrarError(mensaje.msg, mensaje.categoria))
     }
 
   }, [mensaje, autenticado, props.history, dispatch])
@@ -77,10 +79,6 @@ const Registro = (props) => {
     dispatch(getGeneros())
     dispatch(getTipoUsuario())
     dispatch(getPaises())
-
-
-
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -224,12 +222,6 @@ const Registro = (props) => {
             value={fecha_de_nacimiento}
             onChange={handleInputRegister}
           />
-
-
-
-
-
-
 
 
 
