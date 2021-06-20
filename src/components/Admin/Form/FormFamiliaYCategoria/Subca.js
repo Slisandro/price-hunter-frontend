@@ -5,6 +5,7 @@ import {
   getCategorias,
   subcategoriaPost,
   getSubcategoria,
+  mostrarError,
 } from "../../../Redux/actions";
 
 function Subcate({ setSwitcher }) {
@@ -12,6 +13,7 @@ function Subcate({ setSwitcher }) {
   const categoria = useSelector((store) => store.categoria);
   const categorias = useSelector((store) => store.categorias);
   const subcategoria = useSelector((store) => store.subcategoria);
+  const alerta = useSelector((store) => store.alerta);
 
   // var mapeado = categorias.map((c) => c);
   // var mapeado1 = mapeado.map((array) => array);
@@ -81,7 +83,6 @@ function Subcate({ setSwitcher }) {
         [name]: target.value,
       });
     }
-    // console.log(subcate);
   };
 
   const handleSubmit = (e) => {
@@ -105,6 +106,13 @@ function Subcate({ setSwitcher }) {
       return;
     }
 
+    if (!isNaN(parseInt(nuevaSubcate.nombre_subcategoria))) {
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
+      return;
+    }
+
     dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
@@ -119,14 +127,16 @@ function Subcate({ setSwitcher }) {
 
   return (
     <>
-      <div className="contenedorFamilia">
-        <h6 id="titleFam">Sub-Categoría</h6>
+      <div>
         <form
           className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
           <div className="divFormFamilia">
             <div>
               <label className="text-label">Categoría</label>
@@ -160,7 +170,7 @@ function Subcate({ setSwitcher }) {
             <div>
               <label className="text-label-desc">* Descripción</label>
               <input
-                className="btm-desc"
+                className="inp6"
                 type="text"
                 name="descripcion"
                 value={subcate.descripcion}
