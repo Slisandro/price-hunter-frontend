@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap");
+#sidebarr {
+  background: #24244b;
+  grid-area: sidebar;
+  overflow-y: hidden;
+
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-right: 1px solid #ffffff;
+  font-family: "Catamaran", sans-serif !important;
+}
+
+.sidebar__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  margin-bottom: 30px;
+}
+
+.sidebar__menu {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.sidebar__img {
+  display: flex;
+  padding-left: 45px;
+}
+
+.sidebar__title > div > img {
+  width: 50px;
+  object-fit: contain;
+}
+
+.sidebar__title > div > h1 {
+  font-size: 28px;
+  display: inline;
+}
+
+.sidebar__title > i {
+  font-size: 18px;
+  display: none;
+}
+
+.sidebar__link {
+  color: #fbfdff;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.sidebar__link button {
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+.active_menu_link {
+  background: #0d1029;
+  color: azure;
+}
+
+.active_menu_link a {
+  color: #ffffff !important;
+  /* font-size: 20px;
+    padding-left: 40px;
+    font-weight: lighter; */
+}
+
+.sidebar__link > a {
+  text-decoration: none;
+  color: #a7ada5;
+  font-weight: 700;
+}
+
+.sidebar__link > i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar__logout {
+  margin-top: 20px;
+  padding: 10px;
+  color: #e65061;
+}
+
+.sidebar__logout > a {
+  text-decoration: none;
+  color: #e65061;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.sidebar__logout > i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.sidebar-responsivee {
+  display: inline !important;
+  z-index: 10000 !important;
+  left: 0 !important;
+  position: absolute;
+}
+
+@media only screen and (max-width: 978px) {
+  #sidebar {
+    display: none;
+    height: 95vh;
+    border: none;
+  }
+  .sidebar__img {
+    padding-left: 25px;
+  }
+  .sidebar__title {
+    display: inline;
+  }
+  .sidebar__menu {
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+}

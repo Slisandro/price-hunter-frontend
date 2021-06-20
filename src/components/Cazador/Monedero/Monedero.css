@@ -1,0 +1,114 @@
+.miMonedero {
+    width: 90%;
+    margin: auto;
+    color: white;
+}
+
+.miMonedero .misPuntos {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 30%;
+    flex-direction: column;
+    margin: auto;
+}
+
+.miMonedero .misPuntos h2 {
+    font-size: 3em;
+    text-transform: uppercase;
+}
+
+.miMonedero .misPuntos .actual {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.miMonedero .misPuntos .actual .pointsActual {
+    font-size: 4em;
+    margin: 0;
+    color: green;
+    font-weight: 900;
+    font-family: sans-serif;
+    margin: 0 5%;
+}
+
+.miMonedero .misPuntos .actual .puntos {
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
+.miMonedero .movimientos {
+    width: 90%;
+    margin: auto;
+}
+
+.miMonedero .movimientos .titleMovimientos {
+    text-align: left;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.miMonedero .movimientos .listTransaccion {
+    width: 80%;
+    margin: auto;
+    padding: 0;
+}
+
+.miMonedero .movimientos .listTransaccion .transaccion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 1em;
+    margin: 1% 0;
+}
+
+.miMonedero .movimientos .listTransaccion .transaccion .title {
+    width: 80%;
+    font-size: 1.2em;
+}
+
+.miMonedero .movimientos .listTransaccion .transaccion .menos {
+    color: red;
+}
+
+.miMonedero .movimientos .listTransaccion .transaccion .mas {
+    color: green;
+}
+
+.miMonedero .movimientos button {
+    background: green;
+    border: 1px solid green;
+    width: 20%;
+    height: 7vh;
+    margin: 2% 0;
+    margin-left: 70%;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    border-radius: .5em;
+}
+
+.miMonedero .movimientos button:hover {
+    opacity: .5;
+}
+
+#modalRetiroPoints {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    z-index: 10;
+    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+    border: 2px solid rgb(1, 247, 234);
+    width: 40%;
+    height: 50%;
+    border-radius: 1em;
+    z-index: 1000;
+}

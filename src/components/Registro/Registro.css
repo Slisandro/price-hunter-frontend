@@ -13,7 +13,7 @@
   }
   
   .register__container {
-    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+    background: radial-gradient(circle, #343e8b 0%, #02041b 100%);
     border: 2px solid rgb(1, 247, 234);
     border-radius: 40px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 50%;
+    height: 75%;
     padding: 80px 70px 100px 80px;
   
   }
@@ -40,13 +40,15 @@
   .registro__start .p{
       font-weight: bold;
       color: rgb(155, 238, 238);
+      
   }
   .logo__register{
-    width: 4em;
+    width: 3em;
    
 }
   .register__container h2{
     color: rgb(227, 243, 4);
+    font-size: 1.3em;
    
 }
   
@@ -63,21 +65,21 @@
 
 
   .register__container--form .input__registro{
-    background: cornsilk;
+    background: #fff8dc;
     width: 240px ;
-    height: 35px;
+    height: 28px;
     border: none;
     outline: none;
     padding: 0 25px;
-    border-radius: 1em;
+    border-radius: .2em;
     margin-bottom: 1rem;
 
   }
 
   .button__registro{
-    border-radius: 1em;
+    border-radius: .2em;
     width: 21.8em;
-    height: 35px;
+    height: 29px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -106,7 +108,7 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
     padding-top: 2%;
-    padding-bottom: 2%;
+    padding-bottom: 1%;
     transition: .6s;
   }
 
@@ -114,3 +116,79 @@
     background:#769603;
    
   }
+
+
+  .alerta-ok {
+    background-color: rgb(109, 211, 109);
+    color: rgb(2, 103, 2);
+  }
+  .alerta-error {
+    background-color: rgb(255, 19, 19);
+    color: #f0f8f8;
+    font-weight: bold;
+    border-radius: .2em;
+    
+  }
+  
+
+
+
+
+
+
+select {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:0!important;
+  background: #b8baca;
+  background-image: none;
+  
+ 
+  color:rgb(253, 253, 253);
+  cursor:pointer;
+  font-size: 1em;
+  font-family: 'Catamaran', sans-serif;
+
+  
+  
+}
+select::-ms-expand {
+  display: none;
+ 
+}
+.select {
+  position: relative;
+  display: flex;
+  padding: 0 25px;
+  line-height: 1.8;
+  background: #fff8dc;
+  overflow: hidden;
+  border-radius: .2em;
+  color: #000000;
+ 
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 .5em;
+  background: #e459e9;
+  cursor:pointer;
+  pointer-events:none;
+  transition:.25s all ease;
+
+}
+.select:hover::after {
+  color: #ad27ad;
+  
+}
+
+
+.last{
+  margin-bottom: 2.5em;
+}

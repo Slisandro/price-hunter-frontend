@@ -1,0 +1,47 @@
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5%;
+}
+
+.cardsContainer .card {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5% auto;
+}
+
+.cardsContainer .card img.card-img-top {
+    width: 100%;
+    border-radius: 1em 1em 0 0;
+}
+
+.cardsContainer .card .card-body {
+    width: 100%;
+    background: white;
+    border-radius: 0 0 1em 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    padding: 5% 0;
+}
+
+.cardsContainer .card .card-body .card-title.h5 {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+.cardsContainer .card .card-body p.card-text {
+    font-size: 1em;
+    font-family: sans-serif;
+    font-weight: 700;
+    padding: 0 1.5%;
+}
+
+.cardsContainer .card .card-body button.btn.btn-primary {
+    font-size: 1em;
+    font-family: sans-serif;
+}
