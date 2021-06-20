@@ -11,9 +11,9 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
-import TableroEmpresa from "./components/TableroEmpresas/TableroEmpresa";
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
+import Modal from "./components/Registro/Modal";
 
 
 
@@ -34,6 +34,7 @@ function App() {
         <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
+        <Route exact path="/terminos-condiciones" component={Modal}/>
       </Switch>
     </Router>
   );

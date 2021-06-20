@@ -252,13 +252,14 @@ export function iniciarSesion(datos) {
 export const cerrarSesion = () => {
   return function(dispatch) {
     dispatch({
-      type: CERRAR_SESION,
-    });
-  };
-};
 
-{
-  /*
+      type: CERRAR_SESION
+    })
+  }
+}
+
+
+{/*
   return function(dispatch) {
     axios
       .post("http://localhost:3001/usuarios/ingreso", datos)
