@@ -350,6 +350,14 @@ header {
   background-color: white;
   color: black;
 }
+.inp6 {
+  height: 1.3rem;
+  width: 15rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius);
+  background-color: white;
+  color: black;
+}
 
 #titleFam {
   font-size: 1.3rem;

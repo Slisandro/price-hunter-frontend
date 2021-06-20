@@ -118,6 +118,15 @@ header {
   background-color: white;
 }
 
+.inp5 {
+  height: 2.2rem;
+  width: 10rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius);
+  background-color: white;
+  color: black;
+}
+
 /* .divFormAgregar {
   background-color: green;
 } */

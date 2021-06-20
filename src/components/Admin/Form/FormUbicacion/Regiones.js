@@ -38,7 +38,9 @@ function Regiones() {
       nombre_region: region.nombre_region,
     };
     if (!isNaN(parseInt(nuevaRegion.nombre_region))) {
-       dispatch(mostrarError("El nombre no debe contener numeros",'alerta-error'));
+      dispatch(
+        mostrarError("El nombre no debe contener numeros", "alerta-error")
+      );
       return;
     }
     dispatch(regionPost(nuevaRegion));
@@ -52,41 +54,42 @@ function Regiones() {
   return (
     <div>
       <form
-      id="survey-form"
-      className="form"
-      // noValidate
-      onChange={(e) => ChangeInput(e)}
-      onSubmit={handleSubmit(submit)}
+        id="survey-form"
+        className="form"
+        // noValidate
+        onChange={(e) => ChangeInput(e)}
+        onSubmit={handleSubmit(submit)}
       >
-       
-            <label className="text-label">Región</label>
-            <input
-              className="inp"
-              type="text"
-              name="nombre_region"
-              autoComplete="off"
-                {...register("nombre_region", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un Nombre Region ",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "El Nombre no debe tener mas de diez caracteres",
-                  },
-                  minLength: {
-                    value: 2,
-                    message: "El Nombre no debe tener menos de dos caracteres",
-                  },
-                })}
-           />
-             <span className="err">{errors?.nombre_region?.message}</span>
-             {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
-           
-          <button className="btn4" type="submit">
-            Agregar
-          </button>
-        
+        <div className="separador">
+          <label className="text-label">Región</label>
+          <input
+            className="inp"
+            type="text"
+            name="nombre_region"
+            autoComplete="off"
+            {...register("nombre_region", {
+              required: {
+                value: true,
+                message: "Ingrese una Region ",
+              },
+              maxLength: {
+                value: 10,
+                message: "El Nombre no debe tener mas de diez caracteres",
+              },
+              minLength: {
+                value: 2,
+                message: "El Nombre no debe tener menos de dos caracteres",
+              },
+            })}
+          />
+          <span className="err">{errors?.nombre_region?.message}</span>
+          {alerta ? (
+            <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
+          ) : null}
+        </div>
+        <button className="agregarModal" type="submit">
+          Agregar
+        </button>
       </form>
     </div>
   );
