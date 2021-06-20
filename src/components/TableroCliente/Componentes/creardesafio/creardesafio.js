@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "./creardesafio.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { product } from 'prelude-ls';
 import FormCiudades from "../formciudades/formciudades";
@@ -40,6 +41,7 @@ function CrearDesafio() {
     img: "https://www.latinflores.com/imagenes/productos/CANAVI004_L.jpg"
   });
   const [productosState, setProductosState] = useState([]);
+  const [mensajeState, setMensajeState] = useState("");
   //-------------------------------//
 
 
@@ -79,6 +81,8 @@ function CrearDesafio() {
     })
   }
 
+  //-------FUNCIONES CALLBAKC PARA FORM_CIUDADES------//
+  //--------------------------------------------------//
   //-----funcion callback para pushear state.ciudades----//
   function handleChangeCiudades(obj_ciudad){
     // console.log(obj_ciudad)
@@ -88,43 +92,70 @@ function CrearDesafio() {
       ciudades: state.ciudades.concat([obj_ciudad])
     })
   }
+  //----funcion callback para eliminar una ciudad de la lista----//
+  function handleEliminarCiudad(e){
+    setState({
+      ...state,
+      ciudades: state.ciudades.filter((ciudad)=>ciudad.id!==parseInt(e.target.value))
+    })
+  }
+  //--------------------------------------------------//
+  //--------------------------------------------------//
 
   async function handleSubmit(e){
     e.preventDefault();
     const respuesta_creardesafio = await axios.post("http://localhost:3001/creardesafio", state) 
-    console.log(respuesta_creardesafio.data)
+    setMensajeState(respuesta_creardesafio.data.msg)
   }
 
-
+  console.log(mensajeState)
   
   return (
+    <div id="div-superior-terneario" >
+    {
+      mensajeState ? 
+        <div id="div-bttn-y-mensaje-ternario" >
+          <Link to="/tablerocliente/principal" > <button>Volver al Panel</button> </Link>
+          <div id="div-mensaje-de-respuesta-creardesafio" > <p>{mensajeState}</p> </div>
+        </div> 
+      
+      :
 
-    <div id="conteiner-cliente-crear-desafio" >
-
-        <form id="form-cliente-crear-desafio" onSubmit={(e)=>{handleSubmit(e)}} > 
-
-          <div className="form-cliente-crear-desafio-div" >
-
-            <input type="text" placeholder="Nombre del Desafío" name="nombre" value={state.nombre} onChange={(e)=>{handleChangeNombre(e)}} />
-            <textarea placeholder="Descripción del Desafío." name="descripcion" onChange={(e)=>{handleChangeNombre(e)}} />
-
-            <div id="fechas-desafio" >
-
-              <input type="date" min={fecha_min} name="fechainicial" onChange={(e)=>{handleChangeNombre(e)}} />
-              <input type="date" min={fecha_min} name="fechafinal" onChange={(e)=>{handleChangeNombre(e)}} />
-
+      <div id="conteiner-cliente-crear-desafio" >
+  
+          <form id="form-cliente-crear-desafio" onSubmit={(e)=>{handleSubmit(e)}} > 
+  
+            <div className="form-cliente-crear-desafio-div" >
+  
+              <input type="text" placeholder="Nombre del Desafío" name="nombre" value={state.nombre} onChange={(e)=>{handleChangeNombre(e)}} />
+              <textarea placeholder="Descripción del Desafío." name="descripcion" onChange={(e)=>{handleChangeNombre(e)}} />
+  
+              <div id="fechas-desafio" >
+  
+                <input type="date" min={fecha_min} name="fechainicial" onChange={(e)=>{handleChangeNombre(e)}} />
+                <input type="date" min={fecha_min} name="fechafinal" onChange={(e)=>{handleChangeNombre(e)}} />
+  
+              </div>
+  
+              <div id="productos-bttn" >
+                <Select options={productos} id="select-productos" onChange={(e)=>{handleChangeProducto(e)}} />
+                {/* <button>Agregar producto nuevo</button> */}
+              </div>
+              
+              <button 
+                type="submit" 
+                disabled={(state.nombre && state.descripcion && state.fechainicial && state.fechafinal && state.id_producto && state.ciudades.length>0 && state.img)
+                  ? false : true}
+              >CREAR DESAFIO</button>
+  
             </div>
+  
+          </form>
+          <FormCiudades handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
+      </div>
 
-            <div id="productos-bttn" >
-              <Select options={productos} id="select-productos" onChange={(e)=>{handleChangeProducto(e)}} />
-              {/* <button>Agregar producto nuevo</button> */}
-              <button type="submit" >CREAR DESAFIO</button>
-            </div>
 
-          </div>
-
-        </form>
-        <FormCiudades handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
+    }
     </div>
 
   );

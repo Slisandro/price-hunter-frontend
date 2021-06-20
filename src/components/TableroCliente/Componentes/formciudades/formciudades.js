@@ -6,7 +6,7 @@ import Select from 'react-select';
 
 
 
-function FormCiudades({handleChangeCiudades, stateCiudades}) {
+function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad}) {
   const [state2, setState2] = useState([])
   const [nuevaCiudad, setNuevaCiudad] = useState({ id:"", ciudad:"", cantidaddeprecios:"", puntosaganar:"" });
   
@@ -51,7 +51,8 @@ function FormCiudades({handleChangeCiudades, stateCiudades}) {
     e.preventDefault();
     handleChangeCiudades(nuevaCiudad)
   }
-  
+
+
   
   return (
     <div id="form-cliente-crear-desafio-ciudades" id="hola" >
@@ -59,8 +60,14 @@ function FormCiudades({handleChangeCiudades, stateCiudades}) {
         <div>
           <Select options={ciudades} onChange={(e)=>{handleChangeCiudad(e)}} />
           <div  id="inputs-bttn-ciudades" >
-            <input placeholder="cantidad de precios" name="cantidaddeprecios" onChange={(e)=>{handleChange(e)}} />
-            <input placeholder="cantidad de puntos" name="puntosaganar" onChange={(e)=>{handleChange(e)}} />
+            <div>
+              <p>Cant.Precios a C amputar</p>
+              <input type="number" min="1" step="1" name="cantidaddeprecios" onChange={(e)=>{handleChange(e)}} />
+            </div>
+            <div>
+              <p>Cant.Puntos a Ganar</p>
+              <input type="number" min="1" step="1" name="puntosaganar" onChange={(e)=>{handleChange(e)}} />
+            </div>
             <button type="submit" >Agregar</button>
           </div>
         </div>
@@ -73,7 +80,7 @@ function FormCiudades({handleChangeCiudades, stateCiudades}) {
                     <p>Ciudad:{ciudadd.ciudad}</p>   
                     <p>Cant.Precios:{ciudadd.cantidaddeprecios}</p>
                     <p>Cant.Puntos:{ciudadd.puntosaganar}</p> 
-                    <button>X</button>
+                    <button value={ciudadd.id} onClick={(e)=>{handleEliminarCiudad(e)}} >X</button>
                   </div>
         }) : <p>SELECCIONE CIUDAD/ES.</p>
       }

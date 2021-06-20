@@ -1,3 +1,38 @@
+#div-superior-terneario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    min-height: 90vh;
+}
+
+#div-bttn-y-mensaje-ternario{
+    width: 50%;
+    height: 10rem;
+
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+#div-mensaje-de-respuesta-creardesafio{
+    background-color: #43a251;
+    color: white;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 60%);
+    width: 100%;
+    min-height: 3rem;
+    padding: 1px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 10px;
+}
+
 #conteiner-cliente-crear-desafio{
     background: radial-gradient(circle, #272f75 0%, #02041b 100%);
     width: 100vw;
