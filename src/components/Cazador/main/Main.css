@@ -110,13 +110,18 @@
     font-size: 25px;
 }
 
-/* .main__title form {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-} */
+#mainUser {
+    background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+    grid-area: main;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#nameUser {
+    position: relative;
+}
 
 .box {
     margin-left: 340px;

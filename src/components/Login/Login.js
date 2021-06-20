@@ -16,7 +16,8 @@ import GoogleLogin from "react-google-login";
 
 
 const Login = (props) => {
-
+  console.log(props)
+  const history = useHistory()
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
@@ -33,7 +34,7 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      props.history.push('/tablero');
+      history.push('/tablero');
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);

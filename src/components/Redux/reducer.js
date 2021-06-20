@@ -25,8 +25,12 @@ import {
   GET_CATEGORIA,
   GET_GENEROS, 
   GET_TIPO_USUARIO,
-  GET_PAISES, 
-  GET_CIUDADES, 
+  GET_PAISES,
+  GET_CIUDADES,
+  GET_REGION,
+  GET_PAIS,
+  GET_MONEDA,
+  // OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
   REGISTRO_ERROR,
@@ -38,7 +42,7 @@ import {
   // GET_TIPO_USUARIO,
   // GET_PAISES,
   // GET_CIUDADES,
-  OBTENER_USUARIO,
+  // OBTENER_USUARIO,
   // CERRAR_SESION,
   // LOGIN_ERROR,
   // REGISTRO_ERROR,
@@ -96,67 +100,19 @@ const initialState = {
   tipo_usuarios: [],
   paises: [],
   ciudades: [],
+  //----------------------------------------
+  //        POST ADMIN
   admin: {},
   familia: [],
   categoria: [],
-  //----------------------------------------
-  //         PRUEBA PARA POST ADMIN
-  obj: {
-    // codigo_alfa:"PRU",
-    // nombre_pais:"Prueba",
-    // regioneId: 3,
-    // monedaCodigoMoneda:"EUR"
-    // codigo_unidad_medida:"c3f",
-    // nombre_unidad: "centimetro cubicoo"
-    // tipo_usuario:"prueba"
-    // genero:"prueba"
-    // codigo_moneda:"EUR",
-    // nombre_moneda:"Euro",
-    // simbolo:"E"
-    // ciudad:"Chicago",
-    // paiseCodigoAlfa:"ARG"
-    // nombre_region:"Centro America"
-    // nombre_familia: "PRU",
-    // descripcion: "Prueba"
-    // nombre_categoria: "prueba",
-    // descripcion: "esta es una prueba"
-    // nombre_subcategoria: "prueba",
-    // descripcion: "prueba",
-    // categoriumId: 1,
-    //   tipo_transaccion:"prueba"
-    // observacion: "prueba",
-    // puntos: 100,
-    // usuarioId: 5,
-    // tipoTransaccionId: 3,
-    // razon_social: "Prueba S.R.L",
-    // nombre_cial_fantasia:"Prueba",
-    // cuit_nit_rut:"00000000",
-    // email:"prueba@mail.com",
-    // telefono:"000000000",
-    // direccion_fiscal:"prueba 55",
-    // metodo_pago:"Ctt Cte",
-    // banco:"Macro",
-    // numero_cuenta:"0000000",
-    // password:"prueba1234",
-    // ciudadId: 2,
-    // tipoUsuarioId: 1
-    // nombre_desafio: "desafio 1",
-    // descripcion_desafio: "buscar precios",
-    // fecha_inicial: "2021/01/20",
-    // fecha_final: "2021/01/20",
-    // url_image: "www.prueba.com",
-    // clienteId: 1,
-    // productoId: 2,
-    nombre: "prueba1",
-    contenido_neto: 100,
-    unidadMedidaCodigoUnidadMedida: "kg",
-    subcategoriumId: 100,
-    //--------------------------------
-  },
+ 
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
-  
+  pais: [],
+  region: [],
+  moneda: [],
+  //-------------ADMIN-------------//
 };
 
 //-------------ADMIN-------------//
@@ -335,6 +291,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         unidad_medida: action.payload,
       };
+    case GET_REGION:
+      return {
+        ...state,
+        region: action.payload,
+      };
+    case GET_PAIS:
+      return {
+        ...state,
+        pais: action.payload,
+      };
+    case GET_MONEDA:
+      return {
+        ...state,
+        moneda: action.payload,
+      };
+
     //-------------ADMIN-------------//
     default:
       return state;

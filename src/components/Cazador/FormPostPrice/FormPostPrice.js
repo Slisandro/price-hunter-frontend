@@ -3,6 +3,7 @@ import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 var geolocation = require('geolocation');
 
@@ -13,9 +14,9 @@ geolocation.getCurrentPosition((err, position) => {
 
 function FormPostPrice({ setModal, modal, referencia }) {
     const [errors, setErrors] = useState({
-        nombre_negocio: true,
-        direccion_negocio: true,
-        precio: true,
+        nombre_negocio: false,
+        direccion_negocio: false,
+        precio: false,
     });
 
     useEffect(() => {
@@ -34,10 +35,8 @@ function FormPostPrice({ setModal, modal, referencia }) {
         longitud: "",
         nombre_negocio: "", // Usuario
         direccion_negocio: "", // Usuario
-        precio: null, // Usuario
+        precio: "", // Usuario
         desafioId: "", // Usuario
-        usuarioId: 1,
-        mtsTolera: 20,
     })
 
     const handleChange = (e) => {
@@ -52,29 +51,35 @@ function FormPostPrice({ setModal, modal, referencia }) {
                 [e.target.name]: true
             })
         } else {
+
+            if (e.target.name === "precio") {
+                setState({
+                    ...state,
+                    precio: parseFloat(e.target.value)
+                })
+            }
+
             setErrors({
                 ...errors,
                 [e.target.name]: false
             })
         }
 
-        if (e.target.name === "precio") {
-            setState({
-                ...state,
-                precio: parseInt(e.target.value)
-            })
-        }
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(state)
+        const token = localStorage.getItem("token");
+        console.log(typeof(state.precio))
         if (Object.values(errors).filter(x => x === true).length === 0) {
-            axios.post("http://localhost:3001/precios", state)
+            axios.post("http://localhost:3001/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(resp => {
-                    console.log(resp.data)
-                    alert(resp.data.msj)
+                    if (!resp.data.aceptado) {
+                        swal(resp.data.msj, " ", "error");
+                    } else {
+                        swal(resp.data.msj, " ", "success")
+                    }
                     setModal(!modal)
                     setState({
                         latitud: "",
@@ -83,8 +88,6 @@ function FormPostPrice({ setModal, modal, referencia }) {
                         direccion_negocio: "", // Usuario
                         precio: 0, // Usuario
                         desafioId: "", // Usuario
-                        usuarioId: 1,
-                        mtsTolera: 20,
                     })
                 })
         }
@@ -92,6 +95,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
 
     return (
         <form className="FormPostPrice" onSubmit={handleSubmit}>
+            <h2 className="h2">Publicar precio</h2>
             <button className="closeModal" onClick={e => setModal(!modal)}>X</button>
             <Form.Group>
                 <Form.Label className="label">Nombre del negocio</Form.Label>
