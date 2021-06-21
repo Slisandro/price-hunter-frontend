@@ -73,7 +73,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
-            axios.post("http://localhost:3001/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
+            axios.post("https://price-hunter-api.herokuapp.com/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(resp => {
                     if (!resp.data.aceptado) {
                         swal(resp.data.msj, " ", "error");
