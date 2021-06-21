@@ -66,7 +66,7 @@ function Monedero() {
 
     return (
         loading ?
-            <div>Cargando movimientos...</div>
+            <div className="containerMessageBack">Cargando movimientos...</div>
             :
             <>
                 <div className="miMonedero">
