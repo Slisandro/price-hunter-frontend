@@ -35,7 +35,7 @@ function Monedero() {
 
     const handleChange = (e) => {
         setPuntos(parseInt(e.target.value));
-        if(e.target.value >= totalPoints) {
+        if (e.target.value >= totalPoints) {
             setError({
                 bol: true,
                 msg: "No tienes suficientes hunterCoins"
@@ -69,7 +69,6 @@ function Monedero() {
                             "Authorization": `Bearer ${token}`,
                         },
                     }
-<<<<<<< HEAD
                 )
                     .then(resp => {
                         swal(resp.data.rptaPuntos, " ", "success");
@@ -77,15 +76,6 @@ function Monedero() {
                         setPuntos(0);
                         setState(true)
                     })
-=======
-                ) //VERIFICAR RUTA
-                .then(resp => {
-                    swal(resp.data.rptaPuntos, " ", "success");
-                    setModal(false)
-                    setPuntos(0);
-                    setState(true)
-                })
->>>>>>> 070ebd5c763804e5961144b41acac9188ea07b6f
             }
         }
     }
