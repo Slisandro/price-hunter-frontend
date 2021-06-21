@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFamilia, familiaPost } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import { mostrarError } from "../../../Redux/actions";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();

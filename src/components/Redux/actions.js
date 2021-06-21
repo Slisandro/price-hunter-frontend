@@ -80,12 +80,12 @@ export function getProductsByName(nombre, body) {
     axios(
       {
         method: "get",
-        url: `${URL}productos?name=${nombre}&long=${body.long}&lat=${body.lat}&dis=${body.dis}`,
+        url: `${URL}productos?name=${nombre}&long=${body.longitud}&lat=${body.latitud}&dis=${body.dis}`,
         headers: { "Authorization": `Bearer ${token}` }
       }
     )
       .then((r) => {
-        console.log(r.data);
+        // console.log(r.data);
         dispatch({
           type: GET_PRODUCTOS_NAME,
           payload: r.data,
@@ -236,7 +236,7 @@ export function iniciarSesion(datos) {
     axios
       .post(`${URL}usuarios/ingreso`, datos)
       .then((respuesta) => {
-        console.log(respuesta);
+        // console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
               type: LOGIN_ERROR,
@@ -607,7 +607,7 @@ export function pricePost(objeto) {
       .post(`${URL}precios`, objeto)
       // .then(resp => resp.json())
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         dispatch({
           type: PRICE,
           payload: json,
@@ -742,7 +742,7 @@ export function iniciarSesionCliente(datos) {
     axios
       .post(`${URL}clientes/ingreso`, datos)
       .then((respuesta) => {
-        console.log(respuesta);
+        // console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
               type: LOGIN_ERROR,
