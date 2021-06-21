@@ -16,7 +16,7 @@ function actualPoints(arr) {
 
 function Monedero() {
     const [movimiento, setMovimientos] = useState([]);
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
     const [puntos, setPuntos] = useState();
     const [error, setError] = useState(false)

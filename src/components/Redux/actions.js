@@ -64,14 +64,17 @@ export function getCiudades(id) {
 }
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
-export function getProductsByName(nombre) {
+export function getProductsByName(nombre, body) {
   return function (dispatch) {
     const token = localStorage.getItem("token");
     // axios.get("http://localhost:3001/productos?name=sal", { headers: { "Authorization": `Bearer ${token}` } })
-    axios
-      .get(`http://localhost:3001/productos?name=${nombre}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    axios(
+      {
+        method: "get",
+        url: `http://localhost:3001/productos?name=${nombre}&long=${body.long}&lat=${body.lat}&dis=${body.dis}`,
+        headers: { "Authorization": `Bearer ${token}` }
+      }
+    )
       .then((r) => {
         console.log(r.data);
         dispatch({
@@ -617,7 +620,7 @@ export function productoPost(objeto) {
 //
 export function pricePost(objeto) {
 
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`http://localhost:3001/precios`, objeto)
       // .then(resp => resp.json())
@@ -702,7 +705,7 @@ export function getUnidadMedida() {
 }
 
 export function getRegion() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`http://localhost:3001/getadmin/region`).then((response) => {
       dispatch({
         type: GET_REGION,
@@ -713,7 +716,7 @@ export function getRegion() {
 }
 
 export function getPais() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`http://localhost:3001/getadmin/pais`).then((response) => {
       dispatch({
         type: GET_PAIS,
@@ -724,7 +727,7 @@ export function getPais() {
 }
 
 export function getMoneda() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`http://localhost:3001/getadmin/moneda`).then((response) => {
       dispatch({
         type: GET_MONEDA,
