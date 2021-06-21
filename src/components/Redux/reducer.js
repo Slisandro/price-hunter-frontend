@@ -169,7 +169,7 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("nombre", action.payload.usuario.nombre);
+      localStorage.setItem("nombre", action.payload.usuario.nombre?action.payload.usuario.nombre:action.payload.usuario.nombre_cial_fantasia);
 
       return {
         ...state,

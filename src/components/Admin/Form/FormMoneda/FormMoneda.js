@@ -102,7 +102,6 @@ function FormMoneda() {
   return (
     <>
 
-
       <div className="contenedorMoneda">
         <div className="containerForm">
           <header>
@@ -142,6 +141,7 @@ function FormMoneda() {
                   })}
                 />
 
+          
       <div className="contenedorFAM">
         {/* <div className="containerForm"> */}
         <header>

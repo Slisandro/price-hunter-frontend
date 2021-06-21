@@ -46,7 +46,7 @@ function App() {
         <Route exact path="/login-cliente" component={LoginCliente} />
 
         {/* <TableroEmpresa/> */}
-        <Route path="/tablerocliente" component={TableroCLiente} />
+        <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
 
 
         <Route exact path="/terminos-condiciones" component={Modal}/>
