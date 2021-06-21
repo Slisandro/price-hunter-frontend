@@ -3,7 +3,6 @@ import React, { useState,useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Login.css";
 import aguila from "../../assets/aguila.png";
-// import Twitter from '../../assets/twitter.png';
 import Google from '../../assets/google.png';
 import { iniciarSesion, mostrarError } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,7 +16,6 @@ import GoogleLogin from "react-google-login";
 
 const Login = (props) => {
   console.log(props)
-  
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);

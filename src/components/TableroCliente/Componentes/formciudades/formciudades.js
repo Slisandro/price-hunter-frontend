@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "./formciudades.css";
 import axios from "axios";
 import Select from 'react-select';
-import token from "../../../token-cliente"
+// import token from "../../../token-cliente"
 
 
 
@@ -15,6 +15,7 @@ function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad
   //----------------------------------------------------------------------------//
   useEffect(async()=>{
     //---axios para las ciudades---//
+    const token = localStorage.getItem("token");
     const pais_ciudad =  await axios.get("http://localhost:3001/listarciudades", { headers: { "Authorization": `Bearer ${token}` } });
     setState2(pais_ciudad.data);
 

@@ -122,9 +122,8 @@ function FormMoneda() {
               <div>
                 <label className="text-label">Codigo de Moneda</label>
                 <input
-                  className="btm"
+                  className="btm inp"
                   type="NaN"
-                  className="inp"
                   name="codigo_moneda"
                   autoComplete="off"
                   {...register("codigo_moneda", {
@@ -164,9 +163,8 @@ function FormMoneda() {
             <div>
               <label className="text-label">Codigo de Moneda</label>
               <input
-                className="btm"
+                className="btm inp"
                 type="NaN"
-                className="inp"
                 name="codigo_moneda"
                 autoComplete="off"
                 {...register("codigo_moneda", {
@@ -241,6 +239,7 @@ function FormMoneda() {
                 Agregar
               </button>
             </div>
+
           </form>
         </div>
       </div>
@@ -252,7 +251,6 @@ function FormMoneda() {
           ))}
         </div>
       </div> */}
-
       </div>
       </form>
       </div>
