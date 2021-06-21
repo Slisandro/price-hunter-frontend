@@ -646,17 +646,21 @@ export function getCategoria() {
 }
 
 export function getDesafios() {
-  return function(dispatch) {
-    let api = "http://localhost:3001/detalledesafio";
-    return fetch(api)
-      .then((response) => response.json())
+  return function (dispatch) {
+    const token = localStorage.getItem("token");
+    axios.get(
+      "http://localhost:3001/detalledesafio",
+      {
+        headers: { "Authorization": `Bearer ${token}` }
+      }
+    )
       .then((json) => {
         dispatch({
           type: GET_DESAFIOS,
-          payload: json,
+          payload: json.data,
         });
       });
-  };
+  }
 }
 
 export function getSubcategoria() {
