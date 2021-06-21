@@ -47,13 +47,13 @@ const Registro = (props) => {
     numero_de_cuenta: "",
     tipoUsuarioId: "",
     password: "",
-    
+
     confirmar: "",
     
 
   })
 
-  const { email, nombre, apellido, fecha_de_nacimiento,  metodo_de_cobro, password, confirmar,generoId, ciudadId,banco,numero_de_cuenta,tipoUsuarioId} = registro;
+  const { email, nombre, apellido, fecha_de_nacimiento, metodo_de_cobro, password, confirmar, generoId, ciudadId, banco, numero_de_cuenta, tipoUsuarioId } = registro;
 
 
 
@@ -368,7 +368,7 @@ const Registro = (props) => {
             <option value="">-</option>
             {generos ? generos.map(genero => (
               <option key={genero.id} value={genero.id}>{genero.genero}</option>
-            )):("")}
+            )) : ("")}
           </select>
           </div>
 

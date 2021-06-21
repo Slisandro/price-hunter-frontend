@@ -16,7 +16,6 @@ import GoogleLogin from "react-google-login";
 
 const Login = (props) => {
   console.log(props)
-
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
