@@ -4,10 +4,10 @@ import Select from 'react-select';
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 import axios from 'axios';
-import token from "../../../token-cliente"
+// import token from "../../../token-cliente"
 
 
-function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje}){
+function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, setStateBoolean, stateBoolean}){
     const [stateUnidades, setStateUnidades] = useState([]);
     const [stateSubcategorias, setStateSubCategorias] = useState([]);
     const [stateProductoNuevo, setStateProductoNuevo] = useState({
@@ -20,7 +20,9 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje})
 
     //-----traemos las unidades de medida por request al back----//
     //-----------------------------------------------------------//
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async ()=>{
+        const token = localStorage.getItem("token");
         const resp = await axios.get("http://localhost:3001/unidadmedida" , { headers: { "Authorization": `Bearer ${token}` } });
         setStateUnidades(resp.data);
     },[])
@@ -37,7 +39,9 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje})
 
     //-----traemos las subcategorias por request al back---------//
     //-----------------------------------------------------------//
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async ()=>{
+        const token = localStorage.getItem("token");
         const resp = await axios.get("http://localhost:3001/listarsubcategorias", { headers: { "Authorization": `Bearer ${token}` } });
         setStateSubCategorias(resp.data)
     },[])
@@ -56,7 +60,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje})
     //-----------------------------------------------------------//
     async function handleSubmit(e){
         e.preventDefault();
-
+        const token = localStorage.getItem("token")
         const respuesta_crearproducto = await axios.post("http://localhost:3001/crearproducto",{
             nombre: stateProductoNuevo.nombre ,
             contenido_neto: parseInt(stateProductoNuevo.contenido_neto),
@@ -65,6 +69,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje})
         }, { headers: { "Authorization": `Bearer ${token}` } });
         setStateMensaje(respuesta_crearproducto.data.msg)
 
+        setStateBoolean(!stateBoolean)
     }
     //-----------------------------------------------------------//
     //-----------------------------------------------------------//
