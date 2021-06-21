@@ -24,7 +24,7 @@ function Monedero() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         console.log(token)
-        axios.get(`http://localhost:3001/transacciones/consulta`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
                 setMovimientos(json.data)
                 setLoading(false);
@@ -49,7 +49,7 @@ function Monedero() {
         } else {
             if (!error.bol) {
                 axios.post(
-                    "http://localhost:3001/transacciones/retirapuntos",
+                    "https://price-hunter-api.herokuapp.com/transacciones/retirapuntos",
                     body,
                     {
                         headers: {
