@@ -18,8 +18,9 @@ function Monedero() {
     const [movimiento, setMovimientos] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [puntos, setPuntos] = useState();
-    const [error, setError] = useState(false)
+    const [puntos, setPuntos] = useState(0);
+    const [error, setError] = useState(false);
+    const [state, setState] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -29,10 +30,20 @@ function Monedero() {
                 setMovimientos(json.data)
                 setLoading(false);
             })
-    }, []);
+    }, [state]);
 
     const handleChange = (e) => {
         setPuntos(parseInt(e.target.value));
+        if(e.target.value >= totalPoints) {
+            setError({
+                bol: true,
+                msg: "No tienes suficientes hunterCoins"
+            })
+        } else {
+            setError({
+                bol: false
+            })
+        }
     }
 
     const handleSubmit = (e) => {
@@ -42,10 +53,11 @@ function Monedero() {
             puntosRetiro: puntos
         }
         if (puntos >= totalPoints) {
-            return setError({
+            setError({
                 bol: true,
                 msg: "No tienes suficientes hunterCoins"
             })
+            return setPuntos(0)
         } else {
             if (!error.bol) {
                 axios.post(
@@ -56,9 +68,12 @@ function Monedero() {
                             "Authorization": `Bearer ${token}`,
                         },
                     }
-                ) //VERIFICAR RUTA
+                )
                     .then(resp => {
-                        console.log(resp)
+                        swal(resp.data.rptaPuntos, " ", "success");
+                        setModal(false)
+                        setPuntos(0);
+                        setState(true)
                     })
             }
         }
@@ -101,7 +116,10 @@ function Monedero() {
                     !modal ? null :
                         <div className="FormPostPrice" id="modalRetiroPoints">
                             <h2 className="h2">Retiro de Puntos</h2>
-                            <button className="closeModal" onClick={() => setModal(!modal)}>X</button>
+                            <button className="closeModal" onClick={() => {
+                                setModal(!modal)
+                                setPuntos(0)
+                            }}>X</button>
                             <Form.Group>
                                 <Form.Label className="label">Puntos a retirar</Form.Label>
                                 <Form.Control
