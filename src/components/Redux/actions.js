@@ -104,22 +104,22 @@ export function getSubcategoriasId(id) {
   };
 }
 
-{
-  /*
-  return function(dispatch) {
-    axios
-      .get(`http://localhost:3001/subcategoria/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((r) => {
-        dispatch({
-          type: GET_SUBCATEGORIAS_ID,
-          payload: r.data,
-        });
-      });
-  };
-}*/
-}
+
+  
+//   return function(dispatch) {
+//     axios
+//       .get(`http://localhost:3001/subcategoria/${id}`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       })
+//       .then((r) => {
+//         dispatch({
+//           type: GET_SUBCATEGORIAS_ID,
+//           payload: r.data,
+//         });
+//       });
+//   };
+// }
+
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
 export function getGeneros() {
@@ -196,33 +196,30 @@ export function registrarUsuario(datosUser) {
       .catch((err) => console.log(err));
   };
 
-  {
-    /*
-  return function(dispatch) {
-    axios
-      .post("http://localhost:3001/usuarios/registro", datosUser)
-      .then((respuesta) => {
-        console.log(respuesta);
-        respuesta.data.msg
-          ? dispatch({
-              type: REGISTRO_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
-          : dispatch({
-              type: REGISTRO_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            });
-      })
-      .catch((err) => console.log(err));
-  };
-*/
-  }
+  // return function(dispatch) {
+  //   axios
+  //     .post("http://localhost:3001/usuarios/registro", datosUser)
+  //     .then((respuesta) => {
+  //       console.log(respuesta);
+  //       respuesta.data.msg
+  //         ? dispatch({
+  //             type: REGISTRO_ERROR,
+  //             payload: {
+  //               msg: respuesta.data.msg,
+  //               categoria: "alerta-error",
+  //             },
+  //           })
+  //         : dispatch({
+  //             type: REGISTRO_EXITOSO,
+  //             payload: {
+  //               token: respuesta.data.token,
+  //               usuario: respuesta.data.user,
+  //             },
+  //           });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
 }
 
 // Cuando el usuario inicia sesión
@@ -263,49 +260,48 @@ export const cerrarSesion = () => {
 }
 
 
-{/*
-  return function(dispatch) {
-    axios
-      .post("http://localhost:3001/usuarios/ingreso", datos)
-      .then((respuesta) => {
-        console.log(respuesta);
-        respuesta.data.msg
-          ? dispatch({
-              type: LOGIN_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
-          : dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            });
-      })
-      .catch((err) => console.log(err));
-  };
-}
 
-// Cierra la sesión del usuario
-export const cerrarSesion = () => {
-  return function(dispatch) {
-    dispatch({
-      type: CERRAR_SESION,
-    });
-  };
-};
+//   return function(dispatch) {
+//     axios
+//       .post("http://localhost:3001/usuarios/ingreso", datos)
+//       .then((respuesta) => {
+//         console.log(respuesta);
+//         respuesta.data.msg
+//           ? dispatch({
+//               type: LOGIN_ERROR,
+//               payload: {
+//                 msg: respuesta.data.msg,
+//                 categoria: "alerta-error",
+//               },
+//             })
+//           : dispatch({
+//               type: LOGIN_EXITOSO,
+//               payload: {
+//                 token: respuesta.data.token,
+//                 usuario: respuesta.data.user,
+//               },
+//             });
+//       })
+//       .catch((err) => console.log(err));
+//   };
+// }
 
-// Retorna el usuario autenticado
-export const usuarioAutenticado = async () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    // tokenAuth(token);
-  }
-};*/
-}
+// // Cierra la sesión del usuario
+// export const cerrarSesion = () => {
+//   return function(dispatch) {
+//     dispatch({
+//       type: CERRAR_SESION,
+//     });
+//   };
+// };
+
+// // Retorna el usuario autenticado
+// export const usuarioAutenticado = async () => {
+//   const token = localStorage.getItem("token");
+//   if (token) {
+//     // tokenAuth(token);
+//   }
+// };
 
 ////---------------  ADMIN ACTIONS ---------------////
 //_____________________ POST _____________________//
@@ -728,5 +724,33 @@ export function getTipoTransaccion() {
         payload: response.data,
       });
     });
+  };
+}
+
+
+
+export function iniciarSesionCliente(datos) {
+  return function(dispatch) {
+    axios
+      .post("http://localhost:3001/clientes/ingreso", datos)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+              type: LOGIN_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
+          : dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.cliente,
+              },
+            });
+      })
+      .catch((err) => console.log(err));
   };
 }

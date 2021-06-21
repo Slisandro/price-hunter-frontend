@@ -2,18 +2,18 @@
 
 
 
-.login {
-    background-image: linear-gradient(#050824,#1a2058, #18e6db);
-    display: flex !important;
+.login__client {
+    background-image: linear-gradient(#050824,#1a2058, #77a3a1);
+    display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center !important;
-    padding: 0px 30px !important;
+    justify-content: center;
+    padding: 0px 30px;
     height: 100vh;
     font-family: 'Catamaran', sans-serif !important;
   }
   
-  .login__container {
+  .login__container__client {
     background: radial-gradient(circle, #272f75 0%, #02041b 100%);
     border: 2px solid rgb(1, 247, 234);
     border-radius: 40px;
@@ -23,27 +23,25 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 80px 70px 100px 80px;
-    font-family: 'Catamaran', sans-serif !important;
   
   }
   
-  .login__container--form {
+  .login__container--form_cliente {
     display: flex;
     flex-direction: column;
   }
-  .login__container--form  > input {
+  .login__container--form  > input{
      
       background: cornsilk;
-      width: 240px !important;
+      width: 240px ;
       height: 25px;
       border: none;
       outline: none;
       padding: 0 25px;
       border-radius: .2em;
       margin-bottom: 1rem;
-      
   }
-  .logo__login{
+  .logo__login_cliente{
       width: 4em;
       margin-left: 6.2rem;
   }
@@ -58,10 +56,10 @@
     font-size: 14px;
   }
 
-  .button__login {
+  .button__login{
     border-radius: .2em;
-    max-width: 15em !important;
-    height: 38px !important;
+    width: 21.8em;
+    height: 38px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -135,7 +133,7 @@
  .button__login__google{
     
   border-radius: .2em;
-  max-width: 25em !important;
+  width: 21.8em;
   height: 38px;
   border: none;
   outline: none;
@@ -147,7 +145,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
 }
 
 

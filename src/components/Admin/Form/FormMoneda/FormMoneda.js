@@ -122,9 +122,8 @@ function FormMoneda() {
               <div>
                 <label className="text-label">Codigo de Moneda</label>
                 <input
-                  className="btm"
+                  className="btm inp"
                   type="NaN"
-                  className="inp"
                   name="codigo_moneda"
                   autoComplete="off"
                   {...register("codigo_moneda", {
@@ -143,6 +142,44 @@ function FormMoneda() {
                   })}
                 />
 
+      <div className="contenedorFAM">
+        {/* <div className="containerForm"> */}
+        <header>
+          <h1 id="title">Agregar Moneda</h1>
+        </header>
+        <form
+          id="survey-form"
+          className="form"
+          // noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={handleSubmit(submit)}
+        >
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
+          <div className="divForm">
+            <div>
+              <label className="text-label">Codigo de Moneda</label>
+              <input
+                className="btm inp"
+                type="NaN"
+                name="codigo_moneda"
+                autoComplete="off"
+                {...register("codigo_moneda", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar un Codigo de Moneda ",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                })}
+              />
 
                 <div className="contenedorFAM">
                   {/* <div className="containerForm"> */}
@@ -243,7 +280,15 @@ function FormMoneda() {
                   </form>
                 </div>
               </div>
-              {/* <div className="contenedorActuales">
+              <button className="agregarModal" type="submit">
+                Agregar
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      {/* <div className="contenedorActuales">
         <div className="tiposUsuarios">
           Tipos de Monedas Actuales
           {moneda.map((u) => (
@@ -251,9 +296,9 @@ function FormMoneda() {
           ))}
         </div>
       </div> */}
-            </div>
-          </form>
-        </div>
+      </div>
+      </form>
+      </div>
       </div>
     </>
   );
