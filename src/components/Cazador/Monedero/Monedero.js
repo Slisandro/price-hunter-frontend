@@ -15,6 +15,7 @@ function actualPoints(arr) {
 }
 
 function Monedero() {
+    const [state, setState] = useState(false);
     const [movimiento, setMovimientos] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -24,12 +25,13 @@ function Monedero() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         console.log(token)
-        axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta/1`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
                 setMovimientos(json.data)
                 setLoading(false);
+
             })
-    }, []);
+    }, [state]);
 
     const handleChange = (e) => {
         setPuntos(parseInt(e.target.value));
@@ -57,9 +59,12 @@ function Monedero() {
                         },
                     }
                 ) //VERIFICAR RUTA
-                    .then(resp => {
-                        console.log(resp)
-                    })
+                .then(resp => {
+                    swal(resp.data.rptaPuntos, " ", "success");
+                    setModal(false)
+                    setPuntos(0);
+                    setState(true)
+                })
             }
         }
     }
