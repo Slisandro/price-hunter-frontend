@@ -234,7 +234,7 @@ export function registrarUsuario(datosUser) {
 export function iniciarSesion(datos) {
   return function(dispatch) {
     axios
-      .post(`${URL}usuarios/ingreso`, datos)
+      .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
         // console.log(respuesta);
         respuesta.data.msg
@@ -245,13 +245,23 @@ export function iniciarSesion(datos) {
                 categoria: "alerta-error",
               },
             })
-          : dispatch({
+          : 
+          (respuesta.data.user ? 
+          dispatch({
               type: LOGIN_EXITOSO,
               payload: {
                 token: respuesta.data.token,
                 usuario: respuesta.data.user,
               },
-            });
+            })
+            :
+            dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                cliente: respuesta.data.cliente,
+              },
+            }))
       })
       .catch((err) => console.log(err));
   };
