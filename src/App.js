@@ -21,6 +21,7 @@ import TableroEmpresa from "./components/TableroEmpresas/TableroEmpresa";
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
+import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
+        <Route exact path="/login-cliente" component={LoginCliente} />
 
         {/* <TableroEmpresa/> */}
         <Route path="/tablerocliente" component={TableroCLiente} />
