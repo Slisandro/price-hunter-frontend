@@ -1,0 +1,48 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
+
+
+.container__modal{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 160px;
+    height: 100vh;
+    font-family: 'Catamaran', sans-serif !important;
+    
+}
+
+.modal__container {
+    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+   
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
+    color: rgb(248, 240, 230);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 80px 70px 100px 80px;
+    font-family: 'Catamaran', sans-serif !important;
+    font-size: .9em;
+    text-align: justify;
+  
+  }
+
+
+.container__title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Catamaran', sans-serif !important;
+    background:linear-gradient(#050824,#1a2058, #18e7dd)!important;
+    color: rgb(255, 238, 0);
+}
+
+.subtitles{
+    font-size: 1.3em;
+    color: whitesmoke;
+    font-weight: bold;
+}

@@ -118,15 +118,6 @@ header {
   background-color: white;
 }
 
-.inp5 {
-  height: 2.2rem;
-  width: 10rem;
-  margin-top: 0.5rem;
-  border-radius: var(--radius);
-  background-color: white;
-  color: black;
-}
-
 /* .divFormAgregar {
   background-color: green;
 } */
@@ -325,6 +316,16 @@ header {
 .link {
   text-decoration: none;
   color: rgb(5, 236, 236);
+}
+
+.tiposUsuarios {
+  color: rgb(5, 236, 236);
+}
+
+.spans {
+  display: flex;
+  justify-content: space-between;
+  color: white;
 }
 
 @media only screen and (max-width: 480px) {

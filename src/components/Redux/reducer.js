@@ -23,14 +23,15 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
-  GET_GENEROS, 
+  GET_GENEROS,
   GET_TIPO_USUARIO,
   GET_PAISES,
   GET_CIUDADES,
   GET_REGION,
   GET_PAIS,
   GET_MONEDA,
-  OBTENER_USUARIO,
+  GET_TIPO_TRANSACCION,
+  // OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
   REGISTRO_ERROR,
@@ -88,7 +89,7 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
-  
+
   /*Estados para la autenticacion*/
   token: localStorage.getItem("token"),
   autenticado: null,
@@ -100,69 +101,20 @@ const initialState = {
   tipo_usuarios: [],
   paises: [],
   ciudades: [],
+  //----------------------------------------
+  //        POST ADMIN
   admin: {},
   familia: [],
   categoria: [],
-  //----------------------------------------
-  //         PRUEBA PARA POST ADMIN
-  obj: {
-    // codigo_alfa:"PRU",
-    // nombre_pais:"Prueba",
-    // regioneId: 3,
-    // monedaCodigoMoneda:"EUR"
-    // codigo_unidad_medida:"c3f",
-    // nombre_unidad: "centimetro cubicoo"
-    // tipo_usuario:"prueba"
-    // genero:"prueba"
-    // codigo_moneda:"EUR",
-    // nombre_moneda:"Euro",
-    // simbolo:"E"
-    // ciudad:"Chicago",
-    // paiseCodigoAlfa:"ARG"
-    // nombre_region:"Centro America"
-    // nombre_familia: "PRU",
-    // descripcion: "Prueba"
-    // nombre_categoria: "prueba",
-    // descripcion: "esta es una prueba"
-    // nombre_subcategoria: "prueba",
-    // descripcion: "prueba",
-    // categoriumId: 1,
-    //   tipo_transaccion:"prueba"
-    // observacion: "prueba",
-    // puntos: 100,
-    // usuarioId: 5,
-    // tipoTransaccionId: 3,
-    // razon_social: "Prueba S.R.L",
-    // nombre_cial_fantasia:"Prueba",
-    // cuit_nit_rut:"00000000",
-    // email:"prueba@mail.com",
-    // telefono:"000000000",
-    // direccion_fiscal:"prueba 55",
-    // metodo_pago:"Ctt Cte",
-    // banco:"Macro",
-    // numero_cuenta:"0000000",
-    // password:"prueba1234",
-    // ciudadId: 2,
-    // tipoUsuarioId: 1
-    // nombre_desafio: "desafio 1",
-    // descripcion_desafio: "buscar precios",
-    // fecha_inicial: "2021/01/20",
-    // fecha_final: "2021/01/20",
-    // url_image: "www.prueba.com",
-    // clienteId: 1,
-    // productoId: 2,
-    nombre: "prueba1",
-    contenido_neto: 100,
-    unidadMedidaCodigoUnidadMedida: "kg",
-    subcategoriumId: 100,
-    //--------------------------------
-  },
+
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
   pais: [],
   region: [],
   moneda: [],
+  transaccion: [],
+
   //-------------ADMIN-------------//
 };
 
@@ -218,27 +170,25 @@ function rootReducer(state = initialState, action) {
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("nombre", action.payload.usuario.nombre);
-      
+
       return {
         ...state,
         autenticado: true,
         usuario: null,
         mensaje: null,
-      
       };
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
-      localStorage.removeItem('token');
-      localStorage.removeItem('nombre')
+      localStorage.removeItem("token");
+      localStorage.removeItem("nombre");
       return {
-          ...state,
-          token: null,
-          usuario: null,
-          autenticado: null ,
-          mensaje: action.payload, 
-          
-    };
+        ...state,
+        token: null,
+        usuario: null,
+        autenticado: null,
+        mensaje: action.payload,
+      };
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -329,8 +279,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         desafios: action.payload,
       };
-    case PRICE: 
-      console.log("red")
+    case PRICE:
+      console.log("red");
       return;
     case GET_SUBCATEGORIAS:
       return {
@@ -356,6 +306,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         moneda: action.payload,
+      };
+    case GET_TIPO_TRANSACCION:
+      return {
+        ...state,
+        transaccion: action.payload,
       };
 
     //-------------ADMIN-------------//

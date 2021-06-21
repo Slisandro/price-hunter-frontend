@@ -328,3 +328,69 @@ header {
   background: var(--clr-primary-1);
   border-color: var(--clr-primary-1);
 }
+
+.contenedorFamilia {
+  margin-top: 4rem;
+  background: radial-gradient(#02041b 0%, #272f75 100%);
+  border: 2px solid rgb(1, 247, 234);
+  border-radius: 40px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
+  max-width: 100%;
+  background-image: linear-gradient(#050824, #1a2058, #2c7eca);
+  border-radius: 2rem;
+  max-height: 20rem;
+  font-family: "Catamaran", sans-serif !important;
+}
+
+.inp3 {
+  height: 2.2rem;
+  width: 10rem;
+  margin-top: -10rem;
+  border-radius: var(--radius);
+  background-color: white;
+  color: black;
+}
+.inp6 {
+  height: 1.3rem;
+  width: 15rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius);
+  background-color: white;
+  color: black;
+}
+
+#titleFam {
+  font-size: 1.3rem;
+  margin: 0 0 0 11rem;
+  color: var(--clr-primary-5);
+}
+
+.formFamilia {
+  margin-left: -3rem;
+  background-color: transparent;
+  border-radius: 10rem;
+  margin-top: 2rem;
+  width: 100%;
+  padding: 0 10rem 1rem 3rem;
+}
+
+.contenedorTransacciones {
+  margin-top: 4rem;
+  background: radial-gradient(#02041b 0%, #272f75 100%);
+  border: 2px solid rgb(1, 247, 234);
+  border-radius: 40px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
+  max-width: 100%;
+  background-image: linear-gradient(#050824, #1a2058, #2c7eca);
+  border-radius: 2rem;
+  max-height: 20rem;
+  max-width: 35%;
+  margin-left: 20rem;
+  font-family: "Catamaran", sans-serif !important;
+}
+
+#titleTran {
+  font-size: 1.3rem;
+  margin: 1rem 0 0 3rem;
+  color: var(--clr-primary-5);
+}

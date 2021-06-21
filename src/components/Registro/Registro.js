@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Registro.css";
 import aguila from "../../assets/aguila.png";
 import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades} from '../Redux/actions';
+import Modal from './Modal';
 
 // import axios from 'axios';
 
@@ -32,7 +33,7 @@ const Registro = (props) => {
 
 
 
-  // const [ciudad , setCiudad] = useState(""); 
+  
 
   const [registro, guardarRegistro] = useState({
     email: "",
@@ -48,10 +49,12 @@ const Registro = (props) => {
     password: "",
     
     confirmar: "",
+    
 
   })
 
   const { email, nombre, apellido, fecha_de_nacimiento,  metodo_de_cobro, password, confirmar,generoId, ciudadId,banco,numero_de_cuenta,tipoUsuarioId} = registro;
+
 
 
 
@@ -167,189 +170,252 @@ const Registro = (props) => {
 
 
   return (
+    <>
+    <div className="register">
+    
+    <div class="container-register">
+    <div className="encabezado">
+        <p class="title">Registrarme</p>
+        <img src={aguila} alt="" width={40} height={40} className="logo__register" />
+    </div>
+    <div class="content">
 
-    <section className="register">
-      <section className="register__container">
+    {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
+      <form onSubmit={handleSubmit}>
+        <div class="user-details">
 
-
-        <div className="registro__start">
-          <img src={aguila} alt="" className="logo__register" />
-          <h2>Regístrate</h2>
-          <p className="p">Y comenzá a cazar precios</p>
-        </div>
-
-        {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
-
-
-        <form className="register__container--form" onSubmit={handleSubmit}>
-
-          <input
-            className="input__registro"
-            type="text"
-            placeholder="Correo"
+          
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input 
+            class="input" 
+            type="text" 
+            placeholder="Email" 
             name="email"
             value={email}
             onChange={handleInputRegister}
-          />
+          
+            />
+          </div>
+
+          
+          <div class="input-box">
+            <span class="details">Nombre</span>
+            <input 
+              class="input"
+              type="text" 
+              placeholder="Nombre" 
+              name="nombre"
+              value={nombre}
+              onChange={handleInputRegister}
+            
+              />
+          </div>
+         
+      
+          <div class="input-box">
+            <span class="details">Apellido</span>
+            <input 
+              class="input" 
+              type="text" 
+              placeholder="apellido"
+              name="apellido"
+              value={apellido}
+              onChange={handleInputRegister} 
+           
+              />
+          </div>
+
+          <div class="input-box">
+            <span class="details">Fecha de nacimiento</span>
+            <input 
+              class="input" 
+              type="date" 
+              placeholder="Fecha de nacimiento" 
+              name="fecha_de_nacimiento"
+              value={fecha_de_nacimiento}
+              onChange={handleInputRegister}
+            
+              />
+          </div>
 
 
-          <input
-            className="input__registro"
-            type="text"
-            placeholder="Nombre"
-            name="nombre"
-            value={nombre}
-            onChange={handleInputRegister}
-          />
-
-
-          <input
-            className="input__registro"
-            type="text"
-            placeholder="Apellido"
-            name="apellido"
-            value={apellido}
-            onChange={handleInputRegister}
-          />
-
-
-
-          <input
-            className="input__registro"
-            type="date"
-            placeholder="Fecha de nacimiento"
-            name="fecha_de_nacimiento"
-            value={fecha_de_nacimiento}
-            onChange={handleInputRegister}
-          />
-
-
-
-          <label>Genero</label>
-          <select className="select" onChange={handleInputRegister} name="generoId">
-            <option value="">-</option>
-            {generos ? generos.map(genero => (
-              <option key={genero.id} value={genero.id}>{genero.genero}</option>
-            )):("")}
-          </select>
-
-
-
-
-
-          <label>Metodo de cobro</label>
-          <select className="select" onChange={handleInputRegister} name="metodo_de_cobro">
-            <option value="">-</option>
-            <option value="Mercado Pago">Mercado Pago</option>
-            <option value="CBU">CBU</option>
-          </select>
-
-          {
-            metodo_de_cobro !== "" ?
-              (metodo_de_cobro === "CBU" ? (
-                <>
-                <label>Ingrese su banco</label>
-                <input
-                  className="input__registro"
-                  type="text"
-                  placeholder="Ingrese su banco"
-                  name="banco"
-                  onChange={handleInputRegister}
-                />
-                <label>Ingrese su numero de cuenta</label>
-                <input
-                  className="input__registro"
-                  type="text"
-                  placeholder="Ingrese su numero de cuenta"
-                  name="numero_de_cuenta"
-                  onChange={handleInputRegister}
-                />
-                </>
-                
-              ) : (
-                metodo_de_cobro === "Mercado Pago" ?
-                  <input
-                    className="input__registro"
-                    type="text"
-                    placeholder="Ingrese su cuenta de Mercado Libre"
-                    name="numero_de_cuenta"
-                    onChange={handleInputRegister}
-                  />
-                  : ("")
-              )
-              ) : ("")
-          }
+          <div class="input-box">
+            <span class="details">Metodo de cobro</span>
+            <select class="input-select" onChange={handleInputRegister} name="metodo_de_cobro">
+              <option value="">-</option>
+              <option value="Mercado Pago">Mercado Pago</option>
+              <option value="CBU">CBU</option>
+            </select>
+      
+          
+              {
+                metodo_de_cobro !== "" ?
+                  (metodo_de_cobro === "CBU" ? (
+                    <>
+                    <div>
+                    <input
+                      className="input last"
+                      type="text"
+                      placeholder="Ingrese su banco"
+                      name="banco"
+                      onChange={handleInputRegister}
+                    />
+                    </div>
+                    <div>
+                      <input
+                        className="input last"
+                        type="text"
+                        placeholder="Ingrese su numero de cuenta"
+                        name="numero_de_cuenta"
+                        onChange={handleInputRegister}
+                      />
+                    </div>
+                    </>
+                    
+                  ) : (
+    
+                    metodo_de_cobro === "Mercado Pago" ?
+                    <div>
+                      <input
+                        class="input last last-date"
+                        type="text"
+                        placeholder="Ingrese su usuario"
+                        name="numero_de_cuenta"
+                        onChange={handleInputRegister}
+                      />
+                      </div>
+                      : ("")
+                  )
+                  ) : ("")
+              }
+          </div>
+          
 
 
 
-
-
-
-
-
-
-          <label>Tipo de usuario</label>
-          <select className="select " onChange={handleInputRegister} name="tipoUsuarioId">
+          <div class="input-box">
+            <span class="details">Tipo de usuario</span>
+          <select class="input-select" onChange={handleInputRegister} name="tipoUsuarioId">
             <option value="">-</option>
             {tipo_usuarios ? tipo_usuarios.map(item => (
               <option key={item.id} value={item.id}>{item.tipo_usuario}</option>
             )):("")}
           </select>
-
-
-          <label>Seleccione su pais</label>
-          <select className="select" onChange={handleCity}>
-            <option value="">-</option>{/*dispatch(getCiudades(item.codigo_alfa)*/}
-            {paises ? paises.map(item => (
-              <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
-            )) : ("")}
-          </select>
+          </div>
 
 
 
 
-          <label>seleccione su ciudad</label>
-          <select className="select last" onChange={handleInputRegister} name="ciudadId">
+          <div class="input-box">
+            <span class="details">Pais</span>
+            <select class="input-select" onChange={handleCity}>
+              <option value="">-</option>{/*dispatch(getCiudades(item.codigo_alfa)*/}
+              {paises ? paises.map(item => (
+                <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
+              )) : ("")}
+            </select>
+          </div>
+
+
+
+
+          <div class="input-box">
+            <span class="details">Ciudad</span>
+            <select class="input-select" onChange={handleInputRegister} name="ciudadId">
+              <option value="">-</option>
+              {ciudades ? ciudades.map(item => (
+                <option key={item.id} value={item.id}>{item.ciudad}</option>
+              )):("")}
+            </select>
+          </div>
+
+               
+ 
+          
+          
+  
+          <div class="input-box">
+            <span class="details">Contraseña</span>
+            <input 
+              class="input" 
+              type="password" 
+              placeholder="Contraseña" 
+            
+              name="password"
+              value={password}
+              onChange={handleInputRegister}
+              />
+          </div>
+          
+          
+          <div class="input-box">
+            <span class="details">Confirmar contraseña</span>
+            <input 
+              class="input" 
+              type="password"
+              placeholder="Confirmar contraseña" 
+              
+              name="confirmar"
+              value={confirmar}
+              onChange={handleInputRegister}
+              />
+          </div>
+
+          <div class="input-box">
+            <span class="details">Genero</span>
+          <select className="input-select" onChange={handleInputRegister} name="generoId">
             <option value="">-</option>
-            {ciudades ? ciudades.map(item => (
-              <option key={item.id} value={item.id}>{item.ciudad}</option>
+            {generos ? generos.map(genero => (
+              <option key={genero.id} value={genero.id}>{genero.genero}</option>
             )):("")}
           </select>
+          </div>
 
 
+          <div className="input-box-tyc">
+            <input 
+              class="input-policy" 
+              type="checkbox"
+              placeholder="Confirmar contraseña" 
+              name="terms"
+              // value={terms}
+              // onChange={handleTerms}
+              />
+             <Link className="link__sesion" to="/terminos-condiciones">Acepto los términos y condiciones</Link> 
+              
+              
+          </div>
+
+         
+        </div>
+        
+   
 
 
-          <input
-            className="input__registro"
-            type="password"
-            placeholder="Contraseña"
-            name="password"
-            value={password}
-            onChange={handleInputRegister}
-          />
+        
+
+        <div class="button">
+          <input type="submit" value="Registrarme"/>
+        </div>
+      </form>
+      
+      
 
 
+      <div>
 
-          <input
-            className="input__registro"
-            type="password"
-            placeholder="Confirmar contraseña"
-            name="confirmar"
-            value={confirmar}
-            onChange={handleInputRegister}
-          />
+      <Link className="link__sesion" to="/login">Volver a iniciar sesión</Link> 
+      
 
-
-          <button className="button__registro">Registrarme</button>
+      </div>
+    </div>
+  </div>
+  </div>
 
 
-        </form>
-
-        <Link className="link__sesion" to="/login">Iniciar sesión</Link>
-
-      </section>
-    </section>
-
+  
+  </>
   )
 }
 
@@ -357,4 +423,19 @@ const Registro = (props) => {
 
 
 export default Registro;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

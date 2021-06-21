@@ -5,6 +5,7 @@ import {
   getCategorias,
   subcategoriaPost,
   getSubcategoria,
+  mostrarError,
 } from "../../../Redux/actions";
 
 function Subcate({ setSwitcher }) {
@@ -12,6 +13,7 @@ function Subcate({ setSwitcher }) {
   const categoria = useSelector((store) => store.categoria);
   const categorias = useSelector((store) => store.categorias);
   const subcategoria = useSelector((store) => store.subcategoria);
+  const alerta = useSelector((store) => store.alerta);
 
   // var mapeado = categorias.map((c) => c);
   // var mapeado1 = mapeado.map((array) => array);
@@ -81,7 +83,6 @@ function Subcate({ setSwitcher }) {
         [name]: target.value,
       });
     }
-    // console.log(subcate);
   };
 
   const handleSubmit = (e) => {
@@ -105,6 +106,13 @@ function Subcate({ setSwitcher }) {
       return;
     }
 
+    if (!isNaN(parseInt(nuevaSubcate.nombre_subcategoria))) {
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
+      return;
+    }
+
     dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
@@ -119,15 +127,17 @@ function Subcate({ setSwitcher }) {
 
   return (
     <>
-      <div className="divSUB">
-        <h6 id="title3">Sub-Categoría</h6>
+      <div>
         <form
-          className="formSUB"
+          className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="divFormCAT">
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Categoría</label>
               <select
@@ -136,6 +146,7 @@ function Subcate({ setSwitcher }) {
                 value={cate.nombre_categoria}
                 onChange={(e) => ChangeInput(e)}
               >
+                <option></option>
                 {categoria.map((f) => (
                   <option value={f.nombre_categoria}>
                     {f.nombre_categoria}
@@ -144,7 +155,7 @@ function Subcate({ setSwitcher }) {
               </select>
             </div>
           </div>
-          <div className="divFormCAT">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Sub-Categoría</label>
               <input
@@ -155,18 +166,18 @@ function Subcate({ setSwitcher }) {
               ></input>
             </div>
           </div>
-          <div className="divForm">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label-desc">* Descripción</label>
               <input
-                className="btm-desc"
+                className="inp6"
                 type="text"
                 name="descripcion"
                 value={subcate.descripcion}
               ></input>
             </div>
           </div>
-          <button className="btn6" type="submit">
+          <button className="agregarModal" type="submit">
             Agregar Sub-Categoría
           </button>
         </form>

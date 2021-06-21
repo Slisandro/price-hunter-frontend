@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getFamilia, familiaPost } from "../../../Redux/actions";
+import { getFamilia, familiaPost, mostrarError } from "../../../Redux/actions";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();
   const familia = useSelector((store) => store.familia);
+  const alerta = useSelector((store) => store.alerta);
 
-  var mapeado = familia.map((fa) => fa.nombre_familia);
+  // var mapeado = familia.map((fa) => fa.nombre_familia);
 
   useEffect(() => {
     dispatch(getFamilia());
@@ -56,8 +57,15 @@ function Fami({ setSwitcher }) {
       return;
     }
 
-    if (mapeado.includes(fam.nombre_familia)) {
+    if (familia.includes(fam.nombre_familia)) {
       alert("Familia de producto existente");
+      return;
+    }
+
+    if (!isNaN(parseInt(nuevaFamilia.nombre_familia))) {
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
       return;
     }
 
@@ -74,15 +82,17 @@ function Fami({ setSwitcher }) {
 
   return (
     <>
-      <div className="divFAM">
-        <h6 id="title2">Familia</h6>
+      <div>
         <form
-          className="formFAM"
+          className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div className="divFormFAM">
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
+          <div className="divFormFamilia">
             <div>
               <label className="text-label">Familia</label>
               <input
@@ -92,18 +102,18 @@ function Fami({ setSwitcher }) {
               ></input>
             </div>
           </div>
-          <div className="divFormFAM">
+          <div className="divFormFamilia">
             <div>
               <label className="text-label-desc">* Descripción</label>
               <input
-                className="btm-desc"
+                className="inp6"
                 type="text"
                 name="descripcion"
                 value={fam.descripcion}
               ></input>
             </div>
           </div>
-          <button className="btn4" type="submit">
+          <button className="agregarModal" type="submit">
             Agregar Familia
           </button>
         </form>

@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { monedaPost, mostrarError } from "../../../Redux/actions";
+import { monedaPost, mostrarError, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
-  
+  const moneda = useSelector((store) => store.moneda);
+
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
     simbolo: "",
   });
 
+  useEffect(() => {
+    dispatch(getMoneda());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(name);
-
     if (name === "codigo_moneda") {
       setState({
         ...state,
@@ -64,7 +68,9 @@ function FormMoneda() {
     //   return;
     // }
     if (!isNaN(parseInt(data.codigo_moneda))) {
-      dispatch(mostrarError('El codigo solo puede contener letras', 'alerta-error'));
+      dispatch(
+        mostrarError("El codigo solo puede contener letras", "alerta-error")
+      );
       return;
     }
     // if (!nuevaMoneda.nombre_moneda) {
@@ -72,7 +78,9 @@ function FormMoneda() {
     //   return;
     // }
     if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
-      dispatch(mostrarError("El nombre solo puede contener letras", 'alerta-error'));
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
       return;
     }
     // if (!nuevaMoneda.simbolo) {
@@ -93,7 +101,8 @@ function FormMoneda() {
 
   return (
     <>
-      <div className="containerForm">
+      <div className="contenedorFAM">
+        {/* <div className="containerForm"> */}
         <header>
           <h1 id="title">Agregar Moneda</h1>
         </header>
@@ -104,13 +113,16 @@ function FormMoneda() {
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
-           {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
           <div className="divForm">
             <div>
               <label className="text-label">Codigo de Moneda</label>
               <input
                 className="btm"
                 type="NaN"
+                className="inp"
                 name="codigo_moneda"
                 autoComplete="off"
                 {...register("codigo_moneda", {
@@ -128,14 +140,14 @@ function FormMoneda() {
                   },
                 })}
               />
-             
+
               <span className="err">{errors?.codigo_moneda?.message}</span>
             </div>
-           
+
             <div>
               <label className="text-label">Nombre de la Moneda</label>
               <input
-                className="btm"
+                className="inp"
                 // type="text"
                 name="nombre_moneda"
                 autoComplete="off"
@@ -150,17 +162,16 @@ function FormMoneda() {
                   },
                   minLength: {
                     value: 2,
-                    message:
-                      "El nombre no puede tener maenos de dos caracteres!",
+                    message: "El nombre debe tener más de dos caracteres!",
                   },
-                 })}
+                })}
               />
               <span className="err">{errors?.nombre_moneda?.message}</span>
             </div>
             <div>
               <label className="text-label">Simbolo</label>
               <input
-                className="btm"
+                className="inp"
                 type="text"
                 name="simbolo"
                 autoComplete="off"
@@ -181,12 +192,20 @@ function FormMoneda() {
               />
               <span className="err">{errors?.simbolo?.message}</span>
             </div>
-            <button className="btn" type="submit">
+            <button className="agregarModal" type="submit">
               Agregar
             </button>
           </div>
         </form>
       </div>
+      {/* <div className="contenedorActuales">
+        <div className="tiposUsuarios">
+          Tipos de Monedas Actuales
+          {moneda.map((u) => (
+            <span className="spans">{u.nombre_moneda}</span>
+          ))}
+        </div>
+      </div> */}
     </>
   );
 }

@@ -4,14 +4,16 @@ import {
   getFamilia,
   getCategoria,
   categoriaPost,
+  mostrarError,
 } from "../../../Redux/actions";
 
 function Cate({ setSwitcher }) {
   const dispatch = useDispatch();
   const familia = useSelector((store) => store.familia);
   const categoria = useSelector((store) => store.categoria);
+  const alerta = useSelector((store) => store.alerta);
 
-  var mapeado = categoria.map((ca) => ca.nombre_categoria);
+  // var mapeado = categoria.map((ca) => ca.nombre_categoria);
 
   const [fam, setFam] = useState({
     nombre_familia: "",
@@ -76,8 +78,15 @@ function Cate({ setSwitcher }) {
       return;
     }
 
-    if (mapeado.includes(cate.nombre_categoria)) {
+    if (categoria.includes(cate.nombre_categoria)) {
       alert("Categoría de producto existente");
+      return;
+    }
+
+    if (!isNaN(parseInt(nuevaCategoria.nombre_categoria))) {
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
       return;
     }
 
@@ -95,16 +104,18 @@ function Cate({ setSwitcher }) {
 
   return (
     <>
-      <div className="divCAT">
-        <h6 id="title3">Categoría</h6>
+      <div>
         <>
           <form
-            className="formFAM"
+            className="formFamilia"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={(e) => handleSubmit(e)}
           >
-            <div className="divFormFAM">
+            {alerta ? (
+              <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+            ) : null}
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label">Familia</label>
                 <select
@@ -113,13 +124,14 @@ function Cate({ setSwitcher }) {
                   value={fam.nombre_familia}
                   onChange={(e) => ChangeInput(e)}
                 >
+                  <option></option>
                   {familia.map((f) => (
                     <option value={f.nombre_familia}>{f.nombre_familia}</option>
                   ))}
                 </select>
               </div>
             </div>
-            <div className="divFormCAT">
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label">Categoría</label>
                 <input
@@ -130,18 +142,18 @@ function Cate({ setSwitcher }) {
                 ></input>
               </div>
             </div>
-            <div className="divFormCAT">
+            <div className="divFormFamilia">
               <div>
                 <label className="text-label-desc">* Descripción</label>
                 <input
-                  className="btm-desc"
+                  className="inp6"
                   type="text"
                   name="descripcion"
                   value={cate.descripcion}
                 ></input>
               </div>
             </div>
-            <button className="btn4" type="submit">
+            <button className="agregarModal" type="submit">
               Agregar Categoría
             </button>
           </form>
