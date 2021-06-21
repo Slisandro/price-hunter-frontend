@@ -90,3 +90,11 @@ header {
   border: none;
   cursor: pointer;
 }
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}

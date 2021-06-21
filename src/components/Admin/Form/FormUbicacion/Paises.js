@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getMoneda, getRegion, paisPost, mostrarError } from "../../../Redux/actions";
+import { getMoneda, getRegion, paisPost, mostrarError, getPais } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 function Paises() {
@@ -18,6 +18,7 @@ function Paises() {
   useEffect(() => {
     dispatch(getRegion());
     dispatch(getMoneda())
+    dispatch(getPais())
   }, [dispatch]);
 
   const ChangeInput = (e) => {

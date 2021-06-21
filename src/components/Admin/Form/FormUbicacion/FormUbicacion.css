@@ -96,3 +96,11 @@ header {
   margin-top: 20rem;
   background-color: green; */
 }
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { unidadDeMedida } from "../../../Redux/actions";
-
+import { useForm } from "react-hook-form";
 import "./FormUnidadMedida.css";
 
 function FormUnidadMedida() {
@@ -28,8 +28,15 @@ function FormUnidadMedida() {
       });
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
+    
 
     const nuevaUM = {
       codigo_unidad_medida: state.codigo_unidad_medida,
@@ -78,7 +85,7 @@ function FormUnidadMedida() {
           className="form"
           noValidate
           onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(submit)}
         >
           <div>
             <label className="text-label">Nombre</label>
@@ -86,8 +93,28 @@ function FormUnidadMedida() {
               className="inp"
               type="text"
               name="nombre_unidad"
-              value={state.nombre_unidad}
-            ></input>
+              autoComplete="off"
+              max="0"
+              {...register("nombre_unidad", {
+                required: {
+                  value: true,
+                  message: "Debe ingresar un nombre ",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "El nombre debe tener menos de quince letras!",
+                },
+                minLength: {
+                  value: 3,
+                  message: "El nombre debe tener tres letras!",
+                },
+                max: {
+                  value: 0,
+                  message: "El nombre no puede comenzar con numeros",
+                },
+              })}
+            />
+            <span className="err">{errors?.nombre_unidad?.message}</span>
           </div>
           <div className="divForm">
             <div>
@@ -96,8 +123,26 @@ function FormUnidadMedida() {
                 className="inp"
                 type="text"
                 name="codigo_unidad_medida"
-                value={state.codigo_moneda}
-              ></input>
+                autoComplete="off"
+                max="0"
+                {...register("codigo_unidad_medida", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar una unidad ",
+                  },
+                  maxLength: {
+                    value: 4,
+                    message: "la unidad no debe tener mas de cuatro letras!",
+                  },
+                  max: {
+                    value: 0,
+                    message: "La unidad no puede comenzar con numeros",
+                  },
+                })}
+              />
+              <span className="err">
+                {errors?.codigo_unidad_medida?.message}
+              </span>
             </div>
             <button className="agregarModal" type="submit">
               Agregar

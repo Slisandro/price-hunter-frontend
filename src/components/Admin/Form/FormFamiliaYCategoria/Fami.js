@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFamilia, familiaPost } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -43,8 +44,14 @@ function Fami({ setSwitcher }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
+   
 
     const nuevaFamilia = {
       nombre_familia: fam.nombre_familia,
@@ -80,7 +87,7 @@ function Fami({ setSwitcher }) {
           className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(submit)}
         >
           <div className="divFormFamilia">
             <div>
@@ -88,8 +95,30 @@ function Fami({ setSwitcher }) {
               <input
                 name="agregar_familia"
                 className="inp3"
-                placeholder="Agregar Familia"
-              ></input>
+                autoComplete="off"
+                max ='0'
+                      {...register("agregar_familia", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un familia ",
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "La familia debe tener menos de quince letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "La familia debe tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "La familia no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.agregar_familia?.message}</span>
+             
             </div>
           </div>
           <div className="divFormFamilia">
@@ -99,8 +128,29 @@ function Fami({ setSwitcher }) {
                 className="btm-desc"
                 type="text"
                 name="descripcion"
-                value={fam.descripcion}
-              ></input>
+                autoComplete="off"
+                max ='0'
+                      {...register("descripcion", {
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe ingresar un descripcion ",
+                        // },
+                        maxLength: {
+                          value: 256,
+                          message:
+                            "La descripcion no debe tener mas de 256 caracteres!",
+                        },
+                        minLength: {
+                          value: 5,
+                          message: "La descripcion debe tener al menos cinco letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "La descripcion no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.descripcion?.message}</span>
             </div>
           </div>
           <button className="agregarModal" type="submit">

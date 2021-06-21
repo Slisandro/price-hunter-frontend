@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { tipoUsuario } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormUsuario.css";
@@ -35,8 +36,14 @@ function FormUsuario() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
+   
 
     const nuevoUsuario = {
       tipo_usuario: state.tipo_usuario,
@@ -75,7 +82,7 @@ function FormUsuario() {
                 className="form"
                 noValidate
                 onChange={(e) => ChangeInput(e)}
-                onSubmit={(e) => handleSubmit(e)}
+                onSubmit={handleSubmit(submit)}
               >
                 <div className="divModalFAM">
                   <div>
@@ -84,8 +91,29 @@ function FormUsuario() {
                       className="inp"
                       type="text"
                       name="tipo_usuario"
-                      value={state.tipo_usuario}
-                    ></input>
+                      max ='0'
+                      autoComplete="off"
+                      {...register("tipo_usuario", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre ",
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "El tipo de usuario no debe tener mas de quince letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El tipo de usuario debe al menos tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "No puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.tipo_usuario?.message}</span>
                   </div>
                   <button className="agregarModal" type="submit">
                     Agregar

@@ -6,6 +6,7 @@ import {
   subcategoriaPost,
   getSubcategoria,
 } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
 
 function Subcate({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -84,8 +85,14 @@ function Subcate({ setSwitcher }) {
     // console.log(subcate);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
+ 
 
     const nuevaSubcate = {
       nombre_subcategoria: subcate.nombre_subcategoria,
@@ -125,7 +132,7 @@ function Subcate({ setSwitcher }) {
           className="formFamilia"
           noValidate
           onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(submit)}
         >
           <div className="divFormFamilia">
             <div>
@@ -133,8 +140,13 @@ function Subcate({ setSwitcher }) {
               <select
                 name="nombre_categoria"
                 className="selectTransAgregar"
-                value={cate.nombre_categoria}
                 onChange={(e) => ChangeInput(e)}
+                {...register("nombre_categoria", {
+                  required: {
+                    value: true,
+                    message: "Debe seleccionar una categoria",
+                  },
+                })}
               >
                 <option></option>
                 {categoria.map((f) => (
@@ -143,17 +155,41 @@ function Subcate({ setSwitcher }) {
                   </option>
                 ))}
               </select>
+              <span className="err">
+                        {errors?.nombre_categoria?.message}
+                      </span>
             </div>
           </div>
           <div className="divFormFamilia">
             <div>
               <label className="text-label">Sub-Categoría</label>
               <input
-                value={subcate.nombre_subcategoria}
-                name={"nombre_subcategoria"}
+                value={subcate.nombre_subcategroia}
+                name="nombre_subcategoria"
                 className="inp"
-                placeholder="Agregar Sub-Categoría"
-              ></input>
+                max ='0'
+                      autoComplete="off"
+                      {...register("nombre_subcategoria", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre ",
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "El nombre no debe tener mas de quince letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El nombre debe al menos tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.nombre_subcategoria?.message}</span>
             </div>
           </div>
           <div className="divFormFamilia">
@@ -162,9 +198,30 @@ function Subcate({ setSwitcher }) {
               <input
                 className="btm-desc"
                 type="text"
-                name="descripcion"
-                value={subcate.descripcion}
-              ></input>
+                name=""
+                autoComplete="off"
+                  max ='0'
+                        {...register("descripcion", {
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar un descripcion ",
+                          // },
+                          maxLength: {
+                            value: 256,
+                            message:
+                              "La descripcion no debe tener mas de 256 caracteres!",
+                          },
+                          minLength: {
+                            value: 5,
+                            message: "La descripcion debe tener al menos cinco letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "La descripcion no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">{errors?.descripcion?.message}</span>
             </div>
           </div>
           <button className="agregarModal" type="submit">
