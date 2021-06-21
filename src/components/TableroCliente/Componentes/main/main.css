@@ -1,0 +1,65 @@
+#container-main{
+    width: 70%;
+    height: 100%;
+    background: #C4C4C4;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#container-main  a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-main  div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-main div button{
+    width: 200px;
+    height: 150px;
+    border-radius: 0.5em;
+}
+
+#container-main div button:hover{
+    cursor: pointer;
+}
+
+
+#container-main div img {
+    width: 50px;
+    height: 50px;
+}
+
+#container-main div button p{
+    font-size: large;
+    margin: 0%;
+    padding: 0%;
+}
+
+@media only screen and (max-width: 768px) {
+    #container-main{
+        width: 100%;
+    
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    #container-main{
+        width: 100%;
+    
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+  }
+
+  .imagen-bottn-client{
+      width: 25px;
+      height: 25px;
+  }

@@ -97,6 +97,7 @@ header {
   background-color: green; */
 }
 
+
 .err {
   margin: auto;
   display: flex;
@@ -104,3 +105,17 @@ header {
   font-size: 15px;
   color: red
 }
+
+.selectUbi {
+  color: black;
+  width: 10rem;
+  height: 2.2rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius);
+  background-color: white;
+}
+
+.separador {
+  margin-top: 1rem;
+}
+

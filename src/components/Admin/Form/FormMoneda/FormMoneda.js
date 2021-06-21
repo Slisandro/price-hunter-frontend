@@ -7,12 +7,18 @@ import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
+  const moneda = useSelector((store) => store.moneda);
 
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
     simbolo: "",
   });
+
+  useEffect(() => {
+    dispatch(getMoneda());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -96,6 +102,7 @@ function FormMoneda() {
 
   return (
     <>
+
       <div className="contenedorMoneda">
         <div className="containerForm">
           <header>
@@ -115,9 +122,8 @@ function FormMoneda() {
               <div>
                 <label className="text-label">Codigo de Moneda</label>
                 <input
-                  // className="btm"
+                  className="btm inp"
                   type="NaN"
-                  className="inp"
                   name="codigo_moneda"
                   autoComplete="off"
                   {...register("codigo_moneda", {
@@ -133,69 +139,147 @@ function FormMoneda() {
                       value: 3,
                       message: "El codigo debe tener tres letras!",
                     },
-                    type:{
-                      value:!NaN,
-                      message: "El codigo debe tener tres letrasssssssssssssssss!",
-                    }
                   })}
                 />
 
-                <span className="err">{errors?.codigo_moneda?.message}</span>
-              </div>
+          
+      <div className="contenedorFAM">
+        {/* <div className="containerForm"> */}
+        <header>
+          <h1 id="title">Agregar Moneda</h1>
+        </header>
+        <form
+          id="survey-form"
+          className="form"
+          // noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={handleSubmit(submit)}
+        >
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
+          <div className="divForm">
+            <div>
+              <label className="text-label">Codigo de Moneda</label>
+              <input
+                className="btm inp"
+                type="NaN"
+                name="codigo_moneda"
+                autoComplete="off"
+                {...register("codigo_moneda", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar un Codigo de Moneda ",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                })}
+              />
 
-              <div>
-                <label className="text-label">Nombre de la Moneda</label>
-                <input
-                  className="inp"
-                  type="text"
-                  max= '0'
-                  name="nombre_moneda"
-                  autoComplete="off"
-                  {...register("nombre_moneda", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un Nombre para la Moneda ",
-                    },
-                    maxLength: {
-                      value: 10,
-                      message:
-                        "El nombre no puede tener mas de diez caracteres!",
-                    },
-                    minLength: {
-                      value: 2,
-                      message: "El nombre debe tener más de dos caracteres!",
-                    },
-                    max: {
-                      value: 0,
-                      message: "El nombre no debe tener numeros!",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.nombre_moneda?.message}</span>
-              </div>
-              <div>
-                <label className="text-label">Simbolo</label>
-                <input
-                  className="inp"
-                  type="text"
-                  name="simbolo"
-                  autoComplete="off"
-                  {...register("simbolo", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un Simbolo ",
-                    },
-                    maxLength: {
-                      value: 3,
-                      message: "El simbolo debe tener maximo tres letras!",
-                    },
-                    minLength: {
-                      value: 1,
-                      message: "El codigo debe tener como minimo 1 letra!",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.simbolo?.message}</span>
+                <div className="contenedorFAM">
+                  {/* <div className="containerForm"> */}
+                  <header>
+                    <h1 id="title">Agregar Moneda</h1>
+                  </header>
+                  <form
+                    id="survey-form"
+                    className="form"
+                    // noValidate
+                    onChange={(e) => ChangeInput(e)}
+                    onSubmit={handleSubmit(submit)}
+                  >
+                    {alerta ? (
+                      <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+                    ) : null}
+                    <div className="divForm">
+                      <div>
+                        <label className="text-label">Codigo de Moneda</label>
+                        <input
+                          className="btm"
+                          type="NaN"
+                          className="inp"
+                          name="codigo_moneda"
+                          autoComplete="off"
+                          {...register("codigo_moneda", {
+                            required: {
+                              value: true,
+                              message: "Debe ingresar un Codigo de Moneda ",
+                            },
+                            maxLength: {
+                              value: 3,
+                              message: "El codigo debe tener tres letras!",
+                            },
+                            minLength: {
+                              value: 3,
+                              message: "El codigo debe tener tres letras!",
+                            },
+                          })}
+                        />
+
+
+                        <span className="err">{errors?.codigo_moneda?.message}</span>
+                      </div>
+
+                      <div>
+                        <label className="text-label">Nombre de la Moneda</label>
+                        <input
+                          className="inp"
+                          // type="text"
+                          name="nombre_moneda"
+                          autoComplete="off"
+                          {...register("nombre_moneda", {
+                            required: {
+                              value: true,
+                              message: "Debe ingresar un Nombre para la Moneda ",
+                            },
+                            maxLength: {
+                              value: 10,
+                              message: "El nombre no puede tener mas de diez caracteres!",
+                            },
+                            minLength: {
+                              value: 2,
+                              message: "El nombre debe tener más de dos caracteres!",
+                            },
+                          })}
+                        />
+                        <span className="err">{errors?.nombre_moneda?.message}</span>
+                      </div>
+                      <div>
+                        <label className="text-label">Simbolo</label>
+                        <input
+                          className="inp"
+                          type="text"
+                          name="simbolo"
+                          autoComplete="off"
+                          {...register("simbolo", {
+                            required: {
+                              value: true,
+                              message: "Debe ingresar un Simbolo ",
+                            },
+                            maxLength: {
+                              value: 3,
+                              message: "El simbolo debe tener maximo tres letras!",
+                            },
+                            minLength: {
+                              value: 1,
+                              message: "El codigo debe tener como minimo 1 letra!",
+                            },
+                          })}
+                        />
+                        <span className="err">{errors?.simbolo?.message}</span>
+                      </div>
+                      <button className="agregarModal" type="submit">
+                        Agregar
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
               <button className="agregarModal" type="submit">
                 Agregar
@@ -203,6 +287,18 @@ function FormMoneda() {
             </div>
           </form>
         </div>
+      </div>
+       <div className="contenedorActuales">
+        <div className="tiposUsuarios">
+          Tipos de Monedas Actuales
+          {moneda.map((u) => (
+            <span className="spans">{u.nombre_moneda}</span>
+          ))}
+        </div>
+      </div> 
+      </div>
+      </form>
+      </div>
       </div>
     </>
   );

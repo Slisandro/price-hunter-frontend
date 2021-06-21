@@ -4,12 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { Next } from "react-bootstrap/esm/PageItem";
 
 var geolocation = require('geolocation');
 
-geolocation.getCurrentPosition((err, position) => {
-    return position.coords.longitude
-})
+// geolocation.getCurrentPosition((err, position) => {
+//     return position.coords.longitude
+// })
 
 
 function FormPostPrice({ setModal, modal, referencia }) {
@@ -35,7 +36,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
         longitud: "",
         nombre_negocio: "", // Usuario
         direccion_negocio: "", // Usuario
-        precio: null, // Usuario
+        precio: "", // Usuario
         desafioId: "", // Usuario
     })
 
@@ -51,25 +52,28 @@ function FormPostPrice({ setModal, modal, referencia }) {
                 [e.target.name]: true
             })
         } else {
+
+            if (e.target.name === "precio") {
+                setState({
+                    ...state,
+                    precio: parseFloat(e.target.value)
+                })
+            }
+
             setErrors({
                 ...errors,
                 [e.target.name]: false
             })
         }
 
-        if (e.target.name === "precio") {
-            setState({
-                ...state,
-                precio: parseInt(e.target.value)
-            })
-        }
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
-            axios.post("http://localhost:3001/precios", state, { headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` } })
+            axios.post("https://price-hunter-api.herokuapp.com/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(resp => {
                     if (!resp.data.aceptado) {
                         swal(resp.data.msj, " ", "error");

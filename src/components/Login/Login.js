@@ -1,15 +1,13 @@
 
 import React, { useState,useEffect } from 'react';
-// import { Button } from 'react-bootstrap';
-// import {useSelector, useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom'
 import { Link } from "react-router-dom";
 import "./Login.css";
 import aguila from "../../assets/aguila.png";
-import Twitter from '../../assets/twitter.png';
 import Google from '../../assets/google.png';
 import { iniciarSesion, mostrarError } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
+import GoogleLogin from "react-google-login";
+
 
 
 
@@ -18,7 +16,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Login = (props) => {
   console.log(props)
-  const history = useHistory()
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
@@ -35,7 +32,7 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      history.push('/tablero');
+      props.history.push('/tablero');
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);
@@ -49,7 +46,13 @@ const Login = (props) => {
 
 
   /******************************************************************************************************************************/
+  const responseGoogle  =  (response)  => {
+    console.log(response)
 
+  }
+
+
+  /*******************************************************************************************************************************/
 
   const [user, guardarUser] = useState({
     email: "",
@@ -115,7 +118,7 @@ const Login = (props) => {
                       
                       <div className="login__container--remember-me">
                         <label>
-                          <input type="checkbox" id="cbox1" value="first_checkbox"/>Recuérdame
+                          <input className="check" type="checkbox" id="cbox1" value="first_checkbox"/>Recuérdame
                         </label>
                         <label>
                           <a href="/">Olvidé mi contraseña</a>
@@ -124,8 +127,16 @@ const Login = (props) => {
                 </form>
                 
                 <section className="login__container--social-media">
-                    <div><img src={Google} alt=""/> Inicia sesión con Google</div>
-                    <div><img src={Twitter} alt=""/> Inicia sesión con Twitter</div>
+                    <GoogleLogin
+                        clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+                        render={renderProps => (
+                        <button className="button__login__google"  onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt=""/><p>Iniciar sesion con Google</p></button>
+                        )}
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                    
                 </section>
                 
                 <div className="register__login">

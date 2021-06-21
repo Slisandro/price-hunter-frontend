@@ -95,3 +95,20 @@
 .miMonedero .movimientos button:hover {
     opacity: .5;
 }
+
+#modalRetiroPoints {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    z-index: 10;
+    background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+    border: 2px solid rgb(1, 247, 234);
+    width: 40%;
+    height: 50%;
+    border-radius: 1em;
+    z-index: 1000;
+}

@@ -23,13 +23,14 @@ import {
   PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
-  GET_GENEROS, 
+  GET_GENEROS,
   GET_TIPO_USUARIO,
   GET_PAISES,
   GET_CIUDADES,
   GET_REGION,
   GET_PAIS,
   GET_MONEDA,
+  GET_TIPO_TRANSACCION,
   // OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
@@ -88,7 +89,7 @@ const initialState = {
   productos: [],
   subcategorias: [],
   alerta: null,
-  
+
   /*Estados para la autenticacion*/
   token: localStorage.getItem("token"),
   autenticado: null,
@@ -105,13 +106,15 @@ const initialState = {
   admin: {},
   familia: [],
   categoria: [],
- 
+
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
   pais: [],
   region: [],
   moneda: [],
+  transaccion: [],
+
   //-------------ADMIN-------------//
 };
 
@@ -168,28 +171,26 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("nombre", action.payload.usuario.nombre);
-      
+      localStorage.setItem("nombre", action.payload.usuario.nombre?action.payload.usuario.nombre:action.payload.usuario.nombre_cial_fantasia);
+
       return {
         ...state,
         autenticado: true,
         usuario: null,
         mensaje: null,
-      
       };
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
-      localStorage.removeItem('token');
-      localStorage.removeItem('nombre')
+      localStorage.removeItem("token");
+      localStorage.removeItem("nombre");
       return {
-          ...state,
-          token: null,
-          usuario: null,
-          autenticado: null ,
-          mensaje: action.payload, 
-          
-    };
+        ...state,
+        token: null,
+        usuario: null,
+        autenticado: null,
+        mensaje: action.payload,
+      };
     case UNIDAD_MEDIDA_POST:
       return {
         ...state,
@@ -280,8 +281,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         desafios: action.payload,
       };
-    case PRICE: 
-      console.log("red")
+    case PRICE:
+      console.log("red");
       return;
     case GET_SUBCATEGORIAS:
       return {
@@ -307,6 +308,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         moneda: action.payload,
+      };
+    case GET_TIPO_TRANSACCION:
+      return {
+        ...state,
+        transaccion: action.payload,
       };
 
     //-------------ADMIN-------------//

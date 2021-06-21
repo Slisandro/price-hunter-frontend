@@ -110,7 +110,28 @@
 }
 
 @media only screen and (max-width: 978px) {
-  #sidebar {
+  #sidebarr {
+    display: none;
+    height: 95vh;
+    border: none;
+  }
+  .sidebar__img {
+    padding-left: 25px;
+  }
+  .sidebar__title {
+    display: inline;
+  }
+  .sidebar__menu {
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (max-width: 478px) {
+  #sidebarr {
     display: none;
     height: 95vh;
     border: none;
