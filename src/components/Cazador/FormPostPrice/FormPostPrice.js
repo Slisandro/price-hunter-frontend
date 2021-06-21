@@ -4,12 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { Next } from "react-bootstrap/esm/PageItem";
 
 var geolocation = require('geolocation');
 
-geolocation.getCurrentPosition((err, position) => {
-    return position.coords.longitude
-})
+// geolocation.getCurrentPosition((err, position) => {
+//     return position.coords.longitude
+// })
 
 
 function FormPostPrice({ setModal, modal, referencia }) {
