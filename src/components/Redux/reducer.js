@@ -159,10 +159,12 @@ function rootReducer(state = initialState, action) {
       };
     case MOSTRAR_ERROR:
       return {
+        ...state,
         alerta: action.payload,
       };
     case OCULTAR_ERROR:
       return {
+        ...state,
         alerta: null,
       };
 

@@ -91,6 +91,15 @@ header {
   cursor: pointer;
 }
 
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}
+
 .contenedorActualesUM {
   margin-left: 18rem;
   margin-top: 4rem;

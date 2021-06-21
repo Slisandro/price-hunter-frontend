@@ -107,3 +107,11 @@ header {
   border-radius: 2rem;
   font-family: "Catamaran", sans-serif !important;
 }
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}

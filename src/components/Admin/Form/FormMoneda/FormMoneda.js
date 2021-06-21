@@ -40,63 +40,64 @@ function FormMoneda() {
       });
     }
   };
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
-    codigo_moneda: NaN,
-  });
+  } = useForm();
 
   const alerta = useSelector((store) => store.alerta);
+  let moneda = useSelector((store) => store.moneda);
+ 
+  useEffect(() => {
+    dispatch(getMoneda());
+  }, [dispatch]);
 
   const submit = (data, e) => {
-    e.preventDefault();
-
+  
     const nuevaMoneda = {
       codigo_moneda: state.codigo_moneda.toLocaleUpperCase(),
       nombre_moneda: state.nombre_moneda,
       simbolo: state.simbolo,
     };
 
-    // if (!nuevaMoneda.codigo_moneda) {
-    //   dispatch(mostrarError("Debe ingresar el codigo de la moneda", 'alerta-error'));
-    //   return;
-    // }
-    // if (data.codigo_moneda.length !== 3) {
-    //   dispatch(mostrarError("Debe ingresar 3 letras",'alerta-error'));
-    //   return;
-    // }
-    if (!isNaN(parseInt(data.codigo_moneda))) {
+    if (!isNaN(parseInt(nuevaMoneda.codigo_moneda))) {
       dispatch(
         mostrarError("El codigo solo puede contener letras", "alerta-error")
       );
       return;
     }
-    // if (!nuevaMoneda.nombre_moneda) {
-    //   dispatch(mostrarError("Por favor, ingrese el nombre de la moneda", 'alerta-error'));
-    //   return;
-    // }
+
     if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
       dispatch(
         mostrarError("El nombre solo puede contener letras", "alerta-error")
       );
       return;
     }
-    // if (!nuevaMoneda.simbolo) {
-    //   dispatch(mostrarError("Por favor, ingrese el simbolo de la moneda", 'alerta-error'));
-    //   return;
-    // }
+    if (moneda.length > 0) {
+      for (let i = 0; i < moneda.length; i++) {
+        if (nuevaMoneda.codigo_moneda === moneda[i].codigo_moneda) {
+          dispatch(mostrarError("La moneda ya existe", "alerta-error"));
 
+          return;
+        }
+      }
+    }
+    if(nuevaMoneda.codigo_moneda.length>0){
     dispatch(monedaPost(state));
     e.target.reset();
     alert("La Moneda fue agregada con éxito!");
-
+    dispatch(getMoneda());
     setState({
       codigo_moneda: "",
       nombre_moneda: "",
       simbolo: "",
     });
+  }else {
+    alert("Debe agregar datos!");
+  }
+    
   };
 
   return (
@@ -284,18 +285,17 @@ function FormMoneda() {
                 Agregar
               </button>
             </div>
-
           </form>
         </div>
       </div>
-      {/* <div className="contenedorActuales">
+       <div className="contenedorActuales">
         <div className="tiposUsuarios">
           Tipos de Monedas Actuales
           {moneda.map((u) => (
             <span className="spans">{u.nombre_moneda}</span>
           ))}
         </div>
-      </div> */}
+      </div> 
       </div>
       </form>
       </div>
