@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { monedaPost, mostrarError } from "../../../Redux/actions";
+import { monedaPost, mostrarError, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 
 import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
+  const moneda = useSelector((store) => store.moneda);
 
   const [state, setState] = useState({
     codigo_moneda: "",
@@ -14,11 +15,14 @@ function FormMoneda() {
     simbolo: "",
   });
 
+  useEffect(() => {
+    dispatch(getMoneda());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(name);
-
     if (name === "codigo_moneda") {
       setState({
         ...state,
@@ -97,6 +101,8 @@ function FormMoneda() {
 
   return (
     <>
+
+    /*
       <div className="contenedorMoneda">
         <div className="containerForm">
           <header>
@@ -136,6 +142,48 @@ function FormMoneda() {
                     },
                   })}
                 />
+                */
+
+      <div className="contenedorFAM">
+        {/* <div className="containerForm"> */}
+        <header>
+          <h1 id="title">Agregar Moneda</h1>
+        </header>
+        <form
+          id="survey-form"
+          className="form"
+          // noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={handleSubmit(submit)}
+        >
+          {alerta ? (
+            <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+          ) : null}
+          <div className="divForm">
+            <div>
+              <label className="text-label">Codigo de Moneda</label>
+              <input
+                className="btm"
+                type="NaN"
+                className="inp"
+                name="codigo_moneda"
+                autoComplete="off"
+                {...register("codigo_moneda", {
+                  required: {
+                    value: true,
+                    message: "Debe ingresar un Codigo de Moneda ",
+                  },
+                  maxLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "El codigo debe tener tres letras!",
+                  },
+                })}
+              />
+
 
                 <span className="err">{errors?.codigo_moneda?.message}</span>
               </div>
@@ -195,6 +243,14 @@ function FormMoneda() {
           </form>
         </div>
       </div>
+      {/* <div className="contenedorActuales">
+        <div className="tiposUsuarios">
+          Tipos de Monedas Actuales
+          {moneda.map((u) => (
+            <span className="spans">{u.nombre_moneda}</span>
+          ))}
+        </div>
+      </div> */}
     </>
   );
 }

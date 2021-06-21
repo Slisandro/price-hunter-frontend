@@ -12,12 +12,15 @@ import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 
+
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
 
 import TableroEmpresa from "./components/TableroEmpresas/TableroEmpresa";
+
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
+import Modal from "./components/Registro/Modal";
 
 
 
@@ -42,6 +45,9 @@ function App() {
 
         {/* <TableroEmpresa/> */}
         <Route path="/tablerocliente" component={TableroCLiente} />
+
+
+        <Route exact path="/terminos-condiciones" component={Modal}/>
 
       </Switch>
     </Router>

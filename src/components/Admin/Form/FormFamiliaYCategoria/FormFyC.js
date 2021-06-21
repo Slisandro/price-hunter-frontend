@@ -30,7 +30,7 @@ function FormFyC() {
 
   return (
     <>
-      <div className="containerForm">
+      <div className="contenedorFAM">
         <header>
           <h1 id="title">Agregar Familia y Categoría</h1>
         </header>

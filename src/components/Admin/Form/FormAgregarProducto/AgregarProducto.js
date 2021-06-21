@@ -67,12 +67,9 @@ function FormAgregarProducto() {
     const nuevoProducto = {
       nombre: state.nombre,
       contenido_neto: state.contenido_neto,
-
       unidadMedidaCodigoUnidadMedida: state.unidadMedidaCodigoUnidadMedida,
       subcategoriumId: state.subcategoriumId,
     };
-
-    console.log(nuevoProducto);
 
     if (!nuevoProducto.nombre) {
       alert("Por favor, ingrese un nombre");
@@ -112,9 +109,9 @@ function FormAgregarProducto() {
         <div className="contenedorFAM">
           {modal ? (
             <div>
-              <button className="buttonModal" onClick={() => handleModal()}>
+              {/* <button className="buttonModal" onClick={() => handleModal()}>
                 <img width={30} src={close} alt="x" />
-              </button>
+              </button> */}
               <header>
                 <h1 id="title">Agregar Producto</h1>
               </header>
@@ -166,7 +163,7 @@ function FormAgregarProducto() {
                     <label className="text-label">Sub-Categoría</label>
                     <select
                       name="subcategoriumId"
-                      className="inp"
+                      className="inp5"
                       // value={state.nombre}
                       onChange={(e) => ChangeInput(e)}
                     >

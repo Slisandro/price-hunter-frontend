@@ -35,7 +35,7 @@ function MisDesafios() {
 
     return (
         loading ?
-            <div>Cargando desafíos...</div>
+            <div className="containerMessageBack">Cargando desafíos...</div>
             :
             <>
                 <div className="cardsContainer">

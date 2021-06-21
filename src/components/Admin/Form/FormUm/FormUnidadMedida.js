@@ -1,16 +1,24 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { unidadDeMedida } from "../../../Redux/actions";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
 
 import "./FormUnidadMedida.css";
 
 function FormUnidadMedida() {
   const dispatch = useDispatch();
+  const unidad_medida = useSelector((store) => store.unidad_medida);
 
   const [state, setState] = useState({
     codigo_unidad_medida: "",
     nombre_unidad: "",
   });
+
+  useEffect(() => {
+    dispatch(getUnidadMedida());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(unidad_medida);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -71,7 +79,7 @@ function FormUnidadMedida() {
     <>
       <div className="contenedorFAM">
         <header>
-          <h1 id="title">Agregar Unidad Medida</h1>
+          <h1 id="title">Agregar Unidad de Medida</h1>
         </header>
         <form
           id="survey-form"
@@ -104,6 +112,14 @@ function FormUnidadMedida() {
             </button>
           </div>
         </form>
+      </div>
+      <div className="contenedorActualesUM">
+        Unidades de Medida Actuales
+        <div className="tiposUM">
+          {unidad_medida.map((u) => (
+            <span className="spansUM">{u.nombre_unidad}</span>
+          ))}
+        </div>
       </div>
     </>
   );

@@ -72,7 +72,6 @@ function FormPostPrice({ setModal, modal, referencia }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem("token");
-        console.log(typeof(state.precio))
         if (Object.values(errors).filter(x => x === true).length === 0) {
             axios.post("http://localhost:3001/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(resp => {

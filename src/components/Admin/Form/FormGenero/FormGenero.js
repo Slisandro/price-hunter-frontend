@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { generoPost } from "../../../Redux/actions";
+import { generoPost, mostrarError, getGeneros } from "../../../Redux/actions";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormGenero.css";
 
 function FormGenero() {
   const [modal, setModal] = useState(true);
+  const alerta = useSelector((store) => store.alerta);
+  const generos = useSelector((store) => store.generos);
 
   const handleModal = () => {
     setModal(!modal);
@@ -15,7 +17,7 @@ function FormGenero() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getSubcategoria());
+    dispatch(getGeneros());
     // dispatch(getUnidadMedida());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -42,10 +44,15 @@ function FormGenero() {
       genero: state.genero,
     };
 
-    console.log(nuevoGenero);
-
     if (!nuevoGenero.genero) {
-      alert("Por favor, ingrese un Género");
+      dispatch(mostrarError("Ingrese un Género", "alerta-error"));
+      return;
+    }
+
+    if (!isNaN(parseInt(nuevoGenero.genero))) {
+      dispatch(
+        mostrarError("El Género sólo puede contener letras", "alerta-error")
+      );
       return;
     }
 
@@ -77,6 +84,11 @@ function FormGenero() {
                 onChange={(e) => ChangeInput(e)}
                 onSubmit={(e) => handleSubmit(e)}
               >
+                {alerta ? (
+                  <span className={`alerta ${alerta.categoria}`}>
+                    {alerta.msg}
+                  </span>
+                ) : null}
                 <div className="divModalFAM">
                   <div>
                     <label className="text-label">Género</label>
@@ -94,6 +106,14 @@ function FormGenero() {
               </form>
             </div>
           ) : null}
+        </div>
+        <div className="contenedorActuales">
+          <div className="tiposUsuarios">
+            Tipos de Géneros Actuales
+            {generos.map((u) => (
+              <span className="spans">{u.genero}</span>
+            ))}
+          </div>
         </div>
       </div>
     </>

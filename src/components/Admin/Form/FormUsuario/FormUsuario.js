@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { tipoUsuario } from "../../../Redux/actions";
+import { tipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormUsuario.css";
 
 function FormUsuario() {
   const [modal, setModal] = useState(true);
+  const tipo_usuarios = useSelector((store) => store.tipo_usuarios);
 
   const handleModal = () => {
     setModal(!modal);
@@ -15,7 +16,7 @@ function FormUsuario() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getSubcategoria());
+    dispatch(getTipoUsuario());
     // dispatch(getUnidadMedida());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -94,6 +95,12 @@ function FormUsuario() {
               </form>
             </div>
           ) : null}
+        </div>
+        <div className="contenedorActualesUM">
+          Tipos de Usuarios Actuales
+          {tipo_usuarios.map((u) => (
+            <span className="spans">{u.tipo_usuario}</span>
+          ))}
         </div>
       </div>
     </>
