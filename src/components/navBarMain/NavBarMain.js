@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Categorias from '../categorias/Categorias';
 import { getCategorias, getProductsByName } from "../Redux/actions";
@@ -23,10 +23,9 @@ function NavBarMain({ producto, setProducto, setState, ubicacion }) {
     const handleChange = (e) => {
         setProducto(e.target.value)
     }
-    console.log(categorias)
+
     return (
         <>
-
             {/* Animation */}
             <div id="container-welcome">
                 <div className="discount-chart">

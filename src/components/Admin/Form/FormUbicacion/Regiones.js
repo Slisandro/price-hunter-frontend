@@ -21,8 +21,7 @@ function Regiones() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    // console.log(name);
-    // console.log(target.value);
+    
     if (name === "nombre_region") {
       setRegion({
         ...region,
