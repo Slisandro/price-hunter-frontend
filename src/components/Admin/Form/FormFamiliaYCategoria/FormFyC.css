@@ -394,3 +394,11 @@ header {
   margin: 1rem 0 0 3rem;
   color: var(--clr-primary-5);
 }
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}

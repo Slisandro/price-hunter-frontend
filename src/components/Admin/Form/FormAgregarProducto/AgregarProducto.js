@@ -5,8 +5,8 @@ import {
   getSubcategoria,
   getUnidadMedida,
 } from "../../../Redux/actions";
-// import { Link } from "react-router-dom";
-// import logo from "../../assets/aguila.png";
+import { useForm } from "react-hook-form";
+
 import close from "../../../../assets/cancel (1).png";
 import "./AgregarProducto.css";
 
@@ -35,6 +35,12 @@ function FormAgregarProducto() {
     subcategoriumId: "",
   });
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -61,7 +67,7 @@ function FormAgregarProducto() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const submit = (data, e) => {
     e.preventDefault();
 
     const nuevoProducto = {
@@ -120,26 +126,54 @@ function FormAgregarProducto() {
                 className="form"
                 noValidate
                 onChange={(e) => ChangeInput(e)}
-                onSubmit={(e) => handleSubmit(e)}
+                onSubmit={handleSubmit(submit)}
               >
                 <div className="divModalFAM">
                   <div>
+                    {/* ------------------------ */}
                     <label className="text-label">Nombre</label>
                     <input
                       className="inp"
                       type="text"
                       name="nombre"
-                      value={state.nombre}
-                    ></input>
+                      max ='0'
+                      autoComplete="off"
+                      {...register("nombre", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre ",
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "El nombre no debe tener mas de quince letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El nombre debe tener al menos tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.nombre?.message}</span>
                   </div>
                   <div className="divForm">
                     <div>
+                      {/* ------------------------ */}
                       <label className="text-label">Unidad de Medida</label>
                       <select
                         name="unidadMedidaCodigoUnidadMedida"
                         className="inp2"
-                        // value={state.nombre}
                         onChange={(e) => ChangeInput(e)}
+                        {...register("unidadMedidaCodigoUnidadMedida", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una unidad de medida",
+                          },
+                        })}
                       >
                         <option></option>
                         {unidad_medida.map((f, index) => (
@@ -148,24 +182,54 @@ function FormAgregarProducto() {
                           </option>
                         ))}
                       </select>
+                      <span className="err">
+                        {errors?.unidadMedidaCodigoUnidadMedida?.message}
+                      </span>
                     </div>
                   </div>
                   <div>
+                    {/* ------------------------ */}
                     <label className="text-label">Contenido Neto</label>
                     <input
                       className="inp"
                       type="number"
+                      min = '0'
                       name="contenido_neto"
-                      value={state.contenido_neto}
-                    ></input>
+                      autoComplete="off"
+                      {...register("contenido_neto", {
+                        required: {
+                        
+                          value: true,
+                          message: "Debe ingresar un valor ",
+                        },
+                        maxLength: {
+                          value: 4,
+                          message:
+                            "El contenido no debe tener mas de 4 caracteres!",
+                        },
+                        min: {
+                          value:1,
+                          message: "No puede ingresar valores negativos"
+                        }
+                      })}
+                    />
+                    <span className="err">{errors?.contenido_neto?.message}</span>
+                    
                   </div>
                   <div>
+                    {/* ------------------------ */}
                     <label className="text-label">Sub-Categoría</label>
                     <select
                       name="subcategoriumId"
                       className="inp5"
                       // value={state.nombre}
                       onChange={(e) => ChangeInput(e)}
+                      {...register("subcategoriumId", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una subcategoria",
+                        },
+                      })}
                     >
                       <option></option>
                       {subcategoria.map((f, index) => (
@@ -174,6 +238,7 @@ function FormAgregarProducto() {
                         </option>
                       ))}
                     </select>
+                    <span className="err">{errors?.subcategoriumId?.message}</span>
                   </div>
                   <button className="agregarModal" type="submit">
                     Agregar

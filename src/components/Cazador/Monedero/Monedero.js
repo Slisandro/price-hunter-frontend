@@ -15,6 +15,7 @@ function actualPoints(arr) {
 }
 
 function Monedero() {
+    const [state, setState] = useState(false);
     const [movimiento, setMovimientos] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -25,10 +26,11 @@ function Monedero() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         console.log(token)
-        axios.get(`http://localhost:3001/transacciones/consulta`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta/1`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
                 setMovimientos(json.data)
                 setLoading(false);
+
             })
     }, [state]);
 
@@ -61,20 +63,20 @@ function Monedero() {
         } else {
             if (!error.bol) {
                 axios.post(
-                    "http://localhost:3001/transacciones/retirapuntos",
+                    "https://price-hunter-api.herokuapp.com/transacciones/retirapuntos",
                     body,
                     {
                         headers: {
                             "Authorization": `Bearer ${token}`,
                         },
                     }
-                )
-                    .then(resp => {
-                        swal(resp.data.rptaPuntos, " ", "success");
-                        setModal(false)
-                        setPuntos(0);
-                        setState(true)
-                    })
+                ) //VERIFICAR RUTA
+                .then(resp => {
+                    swal(resp.data.rptaPuntos, " ", "success");
+                    setModal(false)
+                    setPuntos(0);
+                    setState(true)
+                })
             }
         }
     }

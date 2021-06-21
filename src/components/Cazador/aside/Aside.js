@@ -1,6 +1,6 @@
 import React,{ useSelector} from 'react';
 import "./Aside.css";
-// import { cerrarSesion} from '../../Redux/actions';
+import { cerrarSesion} from '../../Redux/actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -25,7 +25,7 @@ const Aside= (props) => {
                     <div className="blob"></div>
                 </div>
                 <div className="account-name">Nombre usuario</div>
-                {/* <button className="account-title" onClick={ () => dispatch(cerrarSesion())} >Cerrar Sesion</button> */}
+                <button className="account-title" onClick={ () => dispatch(cerrarSesion())} >Cerrar Sesion</button>
             </div>
 
             <div className="account cardAside card1">

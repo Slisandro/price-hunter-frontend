@@ -3,12 +3,12 @@
 
 
 .login {
-    background-image: linear-gradient(#050824,#1a2058, #18e7dd);
-    display: flex;
+    background-image: linear-gradient(#050824,#1a2058, #18e6db);
+    display: flex !important;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    padding: 0px 30px;
+    justify-content: center !important;
+    padding: 0px 30px !important;
     height: 100vh;
     font-family: 'Catamaran', sans-serif !important;
   }
@@ -23,6 +23,7 @@
     flex-direction: column;
     justify-content: space-around;
     padding: 80px 70px 100px 80px;
+    font-family: 'Catamaran', sans-serif !important;
   
   }
   
@@ -30,16 +31,17 @@
     display: flex;
     flex-direction: column;
   }
-  .login__container--form  > input{
+  .login__container--form  > input {
      
       background: cornsilk;
-      width: 240px ;
+      width: 240px !important;
       height: 25px;
       border: none;
       outline: none;
       padding: 0 25px;
       border-radius: .2em;
       margin-bottom: 1rem;
+      
   }
   .logo__login{
       width: 4em;
@@ -56,10 +58,10 @@
     font-size: 14px;
   }
 
-  .button__login{
+  .button__login {
     border-radius: .2em;
-    width: 21.8em;
-    height: 38px;
+    max-width: 15em !important;
+    height: 38px !important;
     border: none;
     outline: none;
     cursor: pointer;
@@ -133,7 +135,7 @@
  .button__login__google{
     
   border-radius: .2em;
-  width: 21.8em;
+  max-width: 25em !important;
   height: 38px;
   border: none;
   outline: none;
@@ -145,6 +147,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  
 }
 
 
