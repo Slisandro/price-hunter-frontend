@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/misdesafios" component={MisDesafios} />
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
-        <Route exact path="/login-cliente" component={LoginCliente} />
+        {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}
         <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
