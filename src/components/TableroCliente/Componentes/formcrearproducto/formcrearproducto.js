@@ -4,7 +4,7 @@ import Select from 'react-select';
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 import axios from 'axios';
-// import token from "../../../token-cliente"
+import {URL} from "../../../Redux/actions"
 
 
 function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, setStateBoolean, stateBoolean}){
@@ -23,7 +23,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async ()=>{
         const token = localStorage.getItem("token");
-        const resp = await axios.get("http://localhost:3001/unidadmedida" , { headers: { "Authorization": `Bearer ${token}` } });
+        const resp = await axios.get(`${URL}unidadmedida` , { headers: { "Authorization": `Bearer ${token}` } });
         setStateUnidades(resp.data);
     },[])
             
@@ -42,7 +42,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async ()=>{
         const token = localStorage.getItem("token");
-        const resp = await axios.get("http://localhost:3001/listarsubcategorias", { headers: { "Authorization": `Bearer ${token}` } });
+        const resp = await axios.get(`${URL}listarsubcategorias`, { headers: { "Authorization": `Bearer ${token}` } });
         setStateSubCategorias(resp.data)
     },[])
 
@@ -61,7 +61,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
     async function handleSubmit(e){
         e.preventDefault();
         const token = localStorage.getItem("token")
-        const respuesta_crearproducto = await axios.post("http://localhost:3001/crearproducto",{
+        const respuesta_crearproducto = await axios.post(`${URL}crearproducto`,{
             nombre: stateProductoNuevo.nombre ,
             contenido_neto: parseInt(stateProductoNuevo.contenido_neto),
             unidad_medida: stateProductoNuevo.unidad_medida ,

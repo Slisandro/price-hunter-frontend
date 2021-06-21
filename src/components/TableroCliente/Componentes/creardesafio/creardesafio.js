@@ -8,7 +8,7 @@ import FormCiudades from "../formciudades/formciudades";
 import FormCrearProducto from "../formcrearproducto/formcrearproducto";
 import { Button, Modal } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
-// import token from "../../../token-cliente"
+import {URL} from "../../../Redux/actions"
 
 
 
@@ -59,7 +59,7 @@ function CrearDesafio() {
   useEffect(async () => {
 
     const token = localStorage.getItem("token");
-    const prod = await axios.get("http://localhost:3001/listarproductos", { headers: { "Authorization": `Bearer ${token}` } });
+    const prod = await axios.get(`${URL}listarproductos`, { headers: { "Authorization": `Bearer ${token}` } });
     setProductosState(prod.data);
 
   }, [stateBoolean]);
@@ -127,7 +127,7 @@ function CrearDesafio() {
   async function handleSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const respuesta_creardesafio = await axios.post("http://localhost:3001/creardesafio", state, { headers: { "Authorization": `Bearer ${token}` } })
+    const respuesta_creardesafio = await axios.post(`${URL}creardesafio`, state, { headers: { "Authorization": `Bearer ${token}` } })
     setMensajeState(respuesta_creardesafio.data.msg)
   }
 
