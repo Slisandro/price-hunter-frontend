@@ -96,3 +96,16 @@ header {
   margin-top: 20rem;
   background-color: green; */
 }
+
+.selectUbi {
+  color: black;
+  width: 10rem;
+  height: 2.2rem;
+  margin-top: 0.5rem;
+  border-radius: var(--radius);
+  background-color: white;
+}
+
+.separador {
+  margin-top: 1rem;
+}

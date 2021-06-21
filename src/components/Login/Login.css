@@ -3,7 +3,7 @@
 
 
 .login {
-    background-image: linear-gradient(#050824,#1a2058, #18e7dd);
+    background-image: linear-gradient(#050824,#1a2058, #77a3a1);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -34,7 +34,7 @@
      
       background: cornsilk;
       width: 240px ;
-      height: 35px;
+      height: 25px;
       border: none;
       outline: none;
       padding: 0 25px;
@@ -48,6 +48,7 @@
   .login__container h2{
       color: rgb(227, 243, 4);
       margin-left: 4.5rem;
+      font-size: 25px;
       
   }
   
@@ -56,10 +57,9 @@
   }
 
   .button__login{
-    
     border-radius: .2em;
     width: 21.8em;
-    height: 35px;
+    height: 38px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -80,7 +80,9 @@
     justify-content: space-between;
     margin-top: 20px;
     font-weight: bold;
+    
   }
+
   
   .login__container--remember-me a {
     color: rgb(250, 250, 250);
@@ -88,6 +90,7 @@
     text-decoration: none;
     margin-top: 4px;
     font-weight: bold;
+   
   }
   
   .login__container--remember-me a:hover {
@@ -99,45 +102,52 @@
       padding-top: 2rem;
   }
   
-  .login__container--social-media > div {
-    align-items: center;
-    display: flex;
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: white;
-    font-weight: bold;
-  }
   
-  .login__container--social-media > div > img {
-    margin-right: 1.3rem;
-    width: 30px;
-  }
 
 
   .register__login{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      
   }
   
   .login__container--register {
     font-size: 14px;
+    color: rgb(233, 255, 255);
   }
   
   .login__container--register{
-    color: rgb(0, 236, 253);
+    color: rgb(236, 236, 236) !important;
     font-weight: bold;
     font-size: 16px;
     text-decoration: none;
+    font-size: 14px !important;
   }
   
  .link {
      text-decoration: none;
-     color: rgb(5, 236, 236);
+     color: rgb(233, 255, 255) !important;
  }
 
+ .button__login__google{
+    
+  border-radius: .2em;
+  width: 21.8em;
+  height: 38px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background:#03d6d6;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  transition: .4s;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
- 
+
 @media only screen and (max-width:480px) {
 
     .login__container {

@@ -4,14 +4,16 @@ import {
   getFamilia,
   getCategoria,
   categoriaPost,
+  mostrarError,
 } from "../../../Redux/actions";
 
 function Cate({ setSwitcher }) {
   const dispatch = useDispatch();
   const familia = useSelector((store) => store.familia);
   const categoria = useSelector((store) => store.categoria);
+  const alerta = useSelector((store) => store.alerta);
 
-  var mapeado = categoria.map((ca) => ca.nombre_categoria);
+  // var mapeado = categoria.map((ca) => ca.nombre_categoria);
 
   const [fam, setFam] = useState({
     nombre_familia: "",
@@ -76,8 +78,15 @@ function Cate({ setSwitcher }) {
       return;
     }
 
-    if (mapeado.includes(cate.nombre_categoria)) {
+    if (categoria.includes(cate.nombre_categoria)) {
       alert("Categoría de producto existente");
+      return;
+    }
+
+    if (!isNaN(parseInt(nuevaCategoria.nombre_categoria))) {
+      dispatch(
+        mostrarError("El nombre solo puede contener letras", "alerta-error")
+      );
       return;
     }
 
@@ -95,8 +104,7 @@ function Cate({ setSwitcher }) {
 
   return (
     <>
-      <div className="contenedorFamilia">
-        <h6 id="titleFam">Categoría</h6>
+      <div>
         <>
           <form
             className="formFamilia"
@@ -104,6 +112,9 @@ function Cate({ setSwitcher }) {
             onChange={(e) => ChangeInput(e)}
             onSubmit={(e) => handleSubmit(e)}
           >
+            {alerta ? (
+              <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+            ) : null}
             <div className="divFormFamilia">
               <div>
                 <label className="text-label">Familia</label>
@@ -135,7 +146,7 @@ function Cate({ setSwitcher }) {
               <div>
                 <label className="text-label-desc">* Descripción</label>
                 <input
-                  className="btm-desc"
+                  className="inp6"
                   type="text"
                   name="descripcion"
                   value={cate.descripcion}

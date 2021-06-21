@@ -4,17 +4,18 @@ import MisDesafios from "../MisDesafios/MisDesafios";
 import NavBarMain from "../../navBarMain/NavBarMain";
 import Configuración from "../../configuración/Configuración";
 import Monedero from "../Monedero/Monedero";
+import SearchGeolocation from '../SearchGeolocation/SearchGeolocation';
 import { getDesafios } from '../../Redux/actions'
 import Table from "../../Table.js";
 import "./Main.css";
 
-const Main = ({ state, setState }) => {
+const Main = ({ state, setState, ubicacion }) => {
   const productos = useSelector((store) => store.productos);
   const [producto, setProducto] = useState("");
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(getDesafios())
+
+  useEffect(async () => {
+    dispatch(getDesafios());
   }, [])
 
   return (
@@ -25,6 +26,7 @@ const Main = ({ state, setState }) => {
             producto={producto}
             setProducto={setProducto}
             setState={setState}
+            ubicacion={ubicacion}
           />
         </div>
 
@@ -43,7 +45,10 @@ const Main = ({ state, setState }) => {
             <Configuración />
           ) : state === "Movimientos" ? (
             <Monedero />
-          ) : null}
+          ) : state === "BusquedaGeo" ?
+            <SearchGeolocation />
+            : null
+          }
         </div>
       </div>
     </main>

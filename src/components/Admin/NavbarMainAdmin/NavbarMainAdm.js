@@ -13,12 +13,10 @@ function NavBarMainAdm({ producto, setProducto, setState }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // dispatch(getProductsByName(producto));
-    setState("Search");
-    setProducto("");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setState("Search");
+  // };
 
   return (
     <>

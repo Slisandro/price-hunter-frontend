@@ -318,6 +318,16 @@ header {
   color: rgb(5, 236, 236);
 }
 
+.tiposUsuarios {
+  color: rgb(5, 236, 236);
+}
+
+.spans {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
 @media only screen and (max-width: 480px) {
   .login__container {
     border: none;
