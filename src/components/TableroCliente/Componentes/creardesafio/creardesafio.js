@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { product } from 'prelude-ls';
 import FormCiudades from "../formciudades/formciudades";
+import FormCrearProducto from "../formcrearproducto/formcrearproducto";
+import {Button, Modal} from "reactstrap";
+import "bootstrap/dist/css/bootstrap.css"
+import token from "../../../token-cliente"
 
 
 
@@ -42,6 +46,9 @@ function CrearDesafio() {
   });
   const [productosState, setProductosState] = useState([]);
   const [mensajeState, setMensajeState] = useState("");
+  //----estado para abrir y cerrar el modal---//
+  const [stateModal, setStateModal] = useState({ abierto:false });
+  const [stateMensaje, setStateMensaje] = useState("");
   //-------------------------------//
 
 
@@ -49,7 +56,8 @@ function CrearDesafio() {
   //----------------------------------------------------------------------------//
   useEffect(async()=>{
     //---axios para los productos---//
-    const prod =  await axios.get("http://localhost:3001/listarproductos");
+    
+    const prod =  await axios.get("http://localhost:3001/listarproductos", { headers: { "Authorization": `Bearer ${token}` } }  );
     setProductosState(prod.data);
 
     //---axios para las ciudades y paises---//
@@ -81,16 +89,17 @@ function CrearDesafio() {
     })
   }
 
-  //-------FUNCIONES CALLBAKC PARA FORM_CIUDADES------//
+  //-------FUNCIONES CALLBACK PARA FORM_CIUDADES------//
   //--------------------------------------------------//
-  //-----funcion callback para pushear state.ciudades----//
+  //-----funcion callback para concatenar state.ciudades----//
   function handleChangeCiudades(obj_ciudad){
-    // console.log(obj_ciudad)
-    // console.log(state)
-    setState({
-      ...state,
-      ciudades: state.ciudades.concat([obj_ciudad])
-    })
+    const ciudad_encontrada = state.ciudades.find((ciudad)=>{ return ciudad.id===obj_ciudad.id})
+    if(!ciudad_encontrada){
+      setState({
+        ...state,
+        ciudades: state.ciudades.concat([obj_ciudad])
+      })
+    }
   }
   //----funcion callback para eliminar una ciudad de la lista----//
   function handleEliminarCiudad(e){
@@ -102,13 +111,20 @@ function CrearDesafio() {
   //--------------------------------------------------//
   //--------------------------------------------------//
 
+  //-------FUNCIONES CALLBACK PARA FORM_CREAR_PRODUCTO------//
+  //--------------------------------------------------//
+  function abrirModal(){
+    setStateModal({abierto: !stateModal.abierto })
+    setStateMensaje("")
+  }
+  //--------------------------------------------------//
+  //--------------------------------------------------//
+
   async function handleSubmit(e){
     e.preventDefault();
-    const respuesta_creardesafio = await axios.post("http://localhost:3001/creardesafio", state) 
+    const respuesta_creardesafio = await axios.post("http://localhost:3001/creardesafio", state , { headers: { "Authorization": `Bearer ${token}` } }) 
     setMensajeState(respuesta_creardesafio.data.msg)
   }
-
-  console.log(mensajeState)
   
   return (
     <div id="div-superior-terneario" >
@@ -139,7 +155,7 @@ function CrearDesafio() {
   
               <div id="productos-bttn" >
                 <Select options={productos} id="select-productos" onChange={(e)=>{handleChangeProducto(e)}} />
-                {/* <button>Agregar producto nuevo</button> */}
+                <Button onClick={()=>{abrirModal()}} >Producto Nuevo</Button>
               </div>
               
               <button 
@@ -152,8 +168,8 @@ function CrearDesafio() {
   
           </form>
           <FormCiudades handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
+          <FormCrearProducto abierto={stateModal.abierto} abrirModal={abrirModal} stateMensaje={stateMensaje} setStateMensaje={setStateMensaje}  />
       </div>
-
 
     }
     </div>
