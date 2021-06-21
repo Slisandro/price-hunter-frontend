@@ -24,7 +24,6 @@ function Monedero() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log(token)
         axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta/1`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
                 setMovimientos(json.data)

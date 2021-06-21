@@ -51,7 +51,7 @@ function MarcasAsociadas() {
     <div className="marcasAsociadas">
       <h2 id="title">Marcas Asociadas</h2>
       <div className="slideshow-container">
-        <a className="prev" onclick={plusSlides(-1)}>
+        <a className="prev" onClick={plusSlides(-1)}>
           &#10094;
         </a>
         <div className="mySlides fade">
@@ -94,16 +94,16 @@ function MarcasAsociadas() {
           <img className="logoimagen" src={image10} alt="Not Found" />
         </div>
 
-        <a className="next" onclick={plusSlides(1)}>
+        <a className="next" onClick={plusSlides(1)}>
           &#10095;
         </a>
       </div>
       <br></br>
 
       <div style={{ textAlign: "center" }}>
-        <span className="dot" onclick={currentSlide(1)}></span>
-        <span className="dot" onclick={currentSlide(2)}></span>
-        <span className="dot" onclick={currentSlide(3)}></span>
+        <span className="dot" onClick={currentSlide(1)}></span>
+        <span className="dot" onClick={currentSlide(2)}></span>
+        <span className="dot" onClick={currentSlide(3)}></span>
       </div>
     </div>
   );
