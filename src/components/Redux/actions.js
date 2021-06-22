@@ -239,15 +239,15 @@ export function iniciarSesion(datos) {
         // console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-              type: LOGIN_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
-          : 
-          (respuesta.data.user ? 
-          dispatch({
+            type: LOGIN_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
+          :
+          (respuesta.data.user ?
+            dispatch({
               type: LOGIN_EXITOSO,
               payload: {
                 token: respuesta.data.token,
@@ -255,13 +255,22 @@ export function iniciarSesion(datos) {
               },
             })
             :
-            dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                cliente: respuesta.data.cliente,
-              },
-            }))
+            (respuesta.data.admin ?
+              dispatch({
+                type: LOGIN_EXITOSO,
+                payload: {
+                  token: respuesta.data.token,
+                  admin: respuesta.data.admin,
+                },
+              }) :
+              dispatch({
+                type: LOGIN_EXITOSO,
+                payload: {
+                  token: respuesta.data.token,
+                  cliente: respuesta.data.cliente,
+                },
+              })
+            ))
       })
       .catch((err) => console.log(err));
   };
