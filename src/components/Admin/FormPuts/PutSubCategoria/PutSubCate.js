@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { getCategorias, putSubCategoria } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutSubCate() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const categorias = useSelector((store) => store.categorias);
 
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    nombre_subcategoria: "",
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
+    dispatch(getCategorias());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
+  console.log(categorias);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -44,12 +43,12 @@ function PutSubCate() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
+    const subcategoriaModificada = {
+      nombre_categoria: state.nombre_categoria,
+      nombre_subcategoria: state.nombre_subcategoria,
     };
 
-    if (!nuevaUM.codigo_unidad_medida) {
+    if (!subcategoriaModificada.nombre_categoria) {
       alert("Por favor, ingrese el codigo de la moneda");
       return;
     }
@@ -57,20 +56,20 @@ function PutSubCate() {
     //   alert("Debe ingresar 3 letras...");
     //   return;
     // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
+    // if (!isNaN(parseInt(subcategoriaModificada.codigo_unidad_medida))) {
+    //   alert("El codigo solo puede contener letras");
+    //   return;
+    // }
+    // if (!subcategoriaModificada.nombre_unidad) {
+    //   alert("Por favor, ingrese el nombre de la moneda");
+    //   return;
+    // }
+    // if (!isNaN(parseInt(nuevasubcategoriaModificada.nombre_categoria))) {
+    //   alert("El nombre solo puede contener letras");
+    //   return;
+    // }
 
-    // dispatch(unidadDeMedida(nuevaUM));
+    dispatch(putSubCategoria(subcategoriaModificada));
     e.target.reset();
     alert("La Unidad de Medida fue agregada con éxito!");
 
@@ -159,8 +158,8 @@ function PutSubCate() {
       <div className="contenedorActualesUM">
         Sub-Categorías Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {categorias.map((u) => (
+            <span className="spansUM">{u.nombre_categoria}</span>
           ))}
         </div>
       </div>

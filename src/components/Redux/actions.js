@@ -755,11 +755,12 @@ export const PUT_DESAFIO = "PUT_DESAFIO";
 export const PUT_PRODUCTO = "PUT_PRODUCTO";
 export const PUT_UM = "PUT_UM";
 
-export function putFamilia() {
+export function putFamilia(objeto) {
   return function(dispatch) {
-    axios.put(`${URL}putadmin/familia`).then((response) => {
+    axios.put(`${URL}putadmin/familia`, objeto).then((response) => {
       let nombre_familia = {
         nombre_familia: response.data.nombre_familia,
+        id: response.data.id,
       };
       dispatch({
         type: PUT_FAMILIA,
@@ -833,7 +834,7 @@ export function putPais(objeto) {
       };
       dispatch({
         type: PUT_PAIS,
-        payload: response.data,
+        payload: pais,
       });
     });
   };
@@ -876,7 +877,7 @@ export function putSubCategoria(objeto) {
       };
       dispatch({
         type: PUT_SUBCATEGORIA,
-        payload: response.data,
+        payload: nombre_subCategoria,
       });
     });
   };
