@@ -250,7 +250,7 @@ function CrearDesafio() {
 
                 <button
                   type="submit"
-                  disabled={(state.nombre && state.descripcion && state.fechainicial && state.fechafinal && state.id_producto && state.ciudades.length > 0 && state.img)
+                  disabled={( state.nombre && state.descripcion && !errorState.nombre && !errorState.descripcion && !errorState.fechainicial && !errorState.fechafinal && !errorState.producto && state.ciudades.length > 0 && state.img)
                     ? false : true}
                 >CREAR DESAFIO</button>
 
@@ -269,3 +269,16 @@ function CrearDesafio() {
 
 
 export default CrearDesafio;
+
+
+
+// const [errorState, seterrorState] = useState({
+//   nombre:"",
+//   descripcion:"",
+//   fechainicial:"No olvidar fecha inicio.",
+//   fechafinal:"No olvidar fecha fin.",
+//   producto:"No olvidar seleccionar Producto",
+//   ciudades:"",
+//   cantidaddeprecios:"",
+//   puntosaganar:""
+// })
