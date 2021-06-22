@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ----------------------------------------------------------------------- //
 
-export const URL = "https://price-hunter-api.herokuapp.com/"
+export const URL = "http://localhost:3001/"
 
 //importar import {URL} from "../actions"("mas o menos la ruta ")
 
@@ -29,7 +29,7 @@ export const GET_CIUDADES = "GET_CIUDADES";
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
-  return function(dispatch) {
+  return function (dispatch) {
     let api = `${URL}categorias`;
     return fetch(api)
       .then((response) => response.json())
@@ -44,7 +44,7 @@ export function getCategorias() {
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getPaises() {
-  return function(dispatch) {
+  return function (dispatch) {
     let api = `${URL}paises`;
     return fetch(api)
       .then((response) => response.json())
@@ -58,7 +58,7 @@ export function getPaises() {
 }
 
 export function getCiudades(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     let api = `${URL}ciudades/${id}`;
     return fetch(api)
       .then((response) => response.json())
@@ -98,7 +98,7 @@ export function getProductsByName(nombre, body) {
 export function getSubcategoriasId(id) {
   const token = localStorage.getItem("token");
 
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .get(`${URL}subcategoria/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -113,7 +113,7 @@ export function getSubcategoriasId(id) {
 }
 
 
-  
+
 //   return function(dispatch) {
 //     axios
 //       .get(`http://localhost:3001/subcategoria/${id}`, {
@@ -131,7 +131,7 @@ export function getSubcategoriasId(id) {
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
 export function getGeneros() {
-  return function(dispatch) {
+  return function (dispatch) {
     let api = `${URL}generos`;
     return fetch(api)
       .then((response) => response.json())
@@ -146,7 +146,7 @@ export function getGeneros() {
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS TIPOS DE USUARIOS DISPONIBLES
 export function getTipoUsuario() {
-  return function(dispatch) {
+  return function (dispatch) {
     let api = `${URL}tipousuario`;
     return fetch(api)
       .then((response) => response.json())
@@ -162,7 +162,7 @@ export function getTipoUsuario() {
 //ACCION QUE DESPACHA DOS TYPES DIFERENTES: MOSTRAR ERROR Y OCULTAR ERROR LUEGO DE 5 SEGUNDOS.EJEMPLO: SI EL USUARIO NO COMPLETA LOS CAMPOS EN EL FORMULARIO DE
 //LOGIN, O COLOCA CONTRASEÑAS DIFERENTES, SE DESPACHA MOSTRAR ERROR Y LUEGO DE 5 SEG DESAPARECE EL MENSAJE.
 export function mostrarError(msg, categoria) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
       type: MOSTRAR_ERROR,
       payload: {
@@ -180,26 +180,26 @@ export function mostrarError(msg, categoria) {
 
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO USUARIO
 export function registrarUsuario(datosUser) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}usuarios/registro`, datosUser)
       .then((respuesta) => {
         console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-              type: REGISTRO_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
+            type: REGISTRO_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
           : dispatch({
-              type: REGISTRO_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            });
+            type: REGISTRO_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.user,
+            },
+          });
       })
       .catch((err) => console.log(err));
   };
@@ -232,22 +232,22 @@ export function registrarUsuario(datosUser) {
 
 // Cuando el usuario inicia sesión
 export function iniciarSesion(datos) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
         // console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-              type: LOGIN_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
-          : 
-          (respuesta.data.user ? 
-          dispatch({
+            type: LOGIN_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
+          :
+          (respuesta.data.user ?
+            dispatch({
               type: LOGIN_EXITOSO,
               payload: {
                 token: respuesta.data.token,
@@ -255,13 +255,22 @@ export function iniciarSesion(datos) {
               },
             })
             :
-            dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                cliente: respuesta.data.cliente,
-              },
-            }))
+            (respuesta.data.admin ?
+              dispatch({
+                type: LOGIN_EXITOSO,
+                payload: {
+                  token: respuesta.data.token,
+                  admin: respuesta.data.admin,
+                },
+              }) :
+              dispatch({
+                type: LOGIN_EXITOSO,
+                payload: {
+                  token: respuesta.data.token,
+                  cliente: respuesta.data.cliente,
+                },
+              })
+            ))
       })
       .catch((err) => console.log(err));
   };
@@ -269,7 +278,7 @@ export function iniciarSesion(datos) {
 
 // Cierra la sesión del usuario
 export const cerrarSesion = () => {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
 
       type: CERRAR_SESION
@@ -340,7 +349,7 @@ export const DESAFIO_POST = "DESAFIO_POST";
 export const PRODUCTO_POST = "PRODUCTO_POST";
 
 export function unidadDeMedida(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.post(`${URL}admin/um`, objeto).then((response) => {
       let um = {
         codigo_unidad_medida: response.data.codigo_unidad_medida,
@@ -355,7 +364,7 @@ export function unidadDeMedida(objeto) {
 }
 
 export function tipoUsuario(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/tipoUsuario`, objeto)
       .then((response) => {
@@ -371,7 +380,7 @@ export function tipoUsuario(objeto) {
 }
 
 export function generoPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/genero`, objeto)
       .then((response) => {
@@ -387,7 +396,7 @@ export function generoPost(objeto) {
 }
 
 export function monedaPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/moneda`, objeto)
       .then((response) => {
@@ -405,7 +414,7 @@ export function monedaPost(objeto) {
 }
 
 export function ciudadPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/ciudad`, objeto)
       .then((response) => {
@@ -422,7 +431,7 @@ export function ciudadPost(objeto) {
 }
 
 export function paisPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.post(`${URL}admin/pais`, objeto).then((response) => {
       let pais = {
         codigo_alfa: response.data.codigo_alfa,
@@ -439,7 +448,7 @@ export function paisPost(objeto) {
 }
 
 export function regionPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/region`, objeto)
       .then((response) => {
@@ -455,7 +464,7 @@ export function regionPost(objeto) {
 }
 
 export function familiaPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/familia`, objeto)
       .then((response) => {
@@ -472,7 +481,7 @@ export function familiaPost(objeto) {
 }
 
 export function categoriaPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/categoria`, objeto)
       .then((response) => {
@@ -490,7 +499,7 @@ export function categoriaPost(objeto) {
 }
 
 export function subcategoriaPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/subcategoria`, objeto)
       .then((response) => {
@@ -508,7 +517,7 @@ export function subcategoriaPost(objeto) {
 }
 
 export function tipoTransaccionPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/tipo_transaccion`, objeto)
       .then((response) => {
@@ -524,7 +533,7 @@ export function tipoTransaccionPost(objeto) {
 }
 
 export function transaccionPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/transaccion`, objeto)
       .then((response) => {
@@ -543,7 +552,7 @@ export function transaccionPost(objeto) {
 }
 
 export function clientesPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/clientes`, objeto)
       .then((response) => {
@@ -570,7 +579,7 @@ export function clientesPost(objeto) {
 }
 
 export function desafioPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/desafio`, objeto)
       .then((response) => {
@@ -592,7 +601,7 @@ export function desafioPost(objeto) {
 }
 
 export function productoPost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}admin/productos`, objeto)
       .then((response) => {
@@ -638,7 +647,7 @@ export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 
 export function getFamilia() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/familia`).then((response) => {
       dispatch({
         type: GET_FAMILIA,
@@ -649,7 +658,7 @@ export function getFamilia() {
 }
 
 export function getCategoria() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/categoria`).then((response) => {
       dispatch({
         type: GET_CATEGORIA,
@@ -678,7 +687,7 @@ export function getDesafios() {
 }
 
 export function getSubcategoria() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .get(`${URL}getadmin/subcategoria`)
       .then((response) => {
@@ -691,7 +700,7 @@ export function getSubcategoria() {
 }
 
 export function getUnidadMedida() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/um`).then((response) => {
       dispatch({
         type: GET_UNIDAD_MEDIDAS,
@@ -735,7 +744,7 @@ export function getMoneda() {
 }
 
 export function getTipoTransaccion() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}tipotransacciones`).then((response) => {
       dispatch({
         type: GET_TIPO_TRANSACCION,
@@ -748,26 +757,26 @@ export function getTipoTransaccion() {
 
 
 export function iniciarSesionCliente(datos) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}clientes/ingreso`, datos)
       .then((respuesta) => {
         // console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-              type: LOGIN_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error",
-              },
-            })
+            type: LOGIN_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
           : dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.cliente,
-              },
-            });
+            type: LOGIN_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.cliente,
+            },
+          });
       })
       .catch((err) => console.log(err));
   };
