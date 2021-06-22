@@ -39,6 +39,7 @@ import {
   PRICE,
   GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
+  GET_CIUDAD,
   // PUT_SUBCATEGORIA,
   // PUT_TIPO_TRANSACCION,
   // PUT_TRANSACCION,
@@ -126,7 +127,7 @@ const initialState = {
   admin: {},
   familia: [],
   categoria: [],
-
+  ciudad: [],
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
@@ -136,7 +137,7 @@ const initialState = {
   transaccion: [],
 
   //-------------ADMIN-PUT-------------//
-  admin: {},
+
 };
 
 //-------------ADMIN-------------//
@@ -358,6 +359,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         pais: action.payload,
       };
+      case GET_CIUDAD:
+      return {
+        ...state,
+        ciudad: action.payload,
+      };
     case GET_MONEDA:
       return {
         ...state,
@@ -401,7 +407,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         admin: action.payload,
       };
-    case PUT_REGION:
+      case PUT_REGION:
       return {
         ...state,
         regiones: action.payload,

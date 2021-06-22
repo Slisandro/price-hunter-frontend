@@ -607,6 +607,7 @@ export const GET_REGION = "GET_REGION";
 export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
+export const GET_CIUDAD = "GET_CIUDAD";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -690,11 +691,22 @@ export function getPais() {
   };
 }
 
+export function getCiudad() {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/ciudad`).then((response) => {
+      dispatch({
+        type: GET_CIUDAD,
+        payload: response.data,
+      });
+    });
+  };
+}
+
 export function getMoneda() {
   return function(dispatch) {
     axios.get(`${URL}getadmin/moneda`).then((response) => {
       dispatch({
-        type: GET_MONEDA,
+        type: GET_CIUDAD,
         payload: response.data,
       });
     });
@@ -954,13 +966,15 @@ export function putProducto(objeto) {
 
 export function putUM(objeto) {
   return function(dispatch) {
-    axios.put(`${URL}putadmin/um`, objeto).then((response) => {
+    console.log(objeto)
+    axios.put(`${URL}/putadmin/um`, objeto).then((response) => {
       let um = {
-        nombre_producto: response.data.nombre_producto,
+        codigo_unidad_medida: response.data.codigo_unidad_medida,
+        nombre_unidad: response.data.nombre_unidad
       };
       dispatch({
         type: PUT_UM,
-        payload: response.data,
+        payload: um,
       });
     });
   };
