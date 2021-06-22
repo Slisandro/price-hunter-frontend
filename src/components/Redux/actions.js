@@ -236,7 +236,7 @@ export function iniciarSesion(datos) {
     axios
       .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
-        // console.log(respuesta);
+        console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
             type: LOGIN_ERROR,
@@ -780,4 +780,32 @@ export function iniciarSesionCliente(datos) {
       })
       .catch((err) => console.log(err));
   };
+}
+
+
+//ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO cliente
+export function registrarCliente(datosCliente) {
+  return function (dispatch) {
+    axios
+      .post(`${URL}clientes/registro`, datosCliente)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+            type: REGISTRO_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
+          : dispatch({
+            type: REGISTRO_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.cliente,
+            },
+          });
+      })
+      .catch((err) => console.log(err));
+  }
 }
