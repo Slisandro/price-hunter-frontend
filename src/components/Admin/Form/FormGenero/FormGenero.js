@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { generoPost, getGeneros } from "../../../Redux/actions";
+import { generoPost, getGeneros, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import { mostrarError } from "../../../Redux/actions";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormGenero.css";
