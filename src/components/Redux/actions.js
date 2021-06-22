@@ -736,6 +736,11 @@ export function getTipoTransaccion() {
 }
 
 
+//_____________________ PUT _____________________//
+
+
+
+//_____________________ ADMIN_____________________//
 
 export function iniciarSesionCliente(datos) {
   return function(dispatch) {
