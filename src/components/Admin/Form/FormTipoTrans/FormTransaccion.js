@@ -53,16 +53,12 @@ function FormTransaccion() {
     <Fragment>
       <div className="contenedorTransacciones">
         <h6 id="titleTran">Agregar Tipo de Transacción</h6>
-        <form
-          className="formFamilia"
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
+        <form onChange={(e) => ChangeInput(e)} onSubmit={handleSubmit(submit)}>
           <div className="divTransacciones">
             <div>
               <label className="text-label">Tipo de Transacción</label>
               <input
-                className="inp"
+                className="inp3"
                 type="text"
                 name="tipo_transaccion"
                 autoComplete="off"
