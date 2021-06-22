@@ -289,3 +289,13 @@
   /* margin: 0.5rem; */
   /* background: rgb(32, 50, 85); */
 }
+
+.account-title3 {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(39, 48, 109, 0.644);
+  border-color: rgb(12, 2, 59);
+  border-width: 0.13rem;
+  border-radius: var(--radius);
+  margin-top: 2rem;
+}
