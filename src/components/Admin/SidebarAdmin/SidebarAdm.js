@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 import aguila from "../../../assets/aguila.png";
 
 const SidebarAdm = (props) => {
-  const [button, setButton] = useState(false);
+  const [button, setButton] = useState(true);
   const [modifier, setModifier] = useState(false);
 
   function handleButton() {
     setButton(!button);
-  }
-
-  function handleModifier() {
     setModifier(!modifier);
   }
+
+  // function handleModifier() {
+  //   setModifier(!modifier);
+  //   setButton(!button);
+  // }
 
   return (
     <div
@@ -36,14 +38,20 @@ const SidebarAdm = (props) => {
         <div className="sidebar__link  active_menu_link">
           <Link to="/tablero">Panel de control</Link>
         </div>
-
-        <button onClick={() => handleButton()}>Agregar</button>
-        <button onClick={() => handleModifier()}>Modificar</button>
+        <div className="agregarr">
+          <button className="btnSide" onClick={() => handleButton()}>
+            Agregar/Modificar
+          </button>
+          {/* <button className="btnSide" onClick={() => handleModifier()}>
+            Modificar
+          </button> */}
+        </div>
 
         {button ? (
           <>
-            <div className="grid-category">
-              <i className="fa fa-plus"></i>
+            {/* <ul className="addd"> */}
+            <div className="menu-col">
+              {/* <i className="fa fa-plus"></i> */}
               <li
                 className="addd"
                 value={"Agregar Productos"}
@@ -52,8 +60,8 @@ const SidebarAdm = (props) => {
                 Agregar Productos
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-university"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-university"></i> */}
               <li
                 className="addd"
                 value={"Agregar Moneda y UM"}
@@ -62,8 +70,8 @@ const SidebarAdm = (props) => {
                 Agregar Moneda
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-user"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-user"></i> */}
               <li
                 className="addd"
                 value={"Agregar UM"}
@@ -72,8 +80,8 @@ const SidebarAdm = (props) => {
                 Agregar UM
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-globe-americas"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-globe-americas"></i> */}
               <li
                 className="addd"
                 value={"Agregar Ubicación"}
@@ -82,8 +90,8 @@ const SidebarAdm = (props) => {
                 Agregar Ubicación
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-sitemap"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-sitemap"></i> */}
               <li
                 className="addd"
                 value={"Agregar Sub-Categorías"}
@@ -92,8 +100,8 @@ const SidebarAdm = (props) => {
                 Agregar Familia y Categoría
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-credit-card"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-credit-card"></i> */}
               <li
                 className="addd"
                 value={"Agregar Tipo de Transacción"}
@@ -102,8 +110,8 @@ const SidebarAdm = (props) => {
                 Agregar Tipo de Transacción
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-user"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-user"></i> */}
               <li
                 className="addd"
                 value={"Agregar Tipo de Usuario"}
@@ -112,8 +120,8 @@ const SidebarAdm = (props) => {
                 Agregar Tipo de Usuario
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Agregar Género"}
@@ -122,12 +130,13 @@ const SidebarAdm = (props) => {
                 Agregar Género
               </li>
             </div>
+            {/* </ul> */}
           </>
         ) : modifier ? (
           <>
             <div className="agregarr">
-              <div className="grid-category">
-                <i className="fa fa-plus"></i>
+              <div className="menu-col">
+                {/* <i className="fa fa-plus"></i> */}
                 <li
                   className="addd"
                   value={"Modificar-Familias"}
@@ -137,8 +146,8 @@ const SidebarAdm = (props) => {
                 </li>
               </div>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-university"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-university"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Categoría"}
@@ -147,8 +156,8 @@ const SidebarAdm = (props) => {
                 Modificar Categoría
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-user"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-user"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Sub-Categoría"}
@@ -157,8 +166,8 @@ const SidebarAdm = (props) => {
                 Modificar Sub-Categoría
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-globe-americas"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-globe-americas"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Productos"}
@@ -167,8 +176,8 @@ const SidebarAdm = (props) => {
                 Modificar Productos
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-sitemap"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-sitemap"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Países"}
@@ -177,8 +186,8 @@ const SidebarAdm = (props) => {
                 Modificar Países
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-credit-card"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-credit-card"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Ciudades"}
@@ -187,8 +196,8 @@ const SidebarAdm = (props) => {
                 Modificar Ciudades
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fa fa-user"></i>
+            <div className="menu-col">
+              {/* <i className="fa fa-user"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Regiones"}
@@ -197,8 +206,8 @@ const SidebarAdm = (props) => {
                 Modificar Regiones
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Monedas"}
@@ -207,8 +216,8 @@ const SidebarAdm = (props) => {
                 Modificar Monedas
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Tipos-de-Usuario"}
@@ -217,8 +226,8 @@ const SidebarAdm = (props) => {
                 Modificar Tipos de Usuario
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Unidad-de-Medida"}
@@ -227,8 +236,8 @@ const SidebarAdm = (props) => {
                 Modificar Unidad de Medida
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Tipo-de-Transacción"}
@@ -237,8 +246,8 @@ const SidebarAdm = (props) => {
                 Modificar Tipo de Transacción
               </li>
             </div>
-            <div className="grid-category">
-              <i className="fas fa-venus-mars"></i>
+            <div className="menu-col">
+              {/* <i className="fas fa-venus-mars"></i> */}
               <li
                 className="addd"
                 value={"Modificar-Desafíos"}
@@ -250,9 +259,10 @@ const SidebarAdm = (props) => {
           </>
         ) : null}
 
-        <div className="sidebar__link">
-          <i className="fa fa-user-secret"></i>
+        <div>
+          {/* <i className="fa fa-user-secret"></i> */}
           <button
+            className="btnSideConfig"
             value={"Configuracion"}
             onClick={() => props.setState("Configuracion")}
           >
