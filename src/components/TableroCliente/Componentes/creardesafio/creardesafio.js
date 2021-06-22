@@ -49,7 +49,10 @@ function CrearDesafio() {
     descripcion:"",
     fechainicial:"No olvidar fecha inicio.",
     fechafinal:"No olvidar fecha fin.",
-    producto:"No olvidar seleccionar Producto"
+    producto:"No olvidar seleccionar Producto",
+    ciudades:"",
+    cantidaddeprecios:"",
+    puntosaganar:""
   })
 
   const [productosState, setProductosState] = useState([]);
@@ -60,6 +63,16 @@ function CrearDesafio() {
   const [stateBoolean, setStateBoolean] = useState(true)
   //-------------------------------//
 
+
+  //-----Estilos <Button/>-------//
+  const styles_buttn ={
+    width: "30%",
+    height: "3rem",
+    padding: "0",
+    margin: "0",
+
+  }
+  //-----------------------------//
 
   //----------------Request para traer la Lista de Productos--------------------//
   //----------------------------------------------------------------------------//
@@ -95,7 +108,7 @@ function CrearDesafio() {
     if(e.target.value.length<3){
       seterrorState({
         ...errorState,
-        [name]: "Campo Obligatorio."
+        [name]: "Campo Obligatorio. +3 caracteres"
       })
     }else{
       seterrorState({
@@ -127,6 +140,21 @@ function CrearDesafio() {
 
   //-------FUNCIONES CALLBACK PARA FORM_CIUDADES------//
   //--------------------------------------------------//
+  //------funcion chequeo array ciudades/error--------//
+  function errorCiudades(){
+    if(!state.ciudades){
+      seterrorState({
+        ...errorState,
+        ciudades: "Seleccionar Ciudad/es."
+      })
+    }else{
+      seterrorState({
+        ...errorState,
+        ciudades: ""
+      })
+    }
+  }
+
   //-----funcion callback para concatenar state.ciudades----//
   function handleChangeCiudades(obj_ciudad) {
     const ciudad_encontrada = state.ciudades.find((ciudad) => { return ciudad.id === obj_ciudad.id })
@@ -136,6 +164,8 @@ function CrearDesafio() {
         ciudades: state.ciudades.concat([obj_ciudad])
       })
     }
+
+    errorCiudades();
   }
   //----funcion callback para eliminar una ciudad de la lista----//
   function handleEliminarCiudad(e) {
@@ -143,6 +173,13 @@ function CrearDesafio() {
       ...state,
       ciudades: state.ciudades.filter((ciudad) => ciudad.id !== parseInt(e.target.value))
     })
+    //---error: controlo state.ciudades----//
+    if(state.ciudades.length-1===0){
+      seterrorState({
+        ...errorState,
+        ciudades: "Seleccionar Ciudad/es."
+      })
+    }
   }
   //--------------------------------------------------//
   //--------------------------------------------------//
@@ -179,30 +216,36 @@ function CrearDesafio() {
             <form id="form-cliente-crear-desafio" onSubmit={(e) => { handleSubmit(e) }} >
 
               <div className="form-cliente-crear-desafio-div" >
+                <div>
+                  {errorState.nombre ? <p className="estylo-errores" > Desafío: {errorState.nombre} </p>: <p className="stylos-titulos" >Nombre Desafío</p> }
+                  <input className="input-nombre-descripcion" type="text" placeholder="Nombre del Desafío" name="nombre" value={state.nombre} onChange={(e) => { handleChangeNombre(e) }} />
+                </div>
 
-                <input type="text" placeholder="Nombre del Desafío" name="nombre" value={state.nombre} onChange={(e) => { handleChangeNombre(e) }} />
-                {errorState.nombre && <p className="estylo-errores" > {errorState.nombre} </p> }
-
-                <textarea placeholder="Descripción del Desafío." name="descripcion" onChange={(e) => { handleChangeNombre(e) }} />
-                {errorState.descripcion && <p className="estylo-errores" > {errorState.descripcion} </p> }
+                <div>
+                  {errorState.descripcion ? <p className="estylo-errores" > {errorState.descripcion} </p> : <p className="stylos-titulos" >Descripción Desafío</p> }
+                  <textarea className="input-nombre-descripcion" placeholder="Descripción del Desafío." name="descripcion" onChange={(e) => { handleChangeNombre(e) }} />
+                </div>
 
                 <div id="fechas-desafio" >
                   <div>
+                    <p className="stylos-titulos" >Fecha Inicio Desafío</p>
                     <input type="date" min={fecha_min} name="fechainicial" onChange={(e) => { handleChangeNombre(e) }} />
-                    {errorState.fechainicial && <p className="estylo-errores" > {errorState.fechainicial} </p> }
+                    {errorState.fechainicial && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.fechainicial} </p> }
                   </div>
                   <div>
+                    <p className="stylos-titulos" >Fecha Fin Desafío</p>
                     <input type="date" min={fecha_min} name="fechafinal" onChange={(e) => { handleChangeNombre(e) }} />
-                    {errorState.fechafinal && <p className="estylo-errores" > {errorState.fechafinal} </p> }
+                    {errorState.fechafinal && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.fechafinal} </p> }
                   </div>
                 </div>
 
                 <div id="productos-bttn" >
                   <div id="div-producto" >
+                    <p className="stylos-titulos" >Producto</p>
                     <Select options={productos} id="select-productos" onChange={(e) => { handleChangeProducto(e) }} />
-                    {errorState.producto && <p className="estylo-errores" > {errorState.producto} </p> }
+                    {errorState.producto && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.producto} </p> }
                   </div>
-                  <Button onClick={() => { abrirModal() }} >Producto Nuevo</Button>
+                  <Button  style={styles_buttn} onClick={() => { abrirModal() }} >Agregar Producto</Button>
                 </div>
 
                 <button
@@ -214,7 +257,7 @@ function CrearDesafio() {
               </div>
 
             </form>
-            <FormCiudades handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
+            <FormCiudades errores={errorState} seterrorState={seterrorState} handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
             <FormCrearProducto abierto={stateModal.abierto} abrirModal={abrirModal} stateMensaje={stateMensaje} setStateMensaje={setStateMensaje} stateBoolean={stateBoolean} setStateBoolean={setStateBoolean} />
           </div>
 
