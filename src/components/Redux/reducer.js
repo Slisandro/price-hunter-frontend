@@ -91,11 +91,12 @@ const initialState = {
   alerta: null,
 
   /*Estados para la autenticacion*/
-  token: localStorage.getItem("token"),
-  autenticado: null,
+  token: localStorage.getItem("token"),//---------------------------------------------------------------------
+  autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
-  cliente:false,
+  cliente: false,
+  isAdmin: false,
   /******************************* */
 
   generos: [],
@@ -160,47 +161,70 @@ function rootReducer(state = initialState, action) {
       };
     case MOSTRAR_ERROR:
       return {
+        ...state,
         alerta: action.payload,
       };
     case OCULTAR_ERROR:
       return {
+        ...state,
         alerta: null,
       };
 
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("nombre", action.payload.usuario?action.payload.usuario.nombre:action.payload.cliente.nombre_cial_fantasia);
-      if(action.payload.cliente){
+      localStorage.setItem("nombre", action.payload.usuario ? (
+        action.payload.usuario.nombre
+      ) : (
+        action.payload.cliente ? (
+          action.payload.cliente.nombre_cial_fantasia
+        ) : (
+          action.payload.admin.nombre
+        )));
+      localStorage.setItem("auth", true)
+      if (action.payload.cliente) {
         return {
           ...state,
           autenticado: true,
           usuario: null,
           mensaje: null,
-          cliente:true
+          isAdmin: false,
+          cliente: true,
         };
-      }else{
-
-        return {
-          ...state,
-          autenticado: true,
-          usuario: null,
-          mensaje: null,
-          cliente:false
-        };
+      } else {
+        if (action.payload.admin) {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            cliente: false,
+            isAdmin: true,
+          };
+        } else {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            isAdmin: false,
+            cliente: false,
+          };
+        }
       }
-    
-    
+
+
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
       localStorage.removeItem("token");
       localStorage.removeItem("nombre");
+      localStorage.removeItem("auth");
       return {
         ...state,
+        autenticado: false,
         token: null,
         usuario: null,
-        autenticado: null,
         mensaje: action.payload,
       };
     case UNIDAD_MEDIDA_POST:

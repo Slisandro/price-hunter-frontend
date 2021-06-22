@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import "./FormUnidadMedida.css";
+// import "./FormUnidadMedida.css";
 
-function FormUnidadMedida() {
+function PutRegiones() {
   const dispatch = useDispatch();
   const unidad_medida = useSelector((store) => store.unidad_medida);
 
@@ -14,7 +14,7 @@ function FormUnidadMedida() {
   });
 
   useEffect(() => {
-    dispatch(getUnidadMedida());
+    // dispatch(getUnidadMedida());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,8 +44,6 @@ function FormUnidadMedida() {
   } = useForm();
 
   const submit = (data, e) => {
-    
-
     const nuevaUM = {
       codigo_unidad_medida: state.codigo_unidad_medida,
       nombre_unidad: state.nombre_unidad,
@@ -72,7 +70,7 @@ function FormUnidadMedida() {
       return;
     }
 
-    dispatch(unidadDeMedida(nuevaUM));
+    // dispatch(unidadDeMedida(nuevaUM));
     e.target.reset();
     alert("La Unidad de Medida fue agregada con éxito!");
 
@@ -86,7 +84,7 @@ function FormUnidadMedida() {
     <>
       <div className="contenedorFAM">
         <header>
-          <h1 id="title">Agregar Unidad de Medida</h1>
+          <h1 id="title">Modificar Regiones</h1>
         </header>
         <form
           id="survey-form"
@@ -126,7 +124,7 @@ function FormUnidadMedida() {
           </div>
           <div className="divForm">
             <div>
-              <label className="text-label">Unidad de Medida</label>
+              <label className="text-label">Región</label>
               <input
                 className="inp"
                 type="text"
@@ -153,13 +151,13 @@ function FormUnidadMedida() {
               </span>
             </div>
             <button className="agregarModal" type="submit">
-              Agregar
+              Modificar
             </button>
           </div>
         </form>
       </div>
       <div className="contenedorActualesUM">
-        Unidades de Medida Actuales
+        Regiones Actuales
         <div className="tiposUM">
           {unidad_medida.map((u) => (
             <span className="spansUM">{u.nombre_unidad}</span>
@@ -170,4 +168,4 @@ function FormUnidadMedida() {
   );
 }
 
-export default FormUnidadMedida;
+export default PutRegiones;

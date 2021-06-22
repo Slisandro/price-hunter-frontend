@@ -20,8 +20,7 @@ function Ciudades() {
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
-    console.log(name);
-    console.log(target.value);
+  
     if (name === "ciudad") {
       setCiudad({
         ...ciudad,
@@ -44,17 +43,6 @@ function Ciudades() {
   const alerta = useSelector((store) => store.alerta);
 
   const submit = (data, e) => {
-    // // e.preventDefault();
-
-    // const nuevaCiudad = {
-    //   ciudad: ciudad.ciudad,
-    //   paiseCodigoAlfa: ciudad.paiseCodigoAlfa,
-    // };
-    // if (!nuevaCiudad.ciudad) {
-    //   alert("Por favor, ingrese una ciudad");
-    //   return;
-    // }
-
     dispatch(ciudadPost(ciudad));
     e.target.reset();
     alert("Ubicación agregada exitosamente!");
@@ -67,15 +55,13 @@ function Ciudades() {
   return (
     <div>
       <form
-        id="survey-form"
-        // className="form"
-        noValidate
-        onChange={(e) => ChangeInput(e)}
-        onSubmit={handleSubmit(submit)}
-      >
-        {alerta ? (
-          <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
-        ) : null}
+      id="survey-form"
+      noValidate
+      onChange={(e) => ChangeInput(e)}
+      onSubmit={handleSubmit(submit)}
+    >
+       {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
+
         <div>
           <div className="separador">
             <label className="text-label">Pais</label>

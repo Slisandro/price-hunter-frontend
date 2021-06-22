@@ -1,8 +1,7 @@
-
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Categorias.css";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { getSubcategoriasId } from "../Redux/actions";
 
 const Categorias = ({ categorias, setState }) => {
@@ -24,7 +23,7 @@ const Categorias = ({ categorias, setState }) => {
         <div className="categorias">
             <ul className="menu-main">
                 {categorias && categorias.map(familia => (
-                    <li><a href="!#">{familia.nombre_familia}</a>
+                    <li><a href="!#" >{familia.nombre_familia}</a>
                         <div className="menu-sub">
                             <div className="menu-col-1 ">
                                 {familia.categoria.map(categoria => (
@@ -51,12 +50,16 @@ const Categorias = ({ categorias, setState }) => {
                                 )}
                             </div>
                         </div>
-                    </li>
-                ))
-                }
-            </ul>
-        </div >
-    );
-}
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Categorias;

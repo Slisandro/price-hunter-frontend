@@ -20,6 +20,7 @@ const Login = (props) => {
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
   const cliente = useSelector((store) => store.cliente);
+  const isAdmin = useSelector((store) => store.isAdmin);
 
   const dispatch = useDispatch();
 
@@ -33,12 +34,24 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      
-      if(!cliente){
-        props.history.push('/tablero');
-      }else{
+      if (cliente) {
         props.history.push('/tablerocliente/principal');
+      } else {
+        if (isAdmin) {
+          props.history.push('/admin');
+        } else {
+          props.history.push('/tablero');
+        }
       }
+      // if (!cliente) {
+      //   props.history.push('/tablero');
+      // } else {
+      //   if (isAdmin) {
+      //     props.history.push('/admin');
+      //   } else {
+      //     props.history.push('/tablerocliente/principal');
+      //   }
+      // }
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);

@@ -12,7 +12,8 @@ function Tablero() {
   const [sidebarOpen, setSidebar] = useState(false);
   const [ubicacion, setUbicacion] = useState({
     latitud: "",
-    longitud: ""
+    longitud: "",
+    dis: 1000000
   })
   
   const openSidebar = () => {
@@ -26,6 +27,7 @@ function Tablero() {
   useEffect(() => {
     geolocation.getCurrentPosition((err, position) => {
       return setUbicacion({
+        ...ubicacion,
         longitud: position.coords.longitude + "",
         latitud: position.coords.latitude + "",
       })

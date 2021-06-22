@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { generoPost, mostrarError, getGeneros } from "../../../Redux/actions";
+import { generoPost, getGeneros, mostrarError } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormGenero.css";
@@ -37,7 +38,14 @@ function FormGenero() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+
+  const submit = (data, e) => {
     e.preventDefault();
 
     const nuevoGenero = {
@@ -82,7 +90,7 @@ function FormGenero() {
                 className="form"
                 noValidate
                 onChange={(e) => ChangeInput(e)}
-                onSubmit={(e) => handleSubmit(e)}
+                onSubmit={handleSubmit(submit)}
               >
                 {alerta ? (
                   <span className={`alerta ${alerta.categoria}`}>
@@ -96,8 +104,29 @@ function FormGenero() {
                       className="inp"
                       type="text"
                       name="genero"
-                      value={state.genero}
-                    ></input>
+                      max ='0'
+                      autoComplete="off"
+                      {...register("genero", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un genero ",
+                        },
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "El genero no debe tener mas de quince letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El genero debe al menos tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El genero no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.genero?.message}</span>
                   </div>
                   <button className="agregarModal" type="submit">
                     Agregar
