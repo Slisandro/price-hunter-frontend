@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putUM, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutUM() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const unidad = useSelector((store) => store.unidad_medida);
 
   const [state, setState] = useState({
     codigo_unidad_medida: "",
@@ -14,28 +14,27 @@ function PutUM() {
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(getUnidadMedida());
+  }, [dispatch]);
 
-  console.log(unidad_medida);
+  // console.log(unidad)
+  // const ChangeInput = (e) => {
+  //   const target = e.target;
+  //   const name = target.name;
+  //   console.log(e.target.value);
 
-  const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
-
-    if (name === "codigo_unidad_medida") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    } else if (name === "nombre_unidad") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    }
-  };
+  //   if (name === "codigo_unidad_medida") {
+  //     setState({
+  //       ...state,
+  //       [name]: target.value,
+  //     });
+  //   } else if (name === "nombre_unidad") {
+  //     setState({
+  //       ...state,
+  //       [name]: target.value,
+  //     });
+  //   }
+  // };
 
   const {
     register,
@@ -44,33 +43,34 @@ function PutUM() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
-    };
+    // const nuevaUM = {
+    //   codigo_unidad_medida: state.codigo_unidad_medida,
+    //   nombre_unidad: state.nombre_unidad,
+    // };
+    // console.log(data)
 
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
-    }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
+    // if (!nuevaUM.codigo_unidad_medida) {
+    //   alert("Por favor, ingrese el codigo de la moneda");
     //   return;
     // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
+    // // if (nuevaUM.codigo_unidad_medida !== 3) {
+    // //   alert("Debe ingresar 3 letras...");
+    // //   return;
+    // // }
+    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
+    //   alert("El codigo solo puede contener letras");
+    //   return;
+    // }
+    // if (!nuevaUM.nombre_unidad) {
+    //   alert("Por favor, ingrese el nombre de la moneda");
+    //   return;
+    // }
+    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
+    //   alert("El nombre solo puede contener letras");
+    //   return;
+    // }
 
-    // dispatch(unidadDeMedida(nuevaUM));
+    dispatch(putUM(data));
     e.target.reset();
     alert("La Unidad de Medida fue agregada con éxito!");
 
@@ -90,64 +90,60 @@ function PutUM() {
           id="survey-form"
           className="form"
           noValidate
-          onChange={(e) => ChangeInput(e)}
+          // onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
           <div>
             <label className="text-label">Nombre</label>
-            <input
-              className="inp"
-              type="text"
-              name="nombre_unidad"
-              autoComplete="off"
-              max="0"
-              {...register("nombre_unidad", {
+            <select
+              name="codigo_unidad_medida"
+              className="codigo_unidad_medida"
+              // value={paises.nombre_region}
+              // onChange={(e) => ChangeInput(e)}
+              {...register("codigo_unidad_medida", {
                 required: {
                   value: true,
-                  message: "Debe ingresar un nombre ",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "El nombre debe tener menos de quince letras!",
-                },
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener tres letras!",
-                },
-                max: {
-                  value: 0,
-                  message: "El nombre no puede comenzar con numeros",
+                  message: "Debe seleccionar una unidad de medida",
                 },
               })}
-            />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            >
+              <option></option>
+              {unidad.map((f) => (
+                <option value={f.codigo_unidad_medida}>{f.nombre_unidad}</option>
+              ))}
+            </select>
+            <span className="err">{errors?.codigo_unidad_medida?.message}</span>
           </div>
           <div className="divForm">
             <div>
-              <label className="text-label">Unidad de Medida</label>
+              <label className="text-label">Nombre</label>
               <input
                 className="inp"
                 type="text"
-                name="codigo_unidad_medida"
+                name="nombre_unidad"
                 autoComplete="off"
                 max="0"
-                {...register("codigo_unidad_medida", {
+                {...register("nombre_unidad", {
                   required: {
                     value: true,
-                    message: "Debe ingresar una unidad ",
+                    message: "Debe ingresar un nombre nuevo ",
                   },
                   maxLength: {
-                    value: 4,
-                    message: "la unidad no debe tener mas de cuatro letras!",
+                    value: 20,
+                    message: "El nombre no debe tener mas de veinte caracteres",
+                  },
+                  minLength: {
+                    value: 3,
+                    message: "El nombre no debe tener menos de tres caracteres",
                   },
                   max: {
                     value: 0,
-                    message: "La unidad no puede comenzar con numeros",
+                    message: "El nombre no puede comenzar con numeros",
                   },
                 })}
               />
               <span className="err">
-                {errors?.codigo_unidad_medida?.message}
+                {errors?.nombre_unidad?.message}
               </span>
             </div>
             <button className="agregarModal" type="submit">
@@ -156,14 +152,14 @@ function PutUM() {
           </div>
         </form>
       </div>
-      <div className="contenedorActualesUM">
+      {/* <div className="contenedorActualesUM">
         Unidades de Medida Actuales
         <div className="tiposUM">
           {unidad_medida.map((u) => (
             <span className="spansUM">{u.nombre_unidad}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

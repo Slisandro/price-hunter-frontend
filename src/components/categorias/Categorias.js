@@ -48,16 +48,16 @@ const Categorias = ({ categorias, setState }) => {
                             ))}
                           </ul>
                         </div>
-
-                    </li>
-
-                ))
-                }
-            </ul>
-        </div>
-
-
-    );
+                      </div>
+                    </>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Categorias;
