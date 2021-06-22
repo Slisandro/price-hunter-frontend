@@ -39,7 +39,7 @@ const SidebarAdm = (props) => {
           <Link to="/tablero">Panel de control</Link>
         </div>
         <div className="agregarr">
-          <button className="btnSide" onClick={() => handleButton()}>
+          <button className="account-title2" onClick={() => handleButton()}>
             Agregar/Modificar
           </button>
           {/* <button className="btnSide" onClick={() => handleModifier()}>
@@ -262,7 +262,7 @@ const SidebarAdm = (props) => {
         <div>
           {/* <i className="fa fa-user-secret"></i> */}
           <button
-            className="btnSideConfig"
+            className="account-title3"
             value={"Configuracion"}
             onClick={() => props.setState("Configuracion")}
           >

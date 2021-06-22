@@ -12,7 +12,7 @@ const NavbarAdm = (props) => {
       </div>
       <div className="panelADM">Panel de Administrador</div>
       <div className="divADM">
-        <button className="btnNav">Modificar Mis Datos</button>
+        <button className="account-title2">Modificar Mis Datos</button>
         {/* <button className="btnNav">Modificar Productos</button>
         <button className="btnNav">Modificar Desafíos</button> */}
       </div>

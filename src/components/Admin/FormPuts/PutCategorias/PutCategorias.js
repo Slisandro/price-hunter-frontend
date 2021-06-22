@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putCategoria, getCategoria } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutCategorías() {
   const dispatch = useDispatch();
   const unidad_medida = useSelector((store) => store.unidad_medida);
+  const categoria = useSelector((store) => store.categoria);
 
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    nombre_categoria: "",
+    descripcion: "",
+    id: null,
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
+    dispatch(getCategoria());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
+  // console.log(mapeado);
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
 
-    if (name === "codigo_unidad_medida") {
+    if (name === "nombre_categoria") {
+      var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
+      var final = cat.id;
+      console.log(final);
+      setState({
+        ...state,
+        [name]: target.value,
+        id: final,
+      });
+    } else if (name === "nuevo_nombre_categoria") {
       setState({
         ...state,
         [name]: target.value,
       });
-    } else if (name === "nombre_unidad") {
+      console.log([name]);
+    } else if (name === "descripcion") {
       setState({
         ...state,
         [name]: target.value,
       });
     }
+    // console.log(state);
   };
 
   const {
@@ -44,39 +57,42 @@ function PutCategorías() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
+    const categoriaModificada = {
+      nombre_categoria: state.nuevo_nombre_categoria,
+      descripcion: state.descripcion,
+      id: state.id,
     };
 
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
-    }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
+    // if (!categoriaModificada.nombre_categoria) {
+    //   alert("Por favor, ingrese el codigo de la nueva categoría");
     //   return;
     // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
+    // if (!categoriaModificada.nuevo_nombre_categoria) {
+    //   alert("Por favor, ingrese el codigo de la nueva categoría");
+    //   return;
+    // }
+    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
+    //   alert("El codigo solo puede contener letras");
+    //   return;
+    // }
+    // if (!nuevaUM.nombre_unidad) {
+    //   alert("Por favor, ingrese el nombre de la moneda");
+    //   return;
+    // }
+    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
+    //   alert("El nombre solo puede contener letras");
+    //   return;
+    // }
+    console.log(categoriaModificada);
 
-    // dispatch(unidadDeMedida(nuevaUM));
+    dispatch(putCategoria(categoriaModificada));
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
+    alert("La Categoría fue modificada con éxito!");
 
     setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
+      nombre_categoria: "",
+      descripcion: "",
+      id: null,
     });
   };
 
@@ -94,14 +110,19 @@ function PutCategorías() {
           onSubmit={handleSubmit(submit)}
         >
           <div>
-            <label className="text-label">Nombre</label>
-            <input
+            <label className="text-label">Categoría</label>
+            <select name="nombre_categoria">
+              {categoria.map((u) => (
+                <option value={u.nombre_categoria}>{u.nombre_categoria}</option>
+              ))}
+            </select>
+            {/* <input
               className="inp"
               type="text"
-              name="nombre_unidad"
+              name="nombre_categoria"
               autoComplete="off"
               max="0"
-              {...register("nombre_unidad", {
+              {...register("nombre_categoria", {
                 required: {
                   value: true,
                   message: "Debe ingresar un nombre ",
@@ -119,30 +140,30 @@ function PutCategorías() {
                   message: "El nombre no puede comenzar con numeros",
                 },
               })}
-            />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            /> */}
+            {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
           </div>
           <div className="divForm">
             <div>
-              <label className="text-label">Unidad de Medida</label>
+              <label className="text-label">Nuevo Nombre</label>
               <input
                 className="inp"
                 type="text"
-                name="codigo_unidad_medida"
+                name="nuevo_nombre_categoria"
                 autoComplete="off"
                 max="0"
-                {...register("codigo_unidad_medida", {
+                {...register("nuevo_nombre_categoria", {
                   required: {
                     value: true,
-                    message: "Debe ingresar una unidad ",
+                    message: "Debe ingresar una categoría ",
                   },
-                  maxLength: {
-                    value: 4,
-                    message: "la unidad no debe tener mas de cuatro letras!",
-                  },
+                  // maxLength: {
+                  //   value: 4,
+                  //   message: "la unidad no debe tener mas de cuatro letras!",
+                  // },
                   max: {
                     value: 0,
-                    message: "La unidad no puede comenzar con numeros",
+                    message: "La categoría no puede comenzar con numeros",
                   },
                 })}
               />
@@ -159,8 +180,8 @@ function PutCategorías() {
       <div className="contenedorActualesUM">
         Categorías Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {categoria.map((u) => (
+            <span className="spansUM">{u.nombre_categoria}</span>
           ))}
         </div>
       </div>
