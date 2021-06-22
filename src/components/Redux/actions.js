@@ -967,7 +967,7 @@ export function putProducto(objeto) {
 export function putUM(objeto) {
   return function(dispatch) {
     console.log(objeto)
-    axios.put(`http://localhost:3001/putadmin/um`, objeto).then((response) => {
+    axios.put(`${URL}/putadmin/um`, objeto).then((response) => {
       let um = {
         codigo_unidad_medida: response.data.codigo_unidad_medida,
         nombre_unidad: response.data.nombre_unidad
