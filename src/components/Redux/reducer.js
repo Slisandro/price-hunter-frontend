@@ -92,7 +92,7 @@ const initialState = {
 
   /*Estados para la autenticacion*/
   token: localStorage.getItem("token"),//---------------------------------------------------------------------
-  autenticado: null,
+  autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
   cliente: false,
@@ -181,14 +181,15 @@ function rootReducer(state = initialState, action) {
         ) : (
           action.payload.admin.nombre
         )));
+      localStorage.setItem("auth", true)
       if (action.payload.cliente) {
         return {
           ...state,
           autenticado: true,
           usuario: null,
           mensaje: null,
+          isAdmin: false,
           cliente: true,
-          isAdmin: false
         };
       } else {
         if (action.payload.admin) {
@@ -197,7 +198,8 @@ function rootReducer(state = initialState, action) {
             autenticado: true,
             usuario: null,
             mensaje: null,
-            isAdmin: true
+            cliente: false,
+            isAdmin: true,
           };
         } else {
           return {
@@ -205,8 +207,8 @@ function rootReducer(state = initialState, action) {
             autenticado: true,
             usuario: null,
             mensaje: null,
+            isAdmin: false,
             cliente: false,
-            isAdmin: false
           };
         }
       }
@@ -217,11 +219,12 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_ERROR:
       localStorage.removeItem("token");
       localStorage.removeItem("nombre");
+      localStorage.removeItem("auth");
       return {
         ...state,
+        autenticado: false,
         token: null,
         usuario: null,
-        autenticado: null,
         mensaje: action.payload,
       };
     case UNIDAD_MEDIDA_POST:

@@ -34,15 +34,24 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-
-      if (!cliente) {
-        props.history.push('/tablero');
-      }
-      if (isAdmin) {
-        props.history.push('/admin');
-      } else {
+      if (cliente) {
         props.history.push('/tablerocliente/principal');
+      } else {
+        if (isAdmin) {
+          props.history.push('/admin');
+        } else {
+          props.history.push('/tablero');
+        }
       }
+      // if (!cliente) {
+      //   props.history.push('/tablero');
+      // } else {
+      //   if (isAdmin) {
+      //     props.history.push('/admin');
+      //   } else {
+      //     props.history.push('/tablerocliente/principal');
+      //   }
+      // }
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);
