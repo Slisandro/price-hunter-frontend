@@ -91,10 +91,12 @@ const initialState = {
   alerta: null,
 
   /*Estados para la autenticacion*/
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem("token"),//---------------------------------------------------------------------
   autenticado: null,
   usuario: null,
   mensaje: null,
+  cliente: false,
+  isAdmin: false,
   /******************************* */
 
   generos: [],
@@ -171,14 +173,45 @@ function rootReducer(state = initialState, action) {
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("nombre", action.payload.usuario.nombre?action.payload.usuario.nombre:action.payload.usuario.nombre_cial_fantasia);
+      localStorage.setItem("nombre", action.payload.usuario ? (
+        action.payload.usuario.nombre
+      ) : (
+        action.payload.cliente ? (
+          action.payload.cliente.nombre_cial_fantasia
+        ) : (
+          action.payload.admin.nombre
+        )));
+      if (action.payload.cliente) {
+        return {
+          ...state,
+          autenticado: true,
+          usuario: null,
+          mensaje: null,
+          cliente: true,
+          isAdmin: false
+        };
+      } else {
+        if (action.payload.admin) {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            isAdmin: true
+          };
+        } else {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            cliente: false,
+            isAdmin: false
+          };
+        }
+      }
 
-      return {
-        ...state,
-        autenticado: true,
-        usuario: null,
-        mensaje: null,
-      };
+
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
