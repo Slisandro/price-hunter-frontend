@@ -88,6 +88,14 @@
     flex-direction: row;
 }
 
+#div-producto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+
 #select-productos{
     width: 100%;
     margin-bottom: 1rem;
@@ -102,4 +110,10 @@
 #form-cliente-div2{
     justify-content:start
 
+}
+
+.estylo-errores{
+    color: red;
+    margin: 0;
+    padding: 0;
 }
