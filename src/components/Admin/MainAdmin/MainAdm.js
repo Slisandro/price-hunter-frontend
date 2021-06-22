@@ -11,6 +11,19 @@ import FormFyC from "../Form/FormFamiliaYCategoria/FormFyC";
 import FormAgregarProducto from "../Form/FormAgregarProducto/AgregarProducto";
 import FormUsuario from "../Form/FormUsuario/FormUsuario";
 import FormGenero from "../Form/FormGenero/FormGenero";
+import PutCategorías from "../FormPuts/PutCategorias/PutCategorias";
+import PutCiudades from "../FormPuts/PutCiudades/PutCiudades";
+import PutDesafios from "../FormPuts/PutDesafíos/PutDesafios";
+import PutFamilias from "../FormPuts/PutFamilias/PutFamilias";
+import PutMonedas from "../FormPuts/PutMonedas/PutMonedas";
+import PutPaises from "../FormPuts/PutPaises/PutPaises";
+import PutProductos from "../FormPuts/PutProductos/PutProductos";
+import PutRegiones from "../FormPuts/PutRegiones/PutRegiones";
+import PutSubCate from "../FormPuts/PutSubCategoria/PutSubCate";
+import PutTiposUsuarios from "../FormPuts/PutTiposUsuarios/PutTiposUsuarios";
+import PutTipoTrans from "../FormPuts/PutTipoTrans/PutTipoTrans";
+import PutUM from "../FormPuts/PutUM/PutUM";
+
 // import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
 // import Form from "../Form/Form";
 import "./MainAdm.css";
@@ -57,6 +70,30 @@ const MainAdm = ({ state, setState }) => {
             <FormUsuario />
           ) : state === "Agregar Género" ? (
             <FormGenero />
+          ) : state === "Modificar-Familias" ? (
+            <PutFamilias />
+          ) : state === "Modificar-Categoría" ? (
+            <PutCategorías />
+          ) : state === "Modificar-Sub-Categoría" ? (
+            <PutSubCate />
+          ) : state === "Modificar-Productos" ? (
+            <PutProductos />
+          ) : state === "Modificar-Países" ? (
+            <PutPaises />
+          ) : state === "Modificar-Ciudades" ? (
+            <PutCiudades />
+          ) : state === "Modificar-Regiones" ? (
+            <PutRegiones />
+          ) : state === "Modificar-Monedas" ? (
+            <PutMonedas />
+          ) : state === "Modificar-Tipos-de-Usuario" ? (
+            <PutTiposUsuarios />
+          ) : state === "Modificar-Unidad-de-Medida" ? (
+            <PutUM />
+          ) : state === "Modificar-Tipo-de-Transacción" ? (
+            <PutTipoTrans />
+          ) : state === "Modificar-Desafíos" ? (
+            <PutDesafios />
           ) : null}
         </div>
       </div>
