@@ -608,6 +608,7 @@ export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
+export const GET_PRODUCTO = "GET_PRODUCTO";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -706,7 +707,7 @@ export function getMoneda() {
   return function(dispatch) {
     axios.get(`${URL}getadmin/moneda`).then((response) => {
       dispatch({
-        type: GET_CIUDAD,
+        type: GET_MONEDA,
         payload: response.data,
       });
     });
@@ -836,15 +837,15 @@ export function putGenero() {
   };
 }
 
-export function putMoneda() {
+export function putMoneda(objeto) {
   return function(dispatch) {
-    axios.put(`${URL}putadmin/monedas`).then((response) => {
+    axios.put(`${URL}putadmin/monedas`, objeto).then((response) => {
       let moneda = {
         nombre_moneda: response.data.nombre_moneda,
       };
       dispatch({
         type: PUT_MONEDA,
-        payload: response.data,
+        payload: moneda,
       });
     });
   };
