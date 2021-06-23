@@ -12,7 +12,6 @@ import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 
-
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
 
@@ -22,15 +21,11 @@ import Modal from "./components/Registro/Modal";
 import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 import RegistroCliente from "./components/Registro/RegistroCliente";
 
-
-
-
-
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/admin" component={AdminPage} />
+        <RutaPrivada exact path="/admin" component={AdminPage} />
         <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
@@ -48,9 +43,7 @@ function App() {
         {/* <TableroEmpresa/> */}
         <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
 
-
-        <Route exact path="/terminos-condiciones" component={Modal}/>
-
+        <Route exact path="/terminos-condiciones" component={Modal} />
       </Switch>
     </Router>
   );
