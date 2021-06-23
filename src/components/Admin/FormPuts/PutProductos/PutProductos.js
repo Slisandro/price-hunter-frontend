@@ -1,40 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putProducto, getProductos, getSubcategoria } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutProductos() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
-
+  const productos = useSelector((store) => store.productos);
+  const subcategoria = useSelector((store) => store.subcategoria);
+  // console.log(subcategoria)
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    id: "",
+    nombre: "",
+    contenido_neto: "",
+    subcategoriumId: "",
+    unidadMedidaCodigoUnidadMedida: "",
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(getProductos());
+    dispatch(getSubcategoria());
+  }, [dispatch]);
 
-  console.log(unidad_medida);
-
+  
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
-
-    if (name === "codigo_unidad_medida") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    } else if (name === "nombre_unidad") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    }
+    const value = e.target.value;
+    // const name = e.target.name;
+   
+    for (let i = 0; i < productos.length; i++) {
+      if (parseInt(value) === parseInt(productos[i].id)) {
+        setState({
+          id: productos[i].id,
+          nombre: productos[i].nombre,
+          contenido_neto: productos[i].contenido_neto,
+          subcategoriumId: productos[i].subcategoriumId,
+          unidadMedidaCodigoUnidadMedida:
+            productos[i].unidadMedidaCodigoUnidadMedida,
+        });
+      }
+    }   
   };
 
   const {
@@ -43,48 +48,53 @@ function PutProductos() {
     handleSubmit,
   } = useForm();
 
-  const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
-    };
-
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
+  const submit =  (data, e) => {
+  //  console.log(data)
+  
+ if(state.id){
+   dispatch(putProducto(data))
+  // await dispatch(getProductos());
+   data = {
+      id: "",
+      nombre: "",
+      contenido_neto: "",
+      subcategoriumId: "",
+      unidadMedidaCodigoUnidadMedida: "",
     }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
-
-    // dispatch(unidadDeMedida(nuevaUM));
+    console.log(data)
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
-
-    setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
+    swal({
+      title: "Los datos se modificaron con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then(r => dispatch(getProductos()))
+  } else {
+    swal({
+      title: "Debe seleccionar un producto para modificar!",
+      icon: "error",
+      button: "Aceptar",
+      timer: "5000",
     });
+  }
+  setState({
+    id: "",
+    nombre: "",
+    contenido_neto: "",
+    subcategoriumId: "",
+    unidadMedidaCodigoUnidadMedida: "",
+  });
+  //  const s = async function() {
+  //   const t = await ( dispatch(getProductos()))
+  // }
+
   };
 
   return (
     <>
       <div className="contenedorFAM">
         <header>
-          <h1 id="title">Modificar Producto</h1>
+          <h1 id="title">Seleccionar Producto</h1>
         </header>
         <form
           id="survey-form"
@@ -94,75 +104,193 @@ function PutProductos() {
           onSubmit={handleSubmit(submit)}
         >
           <div>
+            <label className="text-label">Original</label>
+            <select
+              name="id"
+              className="inp"
+              onChange={(e) => ChangeInput(e)}
+              // value={paises.nombre_region}
+              {...register("id", {
+                required: {
+                  value: true,
+                  message: "Debe seleccionar un Producto",
+                },
+              })}
+            >
+              <option></option>
+              {productos.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.nombre}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.id?.message}</span>
+          </div>
+          {/* </form> */}
+          <div className="cont_prod">
+            <div className="tiposProductos">
+              <h6>id = {state.id}</h6>
+              <h6>Nombre = {state.nombre}</h6>
+              <h6>Cont Neto = {state.contenido_neto}</h6>
+              <h6>Unidad Medida = {state.unidadMedidaCodigoUnidadMedida}</h6>
+              <h6>Subcategoria = {state.subcategoriumId}</h6>
+            </div>
+          </div>
+
+         
+          <div>
             <label className="text-label">Nombre</label>
             <input
               className="inp"
               type="text"
-              name="nombre_unidad"
+              name="nombre"
               autoComplete="off"
               max="0"
-              {...register("nombre_unidad", {
-                required: {
-                  value: true,
-                  message: "Debe ingresar un nombre ",
-                },
+              {...register("nombre", {
+                // required: {
+                //   value: true,
+                //   message: "Debe ingresar un nombre ",
+                // },
                 maxLength: {
                   value: 15,
                   message: "El nombre debe tener menos de quince letras!",
                 },
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener tres letras!",
-                },
+                // minLength: {
+                //   value: 3,
+                //   message: "El nombre debe tener tres letras!",
+                // },
                 max: {
                   value: 0,
                   message: "El nombre no puede comenzar con numeros",
                 },
               })}
             />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            <span className="err">{errors?.nombre?.message}</span>
           </div>
+
+          <div>
+            <label className="text-label">Cont Neto</label>
+            <input
+              className="inp"
+              type="text"
+              name="contenido_neto"
+              autoComplete="off"
+              max="0"
+              {...register("contenido_neto", {
+                // required: {
+                //   value: true,
+                //   message: "Debe ingresar un nombre ",
+                // },
+                // maxLength: {
+                //   value: 15,
+                //   message: "El nombre debe tener menos de quince letras!",
+                // },
+                // minLength: {
+                //   value: 3,
+                //   message: "El nombre debe tener tres letras!",
+                // },
+                // max: {
+                //   value: 0,
+                //   message: "El nombre no puede comenzar con numeros",
+                // },
+              })}
+            />
+            <span className="err">{errors?.contenido_neto?.message}</span>
+          </div>
+          <div>
+            <label className="text-label">Unidad Medida</label>
+            <input
+              className="inp"
+              type="text"
+              name="unidadMedidaCodigoUnidadMedida"
+              autoComplete="off"
+              max="0"
+              {...register("unidadMedidaCodigoUnidadMedida", {
+                // required: {
+                //   value: true,
+                //   message: "Debe ingresar un nombre ",
+                // },
+                // maxLength: {
+                //   value: 15,
+                //   message: "El nombre debe tener menos de quince letras!",
+                // },
+                // minLength: {
+                //   value: 3,
+                //   message: "El nombre debe tener tres letras!",
+                // },
+                // max: {
+                //   value: 0,
+                //   message: "El nombre no puede comenzar con numeros",
+                // },
+              })}
+            />
+            <span className="err">{errors?.unidadMedidaCodigoUnidadMedida?.message}</span>
+          </div>
+
+
+
+          <div>
+            <label className="text-label">Nombre</label>
+            <select
+              name="subcategoriumId"
+              className="inp"
+              // value={paises.nombre_region}
+              // onChange={(e) => ChangeInput(e)}
+              {...register("subcategoriumId", {
+                // required: {
+                //   value: true,
+                //   message: "Debe seleccionar un campo a modificar",
+                // },
+              })}
+            >
+              <option></option>
+              {subcategoria.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.nombre_subcategoria}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.subcategoriumId?.message}</span>
+          </div>
+
           <div className="divForm">
-            <div>
-              <label className="text-label">Producto</label>
+            {/* <div>
+              <label className="text-label">Subcategoria</label>
               <input
                 className="inp"
                 type="text"
-                name="codigo_unidad_medida"
+                name="subcategoriumId"
                 autoComplete="off"
                 max="0"
-                {...register("codigo_unidad_medida", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar una unidad ",
-                  },
-                  maxLength: {
-                    value: 4,
-                    message: "la unidad no debe tener mas de cuatro letras!",
-                  },
-                  max: {
-                    value: 0,
-                    message: "La unidad no puede comenzar con numeros",
-                  },
+                {...register("subcategoriumId", {
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar un nombre ",
+                  // },
+                  // maxLength: {
+                  //   value: 15,
+                  //   message:
+                  //     "El nombre no debe tener mas de quince caracteres!",
+                  // },
+                  // minLength: {
+                  //   value: 3,
+                  //   message: "El nombre debe tener tres caracteres!",
+                  // },
+                  // max: {
+                  //   value: 0,
+                  //   message: "El nombre no puede comenzar con numeros",
+                  // },
                 })}
               />
-              <span className="err">
-                {errors?.codigo_unidad_medida?.message}
-              </span>
-            </div>
-            <button className="agregarModal" type="submit">
+              <span className="err">{errors?.subcategoriumId?.message}</span>
+            </div> */}
+            <button className="agregarModal" type="submit" 
+            // onClick={() =>dispatch(getProductos())}
+            >
               Modificar
             </button>
           </div>
         </form>
-      </div>
-      <div className="contenedorActualesUM">
-        Productos Actuales
-        <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
-          ))}
-        </div>
       </div>
     </>
   );
