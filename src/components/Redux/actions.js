@@ -608,7 +608,7 @@ export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
-export const GET_TIPO_USUARIO = 'GET_TIPO_USUARIO';
+// export const GET_TIPO_USUARIO = 'GET_TIPO_USUARIO';
 export const GET_PRODUCTO = "GET_PRODUCTO";
 
 export function getFamilia() {

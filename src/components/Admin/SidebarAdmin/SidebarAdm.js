@@ -259,8 +259,7 @@ const SidebarAdm = (props) => {
           </>
         ) : null}
 
-        <div>
-          {/* <i className="fa fa-user-secret"></i> */}
+        {/* <div>
           <button
             className="account-title3"
             value={"Configuracion"}
@@ -268,7 +267,7 @@ const SidebarAdm = (props) => {
           >
             Configuración
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
