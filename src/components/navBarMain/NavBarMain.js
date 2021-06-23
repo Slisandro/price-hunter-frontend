@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Categorias from '../categorias/Categorias';
 import { getCategorias, getProductsByName } from "../Redux/actions";
 
-function NavBarMain({ producto, setProducto, setState, ubicacion }) {
+function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }) {
     const categorias = useSelector(store => store.categorias);
     const dispatch = useDispatch();
     const nombre = localStorage.getItem("nombre");
@@ -18,6 +18,18 @@ function NavBarMain({ producto, setProducto, setState, ubicacion }) {
         dispatch(getProductsByName(producto, ubicacion));
         setState("Search");
         setProducto("")
+        setUbicacion({
+            ...ubicacion,
+            dis: 0
+        })
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setUbicacion({
+            ...ubicacion,
+            dis: e.target.value
+        })
     }
 
     const handleChange = (e) => {
@@ -55,16 +67,25 @@ function NavBarMain({ producto, setProducto, setState, ubicacion }) {
 
 
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    className="input__text"
-                    placeholder="Buscar productos por nombre"
-                    onChange={handleChange}
-                    value={producto}
-                    name={producto}
-                />
-                <input type="submit" className="btn__main" value="Buscar" />
+            <form className="formSearchUser" onSubmit={handleSubmit}>
+                <div className="containerInputSearch">
+                    <input
+                    id="inputSearchBarText"
+                        type="text"
+                        className="input__text"
+                        placeholder="Buscar precios cercanos"
+                        onChange={handleChange}
+                        value={producto}
+                        name={producto}
+                    />
+                    <input type="submit" id="inputSearchBarSubmit" className="btn__main" value="Buscar" />
+                </div>
+                <select onClick={e => handleClick(e)} id="selectSearchBarUser">
+                    <option default>Seleccione el radio para su busqueda</option>
+                    <option value={1000}>1 km</option>
+                    <option value={50000}>50 km</option>
+                    <option value={100000}>100 km</option>
+                </select>
             </form>
 
 
