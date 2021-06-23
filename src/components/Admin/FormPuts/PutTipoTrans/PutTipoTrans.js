@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putTipoTransaccion, getTipoTransaccion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from 'sweetalert';
 // import "./FormUnidadMedida.css";
 
 function PutTipoTrans() {
@@ -19,11 +20,16 @@ function PutTipoTrans() {
   } = useForm();
 
   const submit = (data, e) => {
-    console.log(data);
+  
     dispatch(putTipoTransaccion(data));
     e.target.reset();
     dispatch(getTipoTransaccion());
-    alert("El tipo de transaccion se modifico éxito!");
+    swal({
+      title:"Los datos se modificaron con éxito!",
+      icon:"success",
+      button:"Aceptar",
+      timer:"5000"
+    });
   };
 
   return (
@@ -60,7 +66,7 @@ function PutTipoTrans() {
                 </option>
               ))}
             </select>
-            <span className="err">{errors?.codigo_unidad_medida?.message}</span>
+            <span className="err">{errors?.id?.message}</span>
           </div>
 
           <div className="divForm">

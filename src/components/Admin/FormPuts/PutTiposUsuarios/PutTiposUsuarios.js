@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putTipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from 'sweetalert';
 // import "./FormUnidadMedida.css";
 
 function PutTiposUsuarios() {
@@ -22,7 +23,12 @@ function PutTiposUsuarios() {
     dispatch(putTipoUsuario(data));
     e.target.reset();
     dispatch(getTipoUsuario());
-    alert("La Unidad de Medida fue agregada con éxito!");
+    swal({
+      title:"Los datos se modificaron con éxito!",
+      icon:"success",
+      button:"Aceptar",
+      timer:"5000"
+    });
   };
 
   return (

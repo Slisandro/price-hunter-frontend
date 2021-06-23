@@ -608,8 +608,7 @@ export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
-// export const GET_TIPO_USUARIO = 'GET_TIPO_USUARIO';
-export const GET_PRODUCTO = "GET_PRODUCTO";
+export const GET_PRODUCTOS = "GET_PRODUCTOS"
 
 export function getFamilia() {
   return function(dispatch) {
@@ -715,6 +714,17 @@ export function getMoneda() {
   };
 }
 
+export function getProductos() {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/productos`).then((response) => {
+      dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
 export function getTipoTransaccion() {
   return function(dispatch) {
     axios.get(`${URL}tipotransacciones`).then((response) => {
@@ -726,16 +736,6 @@ export function getTipoTransaccion() {
   };
 }
 
-// export function getTipoUsuario() {
-//   return function(dispatch) {
-//     axios.get(`${URL}getadmin/tipo_usuario`).then((response) => {
-//       dispatch({
-//         type: GET_TIPO_USUARIO,
-//         payload: response.data,
-//       });
-//     });
-//   };
-// }
 
 export function iniciarSesionCliente(datos) {
   return function(dispatch) {
@@ -994,9 +994,6 @@ export function putDesafio(objeto) {
 export function putProducto(objeto) {
   return function(dispatch) {
     axios.put(`${URL}putadmin/productos`, objeto).then((response) => {
-      let producto = {
-        nombre_producto: response.data.nombre_producto,
-      };
       dispatch({
         type: PUT_PRODUCTO,
         payload: response.data,
