@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putCiudad, getCiudad, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutCiudades() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const ciudad = useSelector((store) => store.ciudad);
 
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    nombre_ciudad: "",
+    nuevo_nombre_ciudad: "",
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
+    dispatch(getCiudad());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
+  console.log(ciudad);
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
 
-    if (name === "codigo_unidad_medida") {
+    if (name === "nombre_ciudad") {
+      var ciu = ciudad.find((f) => f.nombre_ciudad === e.target.value);
       setState({
         ...state,
         [name]: target.value,
       });
-    } else if (name === "nombre_unidad") {
+    } else if (name === "nuevo_nombre_ciudad") {
       setState({
         ...state,
         [name]: target.value,
@@ -44,24 +45,22 @@ function PutCiudades() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
+    const ciudadModificada = {
+      nombre_pais: state.nuevo_nombre_pais,
     };
 
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
-    }
+    // if (!paisModificado.state.nuevo_nombre_pais) {
+    //   alert("Por favor, ingrese el nombre del pais");
+    //   return;
+    // }
     // if (nuevaUM.codigo_unidad_medida !== 3) {
     //   alert("Debe ingresar 3 letras...");
     //   return;
     // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
+    /*  if (!isNaN(parseInt(paisModificado.nombre_pais))) {
       alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
+      return; */
+    /*  if (!paisModificado.nombre_unidad) {
       alert("Por favor, ingrese el nombre de la moneda");
       return;
     }
@@ -69,14 +68,14 @@ function PutCiudades() {
       alert("El nombre solo puede contener letras");
       return;
     }
-
-    // dispatch(unidadDeMedida(nuevaUM));
+ */
+    dispatch(putCiudad(ciudadModificada));
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
+    alert("El nuevo nombre de la ciudad fue agregado con exito");
 
     setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
+      nombre_pais: "",
+      nuevo_nombre_pais: "",
     });
   };
 
@@ -120,7 +119,7 @@ function PutCiudades() {
                 },
               })}
             />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            <span className="err">{errors?.nombre_pais?.message}</span>
           </div>
           <div className="divForm">
             <div>
@@ -159,8 +158,8 @@ function PutCiudades() {
       <div className="contenedorActualesUM">
         Ciudades Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {ciudad.map((u) => (
+            <span className="spansUM">{u.nombre_ciudad}</span>
           ))}
         </div>
       </div>

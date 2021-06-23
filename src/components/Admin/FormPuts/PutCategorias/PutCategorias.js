@@ -67,14 +67,14 @@ function PutCategorías() {
       id: state.id,
     };
 
-    if (!categoriaModificada.nombre_categoria) {
-      alert("Por favor, ingrese el codigo de la nueva categoría");
-      return;
-    }
-    if (!categoriaModificada.nuevo_nombre_categoria) {
-      alert("Por favor, ingrese el codigo de la nueva categoría");
-      return;
-    }
+    // if (!categoriaModificada.nombre_categoria) {
+    //   alert("Por favor, ingrese el codigo de la nueva categoría");
+    //   return;
+    // }
+    // if (!categoriaModificada.nuevo_nombre_categoria) {
+    //   alert("Por favor, ingrese el codigo de la nueva categoría");
+    //   return;
+    // }
     // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
     //   alert("El codigo solo puede contener letras");
     //   return;

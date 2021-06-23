@@ -610,7 +610,6 @@ export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
 export const GET_PRODUCTOS = "GET_PRODUCTOS"
 
-
 export function getFamilia() {
   return function(dispatch) {
     axios.get(`${URL}getadmin/familia`).then((response) => {
