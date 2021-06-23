@@ -1,35 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putMoneda, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutMonedas() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const moneda = useSelector((store) => store.moneda);
 
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    codigo_moneda: "",
+    nombre_moneda: "",
+    simbolo: ""
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
+    dispatch(getMoneda());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(unidad_medida);
 
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
 
-    if (name === "codigo_unidad_medida") {
+    if (name === "nombre_moneda") {
+      var mon = moneda.find((f) => f.nombre_moneda === e.target.value);
+      var final = mon.codigo_moneda;
+      setState({
+        ...state,
+        [name]: target.value,
+        codigo_moneda: final
+      });
+    } else if (name === "nuevo_nombre_moneda") {
       setState({
         ...state,
         [name]: target.value,
       });
-    } else if (name === "nombre_unidad") {
+    }
+    // else if (name === "simbolo") {
+    //   setState({
+    //     ...state,
+    //     [name]: target.value,
+    //   });
+    // }
+    else if (name === "codigo_moneda") {
       setState({
         ...state,
         [name]: target.value,
@@ -44,39 +58,43 @@ function PutMonedas() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
+    const nuevaMoneda = {
+      nombre_moneda: state.nuevo_nombre_moneda,
+      codigo_moneda: state.codigo_moneda,
+      simbolo: state.simbolo
     };
 
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
-    }
+    // if (!nuevaUM.codigo_unidad_medida) {
+    //   alert("Por favor, ingrese el codigo de la moneda");
+    //   return;
+    // }
     // if (nuevaUM.codigo_unidad_medida !== 3) {
     //   alert("Debe ingresar 3 letras...");
     //   return;
     // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
+    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
+    //   alert("El codigo solo puede contener letras");
+    //   return;
+    // }
+    // if (!nuevaUM.nombre_unidad) {
+    //   alert("Por favor, ingrese el nombre de la moneda");
+    //   return;
+    // }
+    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
+    //   alert("El nombre solo puede contener letras");
+    //   return;
+    // }
 
-    // dispatch(unidadDeMedida(nuevaUM));
+    console.log(nuevaMoneda)
+
+    dispatch(putMoneda(nuevaMoneda));
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
+    alert("La Moneda fue agregada con éxito!");
 
     setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
+     codigo_moneda: "",
+    nombre_moneda: "",
+    simbolo: ""
     });
   };
 
@@ -95,20 +113,26 @@ function PutMonedas() {
         >
           <div>
             <label className="text-label">Nombre</label>
-            <input
+             <select name="nombre_moneda">
+                  <option></option>
+                  {moneda.map((u) => (
+                    <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
+                  ))}
+                </select>
+            {/* <input
               className="inp"
               type="text"
-              name="nombre_unidad"
+              name="nombre_moneda"
               autoComplete="off"
               max="0"
-              {...register("nombre_unidad", {
+              {...register("nombre_moneda", {
                 required: {
                   value: true,
-                  message: "Debe ingresar un nombre ",
+                  message: "Debe ingresar una moneda",
                 },
                 maxLength: {
                   value: 15,
-                  message: "El nombre debe tener menos de quince letras!",
+                  message: "El nombre de la moneda debe tener menos de quince letras!",
                 },
                 minLength: {
                   value: 3,
@@ -119,8 +143,8 @@ function PutMonedas() {
                   message: "El nombre no puede comenzar con numeros",
                 },
               })}
-            />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            /> */}
+            <span className="err">{errors?.nombre_moneda?.message}</span>
           </div>
           <div className="divForm">
             <div>
@@ -128,17 +152,13 @@ function PutMonedas() {
               <input
                 className="inp"
                 type="text"
-                name="codigo_unidad_medida"
+                name="nuevo_nombre_moneda"
                 autoComplete="off"
                 max="0"
-                {...register("codigo_unidad_medida", {
+                {...register("nuevo_nombre_moneda", {
                   required: {
                     value: true,
-                    message: "Debe ingresar una unidad ",
-                  },
-                  maxLength: {
-                    value: 4,
-                    message: "la unidad no debe tener mas de cuatro letras!",
+                    message: "Debe ingresar una moneda ",
                   },
                   max: {
                     value: 0,
@@ -147,7 +167,7 @@ function PutMonedas() {
                 })}
               />
               <span className="err">
-                {errors?.codigo_unidad_medida?.message}
+                {errors?.codigo_moneda?.message}
               </span>
             </div>
             <button className="agregarModal" type="submit">
@@ -159,8 +179,8 @@ function PutMonedas() {
       <div className="contenedorActualesUM">
         Monedas Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {moneda.map((u) => (
+            <span className="spansUM">{u.nombre_moneda}</span>
           ))}
         </div>
       </div>

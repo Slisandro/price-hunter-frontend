@@ -48,6 +48,7 @@ const Categorias = ({ categorias, setState }) => {
                             ))}
                           </ul>
                         </div>
+
                       </div>
                     </>
                   ))}
@@ -58,6 +59,7 @@ const Categorias = ({ categorias, setState }) => {
       </ul>
     </div>
   );
+
 };
 
 export default Categorias;

@@ -245,7 +245,7 @@ function rootReducer(state = initialState, action) {
         autenticado: false,
         token: null,
         usuario: null,
-        mensaje: action.payload,
+        alerta: action.payload,
       };
     case UNIDAD_MEDIDA_POST:
       return {

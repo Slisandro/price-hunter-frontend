@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putCategoria, getCategoria } from "../../../Redux/actions";
+import {
+  putCategoria,
+  getCategoria,
+  mostrarError,
+} from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
@@ -11,6 +15,7 @@ function PutCategorías() {
 
   const [state, setState] = useState({
     nombre_categoria: "",
+    nuevo_nombre_categoria: "",
     descripcion: "",
     id: null,
   });
@@ -29,7 +34,7 @@ function PutCategorías() {
     if (name === "nombre_categoria") {
       var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
       var final = cat.id;
-      console.log(final);
+      // console.log(final);
       setState({
         ...state,
         [name]: target.value,
@@ -40,7 +45,6 @@ function PutCategorías() {
         ...state,
         [name]: target.value,
       });
-      console.log([name]);
     } else if (name === "descripcion") {
       setState({
         ...state,
@@ -63,14 +67,14 @@ function PutCategorías() {
       id: state.id,
     };
 
-    // if (!categoriaModificada.nombre_categoria) {
-    //   alert("Por favor, ingrese el codigo de la nueva categoría");
-    //   return;
-    // }
-    // if (!categoriaModificada.nuevo_nombre_categoria) {
-    //   alert("Por favor, ingrese el codigo de la nueva categoría");
-    //   return;
-    // }
+    if (!categoriaModificada.nombre_categoria) {
+      alert("Por favor, ingrese el codigo de la nueva categoría");
+      return;
+    }
+    if (!categoriaModificada.nuevo_nombre_categoria) {
+      alert("Por favor, ingrese el codigo de la nueva categoría");
+      return;
+    }
     // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
     //   alert("El codigo solo puede contener letras");
     //   return;
@@ -83,6 +87,7 @@ function PutCategorías() {
     //   alert("El nombre solo puede contener letras");
     //   return;
     // }
+
     console.log(categoriaModificada);
 
     dispatch(putCategoria(categoriaModificada));
@@ -91,6 +96,7 @@ function PutCategorías() {
 
     setState({
       nombre_categoria: "",
+      nuevo_nombre_categoria: "",
       descripcion: "",
       id: null,
     });
