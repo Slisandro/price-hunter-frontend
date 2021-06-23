@@ -8,12 +8,12 @@ var geolocation = require('geolocation');
 
 
 function Tablero() {
-  const [state, setState] = useState("")
+  const [state, setState] = useState("Panel")
   const [sidebarOpen, setSidebar] = useState(false);
   const [ubicacion, setUbicacion] = useState({
     latitud: "",
     longitud: "",
-    dis: 1000000
+    dis: 0
   })
   
   const openSidebar = () => {
@@ -38,8 +38,8 @@ function Tablero() {
     <div className="contenedor">
 
       <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      <Main state={state} setState={setState} ubicacion={ubicacion} />
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
+      <Main setUbicacion={setUbicacion} state={state} setState={setState} ubicacion={ubicacion} />
+      <Sidebar state={state} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
       <Aside />
 
     </div>

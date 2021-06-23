@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
-    <nav className="navbar">
+    <nav className="navbar" id="navbarUser">
       <div className="nav_icon" onClick={() => props.openSidebar()}>
         <i className="fas fa-bars"></i>
       </div>

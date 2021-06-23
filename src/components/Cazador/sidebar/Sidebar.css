@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
 #sidebar {
-    background: #24244b;
+    background: rgba(24, 30, 54, 1);
     grid-area: sidebar;
     overflow-y: hidden;
     padding: 15px;
@@ -10,6 +10,30 @@
     border-bottom-right-radius: 15px;
     border-right: 1px solid #ffffff;
     font-family: 'Catamaran', sans-serif !important;
+}
+
+.titleSideBarUser {
+    text-align: center;
+    margin: auto;
+    font-weight: 700;
+    font-size: 2em !important;
+    font-style: oblique;
+    font-family: sans-serif;
+    letter-spacing: .2em;
+    text-shadow: 0.2em 0.2em rgb(0 0 0 / 50%);
+}
+
+#containerLogoSideBarUser {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 10vh !important;
+    padding: 10% !important;
+    width: 100%;
+}
+
+.imgSideBarUser {
+    width: 35%;
 }
 
 .sidebar__title {
@@ -63,6 +87,7 @@
     background: transparent;
     border: none;
     color: white;
+    width: 80%;
 }
 
 .active_menu_link {
@@ -70,11 +95,32 @@
     color: azure;
 }
 
+.sideBarUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5% !important;
+    width: 100%;
+}
+
+#sidebarUser {
+    height: 40%
+}
+
+.sidebar__link img {
+    width: 20%;
+}
+
+#inputActiveSideBarUser {
+    background: rgba(149, 165, 166, .1);
+}
+
+#inputActiveSideBarUser button {
+    color: rgba(255, 255, 255, .5);
+}
+
 .active_menu_link a {
     color: #ffffff !important;
-    /* font-size: 20px;
-    padding-left: 40px;
-    font-weight: lighter; */
 }
 
 .sidebar__link>a {
