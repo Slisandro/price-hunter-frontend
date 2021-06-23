@@ -14,8 +14,8 @@ const AsideAdm = () => {
           <div className="blob"></div>
           <div className="blob"></div>
         </div>
-        <button className="account-title">Nombre Administrador</button>
-        <button className="account-title">Cerrar Sesión</button>
+        <button className="account-title2">Nombre Administrador</button>
+        <button className="account-title2">Cerrar Sesión</button>
       </div>
 
       <div className="account cardAdm card1">
