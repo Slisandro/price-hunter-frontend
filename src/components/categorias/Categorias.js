@@ -48,14 +48,17 @@ const Categorias = ({ categorias, setState }) => {
                             ))}
                           </ul>
                         </div>
-
+                        </div>
+                        </>
+                  ))}
+                  </div>
+                  </div>  
                     </li>
 
                 ))
                 }
             </ul>
         </div>
-
 
     );
 };
