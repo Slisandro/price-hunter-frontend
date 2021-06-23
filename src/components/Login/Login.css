@@ -2,7 +2,7 @@
 
 
 
-.login {
+.loginHunter {
     background-image: linear-gradient(#050824,#1a2058, #18e6db);
     display: flex !important;
     align-items: center;
@@ -13,29 +13,30 @@
     font-family: 'Catamaran', sans-serif !important;
   }
   
-  .login__container {
+  .loginContainer_hunter {
     background: radial-gradient(circle, #272f75 0%, #02041b 100%);
-    border: 2px solid rgb(1, 247, 234);
-    border-radius: 40px;
+    border: 3px solid rgb(1, 247, 234);
+    border-radius: .8rem;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 80px 70px 100px 80px;
+    padding: 70px 60px 100px 70px;
     font-family: 'Catamaran', sans-serif !important;
   
   }
   
-  .login__container--form {
+  .loginContainer_hunter--form {
     display: flex;
     flex-direction: column;
+    width: 245px !important;
   }
-  .login__container--form  > input {
+  .loginContainer_hunter--form  > #input_login {
      
       background: cornsilk;
-      width: 240px !important;
-      height: 25px;
+      width: 242px !important;
+      height: 30px;
       border: none;
       outline: none;
       padding: 0 25px;
@@ -43,25 +44,27 @@
       margin-bottom: 1rem;
       
   }
-  .logo__login{
+  #logologin{
       width: 4em;
-      margin-left: 6.2rem;
+      margin-left: 5.3rem !important;
   }
-  .login__container h2{
+  .loginContainer_hunter .h2Title{
       color: rgb(227, 243, 4);
-      margin-left: 4.5rem;
-      font-size: 25px;
+      margin-left: 3.9rem !important;
+      font-size: 20px;
+      font-weight: 800;
       
   }
   
-  .login__container--form label {
+  .loginContainer_hunter--form label {
     font-size: 14px;
+    height: 30px;
   }
 
   .button__login {
     border-radius: .2em;
-    max-width: 15em !important;
-    height: 38px !important;
+    max-width: 15.2em !important;
+    height: 36px !important;
     border: none;
     outline: none;
     cursor: pointer;
@@ -76,7 +79,7 @@
   }
 
 
-  .login__container--remember-me {
+  .loginContainer_hunter--remember-me {
     color: rgb(250, 250, 250);
     display: flex;
     justify-content: space-between;
@@ -86,40 +89,48 @@
   }
 
   
-  .login__container--remember-me a {
+  .loginContainer_hunter--remember-me a {
     color: rgb(250, 250, 250);
-    font-size: 14px;
+    font-size: 13px;
     text-decoration: none;
     margin-top: 4px;
     font-weight: bold;
    
   }
   
-  .login__container--remember-me a:hover {
+  .loginContainer_hunter--remember-me a:hover {
     text-decoration: underline;
   }
 
 
-  .login__container--social-media{
-      padding-top: 2rem;
+  .loginContainer_hunter--remember-me--social-media{
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-around;
+  align-items: center;
+
   }
   
   
 
 
-  .register__login{
+  .register__loginHunter{
+      margin-top: 4%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      
+      padding-top: 10px;
+      font-weight: bold;
+      color: white;
+      font-size: 15px;
   }
   
-  .login__container--register {
+  .loginContainer_hunter--remember-me--register {
     font-size: 14px;
     color: rgb(233, 255, 255);
   }
   
-  .login__container--register{
+  .loginContainer_hunter--remember-me--register{
     color: rgb(236, 236, 236) !important;
     font-weight: bold;
     font-size: 16px;
@@ -135,7 +146,7 @@
  .button__login__google{
     
   border-radius: .2em;
-  max-width: 25em !important;
+ 
   height: 38px;
   border: none;
   outline: none;
@@ -144,11 +155,35 @@
   font-weight: bold;
   color: rgb(0, 0, 0);
   transition: .4s;
-  display: flex;
-  justify-content: space-around;
+  
+  justify-content: space-between;
   align-items: center;
+  width: 243px !important;
   
 }
+
+
+
+.alerta-ok {
+  background-color: rgb(109, 211, 109);
+  color: rgb(2, 103, 2);
+}
+.alerta-error {
+  background-color: rgb(245, 0, 0);
+  color: #f0f8f8;
+  border-radius: .2em;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width:480px) {

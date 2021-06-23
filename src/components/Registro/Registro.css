@@ -1,229 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
 
 
-.register{
-  height: 97.8vh !important;
-  color: #50e6cd;
-  font-weight: 700;
+.registerContent{
+ 
+  font-family: 'Catamaran',sans-serif;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background:linear-gradient(#050824,#1a2058, #18e7dd)!important;
-  font-family: 'Catamaran',sans-serif;
-
-
-}
-.container-register{
-  max-width: 700px;
-
-  width: 100%;
-  background:radial-gradient(circle, #272f75 0%, #02041b 100%);
-  padding: 25px 40px;
-  border-radius: 40px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  border: 2px solid rgb(1, 247, 234);
-  font-family: 'Catamaran',sans-serif;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 20px rgba(0, 0, 0, 0.699);
-
-}
-
-.encabezado{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-.container-register .title{
-  font-size: 25px;
-  font-weight: 800;
-  position: relative;
-  color: rgb(227, 252, 4);
-}
-/* .container-register .title::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 150px;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #0ef7ff, #1a0324);
-} */
-.content form .user-details{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
-}
-
-
-
-form .user-details .input-box{
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  
-}
-
-form .user-details .input-box-tyc{
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-  margin-top: 33px;
-  display: flex;
-  align-items: center;
-
-  
-}
-
-.input-policy{
-  width: 60px;
-  height: 22px;
-}
-
-
-.button__tyc{
-  background: rgb(224, 221, 6);
-  border: none;
-  cursor: pointer;
-  padding: .3em;
-  color: rgb(0, 8, 15);
-  border-radius: .2em;
-}
-
-
-
-
-form .input-box span.details{
-  display: block;
-  font-weight: bold;
-  margin-bottom: 4px;
-  font-size: 15px;
-}
-
-.input-select{
-  height: 32px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: .2em;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-  color: #1a0324;
-  background: cornsilk;
-  
-
-}
-
-.user-details .input-box .input{
-  height: 24px;
-  width: 94%;
-  outline: none;
-  font-size: 16px;
-  border-radius: .2em;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  background: cornsilk;
-  transition: all 0.3s ease;
-  color: #1a0324;
-
-}
-
-.last{
-  margin-top: .3em;
-  background: cornsilk;
-  
-}
-
-
- form .gender-details .gender-title{
-  font-size: 20px;
-  font-weight: 500;
- }
- form .category{
-   display: flex;
-   width: 80%;
-   margin: 14px 0 ;
-   justify-content: space-between;
- }
- form .category label{
-   display: flex;
-   align-items: center;
-   cursor: pointer;
- }
- form .category label .dot{
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  margin-right: 10px;
-  background: #d9d9d9;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
-}
- #dot-1:checked ~ .category label .one,
- #dot-2:checked ~ .category label .two,
- #dot-3:checked ~ .category label .three{
-   background: #2e4d86;
-   border-color: #d9d9d9;
- }
- form input[type="radio"]{
-   display: none;
- }
- form .button{
-   height: 35px;
-   margin: 35px 0
- }
- form .button input{
-   height: 100%;
-   width: 100%;
-   border-radius: .2em;
-   border: none;
-   color: rgb(25, 14, 66);
-   font-size: 14px;
-   font-weight: 600;
-   letter-spacing: 1px;
-   cursor: pointer;
-   transition: all 0.3s ease;
-   background: #17e8f7;
- }
-
- .link__sesion{
-   text-decoration: none;
-   color: rgb(255, 255, 255);
-   font-size: 14px;
-   
- }
-
+  min-height: 100vh;
+  background:  linear-gradient(#050824,#1a2058, #18e6db);
+  color: #f0f8f8;
  
 
-
- @media(max-width: 584px){
- .container{
-  max-width: 100%;
 }
-form .user-details .input-box{
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  form .category{
-    width: 100%;
-  }
-  .content form .user-details{
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-  .user-details::-webkit-scrollbar{
-    width: 5px;
-  }
-  }
+
+.container_form_register{
+  width: 560px;
+  background: radial-gradient(circle, #272f75 0%, #02041b 100%);
+  border-radius: .8em;
+  text-align: center;
+  padding: 4px 35px 8px 35px;
+  border: 3px solid rgb(0, 255, 213);
+  
+
+}
 
 
-  @media(max-width: 459px){
-  .container .content .category{
-    flex-direction: column;
-  }
+.container_form_register header {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 30px 0 ;
+  color: rgb(255, 238, 0);
+
+
   
   
+   
 }
+
+.container_form_register .form-outer{
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.form-outer form {
+  display: flex;
+  width: 400%;
+
+} 
+
+.form-outer form .page {
+  width: 20%;
+  
+  
+  
+} 
+
+.form-outer form .page .title {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+
+  
+} 
+
+.form-outer form .page .field {
+    height: 32px;
+    width: 480px;
+    margin: 30px 0;
+    display: flex;
+    position: relative;
+
+  
+  
+} 
+.form-outer form .page .field .label {
+  position: absolute;
+  top: -30px;
+  font-weight: 600;
+  color: rgb(214, 206, 93);
+
+
+
+
+}
+.form-outer form .page .field .inputRegister {
+  height: 90%;
+  width: 100%;
+  border: none;
+  border-radius: .3em;
+  font-size: 17px;
+  padding-left: 15px;
+color: black;
+outline: none;
+
+} 
+
+form .page .field select{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  height: 90%;
+
+
+}
+
+
+.form-outer form .page .field button {
+  width: 100%;
+  height: calc(100% + 3px);
+  margin-top: -20px;
+  border: none;
+  background: rgb(0, 225, 255);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s ease;
+  font-weight: bold;
+
+  
+
+
+}
+.form-outer form .page .field button:hover {
+ 
+  background: #f5e400;
+
+}
+
+
+.form-outer form .page .btns-register button {
+    margin-top: -20px !important;
+
+
+}
+
+.linklogin{
+  color: #f0f8f8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+
+.alerta-ok {
+  background-color: rgb(109, 211, 109);
+  color: rgb(2, 103, 2);
+}
+.alerta-error {
+  background-color: rgb(245, 0, 0);
+  color: #f0f8f8;
+  border-radius: .2em;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
