@@ -8,33 +8,9 @@ function PutUM() {
   const dispatch = useDispatch();
   const unidad = useSelector((store) => store.unidad_medida);
 
-  const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
-  });
-
   useEffect(() => {
     dispatch(getUnidadMedida());
   }, [dispatch]);
-
-  // console.log(unidad)
-  // const ChangeInput = (e) => {
-  //   const target = e.target;
-  //   const name = target.name;
-  //   console.log(e.target.value);
-
-  //   if (name === "codigo_unidad_medida") {
-  //     setState({
-  //       ...state,
-  //       [name]: target.value,
-  //     });
-  //   } else if (name === "nombre_unidad") {
-  //     setState({
-  //       ...state,
-  //       [name]: target.value,
-  //     });
-  //   }
-  // };
 
   const {
     register,
@@ -42,42 +18,14 @@ function PutUM() {
     handleSubmit,
   } = useForm();
 
-  const submit = (data, e) => {
-    // const nuevaUM = {
-    //   codigo_unidad_medida: state.codigo_unidad_medida,
-    //   nombre_unidad: state.nombre_unidad,
-    // };
-    // console.log(data)
-
-    // if (!nuevaUM.codigo_unidad_medida) {
-    //   alert("Por favor, ingrese el codigo de la moneda");
-    //   return;
-    // }
-    // // if (nuevaUM.codigo_unidad_medida !== 3) {
-    // //   alert("Debe ingresar 3 letras...");
-    // //   return;
-    // // }
-    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-    //   alert("El codigo solo puede contener letras");
-    //   return;
-    // }
-    // if (!nuevaUM.nombre_unidad) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
-
+  const submit = async (data, e) => {
     dispatch(putUM(data));
-    e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
 
-    setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
-    });
+    e.target.reset();
+
+    dispatch(getUnidadMedida());
+
+    alert("El nombre se modifico con éxito!");
   };
 
   return (
@@ -97,19 +45,21 @@ function PutUM() {
             <label className="text-label">Nombre</label>
             <select
               name="codigo_unidad_medida"
-              className="codigo_unidad_medida"
+              className="inp"
               // value={paises.nombre_region}
               // onChange={(e) => ChangeInput(e)}
               {...register("codigo_unidad_medida", {
                 required: {
                   value: true,
-                  message: "Debe seleccionar una unidad de medida",
+                  message: "Debe seleccionar un campo a modificar",
                 },
               })}
             >
               <option></option>
-              {unidad.map((f) => (
-                <option value={f.codigo_unidad_medida}>{f.nombre_unidad}</option>
+              {unidad.map((f, index) => (
+                <option key={index} value={f.codigo_unidad_medida}>
+                  {f.nombre_unidad}
+                </option>
               ))}
             </select>
             <span className="err">{errors?.codigo_unidad_medida?.message}</span>
@@ -142,9 +92,7 @@ function PutUM() {
                   },
                 })}
               />
-              <span className="err">
-                {errors?.nombre_unidad?.message}
-              </span>
+              <span className="err">{errors?.nombre_unidad?.message}</span>
             </div>
             <button className="agregarModal" type="submit">
               Modificar
@@ -152,14 +100,16 @@ function PutUM() {
           </div>
         </form>
       </div>
-      {/* <div className="contenedorActualesUM">
+      <div className="contenedorActualesUM">
         Unidades de Medida Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {unidad.map((u, index) => (
+            <span key={index} className="spansUM">
+              {u.nombre_unidad}
+            </span>
           ))}
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
