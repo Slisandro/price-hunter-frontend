@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putProducto, getProducto } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 // import "./FormUnidadMedida.css";
 
 function PutProductos() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const productos = useSelector((store) => store.productos);
 
   const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
+    nombre : "",
+   contenido_neto : "",
+   unidadMedidaCodigoUnidadMedida: "",
+   subcategoriumId: "",
+   id: null
   });
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
+    //dispatch(getProducto());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
+  console.log(productos);
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -70,7 +73,7 @@ function PutProductos() {
       return;
     }
 
-    // dispatch(unidadDeMedida(nuevaUM));
+    //dispatch(putProducto(nuevoProducto));
     e.target.reset();
     alert("La Unidad de Medida fue agregada con éxito!");
 
@@ -159,9 +162,9 @@ function PutProductos() {
       <div className="contenedorActualesUM">
         Productos Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
+         {/*  {unidad_medida.map((u) => (
             <span className="spansUM">{u.nombre_unidad}</span>
-          ))}
+          ))} */}
         </div>
       </div>
     </>
