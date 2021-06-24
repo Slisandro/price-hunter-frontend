@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 import "./FormUnidadMedida.css";
+
 
 function FormUnidadMedida() {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ function FormUnidadMedida() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
+  
 
   const ChangeInput = (e) => {
     const target = e.target;
@@ -74,8 +76,12 @@ function FormUnidadMedida() {
 
     dispatch(unidadDeMedida(nuevaUM));
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
-
+    swal({
+      title: "Unidad de Medida agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then(r =>dispatch(getUnidadMedida()))
     setState({
       codigo_unidad_medida: "",
       nombre_unidad: "",

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { tipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import close from "../../../../assets/cancel (1).png";
+import swal from "sweetalert";
 import "./FormUsuario.css";
 
 function FormUsuario() {
@@ -58,7 +59,12 @@ function FormUsuario() {
 
     dispatch(tipoUsuario(nuevoUsuario));
     e.target.reset();
-    alert("Usuario agregado con éxito!");
+    swal({
+      title: "Usuario agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then(r => dispatch(getTipoUsuario()))
 
     setState({
       tipo_usuario: "",

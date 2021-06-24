@@ -22,7 +22,6 @@ function PutUM() {
   const submit = async (data, e) => {
     if (data.nombre_unidad) {
       dispatch(putUM(data));
-
       e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
