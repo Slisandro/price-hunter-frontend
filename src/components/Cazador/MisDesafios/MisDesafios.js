@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDesafios } from '../../Redux/actions'
 import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
+import axios from 'axios';
 import './MisDesafios.css'
 
-function MisDesafios() {
+function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const desafios = useSelector(store => store.desafios)
     const [referencia, setReferencia] = useState({
         idDesafio: ""
     })
-    const dispatch = useDispatch();
-    const desafios = useSelector(store => store.desafios)
 
     useEffect(() => {
-        dispatch(getDesafios())
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
+            .then(resp => {
+                dispatch(getDesafios(searchCity(resp.data)))
+            })
         setLoading(false)
     }, [])
 
@@ -60,3 +64,18 @@ function MisDesafios() {
 export default MisDesafios;
 
 
+function searchCity(obj) {
+    let arr = []
+    obj.results[0].address_components.map(el => {
+        if (el.types.includes("country")) {
+            return arr[0] = el
+        } else if (el.types.includes("administrative_area_level_1")) {
+            return arr[1] = el
+        } else if (el.types.includes("administrative_area_level_2")) {
+            return arr[2] = el
+        } else if (el.types.includes("sublocality_level_1")) {
+            return arr[3] = el
+        }
+    })
+    return arr;
+}

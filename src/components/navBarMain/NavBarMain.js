@@ -20,7 +20,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
         setProducto("")
         setUbicacion({
             ...ubicacion,
-            dis: 0
+            // dis: 0 VERIFICAR SETEO
         })
     }
 
@@ -82,8 +82,11 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
                 </div>
                 <select onClick={e => handleClick(e)} id="selectSearchBarUser">
                     <option default>Seleccione el radio para su busqueda</option>
+                    <option value={100}>100 m</option>
                     <option value={1000}>1 km</option>
-                    <option value={50000}>50 km</option>
+                    <option value={5000}>5 km</option>
+                    <option value={10000}>10 km</option>
+                    <option value={20000}>20 km</option>
                     <option value={100000}>100 km</option>
                 </select>
             </form>
