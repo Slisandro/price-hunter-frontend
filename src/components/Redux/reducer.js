@@ -41,6 +41,8 @@ import {
   GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
   GET_CIUDAD,
+  GET_CATEGORIA_POR_ID,
+  GET_SUBCATEGORIA_POR_ID,
   // PUT_SUBCATEGORIA,
   // PUT_TIPO_TRANSACCION,
   // PUT_TRANSACCION,
@@ -380,7 +382,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         productos: action.payload,
       };
-
+      case GET_CATEGORIA_POR_ID:
+        return {
+          ...state,
+          categoria: action.payload,
+        };
+        case GET_SUBCATEGORIA_POR_ID:
+        return {
+          ...state,
+          subcategoria: action.payload,
+        };
     //-------------ADMIN-------------//
     //-------------ADMIN-PUT-------------//
     case PUT_FAMILIA:

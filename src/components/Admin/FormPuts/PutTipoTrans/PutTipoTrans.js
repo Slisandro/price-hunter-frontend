@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putTipoTransaccion, getTipoTransaccion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
@@ -56,14 +56,12 @@ function PutTipoTrans() {
             <select
               name="id"
               className="inp"
-              // value={paises.nombre_region}
-              // onChange={(e) => ChangeInput(e)}
-              // {...register("id", {
+              {...register("id", {
               //   required: {
               //     value: true,
               //     message: "Debe seleccionar un tipo de transaccion",
               //   },
-              // })}
+              })}
             >
               <option></option>
               {transaccion.map((f, index) => (
