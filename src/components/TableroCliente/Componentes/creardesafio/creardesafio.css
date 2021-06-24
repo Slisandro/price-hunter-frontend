@@ -75,22 +75,32 @@
     flex-direction: column;
 }
 
+
 #fechas-desafio{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:space-around;
 }
 
 #productos-bttn{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:space-between;
     flex-direction: row;
+}
+
+#div-producto{
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+    width: 60%;
 }
 
 #select-productos{
     width: 100%;
     margin-bottom: 1rem;
+    margin: 0;
 }
 
 @media only screen and (max-width: 980px) {
@@ -103,3 +113,24 @@
     justify-content:start
 
 }
+
+.estylo-errores{
+    color: red;
+    margin: 0;
+    padding: 0;
+}
+
+.stylos-titulos{
+    margin: 0;
+    padding: 0;
+}
+
+.input-nombre-descripcion{
+    width: 80%;
+}
+
+.titulos-no-olvidar{
+    color: blue !important;
+}
+
+

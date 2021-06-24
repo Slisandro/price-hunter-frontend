@@ -2,7 +2,8 @@ import axios from "axios";
 
 // ----------------------------------------------------------------------- //
 
-export const URL = "https://price-hunter-api.herokuapp.com/"
+export const URL = "http://localhost:3001/";
+// export const URL = "https://price-hunter-api.herokuapp.com/";
 
 //importar import {URL} from "../actions"("mas o menos la ruta ")
 
@@ -74,23 +75,20 @@ export function getCiudades(id) {
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
 
 export function getProductsByName(nombre, body) {
-  return function (dispatch) {
+  return function(dispatch) {
     const token = localStorage.getItem("token");
     // axios.get("http://localhost:3001/productos?name=sal", { headers: { "Authorization": `Bearer ${token}` } })
-    axios(
-      {
-        method: "get",
-        url: `${URL}productos?name=${nombre}&long=${body.longitud}&lat=${body.latitud}&dis=${body.dis}`,
-        headers: { "Authorization": `Bearer ${token}` }
-      }
-    )
-      .then((r) => {
-        // console.log(r.data);
-        dispatch({
-          type: GET_PRODUCTOS_NAME,
-          payload: r.data,
-        });
+    axios({
+      method: "get",
+      url: `${URL}productos?name=${nombre}&long=${body.longitud}&lat=${body.latitud}&dis=${body.dis}`,
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((r) => {
+      // console.log(r.data);
+      dispatch({
+        type: GET_PRODUCTOS_NAME,
+        payload: r.data,
       });
+    });
   };
 }
 
@@ -112,8 +110,6 @@ export function getSubcategoriasId(id) {
   };
 }
 
-
-
 //   return function(dispatch) {
 //     axios
 //       .get(`http://localhost:3001/subcategoria/${id}`, {
@@ -127,7 +123,6 @@ export function getSubcategoriasId(id) {
 //       });
 //   };
 // }
-
 
 //ACCION QUE SE DESPACHA PARA TRAER AL SELECT LOS GENEROS DISPONIBLES
 export function getGeneros() {
@@ -227,31 +222,46 @@ export function registrarUsuario(datosUser) {
   //     })
   //     .catch((err) => console.log(err));
   // };
-
 }
 
 // Cuando el usuario inicia sesión
 export function iniciarSesion(datos) {
   return function (dispatch) {
     axios
-      .post(`${URL}usuarios/ingreso`, datos)
+      .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
-        // console.log(respuesta);
+        console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-            type: LOGIN_ERROR,
-            payload: {
-              msg: respuesta.data.msg,
-              categoria: "alerta-error",
-            },
-          })
+              type: LOGIN_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
+          : respuesta.data.user
+          ? dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.user,
+              },
+            })
+          : respuesta.data.admin
+          ? dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                admin: respuesta.data.admin,
+              },
+            })
           : dispatch({
-            type: LOGIN_EXITOSO,
-            payload: {
-              token: respuesta.data.token,
-              usuario: respuesta.data.user,
-            },
-          });
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                cliente: respuesta.data.cliente,
+              },
+            });
       })
       .catch((err) => console.log(err));
   };
@@ -261,13 +271,10 @@ export function iniciarSesion(datos) {
 export const cerrarSesion = () => {
   return function (dispatch) {
     dispatch({
-
-      type: CERRAR_SESION
-    })
-  }
-}
-
-
+      type: CERRAR_SESION,
+    });
+  };
+};
 
 //   return function(dispatch) {
 //     axios
@@ -356,7 +363,7 @@ export function tipoUsuario(objeto) {
           type: TIPO_USUARIO_POST,
           payload: tipo_usuario,
         });
-      });
+    });
   };
 }
 
@@ -372,7 +379,7 @@ export function generoPost(objeto) {
           type: GENERO_POST,
           payload: genero,
         });
-      });
+    });
   };
 }
 
@@ -390,7 +397,7 @@ export function monedaPost(objeto) {
           type: MONEDA_POST,
           payload: moneda,
         });
-      });
+    });
   };
 }
 
@@ -407,7 +414,7 @@ export function ciudadPost(objeto) {
           type: CIUDAD_POST,
           payload: ciudad,
         });
-      });
+    });
   };
 }
 
@@ -440,7 +447,7 @@ export function regionPost(objeto) {
           type: REGION_POST,
           payload: region,
         });
-      });
+    });
   };
 }
 
@@ -457,7 +464,7 @@ export function familiaPost(objeto) {
           type: FAMILIA_POST,
           payload: familia,
         });
-      });
+    });
   };
 }
 
@@ -475,7 +482,7 @@ export function categoriaPost(objeto) {
           type: CATEGORIA_POST,
           payload: categoria,
         });
-      });
+    });
   };
 }
 
@@ -493,7 +500,7 @@ export function subcategoriaPost(objeto) {
           type: SUBCATEGORIA_POST,
           payload: subcategoria,
         });
-      });
+    });
   };
 }
 
@@ -509,7 +516,7 @@ export function tipoTransaccionPost(objeto) {
           type: TIPO_TRANSACCION_POST,
           payload: tipoTransaccion,
         });
-      });
+    });
   };
 }
 
@@ -528,7 +535,7 @@ export function transaccionPost(objeto) {
           type: TRANSACCION_POST,
           payload: transaccion,
         });
-      });
+    });
   };
 }
 
@@ -555,7 +562,7 @@ export function clientesPost(objeto) {
           type: CLIENTES_POST,
           payload: clientes,
         });
-      });
+    });
   };
 }
 
@@ -577,7 +584,7 @@ export function desafioPost(objeto) {
           type: DESAFIO_POST,
           payload: desafio,
         });
-      });
+    });
   };
 }
 
@@ -597,12 +604,12 @@ export function productoPost(objeto) {
           type: PRODUCTO_POST,
           payload: productos,
         });
-      });
+    });
   };
 }
 //
 export function pricePost(objeto) {
-  return function (dispatch) {
+  return function(dispatch) {
     axios
       .post(`${URL}precios`, objeto)
       // .then(resp => resp.json())
@@ -626,6 +633,10 @@ export const GET_REGION = "GET_REGION";
 export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
+export const GET_CIUDAD = "GET_CIUDAD";
+export const GET_PRODUCTOS = "GET_PRODUCTOS"
+export const GET_CATEGORIA_POR_ID = "GET_CATEGORIA_POR_ID"
+export const GET_SUBCATEGORIA_POR_ID = "GET_SUBCATEGORIA_POR_ID"
 
 export function getFamilia() {
   return function (dispatch) {
@@ -649,6 +660,40 @@ export function getCategoria() {
   };
 }
 
+//<<<<<<< lisandro
+//export function getDesafios(arr) {
+//  return function (dispatch) {
+//    const token = localStorage.getItem("token");
+//    fetch(
+//      `${URL}detalledesafio`,
+//      {
+//        method: "POST",
+//        body: JSON.stringify(arr),
+//        headers: {
+//          "Content-Type": "application/json",
+//          "Authorization": `Bearer ${token}`
+//        }
+//      }
+//    )
+//      .then(resp => resp.json())
+//=======
+//export function getDesafios() {
+//  return function(dispatch) {
+//    const token = localStorage.getItem("token");
+//    axios
+//      .get(`${URL}detalledesafio`, {
+//        headers: { Authorization: `Bearer ${token}` },
+//      })
+//>>>>>>> main
+//      .then((json) => {
+//        dispatch({
+//          type: GET_DESAFIOS,
+//          payload: json,
+//        });
+//      });
+//  };
+//}
+
 export function getDesafios(arr) {
   return function (dispatch) {
     const token = localStorage.getItem("token");
@@ -670,7 +715,7 @@ export function getDesafios(arr) {
           payload: json,
         });
       });
-  }
+  };
 }
 
 export function getSubcategoria() {
@@ -682,7 +727,7 @@ export function getSubcategoria() {
           type: GET_SUBCATEGORIAS,
           payload: response.data,
         });
-      });
+    });
   };
 }
 
@@ -698,7 +743,7 @@ export function getUnidadMedida() {
 }
 
 export function getRegion() {
-  return function (dispatch) {
+  return function(dispatch) {
     axios.get(`${URL}getadmin/region`).then((response) => {
       dispatch({
         type: GET_REGION,
@@ -709,7 +754,7 @@ export function getRegion() {
 }
 
 export function getPais() {
-  return function (dispatch) {
+  return function(dispatch) {
     axios.get(`${URL}getadmin/pais`).then((response) => {
       dispatch({
         type: GET_PAIS,
@@ -719,8 +764,19 @@ export function getPais() {
   };
 }
 
+export function getCiudad() {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/ciudad`).then((response) => {
+      dispatch({
+        type: GET_CIUDAD,
+        payload: response.data,
+      });
+    });
+  };
+}
+
 export function getMoneda() {
-  return function (dispatch) {
+  return function(dispatch) {
     axios.get(`${URL}getadmin/moneda`).then((response) => {
       dispatch({
         type: GET_MONEDA,
@@ -729,6 +785,41 @@ export function getMoneda() {
     });
   };
 }
+
+export function getProductos() {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/productos`).then((response) => {
+      dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getCategoriaPorId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/categoria/${id}`).then((response) => {
+      dispatch({
+        type: GET_CATEGORIA_POR_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getSubcategoriaPorId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/subcategoria/${id}`).then((response) => {
+      dispatch({
+        type: GET_SUBCATEGORIA_POR_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+
 
 export function getTipoTransaccion() {
   return function (dispatch) {
@@ -740,7 +831,6 @@ export function getTipoTransaccion() {
     });
   };
 }
-
 
 
 export function iniciarSesionCliente(datos) {
@@ -766,5 +856,260 @@ export function iniciarSesionCliente(datos) {
           });
       })
       .catch((err) => console.log(err));
+  };
+}
+
+//ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO cliente
+export function registrarCliente(datosCliente) {
+  return function (dispatch) {
+    axios
+      .post(`${URL}clientes/registro`, datosCliente)
+      .then((respuesta) => {
+        console.log(respuesta);
+        respuesta.data.msg
+          ? dispatch({
+            type: REGISTRO_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error",
+            },
+          })
+          : dispatch({
+            type: REGISTRO_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.cliente,
+            },
+          });
+      })
+      .catch((err) => console.log(err));
+  }
+}
+//_____________________ PUT _____________________//
+export const PUT_FAMILIA = "PUT_FAMILIA";
+export const PUT_TIPO_USUARIO = "PUT_TIPO_USUARIO";
+export const PUT_GENERO = "PUT_GENERO";
+export const PUT_MONEDA = "PUT_MONEDA";
+export const PUT_CIUDAD = "PUT_CIUDAD";
+export const PUT_PAIS = "PUT_PAIS";
+export const PUT_REGION = "PUT_REGION";
+export const PUT_CATEGORIA = "PUT_CATEGORIA";
+export const PUT_SUBCATEGORIA = "PUT_SUBCATEGORIA";
+export const PUT_TIPO_TRANSACCION = "PUT_TIPO_TRANSACCION";
+export const PUT_TRANSACCION = "PUT_TRANSACCION";
+export const PUT_CLIENTES = "PUT_CLIENTES";
+export const PUT_DESAFIO = "PUT_DESAFIO";
+export const PUT_PRODUCTO = "PUT_PRODUCTO";
+export const PUT_UM = "PUT_UM";
+
+export function putFamilia(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/familia`, objeto).then((response) => {
+      let nombre_familia = {
+        nombre_familia: response.data.nombre_familia,
+        id: response.data.id,
+      };
+      dispatch({
+        type: PUT_FAMILIA,
+        payload: nombre_familia,
+      });
+    });
+  };
+}
+
+export function putTipoUsuario(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/tipo_usuario`, objeto).then((response) => {
+      let tipoUsuario = {
+        nombre_tipoUsuario: response.data.nombre_tipoUsuario,
+      };
+      dispatch({
+        type: PUT_TIPO_USUARIO,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putGenero() {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/genero`).then((response) => {
+      let genero = {
+        nombre_genero: response.data.nombre_genero,
+      };
+      dispatch({
+        type: PUT_GENERO,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putMoneda(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/monedas`, objeto).then((response) => {
+      let moneda = {
+        nombre_moneda: response.data.nombre_moneda,
+      };
+      dispatch({
+        type: PUT_MONEDA,
+        payload: moneda,
+      });
+    });
+  };
+}
+
+export function putCiudad(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/ciudad`, objeto).then((response) => {
+      let ciudad = {
+        nombre_ciudad: response.data.nombre_ciudad,
+      };
+      dispatch({
+        type: PUT_CIUDAD,
+        payload: ciudad,
+      });
+    });
+  };
+}
+
+export function putPais(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/paises`, objeto).then((response) => {
+      let pais = {
+        nombre_pais: response.data.nombre_pais,
+      };
+      dispatch({
+        type: PUT_PAIS,
+        payload: pais,
+      });
+    });
+  };
+}
+
+export function putRegion(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/region`, objeto).then((response) => {
+      let region = {
+        nombre_region: response.data.nombre_region,
+      };
+      dispatch({
+        type: PUT_REGION,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putCategoria(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/categoria`, objeto).then((response) => {
+      let nombre_categoria = {
+        nombre_categoria: response.data.nombre_categoria,
+        id: response.data.id,
+      };
+      dispatch({
+        type: PUT_CATEGORIA,
+        payload: nombre_categoria,
+      });
+    });
+  };
+}
+
+export function putSubCategoria(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/subcategoria`, objeto).then((response) => {
+      let nombre_subCategoria = {
+        nombre_subCategoria: response.data.nombre_SubCategoria,
+      };
+      dispatch({
+        type: PUT_SUBCATEGORIA,
+        payload: nombre_subCategoria,
+      });
+    });
+  };
+}
+
+export function putTipoTransaccion(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/tipo_transaccion`, objeto).then((response) => {
+      let tipo_transaccion = {
+        id: response.data.id,
+        tipo_transaccion: response.data.tipo_transaccion,
+      };
+      dispatch({
+        type: PUT_TIPO_TRANSACCION,
+        payload: tipo_transaccion,
+      });
+    });
+  };
+}
+
+export function putTransaccion(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/transaccion`, objeto).then((response) => {
+      let transaccion = {
+        tipo_transaccion: response.data.tipo_transaccion,
+      };
+      dispatch({
+        type: PUT_TRANSACCION,
+        payload: transaccion,
+      });
+    });
+  };
+}
+
+export function putClientes(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/clientes`, objeto).then((response) => {
+      let clientes = {
+        clientes: response.data.clientes,
+      };
+      dispatch({
+        type: PUT_CLIENTES,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putDesafio(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/desafios`, objeto).then((response) => {
+      let desafio = {
+        nombre_desafio: response.data.nombre_desafio,
+      };
+      dispatch({
+        type: PUT_DESAFIO,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putProducto(objeto) {
+  return function(dispatch) {
+    axios.put(`${URL}putadmin/productos`, objeto).then((response) => {
+      dispatch({
+        type: PUT_PRODUCTO,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function putUM(objeto) {
+  return function(dispatch) {
+    console.log(objeto)
+    axios.put(`${URL}putadmin/um`, objeto).then((response) => {
+      let um = {
+        codigo_unidad_medida: response.data.codigo_unidad_medida,
+        nombre_unidad: response.data.nombre_unidad
+      };
+      dispatch({
+        type: PUT_UM,
+        payload: um,
+      });
+    });
   };
 }

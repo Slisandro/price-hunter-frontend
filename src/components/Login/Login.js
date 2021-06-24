@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Login.css";
 import aguila from "../../assets/aguila.png";
@@ -19,6 +19,8 @@ const Login = (props) => {
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
+  const cliente = useSelector((store) => store.cliente);
+  const isAdmin = useSelector((store) => store.isAdmin);
 
   const dispatch = useDispatch();
 
@@ -32,7 +34,24 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      props.history.push('/tablero');
+      if (cliente) {
+        props.history.push('/tablerocliente/principal');
+      } else {
+        if (isAdmin) {
+          props.history.push('/admin');
+        } else {
+          props.history.push('/tablero');
+        }
+      }
+      // if (!cliente) {
+      //   props.history.push('/tablero');
+      // } else {
+      //   if (isAdmin) {
+      //     props.history.push('/admin');
+      //   } else {
+      //     props.history.push('/tablerocliente/principal');
+      //   }
+      // }
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);
@@ -46,7 +65,7 @@ const Login = (props) => {
 
 
   /******************************************************************************************************************************/
-  const responseGoogle  =  (response)  => {
+  const responseGoogle = (response) => {
     console.log(response)
 
   }
@@ -60,91 +79,105 @@ const Login = (props) => {
   });
   const { email, password } = user;
 
-    const handleInputLogin = e => {
-      guardarUser({
-        ...user,
-        [e.target.name]: e.target.value
-      })
-    }
-    
-  
-    const handleSubmit = e => {
-      e.preventDefault();
+  const handleInputLogin = e => {
+    guardarUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
 
-       // Validar que no haya campos vacios
-       if(email.trim() === '' || password.trim() === '') {
-        dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    // Validar que no haya campos vacios
+    if (email.trim() === '' || password.trim() === '') {
+      dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+      return;
+    }
+
+    if(password < 6){
+      dispatch(mostrarError('La contraseña debe tener mas de 6 caracteres', 'alerta-error'));
+      return;
+
     }
 
     dispatch(iniciarSesion({
       email,
       password
-      })
+    })
     )
 
-    }
-  
+    guardarUser({
+      email: "",
+      password: ""
+    })
+
+
+
+  }
+
 
 
   return (
-    <section className="login">
-          <section className="login__container">
-              <img src={aguila} alt="" className="logo__login" />
-              <h2>Iniciar sesión</h2>
-              
-              { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> )  : null }
+    <section className="loginHunter">
+      <section className="loginContainer_hunter">
+        <img src={aguila} alt="" id="logologin" />
+        <h2 className="h2Title">Iniciar sesión</h2>
 
-                <form className="login__container--form" onSubmit={handleSubmit}>
-                      <input 
-                        name="email"
-                        className="input_login" 
-                        type="text" 
-                        placeholder="Correo"
-                        onChange={handleInputLogin}
-                        value={email}
-                        />
-                      <input 
-                        name="password"
-                        className="input_login" 
-                        type="password" 
-                        placeholder="Contraseña"
-                        onChange={handleInputLogin}
-                        value={password}
-                        />
-              
-                        <button className="button__login">Iniciar sesión</button>
-                  
-                      
-                      
-                      <div className="login__container--remember-me">
-                        <label>
-                          <input className="check" type="checkbox" id="cbox1" value="first_checkbox"/>Recuérdame
-                        </label>
-                        <label>
-                          <a href="/">Olvidé mi contraseña</a>
-                        </label>
-                      </div>
-                </form>
-                
-                <section className="login__container--social-media">
-                    <GoogleLogin
-                        clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
-                        render={renderProps => (
-                        <button className="button__login__google"  onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt=""/><p>Iniciar sesion con Google</p></button>
-                        )}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                    
-                </section>
-                
-                <div className="register__login">
-                    <p className="login__container--register"> No tienes cuenta ?</p>
-                    <p className="login__container--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
-                </div>
-          
-          </section>
+        {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+
+        <form className="loginContainer_hunter--form" onSubmit={handleSubmit}>
+          <input
+            name="email"
+            id="input_login"
+            type="text"
+            placeholder="Correo"
+            onChange={handleInputLogin}
+            value={email}
+          />
+          <input
+            name="password"
+            id="input_login"
+            type="password"
+            placeholder="Contraseña"
+            onChange={handleInputLogin}
+            value={password}
+          />
+
+          <button className="button__login" type="submit" >Iniciar sesión</button>
+
+
+
+          <div className="loginContainer_hunter--remember-me">
+            <label>
+              <input className="check" type="checkbox" id="cbox1" value="first_checkbox" />Recuérdame
+            </label>
+            <label>
+              <a href="/">Olvidé mi contraseña</a>
+            </label>
+          </div>
+        </form>
+
+        <section className="loginContainer_hunter--social-media">
+          <GoogleLogin
+            clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+            render={renderProps => (
+              <button className="button__login__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
+            )}
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+
+        </section>
+
+        <div className="register__loginHunter">
+          <p className="loginContainer_hunter--register"> No tienes cuenta ?</p>
+          <p className="loginContainer_hunter--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
+        </div>
+
+      </section>
     </section>
   );
 };

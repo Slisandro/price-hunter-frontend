@@ -1,8 +1,9 @@
-
-   import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { monedaPost, mostrarError, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 
 import "./FormMonedaYum.css";
 
@@ -44,13 +45,12 @@ function FormMoneda() {
 
   const alerta = useSelector((store) => store.alerta);
   let moneda = useSelector((store) => store.moneda);
- 
+
   useEffect(() => {
     dispatch(getMoneda());
   }, [dispatch]);
 
   const submit = (data, e) => {
-  
     const nuevaMoneda = {
       codigo_moneda: state.codigo_moneda.toLocaleUpperCase(),
       nombre_moneda: state.nombre_moneda,
@@ -79,26 +79,30 @@ function FormMoneda() {
         }
       }
     }
-    if(nuevaMoneda.codigo_moneda.length>0){
-    dispatch(monedaPost(state));
-    e.target.reset();
-    alert("La Moneda fue agregada con éxito!");
-    dispatch(getMoneda());
-    setState({
-      codigo_moneda: "",
-      nombre_moneda: "",
-      simbolo: "",
-    });
-  }else {
-    alert("Debe agregar datos!");
-  }
-    
+    if (nuevaMoneda.codigo_moneda.length > 0) {
+      dispatch(monedaPost(state));
+      e.target.reset();
+      swal({
+        title: "La Moneda fue agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      })
+      dispatch(getMoneda());
+      setState({
+        codigo_moneda: "",
+        nombre_moneda: "",
+        simbolo: "",
+      });
+    } else {
+      alert("Debe agregar datos!");
+    }
   };
 
   return (
     <>
-      <div className="contenedorMoneda">
-        <div className="containerForm">
+      <div className="contenedorFAM">
+        <div>
           <header>
             <h1 id="title">Agregar Moneda</h1>
           </header>
@@ -134,10 +138,6 @@ function FormMoneda() {
                       value: 3,
                       message: "El codigo debe tener tres letras!",
                     },
-                    type:{
-                      value:!NaN,
-                      message: "El codigo debe tener tres letrasssssssssssssssss!",
-                    }
                   })}
                 />
 
@@ -149,7 +149,7 @@ function FormMoneda() {
                 <input
                   className="inp"
                   type="text"
-                  max= '0'
+                  max="0"
                   name="nombre_moneda"
                   autoComplete="off"
                   {...register("nombre_moneda", {
@@ -209,4 +209,4 @@ function FormMoneda() {
   );
 }
 
-export default FormMoneda;     
+export default FormMoneda;

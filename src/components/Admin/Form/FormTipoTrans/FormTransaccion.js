@@ -5,6 +5,8 @@ import {
   getTipoTransaccion,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 
 import "./FormTransaccion.css";
 
@@ -41,8 +43,14 @@ function FormTransaccion() {
   const submit = (data, e) => {
     dispatch(tipoTransaccionPost(state));
     e.target.reset();
-    alert("Tipo de Transacción agregado con éxito!");
-
+   
+    swal({
+      title: "Tipo de Transacción agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then(r => dispatch(getTipoTransaccion()))
+    
     setState({
       ...state,
       tipo_transaccion: "",
@@ -53,16 +61,12 @@ function FormTransaccion() {
     <Fragment>
       <div className="contenedorTransacciones">
         <h6 id="titleTran">Agregar Tipo de Transacción</h6>
-        <form
-          className="formFamilia"
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
+        <form onChange={(e) => ChangeInput(e)} onSubmit={handleSubmit(submit)}>
           <div className="divTransacciones">
             <div>
               <label className="text-label">Tipo de Transacción</label>
               <input
-                className="inp"
+                className="inp3"
                 type="text"
                 name="tipo_transaccion"
                 autoComplete="off"

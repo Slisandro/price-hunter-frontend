@@ -33,7 +33,7 @@ function NavBar() {
             <div className="buttons-nav">
 
               <Link to="/login" className="button-login" >Usuario LogIn</Link>
-              <Link to="/login-cliente" className="button-login" >Cliente LogIn</Link>
+              {/* <Link to="/login-cliente" className="button-login" >Cliente LogIn</Link> */}
               <Link to="/registro" className="button-register" >Registrarse</Link>
 
                 {/* <button 
