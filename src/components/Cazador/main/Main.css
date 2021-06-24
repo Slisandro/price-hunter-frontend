@@ -15,6 +15,32 @@
     justify-content: space-between; */
 }
 
+#mainUser::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+#mainUser::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+#mainUser::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+
+#mainUser::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+#mainUser::-webkit-scrollbar-thumb {
+    background-color: rgba(24,30,54,.1);
+    border-radius: 20px;
+    border: 1px solid white;
+}
+
+#mainUser::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
 #navBarUser {
     height:10vh;
     width: 40%;

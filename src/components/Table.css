@@ -8,8 +8,9 @@
     -ms-flex-direction: column;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: radial-gradient(circle, #272f75 0%, rgba(13, 16, 41,.95) 100%);
+    background: rgba(24,30,54,1);
     color: white;
+    margin-top: 2%;
 }
 
 .ReactTable * {

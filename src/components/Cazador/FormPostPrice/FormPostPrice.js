@@ -4,13 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Next } from "react-bootstrap/esm/PageItem";
+import {URL} from '../../Redux/actions';
 
 var geolocation = require('geolocation');
-
-// geolocation.getCurrentPosition((err, position) => {
-//     return position.coords.longitude
-// })
 
 
 function FormPostPrice({ setModal, modal, referencia }) {
@@ -73,7 +69,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
         e.preventDefault();
         const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
-            axios.post("https://price-hunter-api.herokuapp.com/precios", state, { headers: { "Authorization": `Bearer ${token}` } })
+            axios.post(`${URL}precios`, state, { headers: { "Authorization": `Bearer ${token}` } })
                 .then(resp => {
                     if (!resp.data.aceptado) {
                         swal(resp.data.msj, " ", "error");
@@ -107,7 +103,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
                     placeholder="Ingresé nombre del negocio"
                     className="control"
                 />
-                <Form.Text className={errors.nombre_negocio ? "errors" : "p"}>
+                <Form.Text className={errors.nombre_negocio ? "errors" : "inputSinError"}>
                     Este campo no puede estar vacío
                 </Form.Text>
             </Form.Group>
@@ -121,7 +117,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
                     placeholder="Ingresé dirección del negocio"
                     className="control"
                 />
-                <Form.Text className={errors.direccion_negocio ? "errors" : "p"}>
+                <Form.Text className={errors.direccion_negocio ? "errors" : "inputSinError"}>
                     Este campo no puede estar vacío
                 </Form.Text>
             </Form.Group>
@@ -135,7 +131,7 @@ function FormPostPrice({ setModal, modal, referencia }) {
                     placeholder="Ingresé precio cazado"
                     className="control"
                 />
-                <Form.Text className={errors.precio ? "errors" : "p"}>
+                <Form.Text className={errors.precio ? "errors" : "inputSinError"}>
                     Este campo no puede estar vacío y debe ser un número
                 </Form.Text>
             </Form.Group>

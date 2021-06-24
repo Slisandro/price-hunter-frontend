@@ -6,21 +6,21 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  UNIDAD_MEDIDA_POST,
-  TIPO_USUARIO_POST,
-  GENERO_POST,
-  MONEDA_POST,
-  CIUDAD_POST,
-  PAIS_POST,
-  REGION_POST,
-  FAMILIA_POST,
-  CATEGORIA_POST,
-  SUBCATEGORIA_POST,
-  TIPO_TRANSACCION_POST,
-  TRANSACCION_POST,
-  CLIENTES_POST,
-  DESAFIO_POST,
-  PRODUCTO_POST,
+  // UNIDAD_MEDIDA_POST,
+  // TIPO_USUARIO_POST,
+  // GENERO_POST,
+  // MONEDA_POST,
+  // CIUDAD_POST,
+  // PAIS_POST,
+  // REGION_POST,
+  // FAMILIA_POST,
+  // CATEGORIA_POST,
+  // SUBCATEGORIA_POST,
+  // TIPO_TRANSACCION_POST,
+  // TRANSACCION_POST,
+  // CLIENTES_POST,
+  // DESAFIO_POST,
+  // PRODUCTO_POST,
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_GENEROS,
@@ -56,21 +56,21 @@ import {
   // CERRAR_SESION,
   // LOGIN_ERROR,
   // REGISTRO_ERROR,
-  PUT_FAMILIA,
-  PUT_TIPO_USUARIO,
-  PUT_GENERO,
-  PUT_MONEDA,
-  PUT_CIUDAD,
-  PUT_PAIS,
-  PUT_REGION,
-  PUT_CATEGORIA,
-  PUT_SUBCATEGORIA,
-  PUT_TIPO_TRANSACCION,
-  PUT_TRANSACCION,
-  PUT_CLIENTES,
-  PUT_DESAFIO,
-  PUT_PRODUCTO,
-  PUT_UM,
+  // PUT_FAMILIA,
+  // PUT_TIPO_USUARIO,
+  // PUT_GENERO,
+  // PUT_MONEDA,
+  // PUT_CIUDAD,
+  // PUT_PAIS,
+  // PUT_REGION,
+  // PUT_CATEGORIA,
+  // PUT_SUBCATEGORIA,
+  // PUT_TIPO_TRANSACCION,
+  // PUT_TRANSACCION,
+  // PUT_CLIENTES,
+  // PUT_DESAFIO,
+  // PUT_PRODUCTO,
+  // PUT_UM,
 } from "./actions";
 
 const initialState = {
@@ -248,83 +248,83 @@ function rootReducer(state = initialState, action) {
         autenticado: false,
         token: null,
         usuario: null,
-        alerta: action.payload,
+        mensaje: action.payload
       };
-    case UNIDAD_MEDIDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_USUARIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case GENERO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case MONEDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CIUDAD_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PAIS_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case REGION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case FAMILIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case SUBCATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CLIENTES_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case DESAFIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PRODUCTO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
+    // case UNIDAD_MEDIDA_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case TIPO_USUARIO_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case GENERO_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case MONEDA_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case CIUDAD_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PAIS_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case REGION_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case FAMILIA_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case CATEGORIA_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case SUBCATEGORIA_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case TIPO_TRANSACCION_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case TRANSACCION_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case CLIENTES_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case DESAFIO_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PRODUCTO_POST:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
     case GET_FAMILIA:
       return {
         ...state,
@@ -383,103 +383,93 @@ function rootReducer(state = initialState, action) {
         ...state,
         productos: action.payload,
       };
-    case GET_CATEGORIA_POR_ID:
-      return {
-        ...state,
-        categoria: action.payload,
-      };
-    case GET_SUBCATEGORIA_POR_ID:
-      return {
-        ...state,
-        subcategoria: action.payload,
-      };
-    case GET_PAISES_ID:
-      return {
-        ...state,
-        paises: action.payload,
-      };
-    case GET_CIUDADES_ID:
-      return {
-        ...state,
-        ciudades: action.payload,
-      };
+      case GET_CATEGORIA_POR_ID:
+        return {
+          ...state,
+          categorias: action.payload,
+        };
+        case GET_SUBCATEGORIA_POR_ID:
+        return {
+          ...state,
+          subcategoria: action.payload,
+        };
     //-------------ADMIN-------------//
     //-------------ADMIN-PUT-------------//
-    case PUT_FAMILIA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_TIPO_USUARIO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_GENERO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_MONEDA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_CIUDAD:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_PAIS:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_REGION:
-      return {
-        ...state,
-        regiones: action.payload,
-      };
-    case PUT_CATEGORIA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_SUBCATEGORIA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_TIPO_TRANSACCION:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_TRANSACCION:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_CLIENTES:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_DESAFIO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_PRODUCTO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_UM:
-      return {
-        ...state,
-        admin: action.payload,
-      };
+    // case PUT_FAMILIA:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_TIPO_USUARIO:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_GENERO:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_MONEDA:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_CIUDAD:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_PAIS:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    //   case PUT_REGION:
+    //   return {
+    //     ...state,
+    //     regiones: action.payload,
+    //   };
+    // case PUT_CATEGORIA:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_SUBCATEGORIA:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_TIPO_TRANSACCION:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_TRANSACCION:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_CLIENTES:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_DESAFIO:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_PRODUCTO:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
+    // case PUT_UM:
+    //   return {
+    //     ...state,
+    //     admin: action.payload,
+    //   };
     default:
       return state;
   }
