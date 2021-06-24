@@ -2,8 +2,8 @@ import axios from "axios";
 
 // ----------------------------------------------------------------------- //
 
-export const URL = "http://localhost:3001/";
-// export const URL = "https://price-hunter-api.herokuapp.com/";
+// export const URL = "http:localhost:3001/";
+export const URL = "https://price-hunter-api.herokuapp.com/";
 
 //importar import {URL} from "../actions"("mas o menos la ruta ")
 
