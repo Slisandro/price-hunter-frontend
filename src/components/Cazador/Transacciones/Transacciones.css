@@ -3,7 +3,7 @@
 .containerTransaccionesUser {
     width: 40%;
     height: 30vh;
-    background: rgba(255,255,255,.9);
+    background: rgba(255,255,255,.25);
     margin: 2%;
     border-radius: .5em;
     font-family: 'Rubik', sans-serif;
@@ -41,6 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    color: white;
 }
 
 .containerTransaccionesUser .listTransaccionesUser .itemListTransacciones .puntosTransaccionesUser {
@@ -53,4 +54,5 @@
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    color: white;
 }

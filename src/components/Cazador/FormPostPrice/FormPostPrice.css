@@ -52,7 +52,7 @@
     border-radius: .5em;
     padding: 2%;
     margin-top: 2%;
-    height: 25%;
+    height: 45% !important;
 }
 
 .FormPostPrice .form-group .label {
@@ -67,8 +67,8 @@
     height: 8%;
 }
 
-.p {
-    display: none;
+.inputSinError {
+    display: none !important;
 }
 
 .errors {

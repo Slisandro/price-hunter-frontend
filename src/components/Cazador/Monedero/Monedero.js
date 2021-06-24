@@ -4,6 +4,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import {URL} from '../../Redux/actions'
 
 let totalPoints;
 
@@ -24,7 +25,7 @@ function Monedero() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`https://price-hunter-api.herokuapp.com/transacciones/consulta/1`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.get(`${URL}transacciones/consulta/`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
                 OrderByDate(json.data)
                 setMovimientos(OrderByDate(json.data))
@@ -71,7 +72,7 @@ function Monedero() {
         } else {
             if (!error.bol) {
                 axios.post(
-                    "https://price-hunter-api.herokuapp.com/transacciones/retirapuntos",
+                    `${URL}transacciones/retirapuntos`,
                     body,
                     {
                         headers: {
