@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPaises, putPais } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 // import "./FormUnidadMedida.css";
 
 function PutPaises() {
@@ -19,9 +21,6 @@ function PutPaises() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // var mapeado = paises.map((p) => p.codigo_alfa);
-  // console.log(mapeado);
-
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -29,7 +28,6 @@ function PutPaises() {
     if (name === "nombre_pais") {
       var pai = paises.find((f) => f.nombre_pais === e.target.value);
       var final = pai.codigo_alfa;
-      // console.log(final);
       setState({
         ...state,
         [name]: target.value,
@@ -41,7 +39,6 @@ function PutPaises() {
         [name]: target.value,
       });
     }
-    console.log(state);
   };
 
   const {
@@ -56,31 +53,23 @@ function PutPaises() {
       codigo_alfa: state.codigo_alfa,
     };
 
-    // if (!paisModificado.nombre_pais) {
-    //   alert("Por favor, ingrese el pais a modificar");
-    //   return;
-    // }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-    //   alert("El codigo solo puede contener letras");
-    //   return;
-    // }
-    // if (!nuevaUM.nombre_unidad) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
-
     dispatch(putPais(paisModificado));
     e.target.reset();
-    alert("El país fue modificado con éxito!");
-
+    if (paisModificado.nombre_pais) {
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getPaises()));
+    } else if (!paisModificado.nombre_nuevo_pais) {
+      swal({
+        title: "Debe seleccionar un país para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
     setState({
       nombre_pais: "",
       codigo_alfa: "",
@@ -119,10 +108,10 @@ function PutPaises() {
                   autoComplete="off"
                   max="0"
                   {...register("nombre_nuevo_pais", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un nombre ",
-                    },
+                    // required: {
+                    //   value: true,
+                    //   message: "Debe ingresar un nombre ",
+                    // },
                     maxLength: {
                       value: 15,
                       message: "El nombre debe tener menos de quince letras!",
@@ -149,11 +138,11 @@ function PutPaises() {
           </div>
         </form>
       </div>
-      <div className="contenedorActualesUM">
+      <div className="contenedorActualesCATE">
         Países Actuales
-        <div className="tiposUM">
+        <div className="tiposCATE">
           {paises.map((u) => (
-            <span className="spansUM">{u.nombre_pais}</span>
+            <span className="spansCATE">{u.nombre_pais}</span>
           ))}
         </div>
       </div>

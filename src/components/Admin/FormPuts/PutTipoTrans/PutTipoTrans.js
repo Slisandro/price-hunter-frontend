@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putTipoTransaccion, getTipoTransaccion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import swal from 'sweetalert';
-// import "./FormUnidadMedida.css";
+import swal from "sweetalert";
 
 function PutTipoTrans() {
   const dispatch = useDispatch();
@@ -20,16 +19,23 @@ function PutTipoTrans() {
   } = useForm();
 
   const submit = (data, e) => {
-  
-    dispatch(putTipoTransaccion(data));
-    e.target.reset();
-    dispatch(getTipoTransaccion());
-    swal({
-      title:"Los datos se modificaron con éxito!",
-      icon:"success",
-      button:"Aceptar",
-      timer:"5000"
-    });
+    if (data.tipo_transaccion) {
+      dispatch(putTipoTransaccion(data));
+      e.target.reset();
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getTipoTransaccion()));
+    } else {
+      swal({
+        title: "Debe seleccionar un tipo de transacción para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
   };
 
   return (
@@ -52,12 +58,12 @@ function PutTipoTrans() {
               className="inp"
               // value={paises.nombre_region}
               // onChange={(e) => ChangeInput(e)}
-              {...register("id", {
-                required: {
-                  value: true,
-                  message: "Debe seleccionar un tipo de transaccion",
-                },
-              })}
+              // {...register("id", {
+              //   required: {
+              //     value: true,
+              //     message: "Debe seleccionar un tipo de transaccion",
+              //   },
+              // })}
             >
               <option></option>
               {transaccion.map((f, index) => (
@@ -79,10 +85,10 @@ function PutTipoTrans() {
                 autoComplete="off"
                 max="0"
                 {...register("tipo_transaccion", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar una tipo transaccion ",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar una tipo transaccion ",
+                  // },
                   maxLength: {
                     value: 15,
                     message: "El nombre no debe tener mas de quince letras!",

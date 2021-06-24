@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putMoneda, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 // import "./FormUnidadMedida.css";
 
 function PutMonedas() {
@@ -11,7 +13,8 @@ function PutMonedas() {
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
-    simbolo: ""
+    nuevo_nombre_moneda: "",
+    simbolo: "",
   });
 
   useEffect(() => {
@@ -29,7 +32,7 @@ function PutMonedas() {
       setState({
         ...state,
         [name]: target.value,
-        codigo_moneda: final
+        codigo_moneda: final,
       });
     } else if (name === "nuevo_nombre_moneda") {
       setState({
@@ -61,7 +64,7 @@ function PutMonedas() {
     const nuevaMoneda = {
       nombre_moneda: state.nuevo_nombre_moneda,
       codigo_moneda: state.codigo_moneda,
-      simbolo: state.simbolo
+      simbolo: state.simbolo,
     };
 
     // if (!nuevaUM.codigo_unidad_medida) {
@@ -85,16 +88,29 @@ function PutMonedas() {
     //   return;
     // }
 
-    console.log(nuevaMoneda)
-
     dispatch(putMoneda(nuevaMoneda));
     e.target.reset();
-    alert("La Moneda fue agregada con éxito!");
+    if (nuevaMoneda.nombre_moneda) {
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getMoneda()));
+    } else if (!nuevaMoneda.nuevo_nombre_moneda) {
+      swal({
+        title: "Debe seleccionar una moneda para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
 
     setState({
-     codigo_moneda: "",
-    nombre_moneda: "",
-    simbolo: ""
+      codigo_moneda: "",
+      nombre_moneda: "",
+      nuevo_nombre_moneda: "",
+      simbolo: "",
     });
   };
 
@@ -113,12 +129,12 @@ function PutMonedas() {
         >
           <div>
             <label className="text-label">Nombre</label>
-             <select name="nombre_moneda">
-                  <option></option>
-                  {moneda.map((u) => (
-                    <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
-                  ))}
-                </select>
+            <select name="nombre_moneda">
+              <option></option>
+              {moneda.map((u) => (
+                <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
+              ))}
+            </select>
             {/* <input
               className="inp"
               type="text"
@@ -156,19 +172,17 @@ function PutMonedas() {
                 autoComplete="off"
                 max="0"
                 {...register("nuevo_nombre_moneda", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar una moneda ",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar una moneda ",
+                  // },
                   max: {
                     value: 0,
                     message: "La unidad no puede comenzar con numeros",
                   },
                 })}
               />
-              <span className="err">
-                {errors?.codigo_moneda?.message}
-              </span>
+              <span className="err">{errors?.codigo_moneda?.message}</span>
             </div>
             <button className="agregarModal" type="submit">
               Modificar
@@ -176,11 +190,11 @@ function PutMonedas() {
           </div>
         </form>
       </div>
-      <div className="contenedorActualesUM">
+      <div className="contenedorActualesCATE">
         Monedas Actuales
-        <div className="tiposUM">
+        <div className="tiposCATE">
           {moneda.map((u) => (
-            <span className="spansUM">{u.nombre_moneda}</span>
+            <span className="spansCATE">{u.nombre_moneda}</span>
           ))}
         </div>
       </div>

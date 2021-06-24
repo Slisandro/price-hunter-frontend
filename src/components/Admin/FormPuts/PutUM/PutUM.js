@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putUM, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutUM() {
@@ -20,17 +20,24 @@ function PutUM() {
   } = useForm();
 
   const submit = async (data, e) => {
-    dispatch(putUM(data));
+    if (data.nombre_unidad) {
+      dispatch(putUM(data));
 
-    e.target.reset();
-
-    dispatch(getUnidadMedida());
-    swal({
-      title:"Los datos se modificaron con éxito!",
-      icon:"success",
-      button:"Aceptar",
-      timer:"5000"
-    });
+      e.target.reset();
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getUnidadMedida()));
+    } else {
+      swal({
+        title: "Debe seleccionar un producto para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
   };
 
   return (
@@ -53,12 +60,12 @@ function PutUM() {
               className="inp"
               // value={paises.nombre_region}
               // onChange={(e) => ChangeInput(e)}
-              {...register("codigo_unidad_medida", {
-                required: {
-                  value: true,
-                  message: "Debe seleccionar un campo a modificar",
-                },
-              })}
+              // {...register("codigo_unidad_medida", {
+              //   required: {
+              //     value: true,
+              //     message: "Debe seleccionar un campo a modificar",
+              //   },
+              // })}
             >
               <option></option>
               {unidad.map((f, index) => (
@@ -79,10 +86,10 @@ function PutUM() {
                 autoComplete="off"
                 max="0"
                 {...register("nombre_unidad", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un nombre nuevo ",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar un nombre nuevo ",
+                  // },
                   maxLength: {
                     value: 20,
                     message: "El nombre no debe tener mas de veinte caracteres",
