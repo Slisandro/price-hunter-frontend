@@ -6,6 +6,7 @@ import {
   getUnidadMedida,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 import close from "../../../../assets/cancel (1).png";
 import "./AgregarProducto.css";
@@ -99,7 +100,12 @@ function FormAgregarProducto() {
 
     dispatch(productoPost(nuevoProducto));
     e.target.reset();
-    alert("Producto agregado con éxito!");
+    swal({
+      title: "Producto agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    })
 
     setState({
       nombre: "",

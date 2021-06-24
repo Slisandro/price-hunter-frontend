@@ -9,7 +9,9 @@ function PutProductos() {
   const dispatch = useDispatch();
   const productos = useSelector((store) => store.productos);
   const subcategoria = useSelector((store) => store.subcategoria);
-  // console.log(subcategoria)
+  
+  console.log(subcategoria)
+
   const [state, setState] = useState({
     id: "",
     nombre: "",
@@ -40,6 +42,16 @@ function PutProductos() {
         });
       }
     }   
+
+    for(let i=0; i<subcategoria.length; i++) {
+      if(parseInt(state.subcategoriumId) === parseInt(subcategoria[i].id)){
+        setState({
+          ...state,
+          subcategoriumId: subcategoria[i].nombre_subcategoria,
+          
+        });
+      }
+    }
   };
 
   const {
@@ -49,11 +61,11 @@ function PutProductos() {
   } = useForm();
 
   const submit =  (data, e) => {
-  //  console.log(data)
+    
+    if(state.id){
   
- if(state.id){
    dispatch(putProducto(data))
-  // await dispatch(getProductos());
+  
    data = {
       id: "",
       nombre: "",
@@ -61,7 +73,7 @@ function PutProductos() {
       subcategoriumId: "",
       unidadMedidaCodigoUnidadMedida: "",
     }
-    console.log(data)
+   
     e.target.reset();
     swal({
       title: "Los datos se modificaron con éxito!",
@@ -84,11 +96,9 @@ function PutProductos() {
     subcategoriumId: "",
     unidadMedidaCodigoUnidadMedida: "",
   });
-  //  const s = async function() {
-  //   const t = await ( dispatch(getProductos()))
-  // }
+  
 
-  };
+};
 
   return (
     <>
@@ -109,7 +119,7 @@ function PutProductos() {
               name="id"
               className="inp"
               onChange={(e) => ChangeInput(e)}
-              // value={paises.nombre_region}
+              
               {...register("id", {
                 required: {
                   value: true,
@@ -126,7 +136,7 @@ function PutProductos() {
             </select>
             <span className="err">{errors?.id?.message}</span>
           </div>
-          {/* </form> */}
+       
           <div className="cont_prod">
             <div className="tiposProductos">
               <h6>id = {state.id}</h6>
@@ -147,18 +157,12 @@ function PutProductos() {
               autoComplete="off"
               max="0"
               {...register("nombre", {
-                // required: {
-                //   value: true,
-                //   message: "Debe ingresar un nombre ",
-                // },
+            
                 maxLength: {
                   value: 15,
                   message: "El nombre debe tener menos de quince letras!",
                 },
-                // minLength: {
-                //   value: 3,
-                //   message: "El nombre debe tener tres letras!",
-                // },
+              
                 max: {
                   value: 0,
                   message: "El nombre no puede comenzar con numeros",
@@ -172,27 +176,20 @@ function PutProductos() {
             <label className="text-label">Cont Neto</label>
             <input
               className="inp"
-              type="text"
+              type="number"
+              min= "0"
+              max
               name="contenido_neto"
               autoComplete="off"
-              max="0"
+             
               {...register("contenido_neto", {
-                // required: {
-                //   value: true,
-                //   message: "Debe ingresar un nombre ",
-                // },
-                // maxLength: {
-                //   value: 15,
-                //   message: "El nombre debe tener menos de quince letras!",
-                // },
-                // minLength: {
-                //   value: 3,
-                //   message: "El nombre debe tener tres letras!",
-                // },
-                // max: {
-                //   value: 0,
-                //   message: "El nombre no puede comenzar con numeros",
-                // },
+                maxLength: {
+                  value: 4,
+                  message: "El contenido no debe tener mas de 4 caracteres"             },
+                   min: {
+                  value: 0,
+                  message: "El contenido no puede ser negativo",
+                },
               })}
             />
             <span className="err">{errors?.contenido_neto?.message}</span>
@@ -206,22 +203,14 @@ function PutProductos() {
               autoComplete="off"
               max="0"
               {...register("unidadMedidaCodigoUnidadMedida", {
-                // required: {
-                //   value: true,
-                //   message: "Debe ingresar un nombre ",
-                // },
-                // maxLength: {
-                //   value: 15,
-                //   message: "El nombre debe tener menos de quince letras!",
-                // },
-                // minLength: {
-                //   value: 3,
-                //   message: "El nombre debe tener tres letras!",
-                // },
-                // max: {
-                //   value: 0,
-                //   message: "El nombre no puede comenzar con numeros",
-                // },
+                maxLength: {
+                  value: 4,
+                  message: "La unidad debe tener menos de cuatro letras!",
+                },
+                max: {
+                  value: 0,
+                  message: "La unidad no puede comenzar con numeros",
+                },
               })}
             />
             <span className="err">{errors?.unidadMedidaCodigoUnidadMedida?.message}</span>
@@ -230,17 +219,14 @@ function PutProductos() {
 
 
           <div>
-            <label className="text-label">Nombre</label>
+            <label className="text-label">Subcategoria</label>
             <select
               name="subcategoriumId"
               className="inp"
               // value={paises.nombre_region}
               // onChange={(e) => ChangeInput(e)}
               {...register("subcategoriumId", {
-                // required: {
-                //   value: true,
-                //   message: "Debe seleccionar un campo a modificar",
-                // },
+          
               })}
             >
               <option></option>
@@ -254,39 +240,8 @@ function PutProductos() {
           </div>
 
           <div className="divForm">
-            {/* <div>
-              <label className="text-label">Subcategoria</label>
-              <input
-                className="inp"
-                type="text"
-                name="subcategoriumId"
-                autoComplete="off"
-                max="0"
-                {...register("subcategoriumId", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe ingresar un nombre ",
-                  // },
-                  // maxLength: {
-                  //   value: 15,
-                  //   message:
-                  //     "El nombre no debe tener mas de quince caracteres!",
-                  // },
-                  // minLength: {
-                  //   value: 3,
-                  //   message: "El nombre debe tener tres caracteres!",
-                  // },
-                  // max: {
-                  //   value: 0,
-                  //   message: "El nombre no puede comenzar con numeros",
-                  // },
-                })}
-              />
-              <span className="err">{errors?.subcategoriumId?.message}</span>
-            </div> */}
-            <button className="agregarModal" type="submit" 
-            // onClick={() =>dispatch(getProductos())}
-            >
+         
+            <button className="agregarModal" type="submit">
               Modificar
             </button>
           </div>

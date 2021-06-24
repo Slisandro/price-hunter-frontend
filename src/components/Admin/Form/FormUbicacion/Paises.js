@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getMoneda, getRegion, paisPost, mostrarError, getPais } from "../../../Redux/actions";
 
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 function Paises() {
   const dispatch = useDispatch();
@@ -76,7 +77,13 @@ function Paises() {
       dispatch(paisPost(nuevoPais));
 
       e.target.reset();
-      alert("Pais agregado exitosamente!");
+      swal({
+        title: "Pais agregado con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      })
+  
       setPais({
         codigo_alfa: "",
         nombre_pais: "",

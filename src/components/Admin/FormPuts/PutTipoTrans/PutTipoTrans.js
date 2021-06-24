@@ -23,13 +23,13 @@ function PutTipoTrans() {
   
     dispatch(putTipoTransaccion(data));
     e.target.reset();
-    dispatch(getTipoTransaccion());
+    
     swal({
       title:"Los datos se modificaron con éxito!",
       icon:"success",
       button:"Aceptar",
       timer:"5000"
-    });
+    }).then(r => dispatch(getTipoTransaccion()))
   };
 
   return (

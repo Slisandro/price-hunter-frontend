@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putUM, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutUM() {
@@ -24,13 +24,12 @@ function PutUM() {
 
     e.target.reset();
 
-    dispatch(getUnidadMedida());
     swal({
-      title:"Los datos se modificaron con éxito!",
-      icon:"success",
-      button:"Aceptar",
-      timer:"5000"
-    });
+      title: "Los datos se modificaron con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then((r) => dispatch(getUnidadMedida()));
   };
 
   return (

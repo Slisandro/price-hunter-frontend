@@ -22,13 +22,13 @@ function PutTiposUsuarios() {
   const submit = (data, e) => {
     dispatch(putTipoUsuario(data));
     e.target.reset();
-    dispatch(getTipoUsuario());
+    
     swal({
       title:"Los datos se modificaron con éxito!",
       icon:"success",
       button:"Aceptar",
       timer:"5000"
-    });
+    }).then(r => dispatch(getTipoUsuario()))
   };
 
   return (

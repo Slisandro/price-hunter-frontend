@@ -5,6 +5,8 @@ import {
   getTipoTransaccion,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 
 import "./FormTransaccion.css";
 
@@ -41,8 +43,14 @@ function FormTransaccion() {
   const submit = (data, e) => {
     dispatch(tipoTransaccionPost(state));
     e.target.reset();
-    alert("Tipo de Transacción agregado con éxito!");
-
+   
+    swal({
+      title: "Tipo de Transacción agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then(r => dispatch(getTipoTransaccion()))
+    
     setState({
       ...state,
       tipo_transaccion: "",
