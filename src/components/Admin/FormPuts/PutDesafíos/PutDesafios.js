@@ -158,11 +158,11 @@ function PutDesafíos() {
       </div>
       <div className="contenedorActualesUM">
         Desafíos Actuales
-        <div className="tiposUM">
+        {/* <div className="tiposUM">
           {unidad_medida.map((u) => (
             <span className="spansUM">{u.nombre_unidad}</span>
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putProducto, getProductos, getSubcategoria } from "../../../Redux/actions";
+import {
+  putProducto,
+  getProductos,
+  getSubcategoria,
+} from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
@@ -25,11 +29,10 @@ function PutProductos() {
     dispatch(getSubcategoria());
   }, [dispatch]);
 
-  
   const ChangeInput = (e) => {
     const value = e.target.value;
     // const name = e.target.name;
-   
+
     for (let i = 0; i < productos.length; i++) {
       if (parseInt(value) === parseInt(productos[i].id)) {
         setState({
@@ -59,7 +62,6 @@ function PutProductos() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-
   const submit =  (data, e) => {
     
     if(state.id){
@@ -67,7 +69,7 @@ function PutProductos() {
    dispatch(putProducto(data))
   
    data = {
-      id: "",
+           id: "",
       nombre: "",
       contenido_neto: "",
       subcategoriumId: "",
@@ -147,7 +149,6 @@ function PutProductos() {
             </div>
           </div>
 
-         
           <div>
             <label className="text-label">Nombre</label>
             <input
@@ -213,10 +214,10 @@ function PutProductos() {
                 },
               })}
             />
-            <span className="err">{errors?.unidadMedidaCodigoUnidadMedida?.message}</span>
+            <span className="err">
+              {errors?.unidadMedidaCodigoUnidadMedida?.message}
+            </span>
           </div>
-
-
 
           <div>
             <label className="text-label">Subcategoria</label>
@@ -240,8 +241,41 @@ function PutProductos() {
           </div>
 
           <div className="divForm">
-         
-            <button className="agregarModal" type="submit">
+            {/* <div>
+              <label className="text-label">Subcategoria</label>
+              <input
+                className="inp"
+                type="text"
+                name="subcategoriumId"
+                autoComplete="off"
+                max="0"
+                {...register("subcategoriumId", {
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar un nombre ",
+                  // },
+                  // maxLength: {
+                  //   value: 15,
+                  //   message:
+                  //     "El nombre no debe tener mas de quince caracteres!",
+                  // },
+                  // minLength: {
+                  //   value: 3,
+                  //   message: "El nombre debe tener tres caracteres!",
+                  // },
+                  // max: {
+                  //   value: 0,
+                  //   message: "El nombre no puede comenzar con numeros",
+                  // },
+                })}
+              />
+              <span className="err">{errors?.subcategoriumId?.message}</span>
+            </div> */}
+            <button
+              className="agregarModal"
+              type="submit"
+              // onClick={() =>dispatch(getProductos())}
+            >
               Modificar
             </button>
           </div>

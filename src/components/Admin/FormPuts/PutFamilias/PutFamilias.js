@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFamilia, putFamilia } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 // import "./FormUnidadMedida.css";
 
 function PutFamilias() {
@@ -37,7 +39,6 @@ function PutFamilias() {
         [name]: target.value,
       });
     }
-    console.log(state);
   };
 
   const {
@@ -53,36 +54,23 @@ function PutFamilias() {
       id: state.id,
     };
 
-    // if (!familiaModificada.nombre_familia) {
-    //   alert("Por favor, ingrese el nombre de la familia a modificar");
-    //   return;
-    // }
-    // if (!familiaModificada.nombre_nueva_familia) {
-    //   alert("Por favor, ingrese el nombre de la familia a modificar");
-    //   return;
-    // }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-    //   alert("El codigo solo puede contener letras");
-    //   return;
-    // }
-    // if (!nuevaUM.nombre_unidad) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
-
-    console.log(familiaModificada);
-
     dispatch(putFamilia(familiaModificada));
     e.target.reset();
-    alert("La familia fue modificada con éxito!");
+    if (familiaModificada.nombre_familia) {
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getFamilia()));
+    } else if (!familiaModificada.nombre_nueva_familia) {
+      swal({
+        title: "Debe seleccionar una familia para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
 
     setState({
       nombre_familia: "",
@@ -124,28 +112,20 @@ function PutFamilias() {
                   autoComplete="off"
                   max="0"
                   {...register("nombre_nueva_familia", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un nombre ",
-                    },
+                    // required: {
+                    //   value: true,
+                    //   message: "Debe ingresar un nombre ",
+                    // },
                     maxLength: {
                       value: 15,
                       message: "El nombre debe tener menos de quince letras!",
                     },
-                    minLength: {
-                      value: 3,
-                      message: "El nombre debe tener tres letras!",
-                    },
-                    max: {
-                      value: 0,
-                      message: "El nombre no puede comenzar con numeros",
-                    },
                   })}
                 />
-                <span className="err">{errors?.nombre_unidad?.message}</span>
+                <span className="err">{errors?.nombre_familia?.message}</span>
               </div>
               <span className="err">
-                {errors?.codigo_unidad_medida?.message}
+                {errors?.nombre_nueva_familia?.message}
               </span>
             </div>
             <button className="agregarModal" type="submit">

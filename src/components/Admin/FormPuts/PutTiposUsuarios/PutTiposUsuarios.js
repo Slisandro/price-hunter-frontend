@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putTipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutTiposUsuarios() {
@@ -20,15 +20,24 @@ function PutTiposUsuarios() {
   } = useForm();
 
   const submit = (data, e) => {
-    dispatch(putTipoUsuario(data));
-    e.target.reset();
-    
-    swal({
-      title:"Los datos se modificaron con éxito!",
-      icon:"success",
-      button:"Aceptar",
-      timer:"5000"
-    }).then(r => dispatch(getTipoUsuario()))
+    if (data.tipo_usuario) {
+      dispatch(putTipoUsuario(data));
+      e.target.reset();
+      // dispatch(getTipoUsuario());
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getTipoUsuario()));
+    } else {
+      swal({
+        title: "Debe seleccionar un tipo de usuario para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
   };
 
   return (
@@ -78,10 +87,10 @@ function PutTiposUsuarios() {
                 autoComplete="off"
                 max="0"
                 {...register("tipo_usuario", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar nombre",
-                  },
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar nombre",
+                  // },
                   maxLength: {
                     value: 15,
                     message:
