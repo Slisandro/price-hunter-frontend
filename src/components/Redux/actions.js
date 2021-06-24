@@ -608,9 +608,11 @@ export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
-export const GET_PRODUCTOS = "GET_PRODUCTOS"
-export const GET_CATEGORIA_POR_ID = "GET_CATEGORIA_POR_ID"
-export const GET_SUBCATEGORIA_POR_ID = "GET_SUBCATEGORIA_POR_ID"
+export const GET_PRODUCTOS = "GET_PRODUCTOS";
+export const GET_CATEGORIA_POR_ID = "GET_CATEGORIA_POR_ID";
+export const GET_SUBCATEGORIA_POR_ID = "GET_SUBCATEGORIA_POR_ID";
+export const GET_PAISES_ID = "GET_PAISES_ID";
+export const GET_CIUDADES_ID = "GET_CIUDADES_ID";
 
 export function getFamilia() {
   return function(dispatch) {
@@ -749,7 +751,26 @@ export function getSubcategoriaPorId(id) {
   };
 }
 
-
+export function getPaisesId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/pais/${id}`).then((response) => {
+      dispatch({
+        type: GET_PAISES_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
+export function getCiudadId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/ciudad/${id}`).then((response) => {
+      dispatch({
+        type: GET_CIUDADES_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
 
 export function getTipoTransaccion() {
   return function(dispatch) {
@@ -761,7 +782,6 @@ export function getTipoTransaccion() {
     });
   };
 }
-
 
 export function iniciarSesionCliente(datos) {
   return function(dispatch) {
@@ -791,29 +811,29 @@ export function iniciarSesionCliente(datos) {
 
 //ESTA FUNCION SE ENCARGA DE CREAR UN NUEVO cliente
 export function registrarCliente(datosCliente) {
-  return function (dispatch) {
+  return function(dispatch) {
     axios
       .post(`${URL}clientes/registro`, datosCliente)
       .then((respuesta) => {
         console.log(respuesta);
         respuesta.data.msg
           ? dispatch({
-            type: REGISTRO_ERROR,
-            payload: {
-              msg: respuesta.data.msg,
-              categoria: "alerta-error",
-            },
-          })
+              type: REGISTRO_ERROR,
+              payload: {
+                msg: respuesta.data.msg,
+                categoria: "alerta-error",
+              },
+            })
           : dispatch({
-            type: REGISTRO_EXITOSO,
-            payload: {
-              token: respuesta.data.token,
-              usuario: respuesta.data.cliente,
-            },
-          });
+              type: REGISTRO_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.cliente,
+              },
+            });
       })
       .catch((err) => console.log(err));
-  }
+  };
 }
 //_____________________ PUT _____________________//
 export const PUT_FAMILIA = "PUT_FAMILIA";
@@ -894,6 +914,8 @@ export function putCiudad(objeto) {
     axios.put(`${URL}putadmin/ciudad`, objeto).then((response) => {
       let ciudad = {
         nombre_ciudad: response.data.nombre_ciudad,
+        id: response.data.id,
+        paiseCodigoAlfa: response.data.paiseCodigoAlfa,
       };
       dispatch({
         type: PUT_CIUDAD,
@@ -1030,11 +1052,11 @@ export function putProducto(objeto) {
 
 export function putUM(objeto) {
   return function(dispatch) {
-    console.log(objeto)
+    console.log(objeto);
     axios.put(`${URL}putadmin/um`, objeto).then((response) => {
       let um = {
         codigo_unidad_medida: response.data.codigo_unidad_medida,
-        nombre_unidad: response.data.nombre_unidad
+        nombre_unidad: response.data.nombre_unidad,
       };
       dispatch({
         type: PUT_UM,

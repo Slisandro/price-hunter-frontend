@@ -43,6 +43,8 @@ import {
   GET_CIUDAD,
   GET_CATEGORIA_POR_ID,
   GET_SUBCATEGORIA_POR_ID,
+  GET_PAISES_ID,
+  GET_CIUDADES_ID,
   // PUT_SUBCATEGORIA,
   // PUT_TIPO_TRANSACCION,
   // PUT_TRANSACCION,
@@ -140,7 +142,6 @@ const initialState = {
   transaccion: [],
 
   //-------------ADMIN-PUT-------------//
-
 };
 
 //-------------ADMIN-------------//
@@ -362,7 +363,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         pais: action.payload,
       };
-      case GET_CIUDAD:
+    case GET_CIUDAD:
       return {
         ...state,
         ciudad: action.payload,
@@ -377,21 +378,31 @@ function rootReducer(state = initialState, action) {
         ...state,
         transaccion: action.payload,
       };
-      case GET_PRODUCTOS:
+    case GET_PRODUCTOS:
       return {
         ...state,
         productos: action.payload,
       };
-      case GET_CATEGORIA_POR_ID:
-        return {
-          ...state,
-          categoria: action.payload,
-        };
-        case GET_SUBCATEGORIA_POR_ID:
-        return {
-          ...state,
-          subcategoria: action.payload,
-        };
+    case GET_CATEGORIA_POR_ID:
+      return {
+        ...state,
+        categoria: action.payload,
+      };
+    case GET_SUBCATEGORIA_POR_ID:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_PAISES_ID:
+      return {
+        ...state,
+        paises: action.payload,
+      };
+    case GET_CIUDADES_ID:
+      return {
+        ...state,
+        ciudades: action.payload,
+      };
     //-------------ADMIN-------------//
     //-------------ADMIN-PUT-------------//
     case PUT_FAMILIA:
@@ -424,7 +435,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         admin: action.payload,
       };
-      case PUT_REGION:
+    case PUT_REGION:
       return {
         ...state,
         regiones: action.payload,
