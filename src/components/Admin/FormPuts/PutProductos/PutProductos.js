@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putProducto, getProductos, getSubcategoria } from "../../../Redux/actions";
+import {
+  putProducto,
+  getProductos,
+  getSubcategoria,
+} from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
@@ -23,11 +27,10 @@ function PutProductos() {
     dispatch(getSubcategoria());
   }, [dispatch]);
 
-  
   const ChangeInput = (e) => {
     const value = e.target.value;
     // const name = e.target.name;
-   
+
     for (let i = 0; i < productos.length; i++) {
       if (parseInt(value) === parseInt(productos[i].id)) {
         setState({
@@ -39,7 +42,7 @@ function PutProductos() {
             productos[i].unidadMedidaCodigoUnidadMedida,
         });
       }
-    }   
+    }
   };
 
   const {
@@ -48,46 +51,45 @@ function PutProductos() {
     handleSubmit,
   } = useForm();
 
-  const submit =  (data, e) => {
-  //  console.log(data)
-  
- if(state.id){
-   dispatch(putProducto(data))
-  // await dispatch(getProductos());
-   data = {
+  const submit = (data, e) => {
+    //  console.log(data)
+
+    if (state.id) {
+      dispatch(putProducto(data));
+      // await dispatch(getProductos());
+      data = {
+        id: "",
+        nombre: "",
+        contenido_neto: "",
+        subcategoriumId: "",
+        unidadMedidaCodigoUnidadMedida: "",
+      };
+      console.log(data);
+      e.target.reset();
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getProductos()));
+    } else {
+      swal({
+        title: "Debe seleccionar un producto para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
+    setState({
       id: "",
       nombre: "",
       contenido_neto: "",
       subcategoriumId: "",
       unidadMedidaCodigoUnidadMedida: "",
-    }
-    console.log(data)
-    e.target.reset();
-    swal({
-      title: "Los datos se modificaron con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then(r => dispatch(getProductos()))
-  } else {
-    swal({
-      title: "Debe seleccionar un producto para modificar!",
-      icon: "error",
-      button: "Aceptar",
-      timer: "5000",
     });
-  }
-  setState({
-    id: "",
-    nombre: "",
-    contenido_neto: "",
-    subcategoriumId: "",
-    unidadMedidaCodigoUnidadMedida: "",
-  });
-  //  const s = async function() {
-  //   const t = await ( dispatch(getProductos()))
-  // }
-
+    //  const s = async function() {
+    //   const t = await ( dispatch(getProductos()))
+    // }
   };
 
   return (
@@ -137,7 +139,6 @@ function PutProductos() {
             </div>
           </div>
 
-         
           <div>
             <label className="text-label">Nombre</label>
             <input
@@ -224,10 +225,10 @@ function PutProductos() {
                 // },
               })}
             />
-            <span className="err">{errors?.unidadMedidaCodigoUnidadMedida?.message}</span>
+            <span className="err">
+              {errors?.unidadMedidaCodigoUnidadMedida?.message}
+            </span>
           </div>
-
-
 
           <div>
             <label className="text-label">Nombre</label>
@@ -284,8 +285,10 @@ function PutProductos() {
               />
               <span className="err">{errors?.subcategoriumId?.message}</span>
             </div> */}
-            <button className="agregarModal" type="submit" 
-            // onClick={() =>dispatch(getProductos())}
+            <button
+              className="agregarModal"
+              type="submit"
+              // onClick={() =>dispatch(getProductos())}
             >
               Modificar
             </button>
