@@ -31,6 +31,7 @@ import {
   GET_PAIS,
   GET_MONEDA,
   GET_TIPO_TRANSACCION,
+  GET_PRODUCTOS,
   // OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
@@ -373,6 +374,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         transaccion: action.payload,
+      };
+      case GET_PRODUCTOS:
+      return {
+        ...state,
+        productos: action.payload,
       };
 
     //-------------ADMIN-------------//

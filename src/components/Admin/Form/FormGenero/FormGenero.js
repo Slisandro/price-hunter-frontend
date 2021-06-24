@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { generoPost, getGeneros, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 import close from "../../../../assets/cancel (1).png";
 import "./FormGenero.css";
@@ -66,8 +67,12 @@ function FormGenero() {
 
     dispatch(generoPost(nuevoGenero));
     e.target.reset();
-    alert("Género agregado con éxito!");
-
+    swal({
+      title: "Genero agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    })
     setState({
       genero: "",
     });

@@ -1,41 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { putTipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutTiposUsuarios() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
-
-  const [state, setState] = useState({
-    codigo_unidad_medida: "",
-    nombre_unidad: "",
-  });
+  const tipo_usuarios = useSelector((store) => store.tipo_usuarios);
 
   useEffect(() => {
-    // dispatch(getUnidadMedida());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(unidad_medida);
-
-  const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
-
-    if (name === "codigo_unidad_medida") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    } else if (name === "nombre_unidad") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    }
-  };
+    dispatch(getTipoUsuario());
+  }, [dispatch]);
 
   const {
     register,
@@ -44,40 +20,24 @@ function PutTiposUsuarios() {
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaUM = {
-      codigo_unidad_medida: state.codigo_unidad_medida,
-      nombre_unidad: state.nombre_unidad,
-    };
-
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
+    if (data.tipo_usuario) {
+      dispatch(putTipoUsuario(data));
+      e.target.reset();
+      // dispatch(getTipoUsuario());
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getTipoUsuario()));
+    } else {
+      swal({
+        title: "Debe seleccionar un tipo de usuario para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
     }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
-
-    // dispatch(unidadDeMedida(nuevaUM));
-    e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
-
-    setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
-    });
   };
 
   return (
@@ -90,65 +50,59 @@ function PutTiposUsuarios() {
           id="survey-form"
           className="form"
           noValidate
-          onChange={(e) => ChangeInput(e)}
+          // onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
           <div>
             <label className="text-label">Nombre</label>
-            <input
+            <select
+              name="id"
               className="inp"
-              type="text"
-              name="nombre_unidad"
-              autoComplete="off"
-              max="0"
-              {...register("nombre_unidad", {
+              // value={paises.nombre_region}
+              // onChange={(e) => ChangeInput(e)}
+              {...register("id", {
                 required: {
                   value: true,
-                  message: "Debe ingresar un nombre ",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "El nombre debe tener menos de quince letras!",
-                },
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener tres letras!",
-                },
-                max: {
-                  value: 0,
-                  message: "El nombre no puede comenzar con numeros",
+                  message: "Debe seleccionar un campo a modificar",
                 },
               })}
-            />
-            <span className="err">{errors?.nombre_unidad?.message}</span>
+            >
+              <option></option>
+              {tipo_usuarios.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.tipo_usuario}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.id?.message}</span>
           </div>
+
           <div className="divForm">
             <div>
               <label className="text-label">Tipos de Usuario</label>
               <input
                 className="inp"
                 type="text"
-                name="codigo_unidad_medida"
+                name="tipo_usuario"
                 autoComplete="off"
                 max="0"
-                {...register("codigo_unidad_medida", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar una unidad ",
-                  },
+                {...register("tipo_usuario", {
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar nombre",
+                  // },
                   maxLength: {
-                    value: 4,
-                    message: "la unidad no debe tener mas de cuatro letras!",
+                    value: 15,
+                    message:
+                      "El nombre no debe tener mas de quince caracteres!",
                   },
                   max: {
                     value: 0,
-                    message: "La unidad no puede comenzar con numeros",
+                    message: "El nombre no puede comenzar con numeros",
                   },
                 })}
               />
-              <span className="err">
-                {errors?.codigo_unidad_medida?.message}
-              </span>
+              <span className="err">{errors?.tipo_usuario?.message}</span>
             </div>
             <button className="agregarModal" type="submit">
               Modificar
@@ -159,8 +113,10 @@ function PutTiposUsuarios() {
       <div className="contenedorActualesUM">
         Tipos de Usuarios Actuales
         <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
+          {tipo_usuarios.map((u, index) => (
+            <span key={index} className="spansUM">
+              {u.tipo_usuario}
+            </span>
           ))}
         </div>
       </div>

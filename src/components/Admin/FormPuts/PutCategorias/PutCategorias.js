@@ -6,7 +6,9 @@ import {
   mostrarError,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-// import "./FormUnidadMedida.css";
+import swal from "sweetalert";
+
+import "./PutCategorias.css";
 
 function PutCategorías() {
   const dispatch = useDispatch();
@@ -67,32 +69,23 @@ function PutCategorías() {
       id: state.id,
     };
 
-    if (!categoriaModificada.nombre_categoria) {
-      alert("Por favor, ingrese el codigo de la nueva categoría");
-      return;
-    }
-    if (!categoriaModificada.nuevo_nombre_categoria) {
-      alert("Por favor, ingrese el codigo de la nueva categoría");
-      return;
-    }
-    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-    //   alert("El codigo solo puede contener letras");
-    //   return;
-    // }
-    // if (!nuevaUM.nombre_unidad) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
-
-    console.log(categoriaModificada);
-
     dispatch(putCategoria(categoriaModificada));
     e.target.reset();
-    alert("La Categoría fue modificada con éxito!");
+    if (categoriaModificada.nombre_categoria) {
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getCategoria()));
+    } else if (!categoriaModificada.nuevo_nombre_categoria) {
+      swal({
+        title: "Debe seleccionar una categoría para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
 
     setState({
       nombre_categoria: "",
@@ -118,6 +111,7 @@ function PutCategorías() {
           <div>
             <label className="text-label">Categoría</label>
             <select name="nombre_categoria">
+              <option></option>
               {categoria.map((u) => (
                 <option value={u.nombre_categoria}>{u.nombre_categoria}</option>
               ))}
@@ -159,13 +153,9 @@ function PutCategorías() {
                 autoComplete="off"
                 max="0"
                 {...register("nuevo_nombre_categoria", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar una categoría ",
-                  },
-                  // maxLength: {
-                  //   value: 4,
-                  //   message: "la unidad no debe tener mas de cuatro letras!",
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar una categoría ",
                   // },
                   max: {
                     value: 0,
@@ -174,7 +164,7 @@ function PutCategorías() {
                 })}
               />
               <span className="err">
-                {errors?.codigo_unidad_medida?.message}
+                {errors?.nuevo_nombre_categoria?.message}
               </span>
             </div>
             <button className="agregarModal" type="submit">
@@ -183,11 +173,11 @@ function PutCategorías() {
           </div>
         </form>
       </div>
-      <div className="contenedorActualesUM">
+      <div className="contenedorActualesCATE">
         Categorías Actuales
-        <div className="tiposUM">
+        <div className="tiposCATE">
           {categoria.map((u) => (
-            <span className="spansUM">{u.nombre_categoria}</span>
+            <span className="spansCATE">{u.nombre_categoria}</span>
           ))}
         </div>
       </div>

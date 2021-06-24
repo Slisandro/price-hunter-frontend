@@ -24,7 +24,7 @@ function AdminPage() {
         closeSidebar={closeSidebar}
         setState={setState}
       />
-      <AsideAdm />
+      <AsideAdm setState={setState} />
     </div>
   );
 }

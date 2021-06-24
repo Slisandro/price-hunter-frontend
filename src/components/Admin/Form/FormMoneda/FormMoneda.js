@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { monedaPost, mostrarError, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
 
 import "./FormMonedaYum.css";
 
@@ -80,7 +82,12 @@ function FormMoneda() {
     if (nuevaMoneda.codigo_moneda.length > 0) {
       dispatch(monedaPost(state));
       e.target.reset();
-      alert("La Moneda fue agregada con éxito!");
+      swal({
+        title: "La Moneda fue agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      })
       dispatch(getMoneda());
       setState({
         codigo_moneda: "",

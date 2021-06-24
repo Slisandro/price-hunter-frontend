@@ -8,6 +8,7 @@ import {
   mostrarError,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 function Subcate({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -123,7 +124,13 @@ function Subcate({ setSwitcher }) {
     dispatch(subcategoriaPost(nuevaSubcate));
 
     e.target.reset();
-    alert("Sub-Categoría agregada con éxito!");
+    
+    swal({
+      title: "Sub-Categoría agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    })
 
     setSubcate({
       nombre_subcategoria: "",

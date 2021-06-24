@@ -608,7 +608,7 @@ export const GET_PAIS = "GET_PAIS";
 export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
-export const GET_PRODUCTO = "GET_PRODUCTO";
+export const GET_PRODUCTOS = "GET_PRODUCTOS"
 
 export function getFamilia() {
   return function(dispatch) {
@@ -714,6 +714,17 @@ export function getMoneda() {
   };
 }
 
+export function getProductos() {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/productos`).then((response) => {
+      dispatch({
+        type: GET_PRODUCTOS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
 export function getTipoTransaccion() {
   return function(dispatch) {
     axios.get(`${URL}tipotransacciones`).then((response) => {
@@ -724,6 +735,7 @@ export function getTipoTransaccion() {
     });
   };
 }
+
 
 export function iniciarSesionCliente(datos) {
   return function(dispatch) {
@@ -926,11 +938,12 @@ export function putTipoTransaccion(objeto) {
   return function(dispatch) {
     axios.put(`${URL}putadmin/tipo_transaccion`, objeto).then((response) => {
       let tipo_transaccion = {
+        id: response.data.id,
         tipo_transaccion: response.data.tipo_transaccion,
       };
       dispatch({
         type: PUT_TIPO_TRANSACCION,
-        payload: response.data,
+        payload: tipo_transaccion,
       });
     });
   };
@@ -939,12 +952,12 @@ export function putTipoTransaccion(objeto) {
 export function putTransaccion(objeto) {
   return function(dispatch) {
     axios.put(`${URL}putadmin/transaccion`, objeto).then((response) => {
-      let tipo_transaccion = {
+      let transaccion = {
         tipo_transaccion: response.data.tipo_transaccion,
       };
       dispatch({
         type: PUT_TRANSACCION,
-        payload: response.data,
+        payload: transaccion,
       });
     });
   };
@@ -981,9 +994,6 @@ export function putDesafio(objeto) {
 export function putProducto(objeto) {
   return function(dispatch) {
     axios.put(`${URL}putadmin/productos`, objeto).then((response) => {
-      let producto = {
-        nombre_producto: response.data.nombre_producto,
-      };
       dispatch({
         type: PUT_PRODUCTO,
         payload: response.data,
@@ -995,7 +1005,7 @@ export function putProducto(objeto) {
 export function putUM(objeto) {
   return function(dispatch) {
     console.log(objeto)
-    axios.put(`${URL}/putadmin/um`, objeto).then((response) => {
+    axios.put(`${URL}putadmin/um`, objeto).then((response) => {
       let um = {
         codigo_unidad_medida: response.data.codigo_unidad_medida,
         nombre_unidad: response.data.nombre_unidad

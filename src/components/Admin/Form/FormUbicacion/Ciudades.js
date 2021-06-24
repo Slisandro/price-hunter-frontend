@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ciudadPost, getPais } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 function Ciudades() {
   const dispatch = useDispatch();
@@ -45,7 +46,13 @@ function Ciudades() {
   const submit = (data, e) => {
     dispatch(ciudadPost(ciudad));
     e.target.reset();
-    alert("Ubicación agregada exitosamente!");
+    
+    swal({
+      title: "Ciudad agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    })
     setCiudad({
       ciudad: "",
       paiseCodigoAlfa: "",

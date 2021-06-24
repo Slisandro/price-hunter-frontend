@@ -246,8 +246,7 @@ const SidebarAdm = (props) => {
                 Modificar Tipo de Transacción
               </li>
             </div>
-            <div className="menu-col">
-              {/* <i className="fas fa-venus-mars"></i> */}
+            {/* <div className="menu-col">
               <li
                 className="addd"
                 value={"Modificar-Desafíos"}
@@ -255,12 +254,11 @@ const SidebarAdm = (props) => {
               >
                 Modificar Desafíos
               </li>
-            </div>
+            </div> */}
           </>
         ) : null}
 
-        <div>
-          {/* <i className="fa fa-user-secret"></i> */}
+        {/* <div>
           <button
             className="account-title3"
             value={"Configuracion"}
@@ -268,7 +266,7 @@ const SidebarAdm = (props) => {
           >
             Configuración
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

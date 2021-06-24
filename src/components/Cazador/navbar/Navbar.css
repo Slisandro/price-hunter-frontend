@@ -24,6 +24,10 @@
     color: aqua;   
 }
 
+#navbarUser {
+    background: rgba(24,30,54,1);
+}
+
 
 .navbar__left > a {
     margin-right: 30px;
