@@ -196,7 +196,14 @@ export function registrarUsuario(datosUser) {
             },
           });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => 
+      dispatch({
+        type: REGISTRO_ERROR,
+        payload: {
+          msg: err.response.data.msg,
+          categoria: "alerta-error",
+        },
+      }));
   };
 
   // return function(dispatch) {
@@ -230,16 +237,20 @@ export function iniciarSesion(datos) {
     axios
       .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
-        console.log(respuesta);
+        console.log(respuesta)
+       
         respuesta.data.msg
           ? dispatch({
               type: LOGIN_ERROR,
               payload: {
                 msg: respuesta.data.msg,
-                categoria: "alerta-error",
+                categoria: "alerta-error"
               },
             })
-          : respuesta.data.user
+          : 
+          console.log(respuesta.data.user)
+          respuesta.data.user
+          
           ? dispatch({
               type: LOGIN_EXITOSO,
               payload: {
@@ -263,7 +274,13 @@ export function iniciarSesion(datos) {
               },
             });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => dispatch({
+        type: LOGIN_ERROR,
+        payload: {
+          msg: err.response.data.msg,
+          categoria: "alerta-error"
+        },
+      }));
   };
 }
 
@@ -1111,5 +1128,31 @@ export function putUM(objeto) {
         payload: um,
       });
     });
+  };
+}
+
+
+export function iniciarSesionGoogle(datosGoogle) {
+  return function(dispatch) {
+    axios
+      .post(`${URL}ingreso`, datosGoogle)
+      .then((respuesta) => {
+      
+            dispatch({
+              type: LOGIN_EXITOSO,
+              payload: {
+                token: respuesta.data.token,
+                usuario: respuesta.data.user,
+              },
+            })
+     
+      })
+      .catch((err) => dispatch({
+        type: LOGIN_ERROR,
+        payload: {
+          msg: err.response.data.msg,
+          categoria: "alerta-error"
+        },
+      }));
   };
 }
