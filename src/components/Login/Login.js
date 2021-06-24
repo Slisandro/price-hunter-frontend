@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Login.css";
 import aguila from "../../assets/aguila.png";
 import Google from '../../assets/google.png';
-import { iniciarSesion, mostrarError } from "../Redux/actions";
+import { iniciarSesion, mostrarError, iniciarSesionGoogle } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 import GoogleLogin from "react-google-login";
 
@@ -64,14 +64,18 @@ const Login = (props) => {
 
 
 
-  /******************************************************************************************************************************/
-  const responseGoogle = (response) => {
-    console.log(response)
+/******************************************************************************************************************************/
 
+
+const onSuccessGoogle = (googleUser) => {
+  var datos = googleUser.profileObj;
+  console.log(datos)
+  dispatch(iniciarSesionGoogle(datos))
   }
 
 
-  /*******************************************************************************************************************************/
+
+/*******************************************************************************************************************************/
 
   const [user, guardarUser] = useState({
     email: "",
@@ -121,10 +125,12 @@ const Login = (props) => {
 
   return (
     <section className="loginHunter">
+     {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
       <section className="loginContainer_hunter">
         <img src={aguila} alt="" id="logologin" />
         <h2 className="h2Title">Iniciar sesión</h2>
 
+       
         {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
 
         <form className="loginContainer_hunter--form" onSubmit={handleSubmit}>
@@ -160,15 +166,21 @@ const Login = (props) => {
         </form>
 
         <section className="loginContainer_hunter--social-media">
+          
+          
+          
           <GoogleLogin
             clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
             render={renderProps => (
               <button className="button__login__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
             )}
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
+            onSuccess={onSuccessGoogle}
+            onFailure={onSuccessGoogle}
             cookiePolicy={'single_host_origin'}
           />
+
+
+
 
         </section>
 

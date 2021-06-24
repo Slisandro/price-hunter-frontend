@@ -11,6 +11,8 @@
     align-items: center;
     justify-content: center;
     margin: 5% auto;
+    border-radius: 1em;
+    padding: 0;
 }
 
 .cardsContainer .card img.card-img-top {
@@ -25,6 +27,10 @@
     padding-bottom: 1em;
     text-align: center;
     padding: 5% 0;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .cardsContainer .card .card-body .card-title.h5 {

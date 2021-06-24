@@ -8,12 +8,12 @@ import { URL } from '../../Redux/actions';
 export default function Transacciones() {
     const [movimiento, setMovimiento] = useState([])
     console.log(movimiento)
-
+    
     useEffect(() => {
         const token = localStorage.getItem("token");
         axios.get(`${URL}transacciones/consulta/`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
-                OrderByDate(json.data)
+                console.log(OrderByDate(json.data))
                 setMovimiento(OrderByDate(json.data).slice(0, 5))
             })
     }, []);
