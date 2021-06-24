@@ -609,6 +609,8 @@ export const GET_MONEDA = "GET_MONEDA";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const GET_CIUDAD = "GET_CIUDAD";
 export const GET_PRODUCTOS = "GET_PRODUCTOS"
+export const GET_CATEGORIA_POR_ID = "GET_CATEGORIA_POR_ID"
+export const GET_SUBCATEGORIA_POR_ID = "GET_SUBCATEGORIA_POR_ID"
 
 export function getFamilia() {
   return function(dispatch) {
@@ -724,6 +726,30 @@ export function getProductos() {
     });
   };
 }
+
+export function getCategoriaPorId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/categoria/${id}`).then((response) => {
+      dispatch({
+        type: GET_CATEGORIA_POR_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+export function getSubcategoriaPorId(id) {
+  return function(dispatch) {
+    axios.get(`${URL}getadmin/subcategoria/${id}`).then((response) => {
+      dispatch({
+        type: GET_SUBCATEGORIA_POR_ID,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+
 
 export function getTipoTransaccion() {
   return function(dispatch) {

@@ -1,40 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategorias, putSubCategoria } from "../../../Redux/actions";
+import { getCategoriaPorId, getSubcategoriaPorId, putSubCategoria, getSubcategoria, getFamilia,  } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 // import "./FormUnidadMedida.css";
 
 function PutSubCate() {
   const dispatch = useDispatch();
-  const categorias = useSelector((store) => store.categorias);
+  const categoria = useSelector((store) => store.categoria);
+  const subcategoria = useSelector((store) => store.subcategoria);
+  const familia = useSelector((store) => store.familia);
 
   const [state, setState] = useState({
     nombre_subcategoria: "",
   });
 
   useEffect(() => {
-    dispatch(getCategorias());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // dispatch(getCategorias());
+    // dispatch(getSubcategoria())
+    dispatch(getFamilia())
+  }, [dispatch]);
 
-  console.log(categorias);
+  // console.log(familia, categoria);
 
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
+    const value= e.target.value;
+    const name = e.target.name;
 
-    if (name === "codigo_unidad_medida") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    } else if (name === "nombre_unidad") {
-      setState({
-        ...state,
-        [name]: target.value,
-      });
-    }
+    console.log(value, name)
+    if(name === "Familia") dispatch(getCategoriaPorId(value))
+    if(name === "Categoria") dispatch(getSubcategoriaPorId(value))
   };
+  
 
   const {
     register,
@@ -43,15 +40,15 @@ function PutSubCate() {
   } = useForm();
 
   const submit = (data, e) => {
-    const subcategoriaModificada = {
-      nombre_categoria: state.nombre_categoria,
-      nombre_subcategoria: state.nombre_subcategoria,
-    };
+    // const subcategoriaModificada = {
+    //   nombre_categoria: state.nombre_categoria,
+    //   nombre_subcategoria: state.nombre_subcategoria,
+    // };
 
-    if (!subcategoriaModificada.nombre_categoria) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
-    }
+    // if (!subcategoriaModificada.nombre_categoria) {
+    //   alert("Por favor, ingrese el codigo de la moneda");
+    //   return;
+    // }
     // if (nuevaUM.codigo_unidad_medida !== 3) {
     //   alert("Debe ingresar 3 letras...");
     //   return;
@@ -68,15 +65,16 @@ function PutSubCate() {
     //   alert("El nombre solo puede contener letras");
     //   return;
     // }
+    console.log(data)
 
-    dispatch(putSubCategoria(subcategoriaModificada));
+    dispatch(putSubCategoria(data));
     e.target.reset();
     alert("La Unidad de Medida fue agregada con éxito!");
 
-    setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
-    });
+    // setState({
+    //   codigo_unidad_medida: "",
+    //   nombre_unidad: "",
+    // });
   };
 
   return (
@@ -90,8 +88,84 @@ function PutSubCate() {
           className="form"
           noValidate
           onChange={(e) => ChangeInput(e)}
+          // {...(e) => ChangeInpu(e)}
+          
           onSubmit={handleSubmit(submit)}
         >
+
+<div>
+            <label className="text-label">Familia</label>
+            <select
+              name="Familia"
+              className="inp"
+              onChange={(e) => ChangeInput(e)}
+              
+              {...register("Familia", {
+                required: {
+                  value: true,
+                  message: "Debe seleccionar una Familia de Productos",
+                },
+              })}
+            >
+              <option></option>
+              {familia.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.nombre_familia}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.Familia?.message}</span>
+          </div>
+
+          <div>
+            <label className="text-label">Categorias</label>
+            <select
+              name="Categoria"
+              className="inp"
+              onChange={(e) => ChangeInput(e)}
+              
+              {...register("Categoria", {
+                required: {
+                  value: true,
+                  message: "Debe seleccionar una Familia de Productos",
+                },
+              })}
+            >
+              <option></option>
+              {categoria.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.nombre_categoria}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.Familia?.message}</span>
+          </div>
+
+
+          <div>
+            <label className="text-label">Subcategoria</label>
+            <select
+              name="Subcategoria"
+              className="inp"
+              onChange={(e) => ChangeInput(e)}
+              
+              {...register("Subcategoria", {
+                required: {
+                  value: true,
+                  message: "Debe seleccionar una Familia de Productos",
+                },
+              })}
+            >
+              <option></option>
+              {subcategoria.map((f, index) => (
+                <option key={index} value={f.id}>
+                  {f.nombre_subcategoria}
+                </option>
+              ))}
+            </select>
+            <span className="err">{errors?.Subcategoria?.message}</span>
+          </div>
+
           <div>
             <label className="text-label">Nombre</label>
             <input
@@ -158,7 +232,7 @@ function PutSubCate() {
       <div className="contenedorActualesUM">
         Sub-Categorías Actuales
         <div className="tiposUM">
-          {categorias.map((u) => (
+          {categoria.map((u) => (
             <span className="spansUM">{u.nombre_categoria}</span>
           ))}
         </div>
