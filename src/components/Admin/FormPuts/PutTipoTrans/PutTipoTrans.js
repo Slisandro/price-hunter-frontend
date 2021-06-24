@@ -16,6 +16,7 @@ function PutTipoTrans() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
 
   const submit = (data, e) => {
@@ -36,6 +37,7 @@ function PutTipoTrans() {
         timer: "5000",
       });
     }
+    reset({data})
   };
 
   return (

@@ -17,6 +17,7 @@ function PutTiposUsuarios() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
 
   const submit = (data, e) => {
@@ -38,6 +39,7 @@ function PutTiposUsuarios() {
         timer: "5000",
       });
     }
+    reset({data})
   };
 
   return (
