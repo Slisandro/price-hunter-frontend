@@ -1,7 +1,9 @@
 .cardsContainer {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.5%;
+    /* gap: 0.5%;
+} */
 }
 
 .cardsContainer .card {

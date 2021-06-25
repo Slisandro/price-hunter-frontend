@@ -67,6 +67,7 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setModal(!modal)
         const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
             axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
@@ -82,7 +83,6 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
                             } else {
                                 swal(resp.data.msj, " ", "success")
                             }
-                            setModal(!modal)
                             setState({
                                 latitud: "",
                                 longitud: "",
