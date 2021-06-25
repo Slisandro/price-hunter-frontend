@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { regionPost, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
 
 function Regiones() {
   const dispatch = useDispatch();
@@ -44,7 +45,13 @@ function Regiones() {
     }
     dispatch(regionPost(nuevaRegion));
     e.target.reset();
-    alert("Ubicación agregada exitosamente!");
+    swal({
+      title: "Region agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    })
+
 
     setRegion({
       nombre_region: "",

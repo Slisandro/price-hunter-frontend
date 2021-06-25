@@ -1,0 +1,188 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  putCategoria,
+  getCategoria,
+  mostrarError,
+} from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+
+import "./PutCategorias.css";
+
+function PutCategorías() {
+  const dispatch = useDispatch();
+  const unidad_medida = useSelector((store) => store.unidad_medida);
+  const categoria = useSelector((store) => store.categoria);
+
+  const [state, setState] = useState({
+    nombre_categoria: "",
+    nuevo_nombre_categoria: "",
+    descripcion: "",
+    id: null,
+  });
+
+  useEffect(() => {
+    dispatch(getCategoria());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // console.log(mapeado);
+
+  const ChangeInput = (e) => {
+    const target = e.target;
+    const name = target.name;
+
+    if (name === "nombre_categoria") {
+      var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
+      var final = cat.id;
+      // console.log(final);
+      setState({
+        ...state,
+        [name]: target.value,
+        id: final,
+      });
+    } else if (name === "nuevo_nombre_categoria") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    } else if (name === "descripcion") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    }
+    // console.log(state);
+  };
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
+    const categoriaModificada = {
+      nombre_categoria: state.nuevo_nombre_categoria,
+      descripcion: state.descripcion,
+      id: state.id,
+    };
+
+    dispatch(putCategoria(categoriaModificada));
+    e.target.reset();
+    if (categoriaModificada.nombre_categoria) {
+      swal({
+        title: "Los datos se modificaron con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getCategoria()));
+    } else if (!categoriaModificada.nuevo_nombre_categoria) {
+      swal({
+        title: "Debe seleccionar una categoría para modificar!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
+
+    setState({
+      nombre_categoria: "",
+      nuevo_nombre_categoria: "",
+      descripcion: "",
+      id: null,
+    });
+  };
+
+  return (
+    <>
+      <div className="contenedorFAM">
+        <header>
+          <h1 id="title">Modificar Categoría</h1>
+        </header>
+        <form
+          id="survey-form"
+          className="form"
+          noValidate
+          onChange={(e) => ChangeInput(e)}
+          onSubmit={handleSubmit(submit)}
+        >
+          <div>
+            <label className="text-label">Categoría</label>
+            <select name="nombre_categoria">
+              <option></option>
+              {categoria.map((u) => (
+                <option value={u.nombre_categoria}>{u.nombre_categoria}</option>
+              ))}
+            </select>
+            {/* <input
+              className="inp"
+              type="text"
+              name="nombre_categoria"
+              autoComplete="off"
+              max="0"
+              {...register("nombre_categoria", {
+                required: {
+                  value: true,
+                  message: "Debe ingresar un nombre ",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "El nombre debe tener menos de quince letras!",
+                },
+                minLength: {
+                  value: 3,
+                  message: "El nombre debe tener tres letras!",
+                },
+                max: {
+                  value: 0,
+                  message: "El nombre no puede comenzar con numeros",
+                },
+              })}
+            /> */}
+            {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
+          </div>
+          <div className="divForm">
+            <div>
+              <label className="text-label">Nuevo Nombre</label>
+              <input
+                className="inp"
+                type="text"
+                name="nuevo_nombre_categoria"
+                autoComplete="off"
+                max="0"
+                {...register("nuevo_nombre_categoria", {
+                  // required: {
+                  //   value: true,
+                  //   message: "Debe ingresar una categoría ",
+                  // },
+                  max: {
+                    value: 0,
+                    message: "La categoría no puede comenzar con numeros",
+                  },
+                })}
+              />
+              <span className="err">
+                {errors?.nuevo_nombre_categoria?.message}
+              </span>
+            </div>
+            <button className="agregarModal" type="submit">
+              Modificar
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className="contenedorActualesCATE">
+        Categorías Actuales
+        <div className="tiposCATE">
+          {categoria.map((u) => (
+            <span className="spansCATE">{u.nombre_categoria}</span>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default PutCategorías;

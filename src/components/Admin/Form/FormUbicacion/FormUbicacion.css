@@ -97,13 +97,12 @@ header {
   background-color: green; */
 }
 
-
 .err {
   margin: auto;
   display: flex;
   /* background-color: royalblue; */
   font-size: 15px;
-  color: red
+  color: red;
 }
 
 .selectUbi {
@@ -118,4 +117,3 @@ header {
 .separador {
   margin-top: 1rem;
 }
-

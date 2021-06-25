@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getFamilia, familiaPost } from "../../../Redux/actions";
+import { getFamilia, familiaPost, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import { mostrarError } from "../../../Redux/actions";
+import swal from "sweetalert";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -80,7 +80,13 @@ function Fami({ setSwitcher }) {
     dispatch(familiaPost(nuevaFamilia));
 
     e.target.reset();
-    alert("Familia agregada con éxito!");
+    
+    swal({
+      title: "Familia agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    });
 
     setFam({
       nombre_familia: "",
