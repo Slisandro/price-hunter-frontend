@@ -68,8 +68,9 @@ const Login = (props) => {
 
 
 const onSuccessGoogle = (googleUser) => {
-  var datos = googleUser.profileObj;
-  console.log(datos)
+  // var datos = googleUser.profileObj;
+  var datos = googleUser;
+  // console.log(googleUser)
   dispatch(iniciarSesionGoogle(datos))
   }
 

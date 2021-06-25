@@ -2,8 +2,8 @@ import axios from "axios";
 
 // ----------------------------------------------------------------------- //
 
-// export const URL = "http:localhost:3001/";
-export const URL = "https://price-hunter-api.herokuapp.com/";
+export const URL = "http://localhost:3001/";
+// export const URL = "https://price-hunter-api.herokuapp.com/";
 
 //importar import {URL} from "../actions"("mas o menos la ruta ")
 
@@ -75,7 +75,7 @@ export function getCiudades(id) {
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO POR SU NOMBRE
 
 export function getProductsByName(nombre, body) {
-  return function(dispatch) {
+  return function (dispatch) {
     const token = localStorage.getItem("token");
     // axios.get("http://localhost:3001/productos?name=sal", { headers: { "Authorization": `Bearer ${token}` } })
     axios({
@@ -196,14 +196,14 @@ export function registrarUsuario(datosUser) {
             },
           });
       })
-      .catch((err) => 
-      dispatch({
-        type: REGISTRO_ERROR,
-        payload: {
-          msg: err.response.data.msg,
-          categoria: "alerta-error",
-        },
-      }));
+      .catch((err) =>
+        dispatch({
+          type: REGISTRO_ERROR,
+          payload: {
+            msg: err.response.data.msg,
+            categoria: "alerta-error",
+          },
+        }));
   };
 
   // return function(dispatch) {
@@ -238,35 +238,35 @@ export function iniciarSesion(datos) {
       .post(`${URL}ingreso`, datos)
       .then((respuesta) => {
         console.log(respuesta)
-       
+
         respuesta.data.msg
           ? dispatch({
-              type: LOGIN_ERROR,
-              payload: {
-                msg: respuesta.data.msg,
-                categoria: "alerta-error"
-              },
-            })
-          : 
+            type: LOGIN_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error"
+            },
+          })
+          :
           console.log(respuesta.data.user)
-          respuesta.data.user
-          
+        respuesta.data.user
+
           ? dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            })
+            type: LOGIN_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.user,
+            },
+          })
           : respuesta.data.admin
-          ? dispatch({
+            ? dispatch({
               type: LOGIN_EXITOSO,
               payload: {
                 token: respuesta.data.token,
                 admin: respuesta.data.admin,
               },
             })
-          : dispatch({
+            : dispatch({
               type: LOGIN_EXITOSO,
               payload: {
                 token: respuesta.data.token,
@@ -380,7 +380,7 @@ export function tipoUsuario(objeto) {
           type: TIPO_USUARIO_POST,
           payload: tipo_usuario,
         });
-    });
+      });
   };
 }
 
@@ -396,7 +396,7 @@ export function generoPost(objeto) {
           type: GENERO_POST,
           payload: genero,
         });
-    });
+      });
   };
 }
 
@@ -414,7 +414,7 @@ export function monedaPost(objeto) {
           type: MONEDA_POST,
           payload: moneda,
         });
-    });
+      });
   };
 }
 
@@ -431,7 +431,7 @@ export function ciudadPost(objeto) {
           type: CIUDAD_POST,
           payload: ciudad,
         });
-    });
+      });
   };
 }
 
@@ -464,7 +464,7 @@ export function regionPost(objeto) {
           type: REGION_POST,
           payload: region,
         });
-    });
+      });
   };
 }
 
@@ -481,7 +481,7 @@ export function familiaPost(objeto) {
           type: FAMILIA_POST,
           payload: familia,
         });
-    });
+      });
   };
 }
 
@@ -499,7 +499,7 @@ export function categoriaPost(objeto) {
           type: CATEGORIA_POST,
           payload: categoria,
         });
-    });
+      });
   };
 }
 
@@ -517,7 +517,7 @@ export function subcategoriaPost(objeto) {
           type: SUBCATEGORIA_POST,
           payload: subcategoria,
         });
-    });
+      });
   };
 }
 
@@ -533,7 +533,7 @@ export function tipoTransaccionPost(objeto) {
           type: TIPO_TRANSACCION_POST,
           payload: tipoTransaccion,
         });
-    });
+      });
   };
 }
 
@@ -552,7 +552,7 @@ export function transaccionPost(objeto) {
           type: TRANSACCION_POST,
           payload: transaccion,
         });
-    });
+      });
   };
 }
 
@@ -579,7 +579,7 @@ export function clientesPost(objeto) {
           type: CLIENTES_POST,
           payload: clientes,
         });
-    });
+      });
   };
 }
 
@@ -601,7 +601,7 @@ export function desafioPost(objeto) {
           type: DESAFIO_POST,
           payload: desafio,
         });
-    });
+      });
   };
 }
 
@@ -621,12 +621,12 @@ export function productoPost(objeto) {
           type: PRODUCTO_POST,
           payload: productos,
         });
-    });
+      });
   };
 }
 //
 export function pricePost(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}precios`, objeto)
       // .then(resp => resp.json())
@@ -744,7 +744,7 @@ export function getSubcategoria() {
           type: GET_SUBCATEGORIAS,
           payload: response.data,
         });
-    });
+      });
   };
 }
 
@@ -760,7 +760,7 @@ export function getUnidadMedida() {
 }
 
 export function getRegion() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/region`).then((response) => {
       dispatch({
         type: GET_REGION,
@@ -771,7 +771,7 @@ export function getRegion() {
 }
 
 export function getPais() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/pais`).then((response) => {
       dispatch({
         type: GET_PAIS,
@@ -782,7 +782,7 @@ export function getPais() {
 }
 
 export function getCiudad() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/ciudad`).then((response) => {
       dispatch({
         type: GET_CIUDAD,
@@ -793,7 +793,7 @@ export function getCiudad() {
 }
 
 export function getMoneda() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/moneda`).then((response) => {
       dispatch({
         type: GET_MONEDA,
@@ -804,7 +804,7 @@ export function getMoneda() {
 }
 
 export function getProductos() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/productos`).then((response) => {
       dispatch({
         type: GET_PRODUCTOS,
@@ -815,7 +815,7 @@ export function getProductos() {
 }
 
 export function getCategoriaPorId(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/categoria/${id}`).then((response) => {
       dispatch({
         type: GET_CATEGORIA_POR_ID,
@@ -826,7 +826,7 @@ export function getCategoriaPorId(id) {
 }
 
 export function getSubcategoriaPorId(id) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.get(`${URL}getadmin/subcategoria/${id}`).then((response) => {
       dispatch({
         type: GET_SUBCATEGORIA_POR_ID,
@@ -920,7 +920,7 @@ export const PUT_PRODUCTO = "PUT_PRODUCTO";
 export const PUT_UM = "PUT_UM";
 
 export function putFamilia(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/familia`, objeto).then((response) => {
       let nombre_familia = {
         nombre_familia: response.data.nombre_familia,
@@ -935,7 +935,7 @@ export function putFamilia(objeto) {
 }
 
 export function putTipoUsuario(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/tipo_usuario`, objeto).then((response) => {
       let tipoUsuario = {
         nombre_tipoUsuario: response.data.nombre_tipoUsuario,
@@ -949,7 +949,7 @@ export function putTipoUsuario(objeto) {
 }
 
 export function putGenero() {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/genero`).then((response) => {
       let genero = {
         nombre_genero: response.data.nombre_genero,
@@ -963,7 +963,7 @@ export function putGenero() {
 }
 
 export function putMoneda(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/monedas`, objeto).then((response) => {
       let moneda = {
         nombre_moneda: response.data.nombre_moneda,
@@ -977,7 +977,7 @@ export function putMoneda(objeto) {
 }
 
 export function putCiudad(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/ciudad`, objeto).then((response) => {
       let ciudad = {
         nombre_ciudad: response.data.nombre_ciudad,
@@ -991,7 +991,7 @@ export function putCiudad(objeto) {
 }
 
 export function putPais(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/paises`, objeto).then((response) => {
       let pais = {
         nombre_pais: response.data.nombre_pais,
@@ -1005,7 +1005,7 @@ export function putPais(objeto) {
 }
 
 export function putRegion(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/region`, objeto).then((response) => {
       let region = {
         nombre_region: response.data.nombre_region,
@@ -1019,7 +1019,7 @@ export function putRegion(objeto) {
 }
 
 export function putCategoria(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/categoria`, objeto).then((response) => {
       let nombre_categoria = {
         nombre_categoria: response.data.nombre_categoria,
@@ -1034,7 +1034,7 @@ export function putCategoria(objeto) {
 }
 
 export function putSubCategoria(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/subcategoria`, objeto).then((response) => {
       let nombre_subCategoria = {
         nombre_subCategoria: response.data.nombre_SubCategoria,
@@ -1048,7 +1048,7 @@ export function putSubCategoria(objeto) {
 }
 
 export function putTipoTransaccion(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/tipo_transaccion`, objeto).then((response) => {
       let tipo_transaccion = {
         id: response.data.id,
@@ -1063,7 +1063,7 @@ export function putTipoTransaccion(objeto) {
 }
 
 export function putTransaccion(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/transaccion`, objeto).then((response) => {
       let transaccion = {
         tipo_transaccion: response.data.tipo_transaccion,
@@ -1077,7 +1077,7 @@ export function putTransaccion(objeto) {
 }
 
 export function putClientes(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/clientes`, objeto).then((response) => {
       let clientes = {
         clientes: response.data.clientes,
@@ -1091,7 +1091,7 @@ export function putClientes(objeto) {
 }
 
 export function putDesafio(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/desafios`, objeto).then((response) => {
       let desafio = {
         nombre_desafio: response.data.nombre_desafio,
@@ -1105,7 +1105,7 @@ export function putDesafio(objeto) {
 }
 
 export function putProducto(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios.put(`${URL}putadmin/productos`, objeto).then((response) => {
       dispatch({
         type: PUT_PRODUCTO,
@@ -1116,7 +1116,7 @@ export function putProducto(objeto) {
 }
 
 export function putUM(objeto) {
-  return function(dispatch) {
+  return function (dispatch) {
     console.log(objeto)
     axios.put(`${URL}putadmin/um`, objeto).then((response) => {
       let um = {
@@ -1133,26 +1133,29 @@ export function putUM(objeto) {
 
 
 export function iniciarSesionGoogle(datosGoogle) {
-  return function(dispatch) {
+  return function (dispatch) {
     axios
       .post(`${URL}ingreso`, datosGoogle)
       .then((respuesta) => {
-      
-            dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            })
-     
+        console.log(respuesta)
+        respuesta.data.msg ? (
+          dispatch({
+            type: LOGIN_ERROR,
+            payload: {
+              msg: respuesta.data.msg,
+              categoria: "alerta-error"
+            },
+          })
+        ) : (
+          dispatch({
+            type: LOGIN_EXITOSO,
+            payload: {
+              token: respuesta.data.token,
+              usuario: respuesta.data.usuario,
+            },
+          })
+        )
       })
-      .catch((err) => dispatch({
-        type: LOGIN_ERROR,
-        payload: {
-          msg: err.response.data.msg,
-          categoria: "alerta-error"
-        },
-      }));
+      .catch((err) => console.log(err));
   };
 }
