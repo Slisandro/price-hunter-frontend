@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putUM, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ function PutUM() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
 
   const submit = async (data, e) => {
@@ -37,6 +38,7 @@ function PutUM() {
         timer: "5000",
       });
     }
+    reset({data})
   };
 
   return (
@@ -59,12 +61,12 @@ function PutUM() {
               className="inp"
               // value={paises.nombre_region}
               // onChange={(e) => ChangeInput(e)}
-              // {...register("codigo_unidad_medida", {
+              {...register("codigo_unidad_medida", {
               //   required: {
               //     value: true,
               //     message: "Debe seleccionar un campo a modificar",
               //   },
-              // })}
+              })}
             >
               <option></option>
               {unidad.map((f, index) => (
