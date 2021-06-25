@@ -39,14 +39,7 @@ function PutMonedas() {
         ...state,
         [name]: target.value,
       });
-    }
-    // else if (name === "simbolo") {
-    //   setState({
-    //     ...state,
-    //     [name]: target.value,
-    //   });
-    // }
-    else if (name === "codigo_moneda") {
+    } else if (name === "codigo_moneda") {
       setState({
         ...state,
         [name]: target.value,
@@ -66,27 +59,6 @@ function PutMonedas() {
       codigo_moneda: state.codigo_moneda,
       simbolo: state.simbolo,
     };
-
-    // if (!nuevaUM.codigo_unidad_medida) {
-    //   alert("Por favor, ingrese el codigo de la moneda");
-    //   return;
-    // }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-    //   alert("El codigo solo puede contener letras");
-    //   return;
-    // }
-    // if (!nuevaUM.nombre_unidad) {
-    //   alert("Por favor, ingrese el nombre de la moneda");
-    //   return;
-    // }
-    // if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-    //   alert("El nombre solo puede contener letras");
-    //   return;
-    // }
 
     dispatch(putMoneda(nuevaMoneda));
     e.target.reset();
