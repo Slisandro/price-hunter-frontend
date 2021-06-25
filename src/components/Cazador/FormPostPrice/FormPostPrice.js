@@ -4,12 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import swal from 'sweetalert';
-import {URL} from '../../Redux/actions';
+import { URL } from '../../Redux/actions';
 
 var geolocation = require('geolocation');
 
 
-function FormPostPrice({ setModal, modal, referencia }) {
+function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
     const [errors, setErrors] = useState({
         nombre_negocio: false,
         direccion_negocio: false,
@@ -67,25 +67,33 @@ function FormPostPrice({ setModal, modal, referencia }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setModal(!modal)
         const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
-            axios.post(`${URL}precios`, state, { headers: { "Authorization": `Bearer ${token}` } })
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
                 .then(resp => {
-                    if (!resp.data.aceptado) {
-                        swal(resp.data.msj, " ", "error");
-                    } else {
-                        swal(resp.data.msj, " ", "success")
+                    const body = {
+                        ...state,
+                        arrayApi: searchCity(resp.data)
                     }
-                    setModal(!modal)
-                    setState({
-                        latitud: "",
-                        longitud: "",
-                        nombre_negocio: "", // Usuario
-                        direccion_negocio: "", // Usuario
-                        precio: 0, // Usuario
-                        desafioId: "", // Usuario
-                    })
+                    axios.post(`${URL}precios`, body, { headers: { "Authorization": `Bearer ${token}` } })
+                        .then(resp => {
+                            if (!resp.data.aceptado) {
+                                swal(resp.data.msj, " ", "error");
+                            } else {
+                                swal(resp.data.msj, " ", "success")
+                            }
+                            setState({
+                                latitud: "",
+                                longitud: "",
+                                nombre_negocio: "", // Usuario
+                                direccion_negocio: "", // Usuario
+                                precio: 0, // Usuario
+                                desafioId: "", // Usuario
+                            })
+                        })
                 })
+
         }
     }
 
@@ -143,3 +151,19 @@ function FormPostPrice({ setModal, modal, referencia }) {
 }
 
 export default FormPostPrice;
+
+function searchCity(obj) {
+    let arr = []
+    obj.results[0].address_components.map(el => {
+        if (el.types.includes("country") && el.types.includes("political")) {
+            return arr[0] = el
+        } else if (el.types.includes("administrative_area_level_1") && el.types.includes("political")) {
+            return arr[1] = el
+        } else if (el.types.includes("administrative_area_level_2") && el.types.includes("political")) {
+            return arr[2] = el
+        } else if (el.types.includes("locality") && el.types.includes("political")) {
+            return arr[3] = el
+        }
+    })
+    return arr;
+}
