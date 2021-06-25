@@ -27,8 +27,6 @@ function PutCategorías() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log(mapeado);
-
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -36,7 +34,6 @@ function PutCategorías() {
     if (name === "nombre_categoria") {
       var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
       var final = cat.id;
-      // console.log(final);
       setState({
         ...state,
         [name]: target.value,
@@ -53,7 +50,6 @@ function PutCategorías() {
         [name]: target.value,
       });
     }
-    // console.log(state);
   };
 
   const {

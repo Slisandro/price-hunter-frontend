@@ -17,14 +17,18 @@ function AdminPage() {
 
   return (
     <div className="contenedor">
-      <NavbarAdm sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+      <NavbarAdm
+        sidebarOpen={sidebarOpen}
+        openSidebar={openSidebar}
+        setState={setState}
+      />
       <MainAdm state={state} setState={setState} />
       <SideAdm
         sidebarOpen={sidebarOpen}
         closeSidebar={closeSidebar}
         setState={setState}
       />
-      <AsideAdm setState={setState} />
+      <AsideAdm />
     </div>
   );
 }

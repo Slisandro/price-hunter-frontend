@@ -18,6 +18,8 @@ function PutCiudades() {
   const ciudades = useSelector((store) => store.ciudades);
   const region = useSelector((store) => store.region);
   const pais = useSelector((store) => store.pais);
+  const paisesId = useSelector((store) => store.paisesId);
+  const ciudadesId = useSelector((store) => store.ciudadesId);
 
   useEffect(() => {
     dispatch(getPais());
@@ -31,7 +33,6 @@ function PutCiudades() {
 
     if (name === "region") dispatch(getPaisesId(value));
     if (name === "paises") dispatch(getCiudadId(value));
-    console.log(value);
   };
 
   const {
@@ -42,13 +43,12 @@ function PutCiudades() {
   } = useForm();
 
   const submit = (data, e) => {
-    // console.log(data);
-    const ciudadModificada = {
-      id: data.ciudad,
-      ciudad: data.nombre_nuevo_pais,
-      paiseCodigoAlfa: data.codigo_pais,
-    };
     if (data.ciudad) {
+      const ciudadModificada = {
+        id: data.ciudad,
+        ciudad: data.nombre_nuevo_pais,
+        paiseCodigoAlfa: data.codigo_pais,
+      };
       dispatch(putCiudad(ciudadModificada));
       e.target.reset();
       swal({
@@ -96,7 +96,7 @@ function PutCiudades() {
             <label className="text-label">Paises</label>
             <select name="paises" onChange={(e) => ChangeInput(e)}>
               <option deafult>Seleccionar</option>
-              {paises.map((u) => (
+              {paisesId.map((u) => (
                 <option value={u.codigo_alfa}>{u.nombre_pais}</option>
               ))}
             </select>
@@ -117,13 +117,13 @@ function PutCiudades() {
                 })}
               >
                 <option></option>
-                {ciudades.map((f, index) => (
+                {ciudadesId.map((f, index) => (
                   <option key={index} value={f.id}>
                     {f.ciudad}
                   </option>
                 ))}
               </select>
-              <span className="err">{errors?.ciudades?.message}</span>
+              <span className="err">{errors?.ciudadesId?.message}</span>
               <div>
                 <label className="text-label">Código País</label>
                 <select
@@ -138,7 +138,7 @@ function PutCiudades() {
                   })}
                 >
                   <option></option>
-                  {pais.map((f, index) => (
+                  {paisesId.map((f, index) => (
                     <option key={index} value={f.codigo_alfa}>
                       {f.codigo_alfa}
                     </option>
