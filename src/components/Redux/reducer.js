@@ -140,7 +140,8 @@ const initialState = {
   region: [],
   moneda: [],
   transaccion: [],
-
+  paisesId: [],
+  ciudadesId: [],
   //-------------ADMIN-PUT-------------//
 };
 
@@ -248,7 +249,7 @@ function rootReducer(state = initialState, action) {
         autenticado: false,
         token: null,
         usuario: null,
-        mensaje: action.payload
+        mensaje: action.payload,
       };
     // case UNIDAD_MEDIDA_POST:
     //   return {
@@ -383,16 +384,26 @@ function rootReducer(state = initialState, action) {
         ...state,
         productos: action.payload,
       };
-      case GET_CATEGORIA_POR_ID:
-        return {
-          ...state,
-          categorias: action.payload,
-        };
-        case GET_SUBCATEGORIA_POR_ID:
-        return {
-          ...state,
-          subcategoria: action.payload,
-        };
+    case GET_CATEGORIA_POR_ID:
+      return {
+        ...state,
+        categorias: action.payload,
+      };
+    case GET_SUBCATEGORIA_POR_ID:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_PAISES_ID:
+      return {
+        ...state,
+        paisesId: action.payload,
+      };
+    case GET_CIUDADES_ID:
+      return {
+        ...state,
+        ciudadesId: action.payload,
+      };
     //-------------ADMIN-------------//
     //-------------ADMIN-PUT-------------//
     // case PUT_FAMILIA:
