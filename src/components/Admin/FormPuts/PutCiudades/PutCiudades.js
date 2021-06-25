@@ -15,15 +15,19 @@ import { useForm } from "react-hook-form";
 function PutCiudades() {
   const dispatch = useDispatch();
   const paises = useSelector((store) => store.paises);
+  const ciudad = useSelector((store) => store.ciudad);
   const ciudades = useSelector((store) => store.ciudades);
   const region = useSelector((store) => store.region);
   const pais = useSelector((store) => store.pais);
+
+  const ciudadesId = useSelector((store) => store.ciudadesId);
+  const paisesId = useSelector((store) => store.paisesId);
 
   useEffect(() => {
     dispatch(getPais());
     dispatch(getRegion());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
@@ -31,8 +35,9 @@ function PutCiudades() {
 
     if (name === "region") dispatch(getPaisesId(value));
     if (name === "paises") dispatch(getCiudadId(value));
-    console.log(value);
+    // console.log(value);
   };
+  console.log(pais, ciudad);
 
   const {
     register,
@@ -43,12 +48,12 @@ function PutCiudades() {
 
   const submit = (data, e) => {
     // console.log(data);
-    const ciudadModificada = {
-      id: data.ciudad,
-      ciudad: data.nombre_nuevo_pais,
-      paiseCodigoAlfa: data.codigo_pais,
-    };
     if (data.ciudad) {
+      const ciudadModificada = {
+        id: data.ciudad,
+        ciudad: data.nombre_nuevo_pais,
+        paiseCodigoAlfa: data.codigo_pais,
+      };
       dispatch(putCiudad(ciudadModificada));
       e.target.reset();
       swal({
@@ -96,7 +101,7 @@ function PutCiudades() {
             <label className="text-label">Paises</label>
             <select name="paises" onChange={(e) => ChangeInput(e)}>
               <option deafult>Seleccionar</option>
-              {paises.map((u) => (
+              {paisesId.map((u) => (
                 <option value={u.codigo_alfa}>{u.nombre_pais}</option>
               ))}
             </select>
@@ -117,7 +122,7 @@ function PutCiudades() {
                 })}
               >
                 <option></option>
-                {ciudades.map((f, index) => (
+                {ciudadesId.map((f, index) => (
                   <option key={index} value={f.id}>
                     {f.ciudad}
                   </option>
