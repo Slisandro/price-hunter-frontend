@@ -20,7 +20,8 @@ function MyMap({ ubicacion }) {
                     width: "40%",
                     background: "rgba(255, 255, 255, .5)",
                     borderRadius: "1em",
-                    margin: "2%"
+                    margin: "2%",
+                    boxShadow: "rgb(255 255 255 / 15%) 0px 5px 15px"
                 }}
             >
                 <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
