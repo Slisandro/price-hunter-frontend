@@ -34,8 +34,8 @@ const MainAdm = ({ state, setState }) => {
   const [producto, setProducto] = useState("");
 
   return (
-    <main className="main">
-      <div className="main__container">
+    <main className="mainADM">
+      <div className="main__containerr">
         {state === "Desafios" ? null : (
           <NavBarMainAdm
             producto={producto}

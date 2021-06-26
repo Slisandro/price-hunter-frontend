@@ -54,7 +54,7 @@ function MisDesafios({ ubicacion }) {
                 {
                     modal
                         ?
-                        <FormPostPrice setModal={handleClickClose} modal={modal} referencia={referencia} />
+                        <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
                         : null
                 }
             </>
@@ -67,13 +67,13 @@ export default MisDesafios;
 function searchCity(obj) {
     let arr = []
     obj.results[0].address_components.map(el => {
-        if (el.types.includes("country")) {
+        if (el.types.includes("country") && el.types.includes("political")) {
             return arr[0] = el
-        } else if (el.types.includes("administrative_area_level_1")) {
+        } else if (el.types.includes("administrative_area_level_1") && el.types.includes("political")) {
             return arr[1] = el
-        } else if (el.types.includes("administrative_area_level_2")) {
+        } else if (el.types.includes("administrative_area_level_2") && el.types.includes("political")) {
             return arr[2] = el
-        } else if (el.types.includes("sublocality_level_1")) {
+        } else if (el.types.includes("locality") && el.types.includes("political")) {
             return arr[3] = el
         }
     })

@@ -213,7 +213,7 @@ input {
 
 .formSearchUser {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     width: 40%;
     height: 100%;
     align-items: center;

@@ -17,13 +17,14 @@ function PutTiposUsuarios() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
     if (data.tipo_usuario) {
       dispatch(putTipoUsuario(data));
       e.target.reset();
-      // dispatch(getTipoUsuario());
+
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
@@ -38,6 +39,7 @@ function PutTiposUsuarios() {
         timer: "5000",
       });
     }
+    reset({ data });
   };
 
   return (
