@@ -279,7 +279,7 @@ export function iniciarSesion(datos) {
         payload: {
           msg: err.response.data.msg,
           categoria: "alerta-error"
-        },
+        }
       }));
   };
 }
@@ -1134,25 +1134,6 @@ export function putUM(objeto) {
 
 export function iniciarSesionGoogle(datosGoogle) {
   return function(dispatch) {
-    axios
-      .post(`${URL}ingreso`, datosGoogle)
-      .then((respuesta) => {
-      
-            dispatch({
-              type: LOGIN_EXITOSO,
-              payload: {
-                token: respuesta.data.token,
-                usuario: respuesta.data.user,
-              },
-            })
-     
-      })
-      .catch((err) => dispatch({
-        type: LOGIN_ERROR,
-        payload: {
-          msg: err.response.data.msg,
-          categoria: "alerta-error"
-        },
-      }));
+  
   };
 }

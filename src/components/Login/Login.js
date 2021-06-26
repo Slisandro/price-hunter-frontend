@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Login.css";
-import aguila from "../../assets/aguila.png";
+// import aguila from "../../assets/aguila.png";
 import Google from '../../assets/google.png';
 import { iniciarSesion, mostrarError, iniciarSesionGoogle } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 import GoogleLogin from "react-google-login";
+import svg from "../../assets/undraw_personal_finance_tqcd.svg";
+
 
 
 
@@ -64,18 +66,18 @@ const Login = (props) => {
 
 
 
-/******************************************************************************************************************************/
+  /******************************************************************************************************************************/
 
 
-const onSuccessGoogle = (googleUser) => {
-  var datos = googleUser.profileObj;
-  console.log(datos)
-  dispatch(iniciarSesionGoogle(datos))
+  const onSuccessGoogle = (googleUser) => {
+    var datos = googleUser.profileObj;
+    console.log(datos)
+    dispatch(iniciarSesionGoogle(datos))
   }
 
 
 
-/*******************************************************************************************************************************/
+  /*******************************************************************************************************************************/
 
   const [user, guardarUser] = useState({
     email: "",
@@ -100,7 +102,7 @@ const onSuccessGoogle = (googleUser) => {
       return;
     }
 
-    if(password < 6){
+    if (password < 6) {
       dispatch(mostrarError('La contraseña debe tener mas de 6 caracteres', 'alerta-error'));
       return;
 
@@ -124,74 +126,76 @@ const onSuccessGoogle = (googleUser) => {
 
 
   return (
-    <section className="loginHunter">
-     {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
-      <section className="loginContainer_hunter">
-        <img src={aguila} alt="" id="logologin" />
-        <h2 className="h2Title">Iniciar sesión</h2>
+    <div className="loger_cont">
 
+      <div className="global-container__log">
+
+        <img className="img__Login text-center" src={svg} alt="" width={350} />
        
-        {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+        <div className="card login-form">
+        {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
+          <div className="card-body">
 
-        <form className="loginContainer_hunter--form" onSubmit={handleSubmit}>
-          <input
-            name="email"
-            id="input_login"
-            type="text"
-            placeholder="Correo"
-            onChange={handleInputLogin}
-            value={email}
-          />
-          <input
-            name="password"
-            id="input_login"
-            type="password"
-            placeholder="Contraseña"
-            onChange={handleInputLogin}
-            value={password}
-          />
+            <h1 className="card-title text-center">Iniciar Sesion</h1>
+            <div className="card-text">
+              {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label>Correo</label>
+                  <input
+                    name="email"
+                    type="email"
+                    className="logput form-control form-control-sm"
+                    onChange={handleInputLogin}
+                    value={email}
+                  />
 
-          <button className="button__login" type="submit" >Iniciar sesión</button>
+                </div>
+
+                <div className="form-group">
+                  <label>Contraseña</label>
+                  <a className="a-log" href="!#" >Olvidó su contraeña</a>
+                  <input
+
+                    type="password"
+                    className="logput form-control form-control-sm"
+                    name="password"
+                    onChange={handleInputLogin}
+                    value={password}
+                  />
+
+                </div>
+
+                <button type="submit" className="btn btn-block">Iniciar sesion</button>
+
+                <GoogleLogin
+                  clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+                  render={renderProps => (
+                    <button className="btn_google btn-block" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
+                  )}
+                  onSuccess={onSuccessGoogle}
+                  onFailure={onSuccessGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
 
 
 
-          <div className="loginContainer_hunter--remember-me">
-            <label>
-              <input className="check" type="checkbox" id="cbox1" value="first_checkbox" />Recuérdame
-            </label>
-            <label>
-              <a href="/">Olvidé mi contraseña</a>
-            </label>
+                <div className="singup">
+                  No tiene una cuenta? <Link className="a-new" to="/registro">Crear aquí</Link>
+                </div>
+              </form>
+
+            </div>
           </div>
-        </form>
-
-        <section className="loginContainer_hunter--social-media">
-          
-          
-          
-          <GoogleLogin
-            clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
-            render={renderProps => (
-              <button className="button__login__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
-            )}
-            onSuccess={onSuccessGoogle}
-            onFailure={onSuccessGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
-
-
-
-
-        </section>
-
-        <div className="register__loginHunter">
-          <p className="loginContainer_hunter--register"> No tienes cuenta ?</p>
-          <p className="loginContainer_hunter--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
         </div>
+      </div>
+    </div>
 
-      </section>
-    </section>
   );
 };
 
 export default Login;
+
+
+
+
