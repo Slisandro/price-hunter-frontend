@@ -273,15 +273,6 @@ export function iniciarSesion(datos) {
               },
             });
       })
-<<<<<<< HEAD
-      .catch((err) => dispatch({
-        type: LOGIN_ERROR,
-        payload: {
-          msg: err.response.data.msg,
-          categoria: "alerta-error"
-        }
-      }));
-=======
       .catch((err) =>
         dispatch({
           type: LOGIN_ERROR,
@@ -291,7 +282,6 @@ export function iniciarSesion(datos) {
           },
         })
       );
->>>>>>> cdcbaf950750c73fc6130a22821126fb4e427e23
   };
 }
 
