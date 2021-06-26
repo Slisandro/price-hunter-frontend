@@ -20,6 +20,8 @@ import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
 import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 import RegistroCliente from "./components/Registro/RegistroCliente";
+import Landing from "./HomePage/Landing";
+
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
         <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
 
         <Route exact path="/terminos-condiciones" component={Modal} />
+        <Route exact path="/landing" component={Landing} />
+     
       </Switch>
     </Router>
   );
