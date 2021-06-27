@@ -10,7 +10,6 @@ import {
 } from "../../../Redux/actions";
 import swal from "sweetalert";
 import { useForm } from "react-hook-form";
-// import "./FormUnidadMedida.css";
 
 function PutCiudades() {
   const dispatch = useDispatch();
