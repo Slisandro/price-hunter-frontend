@@ -11,9 +11,9 @@ var geolocation = require('geolocation');
 
 function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
     const [errors, setErrors] = useState({
-        nombre_negocio: false,
-        direccion_negocio: false,
-        precio: false,
+        // nombre_negocio: true,
+        // direccion_negocio: true,
+        precio: true,
     });
 
     useEffect(() => {
@@ -42,46 +42,45 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
             [e.target.name]: e.target.value
         })
 
-        if (e.target.value === "") {
-            setErrors({
-                ...errors,
-                [e.target.name]: true
+        if (e.target.name === "precio") {
+            setState({
+                ...state,
+                precio: parseFloat(e.target.value)
             })
-        } else {
 
-            if (e.target.name === "precio") {
-                setState({
-                    ...state,
-                    precio: parseFloat(e.target.value)
+            if (e.target.value <= 0) {
+                setErrors({
+                    precio: true
+                })
+            } else {
+                setErrors({
+                    precio: false
                 })
             }
-
-            setErrors({
-                ...errors,
-                [e.target.name]: false
-            })
         }
-
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setModal(!modal)
-        const token = localStorage.getItem("token");
         if (Object.values(errors).filter(x => x === true).length === 0) {
+            setModal(!modal)
+            const token = localStorage.getItem("token");
             axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
                 .then(resp => {
+                    console.log(resp)
                     const body = {
                         ...state,
                         arrayApi: searchCity(resp.data)
                     }
+                    console.log(body)
                     axios.post(`${URL}precios`, body, { headers: { "Authorization": `Bearer ${token}` } })
                         .then(resp => {
+                            console.log(resp)
                             if (!resp.data.aceptado) {
                                 swal(resp.data.msj, " ", "error");
                             } else {
-                                swal(resp.data.msj, " ", "success")
+                                swal(`${resp.data.msj}. . . . . . ${resp.data.rptaPuntos}`, " ", "success")
                             }
                             setState({
                                 latitud: "",
@@ -94,6 +93,8 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
                         })
                 })
 
+        } else {
+            swal("Debes ingresar el precio. Captura no valida")
         }
     }
 
@@ -102,7 +103,7 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
             <h2 className="h2">Publicar precio</h2>
             <button className="closeModal" onClick={e => setModal(!modal)}>X</button>
             <Form.Group>
-                <Form.Label className="label">Nombre del negocio</Form.Label>
+                <Form.Label className="label">Nombre del negocio (opcional)</Form.Label>
                 <Form.Control
                     name="nombre_negocio"
                     onChange={(e) => handleChange(e)}
@@ -111,12 +112,12 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
                     placeholder="Ingresé nombre del negocio"
                     className="control"
                 />
-                <Form.Text className={errors.nombre_negocio ? "errors" : "inputSinError"}>
+                {/* <Form.Text className={errors.nombre_negocio ? "errors" : "inputSinError"}>
                     Este campo no puede estar vacío
-                </Form.Text>
+                </Form.Text> */}
             </Form.Group>
             <Form.Group>
-                <Form.Label className="label">Dirección del negocio</Form.Label>
+                <Form.Label className="label">Dirección del negocio (opcional)</Form.Label>
                 <Form.Control
                     name="direccion_negocio"
                     onChange={(e) => handleChange(e)}
@@ -125,9 +126,9 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
                     placeholder="Ingresé dirección del negocio"
                     className="control"
                 />
-                <Form.Text className={errors.direccion_negocio ? "errors" : "inputSinError"}>
+                {/* <Form.Text className={errors.direccion_negocio ? "errors" : "inputSinError"}>
                     Este campo no puede estar vacío
-                </Form.Text>
+                </Form.Text> */}
             </Form.Group>
             <Form.Group>
                 <Form.Label className="label">Precio</Form.Label>

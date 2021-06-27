@@ -1,6 +1,5 @@
 import React from "react";
 import Tablero from "./components/Cazador/Tablero Usuario/Tablero";
-import HomePage from "./HomePage/HomePage";
 import Marcas from "./components/NavBarLinks/Marcas";
 import SobreNosotros from "./components/NavBarLinks/SobreNosotros";
 import Contacto from "./components/NavBarLinks/Contacto";
@@ -22,6 +21,7 @@ import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/L
 import RegistroCliente from "./components/Registro/RegistroCliente";
 import Landing from "./HomePage/Landing";
 import Dash from "./components/Dashboard/Dash";
+import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 
 function App() {
   return (
@@ -40,6 +40,7 @@ function App() {
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
         <Route exact path="/registro-cliente" component={RegistroCliente} />
+        <Route exact path="/registro-google" component={RegistroGoogle} />
         {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}

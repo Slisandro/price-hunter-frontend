@@ -1,15 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap");
 
 .loger_cont {
-  background: radial-gradient(
-    circle,
-    #0cdaf5 0%,
-    #271d63 50%,
-    #181046 75%,
-    #181046 100%
-  );
+  /* background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%); */
+  background: #45a0dd;
   height: 100vh;
   font-family: "Catamaran", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .global-container__log {
@@ -117,8 +115,15 @@
   color: rgb(2, 103, 2);
 }
 .alerta-error {
-  background-color: rgb(245, 0, 0);
-  color: #f0f8f8;
-  border-radius: 0.2em;
-  font-weight: 600;
+  background-color: transparent !important;
+  color: #fc3a3a !important;
+  border-radius: 0.1em;
+  font-weight: 600 !important;
+  padding: 0.2em;
+  font-size: 15px;
+}
+
+.button__google {
+  background: transparent;
+  border: none;
 }

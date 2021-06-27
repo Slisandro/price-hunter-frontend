@@ -7,7 +7,16 @@ import Google from '../../assets/google.png';
 import { iniciarSesion, mostrarError, iniciarSesionGoogle } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 import GoogleLogin from "react-google-login";
-import svg from "../../assets/undraw_personal_finance_tqcd.svg";
+// import svg from "../../assets/undraw_personal_finance_tqcd.svg";
+import {
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Button,
+  Card,
+  CardBody
+} from "reactstrap";
 
 
 
@@ -69,11 +78,11 @@ const Login = (props) => {
   /******************************************************************************************************************************/
 
 
-const onSuccessGoogle = (googleUser) => {
-  // var datos = googleUser.profileObj;
-  var datos = googleUser;
-  // console.log(googleUser)
-  dispatch(iniciarSesionGoogle(datos))
+  const onSuccessGoogle = (googleUser) => {
+    // var datos = googleUser.profileObj;
+    // var datos = googleUser;
+    // console.log(googleUser)
+    // dispatch(iniciarSesionGoogle(datos))
   }
 
 
@@ -126,76 +135,94 @@ const onSuccessGoogle = (googleUser) => {
 
 
 
+
+
+
+
   return (
+    <>
+    
     <div className="loger_cont">
+    
 
       <div className="global-container__log">
 
-        <img className="img__Login text-center" src={svg} alt="" width={350} />
        
-        <div className="card login-form">
+        <Card className="card__login">
         {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
-          <div className="card-body">
+          <CardBody>
+          {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+            <form className="login__form" onSubmit={handleSubmit}>
 
-            <h1 className="card-title text-center">Iniciar Sesion</h1>
-            <div className="card-text">
-              {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>Correo</label>
-                  <input
-                    name="email"
-                    type="email"
-                    className="logput form-control form-control-sm"
-                    onChange={handleInputLogin}
-                    value={email}
-                  />
-
-                </div>
-
-                <div className="form-group">
-                  <label>Contraseña</label>
-                  <a className="a-log" href="!#" >Olvidó su contraeña</a>
-                  <input
-
-                    type="password"
-                    className="logput form-control form-control-sm"
-                    name="password"
-                    onChange={handleInputLogin}
-                    value={password}
-                  />
-
-                </div>
-
-                <button type="submit" className="btn btn-block">Iniciar sesion</button>
-
-                <GoogleLogin
-                  clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
-                  render={renderProps => (
-                    <button className="btn_google btn-block" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
-                  )}
-                  onSuccess={onSuccessGoogle}
-                  onFailure={onSuccessGoogle}
-                  cookiePolicy={'single_host_origin'}
+              <FormGroup row>
+                <Label for="correo"> Correo </Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="correo"
+                  placeholder="Ingrese su correo"
+                  onChange={handleInputLogin}
+                  value={email}
                 />
 
+              </FormGroup>
+              
+              
+              <FormGroup row>
+                <Label for="examplePassword">Contraseña</Label>
+                <Input
+
+                  type="password"
+                  name="password"
+                  id="examplePassword"
+                  placeholder="Ingrese su contraseña"
+                  autoComplete="off"
+                  onChange={handleInputLogin}
+                  value={password}
+                />
+              </FormGroup>
+              <div className=" text-center google__log">
+                <FormText color="muted">
+                  <p>Iniciar sesion con Google</p>
+                  <GoogleLogin
+                    clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+                    render={renderProps => (
+                      <button className="button__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} alt="" width={25} /></button>
+                    )}
+                    onSuccess={onSuccessGoogle}
+                    onFailure={onSuccessGoogle}
+                    cookiePolicy={'single_host_origin'}
+                  />
+                  
+                </FormText>
+              </div>
 
 
-                <div className="singup">
-                  No tiene una cuenta? <Link className="a-new" to="/registro">Crear aquí</Link>
-                </div>
-              </form>
+              <Button className="button__login" type="submit" block>
+                Iniciar sesion
+              </Button>
 
-            </div>
-          </div>
-        </div>
+
+            </form>
+
+
+
+          </CardBody>
+        </Card>
+
+
       </div>
     </div>
+    </>
 
   );
 };
 
 export default Login;
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MisDesafios from "../MisDesafios/MisDesafios";
 import NavBarMain from "../../navBarMain/NavBarMain";
@@ -42,21 +42,31 @@ const Main = ({ state, setState, ubicacion, setUbicacion }) => {
               </div>
             )
           ) : state === "Desafios" ? (
-            <MisDesafios setState={setState} ubicacion={ubicacion}/>
+            <MisDesafios setState={setState} ubicacion={ubicacion} />
           ) : state === "Configuracion" ? (
             <Configuración />
           ) : state === "Movimientos" ? (
             <Monedero />
           ) : state === "Panel" ?
-            <Suspense fallback={<div>Cargando...</div>}>
-              <MyMap ubicacion={ubicacion} />
+            // <Suspense fallback={<div>Cargando...</div>}>
+            <>
+              {/* <MyMap ubicacion={ubicacion} /> */}
+              <h2 
+              style={{
+                margin: "2%",
+                color: "white",
+                fontWeight: 700,
+              }}
+    >
+      Últimas 5 transacciones</h2>
               <Transacciones />
-            </Suspense>
-            : null
+            </>
+            // </Suspense>
+      : null
           }
         </div>
-      </div>
-    </main>
+      </div >
+    </main >
   );
 };
 

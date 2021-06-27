@@ -12,7 +12,7 @@ ul {
   
 .hunter__landing__content {
   font-family: "Catamaran", sans-serif;
-  color: #333;
+  color: rgb(51, 51, 51);
   line-height: 1.6;
   background-color: #fafafaf8;
   overflow-x: hidden;
@@ -22,7 +22,7 @@ ul {
 
 /* Navbar */
 .navbar__landing {
-  background-color: #0f1441;
+  background-color: #0a2352;
   color: rgb(255, 255, 255);
   height: 65px;
   padding-top: 1em;
@@ -101,7 +101,7 @@ ul {
 /* Showcase */
 .showcase {
     height: 400px;
-    background-color: #0f1441;
+    background-color: #0a2352;
     color: #fff;
     position: relative;
     border-bottom: rgb(0, 233, 241);
@@ -149,7 +149,7 @@ ul {
     bottom: -70px;
     right: 0;
     left: 0;
-    background: radial-gradient(circle, #05cfc5 0%, #161b44 50% ,#0f1441 75%,#0f1441 100%);
+    background: radial-gradient(circle, #45a0dd 0%, #0a2352 50% ,#0a2352 75%,#0a2352 100%);
 
    
   }
@@ -284,6 +284,8 @@ ul {
 
 /*SECCION UTILIDADES*/
 
+
+
 .containerLanding{
     max-width: 1750px;
     margin: 0 auto;
@@ -296,13 +298,39 @@ ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr) !important;
   }
+
+.card-instructions{
+  background: #0a2352 !important;
+  color: #f5f5f5 !important;
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  transition: .5s;
+ 
+}
+.card-instructions:hover{
+  transform: translateY(-17px);
+}
+
+.card__title__instructions{
+  font-size: 40px !important;
+  color: #00f5fd !important;
+}
+
+
+
+
+
+
+
+
   .how-it-works-item{
     padding: 30px;
     text-align: center;
   }
   
   .how-it-works{
-    background: #0a0f47;
+    background: linear-gradient(to right,#11cdef, #1573ca );
+
     height: 440px;
     margin-bottom: 50px;
   }
@@ -315,9 +343,9 @@ ul {
   
   .section-title h2{
     font-weight: bold;
-    color: #88ee02 !important;
+    color: #ffffff !important;
     margin-top:3rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   
@@ -356,24 +384,23 @@ ul {
     transform: translateY(-15px);
   }
   
-  .how-it-works-item h3{
-    margin: 20px 0;
-    font-size: 22px;
-    font-weight: 600;
-    color: #fdfdfd;
   
-    
-  
-  
-    
+  .title_jumbo{
+    color: rgb(1, 247, 234) !important;
+    font-size: 25px !important;
   }
-  
-  .how-it-works-item p{
-    font-size: 17px;
-    font-weight: 500;
-    margin: 0;
-    color: #fcfcfc;
-    line-height: 20px;
+  .jumboLanding{
+    background: #0a2352 !important;
+    color: rgb(248, 238, 238) !important;
+    margin-top: 30px;
+    font-size: 17px !important;
+    width: 700px;
+    font-weight: bold !important;
+
+  }
+  .button_empresa{
+    background: yellowgreen !important;
+    color: black !important;
 
   }
   
@@ -381,7 +408,8 @@ ul {
   
 .img__empresas{
     width: 190px !important;
-    margin-left: 110px;
+    margin-left: 130px;
+    margin-top: 20px;
   }
 
   .empresas{
@@ -400,7 +428,31 @@ ul {
 
 
 
-
+  .marcas{
+    height: 700px;
+    background-color: #fffffff8;
+  
+  }
+  
+  .marcas .flex {
+    flex-wrap: wrap;
+  }
+  
+  .marcas .card {
+    text-align: center;
+    margin: 18px 10px 40px;
+    transition: transform 0.2s ease-in;
+  }
+  
+  .marcas .card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .marcas .card:hover {
+    transform: translateY(-15px);
+  }
+  
 
 
 
@@ -461,8 +513,9 @@ ul {
 /* Footer */
 
 .footer{
-    background: #0a0f47;
+  background: linear-gradient(to left,#11cdef, #1573ca );
     color: #fcfcfc;
+    font-weight: bold;
 }
 
 .footer nav ul li a{
@@ -599,8 +652,8 @@ ul {
     }
   
     .img__empresas{
-      width: 120px ;
-      margin-left: 90px;
+      width: 160px !important;
+      margin-left: 160px;
     }
     
   

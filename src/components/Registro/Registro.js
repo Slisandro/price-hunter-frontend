@@ -15,8 +15,6 @@ import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades} f
 
 
 const Registro = (props) => {
-  
-  
   const alerta = useSelector((store) => store.alerta);
   const generos = useSelector((store) => store.generos);
   const paises = useSelector((store) => store.paises);
