@@ -29,17 +29,21 @@ import {
 function PutCiudades() {
   const dispatch = useDispatch();
   const paises = useSelector((store) => store.paises);
+  const ciudad = useSelector((store) => store.ciudad);
   const ciudades = useSelector((store) => store.ciudades);
   const region = useSelector((store) => store.region);
   const pais = useSelector((store) => store.pais);
   const paisesId = useSelector((store) => store.paisesId);
   const ciudadesId = useSelector((store) => store.ciudadesId);
 
+  const ciudadesId = useSelector((store) => store.ciudadesId);
+  const paisesId = useSelector((store) => store.paisesId);
+
   useEffect(() => {
     dispatch(getPais());
     dispatch(getRegion());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
@@ -48,6 +52,7 @@ function PutCiudades() {
     if (name === "region") dispatch(getPaisesId(value));
     if (name === "paises") dispatch(getCiudadId(value));
   };
+  console.log(pais, ciudad);
 
   const {
     register,

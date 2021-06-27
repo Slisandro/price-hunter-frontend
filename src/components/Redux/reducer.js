@@ -201,16 +201,10 @@ function rootReducer(state = initialState, action) {
       localStorage.setItem(
         "nombre",
         action.payload.usuario
-          ? (
-            action.payload.usuario.nombre
-          )
-          : (
-            action.payload.cliente ? (
-              action.payload.cliente.nombre_cial_fantasia
-            ) : (
-              action.payload.admin.nombre
-            )
-          )
+          ? action.payload.usuario.nombre
+          : action.payload.cliente
+          ? action.payload.cliente.nombre_cial_fantasia
+          : action.payload.admin.nombre
       );
       localStorage.setItem("auth", true);
       if (action.payload.cliente) {
