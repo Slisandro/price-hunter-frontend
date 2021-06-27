@@ -8,11 +8,14 @@ import {
   CardFooter,
   CardText,
   FormGroup,
+  ButtonToggle,
+  CardTitle,
   Form,
   Input,
   Row,
   Col,
   FormText,
+  Label
 } from "reactstrap";
 import {
   productoPost,
@@ -135,6 +138,8 @@ function FormAgregarProducto() {
           <Col lg="6">
             <Card>
               <div>
+                
+                
                 {modal ? (
                   <div>
                     <CardHeader>
@@ -143,6 +148,7 @@ function FormAgregarProducto() {
                       </header>
                     </CardHeader>
                     <CardBody>
+                      
                       <Form
                         // id="survey-form"
                         className="card-chart"
@@ -150,8 +156,11 @@ function FormAgregarProducto() {
                         onChange={(e) => ChangeInput(e)}
                         onSubmit={handleSubmit(submit)}
                       >
+
+
+                  
                         <Row>
-                          <Col className="pr-md-1" lg="8">
+                          <Col className="pr-md-1" lg={8}>
                             <div
                               className="btn-group-toggle float-right"
                               data-toggle="buttons"
@@ -164,14 +173,15 @@ function FormAgregarProducto() {
                                   easily wraps to a new line.
                                 </FormText>
                               </div>
+                              
                               <div className="divForm">
                                 <div>
                                   {/* ------------------------ */}
-                                  <label className="text-label">
-                                    Unidad de Medida
-                                  </label>
+                                  <label className="text-label">Unidad de Medida</label>
                                   <br></br>
+                              
                                   <select
+                                   
                                     name="unidadMedidaCodigoUnidadMedida"
                                     className="inp2"
                                     onChange={(e) => ChangeInput(e)}
@@ -240,14 +250,8 @@ function FormAgregarProducto() {
                                   {errors?.subcategoriumId?.message}
                                 </span>
                               </div>
-                              <br></br>
-                              <Button
-                                className="btn-fill"
-                                color="primary"
-                                type="submit"
-                              >
-                                Agregar
-                              </Button>
+                              
+                              <Button color="primary" size="lg" block>Block level button</Button>
                             </div>
                           </Col>
                         </Row>
@@ -260,6 +264,7 @@ function FormAgregarProducto() {
           </Col>
         </Row>
       </div>
+
     </>
   );
 }

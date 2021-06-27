@@ -3,10 +3,16 @@
 
 
 .loger_cont{
-  background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%);
+  /* background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%); */
+  background: #45a0dd;
   height: 100vh;
   font-family: "Catamaran", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
 
 
 .global-container__log{
@@ -14,114 +20,57 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00f3fc;
+  color: #ffffff;
+  width: auto;
   
 }
-.form-group label{
-  color: #10ebe0 !important;
-}
-.form{
-  padding-top: 16px;
-  font-size: 12px;
-  margin-top: 30px;
 
-}
-
-.login-form{
-  width: 380px;
-  height: 460px;
-  margin: 25px;
-  background:#1a2226 !important ;
-  border-radius: 20px !important;
-  border: 4px solid #00edf5 !important;
-
+.card__login{
+  background: #0a2352 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+  border-radius: 1em !important;
 }
 
-.logput,
-.logput{
-  background: #000000 !important;
-  border: 2px solid #00f3fc !important;
-  margin-bottom: 25px;
-  border-radius: 5px;
-  color: #00f3fc !important;
-
+.login__form{
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: bold;
 }
 
 
-.logput:focus{
-  outline: none !important;
-  border: none;
-  margin: 0;
-  background:#1a2226 !important ;
-  color: #00f3fc !important;
+
+.login__form label{
+  color: rgb(0, 232, 240) !important;
+  font-size: 15px !important;
+  font-weight: bold;
 }
 
-
-.a-log{
-  float: right;
-  font-size: 14px;
-  color: white;
-  font-weight: 700 !important;  
+.google__log{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.a-new{
-  color: #ffffff;
-  font-weight: 700 !important;
-}
-
-
-.card-title{
-  font-weight: 700 !important;
-  padding-top: 8px;
-  font-size: 25px;
-  color: rgb(127, 243, 11) !important;
-}
 
 
 .btn{
-  font-size: 14px !important;
-  transform: translateY(10px);
-  border-radius: 10px !important;
-  color: #031b17;
-  font-weight: 700 !important;
-  background: #03d6d6 !important;
+  width: 380px !important;
+  font-size: 13px !important;
+  transform: translateY(12px);
+  border-radius: 2px !important;
+  color: #031b17 !important;
+  font-weight: 750 !important;
+  background: #0a9df1 !important;
 }
-
-
-.btn_google{
-  font-size: 14px;
-  transform: translateY(10px);
-  border-radius: 10px !important;
-  color: #00fdd3;
-  font-weight: 900;
-  background: #1a2226;
-  border: none;
-  cursor: pointer;
-}
-
-
-.singup{
-  text-align: center;
-  padding-top: 25px;
-  font-weight: 500;
-  color: rgb(0, 240, 220) !important;
+.btn:hover{
+  background: #0a173f !important;
 
 }
 
-
-@media only screen and (max-width:850px) {
-  .img__Login{
-      display: none;
-  }  
-}
-
-@media only screen and (max-width:480px) {
-  .img__Login{
-      display: none;
-  }
-
-}
 
 
 .alerta-ok {
@@ -129,10 +78,16 @@
   color: rgb(2, 103, 2);
 }
 .alerta-error {
-  background-color: rgb(245, 0, 0);
-  color: #f0f8f8;
-  border-radius: .2em;
-  font-weight: 600;
+  background-color: transparent !important;
+  color: #fc3a3a !important;
+  border-radius: .1em;
+  font-weight: 600 !important;
+  padding: .2em;
+  font-size: 15px;
 }
 
 
+.button__google{
+  background: transparent;
+  border: none;
+}
