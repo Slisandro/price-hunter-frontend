@@ -127,6 +127,7 @@ function Monedero() {
                     !modal ? null :
                         <div className="FormPostPrice" id="modalRetiroPoints">
                             <h2 className="h2">Retiro de Puntos</h2>
+                            <label className="label">El canje de puntos se hará a la cuenta y banco indicados cuando creaste tu cuenta</label>
                             <button className="closeModal" onClick={() => {
                                 setModal(!modal)
                                 setPuntos(0)

@@ -83,12 +83,11 @@ export function getProductsByName(nombre, body) {
       url: `${URL}productos?name=${nombre}&long=${body.longitud}&lat=${body.latitud}&dis=${body.dis}`,
       headers: { Authorization: `Bearer ${token}` },
     }).then((r) => {
-      // console.log(r.data);
       dispatch({
         type: GET_PRODUCTOS_NAME,
         payload: r.data,
       });
-    });
+    }); 
   };
 }
 
