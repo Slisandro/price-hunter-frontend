@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
 
 .containerTransaccionesUser {
-    width: 40%;
+    width: 35%;
     height: 30vh;
     background: rgba(255,255,255,.25);
     margin: 2%;
     border-radius: .5em;
     font-family: 'Rubik', sans-serif;
+    box-shadow: rgb(255 255 255 / 15%) 0px 5px 15px;
 }
 
 .containerTransaccionesUser .listTransaccionesUser {

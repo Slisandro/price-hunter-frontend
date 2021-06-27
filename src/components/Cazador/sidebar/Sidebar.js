@@ -36,10 +36,10 @@ const Sidebar = (props) => {
           <button value={"Movimientos"} onClick={() => props.setState("Movimientos")}>Mis movimientos</button>
         </div>
 
-        <div className="sidebar__link sideBarUser" id={props.state === "Configuracion" ? "inputActiveSideBarUser" : null}>
+        {/* <div className="sidebar__link sideBarUser" id={props.state === "Configuracion" ? "inputActiveSideBarUser" : null}>
         <img src={Configuracion} alt="icon-configuracion" />
           <button value={"Configuracion"} onClick={() => props.setState("Configuracion")}>Configuración</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

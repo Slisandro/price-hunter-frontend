@@ -1,6 +1,5 @@
 import React from "react";
 import Tablero from "./components/Cazador/Tablero Usuario/Tablero";
-import HomePage from "./HomePage/HomePage";
 import Marcas from "./components/NavBarLinks/Marcas";
 import SobreNosotros from "./components/NavBarLinks/SobreNosotros";
 import Contacto from "./components/NavBarLinks/Contacto";
@@ -20,12 +19,15 @@ import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
 import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 import RegistroCliente from "./components/Registro/RegistroCliente";
+import Landing from "./HomePage/Landing";
+import Dash from "./components/Dashboard/Dash";
+import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <RutaPrivada exact path="/admin" component={AdminPage} />
+        {/* <RutaPrivada exact path="/admin" component={AdminPage} /> */}
         <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
@@ -38,12 +40,15 @@ function App() {
         <Route exact path="/configuración" component={Configuración} />
         <Route exact path="/registro" component={Registro} />
         <Route exact path="/registro-cliente" component={RegistroCliente} />
+        <Route exact path="/registro-google" component={RegistroGoogle} />
         {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}
         <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
 
         <Route exact path="/terminos-condiciones" component={Modal} />
+        <Route exact path="/landing" component={Landing} />
+        <RutaPrivada exact path="/admin" component={Dash} />
       </Switch>
     </Router>
   );

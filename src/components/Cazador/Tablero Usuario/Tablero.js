@@ -15,7 +15,7 @@ function Tablero() {
     longitud: "",
     dis: 0
   })
-  
+
   const openSidebar = () => {
     setSidebar(true);
   }
@@ -37,10 +37,10 @@ function Tablero() {
   return (
     <div className="contenedor">
 
-      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+      <Navbar setState={setState} sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
       <Main setUbicacion={setUbicacion} state={state} setState={setState} ubicacion={ubicacion} />
       <Sidebar state={state} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
-      <Aside />
+      {/* <Aside /> */}
 
     </div>
 

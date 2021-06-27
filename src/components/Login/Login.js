@@ -2,11 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Login.css";
-import aguila from "../../assets/aguila.png";
+// import aguila from "../../assets/aguila.png";
 import Google from '../../assets/google.png';
 import { iniciarSesion, mostrarError, iniciarSesionGoogle } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 import GoogleLogin from "react-google-login";
+// import svg from "../../assets/undraw_personal_finance_tqcd.svg";
+import {
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Button,
+  Card,
+  CardBody
+} from "reactstrap";
+
 
 
 
@@ -64,18 +75,19 @@ const Login = (props) => {
 
 
 
-/******************************************************************************************************************************/
+  /******************************************************************************************************************************/
 
 
-const onSuccessGoogle = (googleUser) => {
-  var datos = googleUser.profileObj;
-  console.log(datos)
-  dispatch(iniciarSesionGoogle(datos))
+  const onSuccessGoogle = (googleUser) => {
+    // var datos = googleUser.profileObj;
+    // var datos = googleUser;
+    // console.log(googleUser)
+    // dispatch(iniciarSesionGoogle(datos))
   }
 
 
 
-/*******************************************************************************************************************************/
+  /*******************************************************************************************************************************/
 
   const [user, guardarUser] = useState({
     email: "",
@@ -100,7 +112,7 @@ const onSuccessGoogle = (googleUser) => {
       return;
     }
 
-    if(password < 6){
+    if (password < 6) {
       dispatch(mostrarError('La contraseña debe tener mas de 6 caracteres', 'alerta-error'));
       return;
 
@@ -123,75 +135,95 @@ const onSuccessGoogle = (googleUser) => {
 
 
 
+
+
+
+
   return (
-    <section className="loginHunter">
-     {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
-      <section className="loginContainer_hunter">
-        <img src={aguila} alt="" id="logologin" />
-        <h2 className="h2Title">Iniciar sesión</h2>
+    <>
+    
+    <div className="loger_cont">
+    
+
+      <div className="global-container__log">
 
        
-        {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+        <Card className="card__login">
+        {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
+          <CardBody>
+          {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+            <form className="login__form" onSubmit={handleSubmit}>
 
-        <form className="loginContainer_hunter--form" onSubmit={handleSubmit}>
-          <input
-            name="email"
-            id="input_login"
-            type="text"
-            placeholder="Correo"
-            onChange={handleInputLogin}
-            value={email}
-          />
-          <input
-            name="password"
-            id="input_login"
-            type="password"
-            placeholder="Contraseña"
-            onChange={handleInputLogin}
-            value={password}
-          />
+              <FormGroup row>
+                <Label for="correo"> Correo </Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="correo"
+                  placeholder="Ingrese su correo"
+                  onChange={handleInputLogin}
+                  value={email}
+                />
 
-          <button className="button__login" type="submit" >Iniciar sesión</button>
+              </FormGroup>
+              
+              
+              <FormGroup row>
+                <Label for="examplePassword">Contraseña</Label>
+                <Input
 
-
-
-          <div className="loginContainer_hunter--remember-me">
-            <label>
-              <input className="check" type="checkbox" id="cbox1" value="first_checkbox" />Recuérdame
-            </label>
-            <label>
-              <a href="/">Olvidé mi contraseña</a>
-            </label>
-          </div>
-        </form>
-
-        <section className="loginContainer_hunter--social-media">
-          
-          
-          
-          <GoogleLogin
-            clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
-            render={renderProps => (
-              <button className="button__login__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt="" /></button>
-            )}
-            onSuccess={onSuccessGoogle}
-            onFailure={onSuccessGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
+                  type="password"
+                  name="password"
+                  id="examplePassword"
+                  placeholder="Ingrese su contraseña"
+                  autoComplete="off"
+                  onChange={handleInputLogin}
+                  value={password}
+                />
+              </FormGroup>
+              <div className=" text-center google__log">
+                <FormText color="muted">
+                  <p>Iniciar sesion con Google</p>
+                  <GoogleLogin
+                    clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+                    render={renderProps => (
+                      <button className="button__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} alt="" width={25} /></button>
+                    )}
+                    onSuccess={onSuccessGoogle}
+                    onFailure={onSuccessGoogle}
+                    cookiePolicy={'single_host_origin'}
+                  />
+                  
+                </FormText>
+              </div>
 
 
+              <Button className="button__login" type="submit" block>
+                Iniciar sesion
+              </Button>
 
 
-        </section>
+            </form>
 
-        <div className="register__loginHunter">
-          <p className="loginContainer_hunter--register"> No tienes cuenta ?</p>
-          <p className="loginContainer_hunter--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
-        </div>
 
-      </section>
-    </section>
+
+          </CardBody>
+        </Card>
+
+
+      </div>
+    </div>
+    </>
+
   );
 };
 
 export default Login;
+
+
+
+
+
+
+
+

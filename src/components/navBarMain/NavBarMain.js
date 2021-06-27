@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Categorias from '../categorias/Categorias';
+import swal from 'sweetalert';
 import { getCategorias, getProductsByName } from "../Redux/actions";
 
 function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }) {
     const categorias = useSelector(store => store.categorias);
     const dispatch = useDispatch();
     const nombre = localStorage.getItem("nombre");
+    // const [error, setError] = useState(false) // Borde al select cuando no ha sido seleccionado
 
     useEffect(() => {
         dispatch(getCategorias())
@@ -15,13 +17,17 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(getProductsByName(producto, ubicacion));
+        if(ubicacion.dis > 0) {
+            dispatch(getProductsByName(producto, ubicacion));
         setState("Search");
         setProducto("")
         setUbicacion({
             ...ubicacion,
             // dis: 0 VERIFICAR SETEO
         })
+        } else {
+            swal("Debe ingresar un valor para el radio de búsqueda")
+        }
     }
 
     const handleClick = (e) => {
