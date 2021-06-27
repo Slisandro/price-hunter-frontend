@@ -11,6 +11,7 @@
     background: rgba(24,30,54,1);
     color: white;
     margin-top: 2%;
+    font-size: 1.5em;
 }
 
 .ReactTable * {

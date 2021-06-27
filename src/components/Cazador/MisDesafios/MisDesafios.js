@@ -41,23 +41,22 @@ function MisDesafios({ ubicacion }) {
         loading ?
             <div className="containerMessageBack">Cargando desafíos...</div>
             :
-            <>
+            desafios.msg ?
+                <div class="containerMessageBack">{desafios.msg}</div>
+                :
                 <div className="cardsContainer">
                     {
-                        desafios.map(desafio => {
-                            return (
-                                <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
-                            )
-                        })
+                        desafios.map(desafio => (
+                            <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
+                        ))
+                    }
+                    {
+                        modal ?
+                            <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
+                            :
+                            null
                     }
                 </div>
-                {
-                    modal
-                        ?
-                        <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
-                        : null
-                }
-            </>
     )
 }
 

@@ -9,19 +9,14 @@ function Table({ name, productos }) {
             data={productos}
             columns={
                 [{
-                    Header: `Resultado de la búsqueda "${name}"`,
+                    Header: `Presione sobre una columna para ordenar descendentemente`,
                     columns: [
                         {
                             Header: "Nombre",
-                            accessor: "preoducto"
-                        },
-                        {
-                            Header: "Contenido neto",
-                            accessor: "contenido_neto"
-                        },
-                        {
-                            Header: "Unidad de Medida",
-                            accessor: "unidad_medida"
+                            accessor: "preoducto",
+                            Cell: (row) => {
+                                return `${row.original.preoducto} de ${row.original.contenido_neto} ${row.original.unidad_medida}`
+                            }
                         },
                         {
                             Header: "Precio",
@@ -30,13 +25,28 @@ function Table({ name, productos }) {
                         {
                             Header: "Desafio",
                             accessor: "desafio"
+                        },
+                        {
+                            Header: "Fecha (YYYY/MM/DD)",
+                            accessor: "fecha"
+                        },
+                        {
+                            Header: "Distancia",
+                            accessor: "distanciaPunto",
+                            Cell: (row) => {
+                                return row.original.distanciaPunto.toFixed(1) + " m"
+                            }
+                        },
+                        {
+                            Header: "Desafio publicado por",
+                            accessor: "cliente"
                         }
                     ]
                 }]
             }
             defaultSorted={
                 [{
-                    id: "nombre",
+                    id: "distanciaPunto",
                     desc: true
                 }]
             }
