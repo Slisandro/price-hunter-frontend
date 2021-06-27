@@ -10,6 +10,21 @@ import {
 } from "../../../Redux/actions";
 import swal from "sweetalert";
 import { useForm } from "react-hook-form";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 function PutCiudades() {
   const dispatch = useDispatch();
@@ -70,80 +85,94 @@ function PutCiudades() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Ciudad</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <label className="text-label">Regiones</label>
-            <select name="region" onChange={(e) => ChangeInput(e)}>
-              <option deafult>Seleccionar</option>
-              {region.map((u) => (
-                <option value={u.id}>{u.nombre_region}</option>
-              ))}
-            </select>
-            <span className="err">{errors?.nombre_region?.message}</span>
-          </div>
-          <div>
-            <label className="text-label">Paises</label>
-            <select name="paises" onChange={(e) => ChangeInput(e)}>
-              <option deafult>Seleccionar</option>
-              {paisesId.map((u) => (
-                <option value={u.codigo_alfa}>{u.nombre_pais}</option>
-              ))}
-            </select>
-            <span className="err">{errors?.nombre_pais?.message}</span>
-          </div>
-          <div className="divForm">
-            <div>
-              <label className="text-label">Ciudad</label>
-              <select
-                name="ciudad"
-                className="inp"
-                onChange={(e) => ChangeInput(e)}
-                {...register("ciudad", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe seleccionar una ciudad",
-                  // },
-                })}
-              >
-                <option></option>
-                {ciudadesId.map((f, index) => (
-                  <option key={index} value={f.id}>
-                    {f.ciudad}
-                  </option>
-                ))}
-              </select>
-              <span className="err">{errors?.ciudadesId?.message}</span>
-              <div>
-                <label className="text-label">Código País</label>
-                <select
-                  name="codigo_pais"
-                  className="inp"
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Ciudades</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Región</label>
+                <Input
+                  type="select"
+                  name="region"
                   onChange={(e) => ChangeInput(e)}
-                  {...register("codigo_pais", {
-                    required: {
-                      value: true,
-                      message: "Debe seleccionar una ciudad",
-                    },
-                  })}
                 >
-                  <option></option>
-                  {paisesId.map((f, index) => (
-                    <option key={index} value={f.codigo_alfa}>
-                      {f.codigo_alfa}
-                    </option>
+                  <option deafult>Seleccionar</option>
+
+                  {region.map((u) => (
+                    <option value={u.id}>{u.nombre_region}</option>
                   ))}
-                </select>
-                {/* <input
+                </Input>
+                <span className="err">{errors?.nombre_region?.message}</span>
+
+                <div>
+                  <label className="title">Pais</label>
+                  <Input
+                    type="select"
+                    name="paises"
+                    onChange={(e) => ChangeInput(e)}
+                  >
+                    <option deafult>Seleccionar</option>
+                    {paisesId.map((u) => (
+                      <option value={u.codigo_alfa}>{u.nombre_pais}</option>
+                    ))}
+                  </Input>
+                  <span className="err">{errors?.nombre_pais?.message}</span>
+                </div>
+
+                <div>
+                  <label className="title">Ciudad</label>
+                  <Input
+                    name="ciudad"
+                    className="inp"
+                    type="select"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("ciudad", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe seleccionar una ciudad",
+                      // },
+                    })}
+                  >
+                    <option></option>
+                    {ciudadesId.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.ciudad}
+                      </option>
+                    ))}
+                  </Input>
+                </div>
+                <span className="err">{errors?.ciudadesId?.message}</span>
+                <div>
+                  <label className="title">Código País</label>
+                  <Input
+                    type="select"
+                    name="codigo_pais"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("codigo_pais", {
+                      required: {
+                        value: true,
+                        message: "Debe seleccionar una ciudad",
+                      },
+                    })}
+                  >
+                    <option></option>
+                    {paisesId.map((f, index) => (
+                      <option key={index} value={f.codigo_alfa}>
+                        {f.codigo_alfa}
+                      </option>
+                    ))}
+                  </Input>
+                  {/* <input
                   className="inp"
                   type="text"
                   name="codigo_pais"
@@ -168,46 +197,52 @@ function PutCiudades() {
                     },
                   })}
                 /> */}
-              </div>
-              <span className="err">{errors?.codigo_pais?.message}</span>
-            </div>
-            <div>
-              <label className="text-label">Nombre</label>
-              <input
-                className="inp"
-                type="text"
-                name="nombre_nuevo_pais"
-                autoComplete="off"
-                max="0"
-                {...register("nombre_nuevo_pais", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un nombre ",
-                  },
-                  maxLength: {
-                    value: 15,
-                    message: "El nombre debe tener menos de quince letras!",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "El nombre debe tener tres letras!",
-                  },
-                  max: {
-                    value: 0,
-                    message: "El nombre no puede comenzar con numeros",
-                  },
-                })}
-              />
-            </div>
-            <span className="err">{errors?.ciudades?.message}</span>
-          </div>
-          <div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
+
+                  <span className="err">{errors?.codigo_pais?.message}</span>
+                </div>
+                <div>
+                  <label className="title">Nombre Nueva Ciudad</label>
+                  <Input
+                    className="inp"
+                    type="text"
+                    name="nombre_nuevo_pais"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nombre_nuevo_pais", {
+                      required: {
+                        value: true,
+                        message: "Debe ingresar un nombre ",
+                      },
+                      maxLength: {
+                        value: 15,
+                        message: "El nombre debe tener menos de quince letras!",
+                      },
+                      minLength: {
+                        value: 3,
+                        message: "El nombre debe tener tres letras!",
+                      },
+                      max: {
+                        value: 0,
+                        message: "El nombre no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                </div>
+                <span className="err">{errors?.ciudades?.message}</span>
+
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
       {/* <div className="contenedorActualesUM">
         Ciudades Actuales
         <div className="tiposUM">

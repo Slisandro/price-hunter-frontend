@@ -60,7 +60,7 @@ function Admin(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admins") {
+      if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -89,7 +89,7 @@ function Admin(props) {
             <Sidebar
               routes={routes}
               logo={{
-                outterLink: "localhost:3000/dashboard",
+                outterLink: "localhost:3000/admin",
                 text: "Price Hunter",
                 imgSrc: logo,
               }}
@@ -98,7 +98,7 @@ function Admin(props) {
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="*" to="/admins/dashboard" />
+                {/* <Redirect from="*" to="/admins/dashboard" /> */}
               </Switch>
             </div>
           </div>

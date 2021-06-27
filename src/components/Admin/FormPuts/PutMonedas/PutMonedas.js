@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { putMoneda, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 // import "./FormUnidadMedida.css";
 
@@ -88,26 +103,28 @@ function PutMonedas() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Moneda</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <label className="text-label">Nombre</label>
-            <select name="nombre_moneda">
-              <option></option>
-              {moneda.map((u) => (
-                <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
-              ))}
-            </select>
-            {/* <input
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Moneda</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Monedas</label>
+                <Input name="nombre_moneda" type="select">
+                  <option></option>
+                  {moneda.map((u) => (
+                    <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
+                  ))}
+                </Input>
+                {/* <input
               className="inp"
               type="text"
               name="nombre_moneda"
@@ -132,44 +149,50 @@ function PutMonedas() {
                 },
               })}
             /> */}
-            <span className="err">{errors?.nombre_moneda?.message}</span>
-          </div>
-          <div className="divForm">
-            <div>
-              <label className="text-label">Moneda</label>
-              <input
-                className="inp"
-                type="text"
-                name="nuevo_nombre_moneda"
-                autoComplete="off"
-                max="0"
-                {...register("nuevo_nombre_moneda", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe ingresar una moneda ",
-                  // },
-                  max: {
-                    value: 0,
-                    message: "La unidad no puede comenzar con numeros",
-                  },
-                })}
-              />
-              <span className="err">{errors?.codigo_moneda?.message}</span>
-            </div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesCATE">
+                <span className="err">{errors?.nombre_moneda?.message}</span>
+
+                <div>
+                  <label className="title">Moneda</label>
+                  <Input
+                    className="inp"
+                    type="text"
+                    name="nuevo_nombre_moneda"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nuevo_nombre_moneda", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar una moneda ",
+                      // },
+                      max: {
+                        value: 0,
+                        message: "La unidad no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">{errors?.codigo_moneda?.message}</span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesCATE">
         Monedas Actuales
         <div className="tiposCATE">
           {moneda.map((u) => (
             <span className="spansCATE">{u.nombre_moneda}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

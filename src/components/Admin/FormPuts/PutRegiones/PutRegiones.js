@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { putRegion, getRegion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 // import "./FormUnidadMedida.css";
 
@@ -64,7 +79,7 @@ function PutRegiones() {
       }).then((r) => dispatch(getRegion()));
     } else if (!nuevaRegion.nuevo_nombre_region) {
       swal({
-        title: "Debe seleccionar un país para modificar!",
+        title: "Debe seleccionar una región para modificar!",
         icon: "error",
         button: "Aceptar",
         timer: "5000",
@@ -80,64 +95,72 @@ function PutRegiones() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Regiones</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <label className="text-label">Regiones</label>
-            <select name="nombre_region">
-              <option></option>
-              {region.map((u) => (
-                <option value={u.nombre_region}>{u.nombre_region}</option>
-              ))}
-            </select>
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Regiones</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Regiones</label>
+                <Input type="select" name="nombre_region">
+                  <option></option>
+                  {region.map((u) => (
+                    <option value={u.nombre_region}>{u.nombre_region}</option>
+                  ))}
+                </Input>
 
-            <span className="err">{errors?.nombre_region?.message}</span>
-          </div>
-          <div className="divForm">
-            <div>
-              <label className="text-label">Nueva Región</label>
-              <input
-                className="inp"
-                type="text"
-                name="nuevo_nombre_region"
-                autoComplete="off"
-                max="0"
-                {...register("nuevo_nombre_region", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe ingresar una region ",
-                  // },
-                  max: {
-                    value: 0,
-                    message: "La region no puede comenzar con numeros",
-                  },
-                })}
-              />
-              <span className="err">{errors?.nombre_region?.message}</span>
-            </div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesUM">
+                <span className="err">{errors?.nombre_region?.message}</span>
+
+                <div>
+                  <label className="title">Nueva Región</label>
+                  <Input
+                    className="inp"
+                    type="text"
+                    name="nuevo_nombre_region"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nuevo_nombre_region", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar una region ",
+                      // },
+                      max: {
+                        value: 0,
+                        message: "La region no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">{errors?.nombre_region?.message}</span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesUM">
         Regiones Actuales
         <div className="tiposUM">
           {region.map((u) => (
             <span className="spansUM">{u.nombre_region}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

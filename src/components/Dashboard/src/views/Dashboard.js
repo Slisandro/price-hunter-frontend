@@ -41,6 +41,7 @@ function Dashboard(props) {
   return (
     <>
       <div className="content">
+        {/* <h1>Panel Administrador</h1> */}
         <Row>
           <Col xs="12">
             <Card className="card-chart">
@@ -195,22 +196,13 @@ function Dashboard(props) {
                     <i className="tim-icons icon-settings-gear-63" />
                   </DropdownToggle>
                   <DropdownMenu aria-labelledby="dropdownMenuLink" right>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <DropdownItem href="#" onClick={(e) => e.preventDefault()}>
                       Últimos
                     </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <DropdownItem href="#" onClick={(e) => e.preventDefault()}>
                       Antiguos
                     </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
+                    <DropdownItem href="#" onClick={(e) => e.preventDefault()}>
                       Ver Todos
                     </DropdownItem>
                   </DropdownMenu>
@@ -242,7 +234,7 @@ function Dashboard(props) {
                             color="link"
                             id="tooltip636901683"
                             title=""
-                            type="button"
+                            // type="button"
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>
@@ -281,7 +273,7 @@ function Dashboard(props) {
                             color="link"
                             id="tooltip457194718"
                             title=""
-                            type="button"
+                            // type="button"
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>
@@ -316,7 +308,7 @@ function Dashboard(props) {
                             color="link"
                             id="tooltip362404923"
                             title=""
-                            type="button"
+                            // type="button"
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>
@@ -351,7 +343,7 @@ function Dashboard(props) {
                             color="link"
                             id="tooltip818217463"
                             title=""
-                            type="button"
+                            // type="button"
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>
@@ -388,7 +380,7 @@ function Dashboard(props) {
                             color="link"
                             id="tooltip831835125"
                             title=""
-                            type="button"
+                            // type="button"
                           >
                             <i className="tim-icons icon-pencil" />
                           </Button>

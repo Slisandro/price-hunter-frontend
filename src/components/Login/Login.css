@@ -1,95 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap");
 
-
-
-.loger_cont{
-  background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%);
+.loger_cont {
+  background: radial-gradient(
+    circle,
+    #0cdaf5 0%,
+    #271d63 50%,
+    #181046 75%,
+    #181046 100%
+  );
   height: 100vh;
   font-family: "Catamaran", sans-serif;
 }
 
-
-.global-container__log{
+.global-container__log {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #00f3fc;
-  
 }
-.form-group label{
+.form-group label {
   color: #10ebe0 !important;
 }
-.form{
+.form {
   padding-top: 16px;
   font-size: 12px;
   margin-top: 30px;
-
 }
 
-.login-form{
+.login-form {
   width: 380px;
   height: 460px;
   margin: 25px;
-  background:#1a2226 !important ;
+  background: #1a2226 !important ;
   border-radius: 20px !important;
   border: 4px solid #00edf5 !important;
-
 }
 
 .logput,
-.logput{
+.logput {
   background: #000000 !important;
   border: 2px solid #00f3fc !important;
   margin-bottom: 25px;
   border-radius: 5px;
   color: #00f3fc !important;
-
 }
 
-
-.logput:focus{
+.logput:focus {
   outline: none !important;
   border: none;
   margin: 0;
-  background:#1a2226 !important ;
+  background: #1a2226 !important ;
   color: #00f3fc !important;
 }
 
-
-.a-log{
+.a-log {
   float: right;
   font-size: 14px;
   color: white;
-  font-weight: 700 !important;  
+  font-weight: 700 !important;
 }
 
-
-.a-new{
+.a-new {
   color: #ffffff;
   font-weight: 700 !important;
 }
 
-
-.card-title{
+.card-title {
   font-weight: 700 !important;
   padding-top: 8px;
   font-size: 25px;
   color: rgb(127, 243, 11) !important;
 }
 
-
-.btn{
+.btn {
   font-size: 14px !important;
   transform: translateY(10px);
   border-radius: 10px !important;
   color: #031b17;
   font-weight: 700 !important;
-  background: #03d6d6 !important;
+  /* background: #03d6d6 !important; */
 }
 
-
-.btn_google{
+.btn_google {
   font-size: 14px;
   transform: translateY(10px);
   border-radius: 10px !important;
@@ -100,29 +93,24 @@
   cursor: pointer;
 }
 
-
-.singup{
+.singup {
   text-align: center;
   padding-top: 25px;
   font-weight: 500;
   color: rgb(0, 240, 220) !important;
-
 }
 
-
-@media only screen and (max-width:850px) {
-  .img__Login{
-      display: none;
-  }  
-}
-
-@media only screen and (max-width:480px) {
-  .img__Login{
-      display: none;
+@media only screen and (max-width: 850px) {
+  .img__Login {
+    display: none;
   }
-
 }
 
+@media only screen and (max-width: 480px) {
+  .img__Login {
+    display: none;
+  }
+}
 
 .alerta-ok {
   background-color: rgb(109, 211, 109);
@@ -131,8 +119,6 @@
 .alerta-error {
   background-color: rgb(245, 0, 0);
   color: #f0f8f8;
-  border-radius: .2em;
+  border-radius: 0.2em;
   font-weight: 600;
 }
-
-

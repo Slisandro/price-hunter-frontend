@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <RutaPrivada exact path="/admin" component={AdminPage} />
+        {/* <RutaPrivada exact path="/admin" component={AdminPage} /> */}
         <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
@@ -47,7 +47,7 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
-        <Route exact path="/admins" component={Dash} />
+        <RutaPrivada exact path="/admin" component={Dash} />
       </Switch>
     </Router>
   );

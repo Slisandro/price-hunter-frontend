@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFamilia, putFamilia } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 // import "./FormUnidadMedida.css";
 
@@ -82,66 +97,73 @@ function PutFamilias() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Familias</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <div className="divForm">
-              <div>
-                <label className="text-label">Familia</label>
-                <select name="nombre_familia">
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Familias</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Familias</label>
+                <Input type="select" name="nombre_familia">
                   <option></option>
                   {familia.map((u) => (
                     <option value={u.nombre_familia}>{u.nombre_familia}</option>
                   ))}
-                </select>
-                <br></br>
-                <label className="text-label">Nueva Familia</label>
-                <input
-                  className="inp"
-                  type="text"
-                  name="nombre_nueva_familia"
-                  autoComplete="off"
-                  max="0"
-                  {...register("nombre_nueva_familia", {
-                    // required: {
-                    //   value: true,
-                    //   message: "Debe ingresar un nombre ",
-                    // },
-                    maxLength: {
-                      value: 15,
-                      message: "El nombre debe tener menos de quince letras!",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.nombre_familia?.message}</span>
-              </div>
-              <span className="err">
-                {errors?.nombre_nueva_familia?.message}
-              </span>
-            </div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesUM">
+                </Input>
+                <div>
+                  <label className="title">Nueva Familia</label>
+                  <Input
+                    className="inp"
+                    type="text"
+                    name="nombre_nueva_familia"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nombre_nueva_familia", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar un nombre ",
+                      // },
+                      maxLength: {
+                        value: 15,
+                        message: "El nombre debe tener menos de quince letras!",
+                      },
+                    })}
+                  />
+                  {/* <span className="err">{errors?.nombre_familia?.message}</span>
+              </div> */}
+                  <span className="err">
+                    {errors?.nombre_nueva_familia?.message}
+                  </span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesUM">
         Familias Actuales
         <div className="tiposUM">
           {familia.map((u) => (
             <span className="spansUM">{u.nombre_familia}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
