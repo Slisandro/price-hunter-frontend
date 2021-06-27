@@ -21,7 +21,7 @@ import Modal from "./components/Registro/Modal";
 import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 import RegistroCliente from "./components/Registro/RegistroCliente";
 import Landing from "./HomePage/Landing";
-
+import Dash from "./components/Dashboard/Dash";
 
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
-     
+        <Route exact path="/admins" component={Dash} />
       </Switch>
     </Router>
   );
