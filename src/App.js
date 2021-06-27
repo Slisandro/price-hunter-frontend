@@ -27,8 +27,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <RutaPrivada exact path="/admin" component={AdminPage} />
-        <Route exact path="/" component={Landing} />
+        {/* <RutaPrivada exact path="/admin" component={AdminPage} /> */}
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
         <Route exact path="/Contacto" component={Contacto} />
@@ -47,8 +47,8 @@ function App() {
         <RutaPrivada path="/tablerocliente" component={TableroCLiente} />
 
         <Route exact path="/terminos-condiciones" component={Modal} />
-        {/* <Route exact path="/landing" component={Landing} /> */}
-        <Route exact path="/admins" component={Dash} />
+        <Route exact path="/landing" component={Landing} />
+        <RutaPrivada exact path="/admin" component={Dash} />
       </Switch>
     </Router>
   );

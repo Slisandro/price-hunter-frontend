@@ -19,10 +19,10 @@ function Dash() {
         <BrowserRouter>
           <Switch>
             <Route
-              path="/admins"
+              path="/admin"
               render={(props) => <AdminLayout {...props} />}
             />
-            <Redirect from="/admins" to="/admins/dashboard" />
+            <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
         </BrowserRouter>
       </BackgroundColorWrapper>

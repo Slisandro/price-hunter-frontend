@@ -1,9 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Button, Dropdown, DropdownToggle, Badge } from "reactstrap";
 import { ThemeContext, themes } from "../../contexts/ThemeContext";
 import { backgroundColors } from "../../contexts/BackgroundColorContext";
+import { cerrarSesion } from "../../../../Redux/actions";
 
 function FixedPlugin(props) {
+  const dispatch = useDispatch();
   const [dropDownIsOpen, setdropDownIsOpen] = React.useState(false);
   const handleClick = () => {
     setdropDownIsOpen(!dropDownIsOpen);
@@ -15,7 +18,7 @@ function FixedPlugin(props) {
           <i className="fa fa-cog fa-2x" />
         </DropdownToggle>
         <ul className="dropdown-menu show">
-          <li className="header-title">SIDEBAR BACKGROUND</li>
+          <li className="header-title">COLOR DEL SIDEBAR</li>
           <li className="adjustments-line">
             <div className="badge-colors text-center">
               <Badge
@@ -64,6 +67,13 @@ function FixedPlugin(props) {
                 </>
               )}
             </ThemeContext.Consumer>
+            <Button
+              className="btn-fill"
+              color="primary"
+              onClick={() => dispatch(cerrarSesion())}
+            >
+              Cerrar Sesión
+            </Button>
           </li>
         </ul>
       </Dropdown>

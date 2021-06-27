@@ -7,6 +7,21 @@ import {
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 import "./PutCategorias.css";
 
@@ -93,26 +108,30 @@ function PutCategorías() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Categoría</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <label className="text-label">Categoría</label>
-            <select name="nombre_categoria">
-              <option></option>
-              {categoria.map((u) => (
-                <option value={u.nombre_categoria}>{u.nombre_categoria}</option>
-              ))}
-            </select>
-            {/* <input
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Categorías</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Categoría</label>
+                <Input type="select" name="nombre_categoria">
+                  <option></option>
+                  {categoria.map((u) => (
+                    <option value={u.nombre_categoria}>
+                      {u.nombre_categoria}
+                    </option>
+                  ))}
+                </Input>
+                {/* <input
               className="inp"
               type="text"
               name="nombre_categoria"
@@ -137,46 +156,53 @@ function PutCategorías() {
                 },
               })}
             /> */}
-            {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
-          </div>
-          <div className="divForm">
-            <div>
-              <label className="text-label">Nuevo Nombre</label>
-              <input
-                className="inp"
-                type="text"
-                name="nuevo_nombre_categoria"
-                autoComplete="off"
-                max="0"
-                {...register("nuevo_nombre_categoria", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe ingresar una categoría ",
-                  // },
-                  max: {
-                    value: 0,
-                    message: "La categoría no puede comenzar con numeros",
-                  },
-                })}
-              />
-              <span className="err">
-                {errors?.nuevo_nombre_categoria?.message}
-              </span>
-            </div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesCATE">
+                {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
+                {/* </div> */}
+                {/* <div className="divForm"> */}
+                <div>
+                  <label className="title">Nueva Categoría</label>
+                  <Input
+                    className="inp"
+                    type="text"
+                    name="nuevo_nombre_categoria"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nuevo_nombre_categoria", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar una categoría ",
+                      // },
+                      max: {
+                        value: 0,
+                        message: "La categoría no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">
+                    {errors?.nuevo_nombre_categoria?.message}
+                  </span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesCATE">
         Categorías Actuales
         <div className="tiposCATE">
           {categoria.map((u) => (
             <span className="spansCATE">{u.nombre_categoria}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

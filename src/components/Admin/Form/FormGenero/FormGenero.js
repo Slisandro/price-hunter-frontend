@@ -3,7 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { generoPost, getGeneros, mostrarError } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
-
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 import close from "../../../../assets/cancel (1).png";
 import "./FormGenero.css";
 
@@ -45,7 +59,6 @@ function FormGenero() {
     handleSubmit,
   } = useForm();
 
-
   const submit = (data, e) => {
     e.preventDefault();
 
@@ -68,11 +81,11 @@ function FormGenero() {
     dispatch(generoPost(nuevoGenero));
     e.target.reset();
     swal({
-      title: "Genero agregado con éxito!",
+      title: "Género agregado con éxito!",
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    })
+    }).then((r) => dispatch(getGeneros()));
     setState({
       genero: "",
     });
@@ -80,76 +93,91 @@ function FormGenero() {
 
   return (
     <>
-      <div>
-        <div className="contenedorFAM">
-          {modal ? (
-            <div>
-              {/* <button className="buttonModal" onClick={() => handleModal()}>
-                <img width={30} src={close} alt="x" />
-              </button> */}
-              <header>
-                <h1 id="title">Agregar Género</h1>
-              </header>
-              <form
-                id="survey-form"
-                className="form"
-                noValidate
-                onChange={(e) => ChangeInput(e)}
-                onSubmit={handleSubmit(submit)}
-              >
-                {alerta ? (
-                  <span className={`alerta ${alerta.categoria}`}>
-                    {alerta.msg}
-                  </span>
-                ) : null}
-                <div className="divModalFAM">
-                  <div>
-                    <label className="text-label">Género</label>
-                    <input
-                      className="inp"
-                      type="text"
-                      name="genero"
-                      max ='0'
-                      autoComplete="off"
-                      {...register("genero", {
-                        required: {
-                          value: true,
-                          message: "Debe ingresar un genero ",
-                        },
-                        maxLength: {
-                          value: 15,
-                          message:
-                            "El genero no debe tener mas de quince letras!",
-                        },
-                        minLength: {
-                          value: 3,
-                          message: "El genero debe al menos tener tres letras!",
-                        },
-                        max: {
-                          value: 0,
-                          message: "El genero no puede comenzar con numeros",
-                        },
-                      })}
-                    />
-                    <span className="err">{errors?.genero?.message}</span>
-                  </div>
-                  <button className="agregarModal" type="submit">
-                    Agregar
-                  </button>
-                </div>
-              </form>
-            </div>
-          ) : null}
-        </div>
-        <div className="contenedorActuales">
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Géneros</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            {/* {alerta ? (
+              <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
+            ) : null} */}
+            <Row>
+              <Col>
+                <label className="title">Géneros Actuales</label>
+                <Input
+                  name="id"
+                  type="select"
+                  className="inp"
+                  onChange={(e) => ChangeInput(e)}
+                  // {...register("id", {
+                  //   required: {
+                  //     value: true,
+                  //     message: "Debe seleccionar un Producto",
+                  //   },
+                  // })}
+                >
+                  <option></option>
+                  {generos.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.genero}
+                    </option>
+                  ))}
+                </Input>
+                <label className="title">Nuevo Género</label>
+                <Input
+                  className="inp"
+                  type="text"
+                  name="genero"
+                  max="0"
+                  autoComplete="off"
+                  {...register("genero", {
+                    // required: {
+                    //   value: true,
+                    //   message: "Debe ingresar un genero ",
+                    // },
+                    maxLength: {
+                      value: 20,
+                      message: "El genero no debe tener mas de veinte letras!",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "El genero debe al menos tener tres letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "El genero no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.genero?.message}</span>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActuales">
           <div className="tiposUsuarios">
             Tipos de Géneros Actuales
             {generos.map((u) => (
               <span className="spans">{u.genero}</span>
             ))}
           </div>
-        </div>
-      </div>
+        </div> */}
     </>
   );
 }
