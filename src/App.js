@@ -13,7 +13,7 @@ import Registro from "./components/Registro/Registro";
 
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
-
+import HomePage from "./HomePage/HomePage";
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
