@@ -23,17 +23,9 @@ import {
   Col,
   FormText,
 } from "reactstrap";
-
-import close from "../../../../assets/cancel (1).png";
 import "./AgregarProducto.css";
 
 function FormAgregarProducto() {
-  const [modal, setModal] = useState(true);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,6 +45,7 @@ function FormAgregarProducto() {
   });
 
   const {
+    reset,
     register,
     formState: { errors },
     handleSubmit,
@@ -85,37 +78,38 @@ function FormAgregarProducto() {
   };
 
   const submit = (data, e) => {
-    e.preventDefault();
+    if (data.nombre.length === 0 || data.contenido_neto.length === 0) {
+      return swal({
+        title: "Agregue un producto!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
 
-    const nuevoProducto = {
-      nombre: state.nombre,
-      contenido_neto: state.contenido_neto,
-      unidadMedidaCodigoUnidadMedida: state.unidadMedidaCodigoUnidadMedida,
-      subcategoriumId: state.subcategoriumId,
-    };
-
-    dispatch(productoPost(nuevoProducto));
+    dispatch(productoPost(data));
     e.target.reset();
     swal({
       title: "Producto agregado con éxito!",
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    });
-
-    setState({
-      nombre: "",
-      subcategoriumId: "",
-      unidadMedidaCodigoUnidadMedida: "",
-      contenido_neto: "",
-    });
+    }).then((g) =>
+      setState({
+        nombre: "",
+        subcategoriumId: "",
+        unidadMedidaCodigoUnidadMedida: "",
+        contenido_neto: "",
+      })
+    );
+    reset({ data });
   };
 
   return (
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Productos</h1>
+          <span id="title">Productos</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -125,48 +119,37 @@ function FormAgregarProducto() {
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
-            <FormGroup>
-              <Row>
-                <Col>
-                  <label className="title">Nombre</label>
+            {/* <FormGroup> */}
+            <Row>
+              <Col>
+                <div>
+                  <h6 className="title">Nombre</h6>
                   {state.nombre ? (
                     <>
                       <Input
                         valid
-                        className="inp"
+                        style={{ appearance: "none" }}
                         type="text"
                         name="nombre"
                         max="0"
                         autoComplete="off"
-                        // {...register("nombre", {
-                        //   required: {
-                        //     value: true,
-                        //     message: "Debe ingresar un nombre ",
-                        //   },
-                        //   maxLength: {
-                        //     value: 15,
-                        //     message:
-                        //       "El nombre no debe tener mas de quince letras!",
-                        //   },
-                        //   minLength: {
-                        //     value: 3,
-                        //     message:
-                        //       "El nombre debe tener al menos tres letras!",
-                        //   },
-                        //   max: {
-                        //     value: 0,
-                        //     message: "El nombre no puede comenzar con numeros",
-                        //   },
-                        // })}
+                        {...register("nombre", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                        })}
                       />
-                      {/* <FormFeedback valid>Nombre Correcto!</FormFeedback> */}
-                      <span className="err">{errors?.nombre?.message}</span>
+                      {/* <FormFeedback style={{ margin: "1rem" }} valid>
+                        Nombre Correcto!
+                      </FormFeedback> */}
+                      {/* <span className="err">{errors?.nombre?.message}</span> */}
                     </>
                   ) : (
                     <>
                       <Input
                         invalid
-                        className="inp"
+                        style={{ appearance: "none" }}
                         type="text"
                         name="nombre"
                         max="0"
@@ -192,200 +175,197 @@ function FormAgregarProducto() {
                           },
                         })}
                       />
-                      {/* <FormFeedback valid>
-                        Sweet! that name is available
+                      {/* <FormFeedback style={{ margin: "1rem" }} invalid>
+                        Nombre Incorrecto!
                       </FormFeedback> */}
+                      <span className="err">{errors?.nombre?.message}</span>
                     </>
                   )}
+                </div>
 
-                  <div>
-                    <label className="title">Unidad de Medida</label>
-                    {state.unidadMedidaCodigoUnidadMedida ? (
-                      <>
-                        <Input
-                          valid
-                          name="unidadMedidaCodigoUnidadMedida"
-                          className="inp2"
-                          type="select"
-                          onChange={(e) => ChangeInput(e)}
-                          // {...register("unidadMedidaCodigoUnidadMedida", {
-                          //   required: {
-                          //     value: true,
-                          //     message: "Debe seleccionar una unidad de medida",
-                          //   },
-                          // })}
-                        >
-                          <option></option>
-                          {unidad_medida.map((f, index) => (
-                            <option key={index} value={f.codigo_unidad_medida}>
-                              {f.codigo_unidad_medida}
-                            </option>
-                          ))}
-                        </Input>
-                        {/* <span className="err">
-                          {errors?.unidadMedidaCodigoUnidadMedida?.message}
-                        </span> */}
-                      </>
-                    ) : (
-                      <>
-                        <Input
-                          invalid
-                          name="unidadMedidaCodigoUnidadMedida"
-                          className="inp2"
-                          type="select"
-                          onChange={(e) => ChangeInput(e)}
-                          // {...register("unidadMedidaCodigoUnidadMedida", {
-                          //   required: {
-                          //     value: true,
-                          //     message: "Debe seleccionar una unidad de medida",
-                          //   },
-                          // })}
-                        >
-                          <option></option>
-                          {unidad_medida.map((f, index) => (
-                            <option key={index} value={f.codigo_unidad_medida}>
-                              {f.codigo_unidad_medida}
-                            </option>
-                          ))}
-                        </Input>
-                        {/* <span className="err">
-                          {errors?.unidadMedidaCodigoUnidadMedida?.message}
-                        </span> */}
-                      </>
-                    )}
-                  </div>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Unidad de Medida</h6>
+                  {state.unidadMedidaCodigoUnidadMedida ? (
+                    <>
+                      <Input
+                        valid
+                        name="unidadMedidaCodigoUnidadMedida"
+                        style={{ appearance: "none" }}
+                        type="select"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("unidadMedidaCodigoUnidadMedida", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una unidad de medida",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {unidad_medida.map((f, index) => (
+                          <option key={index} value={f.codigo_unidad_medida}>
+                            {f.codigo_unidad_medida}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.unidadMedidaCodigoUnidadMedida?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        name="unidadMedidaCodigoUnidadMedida"
+                        style={{ appearance: "none" }}
+                        type="select"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("unidadMedidaCodigoUnidadMedida", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una unidad de medida",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {unidad_medida.map((f, index) => (
+                          <option key={index} value={f.codigo_unidad_medida}>
+                            {f.codigo_unidad_medida}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.unidadMedidaCodigoUnidadMedida?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
 
-                  <div>
-                    <label className="title">Contenido Neto</label>
-                    {state.contenido_neto ? (
-                      <>
-                        <Input
-                          valid
-                          className="inp"
-                          type="number"
-                          min="0"
-                          name="contenido_neto"
-                          autoComplete="off"
-                          {...register("contenido_neto", {
-                            required: {
-                              value: true,
-                              message: "Debe ingresar un valor ",
-                            },
-                            maxLength: {
-                              value: 4,
-                              message:
-                                "El contenido no debe tener mas de 4 caracteres!",
-                            },
-                            min: {
-                              value: 1,
-                              message: "No puede ingresar valores negativos",
-                            },
-                          })}
-                        />
-                        <span className="err">
-                          {errors?.contenido_neto?.message}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <Input
-                          invalid
-                          className="inp"
-                          type="number"
-                          min="0"
-                          name="contenido_neto"
-                          autoComplete="off"
-                          {...register("contenido_neto", {
-                            required: {
-                              value: true,
-                              message: "Debe ingresar un valor ",
-                            },
-                            maxLength: {
-                              value: 4,
-                              message:
-                                "El contenido no debe tener mas de 4 caracteres!",
-                            },
-                            min: {
-                              value: 1,
-                              message: "No puede ingresar valores negativos",
-                            },
-                          })}
-                        />
-                        <span className="err">
-                          {errors?.contenido_neto?.message}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <div>
-                    <label className="title">Sub-Categoría</label>
-                    {state.subcategoriumId ? (
-                      <>
-                        <Input
-                          valid
-                          name="subcategoriumId"
-                          className="inp5"
-                          type="select"
-                          // value={state.nombre}
-                          onChange={(e) => ChangeInput(e)}
-                          {...register("subcategoriumId", {
-                            required: {
-                              value: true,
-                              message: "Debe seleccionar una subcategoria",
-                            },
-                          })}
-                        >
-                          <option></option>
-                          {subcategoria.map((f, index) => (
-                            <option key={index} value={f.id}>
-                              {f.nombre_subcategoria}
-                            </option>
-                          ))}
-                        </Input>
-                        <span className="err">
-                          {errors?.subcategoriumId?.message}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <Input
-                          invalid
-                          name="subcategoriumId"
-                          className="inp5"
-                          type="select"
-                          // value={state.nombre}
-                          onChange={(e) => ChangeInput(e)}
-                          {...register("subcategoriumId", {
-                            required: {
-                              value: true,
-                              message: "Debe seleccionar una subcategoria",
-                            },
-                          })}
-                        >
-                          <option></option>
-                          {subcategoria.map((f, index) => (
-                            <option key={index} value={f.id}>
-                              {f.nombre_subcategoria}
-                            </option>
-                          ))}
-                        </Input>
-                        <span className="err">
-                          {errors?.subcategoriumId?.message}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  <Button
-                    className="btn-fill"
-                    color="primary"
-                    type="submit"
-                    block
-                  >
-                    Agregar
-                  </Button>
-                </Col>
-              </Row>
-            </FormGroup>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Contenido Neto</h6>
+                  {state.contenido_neto && !isNaN(state.contenido_neto) ? (
+                    <>
+                      <Input
+                        valid
+                        type="text"
+                        inputmode="numeric"
+                        min="0"
+                        name="contenido_neto"
+                        autoComplete="off"
+                        {...register("contenido_neto", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un valor ",
+                          },
+                          pattern: {
+                            value: /[0-9]/,
+                            message: "Debe ingresar sólo números",
+                          },
+                          maxLength: {
+                            value: 4,
+                            message:
+                              "El contenido no debe tener mas de 4 caracteres!",
+                          },
+                          min: {
+                            value: 1,
+                            message: "No puede ingresar valores negativos",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.contenido_neto?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        type="text"
+                        inputmode="numeric"
+                        min="0"
+                        name="contenido_neto"
+                        autoComplete="off"
+                        {...register("contenido_neto", {
+                          pattern: {
+                            value: /[0-9]/,
+                            message: "Debe ingresar sólo números",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.contenido_neto?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Sub-Categoría</h6>
+                  {state.subcategoriumId ? (
+                    <>
+                      <Input
+                        valid
+                        style={{ appearance: "none" }}
+                        name="subcategoriumId"
+                        type="select"
+                        // value={state.nombre}
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("subcategoriumId", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una subcategoria",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {subcategoria.map((f, index) => (
+                          <option key={index} value={f.id}>
+                            {f.nombre_subcategoria}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.subcategoriumId?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        name="subcategoriumId"
+                        style={{ appearance: "none" }}
+                        type="select"
+                        // value={state.nombre}
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("subcategoriumId", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una subcategoria",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {subcategoria.map((f, index) => (
+                          <option key={index} value={f.id}>
+                            {f.nombre_subcategoria}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.subcategoriumId?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+            {/* </FormGroup> */}
           </Form>
         </CardBody>
       </Card>

@@ -14,7 +14,7 @@
     "formik": "^2.2.9",
     "geolocation": "^0.2.0",
     "mapbox-gl": "^1.13.1",
-    "npm": "^7.19.0",
+    "mdb-react-ui-kit": "^1.0.0-beta7",
     "node-sass": "^6.0.1",
     "perfect-scrollbar": "^1.5.1",
     "react": "^17.0.2",

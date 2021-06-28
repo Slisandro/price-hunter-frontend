@@ -97,7 +97,7 @@ function Ciudades() {
               <Input
                 name="paiseCodigoAlfa"
                 type="select"
-                className="selectTransAgregar"
+                className="inp"
                 value={paises.nombre_region}
                 onChange={(e) => ChangeInput(e)}
                 {...register("paiseCodigoAlfa", {

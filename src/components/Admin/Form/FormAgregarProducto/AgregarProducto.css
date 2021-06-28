@@ -26,7 +26,7 @@ header {
 }
 
 #title {
-  font-size: 30px;
+  font-size: 50px;
   margin: 30px 0px 0px 0px;
   color: var(--clr-primary-5);
 }
@@ -112,6 +112,7 @@ header {
 
 .selectTransAgregar {
   color: black;
+  appearance: none;
   width: 10rem;
   height: 2.2rem;
   border-radius: var(--radius);
@@ -119,10 +120,10 @@ header {
 }
 .err {
   margin: auto;
+  font-family: "Times New Roman", Times, serif !important;
   display: flex;
-  /* background-color: royalblue; */
-  font-size: 15px;
-  color: red
+  font-size: 12px;
+  color: #ff8d72 !important;
 }
 
 .inp5 {

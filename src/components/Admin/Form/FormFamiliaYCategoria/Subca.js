@@ -140,7 +140,7 @@ function Subcate({ setSwitcher }) {
         </CardHeader>
         <CardBody>
           <Form
-            className="formFamilia"
+            className="form"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
@@ -154,7 +154,7 @@ function Subcate({ setSwitcher }) {
                 <Input
                   type="select"
                   name="nombre_categoria"
-                  className="selectTransAgregar"
+                  className="inp"
                   onChange={(e) => ChangeInput(e)}
                   {...register("nombre_categoria", {
                     required: {

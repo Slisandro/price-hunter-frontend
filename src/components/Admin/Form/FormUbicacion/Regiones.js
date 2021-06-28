@@ -94,7 +94,7 @@ function Regiones() {
           <Row>
             <Col>
               <label className="title">Regiones Actuales</label>
-              <Input type="select" name="nombre_region">
+              <Input type="select" name="nombre_region" className="inp">
                 <option></option>
                 {regiones.map((u) => (
                   <option value={u.nombre_region}>{u.nombre_region}</option>

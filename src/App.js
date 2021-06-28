@@ -10,11 +10,11 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
-import HomePage from './HomePage/HomePage'
+import HomePage from "./HomePage/HomePage";
 
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
-import HomePage from "./HomePage/HomePage";
+// import HomePage from "./HomePage/HomePage";
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
@@ -24,12 +24,13 @@ import Landing from "./HomePage/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 
+
 function App() {
   return (
     <Router>
       <Switch>
         {/* <RutaPrivada exact path="/admin" component={AdminPage} /> */}
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={Landing} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
         <Route exact path="/Marcas" component={Marcas} />
         <Route exact path="/Contacto" component={Contacto} />
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/registro" component={Registro} />
         <Route exact path="/registro-cliente" component={RegistroCliente} />
         <Route exact path="/registro-google" component={RegistroGoogle} />
+      
         {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}
