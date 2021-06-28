@@ -5,6 +5,7 @@ import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
 import axios from 'axios';
 import './MisDesafios.css'
+import { Link } from "react-router-dom";
 
 function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
@@ -42,7 +43,12 @@ function MisDesafios({ ubicacion }) {
             <div className="containerMessageBack">Cargando desafíos...</div>
             :
             desafios.msg ?
-                <div class="containerMessageBack">{desafios.msg}</div>
+                <div>
+                    <div class="containerMessageBack">{desafios.msg}</div>
+                    <Link className="btnAB" to="registro-google">
+                        completar datos
+                    </Link>
+                </div>
                 :
                 <div className="cardsContainer">
                     {

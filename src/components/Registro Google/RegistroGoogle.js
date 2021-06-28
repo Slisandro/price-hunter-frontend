@@ -85,40 +85,41 @@ const RegistroGoogle = (props) => {
     }
 
 
-        
-  const handleSubmit = e => {
-    e.preventDefault();
 
-    if (fecha_de_nacimiento.trim() === '' || generoId === '' || ciudadId === '' || metodo_de_cobro === '') {
-      dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
-      return;
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if (fecha_de_nacimiento.trim() === '' || generoId === '' || ciudadId === '' || metodo_de_cobro === '') {
+            dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+            return;
+        } else {
+            //Si pasamos todas las validacions: 
+            // dispatch(-----------------({
+            //   fecha_de_nacimiento,
+            //   ciudadId,
+            //   generoId,
+            //   metodo_de_cobro,
+            //   banco,
+            //   numero_de_cuenta
+            // })
+            // )
+
+            //Limpiamos el formulario
+            guardarRegistroGoogle({
+
+                fecha_de_nacimiento: [],
+                ciudadId: "",
+                generoId: "",
+                metodo_de_cobro: "",
+                banco: "",
+                numero_de_cuenta: "",
+
+            })
+        }
+
+
+
     }
-    
-
-    //Si pasamos todas las validacions: 
-    // dispatch(-----------------({
-    //   fecha_de_nacimiento,
-    //   ciudadId,
-    //   generoId,
-    //   metodo_de_cobro,
-    //   banco,
-    //   numero_de_cuenta
-    // })
-    // )
-
-    //Limpiamos el formulario
-    guardarRegistroGoogle({
-     
-      fecha_de_nacimiento: [],
-      ciudadId: "",
-      generoId: "",
-      metodo_de_cobro: "",
-      banco: "",
-      numero_de_cuenta: "",
-      
-    })
-
-  }
 
 
 
@@ -222,37 +223,37 @@ const RegistroGoogle = (props) => {
                                     metodo_de_cobro !== "" ?
                                         (metodo_de_cobro === "CBU" ? (
                                             <>
-                                            <FormGroup>
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Banco"
-                                                    name="banco"
-                                                    onChange={handleInputGoogle}
+                                                <FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Banco"
+                                                        name="banco"
+                                                        onChange={handleInputGoogle}
 
-                                                />
+                                                    />
 
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Numero de cuenta"
-                                                    name="numero_de_cuenta"
-                                                    onChange={handleInputGoogle}
-                                                />
-                                            </FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Numero de cuenta"
+                                                        name="numero_de_cuenta"
+                                                        onChange={handleInputGoogle}
+                                                    />
+                                                </FormGroup>
 
                                             </>
 
                                         ) : (
 
                                             metodo_de_cobro === "Mercado Pago" ?
-                                            <FormGroup>
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Usuario"
-                                                    name="banco"
-                                                    onChange={handleInputGoogle}
-                                                
-                                                />
-                                            </FormGroup>
+                                                <FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Usuario"
+                                                        name="banco"
+                                                        onChange={handleInputGoogle}
+
+                                                    />
+                                                </FormGroup>
                                                 : ("")
                                         )
                                         ) : ("")

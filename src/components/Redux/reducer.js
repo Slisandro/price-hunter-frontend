@@ -142,7 +142,7 @@ const initialState = {
   transaccion: [],
   paisesId: [],
   ciudadesId: [],
-  //-------------ADMIN-PUT-------------//
+  //--------------------------//
 };
 
 //-------------ADMIN-------------//
@@ -203,8 +203,8 @@ function rootReducer(state = initialState, action) {
         action.payload.usuario
           ? action.payload.usuario.nombre
           : action.payload.cliente
-          ? action.payload.cliente.nombre_cial_fantasia
-          : action.payload.admin.nombre
+            ? action.payload.cliente.nombre_cial_fantasia
+            : action.payload.admin.nombre
       );
       localStorage.setItem("auth", true);
       if (action.payload.cliente) {
