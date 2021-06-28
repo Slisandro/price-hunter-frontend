@@ -17,7 +17,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (ubicacion.dis > 0) {
+        if (ubicacion.longitud && ubicacion.latitud) {
             dispatch(getProductsByName(producto, ubicacion));
             setState("Search");
             setProducto("")
@@ -25,7 +25,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
                 ...ubicacion,
             })
         } else {
-            swal("Debe ingresar un valor para el radio de búsqueda")
+            swal("No hemos podido acceder a su ubicación", " ", "error");
         }
     }
 
@@ -85,7 +85,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
                     />
                     <input type="submit" id="inputSearchBarSubmit" className="btn__main" value="Buscar" />
                 </div>
-                <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} />    
+                <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} />
                 <select onClick={e => handleClick(e)} id="selectSearchBarUser">
                     <option></option>
                     <option value={100}>100 m</option>

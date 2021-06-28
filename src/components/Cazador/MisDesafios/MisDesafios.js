@@ -18,11 +18,13 @@ function MisDesafios({ ubicacion }) {
     })
 
     useEffect(() => {
-        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
-            .then(resp => {
-                dispatch(getDesafios(searchCity(resp.data)))
-            })
-        setLoading(false)
+        if (ubicacion.latitud && ubicacion.longitud) {
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
+                .then(resp => {
+                    dispatch(getDesafios(searchCity(resp.data)))
+                })
+            setLoading(false)
+        }
     }, [modalCompletado])
 
     const handleClickOpen = (e) => {
@@ -40,32 +42,35 @@ function MisDesafios({ ubicacion }) {
     }
 
     return (
-        loading ?
-            <div className="containerMessageBack">Cargando desafíos...</div>
-            :
-            desafios.msg ?
-                <div class="containerMessageBack">
-                    {desafios.msg}
-                    {
-                        !modalRegistro ? null :
-                        // componente google
-                        null
-                    }
-                </div>
-                :
-                <div className="cardsContainer">
-                    {
-                        desafios.map(desafio => (
-                            <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
-                        ))
-                    }
-                    {
-                        modal ?
-                            <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
-                            :
-                            null
-                    }
-                </div>
+        !ubicacion.latitud && !ubicacion.longitud ? <div className="containerMessageBack">No hemos podido acceder a tu ubicación</div> :
+            (
+                loading ?
+                    <div className="containerMessageBack">Cargando desafíos...</div>
+                    :
+                    desafios.msg ?
+                        <div class="containerMessageBack">
+                            {desafios.msg}
+                            {
+                                !modalRegistro ? null :
+                                    // componente google
+                                    null
+                            }
+                        </div>
+                        :
+                        <div className="cardsContainer">
+                            {
+                                desafios.map(desafio => (
+                                    <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
+                                ))
+                            }
+                            {
+                                modal ?
+                                    <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
+                                    :
+                                    null
+                            }
+                        </div>
+            )
     )
 }
 
