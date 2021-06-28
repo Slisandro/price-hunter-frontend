@@ -23,7 +23,6 @@ import RegistroCliente from "./components/Registro/RegistroCliente";
 import Landing from "./HomePage/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
-import HomePage from "./HomePage/HomePage"
 
 function App() {
   return (

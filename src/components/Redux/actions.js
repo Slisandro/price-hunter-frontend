@@ -881,5 +881,35 @@ export function iniciarSesionGoogle(datosGoogle) {
   };
 }
 
+export const REGISTRO_GOOGLE_OK = "REGISTRO_GOOGLE_OK";
+export const REGISTRO_GOOGLE_ERR = "REGISTRO_GOOGLE_ERR";
 
+export function registro_google(objeto) {
+  return function(dispatch) {
+    const token = localStorage.getItem("token");
+    axios.put(`${URL}registro-google`, objeto, {headers: { Authorization: `Bearer ${token}` }})
+    .then((respuesta) => {
+      // console.log(respuesta)
+      respuesta.data.msg_ok ? (
+        dispatch({
+          type: REGISTRO_GOOGLE_OK,
+          payload: {
+            msg: respuesta.data.msg_ok,
+          },
+        })
+      ) : (
+        dispatch({
+          type: REGISTRO_GOOGLE_ERR,
+          payload: {
+            msg: respuesta.data.msg,
+            categoria: "alerta-error",
+          },
+        })
+      )
+    })
+    .catch((err) =>
+    console.log(err)
+    );
+  };
+}
 

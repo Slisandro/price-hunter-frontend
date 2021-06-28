@@ -31,6 +31,9 @@ import {
   GET_SUBCATEGORIA_POR_ID,
   GET_PAISES_ID,
   GET_CIUDADES_ID,
+
+  REGISTRO_GOOGLE_OK,
+  REGISTRO_GOOGLE_ERR,
   
 } from "./actions";
 
@@ -104,6 +107,7 @@ const initialState = {
   paisesId: [],
   ciudadesId: [],
   //--------------------------//
+  registroGoogleRes: {},
 };
 
 //-------------ADMIN-------------//
@@ -199,6 +203,16 @@ function rootReducer(state = initialState, action) {
         }
       }
 
+    case REGISTRO_GOOGLE_OK:
+      return {
+        ...state,
+        registroGoogleRes: action.payload,
+      }
+    case REGISTRO_GOOGLE_ERR:
+      return {
+        ...state,
+        registroGoogleRes: action.payload,
+      }
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:

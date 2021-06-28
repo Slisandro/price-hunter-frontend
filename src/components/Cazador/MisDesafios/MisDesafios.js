@@ -5,24 +5,27 @@ import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
 import axios from 'axios';
 import './MisDesafios.css'
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import RegistroGoogle from '../../Registro Google/RegistroGoogle'
 
 function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
+    const [modalRegistro, setModalRegistro] = useState(false); // abrir modal
+    const [modalCompletado, setModalCompletado] = useState(false) // se pasa como props al componente
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const desafios = useSelector(store => store.desafios)
     const [referencia, setReferencia] = useState({
         idDesafio: ""
     })
-
+    const history = useHistory()
     useEffect(() => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
             .then(resp => {
                 dispatch(getDesafios(searchCity(resp.data)))
             })
         setLoading(false)
-    }, [])
+    }, [modalCompletado])
 
     const handleClickOpen = (e) => {
         setReferencia({
@@ -45,9 +48,18 @@ function MisDesafios({ ubicacion }) {
             desafios.msg ?
                 <div>
                     <div class="containerMessageBack">{desafios.msg}</div>
-                    <Link className="btnAB" to="registro-google">
-                        completar datos
-                    </Link>
+                    {
+                        desafios.msg === "completar los datos del usuario antes de continuar" ? <>
+                        <button onClick={()=>{setModalRegistro(true)}}>form</button>
+                        </>:null
+                    }
+                    {
+                        !modalRegistro ? null :
+                            // componente google
+                            <>
+                              <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro}history={history}/>
+                            </>
+                    }
                 </div>
                 :
                 <div className="cardsContainer">
