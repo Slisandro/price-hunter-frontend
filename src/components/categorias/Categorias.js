@@ -58,16 +58,20 @@ const Categorias = ({ categorias, setState, ubicacion }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (e.target.value) {
-      if (ubicacion.dis > 0) {
-        setState("Search");
-        dispatch(getSubcategoriasId(e.target.value, ubicacion));
-        setCategoria([])
-        setSubcategoria([])
-        document.getElementsByName("familia")[0].value = null
-        // nombreFamilia.value = ""
+    if (ubicacion.latitud && ubicacion.longitud) {
+      if (e.target.value) {
+        if (ubicacion.dis > 0) {
+          setState("Search");
+          dispatch(getSubcategoriasId(e.target.value, ubicacion));
+          setCategoria([])
+          setSubcategoria([])
+          document.getElementsByName("familia")[0].value = null
+          // nombreFamilia.value = ""
+        } else {
+          swal("Debe ingresar un valor para el radio de búsqueda")
+        }
       } else {
-        swal("Debe ingresar un valor para el radio de búsqueda")
+        swal("No hemos podido acceder a su ubicación", " ", "error");
       }
     }
   }

@@ -12,7 +12,6 @@ export default function Transacciones() {
         const token = localStorage.getItem("token");
         axios.get(`${URL}transacciones/consulta/`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
-                console.log(OrderByDate(json.data))
                 setMovimiento(OrderByDate(json.data).slice(0, 5))
             })
     }, []);

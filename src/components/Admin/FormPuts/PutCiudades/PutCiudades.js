@@ -106,6 +106,7 @@ function PutCiudades() {
                 <Input
                   type="select"
                   name="region"
+                  className="inp"
                   onChange={(e) => ChangeInput(e)}
                 >
                   <option deafult>Seleccionar</option>
@@ -121,6 +122,7 @@ function PutCiudades() {
                   <Input
                     type="select"
                     name="paises"
+                    className="inp"
                     onChange={(e) => ChangeInput(e)}
                   >
                     <option deafult>Seleccionar</option>

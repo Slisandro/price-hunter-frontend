@@ -133,7 +133,7 @@ function Paises() {
           <Row>
             <Col>
               <label className="title">Países Actuales</label>
-              <Input name="nombre_pais" type="select">
+              <Input name="nombre_pais" type="select" className="inp">
                 <option></option>
                 {paises.map((u) => (
                   <option value={u.nombre_pais}>{u.nombre_pais}</option>

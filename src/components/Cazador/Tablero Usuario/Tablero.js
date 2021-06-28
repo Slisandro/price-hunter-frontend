@@ -26,13 +26,14 @@ function Tablero() {
 
   useEffect(() => {
     geolocation.getCurrentPosition((err, position) => {
+      if (err) throw err
       return setUbicacion({
         ...ubicacion,
         longitud: position.coords.longitude + "",
         latitud: position.coords.latitude + "",
       })
     })
-  }, [ubicacion])
+  }, [])
 
   return (
     <div className="contenedor">

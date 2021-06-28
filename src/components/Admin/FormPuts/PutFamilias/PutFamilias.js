@@ -112,7 +112,7 @@ function PutFamilias() {
             <Row>
               <Col>
                 <label className="title">Familias</label>
-                <Input type="select" name="nombre_familia">
+                <Input type="select" name="nombre_familia" className="inp">
                   <option></option>
                   {familia.map((u) => (
                     <option value={u.nombre_familia}>{u.nombre_familia}</option>
