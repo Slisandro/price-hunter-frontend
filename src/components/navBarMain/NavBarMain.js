@@ -17,14 +17,13 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(ubicacion.dis > 0) {
+        if (ubicacion.dis > 0) {
             dispatch(getProductsByName(producto, ubicacion));
-        setState("Search");
-        setProducto("")
-        setUbicacion({
-            ...ubicacion,
-            // dis: 0 VERIFICAR SETEO
-        })
+            setState("Search");
+            setProducto("")
+            setUbicacion({
+                ...ubicacion,
+            })
         } else {
             swal("Debe ingresar un valor para el radio de búsqueda")
         }
@@ -68,7 +67,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
 
 
             {/* Categories */}
-            <Categorias categorias={categorias} setState={setState} />
+            {/* <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} /> */}
             {/* SearchBar */}
 
 
@@ -76,7 +75,7 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
             <form className="formSearchUser" onSubmit={handleSubmit}>
                 <div className="containerInputSearch">
                     <input
-                    id="inputSearchBarText"
+                        id="inputSearchBarText"
                         type="text"
                         className="input__text"
                         placeholder="Buscar precios cercanos"
@@ -86,8 +85,9 @@ function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }
                     />
                     <input type="submit" id="inputSearchBarSubmit" className="btn__main" value="Buscar" />
                 </div>
+                <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} />    
                 <select onClick={e => handleClick(e)} id="selectSearchBarUser">
-                    <option default>Seleccione el radio para su busqueda</option>
+                    <option></option>
                     <option value={100}>100 m</option>
                     <option value={1000}>1 km</option>
                     <option value={5000}>5 km</option>

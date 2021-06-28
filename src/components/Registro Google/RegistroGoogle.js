@@ -9,17 +9,18 @@ import {
     Card,
     CardBody
 } from "reactstrap";
-import { getGeneros, getPaises, getCiudades, mostrarError } from '../Redux/actions';
+import { getGeneros, getPaises, getCiudades, mostrarError, registro_google} from '../Redux/actions';
 
 
-const RegistroGoogle = (props) => {
+const RegistroGoogle = ({setModalCompletado, history, setModalRegistro}) => {
 
 
     const generos = useSelector((store) => store.generos);
     const paises = useSelector((store) => store.paises);
     const ciudades = useSelector((store) => store.ciudades);
-    const autenticado = useSelector((store) => store.autenticado);
+    // const autenticado = useSelector((store) => store.autenticado);
     const mensaje = useSelector((store) => store.mensaje);
+    const res = useSelector((store) => store.registroGoogleRes);
     const dispatch = useDispatch();
 
 
@@ -43,6 +44,8 @@ const RegistroGoogle = (props) => {
         metodo_de_cobro,
         generoId,
         ciudadId,
+        banco,
+        numero_de_cuenta
     } = registroGoogle;
 
 
@@ -50,14 +53,14 @@ const RegistroGoogle = (props) => {
 
 
     useEffect(() => {
-        if (autenticado) {
-            props.history.push("/tablero")
+        if (res.msg === "operación completada con éxito") {
+            setModalCompletado(true)
         }
         if (mensaje) {
             dispatch(mostrarError(mensaje.msg, mensaje.categoria))
         }
 
-    }, [mensaje, autenticado, props.history, dispatch])
+    }, [mensaje, res, history, dispatch])
 
 
 
@@ -85,40 +88,34 @@ const RegistroGoogle = (props) => {
     }
 
 
-        
-  const handleSubmit = e => {
-    e.preventDefault();
 
-    if (fecha_de_nacimiento.trim() === '' || generoId === '' || ciudadId === '' || metodo_de_cobro === '') {
-      dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
-      return;
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        if (fecha_de_nacimiento.trim() === '' || generoId === '' || ciudadId === '' || metodo_de_cobro === '') {
+            dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+            return;
+        } else {
+            // Si pasamos todas las validacions: 
+            dispatch(registro_google(registroGoogle)
+            )
+
+            //Limpiamos el formulario
+            guardarRegistroGoogle({
+
+                fecha_de_nacimiento: [],
+                ciudadId: "",
+                generoId: "",
+                metodo_de_cobro: "",
+                banco: "",
+                numero_de_cuenta: "",
+
+            })
+        }
+
+
+
     }
-    
-
-    //Si pasamos todas las validacions: 
-    // dispatch(-----------------({
-    //   fecha_de_nacimiento,
-    //   ciudadId,
-    //   generoId,
-    //   metodo_de_cobro,
-    //   banco,
-    //   numero_de_cuenta
-    // })
-    // )
-
-    //Limpiamos el formulario
-    guardarRegistroGoogle({
-     
-      fecha_de_nacimiento: [],
-      ciudadId: "",
-      generoId: "",
-      metodo_de_cobro: "",
-      banco: "",
-      numero_de_cuenta: "",
-      
-    })
-
-  }
 
 
 
@@ -222,37 +219,37 @@ const RegistroGoogle = (props) => {
                                     metodo_de_cobro !== "" ?
                                         (metodo_de_cobro === "CBU" ? (
                                             <>
-                                            <FormGroup>
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Banco"
-                                                    name="banco"
-                                                    onChange={handleInputGoogle}
+                                                <FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Banco"
+                                                        name="banco"
+                                                        onChange={handleInputGoogle}
 
-                                                />
+                                                    />
 
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Numero de cuenta"
-                                                    name="numero_de_cuenta"
-                                                    onChange={handleInputGoogle}
-                                                />
-                                            </FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Numero de cuenta"
+                                                        name="numero_de_cuenta"
+                                                        onChange={handleInputGoogle}
+                                                    />
+                                                </FormGroup>
 
                                             </>
 
                                         ) : (
 
                                             metodo_de_cobro === "Mercado Pago" ?
-                                            <FormGroup>
-                                                <Input
-                                                    type="text"
-                                                    placeholder="Usuario"
-                                                    name="banco"
-                                                    onChange={handleInputGoogle}
-                                                
-                                                />
-                                            </FormGroup>
+                                                <FormGroup>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Usuario"
+                                                        name="banco"
+                                                        onChange={handleInputGoogle}
+
+                                                    />
+                                                </FormGroup>
                                                 : ("")
                                         )
                                         ) : ("")
@@ -263,6 +260,7 @@ const RegistroGoogle = (props) => {
                             <Button className="button__login__google" type="submit">
                                 Iniciar sesion
                             </Button>
+                            <Button className="primary" onClick={()=>setModalRegistro(false)}>Cerrar</Button>
 
 
                         </form>
