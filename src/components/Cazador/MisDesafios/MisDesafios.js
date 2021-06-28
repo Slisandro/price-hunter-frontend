@@ -8,6 +8,8 @@ import './MisDesafios.css'
 
 function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
+    const [modalRegistro, setModalRegistro] = useState(false); // abrir modal
+    const [modalCompletado, setModalCompletado] = useState(false) // se pasa como props al componente
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const desafios = useSelector(store => store.desafios)
@@ -21,7 +23,7 @@ function MisDesafios({ ubicacion }) {
                 dispatch(getDesafios(searchCity(resp.data)))
             })
         setLoading(false)
-    }, [])
+    }, [modalCompletado])
 
     const handleClickOpen = (e) => {
         setReferencia({
@@ -42,7 +44,14 @@ function MisDesafios({ ubicacion }) {
             <div className="containerMessageBack">Cargando desafíos...</div>
             :
             desafios.msg ?
-                <div class="containerMessageBack">{desafios.msg}</div>
+                <div class="containerMessageBack">
+                    {desafios.msg}
+                    {
+                        !modalRegistro ? null :
+                        // componente google
+                        null
+                    }
+                </div>
                 :
                 <div className="cardsContainer">
                     {
