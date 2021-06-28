@@ -142,7 +142,7 @@ function PutPaises() {
                       },
                     })}
                   />
-                  {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
+                  <span className="err">{errors?.nombre_nuevo_pais?.message}</span>
                   {/* </div> */}
                   {/* <span className="err">
                 {errors?.codigo_unidad_medida?.message}
