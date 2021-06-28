@@ -21,7 +21,12 @@ import FormMoneda from "../../../Admin/Form/FormMoneda/FormMoneda";
 import FormTransaccion from "../../../Admin/Form/FormTipoTrans/FormTransaccion";
 import FormUnidadMedida from "../../../Admin/Form/FormUm/FormUnidadMedida";
 import FormUsuario from "../../../Admin/Form/FormUsuario/FormUsuario";
-// import FormAgregarProducto from "../../../Admin/Form/FormAgregarProducto/AgregarProducto";
+import Regiones from "../../../Admin/Form/FormUbicacion/Regiones";
+import Paises from "../../../Admin/Form/FormUbicacion/Paises";
+import Ciudades from "../../../Admin/Form/FormUbicacion/Ciudades";
+import Fami from "../../../Admin/Form/FormFamiliaYCategoria/Fami";
+import Cate from "../../../Admin/Form/FormFamiliaYCategoria/Cate";
+import Subcate from "../../../Admin/Form/FormFamiliaYCategoria/Subca";
 
 function FormAgregar() {
   return (
@@ -50,12 +55,26 @@ function FormAgregar() {
           </Col>
         </Row>
         <Row>
-          <Col lg="4">{/* <PutRegiones /> */}</Col>
-          <Col lg="4">{/* <PutPaises /> */}</Col>
-          <Col lg="4">{/* <PutMonedas /> */}</Col>
+          <Col lg="4">
+            <Regiones />
+          </Col>
+          <Col lg="4">
+            <Paises />
+          </Col>
+          <Col lg="4">
+            <Ciudades />
+          </Col>
         </Row>
         <Row>
-          <Col>{/* <PutCiudades /> */}</Col>
+          <Col lg="4">
+            <Fami />
+          </Col>
+          <Col lg="4">
+            <Cate />
+          </Col>
+          <Col lg="4">
+            <Subcate />
+          </Col>
         </Row>
       </div>
     </>

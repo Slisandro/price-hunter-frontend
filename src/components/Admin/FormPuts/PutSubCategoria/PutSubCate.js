@@ -202,6 +202,7 @@ function PutSubCate() {
                   <Input
                     name="categoria"
                     className="inp"
+                    type="select"
                     onChange={(e) => ChangeInput(e)}
                     {...register("categoria", {
                       // required: {

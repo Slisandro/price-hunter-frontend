@@ -82,9 +82,9 @@ const Login = (props) => {
 
   const onSuccessGoogle = (googleUser) => {
     // var datos = googleUser.profileObj;
-    // var datos = googleUser;
+    var datos = googleUser;
     // console.log(googleUser)
-    // dispatch(iniciarSesionGoogle(datos))
+    dispatch(iniciarSesionGoogle(datos))
   }
 
 
