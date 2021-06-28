@@ -32,7 +32,7 @@ function Tablero() {
         latitud: position.coords.latitude + "",
       })
     })
-  }, [])
+  }, [ubicacion])
 
   return (
     <div className="contenedor">

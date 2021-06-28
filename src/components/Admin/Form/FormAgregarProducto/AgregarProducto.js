@@ -7,6 +7,21 @@ import {
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 import close from "../../../../assets/cancel (1).png";
 import "./AgregarProducto.css";
@@ -105,7 +120,7 @@ function FormAgregarProducto() {
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    })
+    });
 
     setState({
       nombre: "",
@@ -117,144 +132,139 @@ function FormAgregarProducto() {
 
   return (
     <>
-      <div>
-        <div className="contenedorFAM">
-          {modal ? (
-            <div>
-              {/* <button className="buttonModal" onClick={() => handleModal()}>
-                <img width={30} src={close} alt="x" />
-              </button> */}
-              <header>
-                <h1 id="title">Agregar Producto</h1>
-              </header>
-              <form
-                id="survey-form"
-                className="form"
-                noValidate
-                onChange={(e) => ChangeInput(e)}
-                onSubmit={handleSubmit(submit)}
-              >
-                <div className="divModalFAM">
-                  <div>
-                    {/* ------------------------ */}
-                    <label className="text-label">Nombre</label>
-                    <input
-                      className="inp"
-                      type="text"
-                      name="nombre"
-                      max ='0'
-                      autoComplete="off"
-                      {...register("nombre", {
-                        required: {
-                          value: true,
-                          message: "Debe ingresar un nombre ",
-                        },
-                        maxLength: {
-                          value: 15,
-                          message:
-                            "El nombre no debe tener mas de quince letras!",
-                        },
-                        minLength: {
-                          value: 3,
-                          message: "El nombre debe tener al menos tres letras!",
-                        },
-                        max: {
-                          value: 0,
-                          message: "El nombre no puede comenzar con numeros",
-                        },
-                      })}
-                    />
-                    <span className="err">{errors?.nombre?.message}</span>
-                  </div>
-                  <div className="divForm">
-                    <div>
-                      {/* ------------------------ */}
-                      <label className="text-label">Unidad de Medida</label>
-                      <select
-                        name="unidadMedidaCodigoUnidadMedida"
-                        className="inp2"
-                        onChange={(e) => ChangeInput(e)}
-                        {...register("unidadMedidaCodigoUnidadMedida", {
-                          required: {
-                            value: true,
-                            message: "Debe seleccionar una unidad de medida",
-                          },
-                        })}
-                      >
-                        <option></option>
-                        {unidad_medida.map((f, index) => (
-                          <option key={index} value={f.codigo_unidad_medida}>
-                            {f.codigo_unidad_medida}
-                          </option>
-                        ))}
-                      </select>
-                      <span className="err">
-                        {errors?.unidadMedidaCodigoUnidadMedida?.message}
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    {/* ------------------------ */}
-                    <label className="text-label">Contenido Neto</label>
-                    <input
-                      className="inp"
-                      type="number"
-                      min = '0'
-                      name="contenido_neto"
-                      autoComplete="off"
-                      {...register("contenido_neto", {
-                        required: {
-                        
-                          value: true,
-                          message: "Debe ingresar un valor ",
-                        },
-                        maxLength: {
-                          value: 4,
-                          message:
-                            "El contenido no debe tener mas de 4 caracteres!",
-                        },
-                        min: {
-                          value:1,
-                          message: "No puede ingresar valores negativos"
-                        }
-                      })}
-                    />
-                    <span className="err">{errors?.contenido_neto?.message}</span>
-                    
-                  </div>
-                  <div>
-                    {/* ------------------------ */}
-                    <label className="text-label">Sub-Categoría</label>
-                    <select
-                      name="subcategoriumId"
-                      className="inp5"
-                      // value={state.nombre}
-                      onChange={(e) => ChangeInput(e)}
-                      {...register("subcategoriumId", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una subcategoria",
-                        },
-                      })}
-                    >
-                      <option></option>
-                      {subcategoria.map((f, index) => (
-                        <option key={index} value={f.id}>
-                          {f.nombre_subcategoria}
-                        </option>
-                      ))}
-                    </select>
-                    <span className="err">{errors?.subcategoriumId?.message}</span>
-                  </div>
-                  <button className="agregarModal" type="submit">
-                    Agregar
-                  </button>
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Productos</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Nombre</label>
+                <Input
+                  className="inp"
+                  type="text"
+                  name="nombre"
+                  max="0"
+                  autoComplete="off"
+                  {...register("nombre", {
+                    required: {
+                      value: true,
+                      message: "Debe ingresar un nombre ",
+                    },
+                    maxLength: {
+                      value: 15,
+                      message: "El nombre no debe tener mas de quince letras!",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "El nombre debe tener al menos tres letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "El nombre no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.nombre?.message}</span>
+
+                <div>
+                  <label className="title">Unidad de Medida</label>
+                  <Input
+                    name="unidadMedidaCodigoUnidadMedida"
+                    className="inp2"
+                    type="select"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("unidadMedidaCodigoUnidadMedida", {
+                      required: {
+                        value: true,
+                        message: "Debe seleccionar una unidad de medida",
+                      },
+                    })}
+                  >
+                    <option></option>
+                    {unidad_medida.map((f, index) => (
+                      <option key={index} value={f.codigo_unidad_medida}>
+                        {f.codigo_unidad_medida}
+                      </option>
+                    ))}
+                  </Input>
+                  <span className="err">
+                    {errors?.unidadMedidaCodigoUnidadMedida?.message}
+                  </span>
                 </div>
-              </form>
-            </div>
-          ) : null}
-        </div>
-      </div>
+
+                <div>
+                  <label className="title">Contenido Neto</label>
+                  <Input
+                    className="inp"
+                    type="number"
+                    min="0"
+                    name="contenido_neto"
+                    autoComplete="off"
+                    {...register("contenido_neto", {
+                      required: {
+                        value: true,
+                        message: "Debe ingresar un valor ",
+                      },
+                      maxLength: {
+                        value: 4,
+                        message:
+                          "El contenido no debe tener mas de 4 caracteres!",
+                      },
+                      min: {
+                        value: 1,
+                        message: "No puede ingresar valores negativos",
+                      },
+                    })}
+                  />
+                  <span className="err">{errors?.contenido_neto?.message}</span>
+                </div>
+                <div>
+                  <label className="title">Sub-Categoría</label>
+                  <Input
+                    name="subcategoriumId"
+                    className="inp5"
+                    type="select"
+                    // value={state.nombre}
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("subcategoriumId", {
+                      required: {
+                        value: true,
+                        message: "Debe seleccionar una subcategoria",
+                      },
+                    })}
+                  >
+                    <option></option>
+                    {subcategoria.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.nombre_subcategoria}
+                      </option>
+                    ))}
+                  </Input>
+                  <span className="err">
+                    {errors?.subcategoriumId?.message}
+                  </span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
     </>
   );
 }

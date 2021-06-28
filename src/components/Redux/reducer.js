@@ -6,21 +6,7 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  UNIDAD_MEDIDA_POST,
-  TIPO_USUARIO_POST,
-  GENERO_POST,
-  MONEDA_POST,
-  CIUDAD_POST,
-  PAIS_POST,
-  REGION_POST,
-  FAMILIA_POST,
-  CATEGORIA_POST,
-  SUBCATEGORIA_POST,
-  TIPO_TRANSACCION_POST,
-  TRANSACCION_POST,
-  CLIENTES_POST,
-  DESAFIO_POST,
-  PRODUCTO_POST,
+  
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_GENEROS,
@@ -43,32 +29,9 @@ import {
   GET_CIUDAD,
   GET_CATEGORIA_POR_ID,
   GET_SUBCATEGORIA_POR_ID,
-  // PUT_SUBCATEGORIA,
-  // PUT_TIPO_TRANSACCION,
-  // PUT_TRANSACCION,
-  // GET_GENEROS,
-  // GET_TIPO_USUARIO,
-  // GET_PAISES,
-  // GET_CIUDADES,
-  // OBTENER_USUARIO,
-  // CERRAR_SESION,
-  // LOGIN_ERROR,
-  // REGISTRO_ERROR,
-  PUT_FAMILIA,
-  PUT_TIPO_USUARIO,
-  PUT_GENERO,
-  PUT_MONEDA,
-  PUT_CIUDAD,
-  PUT_PAIS,
-  PUT_REGION,
-  PUT_CATEGORIA,
-  PUT_SUBCATEGORIA,
-  PUT_TIPO_TRANSACCION,
-  PUT_TRANSACCION,
-  PUT_CLIENTES,
-  PUT_DESAFIO,
-  PUT_PRODUCTO,
-  PUT_UM,
+  GET_PAISES_ID,
+  GET_CIUDADES_ID,
+  
 } from "./actions";
 
 const initialState = {
@@ -138,9 +101,9 @@ const initialState = {
   region: [],
   moneda: [],
   transaccion: [],
-
+  paisesId: [],
+  ciudadesId: [],
   //-------------ADMIN-PUT-------------//
-
 };
 
 //-------------ADMIN-------------//
@@ -247,83 +210,9 @@ function rootReducer(state = initialState, action) {
         autenticado: false,
         token: null,
         usuario: null,
-        alerta: action.payload,
+        mensaje: action.payload,
       };
-    case UNIDAD_MEDIDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_USUARIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case GENERO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case MONEDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CIUDAD_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PAIS_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case REGION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case FAMILIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case SUBCATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CLIENTES_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case DESAFIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PRODUCTO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
+    
     case GET_FAMILIA:
       return {
         ...state,
@@ -362,7 +251,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         pais: action.payload,
       };
-      case GET_CIUDAD:
+    case GET_CIUDAD:
       return {
         ...state,
         ciudad: action.payload,
@@ -377,98 +266,32 @@ function rootReducer(state = initialState, action) {
         ...state,
         transaccion: action.payload,
       };
-      case GET_PRODUCTOS:
+    case GET_PRODUCTOS:
       return {
         ...state,
         productos: action.payload,
       };
-      case GET_CATEGORIA_POR_ID:
-        return {
-          ...state,
-          categoria: action.payload,
-        };
-        case GET_SUBCATEGORIA_POR_ID:
-        return {
-          ...state,
-          subcategoria: action.payload,
-        };
-    //-------------ADMIN-------------//
-    //-------------ADMIN-PUT-------------//
-    case PUT_FAMILIA:
+    case GET_CATEGORIA_POR_ID:
       return {
         ...state,
-        admin: action.payload,
+        categorias: action.payload,
       };
-    case PUT_TIPO_USUARIO:
+    case GET_SUBCATEGORIA_POR_ID:
       return {
         ...state,
-        admin: action.payload,
+        subcategoria: action.payload,
       };
-    case PUT_GENERO:
+    case GET_PAISES_ID:
       return {
         ...state,
-        admin: action.payload,
+        paisesId: action.payload,
       };
-    case PUT_MONEDA:
+    case GET_CIUDADES_ID:
       return {
         ...state,
-        admin: action.payload,
+        ciudadesId: action.payload,
       };
-    case PUT_CIUDAD:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_PAIS:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-      case PUT_REGION:
-      return {
-        ...state,
-        regiones: action.payload,
-      };
-    case PUT_CATEGORIA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_SUBCATEGORIA:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_TIPO_TRANSACCION:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_TRANSACCION:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_CLIENTES:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_DESAFIO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_PRODUCTO:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PUT_UM:
-      return {
-        ...state,
-        admin: action.payload,
-      };
+    
     default:
       return state;
   }

@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { putTipoTransaccion, getTipoTransaccion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 function PutTipoTrans() {
   const dispatch = useDispatch();
@@ -16,6 +31,7 @@ function PutTipoTrans() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
@@ -36,76 +52,94 @@ function PutTipoTrans() {
         timer: "5000",
       });
     }
+    reset({ data });
   };
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Modificar Tipos de Transacción</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          // onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div>
-            <label className="text-label">Nombre</label>
-            <select
-              name="id"
-              className="inp"
-              {...register("id", {
-              //   required: {
-              //     value: true,
-              //     message: "Debe seleccionar un tipo de transaccion",
-              //   },
-              })}
-            >
-              <option></option>
-              {transaccion.map((f, index) => (
-                <option key={index} value={f.id}>
-                  {f.tipo_transaccion}
-                </option>
-              ))}
-            </select>
-            <span className="err">{errors?.id?.message}</span>
-          </div>
+      {/* <div className="content"> */}
+      {/* <Row> */}
+      {/* <Col lg="4"> */}
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Tipo de Transacción</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            // onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <label className="title">Tipos de Transacción</label>
+                <Input
+                  name="id"
+                  type="select"
+                  className="inp"
+                  {...register("id", {
+                    //   required: {
+                    //     value: true,
+                    //     message: "Debe seleccionar un tipo de transaccion",
+                    //   },
+                  })}
+                >
+                  <option></option>
+                  {transaccion.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.tipo_transaccion}
+                    </option>
+                  ))}
+                </Input>
+                <span className="err">{errors?.id?.message}</span>
 
-          <div className="divForm">
-            <div>
-              <label className="text-label">Tipo Transacción</label>
-              <input
-                className="inp"
-                type="text"
-                name="tipo_transaccion"
-                autoComplete="off"
-                max="0"
-                {...register("tipo_transaccion", {
-                  // required: {
-                  //   value: true,
-                  //   message: "Debe ingresar una tipo transaccion ",
-                  // },
-                  maxLength: {
-                    value: 15,
-                    message: "El nombre no debe tener mas de quince letras!",
-                  },
-                  max: {
-                    value: 0,
-                    message: "El nombre no puede comenzar con numeros",
-                  },
-                })}
-              />
-              <span className="err">{errors?.tipo_transaccion?.message}</span>
-            </div>
-            <button className="agregarModal" type="submit">
-              Modificar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesUM">
+                <div>
+                  <label className="title">Nuevo Tipo de Transacción</label>
+                  <Input
+                    // className="inp"
+                    type="text"
+                    name="tipo_transaccion"
+                    autoComplete="off"
+                    max="0"
+                    {...register("tipo_transaccion", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar una tipo transaccion ",
+                      // },
+                      maxLength: {
+                        value: 15,
+                        message:
+                          "El nombre no debe tener mas de quince letras!",
+                      },
+                      max: {
+                        value: 0,
+                        message: "El nombre no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">
+                    {errors?.tipo_transaccion?.message}
+                  </span>
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Modificar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* </Col> */}
+      {/* </Row> */}
+      {/* </div> */}
+      {/* <div className="contenedorActualesUM">
         Tipos de Transacción Actuales
         <div className="tiposUM">
           {transaccion.map((u, index) => (
@@ -113,8 +147,9 @@ function PutTipoTrans() {
               {u.tipo_transaccion}
             </span>
           ))}
-        </div>
-      </div>
+        </div> */}
+      {/* </div>
+      </CardBody> */}
     </>
   );
 }
