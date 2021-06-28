@@ -10,6 +10,7 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
+import HomePage from './HomePage/HomePage'
 
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
