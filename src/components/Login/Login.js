@@ -15,8 +15,10 @@ import {
   FormText,
   Button,
   Card,
-  CardBody
+  CardBody,
+  Col
 } from "reactstrap";
+import NavLogin from "./NavLogin";
 
 
 
@@ -140,80 +142,83 @@ const Login = (props) => {
 
 
   return (
-    <>
-    
-    <div className="loger_cont">
-    
+    <div className="Totallogin">
+      <NavLogin />
 
-      <div className="global-container__log">
+      <div className="loger_cont">
+        <p className="welcome-login">Bienvenido</p>
 
-       
-        <Card className="card__login">
-        {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
-          <CardBody>
-          {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
-            <form className="login__form" onSubmit={handleSubmit}>
-
-              <FormGroup row>
-                <Label for="correo"> Correo </Label>
-                <Input
-                  type="email"
-                  name="email"
-                  id="correo"
-                  placeholder="Ingrese su correo"
-                  onChange={handleInputLogin}
-                  value={email}
-                />
-
-              </FormGroup>
-              
-              
-              <FormGroup row>
-                <Label for="examplePassword">Contraseña</Label>
-                <Input
-
-                  type="password"
-                  name="password"
-                  id="examplePassword"
-                  placeholder="Ingrese su contraseña"
-                  autoComplete="off"
-                  onChange={handleInputLogin}
-                  value={password}
-                />
-              </FormGroup>
-              <div className=" text-center google__log">
-                <FormText color="muted">
-                  <p>Iniciar sesion con Google</p>
-                  <GoogleLogin
-                    clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
-                    render={renderProps => (
-                      <button className="button__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} alt="" width={25} /></button>
-                    )}
-                    onSuccess={onSuccessGoogle}
-                    onFailure={onSuccessGoogle}
-                    cookiePolicy={'single_host_origin'}
-                  />
-                  
-                </FormText>
-              </div>
-
-
-              <Button className="button__login" type="submit" block>
-                Iniciar sesion
-              </Button>
-
-
-            </form>
+        <div className="global-container__log">
 
 
 
-          </CardBody>
-        </Card>
+
+          <Card>
+            {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center`}> {mensaje.msg} </div>) : null}
+            <CardBody>
+              {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}
+              <form className="login__form" onSubmit={handleSubmit}>
+                <Col md="12">
+                  <FormGroup row>
+                    <Label for="correo"> Correo </Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      id="correo"
+                      placeholder="Ingrese su correo"
+                      onChange={handleInputLogin}
+                      value={email}
+                    />
+
+                  </FormGroup>
 
 
+                  <FormGroup row>
+                    <Label for="examplePassword">Contraseña</Label>
+                    <Input
+
+                      type="password"
+                      name="password"
+                      id="examplePassword"
+                      placeholder="Ingrese su contraseña"
+                      autoComplete="off"
+                      onChange={handleInputLogin}
+                      value={password}
+                    />
+                  </FormGroup>
+                  <div className=" text-center google__log">
+                    <FormText color="muted">
+                      <p>Iniciar sesion con Google</p>
+                      <GoogleLogin
+                        clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
+                        render={renderProps => (
+                          <button className="button__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} alt="" width={25} /></button>
+                        )}
+                        onSuccess={onSuccessGoogle}
+                        onFailure={onSuccessGoogle}
+                        cookiePolicy={'single_host_origin'}
+                      />
+
+                    </FormText>
+                  </div>
+
+
+                  <Button className="button__login" type="submit" block>
+                    Iniciar sesion
+                  </Button>
+
+                </Col>
+              </form>
+
+
+
+            </CardBody>
+          </Card>
+
+
+        </div>
       </div>
     </div>
-    </>
 
   );
 };

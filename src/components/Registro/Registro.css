@@ -1,16 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap');
 
 
+
+
 .registerContent{
  
   font-family: 'Catamaran',sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   min-height: 100vh;
-  background:  linear-gradient(#050824,#1a2058, #18e6db);
+  background: #45a0dd;
   color: #f0f8f8;
+
  
+
+}
+
+.register__description{
+  font-size: 19px;
+  margin-bottom: 10px;
 
 }
 
@@ -22,127 +32,8 @@
   padding: 4px 35px 8px 35px;
   border: 3px solid rgb(0, 255, 213);
   
-
-}
-
-
-.container_form_register header {
-  font-size: 24px;
-  font-weight: 800;
-  margin: 0 0 30px 0 ;
-  color: rgb(255, 238, 0);
-
-
-  
-  
-   
-}
-
-.container_form_register .form-outer{
-  width: 100%;
-  overflow: hidden;
-}
-
-
-.form-outer form {
-  display: flex;
-  width: 400%;
-
-} 
-
-.form-outer form .page {
-  width: 20%;
-  
-  
-  
-} 
-
-.form-outer form .page .title {
-  text-align: left;
-  font-size: 18px;
-  font-weight: 500;
-
-  
-} 
-
-.form-outer form .page .field {
-    height: 32px;
-    width: 480px;
-    margin: 30px 0;
-    display: flex;
-    position: relative;
-
-  
-  
-} 
-.form-outer form .page .field .label {
-  position: absolute;
-  top: -30px;
-  font-weight: 600;
-  color: rgb(214, 206, 93);
-
-
-
-
-}
-.form-outer form .page .field .inputRegister {
-  height: 90%;
-  width: 100%;
-  border: none;
-  border-radius: .3em;
-  font-size: 17px;
-  padding-left: 15px;
-color: black;
-outline: none;
-
-} 
-
-form .page .field select{
-  width: 100%;
-  padding-left: 10px;
-  font-size: 17px;
-  font-weight: 500;
-  height: 90%;
-
-
-}
-
-
-.form-outer form .page .field button {
-  width: 100%;
-  height: calc(100% + 3px);
-  margin-top: -20px;
-  border: none;
-  background: rgb(0, 225, 255);
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: .3s ease;
-  font-weight: bold;
-
   
 
-
-}
-.form-outer form .page .field button:hover {
- 
-  background: #f5e400;
-
-}
-
-
-.form-outer form .page .btns-register button {
-    margin-top: -20px !important;
-
-
-}
-
-.linklogin{
-  color: #f0f8f8;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 
