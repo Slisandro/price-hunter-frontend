@@ -138,7 +138,7 @@ function Cate({ setSwitcher }) {
         </CardHeader>
         <CardBody>
           <Form
-            className="formFamilia"
+            className="form"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
@@ -152,7 +152,7 @@ function Cate({ setSwitcher }) {
                 <Input
                   name="nombre_familia"
                   type="select"
-                  className="selectTransAgregar"
+                  className="inp"
                   onChange={(e) => ChangeInput(e)}
                   {...register("nombre_familia", {
                     required: {

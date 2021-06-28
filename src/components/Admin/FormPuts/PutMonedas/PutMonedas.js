@@ -118,7 +118,7 @@ function PutMonedas() {
             <Row>
               <Col>
                 <label className="title">Monedas</label>
-                <Input name="nombre_moneda" type="select">
+                <Input name="nombre_moneda" type="select" className="inp">
                   <option></option>
                   {moneda.map((u) => (
                     <option value={u.nombre_moneda}>{u.nombre_moneda}</option>

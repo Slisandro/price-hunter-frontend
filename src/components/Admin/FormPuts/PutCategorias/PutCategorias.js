@@ -123,7 +123,7 @@ function PutCategorías() {
             <Row>
               <Col>
                 <label className="title">Categoría</label>
-                <Input type="select" name="nombre_categoria">
+                <Input type="select" name="nombre_categoria" className="inp">
                   <option></option>
                   {categoria.map((u) => (
                     <option value={u.nombre_categoria}>

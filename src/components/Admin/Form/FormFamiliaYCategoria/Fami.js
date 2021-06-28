@@ -116,7 +116,7 @@ function Fami({ setSwitcher }) {
         </CardHeader>
         <CardBody>
           <Form
-            className="formFamilia"
+            className="form"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
@@ -127,7 +127,7 @@ function Fami({ setSwitcher }) {
             <Row>
               <Col>
                 <label className="title">Familias Actuales</label>
-                <Input type="select">
+                <Input type="select" className="inp">
                   <option></option>
                   {familia.map((u) => (
                     <option value={u.nombre_familia}>{u.nombre_familia}</option>
