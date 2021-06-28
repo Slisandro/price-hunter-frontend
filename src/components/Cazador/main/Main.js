@@ -35,7 +35,7 @@ const Main = ({ state, setState, ubicacion, setUbicacion }) => {
         <div className="containerTableSearch">
           {state === "Search" ? (
             !productos.msg ? (
-              <Table productos={productos} name={producto} />
+              <Table ubicacion={ubicacion} productos={productos} name={producto} />
             ) : (
               <div className="containerMessageBack">
                 <p>{productos.msg}</p>

@@ -7,7 +7,8 @@ const Map = ReactMapboxGl({
         'pk.eyJ1Ijoic2xpc2FuZHJvIiwiYSI6ImNrcG15cDJwYjBlbjEydnVlb2x2Njh3cHcifQ.xMq5dXRnJYRU5mrWJP6SpA'
 });
 
-function MyMap({ ubicacion }) {
+function MyMap({ ubicacion, precio }) {
+    console.log(precio)
     const coord = [parseFloat(ubicacion.longitud), parseFloat(ubicacion.latitud)]
     return (
         ubicacion.latitud === "" ? <div>Cargando</div> :
@@ -16,8 +17,8 @@ function MyMap({ ubicacion }) {
                 center={coord}
                 zoom={[15]}
                 containerStyle={{
-                    height: "30vh",
-                    width: "35%",
+                    height: "90%",
+                    width: "95%",
                     background: "rgba(255, 255, 255, .5)",
                     borderRadius: "1em",
                     margin: "2%",
@@ -29,10 +30,26 @@ function MyMap({ ubicacion }) {
                 </Layer>
                 <Marker
                     style={{
-                        width: "40px",
-                        height: "40px"
+                        width: "30px",
+                        height: "30px"
                     }}
                     coordinates={coord}
+                >
+                    <img
+                        src={marker}
+                        onClick={() => alert("su ubicacion")}
+                        style={{
+                            width: "100%",
+                            height: "100%"
+                        }}
+                    />
+                </Marker>
+                <Marker
+                    style={{
+                        width: "30px",
+                        height: "30px"
+                    }}
+                    coordinates={[precio[1], precio[0]]}
                 >
                     <img
                         src={marker}
