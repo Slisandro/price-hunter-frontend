@@ -109,7 +109,7 @@ function PutPaises() {
             <Row>
               <Col>
                 <label className="title">Países</label>
-                <Input name="nombre_pais" type="select">
+                <Input name="nombre_pais" type="select" className="inp">
                   <option></option>
                   {paises.map((u) => (
                     <option value={u.nombre_pais}>{u.nombre_pais}</option>
@@ -142,7 +142,9 @@ function PutPaises() {
                       },
                     })}
                   />
-                  <span className="err">{errors?.nombre_nuevo_pais?.message}</span>
+                  <span className="err">
+                    {errors?.nombre_nuevo_pais?.message}
+                  </span>
                   {/* </div> */}
                   {/* <span className="err">
                 {errors?.codigo_unidad_medida?.message}
