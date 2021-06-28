@@ -8,6 +8,22 @@ import {
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
+import {
+  FormFeedback,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 function Cate({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -71,8 +87,6 @@ function Cate({ setSwitcher }) {
   } = useForm();
 
   const submit = (data, e) => {
-    
-
     const nuevaCategoria = {
       nombre_categoria: cate.nombre_categoria,
       descripcion: cate.descripcion,
@@ -101,13 +115,13 @@ function Cate({ setSwitcher }) {
     dispatch(categoriaPost(nuevaCategoria));
 
     e.target.reset();
-  
+
     swal({
       title: "Categoría agregada con éxito!",
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    })
+    }).then((g) => dispatch(getCategoria()));
 
     setCate({
       nombre_categoria: "",
@@ -118,22 +132,26 @@ function Cate({ setSwitcher }) {
 
   return (
     <>
-      <div>
-        <>
-          <form
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Categorías</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
             className="formFamilia"
             noValidate
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
-            {alerta ? (
+            {/* {alerta ? (
               <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
-            ) : null}
-            <div className="divFormFamilia">
-              <div>
-                <label className="text-label">Familia</label>
-                <select
+            ) : null} */}
+            <Row>
+              <Col>
+                <label className="title">Familia</label>
+                <Input
                   name="nombre_familia"
+                  type="select"
                   className="selectTransAgregar"
                   onChange={(e) => ChangeInput(e)}
                   {...register("nombre_familia", {
@@ -147,82 +165,80 @@ function Cate({ setSwitcher }) {
                   {familia.map((f) => (
                     <option value={f.nombre_familia}>{f.nombre_familia}</option>
                   ))}
-                </select>
-                <span className="err">
-                        {errors?.nombre_familia?.message}
-                      </span>
-              </div>
-            </div>
-            <div className="divFormFamilia">
-              <div>
-                <label className="text-label">Categoría</label>
-                <input
+                </Input>
+                <span className="err">{errors?.nombre_familia?.message}</span>
+
+                <label className="title">Nueva Categoría</label>
+                <Input
                   value={cate.nombre_categoria}
                   name="nombre_categoria"
                   className="inp"
-                  max ='0'
-                      autoComplete="off"
-                      {...register("nombre_categoria", {
-                        required: {
-                          value: true,
-                          message: "Debe ingresar un nombre ",
-                        },
-                        maxLength: {
-                          value: 15,
-                          message:
-                            "El nombre no debe tener mas de quince letras!",
-                        },
-                        minLength: {
-                          value: 3,
-                          message: "El nombre debe al menos tener tres letras!",
-                        },
-                        max: {
-                          value: 0,
-                          message: "El nombre no puede comenzar con numeros",
-                        },
-                      })}
-                    />
-                    <span className="err">{errors?.nombre_categoria?.message}</span>
-              </div>
-            </div>
-            <div className="divFormFamilia">
-              <div>
-                <label className="text-label-desc">* Descripción</label>
-                <input
+                  max="0"
+                  autoComplete="off"
+                  {...register("nombre_categoria", {
+                    required: {
+                      value: true,
+                      message: "Debe ingresar un nombre ",
+                    },
+                    maxLength: {
+                      value: 15,
+                      message: "El nombre no debe tener mas de quince letras!",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "El nombre debe al menos tener tres letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "El nombre no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.nombre_categoria?.message}</span>
+
+                <label className="title">* Descripción</label>
+                <Input
                   className="inp6"
                   type="text"
                   name="descripcion"
                   autoComplete="off"
-                  max ='0'
-                        {...register("descripcion", {
-                          // required: {
-                          //   value: true,
-                          //   message: "Debe ingresar un descripcion ",
-                          // },
-                          maxLength: {
-                            value: 256,
-                            message:
-                              "La descripcion no debe tener mas de 256 caracteres!",
-                          },
-                          minLength: {
-                            value: 5,
-                            message: "La descripcion debe tener al menos cinco letras!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "La descripcion no puede comenzar con numeros",
-                          },
-                        })}
-                      />
-                      <span className="err">{errors?.descripcion?.message}</span>
-              </div>
-            </div>
-            <button className="agregarModal" type="submit">
-              Agregar Categoría
-            </button>
-          </form>
-        </>
-      </div>
+                  max="0"
+                  {...register("descripcion", {
+                    // required: {
+                    //   value: true,
+                    //   message: "Debe ingresar un descripcion ",
+                    // },
+                    maxLength: {
+                      value: 256,
+                      message:
+                        "La descripcion no debe tener mas de 256 caracteres!",
+                    },
+                    minLength: {
+                      value: 5,
+                      message:
+                        "La descripcion debe tener al menos cinco letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "La descripcion no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.descripcion?.message}</span>
+
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
     </>
   );
 }

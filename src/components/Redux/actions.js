@@ -93,12 +93,12 @@ export function getProductsByName(nombre, body) {
 }
 
 //ACCION QUE SE DESPACHA AL REALIZAR LA BUSQUEDA DE UN PRODUCTO EN EL MENU DESPLEGABLE DE CATEGORIAS DISPONIBLES
-export function getSubcategoriasId(id) {
+export function getSubcategoriasId(id, obj) {
   const token = localStorage.getItem("token");
 
   return function (dispatch) {
     axios
-      .get(`${URL}subcategoria/${id}`, {
+      .get(`${URL}subcategoria?id=${id}&long=${obj.longitud}&lat=${obj.latitud}&dis=${obj.dis}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((r) => {

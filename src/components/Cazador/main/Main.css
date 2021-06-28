@@ -213,8 +213,8 @@ input {
 
 .formSearchUser {
     display: flex;
-    /* flex-direction: column; */
-    width: 40%;
+    flex-direction: row;
+    width: 60%;
     height: 100%;
     align-items: center;
     justify-content: space-evenly;
