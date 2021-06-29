@@ -82,7 +82,7 @@ function PutRegiones() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <span id="title">Regiones</span>
+          <span id="title">Generos</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -164,9 +164,7 @@ function PutRegiones() {
                         autoComplete="off"
                         max="0"
                         onChange={(e) => ChangeInput(e)}
-                        {...register("nombre_region", {
-                        
-                        })}
+                        {...register("nombre_region", {})}
                       />
                     </>
                   ) : (

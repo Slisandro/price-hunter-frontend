@@ -8,18 +8,11 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-
-// import "./FormUnidadMedida.css";
 
 function PutMonedas() {
   const dispatch = useDispatch();
@@ -28,36 +21,32 @@ function PutMonedas() {
   const [state, setState] = useState({
     codigo_moneda: "",
     nombre_moneda: "",
-    nuevo_nombre_moneda: "",
     simbolo: "",
   });
 
   useEffect(() => {
     dispatch(getMoneda());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
+    const value = e.target.value;
+    const name = e.target.name;
 
     if (name === "nombre_moneda") {
-      var mon = moneda.find((f) => f.nombre_moneda === e.target.value);
-      var final = mon.codigo_moneda;
       setState({
         ...state,
-        [name]: target.value,
-        codigo_moneda: final,
+        [name]: value,
       });
-    } else if (name === "nuevo_nombre_moneda") {
+    }
+    if (name === "codigo_moneda") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
       });
-    } else if (name === "codigo_moneda") {
+    } else if (name === "simbolo") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
       });
     }
   };
@@ -66,25 +55,21 @@ function PutMonedas() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaMoneda = {
-      nombre_moneda: state.nuevo_nombre_moneda,
-      codigo_moneda: state.codigo_moneda,
-      simbolo: state.simbolo,
-    };
-
-    dispatch(putMoneda(nuevaMoneda));
-    e.target.reset();
-    if (nuevaMoneda.nombre_moneda) {
+    if (data.nombre_moneda) {
+      dispatch(putMoneda(data));
+      e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
       }).then((r) => dispatch(getMoneda()));
-    } else if (!nuevaMoneda.nuevo_nombre_moneda) {
+      reset({ data });
+    } else if (!data.codigo_moneda) {
       swal({
         title: "Debe seleccionar una moneda para modificar!",
         icon: "error",
@@ -92,20 +77,13 @@ function PutMonedas() {
         timer: "5000",
       });
     }
-
-    setState({
-      codigo_moneda: "",
-      nombre_moneda: "",
-      nuevo_nombre_moneda: "",
-      simbolo: "",
-    });
   };
 
   return (
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Moneda</h1>
+          <span id="title">Moneda</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -117,61 +95,128 @@ function PutMonedas() {
           >
             <Row>
               <Col>
-                <label className="title">Monedas</label>
-                <Input name="nombre_moneda" type="select" className="inp">
-                  <option></option>
-                  {moneda.map((u) => (
-                    <option value={u.nombre_moneda}>{u.nombre_moneda}</option>
-                  ))}
-                </Input>
-                {/* <input
-              className="inp"
-              type="text"
-              name="nombre_moneda"
-              autoComplete="off"
-              max="0"
-              {...register("nombre_moneda", {
-                required: {
-                  value: true,
-                  message: "Debe ingresar una moneda",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "El nombre de la moneda debe tener menos de quince letras!",
-                },
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener tres letras!",
-                },
-                max: {
-                  value: 0,
-                  message: "El nombre no puede comenzar con numeros",
-                },
-              })}
-            /> */}
-                <span className="err">{errors?.nombre_moneda?.message}</span>
+                <h6 className="title">Monedas</h6>
+                {state.codigo_moneda.length === 0 ? (
+                  <>
+                    <Input
+                      name="codigo_moneda"
+                      type="select"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_moneda", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una moneda",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {moneda.map((u) => (
+                        <option value={u.codigo_moneda}>
+                          {u.nombre_moneda}
+                        </option>
+                      ))}
+                    </Input>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      name="codigo_moneda"
+                      type="select"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_moneda", {})}
+                    >
+                      <option></option>
+                      {moneda.map((u) => (
+                        <option value={u.codigo_moneda}>
+                          {u.nombre_moneda}
+                        </option>
+                      ))}
+                    </Input>
+                  </>
+                )}
+                <span className="err">{errors?.codigo_moneda?.message}</span>
 
-                <div>
-                  <label className="title">Moneda</label>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nombre</h6>
+                  {state.nombre_moneda.length === 0 ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="nombre_moneda"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_moneda", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar una moneda ",
+                          },
+                        })}
+                      />
+                    </>
+                  ) : state.nombre_moneda > 2 && state.nombre_moneda < 10 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="nombre_moneda"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_moneda", {})}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="nombre_moneda"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_moneda", {
+                          maxLength: {
+                            value: 10,
+                            message:
+                              "El nombre no debe tener mas de 10 caracteres",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre no puede tener menos de 3 caracteres",
+                          },
+                          pattern: {
+                            value: /^[a-zA-Z ]*$/,
+                            message: "Debe ingresar solo letras",
+                          },
+                        })}
+                      />
+                    </>
+                  )}
+                  <span className="err">{errors?.nombre_moneda?.message}</span>
+                </div>
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Simbolo</h6>
                   <Input
                     className="inp"
                     type="text"
-                    name="nuevo_nombre_moneda"
+                    name="simbolo"
                     autoComplete="off"
-                    max="0"
-                    {...register("nuevo_nombre_moneda", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe ingresar una moneda ",
-                      // },
-                      max: {
-                        value: 0,
-                        message: "La unidad no puede comenzar con numeros",
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("simbolo", {
+                      maxLength: {
+                        value: 4,
+                        message: "El simbolo no debe tener mas de 4 caracteres",
                       },
                     })}
                   />
-                  <span className="err">{errors?.codigo_moneda?.message}</span>
+                  <span className="err">{errors?.simbolo?.message}</span>
                 </div>
+
                 <Button
                   className="btn-fill"
                   color="primary"
@@ -185,14 +230,6 @@ function PutMonedas() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesCATE">
-        Monedas Actuales
-        <div className="tiposCATE">
-          {moneda.map((u) => (
-            <span className="spansCATE">{u.nombre_moneda}</span>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }
