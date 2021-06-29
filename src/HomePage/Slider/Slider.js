@@ -1,4 +1,5 @@
 import "./Slider.css";
+
 // import Pic1 from '../../assets/img/slider/slider1.png';
 // import Pic2 from "../../assets/img/slider/slider2.png";
 // import Pic3 from "../../assets/img/slider/slider3.png";
