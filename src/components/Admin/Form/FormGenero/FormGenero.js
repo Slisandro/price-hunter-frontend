@@ -95,7 +95,7 @@ function FormGenero() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Géneros</h1>
+          <span id="title">Géneros</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -110,7 +110,7 @@ function FormGenero() {
             ) : null} */}
             <Row>
               <Col>
-                <label className="title">Géneros Actuales</label>
+                <h6 className="title">Géneros Actuales</h6>
                 <Input
                   name="id"
                   type="select"
@@ -130,33 +130,105 @@ function FormGenero() {
                     </option>
                   ))}
                 </Input>
-                <label className="title">Nuevo Género</label>
-                <Input
-                  className="inp"
-                  type="text"
-                  name="genero"
-                  max="0"
-                  autoComplete="off"
-                  {...register("genero", {
-                    // required: {
-                    //   value: true,
-                    //   message: "Debe ingresar un genero ",
-                    // },
-                    maxLength: {
-                      value: 20,
-                      message: "El genero no debe tener mas de veinte letras!",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "El genero debe al menos tener tres letras!",
-                    },
-                    max: {
-                      value: 0,
-                      message: "El genero no puede comenzar con numeros",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.genero?.message}</span>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Género</h6>
+                  {!state.genero ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="genero"
+                        max="0"
+                        autoComplete="off"
+                        {...register("genero", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un género ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El género no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El género debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El género no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">{errors?.genero?.message}</span>
+                    </>
+                  ) : state.genero.length >= 3 && state.genero.length <= 20 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="genero"
+                        max="0"
+                        autoComplete="off"
+                        {...register("genero", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un genero ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El género no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El género debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El género no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">{errors?.genero?.message}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="genero"
+                        max="0"
+                        autoComplete="off"
+                        {...register("genero", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un género ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El género no debe tener mas de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El género debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El género no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">{errors?.genero?.message}</span>
+                    </>
+                  )}
+                </div>
                 <Button
                   className="btn-fill"
                   color="primary"
@@ -170,14 +242,6 @@ function FormGenero() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActuales">
-          <div className="tiposUsuarios">
-            Tipos de Géneros Actuales
-            {generos.map((u) => (
-              <span className="spans">{u.genero}</span>
-            ))}
-          </div>
-        </div> */}
     </>
   );
 }
