@@ -3,21 +3,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDesafios } from '../../Redux/actions'
 import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
+import axios from 'axios';
 import './MisDesafios.css'
+import { useHistory } from "react-router-dom";
+import RegistroGoogle from '../../Registro Google/RegistroGoogle'
 
-function MisDesafios() {
+function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
+    const [modalRegistro, setModalRegistro] = useState(false); // abrir modal
+    const [modalCompletado, setModalCompletado] = useState(false) // se pasa como props al componente
     const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const desafios = useSelector(store => store.desafios)
     const [referencia, setReferencia] = useState({
         idDesafio: ""
     })
-    const dispatch = useDispatch();
-    const desafios = useSelector(store => store.desafios)
-
+    const history = useHistory()
     useEffect(() => {
-        dispatch(getDesafios())
-        setLoading(false)
-    }, [])
+        if (ubicacion.latitud && ubicacion.longitud) {
+            axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${ubicacion.latitud},${ubicacion.longitud}&key=AIzaSyAPEpC-G7gntZsFjZd4KvHx3KWqcT9Yy3c`)
+                .then(resp => {
+                    dispatch(getDesafios(searchCity(resp.data)))
+                })
+            setLoading(false)
+        }
+    }, [modalCompletado])
 
     const handleClickOpen = (e) => {
         setReferencia({
@@ -34,29 +44,60 @@ function MisDesafios() {
     }
 
     return (
-        loading ?
-            <div className="containerMessageBack">Cargando desafíos...</div>
-            :
-            <>
-                <div className="cardsContainer">
-                    {
-                        desafios.map(desafio => {
-                            return (
-                                <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
-                            )
-                        })
-                    }
-                </div>
-                {
-                    modal
-                        ?
-                        <FormPostPrice setModal={handleClickClose} modal={modal} referencia={referencia} />
-                        : null
-                }
-            </>
+        !ubicacion.latitud && !ubicacion.longitud ? <div className="containerMessageBack">No hemos podido acceder a tu ubicación</div> :
+            (
+                loading ?
+                    <div className="containerMessageBack">Cargando desafíos...</div>
+                    :
+                    desafios.msg ?
+                       <div>
+                         <div class="containerMessageBack">{desafios.msg}</div>
+                       {
+                        desafios.msg === "completar los datos del usuario antes de continuar" ? <>
+                        <button onClick={()=>{setModalRegistro(true)}}>form</button>
+                        </>:null
+                       }
+                       {
+                        !modalRegistro ? null :
+                            // componente google
+                            <>
+                              <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro}history={history}/>
+                            </>
+                         }
+                       </div>
+                        :
+                        <div className="cardsContainer">
+                            {
+                                desafios.map(desafio => (
+                                    <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
+                                ))
+                            }
+                            {
+                                modal ?
+                                    <FormPostPrice ubicacion={ubicacion} setModal={handleClickClose} modal={modal} referencia={referencia} />
+                                    :
+                                    null
+                            }
+                        </div>
+            )
     )
 }
 
 export default MisDesafios;
 
 
+function searchCity(obj) {
+    let arr = []
+    obj.results[0].address_components.map(el => {
+        if (el.types.includes("country") && el.types.includes("political")) {
+            return arr[0] = el
+        } else if (el.types.includes("administrative_area_level_1") && el.types.includes("political")) {
+            return arr[1] = el
+        } else if (el.types.includes("administrative_area_level_2") && el.types.includes("political")) {
+            return arr[2] = el
+        } else if (el.types.includes("locality") && el.types.includes("political")) {
+            return arr[3] = el
+        }
+    })
+    return arr;
+}

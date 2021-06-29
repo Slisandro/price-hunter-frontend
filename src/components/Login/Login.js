@@ -1,13 +1,25 @@
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import "./Login.css";
-import aguila from "../../assets/aguila.png";
-import Twitter from '../../assets/twitter.png';
+// import aguila from "../../assets/aguila.png";
 import Google from '../../assets/google.png';
-import { iniciarSesion, mostrarError } from "../Redux/actions";
+import { iniciarSesion, mostrarError, iniciarSesionGoogle } from "../Redux/actions";
 import { useSelector, useDispatch } from 'react-redux';
 import GoogleLogin from "react-google-login";
+// import svg from "../../assets/undraw_personal_finance_tqcd.svg";
+import {
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Button,
+  Card,
+  CardBody,
+  Col
+} from "reactstrap";
+import NavLogin from "./NavLogin";
+
 
 
 
@@ -17,10 +29,11 @@ import GoogleLogin from "react-google-login";
 
 const Login = (props) => {
   console.log(props)
-  const history = useHistory()
   const alerta = useSelector((store) => store.alerta);
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
+  const cliente = useSelector((store) => store.cliente);
+  const isAdmin = useSelector((store) => store.isAdmin);
 
   const dispatch = useDispatch();
 
@@ -34,7 +47,24 @@ const Login = (props) => {
   que le da estilo al mensaje ("alerta-error" en el css)*/
   useEffect(() => {
     if (autenticado) {
-      history.push('/tablero');
+      if (cliente) {
+        props.history.push('/tablerocliente/principal');
+      } else {
+        if (isAdmin) {
+          props.history.push('/admin');
+        } else {
+          props.history.push('/tablero');
+        }
+      }
+      // if (!cliente) {
+      //   props.history.push('/tablero');
+      // } else {
+      //   if (isAdmin) {
+      //     props.history.push('/admin');
+      //   } else {
+      //     props.history.push('/tablerocliente/principal');
+      //   }
+      // }
     }
     if (mensaje) {
       mostrarError(mensaje.msg, mensaje.categoria);
@@ -48,10 +78,15 @@ const Login = (props) => {
 
 
   /******************************************************************************************************************************/
-  const responseGoogle  =  (response)  => {
-    console.log(response)
 
+
+  const onSuccessGoogle = (googleUser) => {
+    // var datos = googleUser.profileObj;
+    var datos = googleUser;
+    // console.log(googleUser)
+    dispatch(iniciarSesionGoogle(datos))
   }
+
 
 
   /*******************************************************************************************************************************/
@@ -62,93 +97,138 @@ const Login = (props) => {
   });
   const { email, password } = user;
 
-    const handleInputLogin = e => {
-      guardarUser({
-        ...user,
-        [e.target.name]: e.target.value
-      })
-    }
-    
-  
-    const handleSubmit = e => {
-      e.preventDefault();
+  const handleInputLogin = e => {
+    guardarUser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
 
-       // Validar que no haya campos vacios
-       if(email.trim() === '' || password.trim() === '') {
-        dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    // Validar que no haya campos vacios
+    if (email.trim() === '' || password.trim() === '') {
+      dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
+      return;
+    }
+
+    if (password < 6) {
+      dispatch(mostrarError('La contraseña debe tener mas de 6 caracteres', 'alerta-error'));
+      return;
+
     }
 
     dispatch(iniciarSesion({
       email,
       password
-      })
+    })
     )
 
-    }
-  
+    guardarUser({
+      email: "",
+      password: ""
+    })
+
+
+
+  }
+
+
+
+
+
 
 
   return (
-    <section className="login">
-          <section className="login__container">
-              <img src={aguila} alt="" className="logo__login" />
-              <h2>Iniciar sesión</h2>
-              
-              { alerta ? ( <div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div> )  : null }
+    <div className="Totallogin">
+      <NavLogin />
 
-                <form className="login__container--form" onSubmit={handleSubmit}>
-                      <input 
-                        name="email"
-                        className="input_login" 
-                        type="text" 
-                        placeholder="Correo"
-                        onChange={handleInputLogin}
-                        value={email}
-                        />
-                      <input 
-                        name="password"
-                        className="input_login" 
-                        type="password" 
-                        placeholder="Contraseña"
-                        onChange={handleInputLogin}
-                        value={password}
-                        />
-              
-                        <button className="button__login">Iniciar sesión</button>
-                  
-                      
-                      
-                      <div className="login__container--remember-me">
-                        <label>
-                          <input className="check" type="checkbox" id="cbox1" value="first_checkbox"/>Recuérdame
-                        </label>
-                        <label>
-                          <a href="/">Olvidé mi contraseña</a>
-                        </label>
-                      </div>
-                </form>
-                
-                <section className="login__container--social-media">
-                    <GoogleLogin
+      <div className="loger_cont">
+        <p className="welcome-login">Bienvenido</p>
+
+        <div className="global-container__log">
+
+
+
+
+          <Card>
+            {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center`}> {mensaje.msg} </div>) : null}
+            <CardBody>
+              {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}
+              <form className="login__form" onSubmit={handleSubmit}>
+                <Col md="12">
+                  <FormGroup row>
+                    <Label for="correo"> Correo </Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      id="correo"
+                      placeholder="Ingrese su correo"
+                      onChange={handleInputLogin}
+                      value={email}
+                    />
+
+                  </FormGroup>
+
+
+                  <FormGroup row>
+                    <Label for="examplePassword">Contraseña</Label>
+                    <Input
+
+                      type="password"
+                      name="password"
+                      id="examplePassword"
+                      placeholder="Ingrese su contraseña"
+                      autoComplete="off"
+                      onChange={handleInputLogin}
+                      value={password}
+                    />
+                  </FormGroup>
+                  <div className=" text-center google__log">
+                    <FormText color="muted">
+                      <p>Iniciar sesion con Google</p>
+                      <GoogleLogin
                         clientId="765999495814-0tujavs1lfj62o58ror1b28c39ackvam.apps.googleusercontent.com"
                         render={renderProps => (
-                        <button className="button__login__google"  onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} width={30} height={30} alt=""/><p>Iniciar sesion con Google</p></button>
+                          <button className="button__google" onClick={renderProps.onClick} disabled={renderProps.disabled}><img src={Google} alt="" width={25} /></button>
                         )}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        onSuccess={onSuccessGoogle}
+                        onFailure={onSuccessGoogle}
                         cookiePolicy={'single_host_origin'}
-                    />
-                    
-                </section>
-                
-                <div className="register__login">
-                    <p className="login__container--register"> No tienes cuenta ?</p>
-                    <p className="login__container--register .link"><Link className="link" to="/registro">Regístrate</Link></p>
-                </div>
-          
-          </section>
-    </section>
+                      />
+
+                    </FormText>
+                  </div>
+
+
+                  <Button className="button__login" type="submit" block>
+                    Iniciar sesion
+                  </Button>
+
+                </Col>
+              </form>
+
+
+
+            </CardBody>
+          </Card>
+
+
+        </div>
+      </div>
+    </div>
+
   );
 };
 
 export default Login;
+
+
+
+
+
+
+
+

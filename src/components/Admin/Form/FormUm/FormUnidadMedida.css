@@ -91,6 +91,15 @@ header {
   cursor: pointer;
 }
 
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red
+}
+
 .contenedorActualesUM {
   margin-left: 18rem;
   margin-top: 4rem;
@@ -120,4 +129,21 @@ header {
   margin-left: 1rem;
   justify-content: space-around;
   color: white;
+}
+
+
+.cont_prod{
+  
+  border: whitesmoke;
+  background-color: rgba(245, 245, 245, 0.179);
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 180px;
+  border-radius: 15px;
+}
+.tiposProductos{
+  color: white;
+  padding: 10px;
+  
 }

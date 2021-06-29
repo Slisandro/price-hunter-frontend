@@ -1,16 +1,17 @@
-.main {
-  background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
+.mainADM {
+  display: grid;
+  width: 100%;
   grid-area: main;
+  background: radial-gradient(circle, #272f75 0%, #0d1029 100%);
   overflow-y: hidden;
   /* Hide vertical scrollbar */
   overflow-x: hidden;
   /* Hide horizontal scrollbar */
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
 }
 
-.main__container {
+.main__containerr {
   padding: 20px 20px;
+
   /* display: flex;
     justify-content: space-between; */
 }
@@ -41,7 +42,7 @@
   color: #ffffff;
   margin-bottom: 3px;
   font-weight: bold;
-  padding-left: 15px;
+  padding-left: 30px;
 }
 
 .main_welcome .hunter {
@@ -57,7 +58,7 @@
   color: #c3d2e0;
   font-weight: lighter;
   margin-top: 0px;
-  padding-left: 15px;
+  padding-left: 35px;
 }
 
 .circle {

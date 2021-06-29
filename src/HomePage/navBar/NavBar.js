@@ -31,7 +31,12 @@ function NavBar() {
             </div>
             
             <div className="buttons-nav">
-                <button 
+
+              <Link to="/login" className="button-login" >Usuario LogIn</Link>
+              {/* <Link to="/login-cliente" className="button-login" >Cliente LogIn</Link> */}
+              <Link to="/registro" className="button-register" >Registrarse</Link>
+
+                {/* <button 
                     onClick={handleModal} 
                     className="button-login">
                 Ingresar
@@ -40,9 +45,9 @@ function NavBar() {
                     onClick={handleModal} 
                     className="button-register">
                 Registrarse
-                </button>
+                </button> */}
             </div>
-                  {modal 
+                  {/* {modal 
                   ? (
                       <div className="modal">
                           <button onClick={handleModal}><img width={20} src={close} alt=""/></button>
@@ -50,7 +55,7 @@ function NavBar() {
                       </div>
                     ) 
                   : 
-                  null}
+                  null} */}
     </div>
   );
 }

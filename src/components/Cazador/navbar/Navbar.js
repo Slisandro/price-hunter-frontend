@@ -1,33 +1,18 @@
 import React from "react";
+import {useDispatch} from 'react-redux';
 import "./Navbar.css";
-import user from "../../../assets/user (1).png";
-import { Link } from "react-router-dom";
-// import notificacion from "../../assets/";
+import {cerrarSesion} from '../../Redux/actions'
 
 const Navbar = (props) => {
+  const dispatch = useDispatch();
   return (
-    <nav className="navbar">
-      <div className="nav_icon" onClick={() => props.openSidebar()}>
-        <i className="fas fa-bars"></i>
-      </div>
-
-      <div className="navbar__left">
-        {/* <Link Link to="/misdesafios">
-          Mis desafios 
-        </Link> */}
-        <Link to="/configuración">Configuración</Link>
-        {/* <a className="active_link" href="!#">
-          admin
-        </a> */}
-      </div>
-
-      <div className="navbar__right">
-        <Link>{/* camapana */}</Link>
-
-        <Link to="/configuración">
-          <img className="icon-user" width={22} src={user} alt="user" />
-        </Link>
-      </div>
+    <nav className="navbar" id="navbarUser">
+      <button onClick={() => props.setState("Configuracion")} className="buttonCerrarSesion">
+        Mi cuenta
+      </button>
+      <button className="buttonCerrarSesion" onClick={() => dispatch(cerrarSesion())}>
+        Cerrar Sesión 
+      </button>
     </nav>
   );
 };

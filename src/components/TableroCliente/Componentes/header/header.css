@@ -1,0 +1,34 @@
+#header-tablero-cliente{
+    width: 100%;
+    height: 10%;
+    background-color: #050926;
+    color: white;
+
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+}
+
+#div-name-cerrarsesion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#div-name-cerrarsesion p {
+    margin: 1rem;
+}
+
+#div-name-cerrarsesion button {
+    margin: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+    #header-tablero-cliente{
+        height: 20%;
+    }
+  }

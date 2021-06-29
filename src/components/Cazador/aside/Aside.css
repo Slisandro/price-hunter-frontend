@@ -11,6 +11,10 @@
   z-index: 1000;
 }
 
+.asideTableroUser {
+  background: rgba(24,30,54,1) !important;
+}
+
 .account-profile {
   margin-top: 5%;
   position: relative;

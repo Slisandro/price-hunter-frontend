@@ -24,6 +24,25 @@
     color: aqua;   
 }
 
+#navbarUser {
+    background: rgba(24,30,54,1);
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top-left-radius: 15px;
+    border-bottom: 1px solid #fff;
+}
+
+#navbarUser .buttonCerrarSesion {
+    background: transparent;
+    border: none;
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 2%;
+}
+
 
 .navbar__left > a {
     margin-right: 30px;

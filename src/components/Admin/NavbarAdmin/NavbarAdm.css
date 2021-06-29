@@ -28,6 +28,16 @@
   font-weight: 700;
 }
 
+.account-title5 {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(39, 48, 109, 0.644);
+  border-color: rgb(12, 2, 59);
+  border-width: 0.13rem;
+  border-radius: var(--radius);
+  margin-top: 0.5rem;
+}
+
 .navbar__left .active_link {
   color: rgb(32, 50, 85);
   border-bottom: 3px solid #27375a;
@@ -88,6 +98,7 @@
 .panelADM {
   color: white;
   font-size: 1.5rem;
+  margin-left: 1.2rem;
 }
 
 @media only screen and (max-width: 480px) {

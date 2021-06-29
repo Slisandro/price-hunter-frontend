@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+.containerTransaccionesUser {
+    width: 35%;
+    height: 30vh;
+    background: rgba(255,255,255,.25);
+    margin: 2%;
+    border-radius: .5em;
+    font-family: 'Rubik', sans-serif;
+    box-shadow: rgb(255 255 255 / 15%) 0px 5px 15px;
+}
+
+.containerTransaccionesUser .listTransaccionesUser {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 3%;
+    margin: 0;
+}
+
+.containerTransaccionesUser .listTransaccionesUser .itemListTransacciones {
+    padding: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.containerTransaccionesUser .listTransaccionesUser .itemListTransacciones .imgTransaccionesUser {
+    width: 5%;
+}
+
+.containerTransaccionesUser .listTransaccionesUser .itemListTransacciones .observacionTransaccionesUser {
+    width: 70%;
+    margin: 0;
+    font-size: 1em;
+    text-transform: uppercase;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+}
+
+.containerTransaccionesUser .listTransaccionesUser .itemListTransacciones .puntosTransaccionesUser {
+    width: 10%;
+    margin: 0;
+    font-size: 1.5em;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}

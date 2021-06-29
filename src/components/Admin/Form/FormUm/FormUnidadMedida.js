@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unidadDeMedida, getUnidadMedida } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 import "./FormUnidadMedida.css";
 
@@ -18,8 +35,6 @@ function FormUnidadMedida() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(unidad_medida);
-
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -36,9 +51,14 @@ function FormUnidadMedida() {
       });
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const submit = (data, e) => {
     const nuevaUM = {
       codigo_unidad_medida: state.codigo_unidad_medida,
       nombre_unidad: state.nombre_unidad,
@@ -67,8 +87,12 @@ function FormUnidadMedida() {
 
     dispatch(unidadDeMedida(nuevaUM));
     e.target.reset();
-    alert("La Unidad de Medida fue agregada con éxito!");
-
+    swal({
+      title: "Unidad de Medida agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then((r) => dispatch(getUnidadMedida()));
     setState({
       codigo_unidad_medida: "",
       nombre_unidad: "",
@@ -77,50 +101,251 @@ function FormUnidadMedida() {
 
   return (
     <>
-      <div className="contenedorFAM">
-        <header>
-          <h1 id="title">Agregar Unidad de Medida</h1>
-        </header>
-        <form
-          id="survey-form"
-          className="form"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <div>
-            <label className="text-label">Nombre</label>
-            <input
-              className="inp"
-              type="text"
-              name="nombre_unidad"
-              value={state.nombre_unidad}
-            ></input>
-          </div>
-          <div className="divForm">
-            <div>
-              <label className="text-label">Unidad de Medida</label>
-              <input
-                className="inp"
-                type="text"
-                name="codigo_unidad_medida"
-                value={state.codigo_moneda}
-              ></input>
-            </div>
-            <button className="agregarModal" type="submit">
-              Agregar
-            </button>
-          </div>
-        </form>
-      </div>
-      <div className="contenedorActualesUM">
-        Unidades de Medida Actuales
-        <div className="tiposUM">
-          {unidad_medida.map((u) => (
-            <span className="spansUM">{u.nombre_unidad}</span>
-          ))}
-        </div>
-      </div>
+      <Card className="card-chart">
+        <CardHeader>
+          <span id="title">Unidad de Medida</span>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <h6 className="title">Unidades de Medida Actuales</h6>
+                <Input
+                  name="id"
+                  type="select"
+                  className="inp"
+                  onChange={(e) => ChangeInput(e)}
+                  // {...register("id", {
+                  //   required: {
+                  //     value: true,
+                  //     message: "Debe seleccionar un Producto",
+                  //   },
+                  // })}
+                >
+                  <option></option>
+                  {unidad_medida.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.nombre_unidad}
+                    </option>
+                  ))}
+                </Input>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Nombre</h6>
+                  {!state.nombre_unidad ? (
+                    <>
+                      <Input
+                        // className="inp"
+                        type="text"
+                        name="nombre_unidad"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_unidad", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre debe tener menos de quince letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre debe tener al menos tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.nombre_unidad?.message}
+                      </span>
+                    </>
+                  ) : state.nombre_unidad &&
+                    state.nombre_unidad.length >= 3 &&
+                    state.nombre_unidad.length <= 15 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="nombre_unidad"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_unidad", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre debe tener menos de quince letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre debe tener al menos tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.nombre_unidad?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="nombre_unidad"
+                        autoComplete="off"
+                        max="0"
+                        {...register("nombre_unidad", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre debe tener menos de quince letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre debe tener al menos tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.nombre_unidad?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Unidad de Medida</h6>
+                  {!state.codigo_unidad_medida ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="codigo_unidad_medida"
+                        autoComplete="off"
+                        max="0"
+                        {...register("codigo_unidad_medida", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar una unidad ",
+                          },
+                          maxLength: {
+                            value: 4,
+                            message:
+                              "La unidad no debe tener mas de cuatro letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "La unidad no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.codigo_unidad_medida?.message}
+                      </span>
+                    </>
+                  ) : state.codigo_unidad_medida &&
+                    state.codigo_unidad_medida.length <= 4 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="codigo_unidad_medida"
+                        autoComplete="off"
+                        max="0"
+                        {...register("codigo_unidad_medida", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar una unidad ",
+                          },
+                          maxLength: {
+                            value: 4,
+                            message:
+                              "La unidad no debe tener mas de cuatro letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "La unidad no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.codigo_unidad_medida?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="codigo_unidad_medida"
+                        autoComplete="off"
+                        max="0"
+                        {...register("codigo_unidad_medida", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar una unidad ",
+                          },
+                          maxLength: {
+                            value: 4,
+                            message:
+                              "La unidad no debe tener mas de cuatro letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "La unidad no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.codigo_unidad_medida?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
     </>
   );
 }

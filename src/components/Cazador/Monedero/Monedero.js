@@ -4,6 +4,7 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
+import {URL} from '../../Redux/actions'
 
 let totalPoints;
 
@@ -15,24 +16,40 @@ function actualPoints(arr) {
 }
 
 function Monedero() {
+    const [state, setState] = useState(false);
     const [movimiento, setMovimientos] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [puntos, setPuntos] = useState();
-    const [error, setError] = useState(false)
+    const [puntos, setPuntos] = useState(0);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log(token)
-        axios.get(`http://localhost:3001/transacciones/consulta`, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.get(`${URL}transacciones/consulta/`, { headers: { "Authorization": `Bearer ${token}` } })
             .then(json => {
-                setMovimientos(json.data)
+                OrderByDate(json.data)
+                setMovimientos(OrderByDate(json.data))
                 setLoading(false);
             })
-    }, []);
+    }, [state]);
 
     const handleChange = (e) => {
         setPuntos(parseInt(e.target.value));
+        if (e.target.value > totalPoints) {
+            setError({
+                bol: true,
+                msg: "No tienes suficientes hunterCoins"
+            })
+        } if (e.target.value <= 0) {
+            setError({
+                bol: true,
+                msg: "Debe ingresar un número mayor a 0"
+            })
+        } else {
+            setError({
+                bol: false
+            })
+        }
     }
 
     const handleSubmit = (e) => {
@@ -41,24 +58,33 @@ function Monedero() {
         const body = {
             puntosRetiro: puntos
         }
-        if (puntos >= totalPoints) {
-            return setError({
-                bol: true,
+        if (puntos > totalPoints) {
+            setError({
+                bol: true,  
                 msg: "No tienes suficientes hunterCoins"
+            })
+            return setPuntos(0)
+        } if (puntos <= 0) {
+            setError({
+                bol: true,
+                msg: "Debe ingresar un número mayor a 0"
             })
         } else {
             if (!error.bol) {
                 axios.post(
-                    "http://localhost:3001/transacciones/retirapuntos",
+                    `${URL}transacciones/retirapuntos`,
                     body,
                     {
                         headers: {
                             "Authorization": `Bearer ${token}`,
                         },
                     }
-                ) //VERIFICAR RUTA
+                )
                     .then(resp => {
-                        console.log(resp)
+                        swal(resp.data.rptaPuntos, " ", "success");
+                        setModal(false)
+                        setPuntos(0);
+                        setState(!state)
                     })
             }
         }
@@ -101,7 +127,11 @@ function Monedero() {
                     !modal ? null :
                         <div className="FormPostPrice" id="modalRetiroPoints">
                             <h2 className="h2">Retiro de Puntos</h2>
-                            <button className="closeModal" onClick={() => setModal(!modal)}>X</button>
+                            <label className="label">El canje de puntos se hará a la cuenta y banco indicados cuando creaste tu cuenta</label>
+                            <button className="closeModal" onClick={() => {
+                                setModal(!modal)
+                                setPuntos(0)
+                            }}>X</button>
                             <Form.Group>
                                 <Form.Label className="label">Puntos a retirar</Form.Label>
                                 <Form.Control
@@ -126,3 +156,26 @@ function Monedero() {
 }
 
 export default Monedero;
+
+
+function OrderByDate (arr) {
+    let array = [];
+    arr.map(el => {
+        const date = new Date(el.createdAt);
+        const year = date.getFullYear() + "" 
+        const mes = "0" + date.getMonth() + "";
+        const dia = date.getDate();
+        const hora = date.getHours() + "";
+        const minutos = date.getMinutes() + "";
+        const segundos = date.getSeconds() + "";
+        const milisegundos = date.getMilliseconds();
+
+        array.push({
+            ...el,
+            "order": year + mes + dia + hora + minutos + segundos + milisegundos
+        })
+    })
+    
+    array.sort((a,b) => a.order < b.order ? 1 : -1)
+    return array;
+} 

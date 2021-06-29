@@ -1,0 +1,21 @@
+
+
+#form-crear-producto-nuevo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+#lista-unidades-form-crear-producto{
+    width: 40%;
+}
+
+.margin-inputs-form-crear-producto{
+    width: 100% !important;
+}
+
+.div-select-crear-producto{
+    width: 70%;
+}

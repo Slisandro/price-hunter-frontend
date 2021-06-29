@@ -3,11 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { mostrarError } from '../Redux/actions';
 import { Link } from "react-router-dom";
 import "./Registro.css";
-import aguila from "../../assets/aguila.png";
-import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades} from '../Redux/actions';
-import Modal from './Modal';
+import { registrarUsuario, getGeneros, getTipoUsuario, getPaises, getCiudades } from '../Redux/actions';
+import {
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Row
+} from "reactstrap";
+import NavRegister from "./NavRegister";
 
-// import axios from 'axios';
+
+
 
 
 
@@ -15,25 +25,19 @@ import Modal from './Modal';
 
 
 const Registro = (props) => {
-
   const alerta = useSelector((store) => store.alerta);
   const generos = useSelector((store) => store.generos);
-  const tipo_usuarios = useSelector((store) => store.tipo_usuarios);
   const paises = useSelector((store) => store.paises);
   const ciudades = useSelector((store) => store.ciudades);
-
-
   const mensaje = useSelector((store) => store.mensaje);
   const autenticado = useSelector((store) => store.autenticado);
- 
-
 
   const dispatch = useDispatch();
 
 
 
 
-  
+
 
   const [registro, guardarRegistro] = useState({
     email: "",
@@ -47,16 +51,25 @@ const Registro = (props) => {
     numero_de_cuenta: "",
     tipoUsuarioId: "",
     password: "",
-    
-    confirmar: "",
-    
+    //Confirmar NO SE ENVIA.
+    confirmar: ""
+
 
   })
 
-  const { email, nombre, apellido, fecha_de_nacimiento,  metodo_de_cobro, password, confirmar,generoId, ciudadId,banco,numero_de_cuenta,tipoUsuarioId} = registro;
-
-
-
+  const { email,
+    nombre,
+    apellido,
+    fecha_de_nacimiento,
+    metodo_de_cobro,
+    password,
+    confirmar,
+    generoId,
+    ciudadId,
+    banco,
+    numero_de_cuenta,
+    tipoUsuarioId
+  } = registro;
 
 
 
@@ -64,16 +77,13 @@ const Registro = (props) => {
   useEffect(() => {
     if (autenticado) {
       props.history.push("/login")
-      
+
     }
     if (mensaje) {
       dispatch(mostrarError(mensaje.msg, mensaje.categoria))
     }
 
   }, [mensaje, autenticado, props.history, dispatch])
-
-
-
 
 
 
@@ -98,6 +108,7 @@ const Registro = (props) => {
   }
 
 
+
   const handleCity = e => {
     dispatch(getCiudades(e.target.value))
   }
@@ -105,48 +116,29 @@ const Registro = (props) => {
 
 
 
+  /*************AQUI HACEMOS EL SUBMIT CON LOS DATOS RECOLECTADOS EN EL FORM**************************************/
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (nombre.trim() === '' || nombre.length < 3) {
-      dispatch(mostrarError('Error en el nombre enviado', 'alerta-error'));
-      return;
-
-    }
-
-    if (apellido.trim() === '' || apellido.length < 3) {
-      dispatch(mostrarError('Error en el apellido enviado', 'alerta-error'));
-      return;
-
-    }
-
-    if (fecha_de_nacimiento.trim() === '' || fecha_de_nacimiento.length < 3) {
-      dispatch(mostrarError('Error en la fecha de nacimiento enviada', 'alerta-error'));
-      return;
-
-    }
-
-
-    if (email.trim() === '' || password.trim() === '' || confirmar.trim() === '') {
+    if (nombre.trim() === '' || apellido.trim() === '' || fecha_de_nacimiento.trim() === '' || email.trim() === '' || password.trim() === '' || confirmar.trim() === '') {
       dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
       return;
     }
-
+    if (apellido.length < 3) {
+      dispatch(mostrarError('Apellido debe contener mas de tres caracteres', 'alerta-error'));
+      return;
+    }
     // Password minimo de 6 caracteres
     if (password.length < 6) {
       dispatch(mostrarError('El password debe ser de al menos 6 caracteres', 'alerta-error'));
       return;
     }
-
     //Los 2 passwords son iguales
     if (password !== confirmar) {
       dispatch(mostrarError('Los passwords no son iguales', 'alerta-error'));
       return;
     }
-
-
-
 
     //Si pasamos todas las validacions: 
     dispatch(registrarUsuario({
@@ -164,263 +156,279 @@ const Registro = (props) => {
     })
     )
 
+    //Limpiamos el formulario
+    guardarRegistro({
+      email: "",
+      nombre: "",
+      apellido: "",
+      fecha_de_nacimiento: [],
+      ciudadId: "",
+      generoId: "",
+      metodo_de_cobro: "",
+      banco: "",
+      numero_de_cuenta: "",
+      tipoUsuarioId: "",
+      password: "",
+      confirmar: ""
+    })
+
   }
+
+  <Row></Row>
+
 
 
 
 
   return (
-    <>
-    <div className="register">
-    
-    <div class="container-register">
-    <div className="encabezado">
-        <p class="title">Registrarme</p>
-        <img src={aguila} alt="" width={40} height={40} className="logo__register" />
-    </div>
-    <div class="content">
+    <div>
+      <NavRegister />
+      <div className="registerContent">
 
-    {alerta ? (<div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>) : null}
-      <form onSubmit={handleSubmit}>
-        <div class="user-details">
-
-          
-          <div class="input-box">
-            <span class="details">Email</span>
-            <input 
-            class="input" 
-            type="text" 
-            placeholder="Email" 
-            name="email"
-            value={email}
-            onChange={handleInputRegister}
-          
-            />
-          </div>
-
-          
-          <div class="input-box">
-            <span class="details">Nombre</span>
-            <input 
-              class="input"
-              type="text" 
-              placeholder="Nombre" 
-              name="nombre"
-              value={nombre}
-              onChange={handleInputRegister}
+      <p className="welcome-login">Bienvenido</p>
+      <p className="register__description">Aqui podrás crear tu cuenta y comenzar a cazar precios !</p>
             
-              />
-          </div>
-         
-      
-          <div class="input-box">
-            <span class="details">Apellido</span>
-            <input 
-              class="input" 
-              type="text" 
-              placeholder="apellido"
-              name="apellido"
-              value={apellido}
-              onChange={handleInputRegister} 
-           
-              />
-          </div>
-
-          <div class="input-box">
-            <span class="details">Fecha de nacimiento</span>
-            <input 
-              class="input" 
-              type="date" 
-              placeholder="Fecha de nacimiento" 
-              name="fecha_de_nacimiento"
-              value={fecha_de_nacimiento}
-              onChange={handleInputRegister}
-            
-              />
-          </div>
-
-
-          <div class="input-box">
-            <span class="details">Metodo de cobro</span>
-            <select class="input-select" onChange={handleInputRegister} name="metodo_de_cobro">
-              <option value="">-</option>
-              <option value="Mercado Pago">Mercado Pago</option>
-              <option value="CBU">CBU</option>
-            </select>
-      
-          
-              {
-                metodo_de_cobro !== "" ?
-                  (metodo_de_cobro === "CBU" ? (
-                    <>
-                    <div>
-                    <input
-                      className="input last"
-                      type="text"
-                      placeholder="Ingrese su banco"
-                      name="banco"
-                      onChange={handleInputRegister}
-                    />
-                    </div>
-                    <div>
-                      <input
-                        className="input last"
-                        type="text"
-                        placeholder="Ingrese su numero de cuenta"
-                        name="numero_de_cuenta"
-                        onChange={handleInputRegister}
-                      />
-                    </div>
-                    </>
-                    
-                  ) : (
+            <Card className="col-md-6">
+            {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center` }> {mensaje.msg} </div>) : null}
+              <CardBody >
+              {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}
+                
+                <form onSubmit={handleSubmit}>
+                  <Col md="12">
+                    <div className="form-row">
+                      
+                      <FormGroup className="col-md-6">
+                        <Label for="inputEmail">Email</Label>
+                        <Input
+                          bsSize="md"
+                          type="email"
+                          id="inputEmail"
+                          placeholder="Email"
+                          name="email"
+                          value={email}
+                          onChange={handleInputRegister}
     
-                    metodo_de_cobro === "Mercado Pago" ?
-                    <div>
-                      <input
-                        class="input last last-date"
-                        type="text"
-                        placeholder="Ingrese su usuario"
-                        name="numero_de_cuenta"
-                        onChange={handleInputRegister}
-                      />
-                      </div>
-                      : ("")
-                  )
-                  ) : ("")
-              }
-          </div>
-          
+                        />
+                      </FormGroup>
+    
+                      <FormGroup className="col-md-6">
+                        <Label for="inputEmail">Nombre</Label>
+                        <Input
+                          bsSize="md"
+                          type="text"
+                          id="inputNombre"
+                          placeholder="Nombre"
+                          name="nombre"
+                          value={nombre}
+                          onChange={handleInputRegister}
+    
+                        />
+                      </FormGroup>
+                    </div>
+    
 
-
-
-          <div class="input-box">
-            <span class="details">Tipo de usuario</span>
-          <select class="input-select" onChange={handleInputRegister} name="tipoUsuarioId">
-            <option value="">-</option>
-            {tipo_usuarios ? tipo_usuarios.map(item => (
-              <option key={item.id} value={item.id}>{item.tipo_usuario}</option>
-            )):("")}
-          </select>
-          </div>
-
-
-
-
-          <div class="input-box">
-            <span class="details">Pais</span>
-            <select class="input-select" onChange={handleCity}>
-              <option value="">-</option>{/*dispatch(getCiudades(item.codigo_alfa)*/}
-              {paises ? paises.map(item => (
-                <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
-              )) : ("")}
-            </select>
-          </div>
-
-
-
-
-          <div class="input-box">
-            <span class="details">Ciudad</span>
-            <select class="input-select" onChange={handleInputRegister} name="ciudadId">
-              <option value="">-</option>
-              {ciudades ? ciudades.map(item => (
-                <option key={item.id} value={item.id}>{item.ciudad}</option>
-              )):("")}
-            </select>
-          </div>
-
-               
- 
-          
-          
+                    <div className="form-row">
+                      <FormGroup className="col-md-6">
+                        <Label for="inputApellido">Apellido</Label>
+                        <Input
+                          bsSize="md"
+                          type="text"
+                          id="inputApellido"
+                          placeholder="Apellido"
+                          name="apellido"
+                          value={apellido}
+                          onChange={handleInputRegister}
+    
+                        />
+                      </FormGroup>
+    
+                      <FormGroup className="col-md-6">
+                        <Label for="inputFecha">Fecha de nacimiento</Label>
+                        <Input
+                          bsSize="md"
+                          type="date"
+                          id="inputFecha"
+                          placeholder="Fecha de nacimiento"
+                          name="fecha_de_nacimiento"
+                          value={fecha_de_nacimiento}
+                          onChange={handleInputRegister}
+    
+                        />
+                      </FormGroup>
+                    </div>
+    
   
-          <div class="input-box">
-            <span class="details">Contraseña</span>
-            <input 
-              class="input" 
-              type="password" 
-              placeholder="Contraseña" 
-            
-              name="password"
-              value={password}
-              onChange={handleInputRegister}
-              />
-          </div>
-          
-          
-          <div class="input-box">
-            <span class="details">Confirmar contraseña</span>
-            <input 
-              class="input" 
-              type="password"
-              placeholder="Confirmar contraseña" 
-              
-              name="confirmar"
-              value={confirmar}
-              onChange={handleInputRegister}
-              />
-          </div>
+                    <div className="form-row">
+                      <FormGroup className="col-md-6">
+                        <Label for="inputGenero">Genero</Label>
+                        <Input
+                          bsSize="md"
+                          type="select"
+                          id="inputGenero"
+                          placeholder="genero"
+                          name="generoId"
+                          value={generoId}
+                          onChange={handleInputRegister}
+                        >
+                          {generos ? generos.map(genero => (
+                            <option key={genero.id} value={genero.id}>{genero.genero}</option>
+                          )) : ("")}
+                        </Input>
+                      </FormGroup>
+    
+                      <FormGroup className="col-md-6">
+                        <Label for="inputPais">Pais</Label>
+                        <Input
+                          bsSize="md"
+                          type="select"
+                          id="inputPais"
+                          name="pais"
+                          onChange={handleCity}
+                        >
+                          {paises ? paises.map(item => (
+                            <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
+                          )) : ("")}
+                        </Input>
+                      </FormGroup>
+    
+                    </div>
+    
+    
+  
+                    <FormGroup>
+                      <Label for="inputCiudad">Ciudad</Label>
+                      <Input
+                        bsSize="md"
+                        type="select"
+                        id="inputCiudad"
+                        name="ciudadId"
+                        value={ciudadId}
+                        onChange={handleInputRegister}
+                      >
+                        {ciudades ? ciudades.map(item => (
+                          <option key={item.id} value={item.id}>{item.ciudad}</option>
+                        )) : ("")}
+                      </Input>
+                    </FormGroup>
+    
+                    <FormGroup>
+                      <Label for="inputCobro">Seleccione un metodo de cobro</Label>
+                      <Input
+                        bsSize="md"
+                        type="select"
+                        id="inputCobro"
+                        onChange={handleInputRegister}
+                        name="metodo_de_cobro"
+                      >
+                        <option value="">-</option>
+                        <option value="Mercado Pago">Mercado Pago</option>
+                        <option value="CBU">CBU</option>
+                      </Input>
+    
+    
+                      {
+                        metodo_de_cobro !== "" ?
+                          (metodo_de_cobro === "CBU" ? (
+                            <>
+                              <div className="form-row">
+                                <FormGroup className="col-md-6">
+                                  <Input
+                                    bsSize="sm"
+                                    type="text"
+                                    placeholder="Banco"
+                                    name="banco"
+                                    onChange={handleInputRegister}
+    
+    
+                                  />
+                                </FormGroup>
+    
+                                <FormGroup className="col-md-6">
+                                  <input
+                                    bsSize="sm"
+                                    type="text"
+                                    placeholder="Nº de cuenta"
+                                    name="numero_de_cuenta"
+                                    onChange={handleInputRegister}
+                                  />
+                                </FormGroup>
+    
+                              </div>
+                            </>
+    
+                          ) : (
+    
+                            metodo_de_cobro === "Mercado Pago" ?
+                              <div className="form-row">
+                                <FormGroup className="col-md-6">
+                                  <input
+                                    bsSize="sm"
+                                    type="text"
+                                    placeholder="Ingrese su usuario"
+                                    name="numero_de_cuenta"
+                                    onChange={handleInputRegister}
+                                  />
+                                </FormGroup>
+    
+                              </div>
+                              : ("")
+                          )
+                          ) : ("")
+                      }
+    
+                    </FormGroup>
+    
+    
+    
+    
+    
+    
+    
+                    <div className="form-row">
+    
+                      <FormGroup className="col-md-6">
+                        <Label for="inputPassword">Contraseña</Label>
+                        <Input
+                          bsSize="sm"
+                          type="password"
+                          id="inputPassword"
+                          name="password"
+                          value={password}
+                          onChange={handleInputRegister}
+    
+                        />
+                      </FormGroup>
+    
+                      <FormGroup className="col-md-6">
+                        <Label for="inputConfirmar">Confirmar contraseña</Label>
+                        <Input
+                          bsSize="sm"
+                          type="password"
+                          id="inputConfirmar"
+                          name="confirmar"
+                          value={confirmar}
+                          onChange={handleInputRegister}
+    
+                        />
+                      </FormGroup>
+    
+    
+                    </div>
+    
+    
+    
+    
+                    <Button bsSize="sm" type="submit" color="primary" block>Registrarme</Button>
+                  </Col>
+                </form>
+              </CardBody>
+            </Card>
 
-          <div class="input-box">
-            <span class="details">Genero</span>
-          <select className="input-select" onChange={handleInputRegister} name="generoId">
-            <option value="">-</option>
-            {generos ? generos.map(genero => (
-              <option key={genero.id} value={genero.id}>{genero.genero}</option>
-            )):("")}
-          </select>
-          </div>
-
-
-          <div className="input-box-tyc">
-            <input 
-              class="input-policy" 
-              type="checkbox"
-              placeholder="Confirmar contraseña" 
-              name="terms"
-              // value={terms}
-              // onChange={handleTerms}
-              />
-             <Link className="link__sesion" to="/terminos-condiciones">Acepto los términos y condiciones</Link> 
-              
-              
-          </div>
-
-         
-        </div>
-        
-   
-
-
-        
-
-        <div class="button">
-          <input type="submit" value="Registrarme"/>
-        </div>
-      </form>
-      
-      
-
-
-      <div>
-
-      <Link className="link__sesion" to="/login">Volver a iniciar sesión</Link> 
-      
 
       </div>
-    </div>
-  </div>
-  </div>
-
-
-  
-  </>
-  )
+      </div>
+  );
 }
-
-
-
 
 export default Registro;
 
@@ -438,4 +446,245 @@ export default Registro;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// {mensaje ? (<div className={`alerta ${mensaje.categoria}`}> {mensaje.msg} </div>) : null}
+// <div className="container_form_register">
+//     <header>Registrarme</header>
+
+
+//     <div className="form-outer">
+
+//     {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
+
+//       <form onSubmit={handleSubmit}>
+
+
+//           <div className="page">
+//             {/* <div className="title">Sobre usted</div> */}
+
+//                           <div className="field">
+//                               <div className="label">Email</div>
+//                                   <input
+//                                       className="inputRegister"
+//                                       type="text"
+//                                       placeholder="Email" 
+//                                       name="email"
+//                                       value={email}
+//                                       onChange={handleInputRegister}
+
+//                                   />
+//                           </div>
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Nombre</div>
+//                                   <input
+//                                       className="inputRegister"
+//                                       type="text"
+//                                       placeholder="Nombre" 
+//                                       name="nombre"
+//                                       value={nombre}
+//                                       onChange={handleInputRegister}
+
+//                                   />
+//                           </div>
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Apellido</div>
+//                                   <input
+//                                       className="inputRegister"
+//                                       type="text"
+//                                       placeholder="Apellido" 
+//                                       name="apellido"
+//                                       value={apellido}
+//                                       onChange={handleInputRegister}
+
+//                                   />
+//                           </div>
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Fecha de nacimiento</div>
+//                               <input 
+//                                       className="inputRegister"
+//                                       type="date" 
+//                                       placeholder="Fecha de nacimiento" 
+//                                       name="fecha_de_nacimiento"
+//                                       value={fecha_de_nacimiento}
+//                                       onChange={handleInputRegister}
+//                               />
+//                           </div>
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Genero</div>
+//                               <select onChange={handleInputRegister} name="generoId">
+//                                   <option value="">-</option>
+//                                   {generos ? generos.map(genero => (
+//                                   <option key={genero.id} value={genero.id}>{genero.genero}</option>
+//                                   )) : ("")}
+//                                   </select>
+//                           </div>
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Pais</div>
+//                               <select onChange={handleCity}>
+//                                   <option value="">-</option>
+                                  // {paises ? paises.map(item => (
+                                  //   <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
+                                  // )) : ("")}
+//                               </select>
+//                           </div>
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Ciudad</div>
+//                               <select onChange={handleInputRegister} name="ciudadId">
+//                                   <option value="">-</option>
+                                  // {ciudades ? ciudades.map(item => (
+                                  //   <option key={item.id} value={item.id}>{item.ciudad}</option>
+                                  // )):("")}
+//                               </select>
+//                           </div>
+
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Metodo de cobro</div>
+//                               <select onChange={handleInputRegister} name="metodo_de_cobro">
+//                                   <option value="">-</option>
+//                                   <option value="Mercado Pago">Mercado Pago</option>
+//                                   <option value="CBU">CBU</option>
+//                               </select>
+
+                              // {
+                              //   metodo_de_cobro !== "" ?
+                              //     (metodo_de_cobro === "CBU" ? (
+                              //       <>
+                              //       <div className="field">
+                              //       <input
+                              //         className="inputRegister"
+                              //         type="text"
+                              //         placeholder="Banco"
+                              //         name="banco"
+                              //         onChange={handleInputRegister}
+                              //       />
+                              //       </div>
+                              //       <div className="field">
+                              //         <input
+                              //           className="inputRegister"
+                              //           type="text"
+                              //           placeholder="Nº de cuenta"
+                              //           name="numero_de_cuenta"
+                              //           onChange={handleInputRegister}
+                              //         />
+                              //       </div>
+                              //       </>
+
+                              //     ) : (
+
+                              //       metodo_de_cobro === "Mercado Pago" ?
+                              //       <div className="field">
+                              //         <input
+                              //           className="inputRegister"
+                              //           type="text"
+                              //           placeholder="Ingrese su usuario"
+                              //           name="numero_de_cuenta"
+                              //           onChange={handleInputRegister}
+                              //         />
+                              //         </div>
+                              //         : ("")
+                              //     )
+                              //     ) : ("")
+                              // }
+//                           </div>
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Contraseña</div>
+//                                 <input
+//                                       className="inputRegister"
+//                                       type="password"
+//                                       placeholder="contraseña" 
+//                                       name="password"
+//                                       value={password}
+//                                       onChange={handleInputRegister}
+//                                       />
+//                           </div>
+
+
+
+
+
+
+//                           <div className="field">
+//                               <div className="label">Confirmar contraseña</div>
+//                               <input
+//                                   className="inputRegister" 
+//                                   type="password"
+//                                   placeholder="Confirmar contraseña" 
+//                                   name="confirmar"
+//                                   value={confirmar}
+//                                   onChange={handleInputRegister}
+//                                   />
+//                           </div>
+
+
+
+
+//                           <div className="field">
+//                               <button>Registrarme</button>
+//                           </div>
+
+
+//             </div>  
+//         </form>
+//     <Link className="linklogin" to="/login" >Volver a iniciar sesion</Link>
+// </div>
+// </div>
 

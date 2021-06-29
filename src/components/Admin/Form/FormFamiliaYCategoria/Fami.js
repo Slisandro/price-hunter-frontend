@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFamilia, familiaPost, mostrarError } from "../../../Redux/actions";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import {
+  FormFeedback,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 function Fami({ setSwitcher }) {
   const dispatch = useDispatch();
@@ -44,9 +62,13 @@ function Fami({ setSwitcher }) {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
+  const submit = (data, e) => {
     const nuevaFamilia = {
       nombre_familia: fam.nombre_familia,
       descripcion: fam.descripcion,
@@ -72,7 +94,13 @@ function Fami({ setSwitcher }) {
     dispatch(familiaPost(nuevaFamilia));
 
     e.target.reset();
-    alert("Familia agregada con éxito!");
+
+    swal({
+      title: "Familia agregada con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then((g) => dispatch(getFamilia()));
 
     setFam({
       nombre_familia: "",
@@ -82,42 +110,100 @@ function Fami({ setSwitcher }) {
 
   return (
     <>
-      <div>
-        <form
-          className="formFamilia"
-          noValidate
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          {alerta ? (
+      <Card className="card-chart">
+        <CardHeader>
+          <h1 id="title">Familias</h1>
+        </CardHeader>
+        <CardBody>
+          <Form
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            {/* {alerta ? (
             <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
-          ) : null}
-          <div className="divFormFamilia">
-            <div>
-              <label className="text-label">Familia</label>
-              <input
-                name="agregar_familia"
-                className="inp"
-                placeholder="Agregar Familia"
-              ></input>
-            </div>
-          </div>
-          <div className="divFormFamilia">
-            <div>
-              <label className="text-label-desc">* Descripción</label>
-              <input
-                className="inp6"
-                type="text"
-                name="descripcion"
-                value={fam.descripcion}
-              ></input>
-            </div>
-          </div>
-          <button className="agregarModal" type="submit">
-            Agregar Familia
-          </button>
-        </form>
-      </div>
+          ) : null} */}
+            <Row>
+              <Col>
+                <label className="title">Familias Actuales</label>
+                <Input type="select" className="inp">
+                  <option></option>
+                  {familia.map((u) => (
+                    <option value={u.nombre_familia}>{u.nombre_familia}</option>
+                  ))}
+                </Input>
+                <label className="title">Familia</label>
+                <Input
+                  name="agregar_familia"
+                  placeholder="Agregar Familia"
+                  className="inp"
+                  autoComplete="off"
+                  max="0"
+                  {...register("agregar_familia", {
+                    required: {
+                      value: true,
+                      message: "Debe ingresar un familia ",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "La familia debe tener menos de veinte letras!",
+                    },
+                    minLength: {
+                      value: 3,
+                      message: "La familia debe tener tres letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "La familia no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.agregar_familia?.message}</span>
+
+                <label className="title">* Descripción</label>
+                <Input
+                  className="inp6"
+                  type="text"
+                  name="descripcion"
+                  autoComplete="off"
+                  max="0"
+                  {...register("descripcion", {
+                    // required: {
+                    //   value: true,
+                    //   message: "Debe ingresar un descripcion ",
+                    // },
+                    maxLength: {
+                      value: 256,
+                      message:
+                        "La descripcion no debe tener mas de 256 caracteres!",
+                    },
+                    minLength: {
+                      value: 5,
+                      message:
+                        "La descripcion debe tener al menos cinco letras!",
+                    },
+                    max: {
+                      value: 0,
+                      message: "La descripcion no puede comenzar con numeros",
+                    },
+                  })}
+                />
+                <span className="err">{errors?.descripcion?.message}</span>
+
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
     </>
   );
 }

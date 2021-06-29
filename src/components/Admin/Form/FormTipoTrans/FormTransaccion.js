@@ -5,6 +5,22 @@ import {
   getTipoTransaccion,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 
 import "./FormTransaccion.css";
 
@@ -41,7 +57,13 @@ function FormTransaccion() {
   const submit = (data, e) => {
     dispatch(tipoTransaccionPost(state));
     e.target.reset();
-    alert("Tipo de Transacción agregado con éxito!");
+
+    swal({
+      title: "Tipo de Transacción agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then((r) => dispatch(getTipoTransaccion()));
 
     setState({
       ...state,
@@ -50,52 +72,137 @@ function FormTransaccion() {
   };
 
   return (
-    <Fragment>
-      <div className="contenedorTransacciones">
-        <h6 id="titleTran">Agregar Tipo de Transacción</h6>
-        <form
-          className="formFamilia"
-          onChange={(e) => ChangeInput(e)}
-          onSubmit={handleSubmit(submit)}
-        >
-          <div className="divTransacciones">
-            <div>
-              <label className="text-label">Tipo de Transacción</label>
-              <input
-                className="inp"
-                type="text"
-                name="tipo_transaccion"
-                autoComplete="off"
-                {...register("tipo_transaccion", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un tipo de transaccion",
-                  },
-                  minLength: {
-                    value: 3,
-                    message: "Mínimo 3 carácteres",
-                  },
-                })}
-              />
-              <span className="err">
-                {errors.tipo_transaccion && errors.tipo_transaccion.message}
-              </span>
-            </div>
-          </div>
-          <button className="agregarModal" type="submit">
-            Agregar
-          </button>
-        </form>
-      </div>
-      <div className="contenedorActualesUM">
+    <>
+      <Card className="card-chart">
+        <CardHeader>
+          <span id="title">Tipo de Transacción</span>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <h6 className="title">Tipos de Transacción Actuales</h6>
+                <Input
+                  name="id"
+                  type="select"
+                  className="inp"
+                  onChange={(e) => ChangeInput(e)}
+                  // {...register("id", {
+                  //   required: {
+                  //     value: true,
+                  //     message: "Debe seleccionar un Producto",
+                  //   },
+                  // })}
+                >
+                  <option></option>
+                  {transaccion.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.tipo_transaccion}
+                    </option>
+                  ))}
+                </Input>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Tipo de Transacción</h6>
+                  {!state.tipo_transaccion ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  ) : state.tipo_transaccion.length >= 3 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesUM">
         Tipos de Transacción Actuales
         <div className="tiposUM">
           {transaccion.map((t) => (
             <span className="spansUM">{t.tipo_transaccion}</span>
           ))}
         </div>
-      </div>
-    </Fragment>
+      </div> */}
+    </>
   );
 }
 

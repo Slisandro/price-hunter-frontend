@@ -304,6 +304,7 @@ header {
   border-radius: var(--radius);
   background-color: white;
   color: black;
+  appearance: none;
 }
 
 .btn6 {
@@ -345,6 +346,7 @@ header {
 .inp3 {
   height: 2.2rem;
   width: 10rem;
+  appearance: none;
   margin-top: -10rem;
   border-radius: var(--radius);
   background-color: white;
@@ -357,6 +359,7 @@ header {
   border-radius: var(--radius);
   background-color: white;
   color: black;
+  appearance: none;
 }
 
 #titleFam {
@@ -393,4 +396,12 @@ header {
   font-size: 1.3rem;
   margin: 1rem 0 0 3rem;
   color: var(--clr-primary-5);
+}
+
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red;
 }

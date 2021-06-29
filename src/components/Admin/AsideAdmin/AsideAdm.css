@@ -1,14 +1,12 @@
-#aside {
+#asidee {
   background: #24244b;
   grid-area: aside;
-  overflow-y: hidden;
+  /* overflow-y: hidden;
   padding: 15px;
   -webkit-transition: all 0.5s;
-  border-bottom-left-radius: 15px;
   transition: all 0.5s;
-  border-right: 1px solid #ffffff;
   font-family: "Catamaran", sans-serif !important;
-  z-index: 1000;
+  z-index: 1000; */
 }
 
 .account-profile {
@@ -18,8 +16,8 @@
   position: relative;
 }
 .account-profile img {
-  width: 84px;
-  height: 84px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   -o-object-fit: cover;
   object-fit: cover;
@@ -34,11 +32,24 @@
   color: #fff;
   font-weight: bold;
 }
-.account-title {
+.account-title2 {
   font-size: 15px;
   color: rgb(255, 255, 255);
-  background-color: rgba(27, 37, 102, 0.644);
+  background-color: rgba(39, 48, 109, 0.644);
+  border-color: rgb(12, 2, 59);
+  border-width: 0.13rem;
   border-radius: var(--radius);
+  margin-top: 0.5rem;
+}
+
+.account-title4 {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background-color: rgba(39, 48, 109, 0.644);
+  border-color: rgb(12, 2, 59);
+  border-width: 0.13rem;
+  border-radius: var(--radius);
+  margin-top: 25rem;
 }
 
 .cardAdm {

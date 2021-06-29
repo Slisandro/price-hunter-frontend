@@ -97,7 +97,16 @@ header {
   background-color: green; */
 }
 
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red;
+}
+
 .selectUbi {
+  appearance: none;
   color: black;
   width: 10rem;
   height: 2.2rem;

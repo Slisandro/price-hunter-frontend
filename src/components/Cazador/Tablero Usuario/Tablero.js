@@ -8,13 +8,14 @@ var geolocation = require('geolocation');
 
 
 function Tablero() {
-  const [state, setState] = useState("")
+  const [state, setState] = useState("Panel")
   const [sidebarOpen, setSidebar] = useState(false);
   const [ubicacion, setUbicacion] = useState({
     latitud: "",
-    longitud: ""
+    longitud: "",
+    dis: 0
   })
-  
+
   const openSidebar = () => {
     setSidebar(true);
   }
@@ -25,7 +26,9 @@ function Tablero() {
 
   useEffect(() => {
     geolocation.getCurrentPosition((err, position) => {
+      if (err) throw err
       return setUbicacion({
+        ...ubicacion,
         longitud: position.coords.longitude + "",
         latitud: position.coords.latitude + "",
       })
@@ -35,10 +38,10 @@ function Tablero() {
   return (
     <div className="contenedor">
 
-      <Navbar sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
-      <Main state={state} setState={setState} ubicacion={ubicacion} />
-      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
-      <Aside />
+      <Navbar setState={setState} sidebarOpen={sidebarOpen} openSidebar={openSidebar} />
+      <Main setUbicacion={setUbicacion} state={state} setState={setState} ubicacion={ubicacion} />
+      <Sidebar state={state} sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} setState={setState} />
+      {/* <Aside /> */}
 
     </div>
 

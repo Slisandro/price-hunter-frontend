@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Categorias from '../categorias/Categorias';
+import swal from 'sweetalert';
 import { getCategorias, getProductsByName } from "../Redux/actions";
 
-function NavBarMain({ producto, setProducto, setState, ubicacion }) {
+function NavBarMain({ producto, setProducto, setState, ubicacion, setUbicacion }) {
     const categorias = useSelector(store => store.categorias);
     const dispatch = useDispatch();
     const nombre = localStorage.getItem("nombre");
+    // const [error, setError] = useState(false) // Borde al select cuando no ha sido seleccionado
 
     useEffect(() => {
         dispatch(getCategorias())
@@ -15,18 +17,32 @@ function NavBarMain({ producto, setProducto, setState, ubicacion }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(getProductsByName(producto, ubicacion));
-        setState("Search");
-        setProducto("")
+        if (ubicacion.longitud && ubicacion.latitud) {
+            dispatch(getProductsByName(producto, ubicacion));
+            setState("Search");
+            setProducto("")
+            setUbicacion({
+                ...ubicacion,
+            })
+        } else {
+            swal("No hemos podido acceder a su ubicación", " ", "error");
+        }
+    }
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setUbicacion({
+            ...ubicacion,
+            dis: e.target.value
+        })
     }
 
     const handleChange = (e) => {
         setProducto(e.target.value)
     }
-    console.log(categorias)
+
     return (
         <>
-
             {/* Animation */}
             <div id="container-welcome">
                 <div className="discount-chart">
@@ -51,21 +67,34 @@ function NavBarMain({ producto, setProducto, setState, ubicacion }) {
 
 
             {/* Categories */}
-            <Categorias categorias={categorias} setState={setState} />
+            {/* <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} /> */}
             {/* SearchBar */}
 
 
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    className="input__text"
-                    placeholder="Buscar productos por nombre"
-                    onChange={handleChange}
-                    value={producto}
-                    name={producto}
-                />
-                <input type="submit" className="btn__main" value="Buscar" />
+            <form className="formSearchUser" onSubmit={handleSubmit}>
+                <div className="containerInputSearch">
+                    <input
+                        id="inputSearchBarText"
+                        type="text"
+                        className="input__text"
+                        placeholder="Buscar precios cercanos"
+                        onChange={handleChange}
+                        value={producto}
+                        name={producto}
+                    />
+                    <input type="submit" id="inputSearchBarSubmit" className="btn__main" value="Buscar" />
+                </div>
+                <Categorias ubicacion={ubicacion} categorias={categorias} setState={setState} />
+                <select onClick={e => handleClick(e)} id="selectSearchBarUser">
+                    <option></option>
+                    <option value={100}>100 m</option>
+                    <option value={1000}>1 km</option>
+                    <option value={5000}>5 km</option>
+                    <option value={10000}>10 km</option>
+                    <option value={20000}>20 km</option>
+                    <option value={100000}>100 km</option>
+                </select>
             </form>
 
 

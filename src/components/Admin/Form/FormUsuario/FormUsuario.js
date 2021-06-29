@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { tipoUsuario, getTipoUsuario } from "../../../Redux/actions";
-
-import close from "../../../../assets/cancel (1).png";
+import { useForm } from "react-hook-form";
+import swal from "sweetalert";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter,
+  CardText,
+  FormGroup,
+  Form,
+  Input,
+  Row,
+  Col,
+  FormText,
+} from "reactstrap";
 import "./FormUsuario.css";
 
 function FormUsuario() {
@@ -36,14 +51,16 @@ function FormUsuario() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
+  const submit = (data, e) => {
     const nuevoUsuario = {
       tipo_usuario: state.tipo_usuario,
     };
-
-    console.log(nuevoUsuario);
 
     if (!nuevoUsuario.tipo_usuario) {
       alert("Por favor, ingrese un tipo de usuario");
@@ -52,7 +69,12 @@ function FormUsuario() {
 
     dispatch(tipoUsuario(nuevoUsuario));
     e.target.reset();
-    alert("Usuario agregado con éxito!");
+    swal({
+      title: "Usuario agregado con éxito!",
+      icon: "success",
+      button: "Aceptar",
+      timer: "5000",
+    }).then((r) => dispatch(getTipoUsuario()));
 
     setState({
       tipo_usuario: "",
@@ -61,48 +83,166 @@ function FormUsuario() {
 
   return (
     <>
-      <div>
-        <div className="contenedorFAM">
-          {modal ? (
-            <div>
-              {/* <button className="buttonModal" onClick={() => handleModal()}>
-                <img width={30} src={close} alt="x" />
-              </button> */}
-              <header>
-                <h1 id="title">Agregar Tipo de Usuario</h1>
-              </header>
-              <form
-                id="survey-form"
-                className="form"
-                noValidate
-                onChange={(e) => ChangeInput(e)}
-                onSubmit={(e) => handleSubmit(e)}
-              >
-                <div className="divModalFAM">
-                  <div>
-                    <label className="text-label">Tipo de Usuario</label>
-                    <input
-                      className="inp"
-                      type="text"
-                      name="tipo_usuario"
-                      value={state.tipo_usuario}
-                    ></input>
-                  </div>
-                  <button className="agregarModal" type="submit">
-                    Agregar
-                  </button>
+      <Card className="card-chart">
+        <CardHeader>
+          <span id="title">Tipo de Usuario</span>
+        </CardHeader>
+        <CardBody>
+          <Form
+            id="survey-form"
+            className="form"
+            noValidate
+            onChange={(e) => ChangeInput(e)}
+            onSubmit={handleSubmit(submit)}
+          >
+            <Row>
+              <Col>
+                <h6 className="title">Usuarios Actuales</h6>
+                <Input
+                  name="id"
+                  type="select"
+                  className="inp"
+                  onChange={(e) => ChangeInput(e)}
+                  // {...register("id", {
+                  //   required: {
+                  //     value: true,
+                  //     message: "Debe seleccionar un Producto",
+                  //   },
+                  // })}
+                >
+                  <option></option>
+                  {tipo_usuarios.map((f, index) => (
+                    <option key={index} value={f.id}>
+                      {f.tipo_usuario}
+                    </option>
+                  ))}
+                </Input>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Usuario</h6>
+                  {!state.tipo_usuario ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : state.tipo_usuario.length <= 20 &&
+                    state.tipo_usuario.length >= 3 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  )}
                 </div>
-              </form>
-            </div>
-          ) : null}
-        </div>
-        <div className="contenedorActualesUM">
+                <Button
+                  className="btn-fill"
+                  color="primary"
+                  type="submit"
+                  block
+                >
+                  Agregar
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+      {/* <div className="contenedorActualesUM">
           Tipos de Usuarios Actuales
           {tipo_usuarios.map((u) => (
             <span className="spans">{u.tipo_usuario}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

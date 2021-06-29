@@ -1,0 +1,39 @@
+
+
+.loger_cont{
+    /* background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%); */
+    background: rgb(69, 160, 221);
+    height: 100vh;
+    font-family: "Catamaran", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+
+  .global-container__log_google{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    width: auto;
+    
+  }
+
+
+  
+.card__google__login{
+    background: #0a2352 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 680px;
+    border-radius: 1em !important;
+  }
+  
+  .button__login__google{
+      background-color: aquamarine !important;
+      font-weight: 800 !important;
+  }

@@ -117,6 +117,13 @@ header {
   border-radius: var(--radius);
   background-color: white;
 }
+.err {
+  margin: auto;
+  display: flex;
+  /* background-color: royalblue; */
+  font-size: 15px;
+  color: red;
+}
 
 /* .divFormAgregar {
   background-color: green;

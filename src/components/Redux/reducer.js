@@ -6,21 +6,7 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  UNIDAD_MEDIDA_POST,
-  TIPO_USUARIO_POST,
-  GENERO_POST,
-  MONEDA_POST,
-  CIUDAD_POST,
-  PAIS_POST,
-  REGION_POST,
-  FAMILIA_POST,
-  CATEGORIA_POST,
-  SUBCATEGORIA_POST,
-  TIPO_TRANSACCION_POST,
-  TRANSACCION_POST,
-  CLIENTES_POST,
-  DESAFIO_POST,
-  PRODUCTO_POST,
+  
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_GENEROS,
@@ -31,6 +17,7 @@ import {
   GET_PAIS,
   GET_MONEDA,
   GET_TIPO_TRANSACCION,
+  GET_PRODUCTOS,
   // OBTENER_USUARIO,
   CERRAR_SESION,
   LOGIN_ERROR,
@@ -39,14 +26,15 @@ import {
   PRICE,
   GET_SUBCATEGORIAS,
   GET_UNIDAD_MEDIDAS,
-  // GET_GENEROS,
-  // GET_TIPO_USUARIO,
-  // GET_PAISES,
-  // GET_CIUDADES,
-  // OBTENER_USUARIO,
-  // CERRAR_SESION,
-  // LOGIN_ERROR,
-  // REGISTRO_ERROR,
+  GET_CIUDAD,
+  GET_CATEGORIA_POR_ID,
+  GET_SUBCATEGORIA_POR_ID,
+  GET_PAISES_ID,
+  GET_CIUDADES_ID,
+
+  REGISTRO_GOOGLE_OK,
+  REGISTRO_GOOGLE_ERR,
+  
 } from "./actions";
 
 const initialState = {
@@ -91,10 +79,12 @@ const initialState = {
   alerta: null,
 
   /*Estados para la autenticacion*/
-  token: localStorage.getItem("token"),
-  autenticado: null,
+  token: localStorage.getItem("token"), //---------------------------------------------------------------------
+  autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
+  cliente: false,
+  isAdmin: false,
   /******************************* */
 
   generos: [],
@@ -106,7 +96,7 @@ const initialState = {
   admin: {},
   familia: [],
   categoria: [],
-
+  ciudad: [],
   desafios: [],
   subcategoria: [],
   unidad_medida: [],
@@ -114,8 +104,10 @@ const initialState = {
   region: [],
   moneda: [],
   transaccion: [],
-
-  //-------------ADMIN-------------//
+  paisesId: [],
+  ciudadesId: [],
+  //--------------------------//
+  registroGoogleRes: {},
 };
 
 //-------------ADMIN-------------//
@@ -159,111 +151,82 @@ function rootReducer(state = initialState, action) {
       };
     case MOSTRAR_ERROR:
       return {
+        ...state,
         alerta: action.payload,
       };
     case OCULTAR_ERROR:
       return {
+        ...state,
         alerta: null,
       };
 
     case REGISTRO_EXITOSO:
     case LOGIN_EXITOSO:
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("nombre", action.payload.usuario.nombre);
+      localStorage.setItem(
+        "nombre",
+        action.payload.usuario
+          ? action.payload.usuario.nombre
+          : action.payload.cliente
+            ? action.payload.cliente.nombre_cial_fantasia
+            : action.payload.admin.nombre
+      );
+      localStorage.setItem("auth", true);
+      if (action.payload.cliente) {
+        return {
+          ...state,
+          autenticado: true,
+          usuario: null,
+          mensaje: null,
+          isAdmin: false,
+          cliente: true,
+        };
+      } else {
+        if (action.payload.admin) {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            cliente: false,
+            isAdmin: true,
+          };
+        } else {
+          return {
+            ...state,
+            autenticado: true,
+            usuario: null,
+            mensaje: null,
+            isAdmin: false,
+            cliente: false,
+          };
+        }
+      }
 
+    case REGISTRO_GOOGLE_OK:
       return {
         ...state,
-        autenticado: true,
-        usuario: null,
-        mensaje: null,
-      };
+        registroGoogleRes: action.payload,
+      }
+    case REGISTRO_GOOGLE_ERR:
+      return {
+        ...state,
+        registroGoogleRes: action.payload,
+      }
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
       localStorage.removeItem("token");
       localStorage.removeItem("nombre");
+      localStorage.removeItem("auth");
       return {
         ...state,
+        autenticado: false,
         token: null,
         usuario: null,
-        autenticado: null,
         mensaje: action.payload,
       };
-    case UNIDAD_MEDIDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_USUARIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case GENERO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case MONEDA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CIUDAD_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PAIS_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case REGION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case FAMILIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case SUBCATEGORIA_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TIPO_TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case TRANSACCION_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case CLIENTES_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case DESAFIO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    case PRODUCTO_POST:
-      return {
-        ...state,
-        admin: action.payload,
-      };
+    
     case GET_FAMILIA:
       return {
         ...state,
@@ -302,6 +265,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         pais: action.payload,
       };
+    case GET_CIUDAD:
+      return {
+        ...state,
+        ciudad: action.payload,
+      };
     case GET_MONEDA:
       return {
         ...state,
@@ -312,8 +280,32 @@ function rootReducer(state = initialState, action) {
         ...state,
         transaccion: action.payload,
       };
-
-    //-------------ADMIN-------------//
+    case GET_PRODUCTOS:
+      return {
+        ...state,
+        productos: action.payload,
+      };
+    case GET_CATEGORIA_POR_ID:
+      return {
+        ...state,
+        categorias: action.payload,
+      };
+    case GET_SUBCATEGORIA_POR_ID:
+      return {
+        ...state,
+        subcategoria: action.payload,
+      };
+    case GET_PAISES_ID:
+      return {
+        ...state,
+        paisesId: action.payload,
+      };
+    case GET_CIUDADES_ID:
+      return {
+        ...state,
+        ciudadesId: action.payload,
+      };
+    
     default:
       return state;
   }
