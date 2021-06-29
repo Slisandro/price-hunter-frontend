@@ -1,8 +1,8 @@
 import "./Slider.css";
-import Pic1 from '../../assets/img/slider/slider1.png';
+/* import Pic1 from '../../assets/img/slider/slider1.png';
 import Pic2 from '../../assets/img/slider/slider2.png';
 import Pic3 from '../../assets/img/slider/slider3.png';
-
+ */
 function SliderHP() {
     return (
         <div className="slider">
@@ -19,7 +19,7 @@ function SliderHP() {
                         </div>
                         <img
                             alt=""
-                            src={Pic1}
+                           /*  src={Pic1} */
                         />
                     </div>
                 </li>
@@ -35,7 +35,7 @@ function SliderHP() {
                         </div>
                         <img
                             alt=""
-                            src={Pic2}
+                           /*  src={Pic2} */
                         />
                     </div>
                 </li>
@@ -51,7 +51,7 @@ function SliderHP() {
                         </div>
                         <img
                             alt=""
-                            src={Pic3}
+                           /*  src={Pic3} */
                         />
                     </div>
                 </li>
