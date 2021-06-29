@@ -246,15 +246,15 @@ const SidebarAdm = (props) => {
                 Modificar Tipo de Transacción
               </li>
             </div>
-            {/* <div className="menu-col">
+            <div className="menu-col">
               <li
                 className="addd"
-                value={"Modificar-Desafíos"}
-                onClick={() => props.setState("Modificar-Desafíos")}
+                value={"Modificar-Generos"}
+                onClick={() => props.setState("Modificar-Generos")}
               >
-                Modificar Desafíos
+                Modificar Generos
               </li>
-            </div> */}
+            </div>
           </>
         ) : null}
 

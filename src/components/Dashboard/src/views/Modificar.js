@@ -1,20 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-  FormText,
-} from "reactstrap";
+import React from "react";
+// import { useSelector, useDispatch } from "react-redux";
+import { Row, Col } from "reactstrap";
 import PutUM from "../../../Admin/FormPuts/PutUM/PutUM";
 import PutTipoTrans from "../../../Admin/FormPuts/PutTipoTrans/PutTipoTrans";
 import PutTiposUsuarios from "../../../Admin/FormPuts/PutTiposUsuarios/PutTiposUsuarios";
@@ -26,6 +12,7 @@ import PutPaises from "../../../Admin/FormPuts/PutPaises/PutPaises";
 import PutRegiones from "../../../Admin/FormPuts/PutRegiones/PutRegiones";
 import PutMonedas from "../../../Admin/FormPuts/PutMonedas/PutMonedas";
 import PutCiudades from "../../../Admin/FormPuts/PutCiudades/PutCiudades";
+import PutGeneros from "../../../Admin/FormPuts/PutGeneros/PutGeneros";
 
 function ModificarForms() {
   return (
@@ -68,6 +55,9 @@ function ModificarForms() {
         <Row>
           <Col>
             <PutCiudades />
+          </Col>
+          <Col>
+            <PutGeneros />
           </Col>
         </Row>
       </div>
