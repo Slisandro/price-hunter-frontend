@@ -6,16 +6,17 @@ import mapa from "../assets/mapa.png";
 import ayuda from "../assets/ayuda.png";
 import ahorro from "../assets/ahorro.png";
 import ventas from "../assets/tendencia.png";
-import cazador from "../assets/cazador.png";
+
+import cazador from "../assets/mira.png";
 import Bot from './Chatbot/Bot';
-// import coca from "../assets/img/logomarcas/cocacola.png";
-// import pepsi from "../assets/img/logomarcas/pepsi.png";
-// import cereal from "../assets/img/logomarcas/kelloggs.png";
-// import mars from "../assets/img/logomarcas/mars.png";
-// import mondelez from "../assets/img/logomarcas/mondelez.png";
-// import colgate from "../assets/img/logomarcas/colgate.png";
-// import unilever from "../assets/img/logomarcas/unilever.png";
-import { Nav, NavItem, NavLink, Button, Jumbotron,Card, CardBody, CardTitle, CardSubtitle, CardText, CardLink } from 'reactstrap';
+import coca from "../assets/img/logomarcas/cocacola.png";
+import pepsi from "../assets/img/logomarcas/pepsi.png";
+import cereal from "../assets/img/logomarcas/kelloggs.png";
+
+import mondelez from "../assets/img/logomarcas/mondelez.png";
+import colgate from "../assets/img/logomarcas/colgate.png";
+import unilever from "../assets/img/logomarcas/unilever.png";
+import { Nav, NavItem, Button, Jumbotron, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 
 const Landing = () => {
@@ -28,9 +29,6 @@ const Landing = () => {
                     <Nav className="justify-content-center">
                         <NavItem>
                             <Link href="#">Inicio</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link href="#">Sobre Nosotros</Link>
                         </NavItem>
                         <NavItem>
                             <Link to="/login">Iniciar Sesion</Link>
@@ -87,17 +85,17 @@ const Landing = () => {
                     <div class="grid grid-3 text-center my-4">
                         <div>
                             <img class="img__publicidad" src={ahorro} alt="" />
-                            <h3 class="h3">Consiga el mejor precio y ahorre dinero</h3>
+                            <h3 class="h3">Conseguí el mejor precio y ahorre dinero</h3>
 
                         </div>
                         <div>
                             <img class="img__publicidad" src={ayuda} alt="" />
-                            <h3 class="h3">Capture precios y ayude a otros consumidores</h3>
+                            <h3 class="h3">Capturá precios y ayude a otros consumidores</h3>
 
                         </div>
                         <div>
                             <img class="img__publicidad" src={mapa} alt="" />
-                            <h3 class="h3">Consiga el precio mas cercano a su hogar</h3>
+                            <h3 class="h3">Encontrá el precio mas cercano a su hogar</h3>
                         </div>
                     </div>
                 </div>
@@ -118,44 +116,49 @@ const Landing = () => {
                     </div>
 
                     <div class="grider__functions grid grid-3 text-center">
-                        
-                        <Card style={{ width: '23rem',height: '17rem' }} className="card-instructions">
+
+                        <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                             <CardBody >
                                 <CardTitle className="card__title__instructions">1</CardTitle>
-                                <CardSubtitle className="mb-2 ">Únase a los desafios propuestos por nuestros clientes</CardSubtitle>
+                                <CardSubtitle className="mb-2 ">Únete a los desafios propuestos por nuestros clientes</CardSubtitle>
                                 <CardText>El desafío es sobre un producto determinado y habrá una cantidad de precios por cazar</CardText>
-                              
+
                             </CardBody>
                         </Card>
-                        <Card style={{ width: '23rem' ,height: '17rem' }} className="card-instructions">
+                        <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                             <CardBody>
                                 <CardTitle className="card__title__instructions">2</CardTitle>
-                                <CardSubtitle className="mb-2">Dirijase a su tienda favorita y cargue el precio del producto</CardSubtitle>
+                                <CardSubtitle className="mb-2">Dirígete a su tienda favorita y cargue el precio del producto</CardSubtitle>
                                 <CardText>Cargue en Price Hunter el precio del producto que ha sido establecido en el desafio</CardText>
-                              
+
                             </CardBody>
                         </Card>
                         <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                             <CardBody>
                                 <CardTitle className="card__title__instructions">3</CardTitle>
-                                <CardSubtitle className="mb-2 ">Capture la mayor cantidad de precios posibles de ese producto</CardSubtitle>
+                                <CardSubtitle className="mb-2 ">Capturá la mayor cantidad de precios posibles de ese producto</CardSubtitle>
                                 <CardText>Tenga en cuenta que no se puede cargar el precio de un producto dos veces en el mismo lugar</CardText>
-                              
+
                             </CardBody>
                         </Card>
                         <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                             <CardBody>
                                 <CardTitle className="card__title__instructions">4</CardTitle>
-                                <CardSubtitle className="mb-2">Cuantos mas precios capture, mas HunterPoints acumulará</CardSubtitle>
-                                <CardText>En su panel de usuario podra administrar sus puntos y canjearlos por grandes recompensas!</CardText>
-                              
+                                <CardSubtitle className="mb-2">Cuantos mas precios captures, mas HunterPoints acumularás</CardSubtitle>
+                                <CardText>En su panel de usuario podras administrar tus puntos y canjearlos por grandes recompensas!</CardText>
+
                             </CardBody>
                         </Card>
-                        
+
                     </div>
                 </div>
 
 
+            </section>
+
+
+            <section className="containerLanding__hunter">
+                    
             </section>
 
 
@@ -179,43 +182,45 @@ const Landing = () => {
                         </p>
 
                     </Jumbotron>
-                    <img class="img__empresas" src={ventas} alt="" />
+                    <img className="img__empresas" src={ventas} width={90} alt="" />
 
 
                 </div>
             </section>
 
-            {/* 
-    <section class="marcas">
-        <h2 class="md text-center ">
-            Ya confian en nosotros
-        </h2>
-        <div class="container flex">
-            <div class="card">
-                <img src={coca} alt=""/>
-            </div>
-            <div class="card">
-                <img src={pepsi} alt=""/>
+
+            <section class="marcas containerLanding__hunter">
+                <h2 class="md text-center ">
+                    Ya confian en nosotros
+                </h2>
+                <div className="grid grid-3 text-center">
+                    <div>
+                        <img className="img__marca"src={coca} alt="" />
+                    </div>
+                    
+                    <div>
+                        <img className="img__marca"src={pepsi} alt="" />
+                    </div>
+                    
+                    <div>
+                        <img className="img__marca"src={colgate} alt="" />
+                    </div>
+                    
+                    <div>
+                        <img className="img__marca"src={mondelez} alt="" />
+                    </div>
+                    
+                    <div>
+                        <img className="img__marca"src={cereal} alt="" />
+                    </div>
+                    
+                    <div>
+                        <img className="img__marca"src={unilever} alt="" />
+                    </div>
+
+
                 </div>
-                <div class="card">
-                <img src={mars} alt=""/>
-              </div>
-                <div class="card">
-                <img src={colgate} alt=""/>
-              </div>
-                <div class="card">
-                <img src={mondelez} alt=""/>
-              </div>
-              <div class="card">
-                <img src={cereal} alt=""/>
-              </div>
-              <div class="card">
-                <img src={unilever} alt=""/>
-              </div>
-            
-              
-        </div>
-    </section> */}
+            </section>
 
 
 
@@ -229,12 +234,18 @@ const Landing = () => {
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="index.html">Nosotros</a></li>
-                            <li><a href="features.html">Funciones</a></li>
-                            <li><a href="docs.html">Contacto</a></li>
-                            <li><a href="docs.html">Empresas</a></li>
+                            <li>Participaron en este proyecto: </li>
+                            <li><a href="index.html">  <i class="fab fa-linkedin"></i> Nicolas Arguello Casas</a></li>
+                            <li><a href="features.html">  <i class="fab fa-linkedin"></i> Carlos Eduardo Lozano</a></li>
+                            <li><a href="docs.html">  <i class="fab fa-linkedin"></i> Tomas Torales</a></li>
+                            <li><a href="docs.html">  <i class="fab fa-linkedin"></i> Pablo Molina</a></li>
+                            <li><a href="docs.html">  <i class="fab fa-linkedin"></i> Marco Pablo Demaio</a></li>
+                            <li><a href="docs.html">  <i class="fab fa-linkedin"></i> Linsandro Salvareschi</a></li>
+                            <li><a href="docs.html"> <i class="fab fa-linkedin"></i> Cristian Fernandez</a></li>
+                            <li><a href="https://www.linkedin.com/in/german-derbes-catoni/"> <i class="fab fa-linkedin"></i> German Derbes Catoni</a></li>
                         </ul>
                     </nav>
+                   
                     <div class="social">
 
                         <a href="!#"><i class="fab fa-facebook fa-2x"></i></a>

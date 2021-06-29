@@ -26,6 +26,7 @@ ul {
   color: rgb(255, 255, 255);
   height: 65px;
   padding-top: 1em;
+  
 }
 .title-hunter {
   font-weight: 600;
@@ -149,7 +150,8 @@ ul {
     bottom: -70px;
     right: 0;
     left: 0;
-    background: radial-gradient(circle, #45a0dd 0%, #0a2352 50% ,#0a2352 75%,#0a2352 100%);
+    /* background: radial-gradient(circle, #45a0dd 0%, #0a2352 50% ,#0a2352 75%,#0a2352 100%); */
+    background:#45a0dd;
 
    
   }
@@ -193,7 +195,8 @@ ul {
     height: 520px;
     background: black;
     background-color: #ffffff;
-    background-image: url("https://codepenworldsfair.com/images/small-worlds-fair.png") center/250px no-repeat;
+    background: url("https://webpicking.com/wp-content/uploads/2021/03/Miebach-consulting-supermercado-eroski.jpg") no-repeat;
+    background-size: cover;
     border: 12px solid rgb(0, 0, 0);
     border-radius: 36px;
     position: absolute;
@@ -329,10 +332,9 @@ ul {
   }
   
   .how-it-works{
-    background: linear-gradient(to right,#11cdef, #1573ca );
-
-    height: 440px;
-    margin-bottom: 50px;
+    background: #45a0dd;
+    height: 490px;
+    margin-bottom: 0px;
   }
   
   .section-title{
@@ -414,6 +416,7 @@ ul {
 
   .empresas{
       background-color: #0a0f47;
+      
   }
 
   .text-center p{
@@ -429,9 +432,11 @@ ul {
 
 
   .marcas{
-    height: 700px;
+    height: auto;
     background-color: #fffffff8;
-  
+    margin-top: 8%;
+    margin-bottom: 10%;
+   
   }
   
   .marcas .flex {
@@ -444,15 +449,29 @@ ul {
     transition: transform 0.2s ease-in;
   }
   
-  .marcas .card h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
+  .marcas  h2 {
+    font-size: 27px;
+    margin-bottom: 10%;
+    color: rgb(0, 135, 180);
   }
   
-  .marcas .card:hover {
+.img__marca{
+  transition: .5s;
+}
+
+  .img__marca:hover {
     transform: translateY(-15px);
   }
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -513,18 +532,17 @@ ul {
 /* Footer */
 
 .footer{
-  background: linear-gradient(to left,#11cdef, #1573ca );
-    color: #fcfcfc;
+  background: #45a0dd;
     font-weight: bold;
 }
 
 .footer nav ul li a{
 
-    color: #fcfcfc;
+    color: #170f46;
 }
 .footer .social a {
   margin: 0 10px;
-  color: white;
+  color: rgb(17, 16, 82);
 
 }
 
@@ -652,7 +670,7 @@ ul {
     }
   
     .img__empresas{
-      width: 160px !important;
+      width: 560px !important;
       margin-left: 160px;
     }
     
@@ -939,7 +957,7 @@ ul {
   }
   
   .my-2 {
-    margin: .1rem 0;
+    margin: 0 !important;
   }
   
   .my-3 {
@@ -980,7 +998,7 @@ ul {
   }
   
   .py-2 {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
   
   .py-3 {

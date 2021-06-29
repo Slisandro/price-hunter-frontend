@@ -35,7 +35,11 @@ const Main = ({ state, setState, ubicacion, setUbicacion }) => {
         <div className="containerTableSearch">
           {state === "Search" ? (
             !productos.msg ? (
-              <Table productos={productos} name={producto} />
+              // {
+              productos.length === 0 ?
+                <div className="containerMessageBack">No se encontraron precios para esta subcategoria</div> :
+                <Table ubicacion={ubicacion} productos={productos} name={producto} />
+              // }
             ) : (
               <div className="containerMessageBack">
                 <p>{productos.msg}</p>
@@ -51,18 +55,18 @@ const Main = ({ state, setState, ubicacion, setUbicacion }) => {
             // <Suspense fallback={<div>Cargando...</div>}>
             <>
               {/* <MyMap ubicacion={ubicacion} /> */}
-              <h2 
-              style={{
-                margin: "2%",
-                color: "white",
-                fontWeight: 700,
-              }}
-    >
-      Últimas 5 transacciones</h2>
+              <h2
+                style={{
+                  margin: "2%",
+                  color: "white",
+                  fontWeight: 700,
+                }}
+              >
+                Últimas 5 transacciones</h2>
               <Transacciones />
             </>
             // </Suspense>
-      : null
+            : null
           }
         </div>
       </div >

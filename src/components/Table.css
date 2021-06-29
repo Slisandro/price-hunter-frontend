@@ -37,6 +37,29 @@
     overflow: auto
 }
 
+.ContainerMapaTable{
+    width: 80%;
+    position: absolute;
+    background: red;
+    margin: auto;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 65vh;
+    top: 15%;
+    border-radius: 1em;
+    flex-direction: column;
+    padding-right: 2%;
+}
+
+.ContainerMapaTable button {
+    position: absolute;
+    z-index: 200000;
+    top: 2%;
+    right: 2%
+}
+
 .ReactTable .rt-thead {
     -webkit-box-flex: 1;
     -ms-flex: 1 0 auto;

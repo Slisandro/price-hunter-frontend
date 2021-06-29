@@ -1,21 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@300;700;800&display=swap");
 
+.Totallogin{
+  overflow-y: hidden;
+  height: 100vh;
+}
+
 .loger_cont {
   /* background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%); */
   background: #45a0dd;
   height: 100vh;
+  flex-direction: column;
   font-family: "Catamaran", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+ 
+  
 }
 
 .global-container__log {
-  height: 100%;
+  
   display: flex;
   align-items: center;
   justify-content: center;
   color: #00f3fc;
+  width: auto;
+ 
+  
+  
+}
+
+
+.welcome-login{
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
+
 }
 .form-group label {
   color: #10ebe0 !important;
