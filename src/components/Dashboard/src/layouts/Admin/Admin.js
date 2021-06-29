@@ -98,7 +98,7 @@ function Admin(props) {
             <div className="main-panel" ref={mainPanelRef} data={color}>
               <Switch>
                 {getRoutes(routes)}
-                {/* <Redirect from="*" to="/admins/dashboard" /> */}
+                {/* <Redirect from="*" to="/admin/dashboard" /> */}
               </Switch>
             </div>
           </div>
