@@ -56,7 +56,7 @@ function ModificarForms() {
           <Col>
             <PutCiudades />
           </Col>
-          <Col>
+          <Col lg="4">
             <PutGeneros />
           </Col>
         </Row>

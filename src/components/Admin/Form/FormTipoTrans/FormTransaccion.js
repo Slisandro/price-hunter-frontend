@@ -50,25 +50,35 @@ function FormTransaccion() {
   };
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
   const submit = (data, e) => {
-    dispatch(tipoTransaccionPost(state));
-    e.target.reset();
+    if (data) {
+      dispatch(tipoTransaccionPost(state));
+      e.target.reset();
+      swal({
+        title: "Tipo de Transacción agregado con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getTipoTransaccion()));
 
-    swal({
-      title: "Tipo de Transacción agregado con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((r) => dispatch(getTipoTransaccion()));
-
-    setState({
-      ...state,
-      tipo_transaccion: "",
-    });
+      setState({
+        ...state,
+        tipo_transaccion: "",
+      });
+    } else {
+      swal({
+        title: "Tipo de Transacción agregado con éxito!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
+    reset({ data });
   };
 
   return (
