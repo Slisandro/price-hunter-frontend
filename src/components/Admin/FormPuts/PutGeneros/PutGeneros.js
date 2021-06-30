@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putRegion, getRegion } from "../../../Redux/actions";
+import { putGenero, getGenero } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
@@ -16,15 +16,15 @@ import {
 
 function PutRegiones() {
   const dispatch = useDispatch();
-  const region = useSelector((store) => store.region);
+  const generos = useSelector((store) => store.generos);
 
   const [state, setState] = useState({
-    nombre_region: "",
+    genero: "",
     id: "",
   });
 
   useEffect(() => {
-    dispatch(getRegion());
+    dispatch(getGenero());
   }, [dispatch]);
 
   const ChangeInput = (e) => {
@@ -37,7 +37,7 @@ function PutRegiones() {
         [name]: value,
       });
     }
-    if (name === "nombre_region") {
+    if (name === "genero") {
       setState({
         ...state,
         [name]: value,
@@ -53,18 +53,19 @@ function PutRegiones() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.id) {
-      dispatch(putRegion(data));
+    if (data.id && data.id.length> 0) {
+      dispatch(putGenero(data));
       e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getRegion()));
+      }).then((r) => dispatch(getGenero()));
+      reset({ data });
     } else {
       swal({
-        title: "Debe seleccionar una región para modificar!",
+        title: "Debe seleccionar un genero para modificar!",
         icon: "error",
         button: "Aceptar",
         timer: "5000",
@@ -72,10 +73,9 @@ function PutRegiones() {
     }
 
     setState({
-      nombre_region: "",
+      genero: "",
       id: "",
     });
-    reset({ data });
   };
 
   return (
@@ -94,7 +94,7 @@ function PutRegiones() {
           >
             <Row>
               <Col>
-                <h6 className="title">Regiones</h6>
+                <h6 className="title">Genero</h6>
                 {state.id.length === 0 ? (
                   <>
                     <Input
@@ -103,15 +103,15 @@ function PutRegiones() {
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
                       {...register("id", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una region",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una region",
+                        // },
                       })}
                     >
                       <option></option>
-                      {region.map((u) => (
-                        <option value={u.id}>{u.nombre_region}</option>
+                      {generos.map((u) => (
+                        <option value={u.id}>{u.genero}</option>
                       ))}
                     </Input>
                   </>
@@ -126,8 +126,8 @@ function PutRegiones() {
                       {...register("id", {})}
                     >
                       <option></option>
-                      {region.map((u) => (
-                        <option value={u.id}>{u.nombre_region}</option>
+                      {generos.map((u) => (
+                        <option value={u.id}>{u.genero}</option>
                       ))}
                     </Input>
                   </>
@@ -135,26 +135,25 @@ function PutRegiones() {
                 <span className="err">{errors?.id?.message}</span>
 
                 <div style={{ marginTop: "1rem" }}>
-                  <h6 className="title">Nueva Región</h6>
-                  {state.nombre_region.length === 0 ? (
+                  <h6 className="title">Nuevo Genero</h6>
+                  {state.genero.length === 0 ? (
                     <>
                       <Input
                         className="inp"
                         type="text"
-                        name="nombre_region"
+                        name="genero"
                         autoComplete="off"
                         onChange={(e) => ChangeInput(e)}
                         max="0"
-                        {...register("nombre_region", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar una region ",
-                          },
+                        {...register("genero", {
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar un genero ",
+                          // },
                         })}
                       />
                     </>
-                  ) : state.nombre_region.length > 2 &&
-                    state.nombre_region.length < 21 ? (
+                  ) : state.genero.length > 2 && state.genero.length < 21 ? (
                     <>
                       <Input
                         valid
@@ -164,7 +163,7 @@ function PutRegiones() {
                         autoComplete="off"
                         max="0"
                         onChange={(e) => ChangeInput(e)}
-                        {...register("nombre_region", {})}
+                        {...register("genero", {})}
                       />
                     </>
                   ) : (
@@ -173,20 +172,20 @@ function PutRegiones() {
                         invalid
                         className="inp"
                         type="text"
-                        name="nombre_region"
+                        name="genero"
                         autoComplete="off"
                         max="0"
                         onChange={(e) => ChangeInput(e)}
-                        {...register("nombre_region", {
+                        {...register("genero", {
                           maxLength: {
                             value: 20,
                             message:
-                              "El nombre no debe tener mas de 20 caracteres",
+                              "El genero no debe tener mas de 20 caracteres",
                           },
                           minLength: {
                             value: 3,
                             message:
-                              "El nombre no puede tener menos de 3 caracteres",
+                              "El genero no puede tener menos de 3 caracteres",
                           },
                           pattern: {
                             value: /^[a-zA-Z ]*$/,
@@ -196,7 +195,7 @@ function PutRegiones() {
                       />
                     </>
                   )}
-                  <span className="err">{errors?.nombre_region?.message}</span>
+                  <span className="err">{errors?.genero?.message}</span>
                 </div>
                 <Button
                   className="btn-fill"

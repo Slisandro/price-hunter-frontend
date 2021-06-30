@@ -8,12 +8,10 @@ import {
   Card,
   CardHeader,
   CardBody,
-  
   Form,
   Input,
   Row,
   Col,
-
 } from "reactstrap";
 
 function PutPaises() {
@@ -27,7 +25,7 @@ function PutPaises() {
 
   useEffect(() => {
     dispatch(getPaises());
-    }, [dispatch]);
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
@@ -37,9 +35,9 @@ function PutPaises() {
       setState({
         ...state,
         [name]: value,
-        });
-    } 
-     if (name === "codigo_alfa") {
+      });
+    }
+    if (name === "codigo_alfa") {
       setState({
         ...state,
         [name]: value,
@@ -51,19 +49,11 @@ function PutPaises() {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
-    
-    if(data.nombre_pais.includes('Numbers')){
-      swal({
-        title: "El nombre no puede contener numeros",
-        icon: "error",
-        button: "Aceptar",
-        timer: "5000",
-      });
-    } else if (data.nombre_pais.length>2) {
+    if (data.nombre_pais && data.nombre_pais.length > 2) {
       dispatch(putPais(data));
       e.target.reset();
       swal({
@@ -71,16 +61,21 @@ function PutPaises() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getPaises()))
-      reset({data})
-    } 
-    
-    
+      }).then((r) => dispatch(getPaises()));
+      reset({ data });
+    } else {
+      swal({
+        title: "Debe seleccionar un pais a modificar",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
+
     setState({
       nombre_pais: "",
-      codigo_alfa: "",      
+      codigo_alfa: "",
     });
-    
   };
 
   return (
@@ -101,113 +96,106 @@ function PutPaises() {
               <Col>
                 <h6 className="title">Países</h6>
                 {state.codigo_alfa.length === 0 ? (
-                <>
-                <Input 
-                name="codigo_alfa" 
-                type="select" 
-                className="inp"
-                onChange={(e) => ChangeInput(e)}
-                {...register("codigo_alfa", {
-                  required: {
-                    value: true,
-                    message: "Debe seleccionar una pais",
-                  },
-                })}
-                >
-                  <option></option>
-                  {paises.map((u) => (
-                    <option value={u.codigo_alfa}>{u.nombre_pais}</option>
-                  ))}
-                </Input>
-                </>
-                ):(
                   <>
-                  <Input
-                  valid 
-                  name="codigo_alfa" 
-                  type="select" 
-                  className="inp"
-                  onChange={(e) => ChangeInput(e)}
-                  {...register("codigo_alfa", {
-                    
-                  })}
-                  >
-                    <option></option>
-                    {paises.map((u) => (
-                      <option value={u.codigo_alfa}>{u.nombre_pais}</option>
-                    ))}
-                  </Input>
+                    <Input
+                      name="codigo_alfa"
+                      type="select"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_alfa", {
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una pais",
+                        // },
+                      })}
+                    >
+                      <option></option>
+                      {paises.map((u) => (
+                        <option value={u.codigo_alfa}>{u.nombre_pais}</option>
+                      ))}
+                    </Input>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      name="codigo_alfa"
+                      type="select"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_alfa", {})}
+                    >
+                      <option></option>
+                      {paises.map((u) => (
+                        <option value={u.codigo_alfa}>{u.nombre_pais}</option>
+                      ))}
+                    </Input>
                   </>
                 )}
                 <span className="err">{errors?.codigo_alfa?.message}</span>
 
-
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Nuevo País</h6>
                   {state.nombre_pais.length === 0 ? (
-                  <>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="nombre_pais"
-                    autoComplete="off"
-                    max="0"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("nombre_pais", {
-                      required: {
-                        value: true,
-                        message: "Debe ingresar un nombre",
-                      },
-                     })}
-                  />
-                  </>
-                  ) : state.nombre_pais.length > 2 && state.nombre_pais.length < 16 ? (
-                  <>
-                  <Input
-                  valid
-                    className="inp"
-                    type="text"
-                    name="nombre_pais"
-                    autoComplete="off"
-                    max="0"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("nombre_pais", {
-                      
-                    })}
-                  />
-                  </>
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="nombre_pais"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_pais", {
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar un nombre",
+                          // },
+                        })}
+                      />
+                    </>
+                  ) : state.nombre_pais.length > 2 &&
+                    state.nombre_pais.length < 16 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="nombre_pais"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_pais", {})}
+                      />
+                    </>
                   ) : (
-                  <>
-                  <Input
-                  invalid
-                    className="inp"
-                    type="text"
-                    name="nombre_pais"
-                    autoComplete="off"
-                    max="0"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("nombre_pais", {
-
-                      maxLength: {
-                        value: 15,
-                        message: "El nombre debe tener menos de quince letras!",
-                      },
-                      minLength: {
-                        value: 3,
-                        message: "El nombre debe tener tres letras!",
-                      },
-                      pattern: {
-                        value: /^[a-zA-Z ]*$/,
-                        message: "Debe ingresar solo letras",
-                      },
-                    })}
-                  />
-                  </>
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="nombre_pais"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_pais", {
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre debe tener menos de quince letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "El nombre debe tener tres letras!",
+                          },
+                          pattern: {
+                            value: /^[a-zA-Z ]*$/,
+                            message: "Debe ingresar solo letras",
+                          },
+                        })}
+                      />
+                    </>
                   )}
-                  <span className="err">
-                    {errors?.nombre_pais?.message}
-                  </span>
-                  
+                  <span className="err">{errors?.nombre_pais?.message}</span>
                 </div>
                 <Button
                   className="btn-fill"
@@ -222,15 +210,7 @@ function PutPaises() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesCATE">
-        Países Actuales
-        <div className="tiposCATE">
-          {paises.map((u) => (
-            <span className="spansCATE">{u.nombre_pais}</span>
-          ))}
-        </div>
-      </div> */}
-    </>
+        </>
   );
 }
 
