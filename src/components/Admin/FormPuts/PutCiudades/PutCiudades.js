@@ -87,7 +87,7 @@ function PutCiudades() {
   } = useForm();
 
   const submit = (data, e) => {
-    console.log(data);
+    
     if (data.ciudad) {
       dispatch(putCiudad(data));
       e.target.reset();

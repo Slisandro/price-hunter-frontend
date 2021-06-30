@@ -6,7 +6,6 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_GENEROS,
@@ -31,10 +30,9 @@ import {
   GET_SUBCATEGORIA_POR_ID,
   GET_PAISES_ID,
   GET_CIUDADES_ID,
-
+  GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
-  
 } from "./actions";
 
 const initialState = {
@@ -168,8 +166,8 @@ function rootReducer(state = initialState, action) {
         action.payload.usuario
           ? action.payload.usuario.nombre
           : action.payload.cliente
-            ? action.payload.cliente.nombre_cial_fantasia
-            : action.payload.admin.nombre
+          ? action.payload.cliente.nombre_cial_fantasia
+          : action.payload.admin.nombre
       );
       localStorage.setItem("auth", true);
       if (action.payload.cliente) {
@@ -207,12 +205,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         registroGoogleRes: action.payload,
-      }
+      };
     case REGISTRO_GOOGLE_ERR:
       return {
         ...state,
         registroGoogleRes: action.payload,
-      }
+      };
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
@@ -226,7 +224,7 @@ function rootReducer(state = initialState, action) {
         usuario: null,
         mensaje: action.payload,
       };
-    
+
     case GET_FAMILIA:
       return {
         ...state,
@@ -305,7 +303,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         ciudadesId: action.payload,
       };
-    
+    case GET_GENERO:
+      return {
+        ...state,
+        generos: action.payload,
+      };
+
     default:
       return state;
   }

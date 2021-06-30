@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategoriaPorId,
@@ -14,17 +14,11 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-// import "./FormUnidadMedida.css";
 
 function PutSubCate() {
   const dispatch = useDispatch();
@@ -38,12 +32,58 @@ function PutSubCate() {
     dispatch(getFamilia());
   }, [dispatch]);
 
+  const [state, setState] = useState({
+    id: "",
+    nombre_subcategoria: "",
+    categoriumId: "",
+    descripcion: "",
+    categoria: "",
+    familia: "",
+  });
+
   const ChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
-    if (name === "Familia") dispatch(getCategoriaPorId(value));
-    if (name === "Categoria") dispatch(getSubcategoriaPorId(value));
+    if (name === "familia") dispatch(getCategoriaPorId(value));
+    if (name === "categoria") dispatch(getSubcategoriaPorId(value));
+
+    if (name === "familia") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "categoria") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "nombre_subcategoria") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "categoriumId") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "descripcion") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
   };
 
   const {
@@ -54,15 +94,8 @@ function PutSubCate() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.Subcategoria) {
-      let datos = {
-        id: data.Subcategoria,
-        nombre_subcategoria: data.nombre_subcategoria,
-        categoriumId: data.categoria,
-        descripcion: data.descripcion,
-      };
-
-      dispatch(putSubCategoria(datos));
+    if (data.id) {
+      dispatch(putSubCategoria(data));
       e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
@@ -79,6 +112,14 @@ function PutSubCate() {
         timer: "5000",
       });
     }
+    setState({
+      id: "",
+      nombre_subcategoria: "",
+      categoriumId: "",
+      descripcion: "",
+      categoria: "",
+      familia: "",
+    });
     reset({ data });
   };
 
@@ -86,7 +127,7 @@ function PutSubCate() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Sub-Categorías</h1>
+          <span id="title">Subcategorías</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -98,148 +139,264 @@ function PutSubCate() {
           >
             <Row>
               <Col>
-                <label className="title">Familia</label>
-                <Input
-                  name="Familia"
-                  className="inp"
-                  type="select"
-                  onChange={(e) => ChangeInput(e)}
-                  {...register("Familia", {
-                    // required: {
-                    //   value: true,
-                    //   message: "Debe seleccionar una Familia de Productos",
-                    // },
-                  })}
-                >
-                  <option></option>
-                  {familia.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.nombre_familia}
-                    </option>
-                  ))}
-                </Input>
-                <span className="err">{errors?.Familia?.message}</span>
-
-                <div>
-                  <label className="title">Categorias</label>
+                <h6 className="title">Familia</h6>
+                {state.familia.length === 0 ? (
                   <Input
-                    name="Categoria"
+                    name="familia"
                     className="inp"
                     type="select"
                     onChange={(e) => ChangeInput(e)}
-                    {...register("Categoria", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe seleccionar una Familia de Productos",
-                      // },
-                    })}
                   >
                     <option></option>
-                    {categoriaId.map((f, index) => (
+                    {familia.map((f, index) => (
                       <option key={index} value={f.id}>
-                        {f.nombre_categoria}
+                        {f.nombre_familia}
                       </option>
                     ))}
                   </Input>
+                ) : (
+                  <Input
+                    valid
+                    name="familia"
+                    className="inp"
+                    type="select"
+                    onChange={(e) => ChangeInput(e)}
+                  >
+                    <option></option>
+                    {familia.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.nombre_familia}
+                      </option>
+                    ))}
+                  </Input>
+                )}
+                <span className="err">{errors?.Familia?.message}</span>
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Categorias</h6>
+                  {state.categoria.length === 0 ? (
+                    <Input
+                      name="categoria"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                    >
+                      <option></option>
+                      {categoriaId.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_categoria}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      name="categoria"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                    >
+                      <option></option>
+                      {categoriaId.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_categoria}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
                   <span className="err">{errors?.Familia?.message}</span>
                 </div>
 
-                <div>
-                  <label className="title">Subcategoria</label>
-                  <Input
-                    name="Subcategoria"
-                    className="inp"
-                    type="select"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("Subcategoria", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe seleccionar una Familia de Productos",
-                      // },
-                    })}
-                  >
-                    <option></option>
-                    {subcategoria.map((f, index) => (
-                      <option key={index} value={f.id}>
-                        {f.nombre_subcategoria}
-                      </option>
-                    ))}
-                  </Input>
-                  <span className="err">{errors?.Subcategoria?.message}</span>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Subcategoria a modificar</h6>
+                  {state.id.length === 0 ? (
+                    <Input
+                      name="id"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una Subcategoria",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {subcategoria.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_subcategoria}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      name="id"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {})}
+                    >
+                      <option></option>
+                      {subcategoria.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_subcategoria}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
+                  <span className="err">{errors?.id?.message}</span>
                 </div>
 
-                <div>
-                  <label className="title">Nuevo Nombre de Sub-Categoría</label>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="nombre_subcategoria"
-                    autoComplete="off"
-                    max="0"
-                    {...register("nombre_subcategoria", {
-                      maxLength: {
-                        value: 20,
-                        message:
-                          "El nombre no debe tener mas de veinte letras!",
-                      },
-                      minLength: {
-                        value: 3,
-                        message: "El nombre debe tener tres letras!",
-                      },
-                      max: {
-                        value: 0,
-                        message: "El nombre no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Nombre de Sub-Categoría</h6>
+                  {state.nombre_subcategoria.length === 0 ? (
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="nombre_subcategoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_subcategoria", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar un codigo",
+                        },
+                      })}
+                    />
+                  ) : state.nombre_subcategoria.length > 2 &&
+                    state.nombre_subcategoria.length < 20 ? (
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="nombre_subcategoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_subcategoria", {})}
+                    />
+                  ) : (
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="nombre_subcategoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_subcategoria", {
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El nombre no debe tener mas de veinte letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El nombre debe tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                  )}
                   <span className="err">
                     {errors?.nombre_subcategoria?.message}
                   </span>
                 </div>
 
-                <div>
-                  <label className="title">Nueva Categoria</label>
-                  <Input
-                    name="categoria"
-                    className="inp"
-                    type="select"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("categoria", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe seleccionar una Familia de Productos",
-                      // },
-                    })}
-                  >
-                    <option></option>
-                    {categorias.map((f, index) => (
-                      <option key={index} value={f.id}>
-                        {f.nombre_categoria}
-                      </option>
-                    ))}
-                  </Input>
-                  <span className="err">{errors?.categoria?.message}</span>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Categoria</h6>
+                  {state.categoriumId.length === 0 ? (
+                    <Input
+                      name="categoriumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("categoriumId", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una Familia de Productos",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {categorias.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_categoria}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      name="categoriumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("categoriumId", {})}
+                    >
+                      <option></option>
+                      {categorias.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_categoria}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
+                  <span className="err">{errors?.categoriumId?.message}</span>
                 </div>
 
-                <div className="divForm">
-                  <label className="title">Descripcion</label>
-                  <Input
-                    className="inp"
-                    type="textarea"
-                    name="descripcion"
-                    autoComplete="off"
-                    max="0"
-                    {...register("descripcion", {
-                      maxLength: {
-                        value: 256,
-                        message: "Supera la cantidad maxima de caracteres!",
-                      },
-                      max: {
-                        value: 0,
-                        message: "La descripcion no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Descripción (opcional)</h6>
+                  {state.descripcion.length === 0 ? (
+                    <>
+                      <Input
+                        className="inp6"
+                        type="text"
+                        name="descripcion"
+                        autoComplete="off"
+                        max="0"
+                      />
+                    </>
+                  ) : state.descripcion.length > 5 &&
+                    state.descripcion.length < 256 ? (
+                    <>
+                      <Input
+                        valid
+                        {...register("descripcion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un descripcion ",
+                          },
+                        })}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        {...register("descripcion", {
+                          maxLength: {
+                            value: 256,
+                            message:
+                              "La descripcion no debe tener mas de 256 caracteres!",
+                          },
+                          minLength: {
+                            value: 5,
+                            message:
+                              "La descripcion debe tener al menos cinco letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message:
+                              "La descripcion no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                    </>
+                  )}
                   <span className="err">{errors?.descripcion?.message}</span>
                 </div>
                 <Button

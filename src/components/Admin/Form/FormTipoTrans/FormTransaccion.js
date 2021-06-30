@@ -75,7 +75,7 @@ function FormTransaccion() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Tipo de Transacción</h1>
+          <span id="title">Tipo de Transacción</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -86,7 +86,7 @@ function FormTransaccion() {
           >
             <Row>
               <Col>
-                <label className="title">Tipos de Transacción Actuales</label>
+                <h6 className="title">Tipos de Transacción Actuales</h6>
                 <Input
                   name="id"
                   type="select"
@@ -106,27 +106,81 @@ function FormTransaccion() {
                     </option>
                   ))}
                 </Input>
-                <label className="title">Nuevo Tipo de Transacción</label>
-                <Input
-                  className="inp"
-                  type="text"
-                  name="tipo_transaccion"
-                  autoComplete="off"
-                  {...register("tipo_transaccion", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un tipo de transaccion",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "Mínimo 3 carácteres",
-                    },
-                  })}
-                />
-                <span className="err">
-                  {errors.tipo_transaccion && errors.tipo_transaccion.message}
-                </span>
-
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Tipo de Transacción</h6>
+                  {!state.tipo_transaccion ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  ) : state.tipo_transaccion.length >= 3 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="tipo_transaccion"
+                        autoComplete="off"
+                        {...register("tipo_transaccion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un tipo de transaccion",
+                          },
+                          minLength: {
+                            value: 3,
+                            message: "Mínimo 3 carácteres",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors.tipo_transaccion &&
+                          errors.tipo_transaccion.message}
+                      </span>
+                    </>
+                  )}
+                </div>
                 <Button
                   className="btn-fill"
                   color="primary"
