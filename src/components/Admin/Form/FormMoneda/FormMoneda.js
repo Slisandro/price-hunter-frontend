@@ -289,6 +289,7 @@ function FormMoneda() {
                     state.nombre_moneda.length < 20 ? (
                     <>
                       <Input
+                        valid
                         className="inp"
                         type="text"
                         max="0"

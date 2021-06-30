@@ -78,7 +78,7 @@ function Ciudades() {
   return (
     <Card className="card-chart">
       <CardHeader>
-        <h1 id="title">Ciudades</h1>
+        <span id="title">Ciudades</span>
       </CardHeader>
       <CardBody>
         <Form
@@ -93,29 +93,60 @@ function Ciudades() {
 
           <Row>
             <Col>
-              <label className="title">País</label>
-              <Input
-                name="paiseCodigoAlfa"
-                type="select"
-                className="inp"
-                value={paises.nombre_region}
-                onChange={(e) => ChangeInput(e)}
-                {...register("paiseCodigoAlfa", {
-                  required: {
-                    value: true,
-                    message: "Debe seleccionar un pais",
-                  },
-                })}
-              >
-                <option></option>
-                {paises.map((f) => (
-                  <option value={f.codigo_alfa}>{f.nombre_pais}</option>
-                ))}
-              </Input>
-              <span className="err">{errors?.paiseCodigoAlfa?.message}</span>
+              <h6 className="title">País</h6>
+              {!ciudad.paiseCodigoAlfa ? (
+                <>
+                  <Input
+                    name="paiseCodigoAlfa"
+                    type="select"
+                    className="inp"
+                    value={paises.nombre_region}
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("paiseCodigoAlfa", {
+                      required: {
+                        value: true,
+                        message: "Debe seleccionar un pais",
+                      },
+                    })}
+                  >
+                    <option></option>
+                    {paises.map((f) => (
+                      <option value={f.codigo_alfa}>{f.nombre_pais}</option>
+                    ))}
+                  </Input>
+                  <span className="err">
+                    {errors?.paiseCodigoAlfa?.message}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Input
+                    valid
+                    name="paiseCodigoAlfa"
+                    type="select"
+                    className="inp"
+                    value={paises.nombre_region}
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("paiseCodigoAlfa", {
+                      required: {
+                        value: true,
+                        message: "Debe seleccionar un pais",
+                      },
+                    })}
+                  >
+                    <option></option>
+                    {paises.map((f) => (
+                      <option value={f.codigo_alfa}>{f.nombre_pais}</option>
+                    ))}
+                  </Input>
+                  {/* <span className="err">
+                    {errors?.paiseCodigoAlfa?.message}
+                  </span> */}
+                </>
+              )}
 
-              <div>
-                <label className="title">Nueva Ciudad</label>
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Nueva Ciudad</h6>
                 <Input
                   className="inp"
                   type="text"
