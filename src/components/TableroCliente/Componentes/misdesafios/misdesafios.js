@@ -16,7 +16,6 @@
 //     {value:"avtivos", label:"avtivos"},
 //     {value:"finalizados", label:"finalizados"}
 //   ]
-
 //   return (
 //     <div id="conteiner-lista-misdesafios-cliente" >
 
