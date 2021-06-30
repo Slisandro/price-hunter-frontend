@@ -64,39 +64,27 @@ function FormUnidadMedida() {
       nombre_unidad: state.nombre_unidad,
     };
 
-    if (!nuevaUM.codigo_unidad_medida) {
-      alert("Por favor, ingrese el codigo de la moneda");
-      return;
+    if (nuevaUM && nuevaUM.nombre_unidad && nuevaUM.codigo_unidad_medida) {
+      dispatch(unidadDeMedida(nuevaUM));
+      e.target.reset();
+      swal({
+        title: "Unidad de Medida agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getUnidadMedida()));
+      setState({
+        codigo_unidad_medida: "",
+        nombre_unidad: "",
+      });
+    } else {
+      swal({
+        title: "La Unidad de Medida no fue agregada!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
     }
-    // if (nuevaUM.codigo_unidad_medida !== 3) {
-    //   alert("Debe ingresar 3 letras...");
-    //   return;
-    // }
-    if (!isNaN(parseInt(nuevaUM.codigo_unidad_medida))) {
-      alert("El codigo solo puede contener letras");
-      return;
-    }
-    if (!nuevaUM.nombre_unidad) {
-      alert("Por favor, ingrese el nombre de la moneda");
-      return;
-    }
-    if (!isNaN(parseInt(nuevaUM.nombre_unidad))) {
-      alert("El nombre solo puede contener letras");
-      return;
-    }
-
-    dispatch(unidadDeMedida(nuevaUM));
-    e.target.reset();
-    swal({
-      title: "Unidad de Medida agregada con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((r) => dispatch(getUnidadMedida()));
-    setState({
-      codigo_unidad_medida: "",
-      nombre_unidad: "",
-    });
   };
 
   return (

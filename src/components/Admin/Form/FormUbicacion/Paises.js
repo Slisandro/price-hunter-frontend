@@ -64,8 +64,8 @@ function Paises() {
       });
     }
     if (name === "nombre_region") {
-      let id = region.find((id) => id.nombre_region === e.target.value);
-      let idRegion = id.id;
+      let ide = region.find((id) => id.nombre_region === e.target.value);
+      var idRegion = ide.id;
       setPais({
         ...pais,
         regioneId: idRegion,
@@ -90,6 +90,7 @@ function Paises() {
   const alerta = useSelector((store) => store.alerta);
 
   const submit = (data, e) => {
+    console.log(data);
     if (pais.codigo_alfa && pais.nombre_pais) {
       const nuevoPais = {
         codigo_alfa: pais.codigo_alfa.toLocaleUpperCase(),
@@ -106,7 +107,7 @@ function Paises() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      });
+      }).then((p) => dispatch(getPais()));
 
       setPais({
         codigo_alfa: "",
@@ -119,7 +120,7 @@ function Paises() {
   return (
     <Card className="card-chart">
       <CardHeader>
-        <h1 id="title">Países</h1>
+        <span id="title">Países</span>
       </CardHeader>
       <CardBody>
         <Form
@@ -132,101 +133,294 @@ function Paises() {
         ) : null} */}
           <Row>
             <Col>
-              <label className="title">Países Actuales</label>
+              <h6 className="title">Países Actuales</h6>
               <Input name="nombre_pais" type="select" className="inp">
                 <option></option>
                 {paises.map((u) => (
                   <option value={u.nombre_pais}>{u.nombre_pais}</option>
                 ))}
               </Input>
-              <label className="title">Nuevo País</label>
-              <Input
-                className="inp"
-                type="text"
-                name="nombre_pais"
-                autoComplete="off"
-                {...register("nombre_pais", {
-                  required: {
-                    value: true,
-                    message: "Debe ingresar un nombre para el pais",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "El Nombre no debe tener mas de diez caracteres",
-                  },
-                  minLength: {
-                    value: 2,
-                    message: "El Nombre no debe tener menos de dos caracteres",
-                  },
-                })}
-              />
-              {/* <span className="err">{errors?.nombre_pais?.message}</span> */}
-
-              <div>
-                <label className="title">Codigo</label>
-                <Input
-                  className="inp"
-                  type="text"
-                  name="codigo_alfa"
-                  autoComplete="off"
-                  {...register("codigo_alfa", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un codigo para el pais ",
-                    },
-                    maxLength: {
-                      value: 3,
-                      message: "El codigo debe tener tres caracteres",
-                    },
-                    minLength: {
-                      value: 3,
-                      message: "El codigo debe tener tres caracteres",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.codigo_alfa?.message}</span>
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Nuevo País</h6>
+                {!pais.nombre_pais ? (
+                  <>
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="nombre_pais"
+                      autoComplete="off"
+                      {...register("nombre_pais", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre para el país",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El Nombre no debe tener menos de tres caracteres",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.nombre_pais?.message}</span>
+                  </>
+                ) : pais.nombre_pais.length >= 3 && isNaN(pais.nombre_pais) ? (
+                  <>
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="nombre_pais"
+                      autoComplete="off"
+                      {...register("nombre_pais", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre para el país",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 2,
+                          message:
+                            "El Nombre no debe tener menos de dos caracteres",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.nombre_pais?.message}</span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="nombre_pais"
+                      autoComplete="off"
+                      {...register("nombre_pais", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un nombre para el pais",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El Nombre no debe tener menos de tres caracteres",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.nombre_pais?.message}</span>
+                  </>
+                )}
               </div>
-              <div>
-                <label className="title">Región</label>
-                <Input
-                  type="select"
-                  name="nombre_region"
-                  className="selectUbi"
-                  onChange={(e) => ChangeInput(e)}
-                  {...register("nombre_region", {
-                    required: {
-                      value: true,
-                      message: "Debe seleccionar una region",
-                    },
-                  })}
-                >
-                  <option></option>
-                  {region.map((f) => (
-                    <option value={f.nombre_region}>{f.nombre_region}</option>
-                  ))}
-                </Input>
-                <span className="err">{errors?.nombre_region?.message}</span>
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Codigo</h6>
+                {!pais.codigo_alfa ? (
+                  <>
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="codigo_alfa"
+                      autoComplete="off"
+                      {...register("codigo_alfa", {
+                        required: {
+                          value: true,
+                          message: "Debe ingresar un codigo para el pais ",
+                        },
+                        maxLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.codigo_alfa?.message}</span>
+                  </>
+                ) : pais.codigo_alfa.length === 3 && isNaN(pais.codigo_alfa) ? (
+                  <>
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="codigo_alfa"
+                      autoComplete="off"
+                      {...register("codigo_alfa", {
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe ingresar un codigo para el pais ",
+                        // },
+                        maxLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.codigo_alfa?.message}</span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="codigo_alfa"
+                      autoComplete="off"
+                      {...register("codigo_alfa", {
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe ingresar un codigo para el pais ",
+                        // },
+                        maxLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El código debe tener tres caracteres (Alfabéticos)",
+                        },
+                      })}
+                    />
+                    <span className="err">{errors?.codigo_alfa?.message}</span>
+                  </>
+                )}
               </div>
-              <div>
-                <label className="title">Moneda</label>
-                <Input
-                  name="codigo_moneda"
-                  type="select"
-                  className="selectUbi"
-                  onChange={(e) => ChangeInput(e)}
-                  {...register("codigo_moneda", {
-                    required: {
-                      value: true,
-                      message: "Debe seleccionar una moneda",
-                    },
-                  })}
-                >
-                  <option></option>
-                  {moneda.map((f) => (
-                    <option value={f.codigo_moneda}>{f.codigo_moneda}</option>
-                  ))}
-                </Input>
-                <span className="err">{errors?.codigo_moneda?.message}</span>
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Región</h6>
+                {pais.regioneId.length === 0 ? (
+                  <>
+                    <Input
+                      type="select"
+                      name="nombre_region"
+                      className="selectUbi"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("nombre_region", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una region",
+                        },
+                      })}
+                    >
+                      {/* <option></option> */}
+                      {region.map((f) => (
+                        <option value={f.nombre_region}>
+                          {f.nombre_region}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">
+                      {errors?.nombre_region?.message}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      type="select"
+                      name="nombre_region"
+                      className="selectUbi"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("nombre_region", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una region",
+                        },
+                      })}
+                    >
+                      {/* <option></option> */}
+                      {region.map((f) => (
+                        <option value={f.nombre_region}>
+                          {f.nombre_region}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">
+                      {errors?.nombre_region?.message}
+                    </span>
+                  </>
+                )}
+              </div>
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Moneda</h6>
+                {pais.monedaCodigoMoneda.length === 0 ? (
+                  <>
+                    <Input
+                      name="codigo_moneda"
+                      type="select"
+                      className="selectUbi"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_moneda", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una moneda",
+                        },
+                      })}
+                    >
+                      {/* <option></option> */}
+                      {moneda.map((f) => (
+                        <option value={f.codigo_moneda}>
+                          {f.codigo_moneda}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">
+                      {errors?.codigo_moneda?.message}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      name="codigo_moneda"
+                      type="select"
+                      className="selectUbi"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_moneda", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar una moneda",
+                        },
+                      })}
+                    >
+                      {/* <option></option> */}
+                      {moneda.map((f) => (
+                        <option value={f.codigo_moneda}>
+                          {f.codigo_moneda}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">
+                      {errors?.codigo_moneda?.message}
+                    </span>
+                  </>
+                )}
               </div>
               <Button className="btn-fill" color="primary" type="submit" block>
                 Agregar

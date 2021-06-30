@@ -1,23 +1,21 @@
 // import React, {useState, useEffect} from 'react';
 // import { connect } from 'react-redux';
-// // import {getMisDesafios} from "../../../Redux/actions";
+// import {getMisDesafios} from "../../../Redux/actions";
 // import "./misdesafios.css"
 // import Desafio from "./desafio/desafio";
 // import Select from 'react-select';
 
-
 // function MisDesafios({misdesafios, getmisdesafios}) {
 
-//   // useEffect(async ()=>{
-//   //   // await getmisdesafios()
-//   // }, []);
+//   useEffect(async ()=>{
+//     await getmisdesafios()
+//   }, []);
 
 //   const estados = [
 //     {value:"programados", label:"programados"},
 //     {value:"avtivos", label:"avtivos"},
 //     {value:"finalizados", label:"finalizados"}
 //   ]
-  
 //   return (
 //     <div id="conteiner-lista-misdesafios-cliente" >
 
@@ -27,8 +25,8 @@
 //           />
 //         <div>
 //           <Select
-//             // options={}
-//           /> 
+//             options={}
+//           />
 //         </div>
 //       </div>
 
@@ -51,14 +49,14 @@
 
 // const mapStateToProps = function(state) {
 //   return {
-//     misdesafios: state.misdesafios 
+//     misdesafios: state.misdesafios
 //   }
 // }
 
-// // const mapDispatchToProps = function(dispatch){
-// //   return{
-// //     getmisdesafios: ()=>{dispatch(getMisDesafios())},
-// //   }
-// // }
+// const mapDispatchToProps = function(dispatch){
+//   return{
+//     getmisdesafios: ()=>{dispatch(getMisDesafios())},
+//   }
+// }
 
-// // export default connect(mapStateToProps, mapDispatchToProps)(MisDesafios);
+// export default connect(mapStateToProps, mapDispatchToProps)(MisDesafios);

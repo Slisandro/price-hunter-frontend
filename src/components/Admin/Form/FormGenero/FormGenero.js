@@ -55,6 +55,7 @@ function FormGenero() {
 
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
@@ -66,29 +67,38 @@ function FormGenero() {
       genero: state.genero,
     };
 
-    if (!nuevoGenero.genero) {
-      dispatch(mostrarError("Ingrese un Género", "alerta-error"));
-      return;
-    }
+    // if (!nuevoGenero.genero) {
+    //   dispatch(mostrarError("Ingrese un Género", "alerta-error"));
+    //   return;
+    // }
 
-    if (!isNaN(parseInt(nuevoGenero.genero))) {
-      dispatch(
-        mostrarError("El Género sólo puede contener letras", "alerta-error")
-      );
-      return;
-    }
+    // if (!isNaN(parseInt(nuevoGenero.genero))) {
+    //   dispatch(
+    //     mostrarError("El Género sólo puede contener letras", "alerta-error")
+    //   );
+    //   return;
 
-    dispatch(generoPost(nuevoGenero));
-    e.target.reset();
-    swal({
-      title: "Género agregado con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((r) => dispatch(getGeneros()));
-    setState({
-      genero: "",
-    });
+    if (nuevoGenero) {
+      dispatch(generoPost(nuevoGenero));
+      e.target.reset();
+      swal({
+        title: "Género agregado con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => dispatch(getGeneros()));
+      setState({
+        genero: "",
+      });
+    } else {
+      swal({
+        title: "El Género no fué agregado!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
+    reset({ data });
   };
 
   return (
