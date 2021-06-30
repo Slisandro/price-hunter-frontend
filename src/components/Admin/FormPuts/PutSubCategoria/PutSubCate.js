@@ -94,7 +94,7 @@ function PutSubCate() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.id) {
+    if (data.id && data.id.length > 0) {
       dispatch(putSubCategoria(data));
       e.target.reset();
       swal({
@@ -103,6 +103,7 @@ function PutSubCate() {
         button: "Aceptar",
         timer: "5000",
       });
+      reset({ data });
     } else {
       swal({
         title:
@@ -120,7 +121,7 @@ function PutSubCate() {
       categoria: "",
       familia: "",
     });
-    reset({ data });
+    
   };
 
   return (
@@ -216,10 +217,10 @@ function PutSubCate() {
                       type="select"
                       onChange={(e) => ChangeInput(e)}
                       {...register("id", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una Subcategoria",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una Subcategoria",
+                        // },
                       })}
                     >
                       <option></option>
@@ -259,10 +260,10 @@ function PutSubCate() {
                       autoComplete="off"
                       max="0"
                       {...register("nombre_subcategoria", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar un codigo",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar un codigo",
+                        // },
                       })}
                     />
                   ) : state.nombre_subcategoria.length > 2 &&
@@ -315,10 +316,10 @@ function PutSubCate() {
                       type="select"
                       onChange={(e) => ChangeInput(e)}
                       {...register("categoriumId", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una Familia de Productos",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una Familia de Productos",
+                        // },
                       })}
                     >
                       <option></option>

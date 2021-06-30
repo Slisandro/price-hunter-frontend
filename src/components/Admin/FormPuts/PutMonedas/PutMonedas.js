@@ -59,7 +59,7 @@ function PutMonedas() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.nombre_moneda) {
+    if (data.nombre_moneda && data.nombre_moneda.length > 0) {
       dispatch(putMoneda(data));
       e.target.reset();
       swal({
@@ -77,6 +77,11 @@ function PutMonedas() {
         timer: "5000",
       });
     }
+    setState({
+      codigo_moneda: "",
+      nombre_moneda: "",
+      simbolo: "",
+    });
   };
 
   return (
@@ -104,10 +109,10 @@ function PutMonedas() {
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
                       {...register("codigo_moneda", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una moneda",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una moneda",
+                        // },
                       })}
                     >
                       <option></option>
@@ -150,10 +155,10 @@ function PutMonedas() {
                         autoComplete="off"
                         max="0"
                         {...register("nombre_moneda", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar una moneda ",
-                          },
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar una moneda ",
+                          // },
                         })}
                       />
                     </>

@@ -53,7 +53,7 @@ function PutRegiones() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.id) {
+    if (data.id && data.id.length> 0) {
       dispatch(putGenero(data));
       e.target.reset();
       swal({
@@ -103,10 +103,10 @@ function PutRegiones() {
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
                       {...register("id", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar una region",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una region",
+                        // },
                       })}
                     >
                       <option></option>
@@ -146,10 +146,10 @@ function PutRegiones() {
                         onChange={(e) => ChangeInput(e)}
                         max="0"
                         {...register("genero", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un genero ",
-                          },
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar un genero ",
+                          // },
                         })}
                       />
                     </>

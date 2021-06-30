@@ -88,7 +88,7 @@ function PutCiudades() {
 
   const submit = (data, e) => {
     
-    if (data.ciudad) {
+    if (data.ciudad && data.ciudad.length > 0) {
       dispatch(putCiudad(data));
       e.target.reset();
       swal({
@@ -97,6 +97,7 @@ function PutCiudades() {
         button: "Aceptar",
         timer: "5000",
       }).then((r) => dispatch(getPais()));
+      reset({ data });
     } else {
       swal({
         title: "Debe seleccionar una ciudad para modificar!",
@@ -105,8 +106,15 @@ function PutCiudades() {
         timer: "5000",
       });
     }
+    setState({
+      region: "",
+      paises: "",
+      id: "",
+      ciudad: "",
+      paiseCodigoAlfa: "",
+    });
 
-    reset({ data });
+    
   };
 
   return (
@@ -246,10 +254,10 @@ function PutCiudades() {
                         className="inp"
                         onChange={(e) => ChangeInput(e)}
                         {...register("paiseCodigoAlfa", {
-                          required: {
-                            value: true,
-                            message: "Debe seleccionar un codigo",
-                          },
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe seleccionar un codigo",
+                          // },
                         })}
                       >
                         <option></option>
@@ -316,10 +324,10 @@ function PutCiudades() {
                       autoComplete="off"
                       max="0"
                       {...register("ciudad", {
-                        required: {
-                          value: true,
-                          message: "Debe ingresar un nombre ",
-                        },
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe ingresar un nombre ",
+                        // },
                         maxLength: {
                           value: 15,
                           message:

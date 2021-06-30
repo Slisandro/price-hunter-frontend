@@ -4,6 +4,7 @@ import {
   putProducto,
   getProductos,
   getSubcategoria,
+  getUnidadMedida,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
@@ -12,24 +13,17 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-// import "./FormUnidadMedida.css";
 
 function PutProductos() {
   const dispatch = useDispatch();
   const productos = useSelector((store) => store.productos);
   const subcategoria = useSelector((store) => store.subcategoria);
-
-  console.log(subcategoria);
+  const unidad = useSelector((store) => store.unidad_medida);
 
   const [state, setState] = useState({
     id: "",
@@ -42,11 +36,12 @@ function PutProductos() {
   useEffect(() => {
     dispatch(getProductos());
     dispatch(getSubcategoria());
+    dispatch(getUnidadMedida());
   }, [dispatch]);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
-    // const name = e.target.name;
+    const name = e.target.name;
 
     for (let i = 0; i < productos.length; i++) {
       if (parseInt(value) === parseInt(productos[i].id)) {
@@ -69,24 +64,48 @@ function PutProductos() {
         });
       }
     }
+
+    if (name === "nombre") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "contenido_neto") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "subcategoriumId") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "unidadMedidaCodigoUnidadMedida") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
   };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
   const submit = (data, e) => {
-    if (state.id) {
+    if (data.id && data.id.length >0) {
       dispatch(putProducto(data));
-
-      data = {
-        id: "",
-        nombre: "",
-        contenido_neto: "",
-        subcategoriumId: "",
-        unidadMedidaCodigoUnidadMedida: "",
-      };
 
       e.target.reset();
       swal({
@@ -95,6 +114,7 @@ function PutProductos() {
         button: "Aceptar",
         timer: "5000",
       }).then((r) => dispatch(getProductos()));
+      reset({ data });
     } else {
       swal({
         title: "Debe seleccionar un producto para modificar!",
@@ -116,7 +136,7 @@ function PutProductos() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Productos</h1>
+          <span id="title">Productos</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -128,130 +148,244 @@ function PutProductos() {
           >
             <Row>
               <Col>
-                <label className="title">Productos</label>
-                <Input
-                  name="id"
-                  type="select"
-                  className="inp"
-                  onChange={(e) => ChangeInput(e)}
-                  {...register("id", {
-                    required: {
-                      value: true,
-                      message: "Debe seleccionar un Producto",
-                    },
-                  })}
-                >
-                  <option></option>
-                  {productos.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.nombre}
-                    </option>
-                  ))}
-                </Input>
+                <h6 className="title">Productos</h6>
+                {state.id.length === 0 ? (
+                  <Input
+                    name="id"
+                    type="select"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {})}
+                  >
+                    <option></option>
+                    {productos.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.nombre}
+                      </option>
+                    ))}
+                  </Input>
+                ) : (
+                  <Input
+                    valid
+                    name="id"
+                    type="select"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {})}
+                  >
+                    <option></option>
+                    {productos.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.nombre}
+                      </option>
+                    ))}
+                  </Input>
+                )}
                 <span className="err">{errors?.id?.message}</span>
 
-                <div className="cont_prod">
-                  <div className="tiposProductos">
-                    <h6>id = {state.id}</h6>
-                    <h6>Nombre = {state.nombre}</h6>
-                    <h6>Cont Neto = {state.contenido_neto}</h6>
-                    <h6>
-                      Unidad Medida = {state.unidadMedidaCodigoUnidadMedida}
-                    </h6>
-                    <h6>Subcategoria = {state.subcategoriumId}</h6>
-                  </div>
-                </div>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Nombre</h6>
+                  {state.nombre.length === 0 ? (
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="nombre"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre", {})}
+                    />
+                  ) : state.nombre.length > 2 && state.nombre.length < 16 ? (
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="nombre"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre", {})}
+                    />
+                  ) : (
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="nombre"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre", {
+                        maxLength: {
+                          value: 15,
+                          message:
+                            "El nombre no debe tener mas de quince letras!",
+                        },
+                        mixLength: {
+                          value: 3,
+                          message:
+                            "El nombre no debe tener menos de tres letras!",
+                        },
 
-                <div>
-                  <label className="title">Nuevo Nombre</label>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="nombre"
-                    autoComplete="off"
-                    max="0"
-                    {...register("nombre", {
-                      maxLength: {
-                        value: 15,
-                        message: "El nombre debe tener menos de quince letras!",
-                      },
-
-                      max: {
-                        value: 0,
-                        message: "El nombre no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                  )}
                   <span className="err">{errors?.nombre?.message}</span>
                 </div>
 
-                <div>
-                  <label className="title">Nuevo Contenido Neto</label>
-                  <Input
-                    className="inp"
-                    type="number"
-                    min="0"
-                    max
-                    name="contenido_neto"
-                    autoComplete="off"
-                    {...register("contenido_neto", {
-                      maxLength: {
-                        value: 4,
-                        message:
-                          "El contenido no debe tener mas de 4 caracteres",
-                      },
-                      min: {
-                        value: 0,
-                        message: "El contenido no puede ser negativo",
-                      },
-                    })}
-                  />
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Contenido Neto</h6>
+                  {state.contenido_neto.length === 0 ? (
+                    <Input
+                      className="inp"
+                      type="number"
+                      min="0"
+                      max
+                      name="contenido_neto"
+                      autoComplete="off"
+                      {...register("contenido_neto", {})}
+                    />
+                  ) : state.contenido_neto.length > 1 &&
+                    state.contenido_neto.length < 4 ? (
+                    <Input
+                      valid
+                      className="inp"
+                      type="number"
+                      min="0"
+                      max
+                      name="contenido_neto"
+                      autoComplete="off"
+                      {...register("contenido_neto", {})}
+                    />
+                  ) : (
+                    <Input
+                      invalid
+                      className="inp"
+                      type="number"
+                      min="0"
+                      max
+                      name="contenido_neto"
+                      autoComplete="off"
+                      {...register("contenido_neto", {
+                        maxLength: {
+                          value: 4,
+                          message:
+                            "El contenido no debe tener mas de 4 caracteres",
+                        },
+                        min: {
+                          value: 0,
+                          message: "El contenido no puede ser negativo",
+                        },
+                      })}
+                    />
+                  )}
                   <span className="err">{errors?.contenido_neto?.message}</span>
                 </div>
-                <div>
-                  <label className="title">Nueva Unidad Medida</label>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="unidadMedidaCodigoUnidadMedida"
-                    autoComplete="off"
-                    max="0"
-                    {...register("unidadMedidaCodigoUnidadMedida", {
-                      maxLength: {
-                        value: 4,
-                        message: "La unidad debe tener menos de cuatro letras!",
-                      },
-                      max: {
-                        value: 0,
-                        message: "La unidad no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Unidad Medida</h6>
+                  {state.unidadMedidaCodigoUnidadMedida.length === 0 ? (
+                    <Input
+                      className="inp"
+                      type="select"
+                      name="unidadMedidaCodigoUnidadMedida"
+                      autoComplete="off"
+                      max="0"
+                      {...register("unidadMedidaCodigoUnidadMedida", {})}
+                    >
+                      <option></option>
+                      {unidad.map((f, index) => (
+                        <option key={index} value={f.codigo_unidad_medida}>
+                          {f.nombre_unidad}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      className="inp"
+                      type="select"
+                      name="unidadMedidaCodigoUnidadMedida"
+                      autoComplete="off"
+                      max="0"
+                      {...register("unidadMedidaCodigoUnidadMedida", {})}
+                    >
+                      <option></option>
+                      {unidad.map((f, index) => (
+                        <option key={index} value={f.codigo_unidad_medida}>
+                          {f.nombre_unidad}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
                   <span className="err">
                     {errors?.unidadMedidaCodigoUnidadMedida?.message}
                   </span>
                 </div>
 
-                <div>
-                  <label className="title">Nueva Subcategoria</label>
-                  <Input
-                    name="subcategoriumId"
-                    className="inp"
-                    type="select"
-                    // value={paises.nombre_region}
-                    // onChange={(e) => ChangeInput(e)}
-                    {...register("subcategoriumId", {})}
-                  >
-                    <option></option>
-                    {subcategoria.map((f, index) => (
-                      <option key={index} value={f.id}>
-                        {f.nombre_subcategoria}
-                      </option>
-                    ))}
-                  </Input>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Subcategoria</h6>
+                  {state.subcategoriumId.length === 0 ? (
+                    <Input
+                      name="subcategoriumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("subcategoriumId", {})}
+                    >
+                      <option></option>
+                      {subcategoria.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_subcategoria}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      name="subcategoriumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("subcategoriumId", {})}
+                    >
+                      <option></option>
+                      {subcategoria.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_subcategoria}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
                   <span className="err">
                     {errors?.subcategoriumId?.message}
                   </span>
+                </div>
+
+                <div className="cont_prod" style={{ marginTop: "1rem" }}>
+                  {state.id.length === 0 && state.nombre.length === 0 ? (
+                    <div
+                      className="tiposProductos"
+                      style={{ display: "none" }}
+                    ></div>
+                  ) : (
+                    <div className="tiposProductos" style={{ display: "" }}>
+                      <h5>id = {state.id}</h5>
+                      <h5 style={{ marginTop: "-1rem" }}>
+                        Nombre = {state.nombre}
+                      </h5>
+                      <h5 style={{ marginTop: "-1rem" }}>
+                        Cont Neto = {state.contenido_neto}
+                      </h5>
+                      <h5 style={{ marginTop: "-1rem" }}>
+                        Unidad Medida = {state.unidadMedidaCodigoUnidadMedida}
+                      </h5>
+                      <h5 style={{ marginTop: "-1rem" }}>
+                        Subcategoria = {state.subcategoriumId}
+                      </h5>
+                    </div>
+                  )}
                 </div>
                 <Button
                   className="btn-fill"
