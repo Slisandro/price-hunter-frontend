@@ -226,7 +226,7 @@ const Landing = () => {
       <footer class="footer py-5">
         <div class="containerLanding__hunter grid grid-3">
           <div>
-            <h1>Prince Hunter</h1>
+            <h1>Price Hunter</h1>
             <p>Copyright &copy; 2021</p>
           </div>
           <nav>
