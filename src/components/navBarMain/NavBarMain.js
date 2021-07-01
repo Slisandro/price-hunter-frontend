@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {useHistory} from 'react-router-dom' 
 // import Categorias from '../categorias/Categorias';
 import swal from 'sweetalert';
 import Table from '../Table'
@@ -19,6 +20,7 @@ var geolocation = require('geolocation');
 
 
 function NavBarMain({ producto, setProducto, setState }) {
+    const history = useHistory()
     const categorias = useSelector(store => store.categorias);
     const productos = useSelector(store => store.productos);
     const dispatch = useDispatch();
@@ -77,8 +79,6 @@ function NavBarMain({ producto, setProducto, setState }) {
                 ...ubicacion,
                 dis: 0
             })
-        } else {
-            swal("No hemos podido acceder a su ubicación", " ", "error");
         }
     }
 
@@ -135,7 +135,7 @@ function NavBarMain({ producto, setProducto, setState }) {
             if (e.target.value) {
                 if (ubicacion.dis > 0) {
                     // setState("Search");
-                      dispatch(getSubcategoriasId(e.target.value, ubicacion));
+                    dispatch(getSubcategoriasId(e.target.value, ubicacion));
                     setCategoria([])
                     setSubcategoria([])
                     setNombreFamilia("Familias");
@@ -144,8 +144,6 @@ function NavBarMain({ producto, setProducto, setState }) {
                 } else {
                     swal("Debe ingresar un valor para el radio de búsqueda")
                 }
-            } else {
-                swal("No hemos podido acceder a su ubicación", " ", "error");
             }
         }
     }
@@ -363,7 +361,13 @@ function NavBarMain({ producto, setProducto, setState }) {
 
             <Card>
                 {
-                    productos.length === 0 ? null : <Table productos={productos} ubicacion={ubicacion} />
+                    !ubicacion.latitud && !ubicacion.longitud ?
+                        <div className="containerMessageBack">
+                            No hemos podido acceder a tu ubicación
+                            <Button onClick={() => history.push("/cazador")}>Recargar</Button>
+                        </div>
+                        :
+                        productos.length === 0 ? null : <Table productos={productos} ubicacion={ubicacion} />
                 }
             </Card>
 

@@ -87,7 +87,7 @@ const Jumbo = () => {
 
       
 
-      <Card>
+      {/* <Card>
         <Row>
 
           <Col lg="12" >
@@ -99,7 +99,7 @@ const Jumbo = () => {
           </Col>
         </Row>
 
-      </Card>
+      </Card> */}
 
     </>
   );
