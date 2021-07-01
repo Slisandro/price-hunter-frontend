@@ -8,10 +8,11 @@
     -ms-flex-direction: column;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: rgba(24,30,54,.5);
-    color: white;
+    background: rgb(59, 59, 59);
+    color: rgb(162, 245, 245);
     margin-top: 2%;
-    font-size: 1.5em;
+    font-size: 1em;
+    border-radius: 20px;
 }
 
 .ReactTable * {
@@ -130,7 +131,12 @@
 }
 
 .ReactTable .rt-thead .rt-th:last-child, .ReactTable .rt-thead .rt-td:last-child {
-    border-right: 0
+    border-right: 0;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: left;
+    padding: 0.5em;
 }
 
 .ReactTable .rt-thead .rt-th:focus {
@@ -147,7 +153,10 @@
 
 .ReactTable .rt-thead .rt-resizable-header-content {
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    color: #9fff04;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .ReactTable .rt-thead .rt-header-pivot {
