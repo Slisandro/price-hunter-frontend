@@ -4,9 +4,10 @@ import { getDesafios } from '../../Redux/actions'
 import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
 import axios from 'axios';
-import './MisDesafios.css'
+import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
-import RegistroGoogle from '../../Registro Google/RegistroGoogle'
+import RegistroGoogle from '../../Registro Google/RegistroGoogle';
+import { Row } from 'reactstrap';
 
 function MisDesafios({ ubicacion }) {
     const [modal, setModal] = useState(false);
@@ -50,23 +51,28 @@ function MisDesafios({ ubicacion }) {
                     <div className="containerMessageBack">Cargando desafíos...</div>
                     :
                     desafios.msg ?
-                       <div>
-                         <div class="containerMessageBack">{desafios.msg}</div>
-                       {
-                        desafios.msg === "completar los datos del usuario antes de continuar" ? <>
-                        <button onClick={()=>{setModalRegistro(true)}}>form</button>
-                        </>:null
-                       }
-                       {
-                        !modalRegistro ? null :
-                            // componente google
-                            <>
-                              <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro}history={history}/>
-                            </>
-                         }
-                       </div>
+                        <div>
+                            <div class="containerMessageBack">{desafios.msg}</div>
+                            {
+                                desafios.msg === "completar los datos del usuario antes de continuar" ? <>
+                                    <button
+                                        className="btn-fill"
+                                        color="primary"
+                                        type="submit"
+                                        block
+                                        onClick={() => { setModalRegistro(true) }}>form</button>
+                                </> : null
+                            }
+                            {
+                                !modalRegistro ? null :
+                                    // componente google
+                                    <>
+                                        <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro} history={history} />
+                                    </>
+                            }
+                        </div>
                         :
-                        <div className="cardsContainer">
+                        <Row>
                             {
                                 desafios.map(desafio => (
                                     <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
@@ -78,7 +84,7 @@ function MisDesafios({ ubicacion }) {
                                     :
                                     null
                             }
-                        </div>
+                        </Row>
             )
     )
 }

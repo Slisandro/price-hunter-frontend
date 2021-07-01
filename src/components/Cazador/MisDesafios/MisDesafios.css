@@ -52,7 +52,7 @@
     padding: 0 1.5%;
 }
 
-.cardsContainer .card .card-body button.btn.btn-primary {
-    font-size: 1em;
-    font-family: sans-serif;
+.cardsContainer .btn{
+    font-size: 1em !important;
+    /* font-family: sans-serif; */
 }

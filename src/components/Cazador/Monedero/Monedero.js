@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Monedero.css';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import swal from 'sweetalert';
-import {URL} from '../../Redux/actions'
+import { URL } from '../../Redux/actions';
+import { useForm } from "react-hook-form";
+import { Card, CardHeader, CardBody, CardTitle, CardText, Button, Table, Form, Modal, ModalBody, Row, Input, FormFeedback, FormText } from 'reactstrap';
 
 let totalPoints;
 
@@ -60,7 +60,7 @@ function Monedero() {
         }
         if (puntos > totalPoints) {
             setError({
-                bol: true,  
+                bol: true,
                 msg: "No tienes suficientes hunterCoins"
             })
             return setPuntos(0)
@@ -95,61 +95,88 @@ function Monedero() {
             <div className="containerMessageBack">Cargando movimientos...</div>
             :
             <>
-                <div className="miMonedero">
-                    <div className="misPuntos">
+                <Card className="miMonedero">
+                    <CardHeader className="misPuntos">
                         <h2>Mis puntos</h2>
                         <div className="actual">
                             <p className="pointsActual">{actualPoints(movimiento)}</p>
                             <p className="puntos">puntos</p>
                         </div>
-                    </div>
-                    <div className="movimientos">
+                    </CardHeader>
+                    <CardBody className="movimientos">
                         <h2 className="titleMovimientos">Mis movimientos</h2>
-                        <ul className="listTransaccion">
-                            {movimiento.map(transaccion => {
-                                return (
-                                    <li key={transaccion.id} className="transaccion">
-                                        <p className="title">{transaccion.observacion}</p>
-                                        {
-                                            transaccion.tipo_transaccion.id === 2 ?
-                                                <h2 className="puntos menos">- {transaccion.puntos}</h2> :
-                                                <h2 className="puntos mas">+ {transaccion.puntos}</h2>
-                                        }
-                                    </li>
-                                )
-                            }
-                            )}
-                        </ul>
-                        <button onClick={e => setModal(!modal)}>Canjear puntos</button>
-                    </div>
-                </div>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Descripción</th>
+                                    <th>Cantidad de puntos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    movimiento.map(transaccion => {
+                                        return (
+                                            <tr key={transaccion.id} className="transaccion">
+                                                <th className="title">{transaccion.observacion}</th>
+                                                {
+                                                    transaccion.tipo_transaccion.id === 2 ?
+                                                        <th className="puntos menos">- {transaccion.puntos}</th> :
+                                                        <th className="puntos mas">+ {transaccion.puntos}</th>
+                                                }
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </Table>
+                        <button onClick={e => setModal(!modal)} >Canjear puntos</button>
+                    </CardBody>
+                </Card>
                 {
                     !modal ? null :
-                        <div className="FormPostPrice" id="modalRetiroPoints">
-                            <h2 className="h2">Retiro de Puntos</h2>
-                            <label className="label">El canje de puntos se hará a la cuenta y banco indicados cuando creaste tu cuenta</label>
-                            <button className="closeModal" onClick={() => {
-                                setModal(!modal)
-                                setPuntos(0)
-                            }}>X</button>
-                            <Form.Group>
-                                <Form.Label className="label">Puntos a retirar</Form.Label>
-                                <Form.Control
-                                    name="puntosRetiro"
-                                    onChange={(e) => handleChange(e)}
-                                    value={puntos}
-                                    type="number"
-                                    placeholder="Ingresé la cantidad de puntos a retirar"
-                                    className="control"
-                                />
-                                <Form.Text className={error.bol ? "errors" : "p"}>
-                                    {error.msg}
-                                </Form.Text>
-                            </Form.Group>
-                            <Button variant="primary" type="submit" onClick={e => handleSubmit(e)}>
-                                Submit
-                            </Button>
-                        </div>
+                        <Modal isOpen={modal}>
+                            <ModalBody style={{ padding: 0 }}>
+                                <Card className="card-chart" style={{ margin: "auto" }}>
+                                    <CardHeader style={{ margin: "auto", marginBottom: "5%" }}>
+                                        <span id="title">Retirar Puntos</span>
+                                    </CardHeader>
+                                    <CardBody style={{ margin: "auto", marginBottom: "5%" }}>
+                                        <Form onSubmit={e => handleSubmit(e)}>
+                                            <Row>
+                                                <Input
+                                                    bsSize="lg"
+                                                    noValid
+                                                    type="number"
+                                                    value={puntos}
+                                                    autoComplete="off"
+                                                    style={{ paddingLeft: "5%" }}
+                                                    onChange={(e) => handleChange(e)}
+                                                />
+                                                <FormText style={{ fontSize: "1.2em", margin: "auto" }}>
+                                                    {error.msg}
+                                                </FormText>
+                                            </Row>
+                                            <Row>
+                                                <Button variant="primary" type="submit">
+                                                    Retirar
+                                                </Button>
+                                                <Button
+                                                    className="btn-fill"
+                                                    color="primary"
+                                                    type="submit"
+                                                    block
+                                                    onClick={() => {
+                                                        setModal(!modal)
+                                                        setPuntos(0)
+                                                    }}>
+                                                    Cancelar
+                                                </Button>
+                                            </Row>
+                                        </Form>
+                                    </CardBody>
+                                </Card>
+                            </ModalBody>
+                        </Modal>
                 }
             </>
     )
@@ -158,11 +185,11 @@ function Monedero() {
 export default Monedero;
 
 
-function OrderByDate (arr) {
+function OrderByDate(arr) {
     let array = [];
     arr.map(el => {
         const date = new Date(el.createdAt);
-        const year = date.getFullYear() + "" 
+        const year = date.getFullYear() + ""
         const mes = "0" + date.getMonth() + "";
         const dia = date.getDate();
         const hora = date.getHours() + "";
@@ -175,7 +202,7 @@ function OrderByDate (arr) {
             "order": year + mes + dia + hora + minutos + segundos + milisegundos
         })
     })
-    
-    array.sort((a,b) => a.order < b.order ? 1 : -1)
+
+    array.sort((a, b) => a.order < b.order ? 1 : -1)
     return array;
-} 
+}
