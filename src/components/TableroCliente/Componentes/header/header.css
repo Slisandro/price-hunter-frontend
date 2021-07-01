@@ -1,31 +1,41 @@
 #header-tablero-cliente{
-    width: 100%;
+    width: 97%;
     height: 10%;
     background-color: #050926;
     color: white;
 
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 10px;
+    /* border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px; */
 
     display: flex;
-    justify-content:flex-end;
+    justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 #div-name-cerrarsesion{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:space-between;
+    width: 100%;
     flex-direction: row;
 }
 
 #div-name-cerrarsesion p {
     margin: 1rem;
+    color: turquoise;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 #div-name-cerrarsesion button {
     margin: 1rem;
+    border-radius: 10px;
+    background-color: teal; 
+
 }
+
 
 @media only screen and (max-width: 768px) {
     #header-tablero-cliente{

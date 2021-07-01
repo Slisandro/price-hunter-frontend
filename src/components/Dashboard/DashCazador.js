@@ -2,7 +2,7 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import AdminLayout from "./src/layouts/Admin/Admin.js";
+import Cazador from "./src/layouts/Admin/Cazador";
 
 
 import "./src/assets/scss/black-dashboard-react.scss";
@@ -20,12 +20,11 @@ function Dash() {
         <BrowserRouter>
           <Switch>
             <Route
-              path="/admin"
-              render={(props) => <AdminLayout {...props} />}
-              
+              path="/cazador" render={(props) => <Cazador {...props} />}
+
             />
-         
-            <Redirect from="/admin" to="/admin/dashboard" />
+          
+            <Redirect from="/cazador" to="/cazador/dashboard" />
           </Switch>
         </BrowserRouter>
       </BackgroundColorWrapper>

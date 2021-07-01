@@ -4,11 +4,16 @@ import { getDesafios } from '../../Redux/actions'
 import CardsDesafios from '../CardsDesafios/CardDesafios';
 import FormPostPrice from '../FormPostPrice/FormPostPrice';
 import axios from 'axios';
-import './MisDesafios.css'
+import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
-import RegistroGoogle from '../../Registro Google/RegistroGoogle'
+import RegistroGoogle from '../../Registro Google/RegistroGoogle';
+import { Row, Button } from 'reactstrap';
+var geolocation = require('geolocation');
 
-function MisDesafios({ ubicacion }) {
+
+
+
+function MisDesafios() {
     const [modal, setModal] = useState(false);
     const [modalRegistro, setModalRegistro] = useState(false); // abrir modal
     const [modalCompletado, setModalCompletado] = useState(false) // se pasa como props al componente
@@ -18,6 +23,18 @@ function MisDesafios({ ubicacion }) {
     const [referencia, setReferencia] = useState({
         idDesafio: ""
     })
+    const [ubicacion, setUbicacion] = useState({
+        latitud: "",
+        longitud: "",
+        dis: 0
+    })
+
+
+
+
+
+
+
     const history = useHistory()
     useEffect(() => {
         if (ubicacion.latitud && ubicacion.longitud) {
@@ -27,7 +44,29 @@ function MisDesafios({ ubicacion }) {
                 })
             setLoading(false)
         }
-    }, [modalCompletado])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalCompletado, ubicacion])
+
+
+
+    useEffect(() => {
+        console.log("Lisandro")
+        geolocation.getCurrentPosition((err, position) => {
+          if (err) throw err
+          return setUbicacion({
+            ...ubicacion,
+            longitud: position.coords.longitude + "",
+            latitud: position.coords.latitude + "",
+          })
+        })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
+
+
+
+
+
+
 
     const handleClickOpen = (e) => {
         setReferencia({
@@ -44,29 +83,39 @@ function MisDesafios({ ubicacion }) {
     }
 
     return (
-        !ubicacion.latitud && !ubicacion.longitud ? <div className="containerMessageBack">No hemos podido acceder a tu ubicación</div> :
+        !ubicacion.latitud && !ubicacion.longitud ? 
+            <div className="containerMessageBack">
+                No hemos podido acceder a tu ubicación
+                <Button onClick={() => history.push("/cazador")}>Recargar</Button>
+            </div> 
+            :
             (
                 loading ?
                     <div className="containerMessageBack">Cargando desafíos...</div>
                     :
                     desafios.msg ?
-                       <div>
-                         <div class="containerMessageBack">{desafios.msg}</div>
-                       {
-                        desafios.msg === "completar los datos del usuario antes de continuar" ? <>
-                        <button onClick={()=>{setModalRegistro(true)}}>form</button>
-                        </>:null
-                       }
-                       {
-                        !modalRegistro ? null :
-                            // componente google
-                            <>
-                              <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro}history={history}/>
-                            </>
-                         }
-                       </div>
+                        <div>
+                            <div class="containerMessageBack">{desafios.msg}</div>
+                            {
+                                desafios.msg === "completar los datos del usuario antes de continuar" ? <>
+                                    <button
+                                        className="btn-fill"
+                                        color="primary"
+                                        type="submit"
+                                        block
+                                        onClick={() => { setModalRegistro(true) }}>form</button>
+                                </> : null
+                            }
+                            {
+                                !modalRegistro ? null :
+                                    // componente google
+                                    <>
+                                        <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro} history={history} />
+                                    </>
+                            }
+                        </div>
                         :
-                        <div className="cardsContainer">
+                        <Row>
                             {
                                 desafios.map(desafio => (
                                     <CardsDesafios key={desafio.id} handleClickOpen={handleClickOpen} desafio={desafio} />
@@ -78,7 +127,7 @@ function MisDesafios({ ubicacion }) {
                                     :
                                     null
                             }
-                        </div>
+                        </Row>
             )
     )
 }
