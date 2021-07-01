@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFamilia, putFamilia } from "../../../Redux/actions";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
   Button,
@@ -99,7 +99,7 @@ function PutFamilias() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Familias</h1>
+          <span id="title">Familias</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -111,15 +111,19 @@ function PutFamilias() {
           >
             <Row>
               <Col>
-                <label className="title">Familias</label>
+                <h6 className="title">Familias</h6>
+                
                 <Input type="select" name="nombre_familia" className="inp">
                   <option></option>
                   {familia.map((u) => (
                     <option value={u.nombre_familia}>{u.nombre_familia}</option>
                   ))}
                 </Input>
-                <div>
-                  <label className="title">Nueva Familia</label>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Familia</h6>
+                  {!state.nombre_nueva_familia ? (
+                    
+                  <> 
                   <Input
                     className="inp"
                     type="text"
@@ -142,6 +146,66 @@ function PutFamilias() {
                   <span className="err">
                     {errors?.nombre_nueva_familia?.message}
                   </span>
+                  
+                  </>
+                  ) : state.nombre_nueva_familia.length && state.nombre_nueva_familia.length < 15 ? (
+                    <>
+                    <Input
+                    valid
+                    className="inp"
+                    type="text"
+                    name="nombre_nueva_familia"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nombre_nueva_familia", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar un nombre ",
+                      // },
+                      maxLength: {
+                        value: 15,
+                        message: "El nombre debe tener menos de quince letras!",
+                      },
+                    })}
+                  />
+                  {/* <span className="err">{errors?.nombre_familia?.message}</span>
+              </div> */}
+                  <span className="err">
+                    {errors?.nombre_nueva_familia?.message}
+                  </span>
+                  </>
+
+                  ) : (
+                    <>
+                    <Input
+                    invalid
+                    className="inp"
+                    type="text"
+                    name="nombre_nueva_familia"
+                    autoComplete="off"
+                    max="0"
+                    {...register("nombre_nueva_familia", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar un nombre ",
+                      // },
+                      maxLength: {
+                        value: 15,
+                        message: "El nombre debe tener menos de quince letras!",
+                      },
+                    })}
+                  />
+                  {/* <span className="err">{errors?.nombre_familia?.message}</span>
+              </div> */}
+                  <span className="err">
+                    {errors?.nombre_nueva_familia?.message}
+                  </span>
+                  </>
+
+                  )
+
+                  }
+                  
                 </div>
                 <Button
                   className="btn-fill"

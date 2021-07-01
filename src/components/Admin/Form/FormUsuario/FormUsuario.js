@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { tipoUsuario, getTipoUsuario } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
-import close from "../../../../assets/cancel (1).png";
 import swal from "sweetalert";
 import {
   Button,
@@ -86,7 +85,7 @@ function FormUsuario() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Tipo de Usuario</h1>
+          <span id="title">Tipo de Usuario</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -98,7 +97,7 @@ function FormUsuario() {
           >
             <Row>
               <Col>
-                <label className="title">Usuarios Actuales</label>
+                <h6 className="title">Usuarios Actuales</h6>
                 <Input
                   name="id"
                   type="select"
@@ -118,36 +117,112 @@ function FormUsuario() {
                     </option>
                   ))}
                 </Input>
-                <label className="title">Nuevo Usuario</label>
-                <Input
-                  className="inp"
-                  type="text"
-                  name="tipo_usuario"
-                  max="0"
-                  autoComplete="off"
-                  {...register("tipo_usuario", {
-                    required: {
-                      value: true,
-                      message: "Debe ingresar un nombre ",
-                    },
-                    maxLength: {
-                      value: 15,
-                      message:
-                        "El tipo de usuario no debe tener mas de quince letras!",
-                    },
-                    minLength: {
-                      value: 3,
-                      message:
-                        "El tipo de usuario debe al menos tener tres letras!",
-                    },
-                    max: {
-                      value: 0,
-                      message: "No puede comenzar con numeros",
-                    },
-                  })}
-                />
-                <span className="err">{errors?.tipo_usuario?.message}</span>
-
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Usuario</h6>
+                  {!state.tipo_usuario ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : state.tipo_usuario.length <= 20 &&
+                    state.tipo_usuario.length >= 3 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        max="0"
+                        autoComplete="off"
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El tipo de usuario no debe tener más de veinte letras!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El tipo de usuario debe al menos tener tres letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "No puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  )}
+                </div>
                 <Button
                   className="btn-fill"
                   color="primary"

@@ -34,6 +34,7 @@ const Login = (props) => {
   const autenticado = useSelector((store) => store.autenticado);
   const cliente = useSelector((store) => store.cliente);
   const isAdmin = useSelector((store) => store.isAdmin);
+  const isUser = useSelector((store) => store.isUser)
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,9 @@ const Login = (props) => {
         if (isAdmin) {
           props.history.push('/admin');
         } else {
-          props.history.push('/tablero');
+          if (isUser) {
+            props.history.push('/tablero');
+          }
         }
       }
       // if (!cliente) {

@@ -5,52 +5,46 @@ import UserProfile from "./views/UserProfile.js";
 import Agregar from "./views/Agregar.js";
 import Modificar from "./views/Modificar.js";
 
-import Monedero from "./views/Monedero";
-import Desafios from "./views/Desafios";
-import Buscador from "./views/Buscador";
-import Jumbotron from "./views/Jumbotron";
-
-
- export var routes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
-    layout: "/admin",
-  },
-  {
-    path: "/mapa",
-    name: "Mapa (AÚN NO FUNCA)",
-    icon: "tim-icons icon-pin",
-    component: Map,
-    layout: "/admin",
-  },
-  {
-    path: "/tablas",
-    name: "Tablas",
-    icon: "tim-icons icon-puzzle-10",
-    component: TableList,
-    layout: "/admin",
-  },
-  {
-    path: "/mi-perfil",
-    name: "Mi Perfil",
-    icon: "tim-icons icon-single-02",
-    component: UserProfile,
-    layout: "/admin",
-  },
+var routes = [
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "tim-icons icon-chart-pie-36",
+  //   component: Dashboard,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/mapa",
+  //   name: "Mapa (AÚN NO FUNCA)",
+  //   icon: "tim-icons icon-pin",
+  //   component: Map,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/tablas",
+  //   name: "Tablas",
+  //   icon: "tim-icons icon-puzzle-10",
+  //   component: TableList,
+  //   layout: "/admin",
+  // },
+  // {
+  //   path: "/mi-perfil",
+  //   name: "Mi Perfil",
+  //   icon: "tim-icons icon-single-02",
+  //   component: UserProfile,
+  //   layout: "/admin",
+  // },
   {
     path: "/agregar",
     name: "Agregar",
-    icon: "tim-icons icon-single-02",
+    icon: "tim-icons icon-pin",
     component: Agregar,
     layout: "/admin",
   },
   {
     path: "/modificar",
     name: "Modificar",
-    icon: "tim-icons icon-single-02",
+    icon: "tim-icons icon-pin",
     component: Modificar,
     layout: "/admin",
   },

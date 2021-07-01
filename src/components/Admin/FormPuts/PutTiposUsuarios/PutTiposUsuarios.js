@@ -28,6 +28,28 @@ function PutTiposUsuarios() {
     dispatch(getTipoUsuario());
   }, [dispatch]);
 
+  const [state, setState] = useState({
+    tipo_usuario: "",
+    id: "",
+  });
+  const ChangeInput = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    if (name === "tipo_usuario") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+  };
+
   const {
     register,
     formState: { errors },
@@ -36,6 +58,7 @@ function PutTiposUsuarios() {
   } = useForm();
 
   const submit = (data, e) => {
+    console.log(data);
     if (data.tipo_usuario) {
       dispatch(putTipoUsuario(data));
       e.target.reset();
@@ -61,66 +84,163 @@ function PutTiposUsuarios() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Tipos de Usuario</h1>
+          <span id="title">Tipos de Usuario</span>
         </CardHeader>
         <CardBody>
           <Form
             id="survey-form"
             className="form"
             noValidate
-            // onChange={(e) => ChangeInput(e)}
+            onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
             <Row>
               <Col>
-                <label className="title">Tipos de Usuario</label>
-                <Input
-                  name="id"
-                  type="select"
-                  className="inp"
-                  // value={paises.nombre_region}
-                  // onChange={(e) => ChangeInput(e)}
-                  {...register("id", {
-                    // required: {
-                    //   value: true,
-                    //   message: "Debe seleccionar un campo a modificar",
-                    // },
-                  })}
-                >
-                  <option></option>
-                  {tipo_usuarios.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.tipo_usuario}
-                    </option>
-                  ))}
-                </Input>
-                <span className="err">{errors?.id?.message}</span>
+                <h6 className="title">Tipos de Usuario</h6>
+                {state.id.length === 0 ? (
+                  <>
+                    <Input
+                      name="id"
+                      type="select"
+                      className="inp"
+                      // value={paises.nombre_region}
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar un campo a modificar",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {tipo_usuarios.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.tipo_usuario}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">{errors?.id?.message}</span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      name="id"
+                      type="select"
+                      className="inp"
+                      // value={paises.nombre_region}
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar un campo a modificar",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {tipo_usuarios.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.tipo_usuario}
+                        </option>
+                      ))}
+                    </Input>
+                    <span className="err">{errors?.id?.message}</span>
+                  </>
+                )}
 
-                <div>
-                  <label className="title">Nuevo Tipo de Usuario</label>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="tipo_usuario"
-                    autoComplete="off"
-                    max="0"
-                    {...register("tipo_usuario", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe ingresar nombre",
-                      // },
-                      maxLength: {
-                        value: 15,
-                        message:
-                          "El nombre no debe tener mas de quince caracteres!",
-                      },
-                      max: {
-                        value: 0,
-                        message: "El nombre no puede comenzar con numeros",
-                      },
-                    })}
-                  />
-                  <span className="err">{errors?.tipo_usuario?.message}</span>
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Tipo de Usuario</h6>
+                  {!state.tipo_usuario ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar nombre",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre no debe tener mas de quince caracteres!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : state.tipo_usuario.length > 4 &&
+                    state.tipo_usuario.length < 15 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar nombre",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre no debe tener mas de quince caracteres!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="tipo_usuario"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("tipo_usuario", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar nombre",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre no debe tener mas de quince caracteres!",
+                          },
+                          max: {
+                            value: 0,
+                            message: "El nombre no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.tipo_usuario?.message}
+                      </span>
+                    </>
+                  )}
                 </div>
                 <Button
                   className="btn-fill"

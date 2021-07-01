@@ -35,6 +35,7 @@ function Regiones() {
 
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
@@ -68,32 +69,32 @@ function Regiones() {
     dispatch(regionPost(nuevaRegion));
     e.target.reset();
     swal({
-      title: "Region agregada con éxito!",
+      title: "Región agregada con éxito!",
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    });
+    }).then((g) => dispatch(getRegion()));
 
     setRegion({
       nombre_region: "",
     });
+    reset({ data });
   };
   return (
     <Card className="card-chart">
       <CardHeader>
-        <h1 id="title">Regiones</h1>
+        <span id="title">Regiones</span>
       </CardHeader>
       <CardBody>
         <Form
-          id="survey-form"
           className="form"
-          // noValidate
+          noValidate
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
           <Row>
             <Col>
-              <label className="title">Regiones Actuales</label>
+              <h6 className="title">Regiones Actuales</h6>
               <Input type="select" name="nombre_region" className="inp">
                 <option></option>
                 {regiones.map((u) => (
@@ -102,32 +103,105 @@ function Regiones() {
               </Input>
 
               {/* <span className="err">{errors?.nombre_region?.message}</span> */}
-              <label className="title">Nueva Región</label>
-              <Input
-                className="inp"
-                type="text"
-                name="nombre_region"
-                autoComplete="off"
-                {...register("nombre_region", {
-                  required: {
-                    value: true,
-                    message: "Ingrese una Region ",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "El Nombre no debe tener mas de diez caracteres",
-                  },
-                  minLength: {
-                    value: 2,
-                    message: "El Nombre no debe tener menos de dos caracteres",
-                  },
-                })}
-              />
-              <span className="err">{errors?.nombre_region?.message}</span>
-              {/* {alerta ? (
+              <div style={{ marginTop: "1rem" }}>
+                <h6 className="title">Nueva Región</h6>
+                {!region.nombre_region ? (
+                  <>
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="nombre_region"
+                      autoComplete="off"
+                      {...register("nombre_region", {
+                        required: {
+                          value: true,
+                          message: "Ingrese una Región ",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El Nombre no debe tener menos de tres caracteres",
+                        },
+                      })}
+                    />
+                    <span className="err">
+                      {errors?.nombre_region?.message}
+                    </span>
+                  </>
+                ) : region.nombre_region.length > 2 &&
+                  region.nombre_region.length <= 20 &&
+                  isNaN(region.nombre_region) ? (
+                  <>
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="nombre_region"
+                      autoComplete="off"
+                      {...register("nombre_region", {
+                        required: {
+                          value: true,
+                          message: "Ingrese una Región ",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El Nombre no debe tener menos de tres caracteres",
+                        },
+                      })}
+                    />
+                    <span className="err">
+                      {errors?.nombre_region?.message}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="nombre_region"
+                      autoComplete="off"
+                      {...register("nombre_region", {
+                        required: {
+                          value: true,
+                          message: "Ingrese una Region ",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El Nombre no debe tener más de veinte caracteres",
+                        },
+                        minLength: {
+                          value: 3,
+                          message:
+                            "El Nombre no debe tener menos de tres caracteres",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                    <span className="err">
+                      {errors?.nombre_region?.message}
+                    </span>
+                  </>
+                )}
+                {/* {alerta ? (
             <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
           ) : null} */}
-
+              </div>
               <Button className="btn-fill" color="primary" type="submit" block>
                 Agregar
               </Button>
