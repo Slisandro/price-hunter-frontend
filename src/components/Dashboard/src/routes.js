@@ -4,8 +4,12 @@ import TableList from "./views/TableList.js";
 import UserProfile from "./views/UserProfile.js";
 import Agregar from "./views/Agregar.js";
 import Modificar from "./views/Modificar.js";
+import Jumbotron from "./views/Jumbotron";
+import Buscador from "./views/Buscador";
+import Monedero from "./views/Monedero";
+import Desafios from "./views/Desafios";
 
-var routes = [
+export var routes = [
   // {
   //   path: "/dashboard",
   //   name: "Dashboard",
@@ -88,5 +92,3 @@ export var routesCazador = [
  
  
 ];
-
-
