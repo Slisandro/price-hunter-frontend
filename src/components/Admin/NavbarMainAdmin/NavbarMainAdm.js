@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Categorias from "../../categorias/Categorias";
+import React, { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import Categorias from "../../categorias/Categorias";
 // import { getCategorias, getProductsByName } from "../Redux/actions";
 
 function NavBarMainAdm({ producto, setProducto, setState }) {
-  const categorias = useSelector((store) => store.categorias);
+  // const categorias = useSelector((store) => store.categorias);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(getCategorias());

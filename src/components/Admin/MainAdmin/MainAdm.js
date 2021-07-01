@@ -13,7 +13,7 @@ import FormUsuario from "../Form/FormUsuario/FormUsuario";
 import FormGenero from "../Form/FormGenero/FormGenero";
 import PutCategorías from "../FormPuts/PutCategorias/PutCategorias";
 import PutCiudades from "../FormPuts/PutCiudades/PutCiudades";
-import PutDesafios from "../FormPuts/PutDesafíos/PutDesafios";
+// import PutDesafios from "../FormPuts/PutDesafíos/PutDesafios";
 import PutFamilias from "../FormPuts/PutFamilias/PutFamilias";
 import PutMonedas from "../FormPuts/PutMonedas/PutMonedas";
 import PutPaises from "../FormPuts/PutPaises/PutPaises";
@@ -23,6 +23,7 @@ import PutSubCate from "../FormPuts/PutSubCategoria/PutSubCate";
 import PutTiposUsuarios from "../FormPuts/PutTiposUsuarios/PutTiposUsuarios";
 import PutTipoTrans from "../FormPuts/PutTipoTrans/PutTipoTrans";
 import PutUM from "../FormPuts/PutUM/PutUM";
+import PutGeneros from "../FormPuts/PutGeneros/PutGeneros";
 
 // import FormMonedaYum from "../Form/FormMonedaYum/FormMoneda";
 // import Form from "../Form/Form";
@@ -30,7 +31,7 @@ import "./MainAdm.css";
 
 const MainAdm = ({ state, setState }) => {
   const productos = useSelector((store) => store.productos);
-  const subcategorias = useSelector((store) => store.subcategorias);
+  // const subcategorias = useSelector((store) => store.subcategorias);
   const [producto, setProducto] = useState("");
 
   return (
@@ -92,8 +93,8 @@ const MainAdm = ({ state, setState }) => {
             <PutUM />
           ) : state === "Modificar-Tipo-de-Transacción" ? (
             <PutTipoTrans />
-          ) : state === "Modificar-Desafíos" ? (
-            <PutDesafios />
+          ) : state === "Modificar-Generos" ? (
+            <PutGeneros />
           ) : null}
         </div>
       </div>

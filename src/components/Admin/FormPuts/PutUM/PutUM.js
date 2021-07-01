@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { putUM, getUnidadMedida } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
@@ -27,6 +27,30 @@ function PutUM() {
   useEffect(() => {
     dispatch(getUnidadMedida());
   }, [dispatch]);
+
+
+  const [state, setState] = useState({
+    codigo_unidad_medida: "",
+    nombre_unidad: "",
+  });
+  const ChangeInput = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    if (name === "nombre_unidad") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+    if (name === "codigo_unidad_medida") {
+      setState({
+        ...state,
+        [name]: value,
+      });
+    }
+  };
+
 
   const {
     register,
@@ -63,51 +87,83 @@ function PutUM() {
       {/* <Col lg="4"> */}
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Unidad de Medida</h1>
+          <span id="title">Unidad de Medida</span>
         </CardHeader>
         <CardBody>
           <Form
             id="survey-form"
             className="form"
             noValidate
-            // onChange={(e) => ChangeInput(e)}
+             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
             <Row>
               <Col>
-                <label className="title">Unidad de Medida</label>
-                <Input
-                  name="codigo_unidad_medida"
-                  className="inp"
-                  type="select"
-                  // value={paises.nombre_region}
-                  // onChange={(e) => ChangeInput(e)}
-                  {...register("codigo_unidad_medida", {
-                    //   required: {
-                    //     value: true,
-                    //     message: "Debe seleccionar un campo a modificar",
-                    //   },
-                  })}
-                >
-                  <option></option>
-                  {unidad.map((f, index) => (
-                    <option key={index} value={f.codigo_unidad_medida}>
-                      {f.nombre_unidad}
-                    </option>
-                  ))}
-                </Input>
-                <span className="err">
-                  {errors?.codigo_unidad_medida?.message}
-                </span>
 
-                <div>
-                  <label className="title">Nueva Unidad de Medida</label>
-                  <Input
+              <div>
+                  <h6 className="title">Unidad de Medida</h6>
+                  {state.codigo_unidad_medida.length === 0 ? (
+                    <>
+                      <Input
+                        name="codigo_unidad_medida"
+                        className="inp"
+                        type="select"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("codigo_unidad_medida", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar un campo a modificar",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {unidad.map((f, index) => (
+                          <option key={index} value={f.codigo_unidad_medida}>
+                            {f.nombre_unidad}
+                          </option>
+                        ))}
+                      </Input>
+                    </>
+                  ) : (
+                    <>
+                    <Input
+                     valid
+                      name="codigo_unidad_medida"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("codigo_unidad_medida", {
+                        required: {
+                          value: true,
+                          message: "Debe seleccionar un campo a modificar",
+                        },
+                      })}
+                    >
+                      <option></option>
+                      {unidad.map((f, index) => (
+                        <option key={index} value={f.codigo_unidad_medida}>
+                          {f.nombre_unidad}
+                        </option>
+                      ))}
+                    </Input>
+                  </>
+                  )}
+                   
+                  <span className="err">{errors?.codigo_unidad_medida?.message}</span>
+                </div>
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Unidad de Medida</h6>
+                  {!state.nombre_unidad ? (
+                    <>
+                    
+                    <Input
                     // className="inp"
                     type="text"
                     name="nombre_unidad"
                     autoComplete="off"
                     max="0"
+                    onChange={(e) => ChangeInput(e)}
                     {...register("nombre_unidad", {
                       // required: {
                       //   value: true,
@@ -130,6 +186,83 @@ function PutUM() {
                     })}
                   />
                   <span className="err">{errors?.nombre_unidad?.message}</span>
+                    
+                    </>
+
+                  ) : state.nombre_unidad.length >= 2 && state.nombre_unidad.length <15 ? (
+
+                    <>
+                    <Input
+                    valid
+                    type="text"
+                    name="nombre_unidad"
+                    autoComplete="off"
+                    max="0"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("nombre_unidad", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar un nombre nuevo ",
+                      // },
+                      maxLength: {
+                        value: 20,
+                        message:
+                          "El nombre no debe tener mas de veinte caracteres",
+                      },
+                      minLength: {
+                        value: 3,
+                        message:
+                          "El nombre no debe tener menos de tres caracteres",
+                      },
+                      max: {
+                        value: 0,
+                        message: "El nombre no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">{errors?.nombre_unidad?.message}</span>
+            
+                    </>
+
+                  ) : (
+
+                    <>
+                    <Input
+                    invalid
+                    type="text"
+                    name="nombre_unidad"
+                    autoComplete="off"
+                    max="0"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("nombre_unidad", {
+                      // required: {
+                      //   value: true,
+                      //   message: "Debe ingresar un nombre nuevo ",
+                      // },
+                      maxLength: {
+                        value: 20,
+                        message:
+                          "El nombre no debe tener mas de veinte caracteres",
+                      },
+                      minLength: {
+                        value: 3,
+                        message:
+                          "El nombre no debe tener menos de tres caracteres",
+                      },
+                      max: {
+                        value: 0,
+                        message: "El nombre no puede comenzar con numeros",
+                      },
+                    })}
+                  />
+                  <span className="err">{errors?.nombre_unidad?.message}</span>
+            
+                    </>
+
+                  )
+                
+                  }
+                  
                 </div>
                 <Button
                   className="btn-fill"

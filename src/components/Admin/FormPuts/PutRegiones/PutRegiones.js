@@ -8,18 +8,11 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-
-// import "./FormUnidadMedida.css";
 
 function PutRegiones() {
   const dispatch = useDispatch();
@@ -27,31 +20,27 @@ function PutRegiones() {
 
   const [state, setState] = useState({
     nombre_region: "",
-    nuevo_nombre_region: "",
-    id: null,
+    id: "",
   });
 
   useEffect(() => {
     dispatch(getRegion());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
+    const value = e.target.value;
+    const name = e.target.name;
 
-    if (name === "nombre_region") {
-      var reg = region.find((f) => f.nombre_region === e.target.value);
-      var final = reg.id;
+    if (name === "id") {
       setState({
         ...state,
-        [name]: target.value,
-        id: final,
+        [name]: value,
       });
-    } else if (name === "nuevo_nombre_region") {
+    }
+    if (name === "nombre_region") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
       });
     }
   };
@@ -60,24 +49,20 @@ function PutRegiones() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevaRegion = {
-      nombre_region: state.nuevo_nombre_region,
-      id: state.id,
-    };
-
-    dispatch(putRegion(nuevaRegion));
-    e.target.reset();
-    if (nuevaRegion.nombre_region) {
+    if (data.id && data.id.length > 0) {
+      dispatch(putRegion(data));
+      e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
       }).then((r) => dispatch(getRegion()));
-    } else if (!nuevaRegion.nuevo_nombre_region) {
+    } else {
       swal({
         title: "Debe seleccionar una región para modificar!",
         icon: "error",
@@ -88,16 +73,16 @@ function PutRegiones() {
 
     setState({
       nombre_region: "",
-      nuevo_nombre_region: "",
-      id: null,
+      id: "",
     });
+    reset({ data });
   };
 
   return (
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Regiones</h1>
+          <span id="title">Regiones</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -109,35 +94,110 @@ function PutRegiones() {
           >
             <Row>
               <Col>
-                <label className="title">Regiones</label>
-                <Input type="select" name="nombre_region" className="inp">
-                  <option></option>
-                  {region.map((u) => (
-                    <option value={u.nombre_region}>{u.nombre_region}</option>
-                  ))}
-                </Input>
+                <h6 className="title">Regiones</h6>
+                {state.id.length === 0 ? (
+                  <>
+                    <Input
+                      type="select"
+                      name="id"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {
+                        // required: {
+                        //   value: true,
+                        //   message: "Debe seleccionar una region",
+                        // },
+                      })}
+                    >
+                      <option></option>
+                      {region.map((u) => (
+                        <option value={u.id}>{u.nombre_region}</option>
+                      ))}
+                    </Input>
+                  </>
+                ) : (
+                  <>
+                    <Input
+                      valid
+                      type="select"
+                      name="id"
+                      className="inp"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("id", {})}
+                    >
+                      <option></option>
+                      {region.map((u) => (
+                        <option value={u.id}>{u.nombre_region}</option>
+                      ))}
+                    </Input>
+                  </>
+                )}
+                <span className="err">{errors?.id?.message}</span>
 
-                <span className="err">{errors?.nombre_region?.message}</span>
-
-                <div>
-                  <label className="title">Nueva Región</label>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="nuevo_nombre_region"
-                    autoComplete="off"
-                    max="0"
-                    {...register("nuevo_nombre_region", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe ingresar una region ",
-                      // },
-                      max: {
-                        value: 0,
-                        message: "La region no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nueva Región</h6>
+                  {state.nombre_region.length === 0 ? (
+                    <>
+                      <Input
+                        className="inp"
+                        type="text"
+                        name="nombre_region"
+                        autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
+                        max="0"
+                        {...register("nombre_region", {
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar una region ",
+                          // },
+                        })}
+                      />
+                    </>
+                  ) : state.nombre_region.length > 2 &&
+                    state.nombre_region.length < 21 ? (
+                    <>
+                      <Input
+                        valid
+                        className="inp"
+                        type="text"
+                        name="nombre_region"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_region", {
+                        
+                        })}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        className="inp"
+                        type="text"
+                        name="nombre_region"
+                        autoComplete="off"
+                        max="0"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_region", {
+                          maxLength: {
+                            value: 20,
+                            message:
+                              "El nombre no debe tener mas de 20 caracteres",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre no puede tener menos de 3 caracteres",
+                          },
+                          pattern: {
+                            value: /^[a-zA-Z ]*$/,
+                            message: "Debe ingresar solo letras",
+                          },
+                        })}
+                      />
+                    </>
+                  )}
                   <span className="err">{errors?.nombre_region?.message}</span>
                 </div>
                 <Button
@@ -153,14 +213,6 @@ function PutRegiones() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesUM">
-        Regiones Actuales
-        <div className="tiposUM">
-          {region.map((u) => (
-            <span className="spansUM">{u.nombre_region}</span>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }

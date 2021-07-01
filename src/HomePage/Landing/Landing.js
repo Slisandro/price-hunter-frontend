@@ -1,50 +1,69 @@
-import React from 'react';
+import React from "react";
 import "./Landing.css";
 import { Link } from 'react-router-dom';
-import aguila from "../assets/aguila.png";
-import mapa from "../assets/mapa.png";
-import ayuda from "../assets/ayuda.png";
-import ahorro from "../assets/ahorro.png";
-import ventas from "../assets/tendencia.png";
-
-import cazador from "../assets/mira.png";
-import Bot from './Chatbot/Bot';
-import coca from "../assets/img/logomarcas/cocacola.png";
-import pepsi from "../assets/img/logomarcas/pepsi.png";
-import cereal from "../assets/img/logomarcas/kelloggs.png";
-
-import mondelez from "../assets/img/logomarcas/mondelez.png";
-import colgate from "../assets/img/logomarcas/colgate.png";
-import unilever from "../assets/img/logomarcas/unilever.png";
+import aguila from "../../assets/aguila.png";
+import mapa from "../../assets/mapa.png";
+import ayuda from "../../assets/ayuda.png";
+import ahorro from "../../assets/ahorro.png";
+import ventas from "../../assets/tendencia.png";
+import cazador from "../../assets/mira.png";
+import Bot from '../Chatbot/Bot';
+import coca from "../../assets/img/logomarcas/cocacola.png";
+import pepsi from "../../assets/img/logomarcas/pepsi.png";
+import cereal from "../../assets/img/logomarcas/kelloggs.png";
+import mondelez from "../../assets/img/logomarcas/mondelez.png";
+import colgate from "../../assets/img/logomarcas/colgate.png";
+import unilever from "../../assets/img/logomarcas/unilever.png";
 import { Nav, NavItem, Button, Jumbotron, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 
+
 const Landing = () => {
-    return (
-        <div className="hunter__landing__content">
+  return (
+    <div className="hunter__landing__content">
+      <div className="navbar__landing">
+        <div className="containerLanding__hunter flexing">
+          <img className="aguilaLanding" src={aguila} alt="" />
+          <Nav className="justify-content-center">
+            <NavItem>
+              <Link href="#">Inicio</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/login">Iniciar Sesion</Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/registro">Registrarme</Link>
+            </NavItem>
+          </Nav>
+        </div>
+      </div>
 
-            <div className="navbar__landing">
-                <div className="containerLanding__hunter flexing">
-                    <img className="aguilaLanding" src={aguila} alt="" />
-                    <Nav className="justify-content-center">
-                        <NavItem>
-                            <Link href="#">Inicio</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/login">Iniciar Sesion</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/registro">Registrarme</Link>
-                        </NavItem>
-                    </Nav>
+      <section class="showcase">
+        <div class="containerLanding__hunter grid">
+          <div class="showcase-text">
+            <h1 class="title-hunter">
+              <span class="hunter-pe">P</span>rice{" "}
+              <span class="hunter-pe">H</span>unter
+            </h1>
+            <p class="description-hunter">
+              Price Hunter es la primera aplicacion que le permite{" "}
+              <small class="hunter-pe">informar los precios</small> de sus
+              productos favoritos para ayudar a otros consumidores y además,
+              <small class="hunter-pe"> obtener recompensas</small> por ello !
+            </p>
+            <a href="features.html" class="btnLanding btn-outline__hunter">
+              Sobre nosotros
+            </a>
+            <a href="features.html" class="btnLanding btn-outline__hunter">
+              Empresas
+            </a>
+          </div>
 
-
-
-                </div>
+          <div class="showcase-form ">
+            <div class="hero__phone">
+              <img class="img__super" src={cazador} alt="" />
             </div>
-
-
-
+<<<<<<< HEAD:src/HomePage/Landing/Landing.js
 
 
             <section class="showcase">
@@ -255,25 +274,8 @@ const Landing = () => {
                 </div>
             </footer>
             <Bot />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Landing;

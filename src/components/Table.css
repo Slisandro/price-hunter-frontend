@@ -8,7 +8,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: rgba(24,30,54,1);
+    background: rgba(24,30,54,.5);
     color: white;
     margin-top: 2%;
     font-size: 1.5em;

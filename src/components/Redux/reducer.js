@@ -6,7 +6,6 @@ import {
   OCULTAR_ERROR,
   REGISTRO_EXITOSO,
   LOGIN_EXITOSO,
-  
   GET_FAMILIA,
   GET_CATEGORIA,
   GET_GENEROS,
@@ -31,12 +30,15 @@ import {
   GET_SUBCATEGORIA_POR_ID,
   GET_PAISES_ID,
   GET_CIUDADES_ID,
-
+  GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
+<<<<<<< HEAD
     // ----- CLIENTE -------//
     GET_MIS_DESAFIOS,
   
+=======
+>>>>>>> c7dc2321fe225a36a0af129cd095b0a31ebd9970
 } from "./actions";
 
 const initialState = {
@@ -85,8 +87,9 @@ const initialState = {
   autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
-  cliente: false,
-  isAdmin: false,
+  cliente: localStorage.getItem("cliente"),
+  isAdmin: localStorage.getItem("isAdmin"),
+  isUser: localStorage.getItem("isUser"),
   /******************************* */
 
   generos: [],
@@ -113,6 +116,7 @@ const initialState = {
   ciudadesId: [],
   //--------------------------//
   registroGoogleRes: {},
+  expire: false,
 };
 
 //-------------ADMIN-------------//
@@ -178,25 +182,30 @@ function rootReducer(state = initialState, action) {
       );
       localStorage.setItem("auth", true);
       if (action.payload.cliente) {
+        localStorage.setItem("cliente", true);
         return {
           ...state,
           autenticado: true,
           usuario: null,
           mensaje: null,
           isAdmin: false,
+          isUser: false,
           cliente: true,
         };
       } else {
         if (action.payload.admin) {
+          localStorage.setItem("isAdmin", true);
           return {
             ...state,
             autenticado: true,
             usuario: null,
             mensaje: null,
             cliente: false,
+            isUser: false,
             isAdmin: true,
           };
         } else {
+          localStorage.setItem("isUser", true);
           return {
             ...state,
             autenticado: true,
@@ -204,6 +213,7 @@ function rootReducer(state = initialState, action) {
             mensaje: null,
             isAdmin: false,
             cliente: false,
+            isUser: true
           };
         }
       }
@@ -212,18 +222,21 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         registroGoogleRes: action.payload,
-      }
+      };
     case REGISTRO_GOOGLE_ERR:
       return {
         ...state,
         registroGoogleRes: action.payload,
-      }
+      };
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
       localStorage.removeItem("token");
       localStorage.removeItem("nombre");
       localStorage.removeItem("auth");
+      localStorage.removeItem("cliente");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("isUser");
       return {
         ...state,
         autenticado: false,
@@ -232,6 +245,7 @@ function rootReducer(state = initialState, action) {
         mensaje: action.payload,
       };
 
+<<<<<<< HEAD
 
     //----CLIENTE REDUCER-----//
     case GET_MIS_DESAFIOS:
@@ -240,6 +254,8 @@ function rootReducer(state = initialState, action) {
         misdesafios: action.payload,
       };
     
+=======
+>>>>>>> c7dc2321fe225a36a0af129cd095b0a31ebd9970
     case GET_FAMILIA:
       return {
         ...state,
@@ -318,7 +334,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         ciudadesId: action.payload,
       };
-    
+    case GET_GENERO:
+      return {
+        ...state,
+        generos: action.payload,
+      };
+
     default:
       return state;
   }
