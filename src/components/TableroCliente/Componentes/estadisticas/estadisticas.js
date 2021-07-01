@@ -9,7 +9,7 @@ function Estadisticas() {
   return (
 
     <div>
-        <p>ESTADISTICAS</p>
+        <p>LO CAMBIAMOS Y SE VE</p>
     </div>
 
   );

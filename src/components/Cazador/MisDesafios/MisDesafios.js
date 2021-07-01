@@ -8,8 +8,12 @@ import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
 import RegistroGoogle from '../../Registro Google/RegistroGoogle';
 import { Row } from 'reactstrap';
+//var geolocation = require('geolocation');
 
-function MisDesafios({ ubicacion }) {
+
+
+
+function MisDesafios() {
     const [modal, setModal] = useState(false);
     const [modalRegistro, setModalRegistro] = useState(false); // abrir modal
     const [modalCompletado, setModalCompletado] = useState(false) // se pasa como props al componente
@@ -19,6 +23,18 @@ function MisDesafios({ ubicacion }) {
     const [referencia, setReferencia] = useState({
         idDesafio: ""
     })
+    const [ubicacion, setUbicacion] = useState({
+        latitud: "",
+        longitud: "",
+        dis: 0
+    })
+
+
+
+
+
+
+
     const history = useHistory()
     useEffect(() => {
         if (ubicacion.latitud && ubicacion.longitud) {
@@ -28,7 +44,28 @@ function MisDesafios({ ubicacion }) {
                 })
             setLoading(false)
         }
-    }, [modalCompletado])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalCompletado, ubicacion])
+
+
+
+    useEffect(() => {
+        geolocation.getCurrentPosition((err, position) => {
+          if (err) throw err
+          return setUbicacion({
+            ...ubicacion,
+            longitud: position.coords.longitude + "",
+            latitud: position.coords.latitude + "",
+          })
+        })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [])
+
+
+
+
+
+
 
     const handleClickOpen = (e) => {
         setReferencia({

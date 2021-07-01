@@ -124,10 +124,9 @@ function FormAgregarProducto() {
               <Col>
                 <div>
                   <h6 className="title">Nombre</h6>
-                  {state.nombre ? (
+                  {!state.nombre ? (
                     <>
                       <Input
-                        valid
                         style={{ appearance: "none" }}
                         type="text"
                         name="nombre"
@@ -143,7 +142,33 @@ function FormAgregarProducto() {
                       {/* <FormFeedback style={{ margin: "1rem" }} valid>
                         Nombre Correcto!
                       </FormFeedback> */}
-                      {/* <span className="err">{errors?.nombre?.message}</span> */}
+                      <span className="err">{errors?.nombre?.message}</span>
+                    </>
+                  ) : state.nombre.length && state.nombre.length < 15 ? (
+                    <>
+                      <Input
+                        valid
+                        style={{ appearance: "none" }}
+                        type="text"
+                        name="nombre"
+                        max="0"
+                        autoComplete="off"
+                        {...register("nombre", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un nombre ",
+                          },
+                          maxLength: {
+                            value: 15,
+                            message:
+                              "El nombre no debe tener mas de quince letras!",
+                          },
+                        })}
+                      />
+                      {/* <FormFeedback style={{ margin: "1rem" }} valid>
+                        Nombre Correcto!
+                      </FormFeedback> */}
+                      <span className="err">{errors?.nombre?.message}</span>
                     </>
                   ) : (
                     <>
@@ -185,7 +210,32 @@ function FormAgregarProducto() {
 
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Unidad de Medida</h6>
-                  {state.unidadMedidaCodigoUnidadMedida ? (
+                  {!state.unidadMedidaCodigoUnidadMedida ? (
+                    <>
+                      <Input
+                        name="unidadMedidaCodigoUnidadMedida"
+                        style={{ appearance: "none" }}
+                        type="select"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("unidadMedidaCodigoUnidadMedida", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una unidad de medida",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {unidad_medida.map((f, index) => (
+                          <option key={index} value={f.codigo_unidad_medida}>
+                            {f.codigo_unidad_medida}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.unidadMedidaCodigoUnidadMedida?.message}
+                      </span>
+                    </>
+                  ) : state.unidadMedidaCodigoUnidadMedida ? (
                     <>
                       <Input
                         valid
@@ -242,7 +292,39 @@ function FormAgregarProducto() {
 
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Contenido Neto</h6>
-                  {state.contenido_neto && !isNaN(state.contenido_neto) ? (
+                  {!state.contenido_neto && !isNaN(state.contenido_neto) ? (
+                    <>
+                      <Input
+                        type="text"
+                        inputmode="numeric"
+                        min="0"
+                        name="contenido_neto"
+                        autoComplete="off"
+                        {...register("contenido_neto", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un valor ",
+                          },
+                          pattern: {
+                            value: /[0-9]/,
+                            message: "Debe ingresar sólo números",
+                          },
+                          maxLength: {
+                            value: 4,
+                            message:
+                              "El contenido no debe tener mas de 4 caracteres!",
+                          },
+                          min: {
+                            value: 1,
+                            message: "No puede ingresar valores negativos",
+                          },
+                        })}
+                      />
+                      <span className="err">
+                        {errors?.contenido_neto?.message}
+                      </span>
+                    </>
+                  ) : !isNaN(state.contenido_neto) ? (
                     <>
                       <Input
                         valid
@@ -299,7 +381,33 @@ function FormAgregarProducto() {
                 </div>
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Sub-Categoría</h6>
-                  {state.subcategoriumId ? (
+                  {!state.subcategoriumId ? (
+                    <>
+                      <Input
+                        style={{ appearance: "none" }}
+                        name="subcategoriumId"
+                        type="select"
+                        // value={state.nombre}
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("subcategoriumId", {
+                          required: {
+                            value: true,
+                            message: "Debe seleccionar una subcategoria",
+                          },
+                        })}
+                      >
+                        <option></option>
+                        {subcategoria.map((f, index) => (
+                          <option key={index} value={f.id}>
+                            {f.nombre_subcategoria}
+                          </option>
+                        ))}
+                      </Input>
+                      <span className="err">
+                        {errors?.subcategoriumId?.message}
+                      </span>
+                    </>
+                  ) : state.subcategoriumId ? (
                     <>
                       <Input
                         valid

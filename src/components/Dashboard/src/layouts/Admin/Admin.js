@@ -3,10 +3,12 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // import Footer from "components/Footer/Footer.js";
+
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 
-import routes from "../../routes";
+import {routes }from "../../routes";
 
 import logo from "../../assets/img/react-logo.png";
 import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
@@ -53,6 +55,7 @@ function Admin(props) {
       mainPanelRef.current.scrollTop = 0;
     }
   }, [location]);
+  
   // this function opens and closes the sidebar on small devices
   const toggleSidebar = () => {
     document.documentElement.classList.toggle("nav-open");
@@ -81,31 +84,41 @@ function Admin(props) {
     }
     return "Brand";
   };
+
+
+
+
   return (
     <BackgroundColorContext.Consumer>
-      {({ color, changeColor }) => (
-        <React.Fragment>
-          <div className="wrapper">
-            <Sidebar
-              routes={routes}
-              logo={{
-                outterLink: "localhost:3000/admin",
-                text: "Price Hunter",
-                imgSrc: logo,
-              }}
+    {({ color, changeColor }) => (
+      <React.Fragment>
+        <div className="wrapper">
+          <Sidebar
+            routes={routes}
+            logo={{
+              outterLink: "https://www.creative-tim.com/",
+              text: "Creative Tim",
+              imgSrc: logo,
+            }}
+            toggleSidebar={toggleSidebar}
+          />
+          <div className="main-panel" ref={mainPanelRef} data={color}>
+            <AdminNavbar
+              brandText={getBrandText(location.pathname)}
               toggleSidebar={toggleSidebar}
+              sidebarOpened={sidebarOpened}
             />
-            <div className="main-panel" ref={mainPanelRef} data={color}>
               <Switch>
                 {getRoutes(routes)}
-                {/* <Redirect from="*" to="/admins/dashboard" /> */}
+                {/* <Redirect from="*" to="/admin/dashboard" /> */}
               </Switch>
-            </div>
+            
           </div>
-          <FixedPlugin bgColor={color} handleBgClick={changeColor} />
-        </React.Fragment>
-      )}
-    </BackgroundColorContext.Consumer>
+        </div>
+        <FixedPlugin bgColor={color} handleBgClick={changeColor} />
+      </React.Fragment>
+    )}
+  </BackgroundColorContext.Consumer>
   );
 }
 

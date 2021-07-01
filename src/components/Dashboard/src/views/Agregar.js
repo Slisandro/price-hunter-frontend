@@ -56,17 +56,6 @@ function FormAgregar() {
         </Row>
         <Row>
           <Col lg="4">
-            <Regiones />
-          </Col>
-          <Col lg="4">
-            <Paises />
-          </Col>
-          <Col lg="4">
-            <Ciudades />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="4">
             <Fami />
           </Col>
           <Col lg="4">
@@ -74,6 +63,17 @@ function FormAgregar() {
           </Col>
           <Col lg="4">
             <Subcate />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg="4">
+            <Regiones />
+          </Col>
+          <Col lg="4">
+            <Paises />
+          </Col>
+          <Col lg="4">
+            <Ciudades />
           </Col>
         </Row>
       </div>
