@@ -94,7 +94,14 @@ function PutSubCate() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.id && data.id.length > 0) {
+    if (
+      data.id &&
+      data.id.length &&
+      data.nombre_subcategoria &&
+      data.categoriumId &&
+      data.familia &&
+      data.categoria > 0
+    ) {
       dispatch(putSubCategoria(data));
       e.target.reset();
       swal({
@@ -102,8 +109,18 @@ function PutSubCate() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
+      }).then(() => {
+        dispatch(getSubcategoriaPorId(data.categoriumId));
+        reset({ data });
+        setState({
+          id: "",
+          nombre_subcategoria: "",
+          categoriumId: "",
+          descripcion: "",
+          categoria: "",
+          familia: "",
+        });
       });
-      reset({ data });
     } else {
       swal({
         title:
@@ -113,15 +130,6 @@ function PutSubCate() {
         timer: "5000",
       });
     }
-    setState({
-      id: "",
-      nombre_subcategoria: "",
-      categoriumId: "",
-      descripcion: "",
-      categoria: "",
-      familia: "",
-    });
-    
   };
 
   return (

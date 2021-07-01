@@ -61,7 +61,14 @@ function PutRegiones() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getRegion()));
+      }).then(() => {
+        dispatch(getRegion())
+        setState({
+          nombre_region: "",
+          id: "",
+        });
+        reset({ data });
+      });
     } else {
       swal({
         title: "Debe seleccionar una región para modificar!",
@@ -69,13 +76,7 @@ function PutRegiones() {
         button: "Aceptar",
         timer: "5000",
       });
-    }
-
-    setState({
-      nombre_region: "",
-      id: "",
-    });
-    reset({ data });
+    }    
   };
 
   return (
