@@ -19,7 +19,7 @@ export default function CardsDesafios({ desafio, handleClickOpen }) {
                                 flexDirection: "column"
                             }}
                         >
-                            <CardTitle style={{ textAlign: "center", fontSize: "1.5em !important" }}>{desafio.nombre_desafio}</CardTitle>
+                            <CardTitle style={{ textAlign: "center", fontSize: "2em" }}>{desafio.nombre_desafio}</CardTitle>
                             <CardText style={{ textAlign: "center", fontSize: "1.2em" }}>{desafio.descripcion_desafio}</CardText>
                             <CardText className="info" style={{ textAlign: "center", fontSize: "1.2em" }}>Ciudad : {x.ciudad}</CardText>
                             <CardText className="info" style={{ textAlign: "center", fontSize: "1.2em" }}>Limite de precios : {x.detalle.cantidad_precios}</CardText>
