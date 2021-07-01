@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { monedaPost, mostrarError, getMoneda } from "../../../Redux/actions";
+import { monedaPost, getMoneda } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
@@ -8,22 +8,16 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 
 import "./FormMonedaYum.css";
 
 function FormMoneda() {
   const dispatch = useDispatch();
-  const monedas = useSelector((store) => store.monedas);
 
   const [state, setState] = useState({
     codigo_moneda: "",
@@ -58,7 +52,6 @@ function FormMoneda() {
     handleSubmit,
   } = useForm();
 
-  const alerta = useSelector((store) => store.alerta);
   let moneda = useSelector((store) => store.moneda);
 
   useEffect(() => {
@@ -71,30 +64,25 @@ function FormMoneda() {
       nombre_moneda: state.nombre_moneda,
       simbolo: state.simbolo,
     };
-    console.log(nuevaMoneda);
-
-    if (!isNaN(parseInt(nuevaMoneda.codigo_moneda))) {
-      dispatch(
-        mostrarError("El codigo solo puede contener letras", "alerta-error")
-      );
-      return;
-    }
-
-    if (!isNaN(parseInt(nuevaMoneda.nombre_moneda))) {
-      dispatch(
-        mostrarError("El nombre solo puede contener letras", "alerta-error")
-      );
-      return;
-    }
     if (moneda.length > 0) {
-      for (let i = 0; i < moneda.length; i++) {
-        if (nuevaMoneda.codigo_moneda === moneda[i].codigo_moneda) {
-          dispatch(mostrarError("La moneda ya existe", "alerta-error"));
-
-          return;
-        }
-      }
+    for (let i = 0; i < moneda.length; i++) {
+      if (
+        moneda[i].nombre_moneda.toUpperCase() ===
+        nuevaMoneda.nombre_moneda.toUpperCase() ||
+          moneda[i].codigo_moneda.toUpperCase() ===
+          nuevaMoneda.codigo_moneda.toUpperCase()
+      )
+        return swal({
+          title: "El nombre o el codigo ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
     }
+  }
+
+   
+   
     if (nuevaMoneda.codigo_moneda.length > 0) {
       dispatch(monedaPost(nuevaMoneda));
       e.target.reset();
@@ -103,8 +91,7 @@ function FormMoneda() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then(
-        (g) => dispatch(getMoneda()),
+      }).then(() => dispatch(getMoneda()),
         setState({
           codigo_moneda: "",
           nombre_moneda: "",
@@ -135,9 +122,7 @@ function FormMoneda() {
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
-            {/* {alerta ? (
-              <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
-            ) : null} */}
+           
             <Row>
               <Col>
                 <h6 className="title">Monedas Actuales</h6>

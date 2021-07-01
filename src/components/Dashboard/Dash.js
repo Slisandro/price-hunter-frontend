@@ -22,7 +22,7 @@ function Dash() {
               path="/admin"
               render={(props) => <AdminLayout {...props} />}
             />
-            <Redirect from="/admin" to="/admin/dashboard" />
+            {/* <Redirect from="/admin" to="/admin/dashboard" /> */}
           </Switch>
         </BrowserRouter>
       </BackgroundColorWrapper>

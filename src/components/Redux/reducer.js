@@ -33,6 +33,7 @@ import {
   GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
+  POST_UM,
 } from "./actions";
 
 const initialState = {
@@ -83,6 +84,7 @@ const initialState = {
   mensaje: null,
   cliente: false,
   isAdmin: false,
+  expires: true,
   /******************************* */
 
   generos: [],
@@ -104,6 +106,7 @@ const initialState = {
   transaccion: [],
   paisesId: [],
   ciudadesId: [],
+  
   //--------------------------//
   registroGoogleRes: {},
 };
@@ -188,6 +191,7 @@ function rootReducer(state = initialState, action) {
             mensaje: null,
             cliente: false,
             isAdmin: true,
+            expires: true,
           };
         } else {
           return {
@@ -223,6 +227,7 @@ function rootReducer(state = initialState, action) {
         token: null,
         usuario: null,
         mensaje: action.payload,
+        expires: false,
       };
 
     case GET_FAMILIA:
@@ -308,6 +313,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         generos: action.payload,
       };
+      case POST_UM:
+      return {
+        ...state,
+        expires: action.payload
+      }
 
     default:
       return state;

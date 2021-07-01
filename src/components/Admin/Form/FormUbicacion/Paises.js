@@ -4,25 +4,18 @@ import {
   getMoneda,
   getRegion,
   paisPost,
-  mostrarError,
   getPais,
   getPaises,
 } from "../../../Redux/actions";
 import {
-  FormFeedback,
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
@@ -85,21 +78,40 @@ function Paises() {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
-  const alerta = useSelector((store) => store.alerta);
-
   const submit = (data, e) => {
-    console.log(data);
-    if (pais.codigo_alfa && pais.nombre_pais) {
-      const nuevoPais = {
-        codigo_alfa: pais.codigo_alfa.toLocaleUpperCase(),
-        nombre_pais: pais.nombre_pais,
-        regioneId: pais.regioneId,
-        monedaCodigoMoneda: pais.monedaCodigoMoneda,
-      };
+    for (let i = 0; i < paises.length; i++) {
+      if (
+        data.nombre_pais.toUpperCase() ===
+          paises[i].nombre_pais.toUpperCase() ||
+        data.codigo_alfa.toUpperCase() === paises[i].codigo_alfa.toUpperCase()
+      ) {
+        return swal({
+          title: "El pais o el codigo ya existen",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
 
-      dispatch(paisPost(nuevoPais));
+    if (!data.codigo_alfa && !data.nombre_pais) {
+      // const nuevoPais = {
+      //   codigo_alfa: pais.codigo_alfa.toLocaleUpperCase(),
+      //   nombre_pais: pais.nombre_pais,
+      //   regioneId: pais.regioneId,
+      //   monedaCodigoMoneda: pais.monedaCodigoMoneda,
+      // };
+      return swal({
+        title: "Debe ingresar un nombre y un codigo para el nuevo pais!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    } else {
+      dispatch(paisPost(data));
 
       e.target.reset();
       swal({
@@ -107,13 +119,15 @@ function Paises() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((p) => dispatch(getPais()));
-
-      setPais({
-        codigo_alfa: "",
-        nombre_pais: "",
-        regioneId: "",
-        monedaCodigoMoneda: "",
+      }).then(() => {
+        dispatch(getPais());
+        setPais({
+          codigo_alfa: "",
+          nombre_pais: "",
+          regioneId: "",
+          monedaCodigoMoneda: "",
+        });
+        reset({ data });
       });
     }
   };
@@ -128,9 +142,6 @@ function Paises() {
           onChange={(e) => ChangeInput(e)}
           onSubmit={handleSubmit(submit)}
         >
-          {/* {alerta ? (
-          <div className={`alerta ${alerta.categoria}`}>{alerta.msg}</div>
-        ) : null} */}
           <Row>
             <Col>
               <h6 className="title">Países Actuales</h6>
@@ -328,7 +339,7 @@ function Paises() {
                         },
                       })}
                     >
-                      {/* <option></option> */}
+                      <option></option>
                       {region.map((f) => (
                         <option value={f.nombre_region}>
                           {f.nombre_region}
@@ -354,7 +365,7 @@ function Paises() {
                         },
                       })}
                     >
-                      {/* <option></option> */}
+                      <option></option>
                       {region.map((f) => (
                         <option value={f.nombre_region}>
                           {f.nombre_region}
@@ -383,7 +394,7 @@ function Paises() {
                         },
                       })}
                     >
-                      {/* <option></option> */}
+                      <option></option>
                       {moneda.map((f) => (
                         <option value={f.codigo_moneda}>
                           {f.codigo_moneda}
@@ -409,7 +420,7 @@ function Paises() {
                         },
                       })}
                     >
-                      {/* <option></option> */}
+                      <option></option>
                       {moneda.map((f) => (
                         <option value={f.codigo_moneda}>
                           {f.codigo_moneda}

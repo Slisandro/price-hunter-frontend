@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   tipoTransaccionPost,
@@ -11,15 +11,10 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 
 import "./FormTransaccion.css";
@@ -30,6 +25,7 @@ function FormTransaccion() {
 
   const [state, setState] = useState({
     tipo_transaccion: "",
+    id: "",
   });
 
   useEffect(() => {
@@ -47,6 +43,12 @@ function FormTransaccion() {
         [name]: target.value,
       });
     }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    }
   };
   const {
     register,
@@ -56,29 +58,42 @@ function FormTransaccion() {
   } = useForm();
 
   const submit = (data, e) => {
+    for (let i = 0; i < transaccion.length; i++) {
+      if (data.tipo_transaccion.toUpperCase() === transaccion[i].tipo_transaccion.toUpperCase()) {
+        return swal({
+          title: "La transaccion ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
+
     if (data) {
-      dispatch(tipoTransaccionPost(state));
+      dispatch(tipoTransaccionPost(data));
       e.target.reset();
-      swal({
+      return swal({
         title: "Tipo de Transacción agregado con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getTipoTransaccion()));
-
-      setState({
-        ...state,
-        tipo_transaccion: "",
+      }).then((r) => {
+        dispatch(getTipoTransaccion());
+        setState({
+          ...state,
+          tipo_transaccion: "",
+          id: "",
+        });
+        reset({ data });
       });
     } else {
-      swal({
+      return swal({
         title: "Tipo de Transacción agregado con éxito!",
         icon: "error",
         button: "Aceptar",
         timer: "5000",
       });
     }
-    reset({ data });
   };
 
   return (
@@ -102,12 +117,7 @@ function FormTransaccion() {
                   type="select"
                   className="inp"
                   onChange={(e) => ChangeInput(e)}
-                  // {...register("id", {
-                  //   required: {
-                  //     value: true,
-                  //     message: "Debe seleccionar un Producto",
-                  //   },
-                  // })}
+                  {...register("id", {})}
                 >
                   <option></option>
                   {transaccion.map((f, index) => (
@@ -130,10 +140,6 @@ function FormTransaccion() {
                             value: true,
                             message: "Debe ingresar un tipo de transaccion",
                           },
-                          minLength: {
-                            value: 3,
-                            message: "Mínimo 3 carácteres",
-                          },
                         })}
                       />
                       <span className="err">
@@ -149,16 +155,7 @@ function FormTransaccion() {
                         type="text"
                         name="tipo_transaccion"
                         autoComplete="off"
-                        {...register("tipo_transaccion", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un tipo de transaccion",
-                          },
-                          minLength: {
-                            value: 3,
-                            message: "Mínimo 3 carácteres",
-                          },
-                        })}
+                        {...register("tipo_transaccion", {})}
                       />
                       <span className="err">
                         {errors.tipo_transaccion &&
@@ -174,10 +171,6 @@ function FormTransaccion() {
                         name="tipo_transaccion"
                         autoComplete="off"
                         {...register("tipo_transaccion", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un tipo de transaccion",
-                          },
                           minLength: {
                             value: 3,
                             message: "Mínimo 3 carácteres",
@@ -204,14 +197,6 @@ function FormTransaccion() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesUM">
-        Tipos de Transacción Actuales
-        <div className="tiposUM">
-          {transaccion.map((t) => (
-            <span className="spansUM">{t.tipo_transaccion}</span>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }

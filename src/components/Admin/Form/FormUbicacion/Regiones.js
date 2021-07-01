@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { regionPost, getRegion, mostrarError } from "../../../Redux/actions";
+import { regionPost, getRegion } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
-  FormFeedback,
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 
 function Regiones() {
@@ -40,8 +34,6 @@ function Regiones() {
     handleSubmit,
   } = useForm();
 
-  const alerta = useSelector((store) => store.alerta);
-
   const ChangeInput = (e) => {
     const target = e.target;
     const name = target.name;
@@ -55,30 +47,43 @@ function Regiones() {
   };
 
   const submit = (data, e) => {
-    e.preventDefault();
-
     const nuevaRegion = {
       nombre_region: region.nombre_region,
     };
-    if (!isNaN(parseInt(nuevaRegion.nombre_region))) {
-      dispatch(
-        mostrarError("El nombre no debe contener numeros", "alerta-error")
-      );
-      return;
+    for (let i = 0; i < regiones.length; i++) {
+      if (data.nombre_region.toUpperCase() === regiones[i].nombre_region.toUpperCase()) {
+        return swal({
+          title: "La Region ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
     }
-    dispatch(regionPost(nuevaRegion));
-    e.target.reset();
-    swal({
-      title: "Región agregada con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((g) => dispatch(getRegion()));
 
-    setRegion({
-      nombre_region: "",
-    });
-    reset({ data });
+    if (!data.nombre_region) {
+      return swal({
+        title: "Agregue una Region!",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    } else {
+      dispatch(regionPost(nuevaRegion));
+      e.target.reset();
+      swal({
+        title: "Región agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then(() => {
+        dispatch(getRegion());
+        setRegion({
+          nombre_region: "",
+        });
+        reset({ data });
+      });
+    }
   };
   return (
     <Card className="card-chart">
@@ -102,7 +107,6 @@ function Regiones() {
                 ))}
               </Input>
 
-              {/* <span className="err">{errors?.nombre_region?.message}</span> */}
               <div style={{ marginTop: "1rem" }}>
                 <h6 className="title">Nueva Región</h6>
                 {!region.nombre_region ? (
@@ -115,19 +119,10 @@ function Regiones() {
                       {...register("nombre_region", {
                         required: {
                           value: true,
-                          message: "Ingrese una Región ",
-                        },
-                        maxLength: {
-                          value: 20,
-                          message:
-                            "El Nombre no debe tener más de veinte caracteres",
-                        },
-                        minLength: {
-                          value: 3,
-                          message:
-                            "El Nombre no debe tener menos de tres caracteres",
+                          message: "Debe ingresar una region ",
                         },
                       })}
+                      
                     />
                     <span className="err">
                       {errors?.nombre_region?.message}
@@ -143,22 +138,7 @@ function Regiones() {
                       type="text"
                       name="nombre_region"
                       autoComplete="off"
-                      {...register("nombre_region", {
-                        required: {
-                          value: true,
-                          message: "Ingrese una Región ",
-                        },
-                        maxLength: {
-                          value: 20,
-                          message:
-                            "El Nombre no debe tener más de veinte caracteres",
-                        },
-                        minLength: {
-                          value: 3,
-                          message:
-                            "El Nombre no debe tener menos de tres caracteres",
-                        },
-                      })}
+                      {...register("nombre_region", {})}
                     />
                     <span className="err">
                       {errors?.nombre_region?.message}
@@ -173,10 +153,6 @@ function Regiones() {
                       name="nombre_region"
                       autoComplete="off"
                       {...register("nombre_region", {
-                        required: {
-                          value: true,
-                          message: "Ingrese una Region ",
-                        },
                         maxLength: {
                           value: 20,
                           message:

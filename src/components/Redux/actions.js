@@ -277,13 +277,15 @@ export function iniciarSesion(datos) {
             });
       })
       .catch((err) =>
-        dispatch({
-          type: LOGIN_ERROR,
-          payload: {
-            msg: err.response.data.msg,
-            categoria: "alerta-error",
-          },
-        })
+        // dispatch({
+          console.log(err)
+        //   type: LOGIN_ERROR,
+        //   payload: {
+        //     msg: err.response.data.msg,
+        //     categoria: "alerta-error",
+        //   },
+        //  }
+        //  )
       );
   };
 }
@@ -648,14 +650,36 @@ export function getCiudadId(id) {
 
 //_____________________ INICIO ADMIN POST _____________________//
 
+export const POST_UM = 'POST_UM'
+
+
 export function unidadDeMedida(objeto) {
-  return function() {
+  return function(dispatch, getState) {
     const token = localStorage.getItem("token");
     axios.post(`${URL}admin/um`, objeto, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    })
+    // .then(()=> {
+    //   let expires = true
+    //   dispatch({
+    //     type: POST_UM,
+    //     payload: expires
+    //   })
+    // }).catch((r) => {
+    //   console.log(r)
+    //   let expires = false
+    //   dispatch({
+    //     type: POST_UM,
+    //     payload: expires
+    //   })
+    // })
   };
 }
+
+// .catch((err) => {
+// console.log(err)
+// dispatch({ type: "CERRAR_SESION" })
+//} );
 
 export function tipoUsuario(objeto) {
   return function() {
