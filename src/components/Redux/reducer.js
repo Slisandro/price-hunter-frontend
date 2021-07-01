@@ -33,6 +33,11 @@ import {
   GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
+
+    // ----- CLIENTE -------//
+    GET_MIS_DESAFIOS,
+  
+
 } from "./actions";
 
 const initialState = {
@@ -91,6 +96,9 @@ const initialState = {
   paises: [],
   ciudades: [],
   //----------------------------------------
+
+  //-----CLIENTE------//
+  misdesafios: [],
   //        POST ADMIN
   admin: {},
   familia: [],
@@ -236,6 +244,15 @@ function rootReducer(state = initialState, action) {
         mensaje: action.payload,
       };
 
+
+
+    //----CLIENTE REDUCER-----//
+    case GET_MIS_DESAFIOS:
+      return {
+        ...state,
+        misdesafios: action.payload,
+      };
+    
     case GET_FAMILIA:
       return {
         ...state,
