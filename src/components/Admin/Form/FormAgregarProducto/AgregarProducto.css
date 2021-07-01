@@ -260,16 +260,18 @@ header {
 }
 
 .button__login {
-  border-radius: 0.2em;
+  border-radius: 0.1em;
   width: 21.8em;
-  height: 35px;
+  height: 40px !important;
   border: none;
   outline: none;
   cursor: pointer;
   background: #17e8f7;
-  font-weight: bold;
   color: rgb(0, 0, 0);
   transition: 0.4s;
+  font-size: 15px !important;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif!important;
+  text-transform: capitalize !important;
 }
 .button__login:hover {
   background: #4ccbd4;

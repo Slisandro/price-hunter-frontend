@@ -147,16 +147,17 @@ const Login = (props) => {
 
       <div className="loger_cont">
         <p className="welcome-login">Bienvenido</p>
-
+        {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center`}> {mensaje.msg} </div>) : null}
+        {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}
         <div className="global-container__log">
 
 
 
-
+  
           <Card>
-            {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center`}> {mensaje.msg} </div>) : null}
+           
             <CardBody>
-              {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}
+              
               <form className="login__form" onSubmit={handleSubmit}>
                 <Col md="12">
                   <FormGroup row>
