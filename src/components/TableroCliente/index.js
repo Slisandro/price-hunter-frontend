@@ -11,7 +11,7 @@ import MisDatos from "./Componentes/misdatos/misdatos";
 
 function TableroCLiente(props) {
   let {url} = useRouteMatch()
-  console.log(url)
+  // console.log(url)
   return (
      
       <div id="contenedor-tablero-cliente">

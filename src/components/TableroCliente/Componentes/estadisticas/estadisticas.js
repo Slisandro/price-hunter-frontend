@@ -25,16 +25,18 @@ import {
 function Estadisticas(props) {
   const dispatch = useDispatch();
   // console.log(props)
+  const [idSelect, setIdSelect] = useState();
   const [cabeza, setCabeza] =useState()
   const [ciudades, setCiudades] =useState()
   const [precios, setPrecios] =useState()
   const [preciosFilter, setPreciosFilter] =useState()
   const [desafios, setDesafios] =useState()
   const [ciudadSelect, setCiudadSelect] =useState()
-  const [idSelect, setIdSelect] = useState();
   const [sumaPuntos, setSumaPuntos] = useState();
   const [sumaPrecios, setSumaPrecios] = useState();
+  const [reinicio, setReinico] =useState();
 
+  
   
 
   function handleDesafios(e){
@@ -44,8 +46,8 @@ function Estadisticas(props) {
     }
   }
   function handlePrecios(ciudadSeleccionada){
-    console.log('ciudSelect',ciudadSeleccionada)
-    console.log('ciudades', precios)
+    // console.log('ciudSelect',ciudadSeleccionada)
+    // console.log('ciudades', precios)
     if(ciudadSeleccionada !=="Todas"){
       setPreciosFilter(precios.filter(arg=>  arg.ciudadId ===parseFloat(ciudadSeleccionada.split(',')[0]) ))
     }else{
@@ -54,7 +56,7 @@ function Estadisticas(props) {
         let sumaPrec = 0;
         let sumaPunt = 0;
         for(let x =0; x< ciudades.length;x++){
-          console.log('sumaRango', parseInt(ciudades[x].puntosOfrecidos))
+          // console.log('sumaRango', parseInt(ciudades[x].puntosOfrecidos))
           sumaPunt =  parseInt(ciudades[x].puntosOfrecidos)+ sumaPrec;
           sumaPrec =  parseInt(ciudades[x].cantidadPrecios)+ sumaPunt;
 
@@ -67,13 +69,9 @@ function Estadisticas(props) {
 
   
     function hadleCiudad(e){
-
       if(e.target.value){
         setCiudadSelect(e.target.value)
         handlePrecios(e.target.value)//FIltra los precios
-      }else{
-        // setCiudadSelect(null)
-        // handlePrecios(null)
       }
     }
  
@@ -103,8 +101,10 @@ function Estadisticas(props) {
         setCabeza(r.data.headerDesafio)
         setCiudades(r.data.ciudadesDesafio)
         setPrecios(r.data.preciosDesafio)
+        setPreciosFilter(null)
+        setReinico('nada')
         
-        console.log(r.data)
+        // console.log(r.data)
       }).catch((err)=>{
         alert('su sesión ha expirado');
         console.log(err)
@@ -113,11 +113,10 @@ function Estadisticas(props) {
   }
   
   useEffect(()=>{
-   getEstadisticas();
-  //  hadleCiudad('Todas')
+    getEstadisticas();
   },[idSelect]);
-
-useEffect(async()=>{
+  
+  useEffect(async()=>{
   await getDesafios('activos');
 },[])
   return (
@@ -161,10 +160,7 @@ useEffect(async()=>{
             </Col>
 
             <Col>
-              {/* {console.log('precios', preciosFilter)}
-              {console.log('Ciudad', ciudadSelect)}
-              {console.log('Ciudades', ciudades)}
-              {console.log('puntos', sumaPuntos)} */}
+              
               <h6 className='titulosestadisticas'>Precios a Capturar:</h6>
               {preciosFilter && preciosFilter.length && ciudadSelect && ciudadSelect!=='Todas' && <span className='datosestadistica'>{parseInt(ciudadSelect.split(',')[2])}</span>}
               {preciosFilter &&  preciosFilter.length  && ciudadSelect && ciudadSelect ==='Todas' && <span className='datosestadistica'>{sumaPrecios}</span>}
@@ -184,7 +180,9 @@ useEffect(async()=>{
             </Col>
             <Col>
               <h6 className='titulosestadisticas'>Puntos Ganados (Cazador)</h6>
-              {preciosFilter && preciosFilter.length && ciudadSelect && <span className='datosestadistica'>{preciosFilter.length * ((sumaPrecios / sumaPuntos).toFixed(2))}</span>}
+              {preciosFilter && preciosFilter.length && ciudadSelect && ciudadSelect!=='Todas' &&<span className='datosestadistica'>{(preciosFilter.length * (parseFloat(ciudadSelect.split(',')[1]) / parseFloat(ciudadSelect.split(',')[2]))).toFixed(2)}</span>}
+              {preciosFilter && preciosFilter.length && ciudadSelect && ciudadSelect ==='Todas' &&<span className='datosestadistica'>{(preciosFilter.length * (sumaPuntos / sumaPrecios)).toFixed(2)}</span>}
+
             </Col>
             <Col>
             {/* {console.log('cantprecios', preciosFilter.length, sumaPrecios)} */}
@@ -200,8 +198,8 @@ useEffect(async()=>{
 
             <Col sm={4}>{/*  lista de ciudades */}
               <h6 className='titulosestadisticas'>Ciudad:</h6>
-              <Input type='select' name='listaciudad' onChange={e => hadleCiudad(e)}>
-                <option className ='listasestadisticas' value={null}></option>
+              <Input type='select' value={reinicio} onChange={e => hadleCiudad(e)}>
+                <option selected className='listasestadisticas' value='nada'></option>
                 <option className ='listasestadisticas'>Todas</option>
                 {ciudades && ciudades.map(arg => {
                   return(
@@ -220,8 +218,8 @@ useEffect(async()=>{
             </Col> 
           </Row>
           <div>
-                {console.log('precios filtrados', preciosFilter)}
-              { idSelect && preciosFilter && <TablaCliente precios={preciosFilter}></TablaCliente>}
+              {/* {console.log('precios filtrados', preciosFilter)} */}
+              {preciosFilter && <TablaCliente precios={preciosFilter}></TablaCliente>}
           </div>
         </div>}
     </div>
