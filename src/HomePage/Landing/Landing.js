@@ -1,6 +1,5 @@
 import React from "react";
 import "./Landing.css";
-<<<<<<< HEAD:src/HomePage/Landing/Landing.js
 import { Link } from 'react-router-dom';
 import aguila from "../../assets/aguila.png";
 import mapa from "../../assets/mapa.png";
@@ -17,35 +16,7 @@ import colgate from "../../assets/img/logomarcas/colgate.png";
 import unilever from "../../assets/img/logomarcas/unilever.png";
 import { Nav, NavItem, Button, Jumbotron, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
-=======
-import { Link } from "react-router-dom";
-import aguila from "../assets/aguila.png";
-import mapa from "../assets/mapa.png";
-import ayuda from "../assets/ayuda.png";
-import ahorro from "../assets/ahorro.png";
-import ventas from "../assets/tendencia.png";
 
-import cazador from "../assets/mira.png";
-import Bot from "./Chatbot/Bot";
-import coca from "../assets/img/logomarcas/cocacola.png";
-import pepsi from "../assets/img/logomarcas/pepsi.png";
-import cereal from "../assets/img/logomarcas/kelloggs.png";
-
-import mondelez from "../assets/img/logomarcas/mondelez.png";
-import colgate from "../assets/img/logomarcas/colgate.png";
-import unilever from "../assets/img/logomarcas/unilever.png";
-import {
-  Nav,
-  NavItem,
-  Button,
-  Jumbotron,
-  Card,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardText,
-} from "reactstrap";
->>>>>>> main:src/HomePage/Landing.js
 
 const Landing = () => {
   return (
