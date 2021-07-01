@@ -82,14 +82,16 @@
     background: green;
     border: 1px solid green;
     width: 20%;
-    height: 7vh;
-    margin: 2% 0;
-    margin-left: 70%;
-    font-size: 1.5em;
+    height: 5vh;
+    margin: 0 auto;
+    font-size: 1.2em;
     text-transform: uppercase;
     font-weight: 600;
     color: white;
     border-radius: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .miMonedero .movimientos button:hover {
