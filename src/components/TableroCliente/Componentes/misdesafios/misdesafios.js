@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import {getMisDesafios} from "../../../Redux/actions";
+// import {getMisDesafios} from "../../../Redux/actions";
 import "./misdesafios.css"
 import Desafio from "./desafio/desafio";
 import Select from 'react-select';
@@ -9,7 +9,7 @@ import Select from 'react-select';
 function MisDesafios({misdesafios, getmisdesafios}) {
 
   useEffect(async ()=>{
-    await getmisdesafios()
+    // await getmisdesafios()
   }, []);
 
   const estados = [
@@ -26,9 +26,9 @@ function MisDesafios({misdesafios, getmisdesafios}) {
             options={estados}
           />
         <div>
-          <Select
+          {/* <Select
             options={}
-          /> 
+          />  */}
         </div>
       </div>
 
@@ -57,7 +57,7 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch){
   return{
-    getmisdesafios: ()=>{dispatch(getMisDesafios())},
+    // getmisdesafios: ()=>{dispatch(getMisDesafios())},
   }
 }
 
