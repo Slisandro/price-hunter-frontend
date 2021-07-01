@@ -135,11 +135,11 @@
   color: rgb(2, 103, 2);
 }
 .alerta-error {
-  background-color: transparent !important;
+  background-color: black !important;
   color: #fc3a3a !important;
   border-radius: 0.1em;
   font-weight: 600 !important;
-  padding: 0.2em;
+  padding: 0.5em;
   font-size: 15px;
 }
 

@@ -3,12 +3,11 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // import Footer from "components/Footer/Footer.js";
-
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 
-import {routes }from "../../routes";
+import {routesCazador} from "../../routes";
 
 import logo from "../../assets/img/react-logo.png";
 import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
@@ -63,7 +62,7 @@ function Admin(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/cazador") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -77,9 +76,9 @@ function Admin(props) {
     });
   };
   const getBrandText = (path) => {
-    for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-        return routes[i].name;
+    for (let i = 0; i < routesCazador.length; i++) {
+      if (location.pathname.indexOf(routesCazador[i].layout + routesCazador[i].path) !== -1) {
+        return routesCazador[i].name;
       }
     }
     return "Brand";
@@ -94,7 +93,7 @@ function Admin(props) {
       <React.Fragment>
         <div className="wrapper">
           <Sidebar
-            routes={routes}
+            routes={routesCazador}
             logo={{
               outterLink: "https://www.creative-tim.com/",
               text: "Creative Tim",
@@ -109,8 +108,8 @@ function Admin(props) {
               sidebarOpened={sidebarOpened}
             />
               <Switch>
-                {getRoutes(routes)}
-                {/* <Redirect from="*" to="/admin/dashboard" /> */}
+                {getRoutes(routesCazador)}
+                <Redirect from="*" to="/cazador/dashboard" />
               </Switch>
             
           </div>

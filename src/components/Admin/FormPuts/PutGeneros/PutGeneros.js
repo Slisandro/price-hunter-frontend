@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { putMoneda, getMoneda } from "../../../Redux/actions";
+import { putGenero, getGenero } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
@@ -14,36 +14,30 @@ import {
   Col,
 } from "reactstrap";
 
-function PutMonedas() {
+function PutRegiones() {
   const dispatch = useDispatch();
-  const moneda = useSelector((store) => store.moneda);
+  const generos = useSelector((store) => store.generos);
 
   const [state, setState] = useState({
-    codigo_moneda: "",
-    nombre_moneda: "",
-    simbolo: "",
+    genero: "",
+    id: "",
   });
 
   useEffect(() => {
-    dispatch(getMoneda());
+    dispatch(getGenero());
   }, [dispatch]);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
 
-    if (name === "nombre_moneda") {
+    if (name === "id") {
       setState({
         ...state,
         [name]: value,
       });
     }
-    if (name === "codigo_moneda") {
-      setState({
-        ...state,
-        [name]: value,
-      });
-    } else if (name === "simbolo") {
+    if (name === "genero") {
       setState({
         ...state,
         [name]: value,
@@ -59,28 +53,28 @@ function PutMonedas() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.nombre_moneda && data.nombre_moneda.length > 0) {
-      dispatch(putMoneda(data));
+    if (data.id && data.id.length> 0) {
+      dispatch(putGenero(data));
       e.target.reset();
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getMoneda()));
+      }).then((r) => dispatch(getGenero()));
       reset({ data });
-    } else if (!data.codigo_moneda) {
+    } else {
       swal({
-        title: "Debe seleccionar una moneda para modificar!",
+        title: "Debe seleccionar un genero para modificar!",
         icon: "error",
         button: "Aceptar",
         timer: "5000",
       });
     }
+
     setState({
-      codigo_moneda: "",
-      nombre_moneda: "",
-      simbolo: "",
+      genero: "",
+      id: "",
     });
   };
 
@@ -88,7 +82,7 @@ function PutMonedas() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <span id="title">Moneda</span>
+          <span id="title">Generos</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -100,26 +94,24 @@ function PutMonedas() {
           >
             <Row>
               <Col>
-                <h6 className="title">Monedas</h6>
-                {state.codigo_moneda.length === 0 ? (
+                <h6 className="title">Genero</h6>
+                {state.id.length === 0 ? (
                   <>
                     <Input
-                      name="codigo_moneda"
                       type="select"
+                      name="id"
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
-                      {...register("codigo_moneda", {
+                      {...register("id", {
                         // required: {
                         //   value: true,
-                        //   message: "Debe seleccionar una moneda",
+                        //   message: "Debe seleccionar una region",
                         // },
                       })}
                     >
                       <option></option>
-                      {moneda.map((u) => (
-                        <option value={u.codigo_moneda}>
-                          {u.nombre_moneda}
-                        </option>
+                      {generos.map((u) => (
+                        <option value={u.id}>{u.genero}</option>
                       ))}
                     </Input>
                   </>
@@ -127,71 +119,73 @@ function PutMonedas() {
                   <>
                     <Input
                       valid
-                      name="codigo_moneda"
                       type="select"
+                      name="id"
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
-                      {...register("codigo_moneda", {})}
+                      {...register("id", {})}
                     >
                       <option></option>
-                      {moneda.map((u) => (
-                        <option value={u.codigo_moneda}>
-                          {u.nombre_moneda}
-                        </option>
+                      {generos.map((u) => (
+                        <option value={u.id}>{u.genero}</option>
                       ))}
                     </Input>
                   </>
                 )}
-                <span className="err">{errors?.codigo_moneda?.message}</span>
+                <span className="err">{errors?.id?.message}</span>
 
                 <div style={{ marginTop: "1rem" }}>
-                  <h6 className="title">Nombre</h6>
-                  {state.nombre_moneda.length === 0 ? (
+                  <h6 className="title">Nuevo Genero</h6>
+                  {state.genero.length === 0 ? (
                     <>
                       <Input
                         className="inp"
                         type="text"
-                        name="nombre_moneda"
+                        name="genero"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
                         max="0"
-                        {...register("nombre_moneda", {
+                        {...register("genero", {
                           // required: {
                           //   value: true,
-                          //   message: "Debe ingresar una moneda ",
+                          //   message: "Debe ingresar un genero ",
                           // },
                         })}
                       />
                     </>
-                  ) : state.nombre_moneda > 2 && state.nombre_moneda < 10 ? (
+                  ) : state.genero.length > 2 && state.genero.length < 21 ? (
                     <>
                       <Input
                         valid
                         className="inp"
                         type="text"
-                        name="nombre_moneda"
+                        name="nombre_region"
                         autoComplete="off"
                         max="0"
-                        {...register("nombre_moneda", {})}
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("genero", {})}
                       />
                     </>
                   ) : (
                     <>
                       <Input
+                        invalid
                         className="inp"
                         type="text"
-                        name="nombre_moneda"
+                        name="genero"
                         autoComplete="off"
                         max="0"
-                        {...register("nombre_moneda", {
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("genero", {
                           maxLength: {
-                            value: 10,
+                            value: 20,
                             message:
-                              "El nombre no debe tener mas de 10 caracteres",
+                              "El genero no debe tener mas de 20 caracteres",
                           },
                           minLength: {
                             value: 3,
                             message:
-                              "El nombre no puede tener menos de 3 caracteres",
+                              "El genero no puede tener menos de 3 caracteres",
                           },
                           pattern: {
                             value: /^[a-zA-Z ]*$/,
@@ -201,27 +195,8 @@ function PutMonedas() {
                       />
                     </>
                   )}
-                  <span className="err">{errors?.nombre_moneda?.message}</span>
+                  <span className="err">{errors?.genero?.message}</span>
                 </div>
-
-                <div style={{ marginTop: "1rem" }}>
-                  <h6 className="title">Simbolo</h6>
-                  <Input
-                    className="inp"
-                    type="text"
-                    name="simbolo"
-                    autoComplete="off"
-                    onChange={(e) => ChangeInput(e)}
-                    {...register("simbolo", {
-                      maxLength: {
-                        value: 4,
-                        message: "El simbolo no debe tener mas de 4 caracteres",
-                      },
-                    })}
-                  />
-                  <span className="err">{errors?.simbolo?.message}</span>
-                </div>
-
                 <Button
                   className="btn-fill"
                   color="primary"
@@ -239,4 +214,4 @@ function PutMonedas() {
   );
 }
 
-export default PutMonedas;
+export default PutRegiones;

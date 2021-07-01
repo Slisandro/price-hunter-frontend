@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  putCategoria,
-  getCategoria,
-  mostrarError,
-} from "../../../Redux/actions";
+import { putCategoria, getCategoria, getFamilia } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
@@ -12,57 +8,58 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 
 import "./PutCategorias.css";
 
 function PutCategorías() {
   const dispatch = useDispatch();
-  const unidad_medida = useSelector((store) => store.unidad_medida);
+  // const unidad_medida = useSelector((store) => store.unidad_medida);
   const categoria = useSelector((store) => store.categoria);
+  const familia = useSelector((store) => store.familia);
 
   const [state, setState] = useState({
     nombre_categoria: "",
-    nuevo_nombre_categoria: "",
     descripcion: "",
-    id: null,
+    id: "",
+    familiumId: "",
   });
 
   useEffect(() => {
     dispatch(getCategoria());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(getFamilia());
+  }, [dispatch]);
 
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
+    const value = e.target.value;
+    const name = e.target.name;
 
     if (name === "nombre_categoria") {
-      var cat = categoria.find((f) => f.nombre_categoria === e.target.value);
-      var final = cat.id;
       setState({
         ...state,
-        [name]: target.value,
-        id: final,
+        [name]: value,
       });
-    } else if (name === "nuevo_nombre_categoria") {
+    }
+    if (name === "id") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
       });
-    } else if (name === "descripcion") {
+    }
+    if (name === "descripcion") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
+      });
+    }
+    if (name === "familiumId") {
+      setState({
+        ...state,
+        [name]: value,
       });
     }
   };
@@ -71,25 +68,23 @@ function PutCategorías() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
 
   const submit = (data, e) => {
-    const categoriaModificada = {
-      nombre_categoria: state.nuevo_nombre_categoria,
-      descripcion: state.descripcion,
-      id: state.id,
-    };
 
-    dispatch(putCategoria(categoriaModificada));
+    
+    if (data.id && data.id.length > 0) {
+      dispatch(putCategoria(data));
     e.target.reset();
-    if (categoriaModificada.nombre_categoria) {
       swal({
         title: "Los datos se modificaron con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
       }).then((r) => dispatch(getCategoria()));
-    } else if (!categoriaModificada.nuevo_nombre_categoria) {
+      reset({data})
+    } else {
       swal({
         title: "Debe seleccionar una categoría para modificar!",
         icon: "error",
@@ -100,9 +95,9 @@ function PutCategorías() {
 
     setState({
       nombre_categoria: "",
-      nuevo_nombre_categoria: "",
       descripcion: "",
-      id: null,
+      id: "",
+      familiumId: "",
     });
   };
 
@@ -110,7 +105,7 @@ function PutCategorías() {
     <>
       <Card className="card-chart">
         <CardHeader>
-          <h1 id="title">Categorías</h1>
+          <span id="title">Categorías</span>
         </CardHeader>
         <CardBody>
           <Form
@@ -122,65 +117,180 @@ function PutCategorías() {
           >
             <Row>
               <Col>
-                <label className="title">Categoría</label>
-                <Input type="select" name="nombre_categoria" className="inp">
-                  <option></option>
-                  {categoria.map((u) => (
-                    <option value={u.nombre_categoria}>
-                      {u.nombre_categoria}
-                    </option>
-                  ))}
-                </Input>
-                {/* <input
-              className="inp"
-              type="text"
-              name="nombre_categoria"
-              autoComplete="off"
-              max="0"
-              {...register("nombre_categoria", {
-                required: {
-                  value: true,
-                  message: "Debe ingresar un nombre ",
-                },
-                maxLength: {
-                  value: 15,
-                  message: "El nombre debe tener menos de quince letras!",
-                },
-                minLength: {
-                  value: 3,
-                  message: "El nombre debe tener tres letras!",
-                },
-                max: {
-                  value: 0,
-                  message: "El nombre no puede comenzar con numeros",
-                },
-              })}
-            /> */}
-                {/* <span className="err">{errors?.nombre_unidad?.message}</span> */}
-                {/* </div> */}
-                {/* <div className="divForm"> */}
-                <div>
-                  <label className="title">Nueva Categoría</label>
+                <h6 className="title">Categoría</h6>
+                {state.id.length === 0 ? (
                   <Input
+                    type="select"
+                    name="id"
                     className="inp"
-                    type="text"
-                    name="nuevo_nombre_categoria"
-                    autoComplete="off"
-                    max="0"
-                    {...register("nuevo_nombre_categoria", {
-                      // required: {
-                      //   value: true,
-                      //   message: "Debe ingresar una categoría ",
-                      // },
-                      max: {
-                        value: 0,
-                        message: "La categoría no puede comenzar con numeros",
-                      },
-                    })}
-                  />
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {})}
+                  >
+                    <option></option>
+                    {categoria.map((u) => (
+                      <option value={u.id}>{u.nombre_categoria}</option>
+                    ))}
+                  </Input>
+                ) : (
+                  <Input
+                    valid
+                    type="select"
+                    name="id"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {})}
+                  >
+                    <option></option>
+                    {categoria.map((u) => (
+                      <option value={u.id}>{u.nombre_categoria}</option>
+                    ))}
+                  </Input>
+                )}
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Nuevo Nombre</h6>
+                  {state.nombre_categoria.length === 0 ? (
+                    <Input
+                      className="inp"
+                      type="text"
+                      name="nombre_categoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_categoria", {
+                        max: {
+                          value: 0,
+                          message: "La categoría no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                  ) : state.nombre_categoria.length > 2 &&
+                    state.nombre_categoria.length < 21 ? (
+                    <Input
+                      valid
+                      className="inp"
+                      type="text"
+                      name="nombre_categoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_categoria", {})}
+                    />
+                  ) : (
+                    <Input
+                      invalid
+                      className="inp"
+                      type="text"
+                      name="nombre_categoria"
+                      autoComplete="off"
+                      max="0"
+                      {...register("nombre_categoria", {
+                        maxLength: {
+                          value: 20,
+                          message:
+                            "El nombre no debe tener mas de veinte letras!",
+                        },
+                        minLength: {
+                          value: 3,
+                          message: "El nombre debe tener tres letras!",
+                        },
+                        max: {
+                          value: 0,
+                          message: "El nombre no puede comenzar con numeros",
+                        },
+                      })}
+                    />
+                  )}
                   <span className="err">
-                    {errors?.nuevo_nombre_categoria?.message}
+                    {errors?.nombre_categoria?.message}
                   </span>
+                </div>
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Familia</h6>
+                  {state.familiumId.length === 0 ? (
+                    <Input
+                      name="familiumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("familiumId", {})}
+                    >
+                      <option></option>
+                      {familia.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_familia}
+                        </option>
+                      ))}
+                    </Input>
+                  ) : (
+                    <Input
+                      valid
+                      name="familiumId"
+                      className="inp"
+                      type="select"
+                      onChange={(e) => ChangeInput(e)}
+                      {...register("familiumId", {})}
+                    >
+                      <option></option>
+                      {familia.map((f, index) => (
+                        <option key={index} value={f.id}>
+                          {f.nombre_familia}
+                        </option>
+                      ))}
+                    </Input>
+                  )}
+                  <span className="err">{errors?.familiumId?.message}</span>
+                </div>
+
+                <div style={{ marginTop: "1rem" }}>
+                  <h6 className="title">Descripción (opcional)</h6>
+                  {state.descripcion.length === 0 ? (
+                    <>
+                      <Input
+                        className="inp6"
+                        type="text"
+                        name="descripcion"
+                        autoComplete="off"
+                        max="0"
+                      />
+                    </>
+                  ) : state.descripcion.length > 5 &&
+                    state.descripcion.length < 256 ? (
+                    <>
+                      <Input
+                        valid
+                        {...register("descripcion", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un descripcion ",
+                          },
+                        })}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Input
+                        invalid
+                        {...register("descripcion", {
+                          maxLength: {
+                            value: 256,
+                            message:
+                              "La descripcion no debe tener mas de 256 caracteres!",
+                          },
+                          minLength: {
+                            value: 5,
+                            message:
+                              "La descripcion debe tener al menos cinco letras!",
+                          },
+                          max: {
+                            value: 0,
+                            message:
+                              "La descripcion no puede comenzar con numeros",
+                          },
+                        })}
+                      />
+                    </>
+                  )}
+                  <span className="err">{errors?.descripcion?.message}</span>
                 </div>
                 <Button
                   className="btn-fill"
@@ -195,14 +305,6 @@ function PutCategorías() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesCATE">
-        Categorías Actuales
-        <div className="tiposCATE">
-          {categoria.map((u) => (
-            <span className="spansCATE">{u.nombre_categoria}</span>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }

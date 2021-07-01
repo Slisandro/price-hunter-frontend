@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+
 .card{
     background: $card-black-background;
     border: 0;
@@ -5,6 +9,7 @@
     width: 100%;
     margin-bottom: 30px;
     box-shadow: $box-shadow;
+    font-family: 'Poppins', sans-serif !important;
 
 
     label{
