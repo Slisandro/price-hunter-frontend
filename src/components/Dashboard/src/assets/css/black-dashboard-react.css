@@ -437,7 +437,7 @@ h6,
 }
 
 .display-3 {
-  font-size: 2.1875rem;
+  font-size: 2.1rem;
   font-weight: 600;
   line-height: 1.2;
 }
@@ -11648,14 +11648,13 @@ a.text-darker:focus {
 .btn:active,
 .navbar .navbar-nav > a.btn:active {
   box-shadow: none !important;
-  transform: translateY(1px) !important;
-  transition: all 0.15s ease;
+
 }
 .btn:not([data-action]):hover,
 .navbar .navbar-nav > a.btn:not([data-action]):hover {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-  transform: translateY(-1px);
-  -webkit-transform: translateY(-1px);
+ 
+
 }
 .btn.disabled,
 .btn.disabled:hover,
@@ -11711,7 +11710,7 @@ fieldset[disabled] .navbar .navbar-nav > a.btn.active {
 .btn.btn-simple,
 .navbar .navbar-nav > a.btn.btn-simple {
   color: #344675;
-  border-color: #344675;
+  border-color: #347375;
   background: transparent;
 }
 .btn.btn-simple:hover,
@@ -11723,7 +11722,7 @@ fieldset[disabled] .navbar .navbar-nav > a.btn.active {
 .navbar .navbar-nav > a.btn.btn-simple:active,
 .navbar .navbar-nav > a.btn.btn-simple:not(:disabled):not(.disabled):active {
   color: #344675;
-  border-color: #344675;
+  border-color: #347575;
   background-color: transparent !important;
   background-image: none !important;
   box-shadow: none;
@@ -11914,7 +11913,7 @@ fieldset[disabled] .navbar .navbar-nav > a.btn.active {
   background: #e14eca;
   background-image: -webkit-linear-gradient(
     to bottom left,
-    #e14eca,
+    #4eb2e1,
     #ba54f5,
     #e14eca
   );
@@ -12354,8 +12353,8 @@ fieldset[disabled] .btn-info.active {
   border-color: #1d8cf8;
 }
 .btn-info.btn-simple {
-  color: #1d8cf8;
-  border-color: #1d8cf8;
+  color: #50c700;
+  border-color: #49f81d;
   background: transparent;
 }
 .btn-info.btn-simple:hover,
@@ -12369,7 +12368,7 @@ fieldset[disabled] .btn-info.active {
   box-shadow: none;
 }
 .btn-info.btn-simple.active {
-  border-color: #1d8cf8 !important;
+  border-color: #1df8f8 !important;
 }
 .btn-info.btn-simple.active:hover,
 .btn-info.btn-simple.active:focus,
@@ -15377,7 +15376,7 @@ img {
   background: transparent !important;
 }
 .navbar.bg-white .navbar-nav .search-bar.input-group i {
-  color: #222a42;
+  color: #089eda;
 }
 .navbar.bg-white .navbar-nav .search-bar.input-group .form-control {
   background: rgba(34, 42, 66, 0.1);
@@ -17388,6 +17387,7 @@ hr {
 .perfect-scrollbar-on .main-panel {
   height: 100%;
   max-height: 100%;
+  
 }
 
 .sidebar,

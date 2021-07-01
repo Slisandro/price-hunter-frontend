@@ -27,6 +27,7 @@ function PutCiudades() {
   const paisesId = useSelector((store) => store.paisesId);
   const ciudadesId = useSelector((store) => store.ciudadesId);
 
+  
   useEffect(() => {
     dispatch(getPais());
     dispatch(getRegion());

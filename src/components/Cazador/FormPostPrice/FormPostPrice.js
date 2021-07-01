@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import './FormPostPrice.css'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { URL } from '../../Redux/actions';
+import {
+    Card, CardHeader, CardBody, CardTitle, CardText, Button, Table,
+    // Form, 
+    Modal, ModalBody, Row, Input, FormFeedback, FormText
+} from 'reactstrap';
 
 var geolocation = require('geolocation');
 
 
 function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
     const [errors, setErrors] = useState({
-        // nombre_negocio: true,
-        // direccion_negocio: true,
         precio: true,
     });
 
@@ -73,10 +75,8 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
                         ...state,
                         arrayApi: searchCity(resp.data)
                     }
-                    console.log(body)
                     axios.post(`${URL}precios`, body, { headers: { "Authorization": `Bearer ${token}` } })
                         .then(resp => {
-                            console.log(resp)
                             if (!resp.data.aceptado) {
                                 swal(resp.data.msj, " ", "error");
                             } else {
@@ -99,55 +99,90 @@ function FormPostPrice({ setModal, modal, referencia, ubicacion }) {
     }
 
     return (
-        <form className="FormPostPrice" onSubmit={handleSubmit}>
-            <h2 className="h2">Publicar precio</h2>
-            <button className="closeModal" onClick={e => setModal(!modal)}>X</button>
-            <Form.Group>
-                <Form.Label className="label">Nombre del negocio (opcional)</Form.Label>
-                <Form.Control
-                    name="nombre_negocio"
-                    onChange={(e) => handleChange(e)}
-                    value={state.nombre_negocio}
-                    type="text"
-                    placeholder="Ingresé nombre del negocio"
-                    className="control"
-                />
-                {/* <Form.Text className={errors.nombre_negocio ? "errors" : "inputSinError"}>
-                    Este campo no puede estar vacío
-                </Form.Text> */}
-            </Form.Group>
-            <Form.Group>
-                <Form.Label className="label">Dirección del negocio (opcional)</Form.Label>
-                <Form.Control
-                    name="direccion_negocio"
-                    onChange={(e) => handleChange(e)}
-                    value={state.direccion_negocio}
-                    type="text"
-                    placeholder="Ingresé dirección del negocio"
-                    className="control"
-                />
-                {/* <Form.Text className={errors.direccion_negocio ? "errors" : "inputSinError"}>
-                    Este campo no puede estar vacío
-                </Form.Text> */}
-            </Form.Group>
-            <Form.Group>
-                <Form.Label className="label">Precio</Form.Label>
-                <Form.Control
-                    name="precio"
-                    onChange={(e) => handleChange(e)}
-                    value={state.precio}
-                    type="number"
-                    placeholder="Ingresé precio cazado"
-                    className="control"
-                />
-                <Form.Text className={errors.precio ? "errors" : "inputSinError"}>
-                    Este campo no puede estar vacío y debe ser un número
-                </Form.Text>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </form>
+        <Modal isOpen={modal}>
+            <ModalBody style={{ padding: 0 }}>
+                <Card className="card-chart" style={{ margin: "auto" }}>
+                    <CardHeader style={{ margin: "auto" }}>
+                        <span id="title">Publicar precio</span>
+                    </CardHeader>
+                    <CardBody style={{ margin: "auto", marginBottom: "5%" }}>
+                        <Form onSubmit={e => handleSubmit(e)}>
+                            <Row style={{ margin: "5% 0" }}>
+                                <h6 className="title" style={{ fontSize: "1em" }}>Nombre del negocio (opcional)</h6>
+                                {/* <FormText className="label">Nombre del negocio (opcional)</FormText> */}
+                                <Input
+                                    bsSize="lg"
+                                    noValid
+                                    name="nombre_negocio"
+                                    onChange={(e) => handleChange(e)}
+                                    value={state.nombre_negocio}
+                                    type="text"
+                                    placeholder="Ingresé nombre del negocio"
+                                    style={{ paddingLeft: "2%" }}
+                                // className="control"
+                                />
+                            </Row>
+                            <Row style={{ margin: "5% 0" }}>
+                                <h6 className="title" style={{ fontSize: "1em" }}>Dirección del negocio (opcional)</h6>
+                                {/* <FormText className="label">Dirección del negocio (opcional)</FormText> */}
+                                <Input
+                                    bsSize="lg"
+                                    noValid
+                                    name="direccion_negocio"
+                                    onChange={(e) => handleChange(e)}
+                                    value={state.direccion_negocio}
+                                    type="text"
+                                    placeholder="Ingresé dirección del negocio"
+                                    style={{ paddingLeft: "2%" }}
+                                // className="control"
+                                />
+                            </Row>
+                            <Row style={{ margin: "5% 0" }}>
+                                <h6 className="title" style={{ fontSize: "1em" }}>Precio</h6>
+                                {/* <FormText className="label">Precio</FormText> */}
+                                <Input
+                                    bsSize="lg"
+                                    noValid
+                                    type="number"
+                                    name="precio"
+                                    onChange={(e) => handleChange(e)}
+                                    value={state.precio}
+                                    placeholder="Ingresé precio cazado"
+                                    style={{ paddingLeft: "2%" }}
+                                />
+                                <FormText style={{ fontSize: "1em", margin: "auto" }}>
+                                    Este campo no puede estar vacío y debe ser un número
+                                </FormText>
+                            </Row>
+                            <Row
+                                style={{
+                                    margin: "auto",
+                                    display: "flex",
+                                    justifyContent: "space-around"
+                                }}
+                            >
+                                <Button
+                                    className="btn-fill"
+                                    color="primary"
+                                    type="submit"
+                                    // block
+                                >
+                                    Enviar
+                                </Button>
+                                <Button
+                                    className="btn-fill"
+                                    color="primary"
+                                    type="submit"
+                                    // block
+                                    onClick={() => setModal(!modal)}>
+                                    Cancelar
+                                </Button>
+                            </Row>
+                        </Form>
+                    </CardBody>
+                </Card>
+            </ModalBody>
+        </Modal >
     )
 }
 

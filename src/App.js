@@ -1,6 +1,6 @@
 import React from "react";
 import Tablero from "./components/Cazador/Tablero Usuario/Tablero";
-import Marcas from "./components/NavBarLinks/Marcas";
+// import Marcas from "./components/NavBarLinks/Marcas";
 import SobreNosotros from "./components/NavBarLinks/SobreNosotros";
 import Contacto from "./components/NavBarLinks/Contacto";
 import Servicios from "./components/NavBarLinks/Servicios";
@@ -10,19 +10,20 @@ import MisDesafios from "./components/desafios/MisDesafios";
 import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
-import HomePage from "./HomePage/HomePage";
+
 
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
-// import HomePage from "./HomePage/HomePage";
+
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
 import LoginCliente from "./components/TableroCliente/Componentes/LoginCliente/LoginCliente";
 import RegistroCliente from "./components/Registro/RegistroCliente";
-import Landing from "./HomePage/Landing";
+import Landing from "./HomePage/Landing/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
+import DashCazador from "./components/Dashboard/DashCazador";
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         {/* <RutaPrivada exact path="/admin" component={AdminPage} /> */}
         <Route exact path="/" component={Landing} />
         <Route exact path="/SobreNosotros" component={SobreNosotros} />
-        <Route exact path="/Marcas" component={Marcas} />
+        {/* <Route exact path="/Marcas" component={Marcas} /> */}
         <Route exact path="/Contacto" component={Contacto} />
         <Route exact path="/Servicios" component={Servicios} />
         <Route exact path="/Ayuda" component={Ayuda} />
@@ -52,6 +53,8 @@ function App() {
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
         <RutaPrivada exact path="/admin" component={Dash} />
+        <RutaPrivada exact path="/cazador" component={DashCazador} />
+
       </Switch>
     </Router>
   );

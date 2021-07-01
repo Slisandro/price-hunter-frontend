@@ -34,6 +34,10 @@ import {
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
   POST_UM,
+    // ----- CLIENTE -------//
+    GET_MIS_DESAFIOS,
+  
+
 } from "./actions";
 
 const initialState = {
@@ -82,9 +86,10 @@ const initialState = {
   autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
-  cliente: false,
-  isAdmin: false,
   expires: true,
+  cliente: localStorage.getItem("cliente"),
+  isAdmin: localStorage.getItem("isAdmin"),
+  isUser: localStorage.getItem("isUser"),
   /******************************* */
 
   generos: [],
@@ -92,6 +97,9 @@ const initialState = {
   paises: [],
   ciudades: [],
   //----------------------------------------
+
+  //-----CLIENTE------//
+  misdesafios: [],
   //        POST ADMIN
   admin: {},
   familia: [],
@@ -109,6 +117,7 @@ const initialState = {
   
   //--------------------------//
   registroGoogleRes: {},
+  expire: false,
 };
 
 //-------------ADMIN-------------//
@@ -169,31 +178,36 @@ function rootReducer(state = initialState, action) {
         action.payload.usuario
           ? action.payload.usuario.nombre
           : action.payload.cliente
-          ? action.payload.cliente.nombre_cial_fantasia
-          : action.payload.admin.nombre
+            ? action.payload.cliente.nombre_cial_fantasia
+            : action.payload.admin.nombre
       );
       localStorage.setItem("auth", true);
       if (action.payload.cliente) {
+        localStorage.setItem("cliente", true);
         return {
           ...state,
           autenticado: true,
           usuario: null,
           mensaje: null,
           isAdmin: false,
+          isUser: false,
           cliente: true,
         };
       } else {
         if (action.payload.admin) {
+          localStorage.setItem("isAdmin", true);
           return {
             ...state,
             autenticado: true,
             usuario: null,
             mensaje: null,
             cliente: false,
+            isUser: false,
             isAdmin: true,
             expires: true,
           };
         } else {
+          localStorage.setItem("isUser", true);
           return {
             ...state,
             autenticado: true,
@@ -201,6 +215,7 @@ function rootReducer(state = initialState, action) {
             mensaje: null,
             isAdmin: false,
             cliente: false,
+            isUser: true
           };
         }
       }
@@ -221,6 +236,9 @@ function rootReducer(state = initialState, action) {
       localStorage.removeItem("token");
       localStorage.removeItem("nombre");
       localStorage.removeItem("auth");
+      localStorage.removeItem("cliente");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("isUser");
       return {
         ...state,
         autenticado: false,
@@ -230,6 +248,15 @@ function rootReducer(state = initialState, action) {
         expires: false,
       };
 
+
+
+    //----CLIENTE REDUCER-----//
+    case GET_MIS_DESAFIOS:
+      return {
+        ...state,
+        misdesafios: action.payload,
+      };
+    
     case GET_FAMILIA:
       return {
         ...state,
