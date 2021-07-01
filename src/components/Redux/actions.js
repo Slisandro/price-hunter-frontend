@@ -680,6 +680,9 @@ export function getCiudadId(id) {
 
 //_____________________ INICIO ADMIN POST _____________________//
 
+export const POST_UM = 'POST_UM'
+
+
 export function unidadDeMedida(objeto) {
   return function (dispatch) {
     const token = localStorage.getItem("token");

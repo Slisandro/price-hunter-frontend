@@ -52,6 +52,17 @@ function Fami() {
   } = useForm();
 
   const submit = (data, e) => {
+    for (let i = 0; i < familia.length; i++) {
+      if (data.nombre_familia.toUpperCase() === familia[i].nombre_familia.toUpperCase()) {
+        return swal({
+          title: "La familia ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
+
     if (!data.nombre_familia) {
       return swal({
         title: "Agregue una Familia!",
@@ -59,19 +70,23 @@ function Fami() {
         button: "Aceptar",
         timer: "5000",
       });
+    } else {
+      dispatch(familiaPost(data));
+      e.target.reset();
+      return swal({
+        title: "Familia agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((g) => {
+        dispatch(getFamilia());
+        reset({ data });
+        setState({
+          nombre_familia: "",
+          descripcion: "",
+        });
+      });
     }
-    dispatch(familiaPost(data));
-
-    e.target.reset();
-
-    swal({
-      title: "Familia agregada con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((g) => dispatch(getFamilia()));
-
-    reset({ data });
   };
 
   return (
@@ -106,6 +121,12 @@ function Fami() {
                         className="inp"
                         autoComplete="off"
                         max="0"
+                        {...register("nombre_familia", {
+                          required: {
+                            value: true,
+                            message: "Debe ingresar un familia ",
+                          },
+                        })}
                       />
                     </>
                   ) : state.nombre_familia.length > 2 &&
@@ -114,10 +135,10 @@ function Fami() {
                       <Input
                         valid
                         {...register("nombre_familia", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un familia ",
-                          },
+                          // required: {
+                          //   value: true,
+                          //   message: "Debe ingresar un familia ",
+                          // },
                         })}
                       />
                     </>

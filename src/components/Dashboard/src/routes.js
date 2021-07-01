@@ -1,7 +1,7 @@
-import Dashboard from "./views/Dashboard";
-import Map from "./views/Map.js";
-import TableList from "./views/TableList.js";
-import UserProfile from "./views/UserProfile.js";
+// import Dashboard from "./views/Dashboard";
+// import Map from "./views/Map.js";
+// import TableList from "./views/TableList.js";
+// import UserProfile from "./views/UserProfile.js";
 import Agregar from "./views/Agregar.js";
 import Modificar from "./views/Modificar.js";
 import Jumbotron from "./views/Jumbotron";

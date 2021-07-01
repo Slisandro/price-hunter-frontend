@@ -8,22 +8,19 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 
 import "./FormUnidadMedida.css";
+// import axios from "axios";
 
 function FormUnidadMedida() {
   const dispatch = useDispatch();
   const unidad_medida = useSelector((store) => store.unidad_medida);
+  // const  expires = useSelector((store) => store.expires);
 
   const [state, setState] = useState({
     codigo_unidad_medida: "",
@@ -64,22 +61,41 @@ function FormUnidadMedida() {
       nombre_unidad: state.nombre_unidad,
     };
 
+    for (let i = 0; i < unidad_medida.length; i++) {
+      if (
+        unidad_medida[i].nombre_unidad.toUpperCase() ===
+          nuevaUM.nombre_unidad.toUpperCase() ||
+        unidad_medida[i].codigo_unidad_medida.toUpperCase() ===
+          nuevaUM.codigo_unidad_medida.toUpperCase()
+      )
+        return swal({
+          title: "El nombre o la unidad de medida ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+    }
+    // const token = localStorage.getItem("token")
+    // axios.get(`${URL}admin/auth`, {
+    //   headers: { Authorization: `Bearer ${token}`}})
+
     if (nuevaUM && nuevaUM.nombre_unidad && nuevaUM.codigo_unidad_medida) {
       dispatch(unidadDeMedida(nuevaUM));
+
       e.target.reset();
       swal({
         title: "Unidad de Medida agregada con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getUnidadMedida()));
+      }).then(() => dispatch(getUnidadMedida()));
       setState({
         codigo_unidad_medida: "",
         nombre_unidad: "",
       });
     } else {
       swal({
-        title: "La Unidad de Medida no fue agregada!",
+        title: "Debe ingresar la Unidad de Medida!",
         icon: "error",
         button: "Aceptar",
         timer: "5000",
