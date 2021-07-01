@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Transacciones.css';
+import { Card, Col, Row } from 'reactstrap';
 import Ingreso from '../../../assets/ingreso_transacciones.png';
 import Retiro from '../../../assets/retiro_transacciones.png';
 import { URL } from '../../Redux/actions';
@@ -17,7 +18,9 @@ export default function Transacciones() {
     }, []);
 
     return (
-        <div className="containerTransaccionesUser">
+        <Card className="containerTransaccionesUser">
+            {/* <Row> */}
+                {/* <Col lg="12" md="12"> */}
             <ul className="listTransaccionesUser">
                 {
                     movimiento.length === 0 ?
@@ -51,13 +54,16 @@ export default function Transacciones() {
                         })
                 }
             </ul>
-        </div>
+                {/* </Col> */}
+            {/* </Row> */}
+        </Card>
     )
 }
 
 function OrderByDate(arr) {
     let array = [];
     arr.map(el => {
+
         const date = new Date(el.createdAt);
         const year = date.getFullYear() + ""
         const mes = "0" + date.getMonth() + "";
@@ -67,7 +73,7 @@ function OrderByDate(arr) {
         const segundos = date.getSeconds() + "";
         const milisegundos = date.getMilliseconds();
 
-        array.push({
+        return array.push({
             ...el,
             "order": year + mes + dia + hora + minutos + segundos + milisegundos
         })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import "./Categorias.css";
 import { getSubcategoriasId } from "../Redux/actions";
@@ -18,7 +18,7 @@ const Categorias = ({ categorias, setState, ubicacion }) => {
 
     if (idFamilia) {
       for (let i = 0; i < categorias.length; i++) {
-        if (categorias[i].id == idFamilia) {
+        if (categorias[i].id === parseInt(idFamilia)) {
           for (let j = 0; j < categorias[i].categoria.length; j++) {
             arrayCategorias.push(
               {
@@ -41,7 +41,7 @@ const Categorias = ({ categorias, setState, ubicacion }) => {
     const arraySubcategorias = [];
     if (idCategoria) {
       for (let i = 0; i < categoria.length; i++) {
-        if (categoria[i].idCategoria == idCategoria) {
+        if (categoria[i].idCategoria === parseInt(idCategoria)) {
           for (let j = 0; j < categoria[i].subcategorias.length; j++) {
             arraySubcategorias.push(
               {
