@@ -22,6 +22,7 @@ function Subcate() {
   const dispatch = useDispatch();
   const categoria = useSelector((store) => store.categoria);
   const subcategoria = useSelector((store) => store.subcategoria);
+  console.log(subcategoria)
 
   useEffect(() => {
     dispatch(getCategoria());
@@ -72,16 +73,18 @@ function Subcate() {
   } = useForm();
 
   const submit = (data, e) => {
+    console.log(data)
     for (let i = 0; i < subcategoria.length; i++) {
       if (data.nombre_subcategoria.toUpperCase() === subcategoria[i].nombre_subcategoria.toUpperCase()) {
         return swal({
-          title: "La categoria ya existe, debe agregar otra",
+          title: "La subcategoria ya existe",
           icon: "warning",
           button: "Aceptar",
           timer: "5000",
         });
       }
     }
+    
     if (!data.nombre_subcategoria) {
       return swal({
         title: "Agregue una Subcategoria!",
