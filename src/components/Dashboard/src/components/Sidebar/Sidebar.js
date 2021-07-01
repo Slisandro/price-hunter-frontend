@@ -90,6 +90,7 @@ function Sidebar(props) {
   }
   return (
     <BackgroundColorContext.Consumer>
+
       {({ color }) => (
         <div className="sidebar" data={color}>
           <div className="sidebar-wrapper" ref={sidebarRef}>

@@ -23,7 +23,7 @@ $gray-700: #525f7f !default;   // Line p color
 $gray-800: #32325d !default;   // Line heading color
 $gray-900: #212529 !default;
 $link-disabled:              #666666 !default;
-$transparent-bg:             transparent !default;
+$transparent-bg:              #34547e  !default;
 $light-bg:                   #f5f6fa !default;
 $dark-background:            #555555 !default;
 
@@ -385,7 +385,7 @@ $font-size-base:              $font-size-dash !default; // Assumes the browser d
 $font-size-xl:                ($font-size-base * 1.428);
 $font-size-lg:                ($font-size-base * 1.142);
 $font-size-sm:                ($font-size-base * .85714286);
-$font-size-xs:                ($font-size-base * .714);
+$font-size-xs:                ($font-size-base * .718);
 
 $h1-font-size:                $font-size-base * 2.35714285 !default;  //2.1875rem
 $h2-font-size:                $font-size-base * 1.9285714 !default;
@@ -895,7 +895,7 @@ $card-border-color:                 rgba($black, .05);
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width});
 $card-cap-bg:                       $gray-100 !default;
 $card-bg:                           $white !default;
-$card-black-background:             #27293d !default;
+$card-black-background:             #222a3f !default;
 $card-img-overlay-padding:          1.25rem !default;
 
 //$card-group-margin:                 ($grid-gutter-width / 2);

@@ -48,5 +48,45 @@ var routes = [
     component: Modificar,
     layout: "/admin",
   },
+ 
 ];
-export default routes;
+
+export var routesCazador = [
+  {
+    path: "/dashboard",
+    name: "Inicio",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Jumbotron,
+    layout: "/cazador",
+  },
+  
+  
+  {
+    path: "/buscador",
+    name: "Buscar",
+    icon: "tim-icons icon-single-02",
+    component: Buscador,
+    layout: "/cazador",
+
+  },
+  {
+    path: "/monedero",
+    name: "Monedero",
+    icon: "tim-icons icon-single-02",
+    component: Monedero,
+    layout: "/cazador",
+
+  },
+  {
+    path: "/desafios",
+    name: "Desafios",
+    icon: "tim-icons icon-single-02",
+    component: Desafios,
+    layout: "/cazador",
+
+  }
+ 
+ 
+];
+
+
