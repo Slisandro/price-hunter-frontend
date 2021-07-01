@@ -41,10 +41,10 @@ function MisDesafios({misdesafios, getmisdesafios}) {
   function handleChangeEstado(e,name){
 
     if(e){
-      console.log({
-        ...state,
-        [name]:e.value
-      })
+      // console.log({
+      //   ...state,
+      //   [name]:e.value
+      // })
 
       getmisdesafios({
         ...state,
@@ -54,12 +54,13 @@ function MisDesafios({misdesafios, getmisdesafios}) {
         ...state,
         [name]: e.value
       })
+      setPageNumber(0)
 
     }else{
-      console.log({
-        ...state,
-        [name]:""
-      })
+      // console.log({
+      //   ...state,
+      //   [name]:""
+      // })
 
       getmisdesafios({
         ...state,
@@ -69,6 +70,7 @@ function MisDesafios({misdesafios, getmisdesafios}) {
         ...state,
         [name]: ""
       })
+      setPageNumber(0)
     }
 
   }
