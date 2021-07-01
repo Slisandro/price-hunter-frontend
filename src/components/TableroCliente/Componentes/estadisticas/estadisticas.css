@@ -1,0 +1,22 @@
+.estadisticasCliente{
+    padding: 2%;
+    /* background: linear-gradient(#25257e, #129da1)!important; */
+    background-color: #0a2352;
+    ;
+}
+
+.datosestadistica{
+    color: #9fff04;
+    font-weight: bold;
+    font-size: 16px;
+}
+.listasestadisticas{
+    color: rgb(0, 195, 255)!important;
+    background-color: #0a2352;
+    font-weight: bold;
+    font-size: 14px;
+}
+.titulosestadisticas{
+    color: rgb(0, 217, 255)!important;
+
+}
