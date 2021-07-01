@@ -21,11 +21,12 @@ import {
 function Cate() {
   const dispatch = useDispatch();
   const familia = useSelector((store) => store.familia);
+  const categoria = useSelector((store) => store.categoria);
 
   const [fam, setFam] = useState({
     nombre_familia: "",
     descripcion: "",
-    id: null,
+    id: '',
   });
 
   useEffect(() => {
@@ -36,12 +37,14 @@ function Cate() {
   const [cate, setCate] = useState({
     nombre_categoria: "",
     descripcion: "",
-    familiumId: null,
+    familiumId: '',
   });
 
   const ChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
+    console.log(value)
+    
     if (name === "nombre_familia") {
       setFam({
         ...fam,
@@ -67,9 +70,22 @@ function Cate() {
     formState: { errors },
     handleSubmit,
     reset,
+  
   } = useForm();
 
   const submit = (data, e) => {
+    console.log(data)
+    for (let i = 0; i < categoria.length; i++) {
+      if (data.nombre_categoria.toUpperCase() === categoria[i].nombre_categoria.toUpperCase()) {
+        return swal({
+          title: "La categoria ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
+
     if (!data.nombre_categoria) {
       return swal({
         title: "Agregue una Categoria!",
@@ -77,24 +93,31 @@ function Cate() {
         button: "Aceptar",
         timer: "5000",
       });
+    } else {
+      dispatch(categoriaPost(data));
+
+      e.target.reset();
+      reset({ data });
+      return swal({
+        title: "Categoría agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((g) => {
+        dispatch(getCategoria());
+        
+        setCate({
+          nombre_categoria: "",
+          descripcion: "",
+          familiumId: "",
+        })
+        setFam({
+          nombre_familia: "",
+          descripcion: "",
+          id: '',
+        });
+      });
     }
-    dispatch(categoriaPost(data));
-
-    e.target.reset();
-
-    swal({
-      title: "Categoría agregada con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((g) => dispatch(getCategoria()));
-
-    setCate({
-      nombre_categoria: "",
-      descripcion: "",
-      familiumId: "",
-    });
-    reset({ data });
   };
 
   return (
@@ -165,10 +188,11 @@ function Cate() {
                         className="inp"
                         placeholder="Agregar Categoria"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
                         {...register("nombre_categoria", {
                           required: {
                             value: true,
-                            message: "Debe agregar una categoria",
+                            message: "Debe ingresar un nombre ",
                           },
                         })}
                       />
@@ -181,6 +205,10 @@ function Cate() {
                         name="nombre_categoria"
                         className="inp"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
+                        {...register("nombre_categoria", {
+                          
+                        })}
                       />
                     </>
                   ) : (
@@ -191,20 +219,18 @@ function Cate() {
                         className="inp"
                         max="0"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
                         {...register("nombre_categoria", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un nombre ",
-                          },
+                         
                           maxLength: {
                             value: 15,
                             message:
-                              "El nombre no debe tener mas de quince letras!",
+                              "El nombre no debe tener mas de quince caracteres!",
                           },
                           minLength: {
                             value: 3,
                             message:
-                              "El nombre debe al menos tener tres letras!",
+                              "El nombre debe al menos tener tres caracteres!",
                           },
                           max: {
                             value: 0,
@@ -238,10 +264,7 @@ function Cate() {
                       <Input
                         valid
                         {...register("descripcion", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un descripcion ",
-                          },
+                         
                         })}
                       />
                     </>

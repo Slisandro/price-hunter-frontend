@@ -14,7 +14,7 @@ import Registro from "./components/Registro/Registro";
 
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
-// import HomePage from "./HomePage/HomePage";
+
 import AdminPage from "./components/Admin/AdminPage";
 import RutaPrivada from "./RutaPrivada";
 import Modal from "./components/Registro/Modal";
@@ -24,6 +24,7 @@ import Landing from "./HomePage/Landing/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 import DashCazador from "./components/Dashboard/DashCazador";
+
 
 function App() {
   return (
