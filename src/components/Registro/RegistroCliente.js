@@ -166,7 +166,7 @@ const RegistroCliente = (props) => {
                 <p className="welcome-login">Bienvenido</p>
                 <p className="register__description">Registre a su empresa aquí</p>
 
-                <Card className="col-md-6">
+                <Card className="col-md-6" style={{backgroundColor:"black"}}>
                     {mensaje ? (<div className={`alerta ${mensaje.categoria} text-center`}> {mensaje.msg} </div>) : null}
                     <CardBody >
                         {alerta ? (<div className={`alerta ${alerta.categoria} text-center`}> {alerta.msg} </div>) : null}

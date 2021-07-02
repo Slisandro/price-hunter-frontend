@@ -7,12 +7,13 @@ import {
     Input,
     Button,
     Card,
-    CardBody
+    CardBody,
+    Modal
 } from "reactstrap";
-import { getGeneros, getPaises, getCiudades, mostrarError, registro_google} from '../Redux/actions';
+import { getGeneros, getPaises, getCiudades, mostrarError, registro_google } from '../Redux/actions';
 
 
-const RegistroGoogle = ({setModalCompletado, history, setModalRegistro}) => {
+const RegistroGoogle = ({ setModalCompletado, history, setModalRegistro }) => {
 
 
     const generos = useSelector((store) => store.generos);
@@ -125,154 +126,153 @@ const RegistroGoogle = ({setModalCompletado, history, setModalRegistro}) => {
 
 
     return (
-        <div className="loger_cont">
-            <div className="global-container__log_google">
+        // <div className="loger_cont">
+        // {/* <div className="global-container__log_google"> */}
+        // <Modal isOpen={modal}>
+            <Card className="card__google__login" style={{margin: 0}}>
+                <CardBody>
 
-                <Card className="card__google__login">
-                    <CardBody>
+                    <form className="login__form" onSubmit={handleSubmit}>
 
-                        <form className="login__form" onSubmit={handleSubmit}>
+                        <FormGroup row>
+                            <Label for="fecha"> Fecha de nacimiento </Label>
+                            <Input
+                                type="date"
+                                name="fecha_de_nacimiento"
+                                id="fecha"
+                                value={fecha_de_nacimiento}
+                                onChange={handleInputGoogle}
 
-                            <FormGroup row>
-                                <Label for="fecha"> Fecha de nacimiento </Label>
-                                <Input
-                                    type="date"
-                                    name="fecha_de_nacimiento"
-                                    id="fecha"
-                                    value={fecha_de_nacimiento}
-                                    onChange={handleInputGoogle}
+                            />
+                        </FormGroup>
 
-                                />
-                            </FormGroup>
-
-                            <FormGroup row>
-                                <Label for="genero">Genero</Label>
-                                <Input
-                                    type="select"
-                                    name="generoId"
-                                    id="genero"
-                                    onChange={handleInputGoogle}
-                                    value={generoId}
-                                >
-                                    <option value="">-</option>
-                                    {generos ? generos.map(genero => (
-                                        <option key={genero.id} value={genero.id}>{genero.genero}</option>
-                                    )) : ("")}
-                                </Input>
-                            </FormGroup>
-
-
-
-
-                            <FormGroup row>
-                                <Label for="inputState">Pais</Label>
-                                <Input
-                                    type="select"
-                                    name="select"
-                                    id="inputState"
-                                    onChange={handleCities}
-                                >
-                                    <option value="">-</option>
-                                    {paises ? paises.map(item => (
-                                        <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
-                                    )) : ("")}
-                                </Input>
-                            </FormGroup>
+                        <FormGroup row>
+                            <Label for="genero">Genero</Label>
+                            <Input
+                                type="select"
+                                name="generoId"
+                                id="genero"
+                                onChange={handleInputGoogle}
+                                value={generoId}
+                            >
+                                <option value="">-</option>
+                                {generos ? generos.map(genero => (
+                                    <option key={genero.id} value={genero.id}>{genero.genero}</option>
+                                )) : ("")}
+                            </Input>
+                        </FormGroup>
 
 
 
 
-                            <FormGroup row>
-                                <Label for="inputState">Ciudad</Label>
-                                <Input
-                                    type="select"
-                                    name="ciudadId"
-                                    id="inputState"
-                                    onChange={handleInputGoogle}
-                                >
-                                    <option value="">-</option>
-                                    {ciudades ? ciudades.map(item => (
-                                        <option key={item.id} value={item.id}>{item.ciudad}</option>
-                                    )) : ("")}
-                                </Input>
-                            </FormGroup>
+                        <FormGroup row>
+                            <Label for="inputState">Pais</Label>
+                            <Input
+                                type="select"
+                                name="select"
+                                id="inputState"
+                                onChange={handleCities}
+                            >
+                                <option value="">-</option>
+                                {paises ? paises.map(item => (
+                                    <option key={item.codigo_alfa} value={item.codigo_alfa} >{item.nombre_pais}</option>
+                                )) : ("")}
+                            </Input>
+                        </FormGroup>
 
 
 
 
-                            <FormGroup row>
-                                <Label for="inputState">Metodo de cobro</Label>
-                                <Input
-                                    type="select"
-                                    name="metodo_de_cobro"
-                                    id="inputState"
-                                    value={metodo_de_cobro}
-                                    onChange={handleInputGoogle}
-
-                                >
-                                    <option value="">-</option>
-                                    <option value="Mercado Pago">Mercado Pago</option>
-                                    <option value="CBU">CBU</option>
-                                </Input>
-
-                                {
-                                    metodo_de_cobro !== "" ?
-                                        (metodo_de_cobro === "CBU" ? (
-                                            <>
-                                                <FormGroup>
-                                                    <Input
-                                                        type="text"
-                                                        placeholder="Banco"
-                                                        name="banco"
-                                                        onChange={handleInputGoogle}
-
-                                                    />
-
-                                                    <Input
-                                                        type="text"
-                                                        placeholder="Numero de cuenta"
-                                                        name="numero_de_cuenta"
-                                                        onChange={handleInputGoogle}
-                                                    />
-                                                </FormGroup>
-
-                                            </>
-
-                                        ) : (
-
-                                            metodo_de_cobro === "Mercado Pago" ?
-                                                <FormGroup>
-                                                    <Input
-                                                        type="text"
-                                                        placeholder="Usuario"
-                                                        name="banco"
-                                                        onChange={handleInputGoogle}
-
-                                                    />
-                                                </FormGroup>
-                                                : ("")
-                                        )
-                                        ) : ("")
-                                }
-                            </FormGroup>
-
-
-                            <Button className="button__login__google" type="submit">
-                                Iniciar sesion
-                            </Button>
-                            <Button className="primary" onClick={()=>setModalRegistro(false)}>Cerrar</Button>
-
-
-                        </form>
+                        <FormGroup row>
+                            <Label for="inputState">Ciudad</Label>
+                            <Input
+                                type="select"
+                                name="ciudadId"
+                                id="inputState"
+                                onChange={handleInputGoogle}
+                            >
+                                <option value="">-</option>
+                                {ciudades ? ciudades.map(item => (
+                                    <option key={item.id} value={item.id}>{item.ciudad}</option>
+                                )) : ("")}
+                            </Input>
+                        </FormGroup>
 
 
 
 
+                        <FormGroup row>
+                            <Label for="inputState">Metodo de cobro</Label>
+                            <Input
+                                type="select"
+                                name="metodo_de_cobro"
+                                id="inputState"
+                                value={metodo_de_cobro}
+                                onChange={handleInputGoogle}
 
-                    </CardBody>
-                </Card>
-            </div>
-        </div>
+                            >
+                                <option value="">-</option>
+                                <option value="Mercado Pago">Mercado Pago</option>
+                                <option value="CBU">CBU</option>
+                            </Input>
+
+                            {
+                                metodo_de_cobro !== "" ?
+                                    (metodo_de_cobro === "CBU" ? (
+                                        <>
+                                            <FormGroup>
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Banco"
+                                                    name="banco"
+                                                    onChange={handleInputGoogle}
+
+                                                />
+
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Numero de cuenta"
+                                                    name="numero_de_cuenta"
+                                                    onChange={handleInputGoogle}
+                                                />
+                                            </FormGroup>
+
+                                        </>
+
+                                    ) : (
+
+                                        metodo_de_cobro === "Mercado Pago" ?
+                                            <FormGroup>
+                                                <Input
+                                                    type="text"
+                                                    placeholder="Usuario"
+                                                    name="banco"
+                                                    onChange={handleInputGoogle}
+
+                                                />
+                                            </FormGroup>
+                                            : ("")
+                                    )
+                                    ) : ("")
+                            }
+                        </FormGroup>
+
+
+                        <Button className="button__login__google" type="submit">
+                            Enviar datos
+                        </Button>
+                        <Button className="primary" onClick={() => setModalRegistro(false)}>Cerrar</Button>
+
+
+                    </form>
+
+
+
+
+
+                </CardBody>
+            </Card>
+        // </Modal>
 
     );
 }

@@ -26,7 +26,7 @@ function Cate() {
   const [fam, setFam] = useState({
     nombre_familia: "",
     descripcion: "",
-    id: '',
+    id: "",
   });
 
   useEffect(() => {
@@ -37,14 +37,13 @@ function Cate() {
   const [cate, setCate] = useState({
     nombre_categoria: "",
     descripcion: "",
-    familiumId: '',
+    familiumId: "",
   });
 
   const ChangeInput = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    console.log(value)
-    
+
     if (name === "nombre_familia") {
       setFam({
         ...fam,
@@ -70,13 +69,14 @@ function Cate() {
     formState: { errors },
     handleSubmit,
     reset,
-  
   } = useForm();
 
   const submit = (data, e) => {
-    console.log(data)
     for (let i = 0; i < categoria.length; i++) {
-      if (data.nombre_categoria.toUpperCase() === categoria[i].nombre_categoria.toUpperCase()) {
+      if (
+        data.nombre_categoria.toUpperCase() ===
+        categoria[i].nombre_categoria.toUpperCase()
+      ) {
         return swal({
           title: "La categoria ya existe",
           icon: "warning",
@@ -105,16 +105,16 @@ function Cate() {
         timer: "5000",
       }).then((g) => {
         dispatch(getCategoria());
-        
+
         setCate({
           nombre_categoria: "",
           descripcion: "",
           familiumId: "",
-        })
+        });
         setFam({
           nombre_familia: "",
           descripcion: "",
-          id: '',
+          id: "",
         });
       });
     }
@@ -206,9 +206,7 @@ function Cate() {
                         className="inp"
                         autoComplete="off"
                         onChange={(e) => ChangeInput(e)}
-                        {...register("nombre_categoria", {
-                          
-                        })}
+                        {...register("nombre_categoria", {})}
                       />
                     </>
                   ) : (
@@ -221,7 +219,6 @@ function Cate() {
                         autoComplete="off"
                         onChange={(e) => ChangeInput(e)}
                         {...register("nombre_categoria", {
-                         
                           maxLength: {
                             value: 15,
                             message:
@@ -261,12 +258,7 @@ function Cate() {
                   ) : cate.descripcion.length > 5 &&
                     cate.descripcion.length < 256 ? (
                     <>
-                      <Input
-                        valid
-                        {...register("descripcion", {
-                         
-                        })}
-                      />
+                      <Input valid {...register("descripcion", {})} />
                     </>
                   ) : (
                     <>

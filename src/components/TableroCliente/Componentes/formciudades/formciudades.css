@@ -1,4 +1,4 @@
-#hola{
+/* #hola{
     width: 50vw;
 }
 
@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: 1fr;
 
-    background-color: #ebebeb;
+    background-color: #554f4f;
     padding: 0.5rem;
     border-radius: 10px;
     box-shadow:  0 0 1px 0 rgb(0 0 0 / 5%), 0 1px 2px 0 rgb(0 0 0 / 15%);
@@ -45,4 +45,4 @@
 
     border: 1px solid black;
     border-radius: 10px;
-}
+} */
