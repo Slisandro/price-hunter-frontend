@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import "./modaldetalles.css";
+// import "./modaldetalles.css";
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 
 
 function ModalDetalleDesafio({abierto, abrirModal, desafio}){
-
 
     return(
             

@@ -440,16 +440,10 @@ const Registro = (props) => {
                 <Form inline onSubmit={(e) => e.preventDefault()}>
 
                   <FormGroup className="mx-2" check>
-                    <Input type="select" name="backdrop" id="backdrop" onChange={changeBackdrop}>
-                      <option value="true">Acepto</option>
-                   
-                    </Input>
-                    <Label check>
-                      <Input type="checkbox" style={{ color: "white" }} onChange={changeKeyboard} />
-                    </Label>
+                    
                   </FormGroup>
                   {' '}
-                  <Link color="danger" onClick={toggle}>Acepto los términos y condiciones </Link>
+                  <p>Al registrarse acepta los <Link color="danger" onClick={toggle}>términos y condiciones </Link></p>
                 </Form>
 
 

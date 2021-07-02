@@ -6,7 +6,7 @@ const Bienvenida = () => {
   return (
     <div>
     
-      <Jumbotron style={{backgroundColor:"transparent"}}>
+      <Jumbotron style={{backgroundColor:"rgb(25, 33, 75)"}}>
         <h1 style={{ color: "rgba(96, 214, 0, 0.959)" }} className="display-3">Bienvenido</h1>
         <h4>Gracias por escoger Price Hunter, juntos llevaremos sus ventas hacia la cima !</h4>
         <hr className="my-2" />

@@ -51,7 +51,6 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
-
         <RutaPrivada path="/admin" component={Dash} />
         <RutaPrivada path="/cazador" component={DashCazador} />
         <RutaPrivada path="/cliente" component={DashCliente} />

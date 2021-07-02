@@ -11,7 +11,10 @@ import Desafios from "./views/Desafios";
 
 import CrearDesafioCliente from "./views/CrearDesafioCliente";
 import BienvenidaCliente from "./views/BienvenidaCliente";
-// import Estadisticas from "../src/components/TableroCliente/Componentes/estadisticas/estadisticas.js"
+import Estadisticas from "./views/Estadisticas.js"
+import DesafiosCliente from "./views/DesafiosCliente";
+
+
 
 
 export var routes = [
@@ -120,16 +123,27 @@ export var routesCliente = [
     component: CrearDesafioCliente,
     layout: "/cliente",
 },
-// {
+{
     
-//     path: "/estadisticas",
-//     name: "Desafios",
-//     icon: "tim-icons icon-notes",
-//     component: Estadisticas,
-//     layout: "/cliente",
+    path: "/estadisticas",
+    name: "Estadísticas",
+    icon: "tim-icons icon-chart-bar-32",
+    component: Estadisticas,
+    layout: "/cliente",
 
   
-// }
+},
+{
+    
+  path: "/desafioscliente",
+  name: "Desafíos",
+  icon: "tim-icons icon-trophy",
+  component: DesafiosCliente,
+  layout: "/cliente",
+
+
+}
+
 
 
   

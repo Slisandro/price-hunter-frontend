@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import "./modaledit.css";
+// import "./modaledit.css";
+import "../../misdesafios/modaledit/modaledit.css";
+
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 import axios from "axios";
@@ -67,14 +69,17 @@ function ModalEdilDesafio({abierto, abrirModal2, desafio}){
         setMsg(respuesta.data.msg)
     }
 
-
+    const funcionMarco = () => {
+        setMsg('');
+        abrirModal2()
+    }
 
     return(
 
         
             
         <Modal isOpen={abierto} >
-            <Button onClick={()=>{abrirModal2()}} >X</Button>
+            <Button onClick={()=>{funcionMarco()}} >X</Button>
             <ModalBody>
 
             {
