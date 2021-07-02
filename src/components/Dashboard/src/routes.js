@@ -11,6 +11,7 @@ import Desafios from "./views/Desafios";
 
 import CrearDesafioCliente from "./views/CrearDesafioCliente";
 import BienvenidaCliente from "./views/BienvenidaCliente";
+// import Estadisticas from "../src/components/TableroCliente/Componentes/estadisticas/estadisticas.js"
 
 
 export var routes = [
@@ -118,9 +119,18 @@ export var routesCliente = [
     icon: "tim-icons icon-notes",
     component: CrearDesafioCliente,
     layout: "/cliente",
+},
+// {
+    
+//     path: "/estadisticas",
+//     name: "Desafios",
+//     icon: "tim-icons icon-notes",
+//     component: Estadisticas,
+//     layout: "/cliente",
 
   
-}
+// }
+
 
   
  

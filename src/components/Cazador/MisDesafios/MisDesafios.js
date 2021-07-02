@@ -8,7 +8,9 @@ import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
 import RegistroGoogle from '../../Registro Google/RegistroGoogle';
 
+
 import { Row, Button, Modal } from 'reactstrap';
+
 
 var geolocation = require('geolocation');
 
