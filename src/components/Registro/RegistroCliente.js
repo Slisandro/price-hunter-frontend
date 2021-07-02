@@ -120,9 +120,9 @@ const RegistroCliente = (props) => {
     const handleSubmitCliente = e => {
         e.preventDefault();
 
-        if (telefono.trim() === "" || email.trim() === '' || razon_social.trim() === ''
-            || nombre_cial_fantasia.trim() === '' || password.trim() === "" || confirmarpassword.trim() === "" || cuit_nit_rut.trim() === "" ||
-            direccion_fiscal.trim() === "" || metodo_pago.trim() === "") {
+        if (telefono.trim() === '' || email.trim() === '' || razon_social.trim() === ''
+            || nombre_cial_fantasia.trim() === '' || password.trim() === "" || confirmarpassword.trim() === '' || cuit_nit_rut.trim() === '' ||
+            direccion_fiscal.trim() === '' || metodo_pago.trim() === '') {
             dispatch(mostrarError('Todos los campos son obligatorios', 'alerta-error'));
             return;
 
@@ -157,6 +157,21 @@ const RegistroCliente = (props) => {
         })
         )
 
+        guardarRegistroCliente({
+            razon_social: "",
+            nombre_cial_fantasia: "",
+            cuit_nit_rut: "",
+            email: "",
+            telefono: "",
+            direccion_fiscal: "",
+            metodo_pago: "",
+            banco: "",
+            numero_cuenta: "",
+            password: "",
+            confirmarpassword: "",
+            ciudadId: ""
+        })
+
     }
 
 
@@ -165,7 +180,8 @@ const RegistroCliente = (props) => {
 
     useEffect(() => {
         if (autenticado) {
-            props.history.push("/tablerocliente")
+            props.history.push("/cliente");
+
 
         }
         if (mensaje) {
@@ -235,12 +251,13 @@ const RegistroCliente = (props) => {
                                         <Label for="inputCuit">Cuit</Label>
                                         <Input
                                             bsSize="md"
-                                            type="text"
+                                            type="number"
                                             id="inputCuit"
                                             placeholder="Ingrese su cuit / nit / rut "
                                             name="cuit_nit_rut"
                                             value={cuit_nit_rut}
                                             onChange={handleInputRegister}
+                                            style={{ appearance: "none"}}
 
                                         />
                                     </FormGroup>
@@ -249,7 +266,7 @@ const RegistroCliente = (props) => {
                                         <Label for="inputEmail">Email</Label>
                                         <Input
                                             bsSize="md"
-                                            type="date"
+                                            type="email"
                                             id="inputEmail"
                                             placeholder="Email"
                                             name="email"
@@ -282,7 +299,7 @@ const RegistroCliente = (props) => {
                                         <Input
                                             bsSize="md"
                                             type="text"
-                                            id="inputEmail"
+                                            id="inputFiscal"
                                             placeholder="Direccion fiscal"
                                             name="direccion_fiscal"
                                             value={direccion_fiscal}
