@@ -201,7 +201,7 @@ const Landing = () => {
                                     permitiendole tomar mejores decisiones, adoptar estrategias de precios adecuadas y maximizar sus ventas..</p>
                                 <p className="lead">
 
-                                    <Button className="button_empresa"><Link to="/registro-cliente"  color="primary" block >Registrese</Link></Button>
+                                    <Button className="button_empresa" ><Link to="/registro-cliente" style={{color:"black", fontWeight:"bold"}}  color="primary" block >Registrese</Link></Button>
 
                                 </p>
 
@@ -269,16 +269,18 @@ const Landing = () => {
                                     <li><a href="https://www.linkedin.com/in/cristian-fernandez-a600b61a8/" rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> Cristian Fernandez</a></li>
                                     <li><a href="https://www.linkedin.com/in/german-derbes-catoni/"  rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> German Derbes Catoni</a></li>
 
-                             </a></li>
+                     
 
                                 </ul>
                             </nav>
 
                             <div class="social">
 
-                                <a href="!#"><i class="fab fa-facebook fa-2x"></i></a>
-                                <a href="!#"><i class="fab fa-instagram fa-2x"></i></a>
-                                <a href="!#"><i class="fab fa-twitter fa-2x"></i></a>
+                                <i class="fab fa-facebook fa-2x"></i>
+                                <hr/>
+                                <i class="fab fa-instagram fa-2x"></i>
+                                <hr/>
+                                <i class="fab fa-twitter fa-2x"></i>
                             </div>
                         </div>
                     </footer>
