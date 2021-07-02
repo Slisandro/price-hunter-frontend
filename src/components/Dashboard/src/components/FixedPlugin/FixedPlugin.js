@@ -67,13 +67,13 @@ function FixedPlugin(props) {
                 </>
               )}
             </ThemeContext.Consumer>
-            <Button
+            {/* <Button
               className="btn-fill"
               color="primary"
               onClick={() => dispatch(cerrarSesion())}
             >
               Cerrar Sesión
-            </Button>
+            </Button> */}
           </li>
         </ul>
       </Dropdown>

@@ -269,7 +269,7 @@ const Landing = () => {
                                     <li><a href="https://www.linkedin.com/in/cristian-fernandez-a600b61a8/" rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> Cristian Fernandez</a></li>
                                     <li><a href="https://www.linkedin.com/in/german-derbes-catoni/"  rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> German Derbes Catoni</a></li>
 
-                     
+
 
                                 </ul>
                             </nav>

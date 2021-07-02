@@ -23,6 +23,7 @@ export default function ThemeContextWrapper(props) {
   return (
     <ThemeContext.Provider value={{ theme: theme, changeTheme: changeTheme }}>
       {props.children}
+      {/* <img src="aguila.png" style={{ opacity: "0.3" }} alt="PRICE HUNTER"></img> */}
     </ThemeContext.Provider>
   );
 }
