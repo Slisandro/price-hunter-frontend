@@ -118,7 +118,7 @@ export var routesCliente = [
   {
     
     path: "/creardesafio",
-    name: "Desafios",
+    name: "Crear Desafios-Productos",
     icon: "tim-icons icon-notes",
     component: CrearDesafioCliente,
     layout: "/cliente",
@@ -136,7 +136,7 @@ export var routesCliente = [
 {
     
   path: "/desafioscliente",
-  name: "Desafíos",
+  name: "Editar Desafíos",
   icon: "tim-icons icon-trophy",
   component: DesafiosCliente,
   layout: "/cliente",
