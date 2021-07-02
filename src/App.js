@@ -11,7 +11,6 @@ import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 
-
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
 
@@ -25,7 +24,6 @@ import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 import DashCazador from "./components/Dashboard/DashCazador";
 import DashCliente from "./components/Dashboard/DashCliente";
-
 
 function App() {
   return (
@@ -45,7 +43,7 @@ function App() {
         <Route exact path="/registro" component={Registro} />
         <Route exact path="/registro-cliente" component={RegistroCliente} />
         <Route exact path="/registro-google" component={RegistroGoogle} />
-      
+
         {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}

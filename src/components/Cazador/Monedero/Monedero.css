@@ -78,7 +78,7 @@
     color: green;
 }
 
-.miMonedero .movimientos button {
+/* .miMonedero .movimientos button {
     background: green;
     border: 1px solid green;
     width: 20%;
@@ -92,11 +92,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
-.miMonedero .movimientos button:hover {
+/* .miMonedero .movimientos button:hover {
     opacity: .5;
-}
+} */
 
 #modalRetiroPoints {
     display: flex;

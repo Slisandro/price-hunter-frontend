@@ -33,11 +33,10 @@ import {
   GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
+  RESET_PRODUCTOS,
   POST_UM,
     // ----- CLIENTE -------//
     GET_MIS_DESAFIOS,
-  
-
 } from "./actions";
 
 const initialState = {
@@ -154,6 +153,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         productos: action.payload,
       };
+    case RESET_PRODUCTOS: 
+    return {
+      ...state,
+      productos: []
+    }
     case GET_SUBCATEGORIAS_ID:
       return {
         ...state,

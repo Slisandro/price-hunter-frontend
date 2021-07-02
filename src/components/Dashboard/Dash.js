@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import AdminLayout from "./src/layouts/Admin/Admin.js";
 
-
 import "./src/assets/scss/black-dashboard-react.scss";
 import "./src/assets/demo/demo.css";
 import "./src/assets/css/nucleo-icons.css";
@@ -22,9 +21,8 @@ function Dash() {
             <Route
               path="/admin"
               render={(props) => <AdminLayout {...props} />}
-              
             />
-         
+
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
         </BrowserRouter>

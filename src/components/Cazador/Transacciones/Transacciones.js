@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Transacciones.css';
-import { Card, Col, Row } from 'reactstrap';
+import { Card, Col, Row, CardTitle } from 'reactstrap';
 import Ingreso from '../../../assets/ingreso_transacciones.png';
 import Retiro from '../../../assets/retiro_transacciones.png';
 import { URL } from '../../Redux/actions';
@@ -19,8 +19,7 @@ export default function Transacciones() {
 
     return (
         <Card className="containerTransaccionesUser">
-            {/* <Row> */}
-                {/* <Col lg="12" md="12"> */}
+            <CardTitle className="titleUltMov">Últimos 5 movimientos</CardTitle>
             <ul className="listTransaccionesUser">
                 {
                     movimiento.length === 0 ?

@@ -19,17 +19,17 @@ export default function CardsDesafios({ desafio, handleClickOpen }) {
                                 flexDirection: "column"
                             }}
                         >
-                            <CardTitle style={{ textAlign: "center", fontSize: "2em" }}>{desafio.nombre_desafio}</CardTitle>
-                            <CardText style={{ textAlign: "center", fontSize: "1.2em" }}>{desafio.descripcion_desafio}</CardText>
-                            <CardText className="info" style={{ textAlign: "center", fontSize: "1.2em" }}>Ciudad : {x.ciudad}</CardText>
-                            <CardText className="info" style={{ textAlign: "center", fontSize: "1.2em" }}>Limite de precios : {x.detalle.cantidad_precios}</CardText>
-                            <CardText className="info" style={{ textAlign: "center", fontSize: "1.2em" }}>Total de puntos : {x.detalle.puntos_ganar}</CardText>
+                            <CardTitle style={{ textAlign: "center", fontSize: "1.5em" }}>{desafio.nombre_desafio}</CardTitle>
+                            <CardText style={{ textAlign: "center", fontSize: "1em" }}>{desafio.descripcion_desafio}</CardText>
+                            <CardText className="info" style={{ textAlign: "center", fontSize: "1em" }}>Ciudad : {x.ciudad}</CardText>
+                            <CardText className="info" style={{ textAlign: "center", fontSize: "1em" }}>Limite de precios : {x.detalle.cantidad_precios}</CardText>
+                            <CardText className="info" style={{ textAlign: "center", fontSize: "1em" }}>Total de puntos : {x.detalle.puntos_ganar}</CardText>
                             <Button
                                 value={desafio.id}
                                 name={x.id}
                                 style={{
                                     width: "100%",
-                                    padding: "5% 10%"
+                                    padding: "5% 0"
                                 }}
                                 onClick={e => handleClickOpen(e)}
                                 className="btn-fill"

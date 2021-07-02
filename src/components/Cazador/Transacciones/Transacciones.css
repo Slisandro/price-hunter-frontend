@@ -21,6 +21,12 @@
     padding: 0
 }
 
+.titleUltMov {
+    font-size: 1.5em !important;
+    width: 100%;
+    text-align: center;
+}
+
 .containerTransaccionesUser .listTransaccionesUser .itemListTransacciones {
     /* padding: 1%; */
     display: flex;
