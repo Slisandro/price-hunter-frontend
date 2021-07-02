@@ -4,6 +4,7 @@ import "./estadisticas.css";
 import TablaCliente from '../../../TablaCliente'
 import { useSelector, useDispatch } from 'react-redux';
 import TablaClientesDesafio from '../../../TablaClienteDesafio';
+import {URL} from '../../../Redux/actions'
 import {
   Button,
   Card,
@@ -80,7 +81,9 @@ function Estadisticas(props) {
     const token = localStorage.getItem("token");
     axios({
       method: "get",
-      url: 'http://localhost:3001/misdesafios?estado=' + tipo + '&orden=asc',
+      // url: 'http://localhost:3001/misdesafios?estado=' + tipo + '&orden=asc',
+      url: `${URL}misdesafios?estado=` + tipo + '&orden=asc',
+
       headers: { Authorization: `Bearer ${token}` },
     }).then((r) => {
       setDesafios(r.data)
@@ -95,7 +98,9 @@ function Estadisticas(props) {
       const token = localStorage.getItem("token");
       axios({
         method: "get",
-        url: 'http://localhost:3001/estadisticacliente/' +  idSelect,
+        // url: 'http://localhost:3001/estadisticacliente/' +  idSelect,
+        url: `${URL}estadisticacliente/` +  idSelect,
+
         headers: { Authorization: `Bearer ${token}` },
       }).then((r) => {
         setCabeza(r.data.headerDesafio)
