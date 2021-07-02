@@ -1,0 +1,12 @@
+.conteiner-edit-desafio-cliente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titulo-nombre-edit-desafio-cliente{
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
