@@ -169,7 +169,7 @@ function FormCiudades({ handleChangeCiudades, stateCiudades, handleEliminarCiuda
                         <h6>Cant. de Puntos: {ciudadd.puntosaganar}</h6>
                         </Col>
                         <Row>
-                          <button style={{backgroundColor: "transparent", border: "none"}} block type="submit" value={ciudadd.id} onClick={(e) => { handleEliminarCiudad(e) }}><img src={close} alt=""/></button>
+                          <Button  type="submit" value={ciudadd.id} onClick={ e  => { handleEliminarCiudad(e) }}>X</Button>
                         </Row>
                     
                     {/* </Col> */}

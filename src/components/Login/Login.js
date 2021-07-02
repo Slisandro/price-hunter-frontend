@@ -49,7 +49,7 @@ const Login = (props) => {
   useEffect(() => {
     if (autenticado) {
       if (cliente) {
-        props.history.push('/cliente');
+        props.history.push('/cliente/bienvenida');
       } else {
         if (isAdmin) {
           props.history.push('/admin');

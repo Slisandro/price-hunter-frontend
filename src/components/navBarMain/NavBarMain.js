@@ -181,9 +181,12 @@ function NavBarMain({ producto, setProducto, setState }) {
                 <Nav className="justify-content-center" >
                     <Form inline className="ml-auto" onSubmit={e => handleSubmit(e)}>
                         <FormGroup>
+                            {/* <label style={{ margin: "1% 0" , fontSize: "1em"}}>
+                                Selecciona un radio de distancia
+                            </label> */}
                             <Input
                                 type="text"
-                                placeholder="Search"
+                                placeholder="Buscar precios"
                                 value={inputSearch}
                                 onChange={e => setInputSearch(e.target.value)}
                             />
@@ -240,23 +243,22 @@ function NavBarMain({ producto, setProducto, setState }) {
                 </Nav>
             </Card>
             <button className="btn btn-secondary btn-sm" onClick={() => {
-                console.log("1", button)
+                // console.log("1", button)
                 setButton(!button)
-                console.log("2", button)
             }}>
                 Busqueda avanzada
             </button>
             <Collapse isOpen={button} >
                 <Card style={{ listStyle: "none" }}>
                     <Row>
-                        <Col lg="6">
+                        <Col lg="4">
                             {/* </NavItem>
                         <NavItem> */}
                             <Row>
 
-                                <Col lg="6" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <Col lg="7" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     <Dropdown nav>
-                                        <label style={{ margin: "1% 0", fontSize: "0.875rem" }}>
+                                        <label style={{ margin: "1% 0" }}>
                                             Selecciona un radio de distancia
                                         </label>
                                     </Dropdown>
@@ -265,7 +267,7 @@ function NavBarMain({ producto, setProducto, setState }) {
                                 {/* <label disabled href="#">Selecciona un radio de distancio</label> */}
                                 {/* </NavItem>
                         <NavItem> */}
-                                <Col lg="6">
+                                <Col lg="5">
                                     <Dropdown nav isOpen={dropdownOpen4} toggle={toggle4}>
                                         <DropdownToggle nav caret>
                                             {radio}
@@ -335,7 +337,7 @@ function NavBarMain({ producto, setProducto, setState }) {
                             </Dropdown>
                         </Col>
                         {/* <NavItem> */}
-                        <Col lg="2">
+                        <Col lg="3">
                             <Dropdown nav isOpen={dropdownOpen2} toggle={toggle2}>
                                 <DropdownToggle nav caret>
                                     {nombreCategoria}
@@ -362,7 +364,7 @@ function NavBarMain({ producto, setProducto, setState }) {
                         </Col>
                         {/* </NavItem>
                         <NavItem> */}
-                        <Col lg="2">
+                        <Col lg="3">
                             <Dropdown nav isOpen={dropdownOpen3} toggle={toggle3}>
                                 <DropdownToggle nav caret>
                                     {nombreSubcategorias}

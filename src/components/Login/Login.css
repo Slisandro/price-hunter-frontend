@@ -7,7 +7,7 @@
 
 .loger_cont {
   /* background: radial-gradient(circle, #0cdaf5 0%,#271d63 50%, #181046 75%, #181046 100%); */
-  background: #45a0dd;
+  background: #0f1538;
   height: 100vh;
   flex-direction: column;
   font-family: "Catamaran", sans-serif;
@@ -95,7 +95,7 @@
   font-size: 14px !important;
   transform: translateY(10px);
   border-radius: 10px !important;
-  color: #031b17;
+  color: hsl(207, 31%, 14%);
   font-weight: 700 !important;
   /* background: #03d6d6 !important; */
 }

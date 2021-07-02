@@ -8,7 +8,7 @@ import FormCiudades from "../formciudades/formciudades";
 import FormCrearProducto from "../formcrearproducto/formcrearproducto";
 
 // import "bootstrap/dist/css/bootstrap.css"
-import { URL } from "../../../Redux/actions"
+import { URL } from "../../../Redux/actions";
 
 import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form, FormGroup, Button, Modal } from 'reactstrap';
 
@@ -219,7 +219,7 @@ function CrearDesafio() {
                 {
                   mensajeState ?
                     <div id="div-bttn-y-mensaje-ternario" >
-                      <Link to="/tablerocliente/principal" > <Button className="btn-fill">Volver al Panel</Button> </Link>
+                      
                       <div id="div-mensaje-de-respuesta-creardesafio" > <h6>{mensajeState}</h6> </div>
                     </div>
 
@@ -303,7 +303,7 @@ function CrearDesafio() {
                               disabled={(state.nombre && state.descripcion && !errorState.nombre && !errorState.descripcion && !errorState.fechainicial && !errorState.fechafinal && !errorState.producto && state.ciudades.length > 0 && state.img)
                                 ? false : true}
                               size="lg" block
-                              onClick={(e) => e.preventDefault()}
+                              onClick={handleSubmit}
                             >CREAR DESAFIO</Button>
                             <Col>
                             </Col>
