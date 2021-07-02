@@ -61,8 +61,14 @@ function PutPaises() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getPaises()));
-      reset({ data });
+      }).then((r) => {
+        dispatch(getPaises());
+        setState({
+          nombre_pais: "",
+          codigo_alfa: "",
+        });
+        reset({ data });
+      });
     } else {
       swal({
         title: "Debe seleccionar un pais a modificar",
@@ -71,11 +77,6 @@ function PutPaises() {
         timer: "5000",
       });
     }
-
-    setState({
-      nombre_pais: "",
-      codigo_alfa: "",
-    });
   };
 
   return (
@@ -210,7 +211,7 @@ function PutPaises() {
           </Form>
         </CardBody>
       </Card>
-        </>
+    </>
   );
 }
 

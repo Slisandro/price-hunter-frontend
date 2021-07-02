@@ -90,16 +90,34 @@ function Admin(props) {
 
   return (
     <BackgroundColorContext.Consumer>
-      {({ color, changeColor }) => (
-        <React.Fragment>
-          <div className="wrapper">
-            <Sidebar
-              routes={routesCazador}
-              logo={{
-                outterLink: "https://www.creative-tim.com/",
-                text: "Creative Tim",
-                imgSrc: logo,
-              }}
+
+//       {({ color, changeColor }) => (
+//         <React.Fragment>
+//           <div className="wrapper">
+//             <Sidebar
+//               routes={routesCazador}
+//               logo={{
+//                 outterLink: "https://www.creative-tim.com/",
+//                 text: "Creative Tim",
+//                 imgSrc: logo,
+//               }}
+
+    {({ color, changeColor }) => (
+      <React.Fragment>
+        <div className="wrapper">
+          <Sidebar
+            routes={routesCazador}
+            logo={{
+              outterLink: "https://github.com/Slisandro/price-hunter-frontend",
+              text: "Price Hunter",
+              imgSrc: logo,
+            }}
+            toggleSidebar={toggleSidebar}
+          />
+          <div className="main-panel" ref={mainPanelRef} data={color}>
+            <AdminNavbar
+              brandText={getBrandText(location.pathname)}
+
               toggleSidebar={toggleSidebar}
             />
             <div className="main-panel" ref={mainPanelRef} data={color}>

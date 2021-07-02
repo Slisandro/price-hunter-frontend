@@ -23,6 +23,7 @@ import Landing from "./HomePage/Landing/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 import DashCazador from "./components/Dashboard/DashCazador";
+import DashCliente from "./components/Dashboard/DashCliente";
 
 function App() {
   return (
@@ -50,8 +51,11 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
+
         <RutaPrivada path="/admin" component={Dash} />
         <RutaPrivada path="/cazador" component={DashCazador} />
+        <RutaPrivada path="/cliente" component={DashCliente} />
+
       </Switch>
     </Router>
   );

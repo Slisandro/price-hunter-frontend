@@ -7,7 +7,9 @@ import axios from 'axios';
 import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
 import RegistroGoogle from '../../Registro Google/RegistroGoogle';
-import { Row, Button } from 'reactstrap';
+
+import { Row } from 'reactstrap';
+
 var geolocation = require('geolocation');
 
 
