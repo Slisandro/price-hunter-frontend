@@ -41,17 +41,19 @@
 .ContainerMapaTable{
     width: 80%;
     position: absolute;
-    background: red;
+    background: rgb(0, 47, 255);
     margin: auto;
     z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 65vh;
-    top: 15%;
+    /* height: 500px !important; */
+    /* height: 65vh;
+    top: 15%; */
+    padding: 1.5%;
     border-radius: 1em;
     flex-direction: column;
-    padding-right: 2%;
+    /* padding-right: 2%; */
 }
 
 .ContainerMapaTable button {

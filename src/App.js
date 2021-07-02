@@ -11,7 +11,6 @@ import Configuración from "./components/configuración/Configuración";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Registro from "./components/Registro/Registro";
 
-
 // import TableroEmpresa from './components/TableroEmpresas/TableroEmpresa'
 import TableroCLiente from "./components/TableroCliente/index";
 
@@ -24,7 +23,7 @@ import Landing from "./HomePage/Landing/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 import DashCazador from "./components/Dashboard/DashCazador";
-
+import DashCliente from "./components/Dashboard/DashCliente";
 
 function App() {
   return (
@@ -44,7 +43,7 @@ function App() {
         <Route exact path="/registro" component={Registro} />
         <Route exact path="/registro-cliente" component={RegistroCliente} />
         <Route exact path="/registro-google" component={RegistroGoogle} />
-      
+
         {/* <Route exact path="/login-cliente" component={LoginCliente} /> */}
 
         {/* <TableroEmpresa/> */}
@@ -52,8 +51,10 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
-        <RutaPrivada exact path="/admin" component={Dash} />
-        <RutaPrivada exact path="/cazador" component={DashCazador} />
+
+        <RutaPrivada path="/admin" component={Dash} />
+        <RutaPrivada path="/cazador" component={DashCazador} />
+        <RutaPrivada path="/cliente" component={DashCliente} />
 
       </Switch>
     </Router>

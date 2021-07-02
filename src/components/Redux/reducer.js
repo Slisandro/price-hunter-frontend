@@ -33,7 +33,7 @@ import {
   GET_GENERO,
   REGISTRO_GOOGLE_OK,
   REGISTRO_GOOGLE_ERR,
-
+  POST_UM,
     // ----- CLIENTE -------//
     GET_MIS_DESAFIOS,
   
@@ -86,6 +86,7 @@ const initialState = {
   autenticado: localStorage.getItem("auth"),
   usuario: null,
   mensaje: null,
+  expires: true,
   cliente: localStorage.getItem("cliente"),
   isAdmin: localStorage.getItem("isAdmin"),
   isUser: localStorage.getItem("isUser"),
@@ -113,6 +114,7 @@ const initialState = {
   transaccion: [],
   paisesId: [],
   ciudadesId: [],
+  
   //--------------------------//
   registroGoogleRes: {},
   expire: false,
@@ -202,6 +204,7 @@ function rootReducer(state = initialState, action) {
             cliente: false,
             isUser: false,
             isAdmin: true,
+            expires: true,
           };
         } else {
           localStorage.setItem("isUser", true);
@@ -242,6 +245,7 @@ function rootReducer(state = initialState, action) {
         token: null,
         usuario: null,
         mensaje: action.payload,
+        expires: false,
       };
 
 
@@ -336,6 +340,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         generos: action.payload,
       };
+      case POST_UM:
+      return {
+        ...state,
+        expires: action.payload
+      }
 
     default:
       return state;

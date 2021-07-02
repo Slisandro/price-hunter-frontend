@@ -157,13 +157,23 @@ function Monedero() {
                                                 </FormText>
                                             </Row>
                                             <Row>
-                                                <Button variant="primary" type="submit">
+                                                <Button 
+                                                    variant="primary" 
+                                                    type="submit"
+                                                    style={{
+                                                        width: "100% !important"
+                                                    }}
+                                                >
                                                     Retirar
                                                 </Button>
                                                 <Button
-                                                    className="btn-fill"
-                                                    color="primary"
+                                                    // className="btn-fill"
+                                                    // color="primary"
+                                                    variant="primary"
                                                     type="submit"
+                                                    // style={{
+                                                    //     width: "100% !important"
+                                                    // }}
                                                     block
                                                     onClick={() => {
                                                         setModal(!modal)

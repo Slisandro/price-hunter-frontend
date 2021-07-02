@@ -2,7 +2,7 @@ import React from "react";
 // import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import Cazador from "./src/layouts/Admin/Cazador";
+import Cliente from "./src/layouts/Admin/Cliente";
 
 
 import "./src/assets/scss/black-dashboard-react.scss";
@@ -20,12 +20,11 @@ function Dash() {
         <BrowserRouter>
           <Switch>
             <Route
-              path="/cazador" render={(props) => <Cazador {...props} />}
+              path="/cliente" render={(props) => <Cliente {...props} />}
 
             />
-
-
-            {/* <Redirect from="/cazador" to="/cazador" /> */}
+          
+            {/* <Redirect from="/cliente" to="/cliente" /> */}
           </Switch>
         </BrowserRouter>
       </BackgroundColorWrapper>
