@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getCategoria,
   subcategoriaPost,
-  getSubcategoria,  
+  getSubcategoria,
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
@@ -21,7 +21,9 @@ import {
 function Subcate() {
   const dispatch = useDispatch();
   const categoria = useSelector((store) => store.categoria);
- 
+  const subcategoria = useSelector((store) => store.subcategoria);
+  console.log(subcategoria)
+
   useEffect(() => {
     dispatch(getCategoria());
     dispatch(getSubcategoria());
@@ -30,13 +32,13 @@ function Subcate() {
   const [cate, setCate] = useState({
     nombre_categoria: "",
     descripcion: "",
-    id: null,
+    id: "",
   });
 
   const [subcate, setSubcate] = useState({
     nombre_subcategoria: "",
     descripcion: "",
-    categoriumId: null,
+    categoriumId: '',
   });
 
   const ChangeInput = (e) => {
@@ -52,7 +54,6 @@ function Subcate() {
     if (name === "nombre_subcategoria") {
       setSubcate({
         ...subcate,
-
         [name]: value,
       });
     }
@@ -72,6 +73,18 @@ function Subcate() {
   } = useForm();
 
   const submit = (data, e) => {
+    console.log(data)
+    for (let i = 0; i < subcategoria.length; i++) {
+      if (data.nombre_subcategoria.toUpperCase() === subcategoria[i].nombre_subcategoria.toUpperCase()) {
+        return swal({
+          title: "La subcategoria ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
+    
     if (!data.nombre_subcategoria) {
       return swal({
         title: "Agregue una Subcategoria!",
@@ -79,20 +92,30 @@ function Subcate() {
         button: "Aceptar",
         timer: "5000",
       });
+    } else {
+      dispatch(subcategoriaPost(data));
+
+      e.target.reset();
+
+      return swal({
+        title: "Subcategoría agregada con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then(() => {
+        reset({ data });
+        setSubcate({
+          nombre_subcategoria: "",
+          descripcion: "",
+          categoriumId: '',
+        });
+        setCate({
+          nombre_categoria: "",
+          descripcion: "",
+          id: "",
+        });
+      });
     }
-
-    dispatch(subcategoriaPost(data));
-
-    e.target.reset();
-
-    swal({
-      title: "Subcategoría agregada con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    });
-
-    reset({ data });
   };
 
   return (
@@ -141,7 +164,9 @@ function Subcate() {
                       name="nombre_categoria"
                       className="inp"
                       onChange={(e) => ChangeInput(e)}
-                      {...register("nombre_categoria", {})}
+                      {...register("nombre_categoria", {
+                       
+                      })}
                     >
                       <option></option>
                       {categoria.map((f) => (
@@ -164,10 +189,11 @@ function Subcate() {
                         max="0"
                         autoComplete="off"
                         placeholder="Agregar Subcategoria"
+                        onChange={(e) => ChangeInput(e)}
                         {...register("nombre_subcategoria", {
                           required: {
                             value: true,
-                            message: "Debe ingresar un nombre ",
+                            message: "Debe ingresar un nombre",
                           },
                         })}
                       />
@@ -181,6 +207,7 @@ function Subcate() {
                         className="inp"
                         max="0"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
                         {...register("nombre_subcategoria", {})}
                       />
                     </>
@@ -192,6 +219,7 @@ function Subcate() {
                         className="inp"
                         max="0"
                         autoComplete="off"
+                        onChange={(e) => ChangeInput(e)}
                         {...register("nombre_subcategoria", {
                           maxLength: {
                             value: 15,
@@ -235,10 +263,7 @@ function Subcate() {
                       <Input
                         valid
                         {...register("descripcion", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un descripcion ",
-                          },
+                          
                         })}
                       />
                     </>

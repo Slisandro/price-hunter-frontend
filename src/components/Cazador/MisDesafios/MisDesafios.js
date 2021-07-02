@@ -7,6 +7,7 @@ import axios from 'axios';
 import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
 import RegistroGoogle from '../../Registro Google/RegistroGoogle';
+
 import { Row } from 'reactstrap';
 var geolocation = require('geolocation');
 
@@ -50,6 +51,7 @@ function MisDesafios() {
 
 
     useEffect(() => {
+        console.log("Lisandro")
         geolocation.getCurrentPosition((err, position) => {
           if (err) throw err
           return setUbicacion({
@@ -82,7 +84,12 @@ function MisDesafios() {
     }
 
     return (
-        !ubicacion.latitud && !ubicacion.longitud ? <div className="containerMessageBack">No hemos podido acceder a tu ubicación</div> :
+        !ubicacion.latitud && !ubicacion.longitud ? 
+            <div className="containerMessageBack">
+                No hemos podido acceder a tu ubicación
+                <Button onClick={() => history.push("/cazador")}>Recargar</Button>
+            </div> 
+            :
             (
                 loading ?
                     <div className="containerMessageBack">Cargando desafíos...</div>

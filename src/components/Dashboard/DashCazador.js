@@ -23,8 +23,9 @@ function Dash() {
               path="/cazador" render={(props) => <Cazador {...props} />}
 
             />
-          
-            <Redirect from="/cazador" to="/cazador/dashboard" />
+
+
+            {/* <Redirect from="/cazador" to="/cazador" /> */}
           </Switch>
         </BrowserRouter>
       </BackgroundColorWrapper>

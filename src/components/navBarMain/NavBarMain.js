@@ -6,7 +6,7 @@ import { getCategorias, getProductsByName } from "../Redux/actions";
 
 import {
     Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledButtonDropdown, Form, FormGroup, Input, Button,
-    Dropdown, Card
+    Dropdown, Card, Collapse
 } from 'reactstrap';
 
 
@@ -22,7 +22,7 @@ var geolocation = require('geolocation');
 function NavBarMain({ producto, setProducto, setState }) {
     const categorias = useSelector(store => store.categorias);
     const dispatch = useDispatch();
-    const nombre = localStorage.getItem("nombre");
+    // const nombre = localStorage.getItem("nombre");
     // const [error, setError] = useState(false) // Borde al select cuando no ha sido seleccionado
     const [nombreFamilia, setNombreFamilia] = useState("Familias");
     const [nombreCategoria, setNombreCategoria] = useState("Categorias");
@@ -161,158 +161,162 @@ function NavBarMain({ producto, setProducto, setState }) {
         setProducto(e.target.value)
     }
 
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleSearch = () => setIsOpen(!isOpen);
+
     return (
         <>
-            <Card>
-                <Nav className="justify-content-center" >
-                    <Form inline className="ml-auto">
-                        <FormGroup>
-                            <Input type="text" placeholder="Search" />
-
-                        </FormGroup>
-                        <Button color="secondary" size="md" style={{ marginTop: "-15px", width: "188px", height: "38px", fontSize: "10px" }}>Buscar</Button>
-                    </Form>
 
 
+            <div>
+
+                <Card>
+                    <Nav className="justify-content-center" >
+                        <Form inline className="ml-auto">
+                            <FormGroup>
+                                <Input type="text" placeholder="Search" />
+
+                            </FormGroup>
+                            <Button color="secondary" size="md" style={{ marginTop: "-15px", width: "188px", height: "38px", fontSize: "10px" }}>Buscar</Button>
+                        </Form>
+                    </Nav>
+                </Card>
+
+                <Button color="secondary" onClick={toggleSearch} style={{ marginBottom: '1rem' }}>Busqueda avanzada</Button>
+                <Collapse isOpen={isOpen}>
+
+                    <Card>
+                        {/* <h3 style={{ color: "rgba(96, 214, 0, 0.959)" }}>Busqueda avanzada</h3> */}
+                        <Nav className="justify-content-center" >
+                            <NavItem>
+                                <NavLink disabled href="#">Selecciona un radio de distancia</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <Dropdown nav isOpen={dropdownOpen4} toggle={toggle4}>
+                                    <DropdownToggle nav caret>
+                                        {radio}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem
+                                            value={1000}
+                                            name={"100 m"}
+                                            onClick={(e) => handleClick(e)}
+                                        >
+                                            100 m
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            value={5000}
+                                            name={"5 km"}
+                                            onClick={(e) => handleClick(e)}
+                                        >
+                                            5 km
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            value={10000}
+                                            name={"10 km"}
+                                            onClick={(e) => handleClick(e)}
+                                        >
+                                            10 km
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            value={20000}
+                                            name={"20 km"}
+                                            onClick={(e) => handleClick(e)}
+                                        >
+                                            20 km
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            value={100000}
+                                            name={"100 km"}
+                                            onClick={(e) => handleClick(e)}
+                                        >
+                                            100km
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+
+                            </NavItem>
 
 
 
-                </Nav>
-            </Card>
 
 
-            <Card>
-                <Nav tabs>
-
-                    <NavItem>
-                        <NavLink disabled href="#">Busqueda avanzada</NavLink>
-                    </NavItem>
-
-                    <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
-                        <DropdownToggle nav caret>
-                            {nombreFamilia}
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            {
-                                categorias.length &&
-                                categorias.map(familia => {
-                                    return (
-                                        <DropdownItem key={familia.id} value={familia.id} name={familia.nombre_familia} onClick={(e) => handleCategorias(e)}>{familia.nombre_familia}</DropdownItem>
-                                    )
-                                })
-                            }
-                        </DropdownMenu>
-                    </Dropdown>
-                    <NavItem>
-                        <Dropdown nav isOpen={dropdownOpen2} toggle={toggle2}>
-                            <DropdownToggle nav caret>
-                                {nombreCategoria}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                {
-                                    categoria.length === 0 ? null : (
-                                        categoria.map(cat => {
+                            <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
+                                <DropdownToggle nav caret>
+                                    {nombreFamilia}
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    {
+                                        categorias.length &&
+                                        categorias.map(familia => {
                                             return (
-                                                <DropdownItem
-                                                    key={cat.idCategoria}
-                                                    value={cat.idCategoria}
-                                                    name={cat.nombreCategoria}
-                                                    onClick={(e) => handleSubcategorias(e)}
-                                                >
-                                                    {cat.nombreCategoria}
-                                                </DropdownItem>
+                                                <DropdownItem key={familia.id} value={familia.id} name={familia.nombre_familia} onClick={(e) => handleCategorias(e)}>{familia.nombre_familia}</DropdownItem>
                                             )
                                         })
-                                    )
-                                }
-                            </DropdownMenu>
-                        </Dropdown>
-                    </NavItem>
-                    <NavItem>
-                        <Dropdown nav isOpen={dropdownOpen3} toggle={toggle3}>
-                            <DropdownToggle nav caret>
-                                {nombreSubcategorias}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                {
-                                    ubicacion.dis === 0 ?
-                                        <label>Debe seleccionar distancia</label> : (
-                                            subcategoria && categoria &&
-                                            subcategoria.map((sub) => {
-                                                return (
-                                                    <DropdownItem
-                                                        key={sub.idSubcategoria}
-                                                        value={sub.idSubcategoria}
-                                                        name={sub.nombreSubcategoria}
-                                                        onClick={e => handleClickSubCategoria(e)}
-                                                    >
-                                                        {sub.nombreSubcategoria}
-                                                    </DropdownItem>
-                                                )
-                                            }
-                                            ))
-                                }
-                            </DropdownMenu>
-                        </Dropdown>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink disabled href="#">Selecciona un radio de distancio</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <Dropdown nav isOpen={dropdownOpen4} toggle={toggle4}>
-                            <DropdownToggle nav caret>
-                                {radio}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem 
-                                    value={1000}
-                                    name={"100 m"}
-                                    onClick={(e) => handleClick(e)}
-                                >
-                                    100 m
-                                </DropdownItem>
-                                <DropdownItem 
-                                    value={5000}
-                                    name={"5 km"}
-                                    onClick={(e) => handleClick(e)}
-                                >
-                                    5 km
-                                </DropdownItem>
-                                <DropdownItem 
-                                    value={10000}
-                                    name={"10 km"}
-                                    onClick={(e) => handleClick(e)}
-                                >
-                                    10 km
-                                </DropdownItem>
-                                <DropdownItem 
-                                    value={20000}
-                                    name={"20 km"}
-                                    onClick={(e) => handleClick(e)}
-                                >
-                                    20 km
-                                </DropdownItem>
-                                <DropdownItem 
-                                    value={100000}
-                                    name={"100 km"}
-                                    onClick={(e) => handleClick(e)}
-                                >
-                                    100km
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-
-                    </NavItem>
-
-
-                </Nav>
-            </Card>
+                                    }
+                                </DropdownMenu>
+                            </Dropdown>
+                            <NavItem>
+                                <Dropdown nav isOpen={dropdownOpen2} toggle={toggle2}>
+                                    <DropdownToggle nav caret>
+                                        {nombreCategoria}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        {
+                                            categoria.length === 0 ? null : (
+                                                categoria.map(cat => {
+                                                    return (
+                                                        <DropdownItem
+                                                            key={cat.idCategoria}
+                                                            value={cat.idCategoria}
+                                                            name={cat.nombreCategoria}
+                                                            onClick={(e) => handleSubcategorias(e)}
+                                                        >
+                                                            {cat.nombreCategoria}
+                                                        </DropdownItem>
+                                                    )
+                                                })
+                                            )
+                                        }
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </NavItem>
+                            <NavItem>
+                                <Dropdown nav isOpen={dropdownOpen3} toggle={toggle3}>
+                                    <DropdownToggle nav caret>
+                                        {nombreSubcategorias}
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        {
+                                            ubicacion.dis === 0 ?
+                                                <label>Debe seleccionar distancia</label> : (
+                                                    subcategoria && categoria &&
+                                                    subcategoria.map((sub) => {
+                                                        return (
+                                                            <DropdownItem
+                                                                key={sub.idSubcategoria}
+                                                                value={sub.idSubcategoria}
+                                                                name={sub.nombreSubcategoria}
+                                                                onClick={e => handleClickSubCategoria(e)}
+                                                            >
+                                                                {sub.nombreSubcategoria}
+                                                            </DropdownItem>
+                                                        )
+                                                    }
+                                                    ))
+                                        }
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </NavItem>
 
 
 
-
-
-
+                        </Nav>
+                    </Card>
+                </Collapse>
+            </div>
 
         </>
     )
@@ -320,6 +324,7 @@ function NavBarMain({ producto, setProducto, setState }) {
 
 
 export default NavBarMain;
+
 
 
 

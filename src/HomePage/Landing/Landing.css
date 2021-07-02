@@ -258,6 +258,7 @@ ul {
     padding-top: 250px;
     animation: slideInFromBottom 1s ease-in;
     height: 500px !important;
+    background: white !important;
 }
 
 .stats-heading {

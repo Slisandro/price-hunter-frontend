@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
     width: 100vw;
     min-height: 90vh;
 }
@@ -19,12 +19,11 @@
 
 #div-mensaje-de-respuesta-creardesafio{
     background-color: #43a251;
-    color: white;
+    color: rgb(255, 255, 255);
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 60%);
     width: 100%;
     min-height: 3rem;
     padding: 1px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +62,7 @@
 }
 
 .form-cliente-crear-desafio-div{
-    background-color: white;
+    background-color: rgb(83, 83, 105);
     margin: 1rem;
     padding: 1rem;
     border-radius: 10px;

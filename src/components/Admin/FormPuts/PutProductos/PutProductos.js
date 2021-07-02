@@ -113,8 +113,17 @@ function PutProductos() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getProductos()));
-      reset({ data });
+      }).then((r) => {
+         dispatch(getProductos())
+         setState({
+          id: "",
+          nombre: "",
+          contenido_neto: "",
+          subcategoriumId: "",
+          unidadMedidaCodigoUnidadMedida: "",
+        });
+         reset({ data });
+        });
     } else {
       swal({
         title: "Debe seleccionar un producto para modificar!",
@@ -123,13 +132,6 @@ function PutProductos() {
         timer: "5000",
       });
     }
-    setState({
-      id: "",
-      nombre: "",
-      contenido_neto: "",
-      subcategoriumId: "",
-      unidadMedidaCodigoUnidadMedida: "",
-    });
   };
 
   return (
@@ -246,7 +248,7 @@ function PutProductos() {
                       autoComplete="off"
                       {...register("contenido_neto", {})}
                     />
-                  ) : state.contenido_neto.length > 1 &&
+                  ) : state.contenido_neto.length > 0 &&
                     state.contenido_neto.length < 4 ? (
                     <Input
                       valid

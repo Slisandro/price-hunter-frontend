@@ -67,8 +67,15 @@ function PutMonedas() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getMoneda()));
-      reset({ data });
+      }).then((r) => {
+        dispatch(getMoneda());
+        setState({
+          codigo_moneda: "",
+          nombre_moneda: "",
+          simbolo: "",
+        });
+        reset({ data });
+      });
     } else if (!data.codigo_moneda) {
       swal({
         title: "Debe seleccionar una moneda para modificar!",
@@ -77,11 +84,6 @@ function PutMonedas() {
         timer: "5000",
       });
     }
-    setState({
-      codigo_moneda: "",
-      nombre_moneda: "",
-      simbolo: "",
-    });
   };
 
   return (

@@ -3,7 +3,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 90vh;
+    min-height: 90vh;
+    padding: 0;
+    margin: 0;
 }
 
 #nav-filtros-ordenamiento-misdesafios-cliente{
@@ -18,4 +20,44 @@
     padding: 0.25rem;
     margin: 0.25rem;
     
+}
+
+#nav-conteiner-filtros-ordenamiento{
+    width: 40vw;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#conteiner-lista-desafios-2-cliente{
+    min-height: 60vh;
+}
+
+.paginationBttns{
+    width: 80%;
+    height: 50px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.paginationBttns a{
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 8px;
+    color: black !important;
+    background-color: white;
+    cursor: pointer;
+}
+.paginationBttns a:hover{
+    color: white !important;
+    background-color: black;
+}
+
+.paginationActive a{
+    color: black !important;
+    background-color: #fcd22b;
 }

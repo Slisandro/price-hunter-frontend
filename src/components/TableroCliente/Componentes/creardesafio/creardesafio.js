@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import "./creardesafio.css";
+// import "./creardesafio.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Select from 'react-select';
 import { product } from 'prelude-ls';
 import FormCiudades from "../formciudades/formciudades";
 import FormCrearProducto from "../formcrearproducto/formcrearproducto";
-import { Button, Modal } from "reactstrap";
-import "bootstrap/dist/css/bootstrap.css"
-import {URL} from "../../../Redux/actions"
+
+// import "bootstrap/dist/css/bootstrap.css"
+import { URL } from "../../../Redux/actions"
+
+import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form, FormGroup, Button, Modal } from 'reactstrap';
 
 
 
@@ -45,14 +47,14 @@ function CrearDesafio() {
     img: "https://www.latinflores.com/imagenes/productos/CANAVI004_L.jpg"
   });
   const [errorState, seterrorState] = useState({
-    nombre:"",
-    descripcion:"",
-    fechainicial:"No olvidar fecha inicio.",
-    fechafinal:"No olvidar fecha fin.",
-    producto:"No olvidar seleccionar Producto",
-    ciudades:"",
-    cantidaddeprecios:"",
-    puntosaganar:""
+    nombre: "",
+    descripcion: "",
+    fechainicial: "No olvidar fecha inicio.",
+    fechafinal: "No olvidar fecha fin.",
+    producto: "No olvidar seleccionar Producto",
+    ciudades: "",
+    cantidaddeprecios: "",
+    puntosaganar: ""
   })
 
   const [productosState, setProductosState] = useState([]);
@@ -65,7 +67,7 @@ function CrearDesafio() {
 
 
   //-----Estilos <Button/>-------//
-  const styles_buttn ={
+  const styles_buttn = {
     width: "30%",
     height: "3rem",
     padding: "0",
@@ -87,7 +89,7 @@ function CrearDesafio() {
 
   const productos = [];
 
-  (function listarproductos(){
+  (function listarproductos() {
     productosState.forEach((producto) => {
       productos.push({
         value: producto.id,
@@ -105,18 +107,18 @@ function CrearDesafio() {
       ...state,
       [name]: e.target.value
     })
-    if(e.target.value.length<3){
+    if (e.target.value.length < 3) {
       seterrorState({
         ...errorState,
         [name]: "Campo Obligatorio. +3 caracteres"
       })
-    }else{
+    } else {
       seterrorState({
         ...errorState,
         [name]: ""
       })
     }
-    
+
   }
 
   function handleChangeProducto(e) {
@@ -124,12 +126,12 @@ function CrearDesafio() {
       ...state,
       id_producto: e.value
     })
-    if(!e.value){
+    if (!e.value) {
       seterrorState({
         ...errorState,
         producto: "Seleccionar Producto."
       })
-    }else{
+    } else {
       seterrorState({
         ...errorState,
         producto: ""
@@ -141,13 +143,13 @@ function CrearDesafio() {
   //-------FUNCIONES CALLBACK PARA FORM_CIUDADES------//
   //--------------------------------------------------//
   //------funcion chequeo array ciudades/error--------//
-  function errorCiudades(){
-    if(!state.ciudades){
+  function errorCiudades() {
+    if (!state.ciudades) {
       seterrorState({
         ...errorState,
         ciudades: "Seleccionar Ciudad/es."
       })
-    }else{
+    } else {
       seterrorState({
         ...errorState,
         ciudades: ""
@@ -174,7 +176,7 @@ function CrearDesafio() {
       ciudades: state.ciudades.filter((ciudad) => ciudad.id !== parseInt(e.target.value))
     })
     //---error: controlo state.ciudades----//
-    if(state.ciudades.length-1===0){
+    if (state.ciudades.length - 1 === 0) {
       seterrorState({
         ...errorState,
         ciudades: "Seleccionar Ciudad/es."
@@ -200,70 +202,140 @@ function CrearDesafio() {
     setMensajeState(respuesta_creardesafio.data.msg)
   }
 
+
+
+
+
   return (
-    <div id="div-superior-terneario" >
-      {
-        mensajeState ?
-          <div id="div-bttn-y-mensaje-ternario" >
-            <Link to="/tablerocliente/principal" > <button>Volver al Panel</button> </Link>
-            <div id="div-mensaje-de-respuesta-creardesafio" > <p>{mensajeState}</p> </div>
-          </div>
+    <>
+      <Row>
+        <Col lg={6}>
+          <Card className="card-chart" style={{ marginTop: "1rem" }}>
+            <CardHeader>
+              <h3 style={{ color: "rgba(96, 214, 0, 0.959)" }}>Desafíos</h3>
+            </CardHeader>
+            <CardBody>
+              <div id="div-superior-terneario" >
+                {
+                  mensajeState ?
+                    <div id="div-bttn-y-mensaje-ternario" >
+                      <Link to="/tablerocliente/principal" > <Button className="btn-fill">Volver al Panel</Button> </Link>
+                      <div id="div-mensaje-de-respuesta-creardesafio" > <h6>{mensajeState}</h6> </div>
+                    </div>
 
-          :
+                    :
 
-          <div id="conteiner-cliente-crear-desafio" >
-            
-            <form id="form-cliente-crear-desafio" onSubmit={(e) => { handleSubmit(e) }} >
+                    <div>
+                      <Form onSubmit={(e) => { handleSubmit(e) }} >
+                        <FormGroup Row>
+                          <Col sm={12}  >
+                            <Row >
+                              {errorState.nombre ? <h6 className="err" > Desafío: {errorState.nombre} </h6> : <h6 className="stylos-titulos" >Nombre Desafío</h6>}
+                            </Row>
+                            <Input
+                            
+                              className="inp"
+                              type="text"
+                              placeholder="Nombre del Desafío"
+                              name="nombre"
+                              value={state.nombre}
+                              onChange={(e) => { handleChangeNombre(e) }}
+                            />
 
-              <div className="form-cliente-crear-desafio-div" >
-                <div>
-                  {errorState.nombre ? <p className="estylo-errores" > Desafío: {errorState.nombre} </p>: <p className="stylos-titulos" >Nombre Desafío</p> }
-                  <input className="input-nombre-descripcion" type="text" placeholder="Nombre del Desafío" name="nombre" value={state.nombre} onChange={(e) => { handleChangeNombre(e) }} />
-                </div>
+                            <div style={{ marginTop: "2rem" }}>
+                              <Row >
+                                {errorState.descripcion ? <p className="err" > {errorState.descripcion} </p> : <h6 className="stylos-titulos" >Descripción Desafío</h6>}
+                              </Row>
+                              <Input
+                                type="textarea"
+                                className="input-nombre-descripcion"
+                                placeholder="Descripción del Desafío."
+                                name="descripcion"
+                                onChange={(e) => { handleChangeNombre(e) }}
+                              />
+                            </div>
 
-                <div>
-                  {errorState.descripcion ? <p className="estylo-errores" > {errorState.descripcion} </p> : <p className="stylos-titulos" >Descripción Desafío</p> }
-                  <textarea className="input-nombre-descripcion" placeholder="Descripción del Desafío." name="descripcion" onChange={(e) => { handleChangeNombre(e) }} />
-                </div>
+                            <div style={{ marginTop: "2rem" }}>
+                              <Col sm={12} id="fechas-desafio" style={{ padding: "0" }}>
 
-                <div id="fechas-desafio" >
-                  <div>
-                    <p className="stylos-titulos" >Fecha Inicio Desafío</p>
-                    <input type="date" min={fecha_min} name="fechainicial" onChange={(e) => { handleChangeNombre(e) }} />
-                    {errorState.fechainicial && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.fechainicial} </p> }
-                  </div>
-                  <div>
-                    <p className="stylos-titulos" >Fecha Fin Desafío</p>
-                    <input type="date" min={fecha_min} name="fechafinal" onChange={(e) => { handleChangeNombre(e) }} />
-                    {errorState.fechafinal && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.fechafinal} </p> }
-                  </div>
-                </div>
+                                <Row sm={2}>
+                                  <h6 className="stylos-titulos" >Fecha Inicio Desafío</h6>
+                                </Row>
 
-                <div id="productos-bttn" >
-                  <div id="div-producto" >
-                    <p className="stylos-titulos" >Producto</p>
-                    <Select options={productos} id="select-productos" onChange={(e) => { handleChangeProducto(e) }} />
-                    {errorState.producto && <p className="estylo-errores" className="titulos-no-olvidar" > {errorState.producto} </p> }
-                  </div>
-                  <Button  style={styles_buttn} onClick={() => { abrirModal() }} >Agregar Producto</Button>
-                </div>
+                                <Input
+                                  type="date"
+                                  min={fecha_min}
+                                  name="fechainicial"
+                                  onChange={(e) => { handleChangeNombre(e) }}
+                                />
+                                {errorState.fechainicial && <p className="err" className="err" > {errorState.fechainicial} </p>}
 
-                <button
-                  type="submit"
-                  disabled={( state.nombre && state.descripcion && !errorState.nombre && !errorState.descripcion && !errorState.fechainicial && !errorState.fechafinal && !errorState.producto && state.ciudades.length > 0 && state.img)
-                    ? false : true}
-                >CREAR DESAFIO</button>
+                                <div style={{ marginTop: "2rem" }} >
+                                  <Row sm={2}>
+                                    <h6 className="stylos-titulos" >Fecha Fin Desafío</h6>
+                                  </Row>
 
+                                  <Input
+                                    type="date"
+                                    min={fecha_min}
+                                    name="fechafinal"
+                                    onChange={(e) => { handleChangeNombre(e) }}
+                                  />
+                                  {errorState.fechafinal && <p className="err" className="err"> {errorState.fechafinal} </p>}
+                                </div>
+                              </Col>
+                            </div>
+
+                            <Col id="productos-bttn" style={{ padding: "0", marginTop: "2rem" }} >
+                              <Row id="div-producto" >
+                                <h6 className="stylos-titulos" >Producto</h6>
+                              </Row>
+                              <Select options={productos} id="select-productos" onChange={(e) => { handleChangeProducto(e) }} />
+
+                              {errorState.producto && <p className="err" className="err" > {errorState.producto} </p>}
+
+                              <Button onClick={() => { abrirModal() }} size="lg" block >Agregar Producto</Button>
+                            </Col>
+
+                            <Button
+                              type="submit"
+                              className="btn-fill"
+                              disabled={(state.nombre && state.descripcion && !errorState.nombre && !errorState.descripcion && !errorState.fechainicial && !errorState.fechafinal && !errorState.producto && state.ciudades.length > 0 && state.img)
+                                ? false : true}
+                              size="lg" block
+                              onClick={(e) => e.preventDefault()}
+                            >CREAR DESAFIO</Button>
+                            <Col>
+                            </Col>
+
+                          </Col>
+                        </FormGroup>
+                      </Form>
+
+                    </div>
+
+                }
               </div>
+            </CardBody>
+          </Card>
 
-            </form>
-            <FormCiudades errores={errorState} seterrorState={seterrorState} handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
-            <FormCrearProducto abierto={stateModal.abierto} abrirModal={abrirModal} stateMensaje={stateMensaje} setStateMensaje={setStateMensaje} stateBoolean={stateBoolean} setStateBoolean={setStateBoolean} />
-          </div>
+        </Col>
 
-      }
-    </div>
+        <Col lg={6}>
+          <Row sm={12}>
+            <Card>
+             
+                <FormCiudades errores={errorState} seterrorState={seterrorState} handleEliminarCiudad={handleEliminarCiudad} handleChangeCiudades={handleChangeCiudades} stateCiudades={state.ciudades} />
+                <FormCrearProducto abierto={stateModal.abierto} abrirModal={abrirModal} stateMensaje={stateMensaje} setStateMensaje={setStateMensaje} stateBoolean={stateBoolean} setStateBoolean={setStateBoolean} />
+             
+            </Card>
+          </Row>
+        </Col>
 
+      </Row>
+
+
+    </>
   );
 }
 

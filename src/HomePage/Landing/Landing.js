@@ -20,7 +20,11 @@ import { Nav, NavItem, Button, Jumbotron, Card, CardBody, CardTitle, CardSubtitl
 
 const Landing = () => {
     return (
+
         <div className="hunter__landing__content">
+
+
+            
             <div className="navbar__landing">
                 <div className="containerLanding__hunter flexing">
                     <img className="aguilaLanding" src={aguila} alt="" />
@@ -38,6 +42,8 @@ const Landing = () => {
                 </div>
             </div>
 
+            
+            
             <section class="showcase">
                 <div class="containerLanding__hunter grid">
                     <div class="showcase-text">
@@ -51,10 +57,12 @@ const Landing = () => {
                             productos favoritos para ayudar a otros consumidores y además,
                             <small class="hunter-pe"> obtener recompensas</small> por ello !
                         </p>
-                        <a href="features.html" class="btnLanding btn-outline__hunter">
+
+                        <a href="#sombrenosotros" class="btnLanding btn-outline__hunter">
                             Sobre nosotros
                         </a>
-                        <a href="features.html" class="btnLanding btn-outline__hunter">
+                        <a href="#empresas" class="btnLanding btn-outline__hunter">
+
                             Empresas
                         </a>
                     </div>
@@ -63,11 +71,14 @@ const Landing = () => {
                         <div class="hero__phone">
                             <img class="img__super" src={cazador} alt="" />
                         </div>
+                    </div>
+                </div>
+                </section>
+                
 
 
-                        <section class="showcase">
+                   
 
-                            <div class="containerLanding__hunter grid">
 
                                 <div class="showcase-text">
                                     <h1 class="title-hunter"><span class="hunter-pe">P</span>rice <span class="hunter-pe">H</span>unter</h1>
@@ -79,20 +90,33 @@ const Landing = () => {
 
                                 </div>
 
+                    <section class="stats">
+                        <div class="containerLanding__hunter">
 
 
-                                <div class="showcase-form ">
-                                    <div class="hero__phone">
-                                        <img class="img__super" src={cazador} alt="" />
-                                    </div>
+                            <div class="grid grid-3 text-center my-4">
+                                <div>
+                                    <img class="img__publicidad" src={ahorro} alt="" />
+
+                                    <h3 class="h3">Conseguí el mejor precio cerca de tu hogar y ahorrá</h3>
+
+
                                 </div>
+                                <div>
+                                    <img class="img__publicidad" src={ayuda} alt="" />
+              <h3 class="h3">Capturá precios y ayudá a otros consumidores</h3>
 
 
+                                </div>
+                                <div>
+                                    <img class="img__publicidad" src={mapa} alt="" />
+
+                                    <h3 class="h3">Encontrá el precio mas cercano a tu hogar</h3>
+
+                                </div>
                             </div>
-
-                        </section>
-
-
+                        </div>
+                    </section>
 
 
 
@@ -100,94 +124,84 @@ const Landing = () => {
                             <div class="containerLanding__hunter">
 
 
-                                <div class="grid grid-3 text-center my-4">
-                                    <div>
-                                        <img class="img__publicidad" src={ahorro} alt="" />
-                                        <h3 class="h3">Conseguí el mejor precio y ahorre dinero</h3>
+                    <section id="sombrenosotros" class="how-it-works">
 
-                                    </div>
-                                    <div>
-                                        <img class="img__publicidad" src={ayuda} alt="" />
-                                        <h3 class="h3">Capturá precios y ayude a otros consumidores</h3>
 
-                                    </div>
-                                    <div>
-                                        <img class="img__publicidad" src={mapa} alt="" />
-                                        <h3 class="h3">Encontrá el precio mas cercano a su hogar</h3>
+
+                        <div class="containerLanding ">
+                            <div class="row justify-content-center">
+                                <div>
+                                    <div class="section-title">
+                                        <h2>¿Como funciona Price Hunter?</h2>
                                     </div>
                                 </div>
                             </div>
-                        </section>
 
+                            <div class="grider__functions grid grid-3 text-center">
 
+                                <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
+                                    <CardBody >
 
+                                        <CardTitle className="card__title__instructions">1</CardTitle>
 
-                        <section class="how-it-works">
+                                        <CardSubtitle className="mb-2 ">Únete a los desafios propuestos por nuestros clientes</CardSubtitle>
+                                        <CardText>El desafío es sobre un producto determinado y habrá una cantidad de precios por cazar</CardText>
 
-                            <div class="containerLanding ">
-                                <div class="row justify-content-center">
-                                    <div>
-                                        <div class="section-title">
-                                            <h2>¿Como funciona Price Hunter?</h2>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </CardBody>
+                                </Card>
+                                <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
+                                    <CardBody>
 
-                                <div class="grider__functions grid grid-3 text-center">
+                                        <CardTitle className="card__title__instructions">2</CardTitle>
 
-                                    <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
-                                        <CardBody >
-                                            <CardTitle className="card__title__instructions">1</CardTitle>
-                                            <CardSubtitle className="mb-2 ">Únete a los desafios propuestos por nuestros clientes</CardSubtitle>
-                                            <CardText>El desafío es sobre un producto determinado y habrá una cantidad de precios por cazar</CardText>
+                                        <CardSubtitle className="mb-2">Dirígete a su tienda favorita y cargue el precio del producto</CardSubtitle>
+                                        <CardText>Cargue en Price Hunter el precio del producto que ha sido establecido en el desafio</CardText>
 
-                                        </CardBody>
-                                    </Card>
-                                    <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
-                                        <CardBody>
-                                            <CardTitle className="card__title__instructions">2</CardTitle>
-                                            <CardSubtitle className="mb-2">Dirígete a su tienda favorita y cargue el precio del producto</CardSubtitle>
-                                            <CardText>Cargue en Price Hunter el precio del producto que ha sido establecido en el desafio</CardText>
+                                    </CardBody>
+                                </Card>
+                                <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
+                                    <CardBody>
 
-                                        </CardBody>
-                                    </Card>
-                                    <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
-                                        <CardBody>
-                                            <CardTitle className="card__title__instructions">3</CardTitle>
-                                            <CardSubtitle className="mb-2 ">Capturá la mayor cantidad de precios posibles de ese producto</CardSubtitle>
-                                            <CardText>Tenga en cuenta que no se puede cargar el precio de un producto dos veces en el mismo lugar</CardText>
+                                        <CardTitle className="card__title__instructions">3</CardTitle>
 
-                                        </CardBody>
-                                    </Card>
-                                    <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
-                                        <CardBody>
-                                            <CardTitle className="card__title__instructions">4</CardTitle>
-                                            <CardSubtitle className="mb-2">Cuantos mas precios captures, mas HunterPoints acumularás</CardSubtitle>
-                                            <CardText>En su panel de usuario podras administrar tus puntos y canjearlos por grandes recompensas!</CardText>
+                                        <CardSubtitle className="mb-2 ">Capturá la mayor cantidad de precios posibles de ese producto</CardSubtitle>
+                                        <CardText>Tenga en cuenta que no se puede cargar el precio de un producto dos veces en el mismo lugar</CardText>
 
-                                        </CardBody>
-                                    </Card>
+                                    </CardBody>
+                                </Card>
+                                <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
+                                    <CardBody>
 
-                                </div>
+                                        <CardTitle className="card__title__instructions">4</CardTitle>
+
+       
+                                        <CardSubtitle className="mb-2">Cuantos mas precios captures, mas HunterPoints acumularás</CardSubtitle>
+                                        <CardText>En su panel de usuario podras administrar tus puntos y canjearlos por grandes recompensas!</CardText>
+
+                                    </CardBody>
+                                </Card>
+
                             </div>
+                        </div>
 
 
-                        </section>
+                    </section>
 
 
-                        <section className="containerLanding__hunter">
+                    <section className="containerLanding__hunter">
 
-                        </section>
-
-
-
-
+                    </section>
 
 
 
 
 
 
+
+
+
+
+<<<<<<< HEAD
                         <section class="empresas my-2 py-2">
                             <div class="containerLanding__hunter grid">
                                 <Jumbotron className="jumboLanding">
@@ -206,6 +220,24 @@ const Landing = () => {
                             </div>
                         </section>
 
+=======
+                    <section  id="empresas" class="empresas my-2 py-2">
+
+                        <div class="containerLanding__hunter grid">
+                            <Jumbotron className="jumboLanding">
+                                <h1 className="display-3 title_jumbo">Price Hunter Empresas</h1>
+
+                                <p>Price Hunter le acerca información detallada sobre del precio de sus productos en el mercado,
+                                    permitiendole tomar mejores decisiones, adoptar estrategias de precios adecuadas y maximizar sus ventas..</p>
+                                <p className="lead">
+
+                                    <Button className="button_empresa"><Link to="/registro-cliente"  color="primary" block >Registrese</Link></Button>
+
+                                </p>
+
+                            </Jumbotron>
+                            <img className="img__empresas" src={ventas} width={90} alt="" />
+>>>>>>> f8edeb78054043c25099fd3440120775b5ddfae2
 
                         <section class="marcas containerLanding__hunter">
                             <h2 class="md text-center ">
@@ -216,14 +248,20 @@ const Landing = () => {
                                     <img className="img__marca" src={coca} alt="" />
                                 </div>
 
+<<<<<<< HEAD
                                 <div>
                                     <img className="img__marca" src={pepsi} alt="" />
                                 </div>
+=======
+                        </div>
+                    </section>
+>>>>>>> f8edeb78054043c25099fd3440120775b5ddfae2
 
                                 <div>
                                     <img className="img__marca" src={colgate} alt="" />
                                 </div>
 
+<<<<<<< HEAD
                                 <div>
                                     <img className="img__marca" src={mondelez} alt="" />
                                 </div>
@@ -235,8 +273,30 @@ const Landing = () => {
                                 <div>
                                     <img className="img__marca" src={unilever} alt="" />
                                 </div>
+=======
+                    <section class="marcas containerLanding__hunter">
+                        <h2 class="md text-center ">
+                            Ya confian en nosotros
+                        </h2>
+                        <div className="grid grid-3 text-center">
+                            <div>
+                                <img className="img__marca" src={coca} alt="" />
+                            </div>
 
+                            <div>
+                                <img className="img__marca" src={pepsi} alt="" />
+                            </div>
 
+                            <div>
+                                <img className="img__marca" src={colgate} alt="" />
+                            </div>
+>>>>>>> f8edeb78054043c25099fd3440120775b5ddfae2
+
+                            <div>
+                                <img className="img__marca" src={mondelez} alt="" />
+                            </div>
+
+<<<<<<< HEAD
                             </div>
                         </section>
 
@@ -277,7 +337,62 @@ const Landing = () => {
                 </div>
             </section>
         </div>
+=======
+                            <div>
+                                <img className="img__marca" src={cereal} alt="" />
+                            </div>
+
+                            <div>
+                                <img className="img__marca" src={unilever} alt="" />
+                            </div>
+
+
+                        </div>
+                    </section>
+
+
+
+
+                    <footer class="footer py-5">
+                        <div class="containerLanding__hunter grid grid-3">
+                            <div>
+                                <h1>Prince Hunter
+                                </h1>
+                                <p>Copyright &copy; 2021</p>
+                            </div>
+                            <nav>
+                                <ul>
+                                    <li>Participaron en este proyecto: </li>
+
+                                    <li><a href="https://www.linkedin.com/in/nicolas-arguello-casas-full-stack-web-developer-javascript-html-css-react-redux-express/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Nicolas Arguello Casas</a></li>
+                                    <li><a href="https://www.linkedin.com/in/carlos-edo-lozano/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Carlos Eduardo Lozano</a></li>
+                                    <li><a href="https://www.linkedin.com/in/tom%C3%A1s-torales-vazquez/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Tomas Torales</a></li>
+                                    <li><a href="https://www.linkedin.com/in/pablo-molina-00/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Pablo Molina</a></li>
+                                    <li><a href="https://www.linkedin.com/in/marco-pablo-demaio-full-stack-developer-est-ingenier%C3%ADa-industrial/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Marco Pablo Demaio</a></li>
+                                    <li><a href="https://www.linkedin.com/in/salvareschilisandro/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Linsandro Salvareschi</a></li>
+                                    <li><a href="https://www.linkedin.com/in/cristian-fernandez-a600b61a8/" rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> Cristian Fernandez</a></li>
+                                    <li><a href="https://www.linkedin.com/in/german-derbes-catoni/"  rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> German Derbes Catoni</a></li>
+
+                             </a></li>
+
+                                </ul>
+                            </nav>
+
+                            <div class="social">
+
+                                <a href="!#"><i class="fab fa-facebook fa-2x"></i></a>
+                                <a href="!#"><i class="fab fa-instagram fa-2x"></i></a>
+                                <a href="!#"><i class="fab fa-twitter fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </footer>
+                    <Bot />
+                </div>
+          
+                
+>>>>>>> f8edeb78054043c25099fd3440120775b5ddfae2
     );
 };
+
 
 export default Landing;

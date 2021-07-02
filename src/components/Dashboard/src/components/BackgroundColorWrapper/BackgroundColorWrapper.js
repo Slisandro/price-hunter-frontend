@@ -16,6 +16,7 @@ export default function BackgroundColorWrapper(props) {
       value={{ color: color, changeColor: changeColor }}
     >
       {props.children}
+      {/* <img src="aguila.png" alt="PRICE HUNTER"></img> */}
     </BackgroundColorContext.Provider>
   );
 }
