@@ -18,11 +18,7 @@ function Header() {
         <div id="div-name-cerrarsesion" > 
           <p> Bienvenido: {name} </p>
           
-          {URLactual.pathname !== '/tablerocliente/principal' ?
-          <NavLink to="/tablerocliente/principal" >
-           <button className="account-title"> {'< Tablero Cliente'} </button>
-        </NavLink>
-          :null}
+        
           <button className="account-title" onClick={ () => dispatch(cerrarSesion())} >Cerrar Sesion</button>
         </div>
 

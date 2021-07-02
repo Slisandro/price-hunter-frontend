@@ -7,6 +7,8 @@ import ojo from "./ver.png";
 import { Button, Modal } from "reactstrap";
 import ModalDetalleDesafio from "../modal-detalles/modaldetalles";
 import ModalEdilDesafio from "../modaledit/modaledit";
+import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form, FormGroup, Alert } from 'reactstrap';
+
 
 
 
@@ -28,20 +30,20 @@ function Desafio({desafio}) {
   
   return (
     
-        <div className="desafio-lista-misdesafios-cliente" >
-            <div className="conteiner-p-desafio" > <p className="p-desafio-misdesafios-cliente" > {desafio.nombre_desafio} </p> </div>
-            <div className="conteiner-p-desafio" > <p className="p-desafio-misdesafios-cliente" > {desafio.fecha_inicial} </p> </div>
-            <div className="conteiner-p-desafio" > <p className="p-desafio-misdesafios-cliente" > {desafio.fecha_final} </p> </div>
+        <Row className="desafio-lista-misdesafios-cliente" >
+            <div className="conteiner-p-desafio" > <h6 className="p-desafio-misdesafios-cliente" > {desafio.nombre_desafio} </h6> </div>
+            <div className="conteiner-p-desafio" > <h6 className="p-desafio-misdesafios-cliente" > {desafio.fecha_inicial} </h6> </div>
+            <div className="conteiner-p-desafio" > <h6 className="p-desafio-misdesafios-cliente" > {desafio.fecha_final} </h6> </div>
             <div className="conteiner-p-desafio" className="conteiner-img-desafio" >
                 {/* <div> <Button style={styles_buttn} ><img className="icono-desafio-listadesafios-cliente" src={ojo} /></Button>  </div> 
                 <div> <Button style={styles_buttn} ><img  className="icono-desafio-listadesafios-cliente" src={lapiz} /></Button>  </div>  */}
-                <div> <button onClick={()=>{abrirModal()}} ><img className="icono-desafio-listadesafios-cliente" src={ojo} /></button>  </div> 
-                <div> <button onClick={()=>{abrirModal2()}} ><img  className="icono-desafio-listadesafios-cliente" src={lapiz} /></button>  </div> 
+                <div> <Button onClick={()=>{abrirModal()}} ><img className="icono-desafio-listadesafios-cliente" src={ojo} /></Button>  </div> 
+                <div> <Button onClick={()=>{abrirModal2()}} ><img  className="icono-desafio-listadesafios-cliente" src={lapiz} /></Button>  </div> 
             </div>
 
             <ModalDetalleDesafio desafio={desafio} abierto={stateModal.abierto} abrirModal={abrirModal} />
             <ModalEdilDesafio desafio={desafio} abierto={stateModal2.abierto} abrirModal2={abrirModal2}  />
-        </div>
+        </Row>
     
   );
 }

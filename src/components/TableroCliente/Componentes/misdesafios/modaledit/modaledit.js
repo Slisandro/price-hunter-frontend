@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import "./modaledit.css";
+// import "./modaledit.css";
+import "../../misdesafios/modaledit/modaledit.css";
+
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 

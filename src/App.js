@@ -53,9 +53,9 @@ function App() {
 
         <Route exact path="/terminos-condiciones" component={Modal} />
         <Route exact path="/landing" component={Landing} />
-        <RutaPrivada exact path="/admin" component={Dash} />
-        <RutaPrivada exact path="/cazador" component={DashCazador} />
-        <RutaPrivada exact path="/cliente" component={DashCliente} />
+        <RutaPrivada path="/admin" component={Dash} />
+        <RutaPrivada path="/cazador" component={DashCazador} />
+        <RutaPrivada path="/cliente" component={DashCliente} />
 
       </Switch>
     </Router>
