@@ -7,9 +7,7 @@ import axios from 'axios';
 import './MisDesafios.css';
 import { useHistory } from "react-router-dom";
 import RegistroGoogle from '../../Registro Google/RegistroGoogle';
-
-import { Row } from 'reactstrap';
-
+import { Row, Button, Modal } from 'reactstrap';
 var geolocation = require('geolocation');
 
 
@@ -100,20 +98,21 @@ function MisDesafios() {
                             <div class="containerMessageBack">{desafios.msg}</div>
                             {
                                 desafios.msg === "completar los datos del usuario antes de continuar" ? <>
-                                    <button
-                                        className="btn-fill"
+                                    <Button
+                                        className="btn"
                                         color="primary"
+                                        // style={{margin: "auto"}}
                                         type="submit"
-                                        block
-                                        onClick={() => { setModalRegistro(true) }}>form</button>
+                                        // block
+                                        onClick={() => { setModalRegistro(true) }}>Completar datos</Button>
                                 </> : null
                             }
                             {
                                 !modalRegistro ? null :
                                     // componente google
-                                    <>
-                                        <RegistroGoogle setModalCompletado={setModalCompletado} setModalRegistro={setModalRegistro} history={history} />
-                                    </>
+                                    <Modal isOpen={modalRegistro} style={{background: "transparent !important"}}>
+                                        <RegistroGoogle setModalCompletado={setModalCompletado} modalRegistro={modalRegistro} setModalRegistro={setModalRegistro} history={history} />
+                                    </Modal>
                             }
                         </div>
                         :

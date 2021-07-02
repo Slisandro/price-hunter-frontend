@@ -25,11 +25,11 @@
 
   
 .card__google__login{
-    background: #0a2352 !important;
+    /* background: #0a2352 !important; */
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 680px;
+    /* height: 680px; */
     border-radius: 1em !important;
   }
   

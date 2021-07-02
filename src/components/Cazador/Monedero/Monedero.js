@@ -159,6 +159,7 @@ function Monedero() {
                                             <Row>
                                                 <Button 
                                                     variant="primary" 
+                                                    block
                                                     type="submit"
                                                     style={{
                                                         width: "100% !important"
