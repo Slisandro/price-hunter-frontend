@@ -337,6 +337,7 @@ export default NavBarMain;
 
 
 
+
 // {/* Animation */ }
 // <div id="container-welcome">
 //     <div className="discount-chart">

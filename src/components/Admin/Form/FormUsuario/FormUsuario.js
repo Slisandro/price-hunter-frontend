@@ -8,36 +8,27 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
 import "./FormUsuario.css";
 
 function FormUsuario() {
-  const [modal, setModal] = useState(true);
   const tipo_usuarios = useSelector((store) => store.tipo_usuarios);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTipoUsuario());
-    // dispatch(getUnidadMedida());
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [state, setState] = useState({
     tipo_usuario: "",
+    id: "",
   });
 
   const ChangeInput = (e) => {
@@ -49,36 +40,59 @@ function FormUsuario() {
         [name]: target.value,
       });
     }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: target.value,
+      });
+    }
   };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
   const submit = (data, e) => {
-    const nuevoUsuario = {
-      tipo_usuario: state.tipo_usuario,
-    };
-
-    if (!nuevoUsuario.tipo_usuario) {
-      alert("Por favor, ingrese un tipo de usuario");
-      return;
+    for (let i = 0; i < tipo_usuarios.length; i++) {
+      if (
+        data.tipo_usuario.toUpperCase() ===
+        tipo_usuarios[i].tipo_usuario.toUpperCase()
+      ) {
+        return swal({
+          title: "El tipo de usuario ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
     }
 
-    dispatch(tipoUsuario(nuevoUsuario));
-    e.target.reset();
-    swal({
-      title: "Usuario agregado con éxito!",
-      icon: "success",
-      button: "Aceptar",
-      timer: "5000",
-    }).then((r) => dispatch(getTipoUsuario()));
-
-    setState({
-      tipo_usuario: "",
-    });
+    if (!data.tipo_usuario) {
+      return swal({
+        title: "Ingrese un tipo de usuario",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    } else {
+      dispatch(tipoUsuario(data));
+      e.target.reset();
+      return swal({
+        title: "El tipo de usuario fue agregado con éxito!",
+        icon: "success",
+        button: "Aceptar",
+        timer: "5000",
+      }).then((r) => {
+        dispatch(getTipoUsuario());
+        setState({
+          tipo_usuario: "",
+        });
+        reset({ data });
+      });
+    }
   };
 
   return (
@@ -98,25 +112,26 @@ function FormUsuario() {
             <Row>
               <Col>
                 <h6 className="title">Usuarios Actuales</h6>
-                <Input
-                  name="id"
-                  type="select"
-                  className="inp"
-                  onChange={(e) => ChangeInput(e)}
-                  // {...register("id", {
-                  //   required: {
-                  //     value: true,
-                  //     message: "Debe seleccionar un Producto",
-                  //   },
-                  // })}
-                >
-                  <option></option>
-                  {tipo_usuarios.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.tipo_usuario}
-                    </option>
-                  ))}
-                </Input>
+               
+                  <Input
+                    name="id"
+                    type="select"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {
+                     
+                    })}
+                  >
+                    <option></option>
+                    {tipo_usuarios.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.tipo_usuario}
+                      </option>
+                    ))}
+                  </Input>
+                
+                <span className="err">{errors?.id?.message}</span>
+
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Nuevo Usuario</h6>
                   {!state.tipo_usuario ? (
@@ -130,21 +145,7 @@ function FormUsuario() {
                         {...register("tipo_usuario", {
                           required: {
                             value: true,
-                            message: "Debe ingresar un nombre ",
-                          },
-                          maxLength: {
-                            value: 20,
-                            message:
-                              "El tipo de usuario no debe tener más de veinte letras!",
-                          },
-                          minLength: {
-                            value: 3,
-                            message:
-                              "El tipo de usuario debe al menos tener tres letras!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "No puede comenzar con numeros",
+                            message: "Debe agregar un tipo de usuario",
                           },
                         })}
                       />
@@ -162,26 +163,7 @@ function FormUsuario() {
                         name="tipo_usuario"
                         max="0"
                         autoComplete="off"
-                        {...register("tipo_usuario", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un nombre ",
-                          },
-                          maxLength: {
-                            value: 20,
-                            message:
-                              "El tipo de usuario no debe tener más de veinte letras!",
-                          },
-                          minLength: {
-                            value: 3,
-                            message:
-                              "El tipo de usuario debe al menos tener tres letras!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "No puede comenzar con numeros",
-                          },
-                        })}
+                        {...register("tipo_usuario", {})}
                       />
                       <span className="err">
                         {errors?.tipo_usuario?.message}
@@ -197,10 +179,6 @@ function FormUsuario() {
                         max="0"
                         autoComplete="off"
                         {...register("tipo_usuario", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un nombre ",
-                          },
                           maxLength: {
                             value: 20,
                             message:

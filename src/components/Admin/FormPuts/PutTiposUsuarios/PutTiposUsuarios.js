@@ -8,17 +8,11 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-// import "./FormUnidadMedida.css";
 
 function PutTiposUsuarios() {
   const dispatch = useDispatch();
@@ -58,7 +52,6 @@ function PutTiposUsuarios() {
   } = useForm();
 
   const submit = (data, e) => {
-    console.log(data);
     if (data.tipo_usuario) {
       dispatch(putTipoUsuario(data));
       e.target.reset();
@@ -68,7 +61,13 @@ function PutTiposUsuarios() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getTipoUsuario()));
+      }).then((r) => {
+        dispatch(getTipoUsuario());
+        setState({
+          tipo_usuario: "",
+          id: "",
+        });
+      });
     } else {
       swal({
         title: "Debe seleccionar un tipo de usuario para modificar!",
@@ -103,14 +102,8 @@ function PutTiposUsuarios() {
                       name="id"
                       type="select"
                       className="inp"
-                      // value={paises.nombre_region}
                       onChange={(e) => ChangeInput(e)}
-                      {...register("id", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar un campo a modificar",
-                        },
-                      })}
+                      {...register("id", {})}
                     >
                       <option></option>
                       {tipo_usuarios.map((f, index) => (
@@ -128,14 +121,8 @@ function PutTiposUsuarios() {
                       name="id"
                       type="select"
                       className="inp"
-                      // value={paises.nombre_region}
                       onChange={(e) => ChangeInput(e)}
-                      {...register("id", {
-                        required: {
-                          value: true,
-                          message: "Debe seleccionar un campo a modificar",
-                        },
-                      })}
+                      {...register("id", {})}
                     >
                       <option></option>
                       {tipo_usuarios.map((f, index) => (
@@ -159,27 +146,13 @@ function PutTiposUsuarios() {
                         autoComplete="off"
                         max="0"
                         onChange={(e) => ChangeInput(e)}
-                        {...register("tipo_usuario", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar nombre",
-                          },
-                          maxLength: {
-                            value: 15,
-                            message:
-                              "El nombre no debe tener mas de quince caracteres!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "El nombre no puede comenzar con numeros",
-                          },
-                        })}
+                        {...register("tipo_usuario", {})}
                       />
                       <span className="err">
                         {errors?.tipo_usuario?.message}
                       </span>
                     </>
-                  ) : state.tipo_usuario.length > 4 &&
+                  ) : state.tipo_usuario.length > 2 &&
                     state.tipo_usuario.length < 15 ? (
                     <>
                       <Input
@@ -191,14 +164,15 @@ function PutTiposUsuarios() {
                         max="0"
                         onChange={(e) => ChangeInput(e)}
                         {...register("tipo_usuario", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar nombre",
-                          },
                           maxLength: {
                             value: 15,
                             message:
                               "El nombre no debe tener mas de quince caracteres!",
+                          },
+                          minLength: {
+                            value: 3,
+                            message:
+                              "El nombre no debe tener menos de caracteres!",
                           },
                           max: {
                             value: 0,
@@ -221,10 +195,6 @@ function PutTiposUsuarios() {
                         max="0"
                         onChange={(e) => ChangeInput(e)}
                         {...register("tipo_usuario", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar nombre",
-                          },
                           maxLength: {
                             value: 15,
                             message:
@@ -255,16 +225,6 @@ function PutTiposUsuarios() {
           </Form>
         </CardBody>
       </Card>
-      {/* <div className="contenedorActualesUM">
-        Tipos de Usuarios Actuales
-        <div className="tiposUM">
-          {tipo_usuarios.map((u, index) => (
-            <span key={index} className="spansUM">
-              {u.tipo_usuario}
-            </span>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 }

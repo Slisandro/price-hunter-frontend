@@ -20,8 +20,10 @@ import { Nav, NavItem, Button, Jumbotron, Card, CardBody, CardTitle, CardSubtitl
 
 const Landing = () => {
     return (
+
         <div className="hunter__landing__content">
-            
+
+
             
             <div className="navbar__landing">
                 <div className="containerLanding__hunter flexing">
@@ -55,10 +57,12 @@ const Landing = () => {
                             productos favoritos para ayudar a otros consumidores y además,
                             <small class="hunter-pe"> obtener recompensas</small> por ello !
                         </p>
+
                         <a href="#sombrenosotros" class="btnLanding btn-outline__hunter">
                             Sobre nosotros
                         </a>
                         <a href="#empresas" class="btnLanding btn-outline__hunter">
+
                             Empresas
                         </a>
                     </div>
@@ -85,17 +89,22 @@ const Landing = () => {
                             <div class="grid grid-3 text-center my-4">
                                 <div>
                                     <img class="img__publicidad" src={ahorro} alt="" />
+
                                     <h3 class="h3">Conseguí el mejor precio cerca de tu hogar y ahorrá</h3>
+
 
                                 </div>
                                 <div>
                                     <img class="img__publicidad" src={ayuda} alt="" />
-                                    <h3 class="h3">Capturá precios y ayudá a otros consumidores</h3>
+              <h3 class="h3">Capturá precios y ayudá a otros consumidores</h3>
+
 
                                 </div>
                                 <div>
                                     <img class="img__publicidad" src={mapa} alt="" />
+
                                     <h3 class="h3">Encontrá el precio mas cercano a tu hogar</h3>
+
                                 </div>
                             </div>
                         </div>
@@ -104,7 +113,10 @@ const Landing = () => {
 
 
 
+
                     <section id="sombrenosotros" class="how-it-works">
+
+
 
                         <div class="containerLanding ">
                             <div class="row justify-content-center">
@@ -119,7 +131,9 @@ const Landing = () => {
 
                                 <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                                     <CardBody >
+
                                         <CardTitle className="card__title__instructions">1</CardTitle>
+
                                         <CardSubtitle className="mb-2 ">Únete a los desafios propuestos por nuestros clientes</CardSubtitle>
                                         <CardText>El desafío es sobre un producto determinado y habrá una cantidad de precios por cazar</CardText>
 
@@ -127,7 +141,9 @@ const Landing = () => {
                                 </Card>
                                 <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                                     <CardBody>
+
                                         <CardTitle className="card__title__instructions">2</CardTitle>
+
                                         <CardSubtitle className="mb-2">Dirígete a su tienda favorita y cargue el precio del producto</CardSubtitle>
                                         <CardText>Cargue en Price Hunter el precio del producto que ha sido establecido en el desafio</CardText>
 
@@ -135,7 +151,9 @@ const Landing = () => {
                                 </Card>
                                 <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                                     <CardBody>
+
                                         <CardTitle className="card__title__instructions">3</CardTitle>
+
                                         <CardSubtitle className="mb-2 ">Capturá la mayor cantidad de precios posibles de ese producto</CardSubtitle>
                                         <CardText>Tenga en cuenta que no se puede cargar el precio de un producto dos veces en el mismo lugar</CardText>
 
@@ -143,7 +161,10 @@ const Landing = () => {
                                 </Card>
                                 <Card style={{ width: '23rem', height: '17rem' }} className="card-instructions">
                                     <CardBody>
+
                                         <CardTitle className="card__title__instructions">4</CardTitle>
+
+       
                                         <CardSubtitle className="mb-2">Cuantos mas precios captures, mas HunterPoints acumularás</CardSubtitle>
                                         <CardText>En su panel de usuario podras administrar tus puntos y canjearlos por grandes recompensas!</CardText>
 
@@ -171,6 +192,7 @@ const Landing = () => {
 
 
                     <section  id="empresas" class="empresas my-2 py-2">
+
                         <div class="containerLanding__hunter grid">
                             <Jumbotron className="jumboLanding">
                                 <h1 className="display-3 title_jumbo">Price Hunter Empresas</h1>
@@ -178,7 +200,9 @@ const Landing = () => {
                                 <p>Price Hunter le acerca información detallada sobre del precio de sus productos en el mercado,
                                     permitiendole tomar mejores decisiones, adoptar estrategias de precios adecuadas y maximizar sus ventas..</p>
                                 <p className="lead">
+
                                     <Button className="button_empresa"><Link to="/registro-cliente"  color="primary" block >Registrese</Link></Button>
+
                                 </p>
 
                             </Jumbotron>
@@ -235,6 +259,7 @@ const Landing = () => {
                             <nav>
                                 <ul>
                                     <li>Participaron en este proyecto: </li>
+
                                     <li><a href="https://www.linkedin.com/in/nicolas-arguello-casas-full-stack-web-developer-javascript-html-css-react-redux-express/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Nicolas Arguello Casas</a></li>
                                     <li><a href="https://www.linkedin.com/in/carlos-edo-lozano/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Carlos Eduardo Lozano</a></li>
                                     <li><a href="https://www.linkedin.com/in/tom%C3%A1s-torales-vazquez/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Tomas Torales</a></li>
@@ -243,6 +268,9 @@ const Landing = () => {
                                     <li><a href="https://www.linkedin.com/in/salvareschilisandro/"  rel="noopener" target="blank">  <i class="fab fa-linkedin"></i> Linsandro Salvareschi</a></li>
                                     <li><a href="https://www.linkedin.com/in/cristian-fernandez-a600b61a8/" rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> Cristian Fernandez</a></li>
                                     <li><a href="https://www.linkedin.com/in/german-derbes-catoni/"  rel="noopener" target="blank"> <i class="fab fa-linkedin"></i> German Derbes Catoni</a></li>
+
+                             </a></li>
+
                                 </ul>
                             </nav>
 
