@@ -129,7 +129,18 @@ function Monedero() {
                                 }
                             </tbody>
                         </Table>
-                        <button onClick={e => setModal(!modal)} >Canjear puntos</button>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            // block
+                            style={{
+                                width: "100% !important",
+                                margin: "auto"
+                            }}
+                            onClick={() => setModal(!modal)}
+                        >
+                            Canjear puntos
+                        </Button>
                     </CardBody>
                 </Card>
                 {
@@ -157,10 +168,10 @@ function Monedero() {
                                                 </FormText>
                                             </Row>
                                             <Row>
-                                                <Button 
-                                                    variant="primary" 
-                                                    block
+                                                <Button
+                                                    variant="primary"
                                                     type="submit"
+                                                    block
                                                     style={{
                                                         width: "100% !important"
                                                     }}
