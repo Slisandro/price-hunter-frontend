@@ -28,6 +28,7 @@ export const GET_TIPO_USUARIO = "GET_TIPO_USUARIO";
 export const GET_PAISES = "GET_PAISES";
 export const GET_CIUDADES = "GET_CIUDADES";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
+export const RESET_PRODUCTOS = "RESET_PRODUCTOS"
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
@@ -594,6 +595,15 @@ export function getProductos() {
       });
     });
   };
+}
+
+export function resetProductos() {
+  return function (dispatch) {
+    dispatch({
+      type: RESET_PRODUCTOS,
+      payload: []
+    })
+  }
 }
 
 export function getGenero() {
