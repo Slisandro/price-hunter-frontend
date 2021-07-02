@@ -1,16 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import "./sidebar.css";
 
-
 function SideBar() {
-  
-  return (
-    <div id="container-sidebar">
-        SIDEBAR
-    </div>
-
-  
-  );
+  return <div>SIDEBAR</div>;
 }
 
 export default SideBar;
