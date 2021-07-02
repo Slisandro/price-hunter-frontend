@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { generoPost, getGeneros, mostrarError } from "../../../Redux/actions";
+import { generoPost, getGeneros } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
@@ -8,47 +8,41 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
   Form,
   Input,
   Row,
   Col,
-  FormText,
 } from "reactstrap";
-import close from "../../../../assets/cancel (1).png";
+
 import "./FormGenero.css";
 
 function FormGenero() {
-  const [modal, setModal] = useState(true);
-  const alerta = useSelector((store) => store.alerta);
   const generos = useSelector((store) => store.generos);
-
-  const handleModal = () => {
-    setModal(!modal);
-  };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getGeneros());
-    // dispatch(getUnidadMedida());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const [state, setState] = useState({
     genero: "",
+    id: "",
   });
 
   const ChangeInput = (e) => {
-    const target = e.target;
-    const name = target.name;
+    const value = e.target.value;
+    const name = e.target.name;
     if (name === "genero") {
       setState({
         ...state,
-        [name]: target.value,
+        [name]: value,
+      });
+    }
+    if (name === "id") {
+      setState({
+        ...state,
+        [name]: value,
       });
     }
   };
@@ -61,34 +55,32 @@ function FormGenero() {
   } = useForm();
 
   const submit = (data, e) => {
-    e.preventDefault();
+    for (let i = 0; i < generos.length; i++) {
+      if (data.genero.toUpperCase() === generos[i].genero.toUpperCase()) {
+        return swal({
+          title: "El genero ya existe!",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+      }
+    }
 
-    const nuevoGenero = {
-      genero: state.genero,
-    };
-
-    // if (!nuevoGenero.genero) {
-    //   dispatch(mostrarError("Ingrese un Género", "alerta-error"));
-    //   return;
-    // }
-
-    // if (!isNaN(parseInt(nuevoGenero.genero))) {
-    //   dispatch(
-    //     mostrarError("El Género sólo puede contener letras", "alerta-error")
-    //   );
-    //   return;
-
-    if (nuevoGenero) {
-      dispatch(generoPost(nuevoGenero));
+    if (data.genero) {
+      dispatch(generoPost(data));
       e.target.reset();
-      swal({
+      return swal({
         title: "Género agregado con éxito!",
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getGeneros()));
-      setState({
-        genero: "",
+      }).then((r) => {
+        dispatch(getGeneros());
+        setState({
+          genero: "",
+          id: "",
+        });
+        reset({ data });
       });
     } else {
       swal({
@@ -98,7 +90,6 @@ function FormGenero() {
         timer: "5000",
       });
     }
-    reset({ data });
   };
 
   return (
@@ -115,31 +106,30 @@ function FormGenero() {
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
-            {/* {alerta ? (
-              <span className={`alerta ${alerta.categoria}`}>{alerta.msg}</span>
-            ) : null} */}
             <Row>
               <Col>
                 <h6 className="title">Géneros Actuales</h6>
-                <Input
-                  name="id"
-                  type="select"
-                  className="inp"
-                  onChange={(e) => ChangeInput(e)}
-                  // {...register("id", {
-                  //   required: {
-                  //     value: true,
-                  //     message: "Debe seleccionar un Producto",
-                  //   },
-                  // })}
-                >
-                  <option></option>
-                  {generos.map((f, index) => (
-                    <option key={index} value={f.id}>
-                      {f.genero}
-                    </option>
-                  ))}
-                </Input>
+               
+                  <Input
+                    name="id"
+                    type="select"
+                    className="inp"
+                    onChange={(e) => ChangeInput(e)}
+                    {...register("id", {
+                    
+                    })}
+                  >
+                    <option></option>
+                    {generos.map((f, index) => (
+                      <option key={index} value={f.id}>
+                        {f.genero}
+                      </option>
+                    ))}
+                  </Input>
+               
+
+                <span className="err">{errors?.id?.message}</span>
+
                 <div style={{ marginTop: "1rem" }}>
                   <h6 className="title">Nuevo Género</h6>
                   {!state.genero ? (
@@ -155,20 +145,6 @@ function FormGenero() {
                             value: true,
                             message: "Debe ingresar un género ",
                           },
-                          maxLength: {
-                            value: 20,
-                            message:
-                              "El género no debe tener más de veinte letras!",
-                          },
-                          minLength: {
-                            value: 3,
-                            message:
-                              "El género debe al menos tener tres letras!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "El género no puede comenzar con numeros",
-                          },
                         })}
                       />
                       <span className="err">{errors?.genero?.message}</span>
@@ -182,26 +158,7 @@ function FormGenero() {
                         name="genero"
                         max="0"
                         autoComplete="off"
-                        {...register("genero", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un genero ",
-                          },
-                          maxLength: {
-                            value: 20,
-                            message:
-                              "El género no debe tener más de veinte letras!",
-                          },
-                          minLength: {
-                            value: 3,
-                            message:
-                              "El género debe al menos tener tres letras!",
-                          },
-                          max: {
-                            value: 0,
-                            message: "El género no puede comenzar con numeros",
-                          },
-                        })}
+                        {...register("genero", {})}
                       />
                       <span className="err">{errors?.genero?.message}</span>
                     </>
@@ -215,10 +172,7 @@ function FormGenero() {
                         max="0"
                         autoComplete="off"
                         {...register("genero", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un género ",
-                          },
+                          
                           maxLength: {
                             value: 20,
                             message:

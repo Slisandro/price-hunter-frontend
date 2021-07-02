@@ -55,7 +55,7 @@ const Login = (props) => {
           props.history.push('/admin');
         } else {
           if (isUser) {
-            props.history.push('/tablero');
+            props.history.push('/cazador');
           }
         }
       }
@@ -157,7 +157,7 @@ const Login = (props) => {
 
 
   
-          <Card>
+          <Card style={{backgroundColor:"black"}}>
            
             <CardBody>
               

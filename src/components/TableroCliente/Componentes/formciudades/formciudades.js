@@ -1,29 +1,31 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./formciudades.css";
 import axios from "axios";
 import Select from 'react-select';
-import {URL} from '../../../Redux/actions'
+import { URL } from '../../../Redux/actions'
+import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form, FormGroup, Button, Modal, Alert } from 'reactstrap';
+import close from "./icons8-cerrar-ventana-30.png";
 
 
 
-
-function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad, errores, seterrorState}) {
+function FormCiudades({ handleChangeCiudades, stateCiudades, handleEliminarCiudad, errores, seterrorState }) {
   const [state2, setState2] = useState([])
-  const [nuevaCiudad, setNuevaCiudad] = useState({ id:"", ciudad:"", cantidaddeprecios:"", puntosaganar:"" });
-  
+  const [nuevaCiudad, setNuevaCiudad] = useState({ id: "", ciudad: "", cantidaddeprecios: "", puntosaganar: "" });
+
   //----------------Request para traer la Lista de ciudades--------------------//
   //----------------------------------------------------------------------------//
-  useEffect(async()=>{
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     //---axios para las ciudades---//
     const token = localStorage.getItem("token");
-    const pais_ciudad =  await axios.get(`${URL}listarciudades`, { headers: { "Authorization": `Bearer ${token}` } });
+    const pais_ciudad = await axios.get(`${URL}listarciudades`, { headers: { "Authorization": `Bearer ${token}` } });
     setState2(pais_ciudad.data);
 
-  },[]);
-  
+  }, []);
+
   const ciudades = [];
-  state2.forEach((pais)=>{
-    pais.ciudads.forEach((ciudad)=>{
+  state2.forEach((pais) => {
+    pais.ciudads.forEach((ciudad) => {
       ciudades.push({
         value: ciudad.id,
         label: ciudad.ciudad + " / " + pais.nombre_pais
@@ -33,7 +35,7 @@ function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad
   //----------------------------------------------------------------------------//
   //----------------------------------------------------------------------------//
 
-  function handleChange(e){
+  function handleChange(e) {
     const name = e.target.name;
     setNuevaCiudad({
       ...nuevaCiudad,
@@ -41,20 +43,20 @@ function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad
     })
 
     //----control errores----//
-    if(!e.target.value){
+    if (!e.target.value) {
       seterrorState({
         ...errores,
         [name]: "Campo obligatorio"
       })
-    }else{
+    } else {
       seterrorState({
         ...errores,
         [name]: ""
       })
     }
   }
- 
-  function handleChangeCiudad(e){
+
+  function handleChangeCiudad(e) {
     setNuevaCiudad({
       ...nuevaCiudad,
       ciudad: e.label,
@@ -62,7 +64,7 @@ function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad
     })
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     handleChangeCiudades(nuevaCiudad)
 
@@ -70,64 +72,119 @@ function FormCiudades({handleChangeCiudades, stateCiudades, handleEliminarCiudad
     setNuevaCiudad({
       ...nuevaCiudad,
       id: "",
-      ciudad:"",
+      ciudad: "",
       cantidaddeprecios: "",
       puntosaganar: "",
     })
   }
 
 
-  
+
   return (
-    <div id="form-cliente-crear-desafio-ciudades" id="hola" >
-    <form  id="form-cliente-crear-desafio-ciudades" onSubmit={(e)=>{handleSubmit(e)}} >
-        <div>
 
-          <div>
-            <p className="stylos-titulos" >Seleccionar Ciudad/es</p>
-            <Select options={ciudades} onChange={(e)=>{handleChangeCiudad(e)}} />
-            {errores.ciudades ? <p className="estylo-errores" > {errores.ciudades} </p> : <p className="estylo-errores" className="titulos-no-olvidar" >No olvidar seleccionar Ciudad/es</p> }
-          </div>
+    // <div >
+    <Row>
+      <Col lg={12}>
+        <Card className="card-chart" style={{ marginTop: "1rem" }}>
+          <CardHeader>
+            <h3 style={{ color: "rgba(96, 214, 0, 0.959)" }}>Ciudades</h3>
+          </CardHeader>
+          <Col id="form-cliente-crear-desafio-ciudades" >
+            <Form id="form-cliente-crear-desafio-ciudades" onSubmit={(e) => { handleSubmit(e) }} >
+              <div>
 
-          <div  id="inputs-bttn-ciudades" >
-            <div>
-              {errores.cantidaddeprecios ? <p className="estylo-errores" > {errores.cantidaddeprecios} </p> : <p className="stylos-titulos" >Cant.Precios a C amputar</p> }
-              <input value={nuevaCiudad.cantidaddeprecios} type="number" min="1" step="1" name="cantidaddeprecios" onChange={(e)=>{handleChange(e)}} />
-              
-            </div>
-            <div>
-              {errores.puntosaganar ? <p className="estylo-errores" > {errores.puntosaganar} </p> : <p className="stylos-titulos" >Cant.Puntos a Ganar</p> }
-              <input value={nuevaCiudad.puntosaganar} type="number" min="1" step="1" name="puntosaganar" onChange={(e)=>{handleChange(e)}} />
-            </div>
+                <Col sm={12} id="productos-bttn" style={{ padding: "0", marginTop: "2rem", marginBottom: "1rem" }}>
+                  <Row>
+                    <h6 className="title" >Seleccionar Ciudad/es</h6>
+                  </Row>
+                  <Select options={ciudades} onChange={(e) => { handleChangeCiudad(e) }} />
+                  {errores.ciudades ? <p className="err" > {errores.ciudades} </p> : null }
+                  {/* // <p className="err" className="err" >No olvidar seleccionar Ciudad/es</p>} */}
+                </Col>
 
-            <button 
-            disabled={
-              (!nuevaCiudad.id || !nuevaCiudad.ciudad || !nuevaCiudad.puntosaganar || !nuevaCiudad.cantidaddeprecios )
-              ? true
-              : false
-            } 
-            type="submit" 
-            >Agregar</button>
 
-          </div>
 
-        </div>
-    </form>
+                <div>
 
-    <div id="div-form-cliente-ciudades" >
-      {
-        stateCiudades ? stateCiudades.map((ciudadd)=>{
-          return <div className="lista-ciudades-agregadas" > 
-                    <p>Ciudad:{ciudadd.ciudad}</p>   
-                    <p>Cant.Precios:{ciudadd.cantidaddeprecios}</p>
-                    <p>Cant.Puntos:{ciudadd.puntosaganar}</p> 
-                    <button value={ciudadd.id} onClick={(e)=>{handleEliminarCiudad(e)}} >X</button>
+                  <Col sm={12}>
+                    <Row style={{ marginTop: "2rem" }}>
+                      <Row md={12}>
+                        <h6 className="title" >Cantidad de Precios a Computar</h6>
+                      </Row>
+                      <Input value={nuevaCiudad.cantidaddeprecios}
+                        type="number"
+                        min="1"
+                        step="1"
+                        name="cantidaddeprecios"
+                        onChange={(e) => { handleChange(e) }} />
+                      {errores.cantidaddeprecios ? <p className="err" > {errores.cantidaddeprecios} </p> : null}
+                    </Row>
+                  </Col>
+
+                  <div style={{ marginTop: "2rem" }}>
+                    <Row md={12}>
+                      <h6 className="title" >Cantid de Puntos a Ganar</h6>
+                    </Row>
+                    <Input value={nuevaCiudad.puntosaganar}
+                      type="number"
+                      min="1"
+                      step="1"
+                      name="puntosaganar"
+                      onChange={(e) => { handleChange(e) }} />
+                    {errores.puntosaganar ? <p className="err" > {errores.puntosaganar} </p> : null}
                   </div>
-        }) : <p>SELECCIONE CIUDAD/ES.</p>
-      }
-    </div>
-    </div>
-    
+
+                  <Button
+                    disabled={
+                      (!nuevaCiudad.id || !nuevaCiudad.ciudad || !nuevaCiudad.puntosaganar || !nuevaCiudad.cantidaddeprecios)
+                        ? true
+                        : false
+                    }
+                    type="submit"
+                    className="btn-fill"
+                    size="lg"
+                    block
+                  >Agregar</Button>
+
+                </div>
+              </div>
+            </Form>
+          </Col>
+      
+
+          <div id="div-form-cliente-ciudades" >
+            <Row>
+            {
+              stateCiudades ? stateCiudades.map((ciudadd) => {
+                return <Card style={{ maxWidth: "50%" }}>
+                <Alert color="success" style={{height: "10vh"}}>
+                  <Row>
+                    {/* <Col lg="12"> */}
+                      
+                        <h6 style={{ justifyContent: "center", width: "100%", marginBottom: "1rem" }}>Ciudad: {ciudadd.ciudad} </h6>
+                        <Col>
+                        <h6>Cant. de Precios: {ciudadd.cantidaddeprecios} </h6>
+                        </Col>
+                        <Col>
+                        <h6>Cant. de Puntos: {ciudadd.puntosaganar}</h6>
+                        </Col>
+                        <Row>
+                          <button style={{backgroundColor: "transparent", border: "none"}} block type="submit" value={ciudadd.id} onClick={(e) => { handleEliminarCiudad(e) }}><img src={close} alt=""/></button>
+                        </Row>
+                    
+                    {/* </Col> */}
+                  </Row>
+                  </Alert>
+                </Card>
+              }) : <h6>SELECCIONE CIUDAD/ES.</h6>
+            }
+            </Row>
+          </div>
+
+        </Card>
+      </Col>
+    </Row>
+    // </div>
   );
 }
 

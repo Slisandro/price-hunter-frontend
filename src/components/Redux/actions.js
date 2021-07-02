@@ -29,6 +29,32 @@ export const GET_PAISES = "GET_PAISES";
 export const GET_CIUDADES = "GET_CIUDADES";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const RESET_PRODUCTOS = "RESET_PRODUCTOS"
+export const GET_MIS_DESAFIOS = "GET_MIS_DESAFIOS";
+
+//-----Esta accion es para traer los desafios (MisDesafios) del cliente-----//
+export function getMisDesafios(obj) {
+  const token = localStorage.getItem("token");
+  console.log(obj)
+
+  return function(dispatch) {
+    let api = `${URL}misdesafios?estado=${obj.estado}&orden=${obj.orden}`;
+    return fetch(api, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: GET_MIS_DESAFIOS,
+          payload: json,
+        });
+      })
+      .catch((err)=>{
+        alert('su sesión ha expirado');
+        console.log(err)
+          return(dispatch({type: 'CERRAR_SESION'}))
+      })
+  };
+}
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {
@@ -663,6 +689,9 @@ export function getCiudadId(id) {
 //_____________________ FIN ADMIN GET _____________________//
 
 //_____________________ INICIO ADMIN POST _____________________//
+
+export const POST_UM = 'POST_UM'
+
 
 export function unidadDeMedida(objeto) {
   return function (dispatch) {

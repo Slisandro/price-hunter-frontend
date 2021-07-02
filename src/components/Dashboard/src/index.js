@@ -23,7 +23,7 @@ ReactDOM.render(
       
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
     
-          {/* <Redirect from="/" to="/admin/dashboard" /> */}
+          <Redirect from="/" to="/admin/dashboard" />
         </Switch>
       </BrowserRouter>
     </BackgroundColorWrapper>

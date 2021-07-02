@@ -1,7 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-
+import { useDispatch } from "react-redux";
 // reactstrap components
 import {
   Button,
@@ -21,8 +21,10 @@ import {
   NavbarToggler,
   ModalHeader,
 } from "reactstrap";
+import { cerrarSesion } from "../../../../Redux/actions";
 
 function AdminNavbar(props) {
+  const dispatch = useDispatch();
   const [collapseOpen, setcollapseOpen] = React.useState(false);
   const [modalSearch, setmodalSearch] = React.useState(false);
   const [color, setcolor] = React.useState("navbar-transparent");
@@ -79,16 +81,9 @@ function AdminNavbar(props) {
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
           </NavbarToggler>
-          
+
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
-              
-              
-              
-              
-              
-              
-              
               <UncontrolledDropdown nav>
                 <DropdownToggle
                   caret
@@ -96,11 +91,14 @@ function AdminNavbar(props) {
                   nav
                   onClick={(e) => e.preventDefault()}
                 >
-                  <div className="photo">
-                 
-                  </div>
+                  <div className="photo"></div>
                   <i class="fas fa-user"></i>
-                  <p className="d-lg-none">Cerrar sesion</p>
+                  <Button
+                    onClick={() => dispatch(cerrarSesion())}
+                    className="d-lg-none"
+                  >
+                    Cerrar sesion
+                  </Button>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
@@ -108,7 +106,12 @@ function AdminNavbar(props) {
                   </NavLink>
                   <DropdownItem divider tag="li" />
                   <NavLink tag="li">
-                    <DropdownItem className="nav-item">Cerrar sesion </DropdownItem>
+                    <DropdownItem
+                      onClick={() => dispatch(cerrarSesion())}
+                      className="nav-item"
+                    >
+                      Cerrar sesion{" "}
+                    </DropdownItem>
                   </NavLink>
                 </DropdownMenu>
               </UncontrolledDropdown>

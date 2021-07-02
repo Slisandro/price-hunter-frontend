@@ -53,7 +53,7 @@ function PutRegiones() {
   } = useForm();
 
   const submit = (data, e) => {
-    if (data.id && data.id.length> 0) {
+    if (data.id && data.id.length > 0) {
       dispatch(putGenero(data));
       e.target.reset();
       swal({
@@ -61,8 +61,14 @@ function PutRegiones() {
         icon: "success",
         button: "Aceptar",
         timer: "5000",
-      }).then((r) => dispatch(getGenero()));
-      reset({ data });
+      }).then((r) => {
+        dispatch(getGenero());
+        setState({
+          genero: "",
+          id: "",
+        });
+        reset({ data });
+      });
     } else {
       swal({
         title: "Debe seleccionar un genero para modificar!",
@@ -71,11 +77,6 @@ function PutRegiones() {
         timer: "5000",
       });
     }
-
-    setState({
-      genero: "",
-      id: "",
-    });
   };
 
   return (

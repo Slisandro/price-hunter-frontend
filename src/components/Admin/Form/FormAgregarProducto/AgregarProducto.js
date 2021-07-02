@@ -4,24 +4,22 @@ import {
   productoPost,
   getSubcategoria,
   getUnidadMedida,
+  getProductos
 } from "../../../Redux/actions";
 import { useForm } from "react-hook-form";
 import swal from "sweetalert";
 import {
-  FormFeedback,
+  
   Button,
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
-  CardFooter,
-  CardText,
-  FormGroup,
+ 
   Form,
   Input,
   Row,
   Col,
-  FormText,
+  
 } from "reactstrap";
 import "./AgregarProducto.css";
 
@@ -31,11 +29,13 @@ function FormAgregarProducto() {
   useEffect(() => {
     dispatch(getSubcategoria());
     dispatch(getUnidadMedida());
+    dispatch(getProductos())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const subcategoria = useSelector((store) => store.subcategoria);
   const unidad_medida = useSelector((store) => store.unidad_medida);
+  const productos = useSelector((store) => store.productos);
 
   const [state, setState] = useState({
     nombre: "",
@@ -78,6 +78,19 @@ function FormAgregarProducto() {
   };
 
   const submit = (data, e) => {
+
+    for (let i = 0; i < productos.length; i++) {
+      if (productos[i].nombre.toUpperCase() === data.nombre.toUpperCase())
+        return swal({
+          title: "El nombre ya existe",
+          icon: "warning",
+          button: "Aceptar",
+          timer: "5000",
+        });
+    }
+
+
+
     if (data.nombre.length === 0 || data.contenido_neto.length === 0) {
       return swal({
         title: "Agregue un producto!",
@@ -94,15 +107,16 @@ function FormAgregarProducto() {
       icon: "success",
       button: "Aceptar",
       timer: "5000",
-    }).then((g) =>
+    }).then((g) => {
+      dispatch(getProductos()) 
       setState({
         nombre: "",
         subcategoriumId: "",
         unidadMedidaCodigoUnidadMedida: "",
         contenido_neto: "",
       })
-    );
-    reset({ data });
+      reset({ data });
+    });
   };
 
   return (
@@ -119,7 +133,7 @@ function FormAgregarProducto() {
             onChange={(e) => ChangeInput(e)}
             onSubmit={handleSubmit(submit)}
           >
-            {/* <FormGroup> */}
+           
             <Row>
               <Col>
                 <div>
@@ -139,9 +153,7 @@ function FormAgregarProducto() {
                           },
                         })}
                       />
-                      {/* <FormFeedback style={{ margin: "1rem" }} valid>
-                        Nombre Correcto!
-                      </FormFeedback> */}
+                     
                       <span className="err">{errors?.nombre?.message}</span>
                     </>
                   ) : state.nombre.length && state.nombre.length < 15 ? (
@@ -154,20 +166,10 @@ function FormAgregarProducto() {
                         max="0"
                         autoComplete="off"
                         {...register("nombre", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un nombre ",
-                          },
-                          maxLength: {
-                            value: 15,
-                            message:
-                              "El nombre no debe tener mas de quince letras!",
-                          },
+                         
                         })}
                       />
-                      {/* <FormFeedback style={{ margin: "1rem" }} valid>
-                        Nombre Correcto!
-                      </FormFeedback> */}
+                    
                       <span className="err">{errors?.nombre?.message}</span>
                     </>
                   ) : (
@@ -200,9 +202,7 @@ function FormAgregarProducto() {
                           },
                         })}
                       />
-                      {/* <FormFeedback style={{ margin: "1rem" }} invalid>
-                        Nombre Incorrecto!
-                      </FormFeedback> */}
+                     
                       <span className="err">{errors?.nombre?.message}</span>
                     </>
                   )}
@@ -244,10 +244,7 @@ function FormAgregarProducto() {
                         type="select"
                         onChange={(e) => ChangeInput(e)}
                         {...register("unidadMedidaCodigoUnidadMedida", {
-                          required: {
-                            value: true,
-                            message: "Debe seleccionar una unidad de medida",
-                          },
+                         
                         })}
                       >
                         <option></option>
@@ -305,19 +302,7 @@ function FormAgregarProducto() {
                             value: true,
                             message: "Debe ingresar un valor ",
                           },
-                          pattern: {
-                            value: /[0-9]/,
-                            message: "Debe ingresar sólo números",
-                          },
-                          maxLength: {
-                            value: 4,
-                            message:
-                              "El contenido no debe tener mas de 4 caracteres!",
-                          },
-                          min: {
-                            value: 1,
-                            message: "No puede ingresar valores negativos",
-                          },
+                         
                         })}
                       />
                       <span className="err">
@@ -334,23 +319,7 @@ function FormAgregarProducto() {
                         name="contenido_neto"
                         autoComplete="off"
                         {...register("contenido_neto", {
-                          required: {
-                            value: true,
-                            message: "Debe ingresar un valor ",
-                          },
-                          pattern: {
-                            value: /[0-9]/,
-                            message: "Debe ingresar sólo números",
-                          },
-                          maxLength: {
-                            value: 4,
-                            message:
-                              "El contenido no debe tener mas de 4 caracteres!",
-                          },
-                          min: {
-                            value: 1,
-                            message: "No puede ingresar valores negativos",
-                          },
+                          
                         })}
                       />
                       <span className="err">
@@ -370,6 +339,15 @@ function FormAgregarProducto() {
                           pattern: {
                             value: /[0-9]/,
                             message: "Debe ingresar sólo números",
+                          },
+                           maxLength: {
+                            value: 4,
+                            message:
+                              "El contenido no debe tener mas de 4 caracteres!",
+                          },
+                          min: {
+                            value: 1,
+                            message: "No puede ingresar valores negativos",
                           },
                         })}
                       />
@@ -417,10 +395,7 @@ function FormAgregarProducto() {
                         // value={state.nombre}
                         onChange={(e) => ChangeInput(e)}
                         {...register("subcategoriumId", {
-                          required: {
-                            value: true,
-                            message: "Debe seleccionar una subcategoria",
-                          },
+                          
                         })}
                       >
                         <option></option>
@@ -441,7 +416,7 @@ function FormAgregarProducto() {
                         name="subcategoriumId"
                         style={{ appearance: "none" }}
                         type="select"
-                        // value={state.nombre}
+                        
                         onChange={(e) => ChangeInput(e)}
                         {...register("subcategoriumId", {
                           required: {

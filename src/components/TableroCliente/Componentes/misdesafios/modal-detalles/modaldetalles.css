@@ -1,0 +1,33 @@
+.detalle-desafio-img-estilos{
+    width: 8rem;
+    height: 8rem;
+    margin: 1rem;
+}
+
+.conteiner-detalle-desafio-cliente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.conteiner-img-fechas-detalle-desafio{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; */
+
+    width: 100%;
+}
+
+.div-img-fechas-detalle-desafio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fechas-detalle-desafio-estilo{
+    margin: 1rem;
+}
