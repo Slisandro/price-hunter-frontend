@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import "./formcrearproducto.css";
 import Select from 'react-select';
-import {Button, Modal, ModalBody} from "reactstrap";
-import "bootstrap/dist/css/bootstrap.css"
 import axios from 'axios';
-import {URL} from "../../../Redux/actions"
+import {URL} from "../../../Redux/actions";
+import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form, FormGroup, Button, Modal, ModalBody } from 'reactstrap';
 
 
 function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, setStateBoolean, stateBoolean}){
@@ -128,25 +126,22 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
 
 
     return(
-
-        
-
             
         <Modal isOpen={abierto} >
-            <Button onClick={()=>{abrirModal()}} >X</Button>
+            <Button className="btn-fill" onClick={()=>{abrirModal()}} >X</Button>
             <ModalBody>
 
             {
                 stateMensaje ?
                     <div>
-                        <p> {stateMensaje} </p>
+                        <h6> {stateMensaje} </h6>
                     </div>
                 :
-                <form id="form-crear-producto-nuevo" onSubmit={(e)=>{handleSubmit(e)}} >
+                <Form id="form-crear-producto-nuevo" onSubmit={(e)=>{handleSubmit(e)}} >
 
                     <div className="div-select-crear-producto" >
-                        {errorsState.nombre ? <p className="estylo-errores" >{errorsState.nombre}</p> : <p className="stylos-titulos" >Nombre Producto</p> }
-                        <input 
+                        {errorsState.nombre ? <p className="err" >{errorsState.nombre}</p> : <h6 className="stylos-titulos" >Nombre Producto</h6> }
+                        <Input 
                             type="text" 
                             placeholder="Nombre Producto" 
                             name="nombre"
@@ -155,8 +150,8 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
                     
                     <div className="div-select-crear-producto" >
-                        {errorsState.contenido_neto ? <p className="estylo-errores" >{errorsState.contenido_neto}</p> : <p className="stylos-titulos" > Contenido Neto </p> }
-                        <input 
+                        {errorsState.contenido_neto ? <p className="err" >{errorsState.contenido_neto}</p> : <h6 className="stylos-titulos" > Contenido Neto </h6> }
+                        <Input 
                             type="number"
                             min="0" 
                             placeholder="Contenido Neto" 
@@ -166,7 +161,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
                     
                     <div className="div-select-crear-producto" >
-                        <p className="stylos-titulos" > Unidad de medida </p>
+                        <h6 className="stylos-titulos" > Unidad de medida </h6>
                         <Select 
                             name="unidad_de_medida"
                             options={lista_unidades} 
@@ -177,7 +172,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
 
                     <div className="div-select-crear-producto" >
-                    <p className="stylos-titulos" > Sub Categoría </p>
+                    <h6 className="stylos-titulos" > Sub Categoría </h6>
                         <Select
                             name="sub_categoria"
                             options={lista_subcategorias}
@@ -186,24 +181,19 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                             onChange={(e)=>{handleSubcategoria(e)}}
                         />
                     </div>
-                       
-                    
+                                       
                     <Button 
                         disabled={ ( errorsState.nombre || errorsState.contenido_neto || !stateProductoNuevo.unidad_medida || !stateProductoNuevo.id_subcategoria ) ? true : false }
                         type="submit"
-                        className="margin-inputs-form-crear-producto" 
+                        className="btn-fill"
+                        size="lg" 
+                        block
                     >Crear Producto</Button>
 
-                </form>
-            }
-                
-
+                </Form>
+            }           
             </ModalBody>
         </Modal>
-            
-
-        
-
     );
 }
 

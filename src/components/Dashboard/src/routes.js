@@ -4,8 +4,14 @@ import TableList from "./views/TableList.js";
 import UserProfile from "./views/UserProfile.js";
 import Agregar from "./views/Agregar.js";
 import Modificar from "./views/Modificar.js";
+import Jumbotron from "./views/Jumbotron";
+import Buscador from "./views/Buscador";
+import Monedero from "./views/Monedero";
+import Desafios from "./views/Desafios";
+import CrearDesafioCliente from "./views/CrearDesafioCliente";
+import BienvenidaCliente from "./views/BienvenidaCliente";
 
-var routes = [
+export var routes = [
   // {
   //   path: "/dashboard",
   //   name: "Dashboard",
@@ -37,14 +43,14 @@ var routes = [
   {
     path: "/agregar",
     name: "Agregar",
-    icon: "tim-icons icon-pin",
+    icon: "tim-icons icon-simple-add",
     component: Agregar,
     layout: "/admin",
   },
   {
     path: "/modificar",
     name: "Modificar",
-    icon: "tim-icons icon-pin",
+    icon: "tim-icons icon-pencil",
     component: Modificar,
     layout: "/admin",
   },
@@ -55,7 +61,7 @@ export var routesCazador = [
   {
     path: "/dashboard",
     name: "Inicio",
-    icon: "tim-icons icon-chart-pie-36",
+    icon: "tim-icons icon-badge",
     component: Jumbotron,
     layout: "/cazador",
   },
@@ -64,7 +70,7 @@ export var routesCazador = [
   {
     path: "/buscador",
     name: "Buscar",
-    icon: "tim-icons icon-single-02",
+    icon: "tim-icons icon-zoom-split",
     component: Buscador,
     layout: "/cazador",
 
@@ -72,7 +78,7 @@ export var routesCazador = [
   {
     path: "/monedero",
     name: "Monedero",
-    icon: "tim-icons icon-single-02",
+    icon: "tim-icons icon-wallet-43",
     component: Monedero,
     layout: "/cazador",
 
@@ -80,11 +86,41 @@ export var routesCazador = [
   {
     path: "/desafios",
     name: "Desafios",
-    icon: "tim-icons icon-single-02",
+    icon: "tim-icons  icon-notes",
     component: Desafios,
     layout: "/cazador",
 
   }
+ 
+ 
+];
+
+
+export var routesCliente = [
+  
+  {
+    
+    path: "/bienvenida",
+    name: "Inicio",
+    icon: "tim-icons icon-chart-bar-32",
+    component: BienvenidaCliente,
+    layout: "/cliente",
+
+  
+  },
+  {
+    
+    path: "/creardesafio",
+    name: "Desafios",
+    icon: "tim-icons icon-notes",
+    component: CrearDesafioCliente,
+    layout: "/cliente",
+
+  
+}
+
+  
+ 
  
  
 ];

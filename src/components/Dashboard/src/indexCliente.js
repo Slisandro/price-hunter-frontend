@@ -2,10 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import AdminLayout from "./layouts/Admin/Admin.js";
-
-
-
+import Cliente from "./layouts/Admin/Cliente";
 
 import "./assets/scss/black-dashboard-react.scss";
 import "./assets/demo/demo.css";
@@ -21,9 +18,8 @@ ReactDOM.render(
       <BrowserRouter>
         <Switch>
       
-          <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-    
-          <Redirect from="/" to="/admin/dashboard" />
+          <Route path="/cliente" render={(props) => <Cliente {...props} />} />
+          {/* <Redirect from="/" to="/admin/dashboard" /> */}
         </Switch>
       </BrowserRouter>
     </BackgroundColorWrapper>

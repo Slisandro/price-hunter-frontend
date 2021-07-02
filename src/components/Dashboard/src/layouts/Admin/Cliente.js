@@ -3,12 +3,11 @@ import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // import Footer from "components/Footer/Footer.js";
-
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 
-import {routes }from "../../routes";
+import {routesCliente} from "../../routes";
 
 import logo from "../../assets/img/react-logo.png";
 import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
@@ -63,7 +62,7 @@ function Admin(props) {
   };
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/cliente") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -76,14 +75,14 @@ function Admin(props) {
       }
     });
   };
-  // const getBrandText = (path) => {
-  //   for (let i = 0; i < routes.length; i++) {
-  //     if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-  //       return routes[i].name;
-  //     }
-  //   }
-  //   return "Brand";
-  // };
+  const getBrandText = (path) => {
+    for (let i = 0; i < routesCliente.length; i++) {
+      if (location.pathname.indexOf(routesCliente[i].layout + routesCliente[i].path) !== -1) {
+        return routesCliente[i].name;
+      }
+    }
+    return "Brand";
+  };
 
 
 
@@ -94,7 +93,7 @@ function Admin(props) {
       <React.Fragment>
         <div className="wrapper">
           <Sidebar
-            routes={routes}
+            routes={routesCliente}
             logo={{
               outterLink: "https://github.com/Slisandro/price-hunter-frontend",
               text: "Price Hunter",
@@ -104,13 +103,13 @@ function Admin(props) {
           />
           <div className="main-panel" ref={mainPanelRef} data={color}>
             <AdminNavbar
-            
+              brandText={getBrandText(location.pathname)}
               toggleSidebar={toggleSidebar}
               sidebarOpened={sidebarOpened}
             />
               <Switch>
-                {getRoutes(routes)}
-                <Redirect from="*" to="/admin/dashboard" />
+                {getRoutes(routesCliente)}
+                <Redirect from="*" to="/cliente" />
               </Switch>
             
           </div>
