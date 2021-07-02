@@ -7,7 +7,7 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 
-import {routesCazador} from "../../routes";
+import { routesCazador } from "../../routes";
 
 import logo from "../../assets/img/react-logo.png";
 import { BackgroundColorContext } from "../../contexts/BackgroundColorContext";
@@ -54,7 +54,7 @@ function Admin(props) {
       mainPanelRef.current.scrollTop = 0;
     }
   }, [location]);
-  
+
   // this function opens and closes the sidebar on small devices
   const toggleSidebar = () => {
     document.documentElement.classList.toggle("nav-open");
@@ -77,18 +77,31 @@ function Admin(props) {
   };
   const getBrandText = (path) => {
     for (let i = 0; i < routesCazador.length; i++) {
-      if (location.pathname.indexOf(routesCazador[i].layout + routesCazador[i].path) !== -1) {
+      if (
+        location.pathname.indexOf(
+          routesCazador[i].layout + routesCazador[i].path
+        ) !== -1
+      ) {
         return routesCazador[i].name;
       }
     }
     return "Brand";
   };
 
-
-
-
   return (
     <BackgroundColorContext.Consumer>
+
+//       {({ color, changeColor }) => (
+//         <React.Fragment>
+//           <div className="wrapper">
+//             <Sidebar
+//               routes={routesCazador}
+//               logo={{
+//                 outterLink: "https://www.creative-tim.com/",
+//                 text: "Creative Tim",
+//                 imgSrc: logo,
+//               }}
+
     {({ color, changeColor }) => (
       <React.Fragment>
         <div className="wrapper">
@@ -104,20 +117,37 @@ function Admin(props) {
           <div className="main-panel" ref={mainPanelRef} data={color}>
             <AdminNavbar
               brandText={getBrandText(location.pathname)}
+
               toggleSidebar={toggleSidebar}
-              sidebarOpened={sidebarOpened}
             />
+            <div className="main-panel" ref={mainPanelRef} data={color}>
+              <AdminNavbar
+                brandText={getBrandText(location.pathname)}
+                toggleSidebar={toggleSidebar}
+                sidebarOpened={sidebarOpened}
+              />
               <Switch>
                 {getRoutes(routesCazador)}
                 <Redirect from="*" to="/cazador/dashboard" />
               </Switch>
-            
+              <img
+                src="aguila.png"
+                style={{
+                  opacity: "0.3",
+                  width: "100%",
+                  marginLeft: "55rem",
+                  marginTop: "6rem",
+                  height: "85vh",
+                  width: "40vw",
+                }}
+                alt="PRICE HUNTER"
+              ></img>
+            </div>
           </div>
-        </div>
-        <FixedPlugin bgColor={color} handleBgClick={changeColor} />
-      </React.Fragment>
-    )}
-  </BackgroundColorContext.Consumer>
+          <FixedPlugin bgColor={color} handleBgClick={changeColor} />
+        </React.Fragment>
+      )}
+    </BackgroundColorContext.Consumer>
   );
 }
 
