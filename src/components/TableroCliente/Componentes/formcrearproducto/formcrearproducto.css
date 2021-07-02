@@ -1,11 +1,14 @@
 
-
+#msg_creacionProducto{
+    color: black!important;
+}
 #form-crear-producto-nuevo{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 1rem;
+    /* background-color: rgb(0, 0, 78) !important; */
 }
 
 #lista-unidades-form-crear-producto{

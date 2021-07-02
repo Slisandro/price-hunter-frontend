@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 // import "./modaledit.css";
 import "../../misdesafios/modaledit/modaledit.css";
 
 import {Button, Modal, ModalBody} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css"
 import axios from "axios";
-import {URL} from "../../../../Redux/actions";
+import {URL, refreshMisDesafiosCliente} from "../../../../Redux/actions";
 
 
 
@@ -68,10 +69,11 @@ function ModalEdilDesafio({abierto, abrirModal2, desafio}){
         
         setMsg(respuesta.data.msg)
     }
-
+    const dispatch = useDispatch();
     const funcionMarco = () => {
         setMsg('');
-        abrirModal2()
+        abrirModal2();
+        dispatch(refreshMisDesafiosCliente());
     }
 
     return(

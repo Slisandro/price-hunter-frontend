@@ -6,6 +6,8 @@ import Select from 'react-select';
 import { product } from 'prelude-ls';
 import FormCiudades from "../formciudades/formciudades";
 import FormCrearProducto from "../formcrearproducto/formcrearproducto";
+// import { useSelector } from 'react-redux';
+
 
 // import "bootstrap/dist/css/bootstrap.css"
 import { URL } from "../../../Redux/actions";
