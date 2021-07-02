@@ -95,8 +95,8 @@ function Admin(props) {
           <Sidebar
             routes={routesCazador}
             logo={{
-              outterLink: "https://www.creative-tim.com/",
-              text: "Creative Tim",
+              outterLink: "https://github.com/Slisandro/price-hunter-frontend",
+              text: "Price Hunter",
               imgSrc: logo,
             }}
             toggleSidebar={toggleSidebar}

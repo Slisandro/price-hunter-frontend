@@ -24,6 +24,7 @@ import Landing from "./HomePage/Landing/Landing";
 import Dash from "./components/Dashboard/Dash";
 import RegistroGoogle from "./components/Registro Google/RegistroGoogle";
 import DashCazador from "./components/Dashboard/DashCazador";
+import DashCliente from "./components/Dashboard/DashCliente";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <Route exact path="/landing" component={Landing} />
         <RutaPrivada exact path="/admin" component={Dash} />
         <RutaPrivada exact path="/cazador" component={DashCazador} />
+        <RutaPrivada exact path="/cliente" component={DashCliente} />
 
       </Switch>
     </Router>
