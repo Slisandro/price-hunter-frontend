@@ -49,7 +49,7 @@ function TablaClientesDesafio({desafios, setIdSelect}) {
                             },
                             {
                                 Header: "Fecha Final",
-                                accessor: "fecha_inicial"
+                                accessor: "fecha_final"
                             },
                             
                         ]

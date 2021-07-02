@@ -133,14 +133,14 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
 
             {
                 stateMensaje ?
-                    <div>
-                        <h6> {stateMensaje} </h6>
+                    <div >
+                        <label id='msg_creacionProducto'> {stateMensaje} </label>
                     </div>
                 :
                 <Form id="form-crear-producto-nuevo" onSubmit={(e)=>{handleSubmit(e)}} >
 
                     <div className="div-select-crear-producto" >
-                        {errorsState.nombre ? <p className="err" >{errorsState.nombre}</p> : <h6 className="stylos-titulos" >Nombre Producto</h6> }
+                        {errorsState.nombre ? <p className="err" >{errorsState.nombre}</p> : <label className="stylos-titulos" >Nombre Producto</label> }
                         <Input 
                             type="text" 
                             placeholder="Nombre Producto" 
@@ -150,7 +150,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
                     
                     <div className="div-select-crear-producto" >
-                        {errorsState.contenido_neto ? <p className="err" >{errorsState.contenido_neto}</p> : <h6 className="stylos-titulos" > Contenido Neto </h6> }
+                        {errorsState.contenido_neto ? <p className="err" >{errorsState.contenido_neto}</p> : <label className="stylos-titulos" > Contenido Neto </label> }
                         <Input 
                             type="number"
                             min="0" 
@@ -161,7 +161,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
                     
                     <div className="div-select-crear-producto" >
-                        <h6 className="stylos-titulos" > Unidad de medida </h6>
+                        <label className="stylos-titulos" > Unidad de medida </label>
                         <Select 
                             name="unidad_de_medida"
                             options={lista_unidades} 
@@ -172,7 +172,7 @@ function FormCrearProducto({abierto, abrirModal, stateMensaje, setStateMensaje, 
                     </div>
 
                     <div className="div-select-crear-producto" >
-                    <h6 className="stylos-titulos" > Sub Categoría </h6>
+                    <label className="stylos-titulos" > Sub Categoría </label>
                         <Select
                             name="sub_categoria"
                             options={lista_subcategorias}

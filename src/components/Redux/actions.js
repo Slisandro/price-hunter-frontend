@@ -30,6 +30,7 @@ export const GET_CIUDADES = "GET_CIUDADES";
 export const GET_TIPO_TRANSACCION = "GET_TIPO_TRANSACCION";
 export const RESET_PRODUCTOS = "RESET_PRODUCTOS"
 export const GET_MIS_DESAFIOS = "GET_MIS_DESAFIOS";
+export const REFESH_MISDESAFIOS_CLIENTE = 'REFESH_MISDESAFIOS_CLIENTE'
 
 //-----Esta accion es para traer los desafios (MisDesafios) del cliente-----//
 export function getMisDesafios(obj) {
@@ -55,6 +56,15 @@ export function getMisDesafios(obj) {
       })
   };
 }
+
+//ESTA ACCION ES PARA RECARGAR MISDESAFIOS - CLIENTE
+export const refreshMisDesafiosCliente = () => {
+  return function (dispatch) {
+    dispatch({
+      type: REFESH_MISDESAFIOS_CLIENTE,
+    });
+  };
+};
 
 //ESTA ACCION DE DESPACHA AUTOMATICAMENTE APENAS SE LEVANTA LA APLICACION Y TRAE DESDE EL BACK TODAS LAS CATEGORIAS DISPONIBLES
 export function getCategorias() {

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import { connect } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // import {getMisDesafios} from "../../../Redux/actions";
 import "./desafio.css"
 import lapiz from "./lapiz.png";
@@ -15,6 +15,8 @@ import { Card, CardHeader, CardBody, CardTitle, CardText, Input, Col, Row, Form,
 function Desafio({desafio}) {
   const [stateModal, setStateModal] = useState({ abierto: false });
   const [stateModal2, setStateModal2] = useState({ abierto: false });
+
+
 
 
   //-----funcion para limitar las fechas min en el form-------//

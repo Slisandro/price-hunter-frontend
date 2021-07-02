@@ -8,7 +8,7 @@ import ReactPaginate from 'react-paginate';
 
 
 
-function MisDesafios({misdesafios, getmisdesafios}) {
+function MisDesafios({misdesafios, getmisdesafios, booleanoMisDesafios}) {
   const [state, setState] = useState({ estado:"", orden:"" });
 
   //-----paginacion-----//
@@ -25,7 +25,7 @@ function MisDesafios({misdesafios, getmisdesafios}) {
 
   useEffect(async ()=>{
     await getmisdesafios(state)
-  }, []);
+  }, [booleanoMisDesafios]);
 
   const estados = [
     {value:"programados", label:"Programados"},
@@ -131,7 +131,8 @@ function MisDesafios({misdesafios, getmisdesafios}) {
 
 const mapStateToProps = function(state) {
   return {
-    misdesafios: state.misdesafios 
+    misdesafios: state.misdesafios,
+    booleanoMisDesafios: state.booleanoMisDesafios
   }
 }
 

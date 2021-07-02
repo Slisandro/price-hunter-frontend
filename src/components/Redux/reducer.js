@@ -37,6 +37,7 @@ import {
   POST_UM,
     // ----- CLIENTE -------//
     GET_MIS_DESAFIOS,
+    REFESH_MISDESAFIOS_CLIENTE,
 } from "./actions";
 
 const initialState = {
@@ -99,6 +100,7 @@ const initialState = {
 
   //-----CLIENTE------//
   misdesafios: [],
+  booleanoMisDesafios: false,
   //        POST ADMIN
   admin: {},
   familia: [],
@@ -234,6 +236,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         registroGoogleRes: action.payload,
       };
+    case REFESH_MISDESAFIOS_CLIENTE:
+      return{
+        ...state,
+        booleanoMisDesafios: !state.booleanoMisDesafios
+      }
     case CERRAR_SESION:
     case LOGIN_ERROR:
     case REGISTRO_ERROR:
