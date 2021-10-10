@@ -95,8 +95,8 @@ const Login = (props) => {
   /*******************************************************************************************************************************/
 
   const [user, guardarUser] = useState({
-    email: "",
-    password: "",
+    email: "pedroperez@correo.com",
+    password: "abc1234",
   });
   const { email, password } = user;
 
